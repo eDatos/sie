@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link href="//www.gobiernodecanarias.org/gcc/css/estilos.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="//www.gobiernodecanarias.org/gcc/css/imprime.css" rel="stylesheet" type="text/css" media="print" />
+    <link href="//www.gobiernodecanarias.org/gcc/css/voz.css" rel="stylesheet" type="text/css" media="aural" />
+    <link href="//www.gobiernodecanarias.org/gcc/img/favicon.ico" rel="shortcut icon" />
+    <link href="../../../metamac-portal-web/src/main/webapp/gobcanoverwrite.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="../../target/metamac.css" />
+
+    <script src="//estadisticas.arte-consultores.com/statistical-visualizer-api/js/authentication.js"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-501fc6f600bacbe9"></script>
+    <script type="text/javascript" src="../../target/metamac.js"></script>
+
+    <style>
+        #contenido {
+            padding: 25px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="contenido">
+        <div id="cabecera">
+
+            <!-- IMAGEN ISTAC -->
+            <h1>
+                <a href="http://www.gobiernodecanarias.org/istacc" title="Página principal del Instituto Canario de Estadística (ISTAC) - Opciones de accesibilidad (tecla de acceso: i)"
+                    accesskey="i">Instituto Canario de Estadística</a>
+            </h1>
+        </div>
+
+
+        <div id="bloq_interior">
+            <div class="contenido">
+
+                <div class="metamac-container" id="metamac-container">Cargando...</div>
+
+            </div>
+        </div>
+        <div id="pie_istac" class="footer">
+            <div class="izda">&copy; Gobierno de Canarias</div>
+            <div class="dcha">
+                <a href="http://opendefinition.org/okd/espanol/" height="13px" target=_blank>
+                    <img alt="Open Data" src="../../../metamac-portal-web/src/main/webapp/img/open_data.png" />
+                </a> |
+                <a href="http://www.gobiernodecanarias.org/istac/aviso_legal.html" rel="license">Aviso Legal</a> |
+                <a href="http://www.gobiernodecanarias.org/sugrec/">Sugerencias y Reclamaciones</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        I18n.defaultLocale = "es";
+        I18n.locale = "es";
+
+        App.endpoints["statistical-resources"] = "http://estadisticas.arte-consultores.com/statistical-resources/v1.0";
+        App.endpoints["structural-resources"] = "http://estadisticas.arte-consultores.com/structural-resources-internal/apis/structural-resources-internal/v1.0";
+        App.endpoints["statistical-visualizer"] = "http://estadisticas.arte-consultores.com/statistical-visualizer";
+        App.endpoints["permalinks"] = "http://estadisticas.arte-consultores.com/permalinks/v1.0";
+        //    App.endpoints["permalinks"] = "http://localhost:8080/statistical-visualizer-3.0.1-SNAPSHOT/apis/permalinks/v1.0";
+        App.endpoints["export"] = "http://localhost:8080/statistical-visualizer-api-5.0.1-SNAPSHOT/apis/export/v1.0";
+        //  App.endpoints["export"] = "http://localhost:8080/statistical-visualizer-3.0.1-SNAPSHOT/apis/export/v1.0";
+        // App.endpoints["export"] = "http://localhost:8080/statistical-visualizer-api-4.1.2-SNAPSHOT/apis/export/v1.0";
+
+        App.endpoints["indicators"] = "http://estadisticas.arte-consultores.com/indicators/v1.0";
+        // App.endpoints["indicators"] = "http://localhost:8080/indicators-internal-6.0.1-SNAPSHOT/internal/api/indicators/v1.0";
+
+        //App.queryParams = { "agency": "ISTAC", "identifier": "C00031A_000002", "version": "~latest", "type": "dataset", "geo": "LANZAROTE|LA_GOMERA" };
+
+        //App.queryParams = { "agency": "ISTAC", "identifier": "C00098A_000002", "version": "001.001", "type": "dataset" };
+        //App.queryParams = { "agency": "ISTAC", "identifier": "C00031A_000002", "version": "~latest", "type": "dataset" };
+
+        // Ejemplo de dataset con atributos a distintos niveles
+        // App.queryParams = { "agency": "ISTAC", "identifier": "C00031A_000002", "version": "001.006", "type": "dataset" };
+
+        // Ejemplo de indicador
+        // App.queryParams = { "identifier": "IND_0001", "type": "indicator" };
+
+        // Ejemplo de indicador con atributos
+        // App.queryParams = { "identifier": "PUESTOS_TOTALES_ISTAC", "type": "indicator" };
+
+        // Ejemplo de instancia de indicador
+        // App.queryParams = { "identifier": "0a36fed2-5c42-4c42-8162-a247f55fe4ed", "type": "indicatorInstance", "indicatorSystem": "E30308A" };
+
+        // Ejemplo con atributo de medida en vez de measure dimension
+        // App.queryParams = { "agency": "ISTAC", "identifier": "C00031A_000004", "version": "001.000", "type": "dataset" }
+
+        // Ejemplo de query INDICE_OCUPACION_TFE_2016
+        // App.queryParams = { "agency": "ISTAC", "identifier": "INDICE_OCUPACION_TFE_2016", "type": "query" }
+
+        // Ejemplo de query INDICADORES_OCUPACION
+        // App.queryParams = { "agency": "ISTAC", "identifier": "INDICADORES_OCUPACION", "type": "query" }
+
+        // Puestos del trabajo
+        //App.queryParams = { "agency": "ISTAC", "identifier": "C00098A_000001", "version": "001.000", "type": "dataset" };
+
+        // http://estadisticas.arte-consultores.com/statistical-visualizer/visualizer/data.html?resourceType=indicatorInstance&resourceId=0a36fed2-5c42-4c42-8162-a247f55fe4ed&indicatorSystem=E30308A&measure=ABSOLUTE,ANNUAL_PERCENTAGE_RATE,INTERPERIOD_PERCENTAGE_RATE&geo=ES611#visualization/table
+        //        App.queryParams = { "identifier": "0a36fed2-5c42-4c42-8162-a247f55fe4ed", "indicatorSystem": "E30308A", "type": "indicatorInstance", "geo": "ES611" };
+
+        // Ejemplo de multidataset
+        // http://estadisticas.arte-consultores.com/statistical-resources/v1.0/multidatasets/ISTAC/C00031A_000001.json
+        // App.queryParams = { "agency": "ISTAC", "identifier": "C00031A_000004", "version": "001.000", "type": "dataset" };
+        App.queryParams = { "agency": "ISTAC", "identifier": "C00031A_000004", "version": "001.000", "type": "dataset", "multidatasetId": "ISTAC:C00031A_000001" };
+
+        // Vista widget
+        // App.config.widget = true;
+        App.config["organisationUrn"] = "urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ISTAC";
+        App.config["installationType"] = "EXTERNAL";
+
+        App.start();
+    </script>
+
+</body>
+
+</html>

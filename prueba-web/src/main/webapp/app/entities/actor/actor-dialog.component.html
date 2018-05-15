@@ -1,0 +1,165 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+    <div class="entity">
+        <div class="modal-header">
+            <h4 class="modal-title" id="myActorLabel">
+                <span class="fa fa-tag"></span>
+                <span *ngIf="!actor.id" jhiTranslate="arteApplicationTemplateApp.actor.home.createLabel"></span>
+                <span *ngIf="actor.id">{{actor.normalizeName()}}</span>
+            </h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                    (click)="clear()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <fieldset>
+                    <div class="entity-fields">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="arteApplicationTemplateApp.actor.genero.label" for="field_genero">Genero</label>
+                            <ac-autocomplete-enum name="genero" [(ngModel)]="actor.genero" [suggestionsEnum]="generoEnum" [translationPath]="'arteApplicationTemplateApp.actor.genero.'"
+                                [placeholder]="'arteApplicationTemplateApp.actor.genero.placeholder' | translate"></ac-autocomplete-enum>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="arteApplicationTemplateApp.actor.nombre" for="field_nombre">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" id="field_nombre"
+                                [(ngModel)]="actor.nombre" required acAutofocus />
+                            <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
+                                <small class="form-text text-danger"
+                                [hidden]="!editForm.controls.nombre?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="arteApplicationTemplateApp.actor.apellido1" for="field_apellido1">Apellido 1</label>
+                            <input type="text" class="form-control" name="apellido1" id="field_apellido1"
+                                [(ngModel)]="actor.apellido1" required />
+                            <div [hidden]="!(editForm.controls.apellido1?.dirty && editForm.controls.apellido1?.invalid)">
+                                <small class="form-text text-danger"
+                                    [hidden]="!editForm.controls.apellido1?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="arteApplicationTemplateApp.actor.apellido2" for="field_apellido2">Apellido 2</label>
+                            <input type="text" class="form-control" name="apellido2" id="field_apellido2"
+                                [(ngModel)]="actor.apellido2" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="arteApplicationTemplateApp.actor.oscarizado" for="field_genero">Genero</label>
+                            <ac-tri-input-switch [(ngModel)]="actor.oscarizado" [required]="false" [ngModelOptions]="{ standalone: true }"
+                                [nullable]="true" ></ac-tri-input-switch>
+                        </div>
+                    </div>
+            </fieldset>
+            <div *ngIf="actor.id" class="section-buttons">
+                <fieldset>
+                        <ng-container *ngIf="!ordenandoPeliculas">
+                            <button class="btn btn-primary add-button"
+                                type="button" (click)="crearNuevaPelicula()">
+                                <i class="fa fa-plus"></i>
+                                <span jhiTranslate="arteApplicationTemplateApp.actor.peliculas.crear"></span>
+                            </button>
+                        </ng-container>   
+                        <!-- Botones de ordenación -->                     
+                        <ng-container *ngIf="!ordenandoPeliculas">
+                            <button class="btn btn-primary add-button"
+                                type="button" (click)="activarReordenarPeliculas()">
+                                <i class="fa fa-arrows-v"></i>
+                                <span jhiTranslate="arteApplicationTemplateApp.actor.peliculas.reordenar"></span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="ordenandoPeliculas">
+                            <button class="btn btn-default add-button"
+                                type="button" (click)="cancelarReordenarPeliculas()">
+                                <i class="fa fa-times"></i>
+                                <span jhiTranslate="arteApplicationTemplateApp.actor.peliculas.cancelar"></span>
+                            </button>
+                            <button class="btn btn-primary add-button"
+                                type="button" (click)="guardarReordenarPeliculas()">
+                                <i class="fa fa-floppy-o"></i>
+                                <span jhiTranslate="arteApplicationTemplateApp.actor.peliculas.guardar"></span>
+                            </button>
+                        </ng-container>
+                </fieldset>
+            </div>
+        
+            <h3 *ngIf="actor.id">
+                <span jhiTranslate="arteApplicationTemplateApp.actor.peliculas.title">Peliculas</span>
+            </h3>
+        
+            <div *ngIf="actor.id" class="entity-fields">
+                <div class="form-group full-width">
+                    <fieldset>
+                        <p-orderList [class.disabled]="!ordenandoPeliculas" [value]="peliculas" dragdrop="false" metaKeySelection="true" dragdropScope="tablaPelicula">
+                            <ng-template let-item pTemplate="item">
+                                <div class="orderlist-row">
+                                    <span class="orderlist-cell titulo-pelicula">{{ item.titulo }}</span>
+                                    <span class="orderlist-cell fecha-pelicula">{{ item.fechaEstreno | date: 'dd/MM/yyyy' }}</span>
+                                    <span class="orderlist-cell categorias-pelicula">
+                                        <div *ngFor="let categoria of item.categorias" class="categoria-item">
+                                            <span class="badge badge-info">{{ categoria.nombre }}</span>
+                                        </div>
+                                    </span>
+                                </div>
+                            </ng-template>
+                        </p-orderList>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div *ngIf="actor.id" class="entity-fields">
+                    <div class="form-group full-width">
+                        <fieldset>
+                            <ac-file-upload [title]="'arteApplicationTemplateApp.actor.documentos.label' | translate" [url]="resourceUrl" (onUpload)="onDocumentoUpload($event)"
+                                accept="image/*" [files]="actor.documentos" [auto]="false" [limited]="3">
+    
+                                <ng-template let-file="file">
+                                    <button type="button" class="btn btn-sm" [title]="'arteApplicationTemplateApp.documento.delete.title' | translate" (click)="deleteDocumento(file)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </ng-template>
+    
+                            </ac-file-upload>
+                        </fieldset>
+                    </div>       
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <ng-container *ngIf="!isDeleting">
+                <div class="col-sm-6 text-right">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+                        <span class="fa fa-ban"></span>&nbsp;
+                        <span jhiTranslate="entity.action.cancel"></span>
+                    </button>
+                    <ng-container *ngIf="actor.id" >
+                        <button type="button" [disabled]="isSaving || !actor.id" class="btn btn-danger" (click)="toggleIsDeleting()">
+                            <span class="fa fa-times"></span>&nbsp;
+                            <span jhiTranslate="entity.action.delete"></span>
+                        </button>
+                    </ng-container>
+                    <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                        <span class="fa fa-save"></span>&nbsp;
+                        <span jhiTranslate="entity.action.save"></span>
+                    </button>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="isDeleting">
+                <div class="col-sm-6 text-center">
+                    <span jhiTranslate="arteApplicationTemplateApp.actor.delete.question"></span>
+                </div>
+                <div class="col-sm-6 text-right"> 
+                    <button type="button" class="btn btn-success" (click)="confirmDelete(actor.id)">
+                        <span class="fa fa-check"></span>&nbsp;
+                        <span jhiTranslate="entity.action.confirm"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="toggleIsDeleting()">
+                        <span class="fa fa-ban"></span>&nbsp;
+                        <span jhiTranslate="entity.action.cancel"></span>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</form>

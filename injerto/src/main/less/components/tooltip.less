@@ -1,0 +1,93 @@
+//
+// Tooltips
+// --------------------------------------------------
+
+
+// Base class
+.tooltip {
+    position: absolute;
+    z-index: @zindexTooltip;
+    display: block;
+    visibility: visible;
+    padding: 5px;
+    font-size: 11px;
+    .opacity(0);
+    font: @istacFontSansSerif;
+    
+    &.in     { .opacity(95); }
+    &.top    { margin-top:  -3px; }
+    &.right  { margin-left:  3px; }
+    &.bottom { margin-top:   3px; }
+    &.left   { margin-left: -3px; }
+}
+
+// Wrapper for the tooltip content
+.tooltip-inner {
+    padding: 10px;
+    color: @tooltipColor;
+    text-align: left;
+    text-decoration: none;
+    background-color: @tooltipBackground;
+    .border-radius(4px);
+    .box-shadow(3px 3px 4px 0px rgba(0,0,0,0.50));
+    border: 1px solid @tooltipColor;
+    font-size: 12px;
+
+    a { 
+        color: @tooltipColor;
+    }
+
+    .contenido & ol					{ margin: initial;	padding: initial;}
+    .contenido & ul li				{ background: initial;	line-height: initial; list-style-type: initial;	margin: initial; padding-left: initial;	text-align: initial; }
+    .contenido & ul li ul li		{ background: initial; }
+    .contenido & ul li ul li ul li	{ background: initial; }
+
+    .contenido & ul,
+    ul {
+        padding-left: 20px;
+        margin: 0 0 5px 0;
+    }
+    .contenido & ul li,
+    li {
+        margin: 5px;
+    }
+}
+
+// Arrows
+.tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+.tooltip {
+    &.top .tooltip-arrow {
+        bottom: 0;
+        left: 50%;
+        margin-left: -@tooltipArrowWidth;
+        border-width: @tooltipArrowWidth @tooltipArrowWidth 0;
+        border-top-color: @tooltipArrowColor;
+    }
+    &.right .tooltip-arrow {
+        top: 50%;
+        left: 0;
+        margin-top: -@tooltipArrowWidth;
+        border-width: @tooltipArrowWidth @tooltipArrowWidth @tooltipArrowWidth 0;
+        border-right-color: @tooltipArrowColor;
+    }
+    &.left .tooltip-arrow {
+        top: 50%;
+        right: 0;
+        margin-top: -@tooltipArrowWidth;
+        border-width: @tooltipArrowWidth 0 @tooltipArrowWidth @tooltipArrowWidth;
+        border-left-color: @tooltipArrowColor;
+    }
+    &.bottom .tooltip-arrow {
+        top: 0;
+        left: 50%;
+        margin-left: -@tooltipArrowWidth;
+        border-width: 0 @tooltipArrowWidth @tooltipArrowWidth;
+        border-bottom-color: @tooltipArrowColor;
+    }
+}

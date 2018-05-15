@@ -1,0 +1,34 @@
+<?xml version="1.0" ?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <version>1.5.4.RELEASE</version>
+        <relativePath />
+    </parent>
+
+    
+	<artifactId>prueba-madre</artifactId>
+	<groupId>es.artesl.prueba</groupId>
+	<version>1.0.0.SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>PRUEBA :: MADRE</name>
+
+    <modules>
+        <!--module>injerto</module-->
+        <module>prueba-web</module>
+		<module>injerto</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+            
+        </plugins>
+    </build>
+
+</project>

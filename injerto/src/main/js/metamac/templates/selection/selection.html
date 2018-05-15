@@ -1,0 +1,28 @@
+{{#if showHeader}}
+    <div class="dataset-header">
+        <div>
+            <div class="dataset-header-actions"></div>
+            
+            <div class="dataset-header-info">
+                <h1 class="dataset-header-title" title="{{ metadata.title }}">{{ metadata.title }}</h1>
+            </div>
+        </div>
+
+        {{#if metadata.description }}
+            <div>
+                <p>{{ safeString metadata.description }}</p>
+            </div>
+        {{/if}}
+    </div>
+{{/if}}
+<div class="selection-body">
+	<div class="sidebar-container selection-sidebar-container">
+	
+	</div>
+	<div class="selection-dimensions js-sidebar-container-sibling">
+		<div class="selection-options-bar">
+	
+		</div>
+	
+	</div>
+</div>

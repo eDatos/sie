@@ -1,0 +1,187 @@
+// Component sidebar
+
+@sidebarMenuWidth: 50px;
+@sidebarSidebarWidth: 240px; // See SidebarStateModel.js
+@sidebarRadius : 6px;
+
+@sidebarMenuColor: @istacBlueDark;
+@sidebarMenuBackground: @istacBlueMedium;
+
+.sidebar-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-menu {
+    background-color: @sidebarMenuColor;
+    color: @istacWhite;
+    width: @sidebarMenuWidth;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 80;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        color: @istacWhite;		
+        padding: 0;
+		
+        li {
+            text-align: center;
+            padding: 10px 3px 5px 3px;
+            border-bottom: 1px solid @sidebarMenuBackground;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+            font-size: 11px;
+            cursor: pointer;
+            margin: 0;
+            background:none;
+            
+            &:first-child {
+				.border-radius(6px 0 0 0);
+			}
+
+            &.active {
+                background-color: @sidebarMenuBackground;
+            }
+
+            i {
+                font-size: 25px;
+                display: block;
+                color: @istacWhite;
+                margin-bottom: 5px;
+            }
+
+            a {
+                line-height: 1.6;
+                list-style-type: none;
+                color: @istacWhite;
+                opacity: 0.8;
+                text-decoration: none;
+
+                &:link, &:active, &:visited, &:hover {
+                    color: @istacWhite;
+                }
+
+                &:hover {
+                    text-decoration: none;
+                    opacity: 1;
+                }
+            }
+        }
+
+    }
+}
+
+@sidebarTransition : 0.2s ease-in-out;
+@splitterWidth: 6px;
+
+.sidebar-sidebar {
+    position: absolute;
+    width: @sidebarSidebarWidth;
+    height: 100%;
+    left: @sidebarMenuWidth - @sidebarSidebarWidth;
+
+    padding: 5px;
+    .box-sizing(border-box);
+    z-index: 1;
+
+    .sidebar-sidebar-content {
+        height: 100%;
+        margin-right: @splitterWidth + 2px;
+        overflow-y: auto;
+    }
+
+    &.animation {
+        .transition(left @sidebarTransition);
+    }
+
+    &.without-menu {
+        left: -@sidebarSidebarWidth;
+    }
+}
+
+.sidebar-splitter {
+    width: @splitterWidth;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: @istacGreyLight;
+
+    border-left: 1px solid @istacGreyMedium;
+    border-right: 1px solid @istacGreyMedium;
+    cursor: col-resize;
+
+
+    i {
+        opacity: 0.5;
+        position: absolute;
+        top: 50%;
+        left: -4px;
+        font-size: 14px;
+        
+        .icon-separator;
+    }
+}
+
+.sidebar-opener {
+    position: absolute;
+    top: 50%;
+    right: -23px;
+    z-index: -1;
+    button {
+        .border-radius(0 9px 9px 0);   
+    }    
+}
+
+.sidebar-content {
+    height: 100%;
+    padding-left: @sidebarMenuWidth;    
+    .box-sizing(border-box);
+
+    &.without-menu {
+        padding-left: 0;
+    }
+}
+
+.sidebar-slideRight {
+    .sidebar-sidebar {
+        left: @sidebarMenuWidth;
+
+        &.without-menu {
+            left: 0;
+        }
+    }
+
+    .sidebar-content {
+        padding-left: @sidebarMenuWidth + @sidebarSidebarWidth;
+
+        &.without-menu {
+            padding-left: @sidebarSidebarWidth;
+        }
+    }
+    
+}
+
+.sidebar-slideRightOver {
+    .sidebar-sidebar {
+        left: @sidebarMenuWidth;
+    }
+}
+
+.sidebar-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    background-color: red; //IE fix
+    cursor: col-resize;
+}
+

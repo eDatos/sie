@@ -1,0 +1,223 @@
+@import "maps-colors";
+
+svg { overflow: hidden; } // IE FIX
+
+.svgContainer {
+    width: 100%;
+    height: 100%;
+    padding-top: 25px;
+    padding-bottom: 5px;
+    box-sizing: border-box;
+}
+
+.background {
+    fill: none;
+    pointer-events: all;
+}
+
+.map path {
+    stroke: rgba(255, 255, 255, 0.5);
+    stroke-width: 0.01px;
+}
+
+.map path.active {
+    stroke: @istacBlueLight;
+    stroke-width: 0.02px;
+}
+
+#tooltip {
+    background: @istacGreyDark;
+    border: 1px solid @istacBlack;
+    border-radius: 5px;
+    pointer-events: none;
+    position: absolute;
+    text-align: center;
+    font-size: 14px;
+    color: @istacGreyLight;
+    padding: 4px;
+    min-height: 10px;
+    min-width: 100px;
+}
+
+.grab {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: move;
+}
+
+.grabbing {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: move;
+}
+
+#zoom-container {
+    position: absolute;
+    top: @dimensionsBarTypeDefault;
+    left: 0;
+    width: 30px;
+    height: 130px;
+
+    .zoom-controls {
+        font-size: 11px;
+        background-color: @istacWhite;
+        left: 6px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        position: absolute;
+        line-height: 18px;
+        text-align: center;
+        color: @istacBlack;
+        .user-select(none);
+    }
+
+    #exit-zoom {
+        top: 15px;
+    }
+
+    #more-zoom {
+        top: 40px;
+    }
+
+    #less-zoom {
+        top: 100px;
+    }
+
+    #zoom-line {
+        background-color: @istacGreyDark;
+        position: absolute;
+        top: 58px;
+        left: 13px;
+        width: 4px;
+        height: 42px;
+    }
+
+    #current-zoom {
+        background-color: @istacWhite;
+        position: absolute;
+        top: 95px;
+        left: 5px;
+        width: 20px;
+        height: 4px;
+    }
+}
+
+#leyend-container {
+    background-color: @istacGreyLight;
+    box-shadow: 1px 1px 1px 0px @istacGreyDark;
+    .border-radius(4px 4px 4px 4px);
+    position: absolute;
+    bottom: 65px;
+    right: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    padding: 10px 10px 8px 10px;
+
+    .leyend-item {
+        display: block;
+        margin-bottom: 2px;
+
+        .leyend-item-square {
+            width: 8px;
+            height: 8px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .leyend-item-text {
+            font: @istacFontSansSerif;
+            color: @istacBlueDark;
+        }
+
+    }
+}
+
+#ranges-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 7px;
+    width: 200px;
+    height: 12px;
+
+    .ranges-selector-title {
+        display: inline-block;
+        margin-right: 10px;
+        vertical-align: middle;
+        font: @istacFontSansSerif;
+        color: @istacBlueDark;
+    }
+
+
+    #line-container {
+        position: relative;
+        display: inline-block;
+        width: 140px;
+
+        .selector {
+            display: inline-block;
+            width: 100px;
+            margin-right: 10px;
+            position: relative;
+            vertical-align: middle;
+            height: 12px;
+
+            #line {
+                height: 2px;
+                width: 100%;
+                background: @istacGreyMedium;
+                position: absolute;
+                top: 5px;
+            }
+
+            #draggable {
+                width: 6px;
+                height: 100%;
+                background: @istacWhite;
+                box-shadow: 0 0 2px @istacGreyDark;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+            }
+        }
+
+        .ranges-boundaries {
+            display: inline-block;
+            width: 10px;            
+            font-size: 10px;
+            color: @istacBlueDark;
+        }
+
+    }
+}
+
+.map-error-container {
+    height: 100%;
+
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+
+    display: -moz-box;
+    -moz-box-orient: horizontal;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+
+    display: box;
+    box-orient: horizontal;
+    box-pack: center;
+    box-align: center;
+    
+
+    .map-error {
+        font-size: 20px;
+        color: @istacWhite;
+        background-color: @istacGreyDark;
+        padding: 18px;
+        border-radius: 5px;
+        text-align: center;
+    }
+}

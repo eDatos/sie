@@ -1,0 +1,13 @@
+@import "./perfect-scrollbar-original";
+
+.ps-container {
+  & > .ps-scrollbar-x-rail,
+  & > .ps-scrollbar-y-rail {
+    &, &:hover {
+      opacity: 1;
+    }
+    .ps-scrollbar-y {
+      width: 7px;
+    }
+  }
+}

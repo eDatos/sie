@@ -1,0 +1,23 @@
+<b>{{message 'entity.observation.measure.title'}}</b>
+<ul>
+{{#each categories }}
+    <li><b>{{ dimension }}:</b> {{value}}</li>
+{{/each}}
+</ul>
+
+{{#if hasAttributes}}
+<b>{{message 'entity.observation.attributes.title'}}</b>
+<ul>
+    {{#each primaryMeasureAttributes}}
+    <li>
+        {{#if href}}
+        <a href="{{href}}" target="_blank">{{name}}</a> {{/if}} {{#unless href}} {{this}} {{/unless}}
+    </li>
+    {{/each}} {{#each combinatedDimensionsAttributes}}
+    <li>
+        {{#if href}}
+        <a href="{{href}}" target="_blank">{{name}}</a> {{/if}} {{#unless href}} {{this}} {{/unless}}
+    </li>
+    {{/each}}
+</ul>
+{{/if}}

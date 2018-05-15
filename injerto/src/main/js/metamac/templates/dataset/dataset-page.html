@@ -1,0 +1,36 @@
+{{#if showHeader}}
+<div class="dataset-header">
+    <div>
+
+        <div class="dataset-header-actions"></div>
+
+        <div class="dataset-header-info">
+            <h1 class="dataset-header-title" title="{{ metadata.title }}">{{ metadata.title }}</h1>
+
+            <p class="dataset-header-categories">
+                {{#join metadata.categories }} {{ label }} {{/join}}
+            </p>
+        </div>
+    </div>
+
+    {{#if metadata.description }}
+    <div>{{ safeString metadata.description }}</div>
+    {{/if}}
+</div>
+{{/if}}
+<div class="dataset-visualization-container">
+    {{#if isWidget}}
+    <h2 class="dataset-visualization-title"><a target="_blank" href="{{ metadata.visualizerUrlForWidget }}" title="{{ metadata.title }}">{{ metadata.title }}</a></h2>
+    {{/if}}
+    <div class="dataset-sidebar-visualization-container {{#if noDimensions}}no-dimensions{{/if}}">">
+
+    </div>
+    <div class="dataset-visualization-options-bar">
+
+    </div>
+</div>
+{{#unless isWidget}}
+<div class="clearfix dataset-export">
+
+</div>
+{{/unless}}

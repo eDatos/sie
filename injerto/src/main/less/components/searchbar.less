@@ -1,0 +1,42 @@
+.searchbar {
+    position: relative;
+
+    input {
+        display: block;
+        width: 100%;
+        .box-sizing(border-box);
+        padding: 0 6px;
+        height: 24px;
+        .border-radius(0);
+    }
+
+
+    .searchbar-icon {
+        position:absolute;
+        padding-left: 0;
+        width: 13px;
+        top: 5px;
+
+        &:before {
+            color: @istacGreyMedium;
+            font-size: 14px;
+        }
+    }
+
+    .searchbar-icon-clear {
+        .searchbar-icon;
+        .icon-times;
+        right: 6px;
+    }
+
+    .searchbar-clear {
+        &:link, &:active, &:visited {
+            color: @istacGreyDark;
+        }
+
+        &:hover {
+            color: @istacBlack;
+        }
+    }
+
+}
