@@ -76538,10 +76538,10 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                     var routeParts = [];
 
                     if (self.metadata.getAutoOpen()) {
-						routeParts.push("visualizer");
+                        routeParts.push("visualizer");
                         routeParts.push("visualization");
                     } else {
-						routeParts.push("visualizer");
+                        routeParts.push("visualizer");
                         routeParts.push("selection");
                     }
 
