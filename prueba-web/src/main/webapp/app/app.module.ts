@@ -9,8 +9,6 @@ import { Ng2Webstorage } from 'ng2-webstorage';
 
 import { ArteApplicationTemplateSharedModule, UserRouteAccessService, AuthServerProvider } from './shared';
 import { ArteApplicationTemplateHomeModule } from './home/home.module';
-import { ArteApplicationTemplateAdminModule } from './admin/admin.module';
-import { ArteApplicationTemplateAccountModule } from './account/account.module';
 import { ArteApplicationTemplateEntityModule } from './entities/entity.module';
 
 import { customHttpProvider } from './blocks/interceptor/http.provider';
@@ -54,8 +52,6 @@ export function init(configService: ConfigService, authServerProvider: AuthServe
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         ArteApplicationTemplateSharedModule,
         ArteApplicationTemplateHomeModule,
-        ArteApplicationTemplateAdminModule,
-        ArteApplicationTemplateAccountModule,
         ArteApplicationTemplateEntityModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         ArteApplicationTemplateConfigModule,

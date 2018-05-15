@@ -11,7 +11,7 @@ import { OperacionService } from '../entities/operacion';
  * La constante DEFAULT_OPERACIONES debe contener las operaciones que debe tener el usuario que quiere acceder a esta página por defecto
  * Estas constantes deben ser luego usadas en el route en cuestión del componente al que corresponden
  **/
-export const DEFAULT_PATH = 'user-management';
+export const DEFAULT_PATH = 'visualizer';
 export const DEFAULT_OPERACIONES = ['LEER:USUARIO'];
 
 @Component({

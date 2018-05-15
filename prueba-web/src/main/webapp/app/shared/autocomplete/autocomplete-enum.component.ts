@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AutocompleteComponent } from '.';
 import { buildProvider } from '..';
-import { Genero } from '../../entities/actor';
 
 /*
   Documentación en http://confluence.arte-consultores.com/display/INFRASTR/ac-autocomplete-enum
