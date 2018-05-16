@@ -14,7 +14,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         ArteApplicationTemplateSharedModule,
-        RouterModule.forRoot(ENTITY_STATES, { useHash: true, enableTracing: true })
+        RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],
     declarations: [
         VisualizerComponent

@@ -23,6 +23,6 @@ export class LugarComponent implements OnInit {
     }
 
     transition() {
-        this.router.navigate(['visualizer']);
+        this.router.navigate(['evolucion-electoral', this.lugar.id]);
     }
 }
