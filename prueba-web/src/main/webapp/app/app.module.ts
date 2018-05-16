@@ -6,8 +6,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Ng2Webstorage } from 'ng2-webstorage';
 
 import { ArteApplicationTemplateSharedModule } from './shared';
-import { ArteApplicationTemplateHomeModule } from './home/home.module';
 import { ArteApplicationTemplateVisualizerModule } from './visualizer/visualizer.module';
+import { ArteApplicationTemplateInterfacesModule } from './interfaces/interfaces.module';
 
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
@@ -31,8 +31,8 @@ const APP_ROUTES = [
         LayoutRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         ArteApplicationTemplateSharedModule,
-        ArteApplicationTemplateHomeModule,
         ArteApplicationTemplateVisualizerModule,
+        ArteApplicationTemplateInterfacesModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         RouterModule.forRoot(APP_ROUTES, { useHash: true, enableTracing: true })
     ],

@@ -4,7 +4,7 @@ declare var I18n: any;
 declare var App: any;
 
 @Component({
-    selector: 'jhi-actor',
+    selector: 'jhi-visualizer',
     styles: ['./metamac.css', './gobcanoverwrite.css'],
     templateUrl: './visualizer.component.html'
 })
