@@ -7,20 +7,14 @@ import {
     AcAlertService,
     ArteApplicationTemplateSharedCommonModule,
     ArteApplicationTemplateSharedLibsModule,
-    AuthServerProvider,
     CalendarComponent,
     CSRFService,
     EntityListEmptyComponent,
     GenericModalService,
-    HasAnyOperacionDirective,
-    LoginService,
-    Principal,
-    RolService,
     ScrollService,
     SideMenuComponent,
     SplitButtonComponent,
-    StateStorageService,
-    UserService,
+    StateStorageService
 } from './';
 
 @NgModule({
@@ -30,20 +24,14 @@ import {
         RouterModule
     ],
     declarations: [
-        HasAnyOperacionDirective,
         EntityListEmptyComponent,
         SplitButtonComponent,
         CalendarComponent,
         SideMenuComponent
     ],
     providers: [
-        LoginService,
         StateStorageService,
-        Principal,
         CSRFService,
-        AuthServerProvider,
-        RolService,
-        UserService,
         DatePipe,
         GenericModalService,
         AcAlertService,
@@ -52,7 +40,6 @@ import {
     entryComponents: [],
     exports: [
         ArteApplicationTemplateSharedCommonModule,
-        HasAnyOperacionDirective,
         DatePipe,
         EntityListEmptyComponent,
         SplitButtonComponent,
