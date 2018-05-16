@@ -1,7 +1,5 @@
 // FIXME: Eliminar referencias a la plantilla (com.arte.application.template, arte-application-template, etc...)
 
-import './vendor.ts';
-
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';

@@ -19,10 +19,6 @@
         "tsconfig": "../../../tsconfig.json",
         "prefix": "jhi",
         "mobile": false,
-        "styles": [
-            "content/scss/vendor.scss",
-            "content/scss/global.scss"
-        ],
         "scripts": []
     }],
     "lint": [{
