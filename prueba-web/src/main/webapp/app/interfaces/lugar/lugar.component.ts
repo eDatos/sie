@@ -10,6 +10,7 @@ import { Lugar } from './lugar.model';
 export class LugarComponent implements OnInit {
 
     lugares: Lugar[];
+    lugar: Lugar;
 
     constructor(
         private lugarService: LugarService,
@@ -19,5 +20,9 @@ export class LugarComponent implements OnInit {
 
     ngOnInit() {
         this.lugarService.query().subscribe((response) => this.lugares = response.json);
+    }
+
+    transition() {
+        this.router.navigate(['visualizer']);
     }
 }
