@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EvolucionElectoralService } from './evolucion-electoral.service';
 import { EvolucionElectoral, ProcesoElectoral } from './evolucion-electoral.model';
 
 @Component({
@@ -13,13 +12,12 @@ export class EvolucionElectoralComponent implements OnInit {
     procesoElectoral: ProcesoElectoral;
 
     constructor(
-        private evolucionElectoralService: EvolucionElectoralService,
         private activatedRoute: ActivatedRoute,
         private router: Router
     ) { }
 
     ngOnInit() {
-        this.evolucionElectoralService.query().subscribe((response) => this.listaEvolucionElectoral = response.json);
+        this.activatedRoute.params.subscribe((params) => console.log(params.id));
     }
 
     transition() {

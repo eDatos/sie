@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ArteApplicationTemplateSharedModule } from '../../shared';
-import { EvolucionElectoralComponent, evolucionElectoralRoute, EvolucionElectoralService } from './';
+import { EvolucionElectoralComponent, evolucionElectoralRoute } from './';
 
 const ENTITY_STATES = [
     ...evolucionElectoralRoute
@@ -17,9 +17,6 @@ const ENTITY_STATES = [
     ],
     entryComponents: [
         EvolucionElectoralComponent
-    ],
-    providers: [
-        EvolucionElectoralService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
