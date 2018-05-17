@@ -8,12 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Component;
 
-import com.arte.application.template.service.criteria.ActorCriteriaProcessor;
 import com.arte.application.template.service.criteria.IdiomaCriteriaProcessor;
-import com.arte.application.template.service.criteria.OperacionCriteriaProcessor;
-import com.arte.application.template.service.criteria.PeliculaCriteriaProcessor;
-import com.arte.application.template.service.criteria.RolCriteriaProcessor;
-import com.arte.application.template.service.criteria.UsuarioCriteriaProcessor;
 import com.arte.libs.grammar.antlr.DefaultQueryExprVisitor;
 import com.arte.libs.grammar.antlr.QueryExprCompiler;
 import com.arte.libs.grammar.domain.QueryRequest;
@@ -26,28 +21,8 @@ public class QueryUtil {
     private static final String INCLUDE_DELETED_HINT = "HINT INCLUDE_DELETED SET 'true'";
     private QueryExprCompiler queryExprCompiler = new QueryExprCompiler();
 
-    public DetachedCriteria queryToUserCriteria(Pageable pageable, String query) {
-        return queryToCriteria(pageable, query, new UsuarioCriteriaProcessor());
-    }
-
-    public DetachedCriteria queryToOperacionCriteria(Pageable pageable, String query) {
-        return queryToCriteria(pageable, query, new OperacionCriteriaProcessor());
-    }
-
-    public DetachedCriteria queryToRolCriteria(Pageable pageable, String query) {
-        return queryToCriteria(pageable, query, new RolCriteriaProcessor());
-    }
-    
     public DetachedCriteria queryToIdiomaCriteria(Pageable pageable, String query) {
         return queryToCriteria(pageable, query, new IdiomaCriteriaProcessor());
-    }
-
-    public DetachedCriteria queryToPeliculaCriteria(Pageable pageable, String query) {
-        return queryToCriteria(pageable, query, new PeliculaCriteriaProcessor());
-    }
-
-    public DetachedCriteria queryToActorCriteria(Pageable pageable, String query) {
-        return queryToCriteria(pageable, query, new ActorCriteriaProcessor());
     }
 
     public String queryIncludingDeleted(String query) {

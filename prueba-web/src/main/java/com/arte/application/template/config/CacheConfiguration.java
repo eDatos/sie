@@ -32,21 +32,6 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
-            cm.createCache(com.arte.application.template.domain.Usuario.class.getName(), jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Usuario.class.getName() + ".roles", jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Rol.class.getName(), jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Rol.class.getName() + ".operaciones", jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Rol.class.getName() + ".usuarios", jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Operacion.class.getName(), jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Operacion.class.getName() + ".roles", jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Pelicula.class.getName(), jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Pelicula.class.getName() + ".idiomas", jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Pelicula.class.getName() + ".actores", jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Pelicula.class.getName() + ".categorias", jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Actor.class.getName(), jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Actor.class.getName() + ".peliculas", jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Categoria.class.getName(), jcacheConfiguration);
-            cm.createCache(com.arte.application.template.domain.Categoria.class.getName() + ".peliculas", jcacheConfiguration);
             cm.createCache(com.arte.application.template.domain.Idioma.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
