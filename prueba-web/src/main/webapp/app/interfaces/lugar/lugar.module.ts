@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ArteApplicationTemplateSharedModule } from '../../shared';
-import { LugarComponent, lugarRoute, LugarService } from './';
+import { LugarComponent, lugarRoute } from './';
 
 const ENTITY_STATES = [
     ...lugarRoute
@@ -17,9 +17,6 @@ const ENTITY_STATES = [
     ],
     entryComponents: [
         LugarComponent
-    ],
-    providers: [
-        LugarService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

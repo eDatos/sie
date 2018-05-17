@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LugarService } from './lugar.service';
+import { Router } from '@angular/router';
 import { Lugar } from './lugar.model';
+import { DatasetService } from '../../dataset';
 
 @Component({
     selector: 'jhi-lugar',
@@ -13,13 +13,20 @@ export class LugarComponent implements OnInit {
     lugar: Lugar;
 
     constructor(
-        private lugarService: LugarService,
-        private activatedRoute: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private datasetService: DatasetService,
     ) { }
 
     ngOnInit() {
-        this.lugarService.query().subscribe((response) => this.lugares = response.json);
+        this.datasetService.getDataset().subscribe((json) => {
+            this.lugares = json.metadata.geographicCoverages.resource.map((element) => {
+                const result: Lugar = {
+                    id: element.id,
+                    nombre: element.name.text[0].value
+                }
+                return result;
+            });
+        });
     }
 
     transition() {

@@ -14,7 +14,7 @@ export const visualizerRoute: Routes = [
         component: VisualizerComponent,
         data: {
             roles: [],
-            pageTitle: 'arteApplicationTemplateApp.actor.home.title'
+            pageTitle: 'home.pageTitle'
         }
     }
 ];

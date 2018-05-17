@@ -1,25 +1,18 @@
 // FIXME: Eliminar referencias a la plantilla (com.arte.application.template, arte-application-template, etc...)
 
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { Ng2Webstorage } from 'ng2-webstorage';
 
-import { ArteApplicationTemplateSharedModule } from './shared';
-import { ArteApplicationTemplateVisualizerModule } from './visualizer/visualizer.module';
-import { ArteApplicationTemplateInterfacesModule } from './interfaces/interfaces.module';
-
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
-
-// jhipster-needle-angular-add-module-import JHipster will add new module here
-
-import {
-    JhiMainComponent,
-    LayoutRoutingModule,
-    ErrorComponent,
-    notFoundRoute
-} from './layouts';
+import { ArteApplicationTemplateConfigModule } from './config/config.module';
+import { ArteApplicationTemplateDatasetServiceModule } from './dataset/dataset.module';
+import { ArteApplicationTemplateInterfacesModule } from './interfaces/interfaces.module';
+import { JhiMainComponent, LayoutRoutingModule, ErrorComponent, notFoundRoute } from './layouts';
+import { ArteApplicationTemplateSharedModule } from './shared';
+import { ArteApplicationTemplateVisualizerModule } from './visualizer/visualizer.module';
 
 const APP_ROUTES = [
     notFoundRoute
@@ -30,11 +23,15 @@ const APP_ROUTES = [
         BrowserModule,
         LayoutRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
+
+        ArteApplicationTemplateConfigModule,
+        ArteApplicationTemplateDatasetServiceModule,
+        ArteApplicationTemplateInterfacesModule,
         ArteApplicationTemplateSharedModule,
         ArteApplicationTemplateVisualizerModule,
-        ArteApplicationTemplateInterfacesModule,
+
         // jhipster-needle-angular-add-module JHipster will add new module here
-        RouterModule.forRoot(APP_ROUTES, { useHash: true, enableTracing: true })
+        RouterModule.forRoot(APP_ROUTES, { useHash: true })
     ],
     declarations: [
         JhiMainComponent,

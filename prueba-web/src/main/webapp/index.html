@@ -23,11 +23,8 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
         window.CONFIGURATION = {};
-        window.CONFIGURATION.cas = {};
-        window.CONFIGURATION.cas.login = /*[[${cas.getEndpoint()}]]*/ 'https://demo-cas.arte-consultores.com/login';
-        window.CONFIGURATION.cas.logout = /*[[${cas.getLogout()}]]*/ 'https://demo-cas.arte-consultores.com/logout';
-        window.CONFIGURATION.cas.applicationHome = /*[[${cas.getApplicationHome()}]]*/ 'http://localhost:9000/login/cas';
-
+        window.CONFIGURATION.dataset = {};
+        window.CONFIGURATION.dataset.endpoint = 'http://estadisticas.arte-consultores.com/statistical-resources/v1.0/datasets/ISTAC/C00031A_000001/~latest.json';
        	/*]]>*/
     </script>
 
