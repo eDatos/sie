@@ -5,7 +5,6 @@ declare var App: any;
 
 @Component({
     selector: 'jhi-visualizer',
-    styles: ['./metamac.css', './gobcanoverwrite.css'],
     templateUrl: './visualizer.component.html'
 })
 export class VisualizerComponent implements OnInit {

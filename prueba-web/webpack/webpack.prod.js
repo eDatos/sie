@@ -16,6 +16,7 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
     // devtool: 'source-map', // Enable source maps. Please note that this will slow down the build
     entry: {
         polyfills: './src/main/webapp/app/polyfills',
+        global: './src/main/webapp/content/scss/global.scss',
         main: './src/main/webapp/app/app.main-aot'
     },
     output: {
