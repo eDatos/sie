@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 
 declare var I18n: any;
 declare var App: any;
@@ -7,7 +7,7 @@ declare var App: any;
     selector: 'jhi-visualizer',
     templateUrl: './visualizer.component.html'
 })
-export class VisualizerComponent implements OnInit {
+export class VisualizerComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor() { }
 
@@ -72,5 +72,23 @@ export class VisualizerComponent implements OnInit {
         App.config['installationType'] = 'EXTERNAL';
 
         App.start();
+    }
+
+    ngAfterViewInit() {
+        this.setGlobalStyleSheetsDisabled(true);
+    }
+
+    ngOnDestroy() {
+        this.setGlobalStyleSheetsDisabled(false);
+    }
+
+    private setGlobalStyleSheetsDisabled(disabled: boolean) {
+        const styleSheetList = document.styleSheets;
+        for (let i = 0; i < styleSheetList.length; i++) {
+            const styleSheet = styleSheetList.item(i);
+            if (!styleSheet.href) {
+                styleSheet.disabled = disabled;
+            }
+        }
     }
 }
