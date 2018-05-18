@@ -8,7 +8,7 @@ export const lugarRoute: Routes = [
         component: LugarComponent,
         data: {
             roles: [],
-            pageTitle: 'home.pageTitle'
+            pageTitle: 'lugar.pageTitle'
         }
     }
 ];

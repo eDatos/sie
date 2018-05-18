@@ -5,7 +5,8 @@ import { DatasetService } from '../../dataset';
 
 @Component({
     selector: 'jhi-lugar',
-    templateUrl: './lugar.component.html'
+    templateUrl: './lugar.component.html',
+    styleUrls: ['lugar.component.scss']
 })
 export class LugarComponent implements OnInit {
 

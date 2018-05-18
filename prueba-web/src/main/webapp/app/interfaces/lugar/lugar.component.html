@@ -1,17 +1,11 @@
-<form name="lugarForm" role="form" novalidate (ngSubmit)="transition()">
+<div class="section">
+    <h1 jhiTranslate="lugar.header">¿De qué lugar deseas conocer su evolución en materia electoral?</h1>
 
-    <fieldset>
-        <h3 jhiTranslate="lugar.header">¿De qué lugar deseas conocer su evolución en materia electoral?</h3>
+    <div class="form-group">
+        <ac-autocomplete-short-list name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombre']"></ac-autocomplete-short-list>
+    </div>
 
-        <div class="entity-fields">
-            <div class="form-group">
-                <ac-autocomplete-short-list name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombre']"></ac-autocomplete-short-list>
-            </div>
-        </div>
-
-        <button type="submit" [disabled]="!lugar" class="btn btn-primary">
-            <span jhiTranslate="lugar.continuar">continuar</span>
-        </button>
-    </fieldset>
-
-</form>
+    <button class="btn btn-primary" (click)="transition()" [disabled]="!lugar">
+        <span jhiTranslate="lugar.continuar">continuar</span>
+    </button>
+</div>
