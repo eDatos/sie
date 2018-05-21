@@ -91,8 +91,7 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
         ]),
         new WebpackNotifierPlugin({
             title: 'JHipster',
-            // FIXME: Change Logo
-            contentImage: path.join(__dirname, 'logo-arte.png')
+            contentImage: path.join(__dirname, 'logo_istac.png')
         })
     ]
 });

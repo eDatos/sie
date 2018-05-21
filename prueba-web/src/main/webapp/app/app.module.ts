@@ -11,7 +11,7 @@ import { PaginationConfig } from './blocks/config/uib-pagination.config';
 import { ArteApplicationTemplateConfigModule } from './config/config.module';
 import { ArteApplicationTemplateDatasetServiceModule } from './dataset/dataset.module';
 import { ArteApplicationTemplateInterfacesModule } from './interfaces/interfaces.module';
-import { JhiMainComponent, LayoutRoutingModule, ErrorComponent, notFoundRoute } from './layouts';
+import { JhiMainComponent, LayoutRoutingModule, ErrorComponent, notFoundRoute, NavbarComponent } from './layouts';
 import { ArteApplicationTemplateSharedModule } from './shared';
 import { ArteApplicationTemplateVisualizerModule } from './visualizer/visualizer.module';
 
@@ -37,6 +37,7 @@ const APP_ROUTES = [
     declarations: [
         JhiMainComponent,
         ErrorComponent,
+        NavbarComponent
     ],
     providers: [
         customHttpProvider(),
