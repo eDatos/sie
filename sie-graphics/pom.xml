@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>prueba-madre</artifactId>
-		<groupId>es.artesl.prueba</groupId>
-		<version>1.0.0.SNAPSHOT</version>
+        <groupId>es.gobcan.istac.sie</groupId>
+        <artifactId>sie</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>sie-graphics</artifactId>
