@@ -1,0 +1,39 @@
+<!doctype html>
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+    <base href="/" th:href="@{/}" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Sie</title>
+    <meta name="description" content="" />
+    <meta name="google" value="notranslate" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="manifest" href="manifest.webapp" />
+    <script src="./visualizer-static/metamac.js"></script>
+    <script src="//estadisticas.arte-consultores.com/statistical-visualizer-api/js/authentication.js"></script>
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-501fc6f600bacbe9" type="text/javascript" ></script>
+</head>
+
+<body>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        window.CONFIGURATION = {};
+        window.CONFIGURATION.dataset = {};
+        window.CONFIGURATION.dataset.endpoint = 'http://estadisticas.arte-consultores.com/statistical-resources/v1.0/datasets/ISTAC/C00031A_000001/~latest.json';
+       	/*]]>*/
+    </script>
+
+    <!--[if lt IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <jhi-main></jhi-main>
+    <noscript>
+        <h1>You must enable javascript to view this page.</h1>
+    </noscript>
+
+</body>
+
+</html>
