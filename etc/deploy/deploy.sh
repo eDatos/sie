@@ -11,7 +11,7 @@ if [ "$1" == "--no-restart" ]; then
 fi
 
 scp -r etc/deploy deploy@estadisticas.arte-consultores.com:$TRANSFER_PATH
-scp target/sie-portal-web-*.war deploy@estadisticas.arte-consultores.com:$TRANSFER_PATH/sie.war
+scp sie-portal-web/target/sie-portal-web-*.war deploy@estadisticas.arte-consultores.com:$TRANSFER_PATH/sie.war
 ssh deploy@estadisticas.arte-consultores.com <<EOF
 
     # chmod a+x $TRANSFER_PATH/deploy/*.sh;
