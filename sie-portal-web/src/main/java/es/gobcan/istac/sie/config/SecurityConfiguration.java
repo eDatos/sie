@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.cas.web.CasAuthenticationFilter;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -79,8 +78,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //@formatter:off
         http
-            .addFilterBefore(corsFilter, CasAuthenticationFilter.class)
-	    	.addFilterBefore(requestCasGlobalLogoutFilter(), LogoutFilter.class)
+            .addFilter(corsFilter)
+	    	.addFilter(requestCasGlobalLogoutFilter())
             .exceptionHandling()
         .and() 
             .csrf().disable()
@@ -91,19 +90,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
             .authorizeRequests()
-            .antMatchers("/api/activate").permitAll()
-            .antMatchers("/api/authenticate").permitAll()
-            .antMatchers("/api/profile-info").permitAll()
-            .antMatchers("/management/metrics").access("hasAuthority('LEER_METRICA')")
-            .antMatchers("/management/health").access("hasAuthority('LEER_SALUD')")
-            .antMatchers("/management/configprops").access("hasAuthority('LEER_CONFIG')")
-            .antMatchers("/management/audits").access("hasAuthority('LEER_AUDITORIA')")
-            .antMatchers("/management/logs").access("hasAuthority('LEER_LOGS')")
-            .antMatchers("/management/**").permitAll()
-            .antMatchers("/v2/api-docs/**").permitAll()
-            .antMatchers("/swagger-resources/configuration/ui").permitAll()
-            .antMatchers("/swagger-ui/index.html").access("hasAuthority('LEER_API')")
-            .antMatchers("/**").authenticated();
+            .antMatchers("/**").permitAll();
         //@formatter:on
     }
 
