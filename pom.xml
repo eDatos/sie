@@ -21,6 +21,23 @@
 		<module>sie-portal-web</module>
     </modules>
 
+	<issueManagement>
+		<system>Jira</system>
+		<url>http://jira.arte-consultores.com/browse/METAMAC</url>
+	</issueManagement>
+	<distributionManagement>
+		<repository>
+			<id>arte-repository</id>
+			<name>Arte Repository - RELEASE</name>
+			<url>http://repository.arte-consultores.com/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>arte-repository</id>
+			<name>Arte Repository - SNAPSHOT</name>
+			<url>http://repository.arte-consultores.com/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
     <build>
         <plugins>
             <plugin>

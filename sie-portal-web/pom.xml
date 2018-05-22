@@ -12,23 +12,6 @@
     <packaging>war</packaging>
     <name>Módulo web del Sistema de Información Electoral</name>
 
-    <issueManagement>
-        <system>Jira</system>
-        <url>http://jira.arte-consultores.com/browse/INFRASTR</url>
-    </issueManagement>
-    <distributionManagement>
-        <repository>
-            <id>arte-repository</id>
-            <name>Arte Repository - RELEASE</name>
-            <url>http://repository.arte-consultores.com/content/repositories/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>arte-repository</id>
-            <name>Arte Repository - SNAPSHOT</name>
-            <url>http://repository.arte-consultores.com/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-
     <properties>
         <argLine>-Djava.security.egd=file:/dev/./urandom -Xmx256m</argLine>
         <arte-libs-grammar.version>2.0.1-SNAPSHOT</arte-libs-grammar.version>
