@@ -13,7 +13,7 @@
     class="ch.qos.logback.classic.AsyncAppender"> <queueSize>512</queueSize> 
     <appender-ref ref="FILE"/> </appender> -->
 
-  <property name="LOGS_HOME" value="/data/istac/sie/serverlogs" />
+  <property name="LOGS_HOME" value="/servers/metamac/data/sie/logs" />
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
