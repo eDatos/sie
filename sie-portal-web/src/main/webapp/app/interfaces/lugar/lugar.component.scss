@@ -7,3 +7,7 @@
 .form-group {
     margin-top: 1rem;
 }
+
+ac-autocomplete-short-list /deep/ span.ui-autocomplete {
+    width: 90%;
+}

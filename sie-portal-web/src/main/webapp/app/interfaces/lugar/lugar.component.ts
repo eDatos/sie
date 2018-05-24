@@ -4,6 +4,7 @@ import { Lugar } from './lugar.model';
 import { DatasetService } from '../../dataset';
 
 const BACKGROUND_CLASS = 'lugar-background';
+const GEOGRAPHIC_DIMENSION = 'GEOGRAPHIC_DIMENSION';
 
 @Component({
     selector: 'jhi-lugar',
@@ -24,14 +25,12 @@ export class LugarComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.datasetService.getDataset().subscribe((json) => {
-            this.lugares = json.metadata.geographicCoverages.resource.map((element) => {
-                const result: Lugar = {
-                    id: element.id,
-                    nombre: element.name.text[0].value
-                }
-                return result;
-            });
+        this.datasetService.getMetadata().subscribe((json) => {
+            this.lugares = json.metadata.dimensions.dimension.find((dimension) => dimension.type === GEOGRAPHIC_DIMENSION)
+                .dimensionValues.value
+                .map((element) => {
+                    return new Lugar(element.variableElement.id, element.variableElement.name.text[0].value + ' (' + element.geographicGranularity.name.text[0].value + ')');
+                });
         });
     }
 

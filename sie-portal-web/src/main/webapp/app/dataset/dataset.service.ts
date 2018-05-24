@@ -10,9 +10,10 @@ export class DatasetService {
 
     constructor(private http: Http, private configService: ConfigService) { }
 
-    getDataset(): Observable<any> {
+    getMetadata(): Observable<any> {
         if (!this.datasetObservable) {
-            this.datasetObservable = this.http.get(this.configService.getConfig().dataset.endpoint)
+            const config = this.configService.getConfig();
+            this.datasetObservable = this.http.get(config.dataset.endpoint + config.dataset.metadata)
             .map((res: Response) => res.json())
             .publishReplay(1)
             .refCount();

@@ -2,7 +2,8 @@
     <h1 jhiTranslate="lugar.header">¿De qué lugar deseas conocer su evolución en materia electoral?</h1>
 
     <div class="form-group">
-        <ac-autocomplete-short-list name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombre']"></ac-autocomplete-short-list>
+        <ac-autocomplete-short-list name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombre']" [disabled]="!lugares"></ac-autocomplete-short-list>
+        <div *ngIf="!lugares" class="loader first-loader"></div>
     </div>
 
     <button class="btn btn-primary" (click)="transition()" [disabled]="!lugar">
