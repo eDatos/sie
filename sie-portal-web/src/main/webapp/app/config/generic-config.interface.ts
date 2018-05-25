@@ -1,6 +1,7 @@
 export interface GenericConfig {
     dataset: {
         endpoint,
-        metadata
+        metadata,
+        data
     };
 };

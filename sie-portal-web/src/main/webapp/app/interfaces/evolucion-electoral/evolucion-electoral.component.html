@@ -1,1 +1,25 @@
-Hola, Mundo
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th style="width: 20%">
+                <span jhiTranslate="arteApplicationTemplateApp.pelicula.titulo.label"></span>
+                <span class="fa fa-sort"></span>
+            </th>
+            <th style="width: 10%">
+                <span jhiTranslate="arteApplicationTemplateApp.pelicula.fechaEstreno.label"></span>
+                <span class="fa fa-sort"></span>
+            </th>
+            <th style="width: 10%">
+                <span jhiTranslate="arteApplicationTemplateApp.pelicula.idioma.label"></span>
+                <span class="fa fa-sort"></span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let proceso of listaProcesoElectoral" [routerLink]="['visualizer', proceso.id ]">
+            <td>{{proceso.id}}</td>
+            <td>{{proceso.tipoProcesoElectoral}}</td>
+            <td>{{proceso.fechaEleccion}}</td>
+        </tr>
+    </tbody>
+</table>

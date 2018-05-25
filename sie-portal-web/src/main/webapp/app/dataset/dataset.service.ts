@@ -2,22 +2,163 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { ConfigService } from '../config';
+import { Lugar } from '../interfaces/lugar/lugar.model';
+import { ProcesoElectoral } from '../interfaces/evolucion-electoral/proceso-electoral.model';
+
+const GEOGRAPHIC_DIMENSION = 'GEOGRAPHIC_DIMENSION';
+const FECHA_ELECCION = 'FECHA_ELECCION';
+const TIPO_PROCESO_ELECTORAL = 'TIPO_PROCESO_ELECTORAL';
+const SEPARADOR = '|';
+const TERRITORIO = 'TERRITORIO';
+const PROCESO_ELECTORAL = 'PROCESO_ELECTORAL';
+const INDICADORES = 'INDICADORES';
 
 @Injectable()
 export class DatasetService {
 
-    private datasetObservable: Observable<any>;
+    // Atributos para la lista de lugares
+    private promesaLugares: Promise<Lugar[]>;
+
+    // Atributos para la lista de procesos electorales
+    private multiplicadores = {};
+    private idsDimensiones: string[] = [];
 
     constructor(private http: Http, private configService: ConfigService) { }
 
-    getMetadata(): Observable<any> {
-        if (!this.datasetObservable) {
-            const config = this.configService.getConfig();
-            this.datasetObservable = this.http.get(config.dataset.endpoint + config.dataset.metadata)
-            .map((res: Response) => res.json())
-            .publishReplay(1)
-            .refCount();
+    getListaLugares(): Promise<Lugar[]> {
+        if (!this.promesaLugares) {
+            this.promesaLugares = new Promise<Lugar[]>((resolve) => {
+                this.doGetMetadata().subscribe((json) => {
+                    resolve(this.parseListaLugares(json));
+                });
+            });
         }
-        return this.datasetObservable;
+        return this.promesaLugares;
+    }
+
+    private doGetMetadata(): Observable<any> {
+        const config = this.configService.getConfig();
+        return this.http.get(`${config.dataset.endpoint}${config.dataset.metadata}`)
+            .map((res: Response) => res.json());
+    }
+
+    private parseListaLugares(json: any): Lugar[] {
+        const geographicDimension = json.metadata.dimensions.dimension.find((dimension) => dimension.type === GEOGRAPHIC_DIMENSION);
+        return geographicDimension.dimensionValues.value.map((element) => {
+            return new Lugar(element.id, element.name.text[0].value + ' (' + element.geographicGranularity.name.text[0].value + ')');
+        });
+    }
+
+    getProcesosElectoralesByRegionId(id: string): Promise<ProcesoElectoral[]> {
+        return new Promise<ProcesoElectoral[]>((resolve) => {
+            this.doGetDataByRegionId(id).subscribe((json) => {
+                resolve(this.parseListaProcesosElectorales(json));
+            });
+        });
+    }
+
+    private parseListaProcesosElectorales(json: any): ProcesoElectoral[] {
+        // Atributos
+        const fechas = this.procesaAtributo(json, FECHA_ELECCION);
+        const tipos = this.procesaAtributo(json, TIPO_PROCESO_ELECTORAL);
+
+        // Datos
+        const datos = this.procesaDatos(json);
+
+        // Inicializacion de atributos para calcular los indices
+        this.idsDimensiones = this.creaListaIdsDimensiones(json);
+        this.multiplicadores = this.creaMultiplicador(json);
+
+        // Ensamblaje de los procesos electorales
+        const listaProcesoElectoral = this.creaProcesosElectorales(json);
+        const listaIndicadores = this.creaIndicadores(json);
+
+        for (let i = 0; i < listaProcesoElectoral.length; i++) {
+            const procesoElectoral = listaProcesoElectoral[i];
+            procesoElectoral.fechaEleccion = fechas[i].trim();
+            procesoElectoral.tipoProcesoElectoral = tipos[i].trim();
+
+            for (let j = 0; j < listaIndicadores.length; j++) {
+                const indicador = listaIndicadores[j];
+                const coordenadas = {
+                    'INDICADORES': indicador.index,
+                    'TERRITORIO': 0,
+                    'PROCESO_ELECTORAL': procesoElectoral.indiceDimension
+                }
+                procesoElectoral.indicadores[indicador.code] = datos[this.calcularIndice(coordenadas)].trim();
+            }
+        }
+
+        return listaProcesoElectoral;
+    }
+
+    private doGetDataByRegionId(id: string): Observable<any> {
+        const config = this.configService.getConfig();
+        return this.http.get(`${config.dataset.endpoint}${config.dataset.data}${id}`)
+            .map((res: Response) => res.json());
+    }
+
+    private procesaAtributo(json: any, nombreAtributo: string): string[] {
+        return json.data.attributes.attribute.find((attribute) => attribute.id === nombreAtributo)
+            .value.split(SEPARADOR);
+    }
+
+    private procesaDatos(json: any): string[] {
+        return json.data.observations.split(SEPARADOR);
+    }
+
+    private creaListaIdsDimensiones(json: any) {
+        const listaIdsDimensiones = [];
+        for (let i = 0; i < json.data.dimensions.dimension.length; i++) {
+            listaIdsDimensiones.push(json.data.dimensions.dimension[i].dimensionId);
+        }
+        return listaIdsDimensiones;
+    }
+
+    private creaMultiplicador(json: any) {
+        const multiplicadores = {};
+        const numDimensiones = json.data.dimensions.dimension.length;
+        for (let i = 1; i <= numDimensiones; i++) {
+            const dimensionActual = json.data.dimensions.dimension[numDimensiones - i];
+            const idDimension = dimensionActual.dimensionId;
+            if (i === 1) {
+                multiplicadores[idDimension] = 1;
+            } else {
+                const dimensionAnterior = json.data.dimensions.dimension[numDimensiones - i + 1];
+                const multiplicadorAnterior = multiplicadores[dimensionAnterior.dimensionId];
+                const multiplicador = dimensionAnterior.representations.total * multiplicadorAnterior;
+
+                multiplicadores[idDimension] = multiplicador;
+            }
+        }
+        return multiplicadores;
+    }
+
+    private creaProcesosElectorales(json: any): ProcesoElectoral[] {
+        const lugarId = this.parseLugarId(json);
+        return json.data.dimensions.dimension.find((dimension) => dimension.dimensionId === PROCESO_ELECTORAL)
+            .representations.representation
+            .map((element) => {
+                return new ProcesoElectoral(element.code, element.index, lugarId);
+            });
+    }
+
+    private parseLugarId(json: any): string {
+        return json.data.dimensions.dimension.find((dimension) => dimension.dimensionId === TERRITORIO)
+            .representations.representation[0].code;
+    }
+
+    private creaIndicadores(json: any): any[] {
+        return json.data.dimensions.dimension.find((dimension) => dimension.dimensionId === INDICADORES)
+        .representations.representation;
+    }
+
+    private calcularIndice(coordenadas: any) {
+        let indice = 0;
+        for (let i = 0; i < this.idsDimensiones.length; i++) {
+            const idDimension = this.idsDimensiones[i];
+            indice += this.multiplicadores[idDimension] * coordenadas[idDimension];
+        }
+        return indice;
     }
 }

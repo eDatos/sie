@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { EvolucionElectoral, ProcesoElectoral } from './evolucion-electoral.model';
+import { ActivatedRoute } from '@angular/router';
+import { ProcesoElectoral } from './proceso-electoral.model';
+import { DatasetService } from '../../dataset';
 
 @Component({
     selector: 'jhi-evolucion-electoral',
@@ -8,19 +9,17 @@ import { EvolucionElectoral, ProcesoElectoral } from './evolucion-electoral.mode
 })
 export class EvolucionElectoralComponent implements OnInit {
 
-    listaEvolucionElectoral: EvolucionElectoral[];
-    procesoElectoral: ProcesoElectoral;
+    listaProcesoElectoral: ProcesoElectoral[];
 
     constructor(
         private activatedRoute: ActivatedRoute,
-        private router: Router
+        private datasetService: DatasetService
     ) { }
 
     ngOnInit() {
-        this.activatedRoute.params.subscribe((params) => console.log(params.id));
-    }
-
-    transition() {
-        this.router.navigate(['visualizer']);
+        this.activatedRoute.params.subscribe((params) => {
+            this.datasetService.getProcesosElectoralesByRegionId(params.id)
+                .then((listaProcesoElectoral) => this.listaProcesoElectoral = listaProcesoElectoral);
+        });
     }
 }
