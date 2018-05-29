@@ -8,6 +8,13 @@
         "title": "Bienvenido, {{user}}",
         "detail": "Acceda al apartado deseado a través del menú de navegación"
     },
+    "entity": {
+        "list": {
+            "empty": {
+                "detail": "No se han encontrado resultados"
+            }
+        }
+    },
     "error": {
         "internalServerError": "Error interno del servidor",
         "server.not.reachable": "Servidor no accesible",

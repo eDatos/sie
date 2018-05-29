@@ -1,25 +1,64 @@
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th style="width: 20%">
-                <span jhiTranslate="arteApplicationTemplateApp.pelicula.titulo.label"></span>
-                <span class="fa fa-sort"></span>
-            </th>
-            <th style="width: 10%">
-                <span jhiTranslate="arteApplicationTemplateApp.pelicula.fechaEstreno.label"></span>
-                <span class="fa fa-sort"></span>
-            </th>
-            <th style="width: 10%">
-                <span jhiTranslate="arteApplicationTemplateApp.pelicula.idioma.label"></span>
-                <span class="fa fa-sort"></span>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let proceso of listaProcesoElectoral" [routerLink]="['visualizer', proceso.id ]">
-            <td>{{proceso.id}}</td>
-            <td>{{proceso.tipoProcesoElectoral}}</td>
-            <td>{{proceso.fechaEleccion}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="section">
+    <div class="titulo-pagina">
+        <h1 jhiTranslate="evolucionElectoral.header">Historia de la evolución electoral en</h1>
+        <ac-autocomplete-short-list name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombre']" [disabled]="!lugares"
+            (onSelect)="transition()"></ac-autocomplete-short-list>
+        <div *ngIf="!lugares" class="loader first-loader"></div>
+    </div>
+
+    <div>
+        <input id="absoluto" type="radio" name="indicadoresEnPorcentajes" [value]="false" [(ngModel)]="indicadoresEnPorcentajes">
+        <label for="absoluto" jhiTranslate="evolucionElectoral.indicador.absoluto">Num Total</label>
+        <br>
+        <input id="porcentaje" type="radio" name="indicadoresEnPorcentajes" [value]="true" [(ngModel)]="indicadoresEnPorcentajes"> 
+        <label for="porcentaje" jhiTranslate="evolucionElectoral.indicador.porcentaje">Porcentaje</label>
+    </div>
+
+    <ngb-accordion [closeOthers]="true" activeIds="panel-id-0" *ngIf="tiposEleccion">
+        <ngb-panel *ngFor="let tipo of tiposEleccion; index as i" id="panel-id-{{i}}">
+            <ng-template ngbPanelTitle>
+                <span jhiTranslate="evolucionElectoral.tipoEleccion.{{tipo}}"></span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <ac-stacked-bar-chart [data]="graficasPorTipo[tipo]" [isPercentaje]="indicadoresEnPorcentajes"></ac-stacked-bar-chart>
+                <div *ngFor="let proceso of procesosPorTipo[tipo]" class="proceso-electoral">
+                    <div class="titulo-tabla">
+                        <a [routerLink]="['/visualizer', lugar.id, proceso.id]">{{proceso.fechaEleccion | date: 'yyyy'}}</a>
+                    </div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td jhiTranslate="evolucionElectoral.indicador.CENSO_ESCRUTINIO"></td>
+                                <td>{{proceso.indicadores['CENSO_ESCRUTINIO']}}</td>
+                            </tr>
+                            <tr>
+                                <td jhiTranslate="evolucionElectoral.indicador.PAPELETAS_TOTAL"></td>
+                                <td>{{proceso.indicadores['PAPELETAS_TOTAL']}}</td>
+                            </tr>
+                            <tr>
+                                <td jhiTranslate="evolucionElectoral.indicador.VOTANTES_TOTAL"></td>
+                                <td>{{proceso.indicadores['VOTANTES_TOTAL']}}</td>
+                            </tr>
+                            <tr>
+                                <td jhiTranslate="evolucionElectoral.indicador.VOTOS_BLANCOS"></td>
+                                <td>{{proceso.indicadores['VOTOS_BLANCOS']}}</td>
+                            </tr>
+                            <tr>
+                                <td jhiTranslate="evolucionElectoral.indicador.VOTOS_NULOS"></td>
+                                <td>{{proceso.indicadores['VOTOS_NULOS']}}</td>
+                            </tr>
+                            <tr>
+                                <td jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS"></td>
+                                <td>{{proceso.indicadores['VOTOS_VALIDOS']}}</td>
+                            </tr>
+                            <tr>
+                                <td jhiTranslate="evolucionElectoral.indicador.ABSTENCION"></td>
+                                <td>{{proceso.indicadores['ABSTENCION']}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+</div>

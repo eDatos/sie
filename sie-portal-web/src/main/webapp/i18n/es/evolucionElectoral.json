@@ -1,0 +1,33 @@
+{
+    "evolucionElectoral": {
+        "pageTitle": "Sistema electoral del ISTAC",
+        "header": "Historia de la evolución electoral en",
+        "detail": "Ver detalle",
+        "indicador": {
+            "absoluto": "Nº Total",
+            "porcentaje": "Porcentaje",
+            "ABSTENCION": "Abstención",
+            "ABSTENCION_PORCENTAJE": "Abstención",
+            "CENSO_ESCRUTINIO": "Censo",
+            "PAPELETAS_PORCENTAJE": "Papeletas",
+            "PAPELETAS_TOTAL": "Papeletas",
+            "VOTANTES_PORCENTAJE": "Votantes",
+            "VOTANTES_TOTAL": "Votantes",
+            "VOTOS_BLANCOS": "Votos en blanco",
+            "VOTOS_BLANCOS_PORCENTAJE": "Votos en blanco",
+            "VOTOS_NULOS": "Votos nulos",
+            "VOTOS_NULOS_PORCENTAJE": "Votos nulos",
+            "VOTOS_VALIDOS": "Votos válidos",
+            "VOTOS_VALIDOS_PORCENTAJE": "Votos válidos"
+        },
+        "tipoEleccion": {
+            "AUTONOMICAS": "Elecciones autonómicas",
+            "CABILDO": "Elecciones al Cabildo",
+            "CONGRESO": "Elecciones al Congreso",
+            "MUNICIPALES": "Elecciones municipales",
+            "PARLAMENTO_EUROPEO": "Elecciones al Parlamento Europeo",
+            "REFERENDUM": "Referéndum",
+            "SENADO": "Elecciones al Senado"
+        }
+    }
+}

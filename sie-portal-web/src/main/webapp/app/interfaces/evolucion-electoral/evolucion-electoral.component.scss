@@ -1,0 +1,35 @@
+.section {
+    max-width: 1200px;
+	margin: 0 auto;
+}
+
+.titulo-pagina {
+    margin-bottom: 2rem;
+}
+
+h1 {
+    display: inline-block;
+    margin-bottom: 0rem;
+    margin-right: 0.3rem;
+}
+
+ac-autocomplete-short-list {
+    display: inline-block;
+}
+
+.proceso-electoral {
+    width: 80%;
+    margin: auto;
+}
+
+.proceso-electoral:not(:last-of-type) {
+    margin-bottom: 2rem;
+}
+
+.proceso-electoral td {
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+}
+
+.titulo-tabla {
+    border-bottom: 1px solid;
+}

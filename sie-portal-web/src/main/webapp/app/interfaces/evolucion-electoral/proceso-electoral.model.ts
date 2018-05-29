@@ -4,7 +4,7 @@ export class ProcesoElectoral {
         public id: string,
         public indiceDimension: number,
         public idLugar: string,
-        public fechaEleccion?: string,
+        public fechaEleccion?: Date,
         public tipoProcesoElectoral?: string,
         public indicadores: any = {}
     ) { }

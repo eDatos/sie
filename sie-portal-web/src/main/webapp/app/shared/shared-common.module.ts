@@ -21,6 +21,8 @@ import {
     CurrencyComponent
 } from './';
 
+import { StackedBarChartComponent } from './stacked-bar-chart/stacked-bar-chart.component';
+
 @NgModule({
     imports: [
         SieSharedLibsModule
@@ -34,6 +36,7 @@ import {
         AutocompleteShortListComponent,
         AutocompleteLongListComponent,
         AutocompleteEnumComponent,
+        StackedBarChartComponent,
         OrderListComponent,
         HelpTooltipComponent,
         PaginationComponent,
@@ -60,6 +63,7 @@ import {
         AutocompleteShortListComponent,
         AutocompleteLongListComponent,
         AutocompleteEnumComponent,
+        StackedBarChartComponent,
         OrderListComponent,
         HelpTooltipComponent,
         PaginationComponent,

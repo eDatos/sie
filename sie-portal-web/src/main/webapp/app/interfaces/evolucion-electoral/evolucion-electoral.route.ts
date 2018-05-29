@@ -7,7 +7,7 @@ export const evolucionElectoralRoute: Routes = [
         component: EvolucionElectoralComponent,
         data: {
             roles: [],
-            pageTitle: 'home.pageTitle'
+            pageTitle: 'evolucionElectoral.pageTitle'
         }
     }
 ];

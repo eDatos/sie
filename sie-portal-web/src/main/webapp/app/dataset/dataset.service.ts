@@ -75,7 +75,7 @@ export class DatasetService {
 
         for (let i = 0; i < listaProcesoElectoral.length; i++) {
             const procesoElectoral = listaProcesoElectoral[i];
-            procesoElectoral.fechaEleccion = fechas[i].trim();
+            procesoElectoral.fechaEleccion = new Date(fechas[i].trim());
             procesoElectoral.tipoProcesoElectoral = tipos[i].trim();
 
             for (let j = 0; j < listaIndicadores.length; j++) {
