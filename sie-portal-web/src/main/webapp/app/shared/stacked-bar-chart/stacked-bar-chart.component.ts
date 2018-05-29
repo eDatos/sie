@@ -17,7 +17,7 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
     public data: BarChart;
 
     // Atributos de uso interno
-    private name: string = 'container-' + new Date().getTime().toString() + '-' + Math.floor(Math.random() * 10000).toString();
+    public name: string = 'container-' + new Date().getTime().toString() + '-' + Math.floor(Math.random() * 10000).toString();
 
     private grafica;
 
