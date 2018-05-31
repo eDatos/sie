@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="grid-procesos">
-                    <table *ngFor="let proceso of procesosPorTipo[tipo].reverse()" class="proceso-electoral">
+                    <table *ngFor="let proceso of procesosPorTipo[tipo].slice().reverse()" class="proceso-electoral">
                         <thead class="titulo-tabla">
                             <tr>
                                 <th>
