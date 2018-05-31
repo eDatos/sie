@@ -37,6 +37,12 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
     }
 
     ngAfterViewInit() {
+        Highcharts.setOptions({
+            lang: {
+                decimalPoint: ',',
+                thousandsSep: '.'
+            }
+        });
         this.grafica = new Highcharts.Chart({
             xAxis: {
                 categories: this.data.xAxis
@@ -48,7 +54,7 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
             },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+                pointFormat: '{series.name}: {point.y}<br/>Total: {point.total:,.0f}'
             },
             yAxis: {
                 min: 0,
