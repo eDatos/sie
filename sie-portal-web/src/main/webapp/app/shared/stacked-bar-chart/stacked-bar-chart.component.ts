@@ -74,6 +74,9 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
                     }
                 }
             },
+            credits: {
+                enabled: false
+            },
             title: {
                 text: ''
             }
