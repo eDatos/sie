@@ -25,12 +25,16 @@ ac-autocomplete-short-list {
     }
 }
 
+.grid-procesos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
 .proceso-electoral {
-    width: 80%;
     margin: auto;
 }
 
-.proceso-electoral:not(:last-of-type) {
+.proceso-electoral {
     margin-bottom: 2rem;
 }
 

@@ -23,11 +23,16 @@
                     <label for="porcentaje-{{i}}" jhiTranslate="evolucionElectoral.indicador.porcentaje">Porcentaje</label>
                 </div>
 
-                <div *ngFor="let proceso of procesosPorTipo[tipo]" class="proceso-electoral">
-                    <div class="titulo-tabla">
-                        <a [routerLink]="['/visualizer', lugar.id, proceso.id]">{{proceso.fechaEleccion | date: 'yyyy'}}</a>
-                    </div>
-                    <table>
+                <div class="grid-procesos">
+                    <table *ngFor="let proceso of procesosPorTipo[tipo].reverse()" class="proceso-electoral">
+                        <thead class="titulo-tabla">
+                            <tr>
+                                <th>
+                                    <!-- <a [routerLink]="['/visualizer', lugar.id, proceso.id]">{{proceso.fechaEleccion | date: 'yyyy'}}</a> -->
+                                    {{proceso.fechaEleccion | date: 'yyyy'}}
+                                </th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr>
                                 <td>&#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.CENSO_INE"></span></td>
