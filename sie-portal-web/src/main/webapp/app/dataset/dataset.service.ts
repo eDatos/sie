@@ -44,7 +44,8 @@ export class DatasetService {
 
     private parseListaLugares(json: any): Lugar[] {
         const geographicDimension = json.metadata.dimensions.dimension.find((dimension) => dimension.type === GEOGRAPHIC_DIMENSION);
-        return geographicDimension.dimensionValues.value.map((element) => {
+        const lugares = geographicDimension.dimensionValues.value.filter((element) => !/.+_O$/.test(element.id));
+        return lugares.map((element) => {
             return new Lugar(element.id, element.name.text[0].value + ' (' + element.geographicGranularity.name.text[0].value + ')');
         });
     }

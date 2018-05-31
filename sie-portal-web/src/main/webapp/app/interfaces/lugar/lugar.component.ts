@@ -22,12 +22,12 @@ export class LugarComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.renderer.addClass(document.body, BACKGROUND_CLASS);
+        this.renderer.addClass(document.body.parentNode, BACKGROUND_CLASS);
         this.datasetService.getListaLugares().then((listaLugares) => this.lugares = listaLugares);
     }
 
     ngOnDestroy() {
-        this.renderer.removeClass(document.body, BACKGROUND_CLASS);
+        this.renderer.removeClass(document.body.parentNode, BACKGROUND_CLASS);
     }
 
     transition() {

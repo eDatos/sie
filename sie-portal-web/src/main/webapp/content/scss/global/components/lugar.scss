@@ -1,5 +1,10 @@
 .lugar-background {
-    height: 100%;
+    height: 100vh;
     background: url("~images/lugar-background.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.lugar-background > body {
+    background: none;
 }
