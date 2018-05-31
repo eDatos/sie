@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 const INDICADORES_ABSOLUTOS_GRAFICA = ['VOTOS_VALIDOS', 'VOTOS_BLANCOS', 'VOTOS_NULOS'];
 const INDICADORES_PORCENTAJE_GRAFICA = ['VOTOS_VALIDOS_PORCENTAJE', 'VOTOS_BLANCOS_PORCENTAJE', 'VOTOS_NULOS_PORCENTAJE'];
+const INDICADORES_EN_PORCENTAJE_DEFAULT = false;
 
 @Component({
     selector: 'jhi-evolucion-electoral',
@@ -19,11 +20,10 @@ export class EvolucionElectoralComponent implements OnInit {
     procesosPorTipo;
     tiposEleccion: Set<string>;
     graficasPorTipo;
+    indicadoresPorTipo;
 
     lugares: Lugar[];
     _lugar: Lugar;
-
-    indicadoresEnPorcentajes = false;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -45,7 +45,7 @@ export class EvolucionElectoralComponent implements OnInit {
                     this.limpiarAtributos();
                     this.inicializarProcesosElectorales(listaProcesoElectoral);
                     this.inicializarTiposEleccion(listaProcesoElectoral);
-                    this.inicializarGraficas();
+                    this.inicializarIndicadoresYGraficas();
                 });
             });
         });
@@ -54,6 +54,7 @@ export class EvolucionElectoralComponent implements OnInit {
     private limpiarAtributos() {
         this.procesosPorTipo = {};
         this.graficasPorTipo = {};
+        this.indicadoresPorTipo = {};
     }
 
     private inicializarProcesosElectorales(listaProcesoElectoral: ProcesoElectoral[]) {
@@ -71,20 +72,25 @@ export class EvolucionElectoralComponent implements OnInit {
         this.tiposEleccion = new Set(tiposEleccion);
     }
 
-    private inicializarGraficas() {
+    private inicializarIndicadoresYGraficas() {
         this.tiposEleccion.forEach((tipoEleccion) => {
-            const indicadores = this.getIndicadores();
-
-            const grafica = new BarChart();
-            grafica.xAxis = this.crearEjeX(tipoEleccion);
-            grafica.yAxis = indicadores.map((indicador) => this.crearElementoEjeY(indicador, tipoEleccion));
-
-            this.graficasPorTipo[tipoEleccion] = grafica;
+            this.indicadoresPorTipo[tipoEleccion] = INDICADORES_EN_PORCENTAJE_DEFAULT;
+            this.inicializarGrafica(tipoEleccion);
         });
     }
 
-    private getIndicadores(): string[] {
-        if (this.indicadoresEnPorcentajes) {
+    private inicializarGrafica(tipoEleccion: string) {
+        const indicadores = this.getIndicadores(tipoEleccion);
+
+        const grafica = new BarChart();
+        grafica.xAxis = this.crearEjeX(tipoEleccion);
+        grafica.yAxis = indicadores.map((indicador) => this.crearElementoEjeY(indicador, tipoEleccion));
+
+        this.graficasPorTipo[tipoEleccion] = grafica;
+    }
+
+    private getIndicadores(tipoEleccion: string): string[] {
+        if (this.indicadoresPorTipo[tipoEleccion]) {
             return INDICADORES_PORCENTAJE_GRAFICA;
         } else {
             return INDICADORES_ABSOLUTOS_GRAFICA;
@@ -104,9 +110,13 @@ export class EvolucionElectoralComponent implements OnInit {
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador);
         resultado.data = [];
         this.procesosPorTipo[tipoEleccion].forEach((eleccion) => {
-            resultado.data.push(parseInt(eleccion.indicadores[indicador], 10));
+            resultado.data.push(parseFloat(eleccion.indicadores[indicador]));
         });
         return resultado;
+    }
+
+    onChangeIndicador(tipoEleccion: string) {
+        this.inicializarGrafica(tipoEleccion);
     }
 
     transition() {

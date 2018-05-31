@@ -3,6 +3,8 @@ import { BarChart } from '.';
 
 declare var Highcharts: any;
 
+const EJE_Y = 'y';
+
 @Component({
     selector: 'ac-stacked-bar-chart',
     templateUrl: './stacked-bar-chart.component.html'
@@ -27,6 +29,7 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
         }
 
         if (this.grafica) {
+            this.grafica.axes.find((axis) => EJE_Y === axis.xOrY).update({ max: this.getMaxY() });
             this.grafica.series.forEach((serie, index) => {
                 serie.update(this.data.yAxis[index], true);
             });
@@ -49,7 +52,7 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
             },
             yAxis: {
                 min: 0,
-                max: this.isPercentaje ? 100 : undefined,
+                max: this.getMaxY(),
                 title: {
                     text: ''
                 },
@@ -69,5 +72,9 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
                 text: ''
             }
         });
+    }
+
+    private getMaxY() {
+        return this.isPercentaje ? 100 : undefined;
     }
 }

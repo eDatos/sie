@@ -17,6 +17,14 @@ ac-autocomplete-short-list {
     display: inline-block;
 }
 
+.selector-indicador {
+    text-align: center;
+
+    input:not(:first-child) {
+        margin-left: 1rem;
+    }
+}
+
 .proceso-electoral {
     width: 80%;
     margin: auto;
