@@ -65,7 +65,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnInit, Afte
     public deleteOnBackspace = true;
 
     @Input()
-    public emptyMessage = this.translateService.instant('entity.list.empty.detail');
+    public emptyMessage;
 
     @Input()
     public placeholder: string = null;
@@ -115,6 +115,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnInit, Afte
         this.updateFilteredSuggestions();
         this.debouncedMode = this.completeMethod.observers.length > 0;
         this.placeholder = this.placeholder || (this.debouncedMode ? this.translateService.instant('entity.list.empty.writeForSuggestions') : null);
+        this.translateService.get('entity.list.empty.detail').subscribe((message) => this.emptyMessage = message);
     }
 
     private initFieldAndPropertiesAndItemTemplate() {

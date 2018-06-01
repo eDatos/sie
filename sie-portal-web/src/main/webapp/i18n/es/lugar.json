@@ -2,6 +2,7 @@
     "lugar": {
         "pageTitle": "Sistema electoral del ISTAC",
         "header": "¿De qué lugar deseas conocer su evolución electoral?",
-        "continuar": "Continuar"
+        "continuar": "Continuar",
+        "errorNoEncontrado": "No se ha encontrado ningún territorio con el código {{ codigo }}."
     }
 }

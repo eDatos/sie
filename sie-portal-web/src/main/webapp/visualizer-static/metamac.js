@@ -71443,7 +71443,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
 
 })( jQuery );
 
-;$(function() {
+/* ;$(function() {
   window.keydown = {};
   
   function keyName(event) {
@@ -71458,7 +71458,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
   $(document).bind("keyup", function(event) {
     keydown[keyName(event)] = false;
   });
-});
+}); */
 
 ;/**!
  * project-site: http://plugins.jquery.com/project/AjaxManager
