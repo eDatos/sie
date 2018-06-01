@@ -9,6 +9,9 @@ import { TranslateService } from '@ngx-translate/core';
 const INDICADORES_ABSOLUTOS_GRAFICA = ['VOTOS_VALIDOS', 'VOTOS_BLANCOS', 'VOTOS_NULOS'];
 const INDICADORES_PORCENTAJE_GRAFICA = ['VOTOS_VALIDOS_PORCENTAJE', 'VOTOS_BLANCOS_PORCENTAJE', 'VOTOS_NULOS_PORCENTAJE'];
 const INDICADORES_EN_PORCENTAJE_DEFAULT = false;
+const TIPO_COLUMNA = 'column';
+const TIPO_LINEA = 'spline';
+const INDICADOR_CENSO = 'CENSO_ESCRUTINIO';
 
 @Component({
     selector: 'jhi-evolucion-electoral',
@@ -85,6 +88,7 @@ export class EvolucionElectoralComponent implements OnInit {
         const grafica = new BarChart();
         grafica.xAxis = this.crearEjeX(tipoEleccion);
         grafica.yAxis = indicadores.map((indicador) => this.crearElementoEjeY(indicador, tipoEleccion));
+        grafica.yAxis.push(this.crearLineaCenso(tipoEleccion));
 
         this.graficasPorTipo[tipoEleccion] = grafica;
     }
@@ -108,9 +112,21 @@ export class EvolucionElectoralComponent implements OnInit {
     private crearElementoEjeY(indicador: string, tipoEleccion: string): YElement {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador);
+        resultado.type = TIPO_COLUMNA;
         resultado.data = [];
         this.procesosPorTipo[tipoEleccion].forEach((eleccion) => {
             resultado.data.push(parseFloat(eleccion.indicadores[indicador]));
+        });
+        return resultado;
+    }
+
+    private crearLineaCenso(tipoEleccion: string): YElement {
+        const resultado = new YElement();
+        resultado.name = this.translateService.instant('evolucionElectoral.indicador.CENSO_INE');
+        resultado.type = TIPO_LINEA;
+        resultado.data = [];
+        this.procesosPorTipo[tipoEleccion].forEach((eleccion) => {
+            resultado.data.push(parseInt(eleccion.indicadores[INDICADOR_CENSO], 10));
         });
         return resultado;
     }
