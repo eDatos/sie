@@ -31,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 import es.gobcan.istac.sie.SieApp;
 import es.gobcan.istac.sie.domain.Idioma;
 import es.gobcan.istac.sie.repository.IdiomaRepository;
-import es.gobcan.istac.sie.service.IdiomaService;
+import es.gobcan.istac.sie.service.EvolucionElectoralService;
 import es.gobcan.istac.sie.web.rest.dto.IdiomaDTO;
 import es.gobcan.istac.sie.web.rest.errors.ExceptionTranslator;
 import es.gobcan.istac.sie.web.rest.mapper.IdiomaMapper;
@@ -39,7 +39,7 @@ import es.gobcan.istac.sie.web.rest.mapper.IdiomaMapper;
 /**
  * Test class for the IdiomaResource REST controller.
  *
- * @see IdiomaResource
+ * @see EvolucionElectoralResource
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SieApp.class)
@@ -57,7 +57,7 @@ public class IdiomaResourceIntTest {
     private IdiomaMapper idiomaMapper;
 
     @Autowired
-    private IdiomaService idiomaService;
+    private EvolucionElectoralService idiomaService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -78,7 +78,7 @@ public class IdiomaResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        IdiomaResource idiomaResource = new IdiomaResource(idiomaService, idiomaMapper);
+        EvolucionElectoralResource idiomaResource = new EvolucionElectoralResource(idiomaService, idiomaMapper);
         this.restIdiomaMockMvc = MockMvcBuilders.standaloneSetup(idiomaResource).setCustomArgumentResolvers(pageableArgumentResolver).setControllerAdvice(exceptionTranslator)
                 .setMessageConverters(jacksonMessageConverter).build();
     }

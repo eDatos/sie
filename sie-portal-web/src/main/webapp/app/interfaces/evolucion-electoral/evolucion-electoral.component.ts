@@ -5,6 +5,7 @@ import { DatasetService } from '../../dataset';
 import { Lugar } from '../lugar';
 import { BarChart, YElement } from '../../shared';
 import { TranslateService } from '@ngx-translate/core';
+import { DocumentoService } from '../../documento';
 
 const INDICADORES_ABSOLUTOS_GRAFICA = ['VOTOS_VALIDOS', 'VOTOS_BLANCOS', 'VOTOS_NULOS'];
 const INDICADORES_PORCENTAJE_GRAFICA = ['VOTOS_VALIDOS_PORCENTAJE', 'VOTOS_BLANCOS_PORCENTAJE', 'VOTOS_NULOS_PORCENTAJE'];
@@ -29,7 +30,8 @@ export class EvolucionElectoralComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private datasetService: DatasetService,
-        private translateService: TranslateService
+        private translateService: TranslateService,
+        private documentoService: DocumentoService
     ) { }
 
     ngOnInit() {
@@ -126,6 +128,8 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     descargarPdf(event: Event, tipoEleccion: string) {
+        event.stopPropagation();
+        this.documentoService.download(this.lugar.id, tipoEleccion);
     }
 
     set lugar(lugar: Lugar) {
