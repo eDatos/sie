@@ -31,9 +31,6 @@ public class CacheConfiguration {
 
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
-        return cm -> {
-            cm.createCache(es.gobcan.istac.sie.domain.Idioma.class.getName(), jcacheConfiguration);
-            // jhipster-needle-ehcache-add-entry
-        };
+        return cm -> cm.createCache(es.gobcan.istac.sie.domain.Idioma.class.getName(), jcacheConfiguration);
     }
 }
