@@ -125,6 +125,9 @@ export class EvolucionElectoralComponent implements OnInit {
         }
     }
 
+    descargarPdf(event: Event, tipoEleccion: string) {
+    }
+
     set lugar(lugar: Lugar) {
         if (lugar instanceof Lugar) {
             this._lugar = lugar;

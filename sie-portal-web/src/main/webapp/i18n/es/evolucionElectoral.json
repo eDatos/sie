@@ -3,6 +3,7 @@
         "pageTitle": "Sistema electoral del ISTAC",
         "header": "Historia de la evolución electoral en",
         "detail": "Ver detalle",
+        "descargarPdf": "Descargar PDF",
         "indicador": {
             "absoluto": "Nº Total",
             "porcentaje": "Porcentaje",
