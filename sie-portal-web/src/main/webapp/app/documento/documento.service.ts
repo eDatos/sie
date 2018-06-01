@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Http, ResponseContentType } from '@angular/http';
 import * as FileSaver from 'file-saver';
+import { ProcesoElectoral } from '../interfaces/evolucion-electoral';
 
 @Injectable()
 export class DocumentoService {
 
-    public resourceUrl = 'api/evolucion-electoral';
+    public resourceUrl = 'api/documento';
 
     constructor(private http: Http) { }
 
-    download(lugarId: string, tipoEleccion: string) {
-        this.http.get(`${this.resourceUrl}/${lugarId}/${tipoEleccion}/download`, { responseType: ResponseContentType.Blob })
+    descargarPdfEvolucionElectoral(procesosElectorales: ProcesoElectoral[]) {
+        this.http.post(`${this.resourceUrl}/evolucion-electoral`, procesosElectorales, { responseType: ResponseContentType.Blob })
             .map((response) => this.saveToFileSystem(response))
             .subscribe();
     }

@@ -35,8 +35,8 @@ export class EvolucionElectoralComponent implements OnInit {
         private router: Router,
         private datasetService: DatasetService,
         private translateService: TranslateService,
-        private documentoService: DocumentoService,
-        private alertService: JhiAlertService
+        private alertService: JhiAlertService,
+        private documentoService: DocumentoService
     ) { }
 
     ngOnInit() {
@@ -150,7 +150,7 @@ export class EvolucionElectoralComponent implements OnInit {
 
     descargarPdf(event: Event, tipoEleccion: string) {
         event.stopPropagation();
-        this.documentoService.download(this.lugar.id, tipoEleccion);
+        this.documentoService.descargarPdfEvolucionElectoral(this.procesosPorTipo[tipoEleccion]);
     }
 
     set lugar(lugar: Lugar) {
