@@ -5,6 +5,7 @@ import { DatasetService } from '../../dataset';
 import { Lugar } from '../lugar';
 import { BarChart, YElement } from '../../shared';
 import { TranslateService } from '@ngx-translate/core';
+import { JhiAlertService } from 'ng-jhipster';
 
 const INDICADORES_ABSOLUTOS_GRAFICA = ['VOTOS_VALIDOS', 'VOTOS_BLANCOS', 'VOTOS_NULOS'];
 const INDICADORES_PORCENTAJE_GRAFICA = ['VOTOS_VALIDOS_PORCENTAJE', 'VOTOS_BLANCOS_PORCENTAJE', 'VOTOS_NULOS_PORCENTAJE'];
@@ -32,7 +33,8 @@ export class EvolucionElectoralComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private datasetService: DatasetService,
-        private translateService: TranslateService
+        private translateService: TranslateService,
+        private alertService: JhiAlertService
     ) { }
 
     ngOnInit() {
@@ -40,10 +42,13 @@ export class EvolucionElectoralComponent implements OnInit {
             this.lugares = listaLugares;
 
             this.activatedRoute.params.subscribe((params) => {
-                if (!this._lugar) {
-                    this._lugar = this.lugares.find((lugar) => lugar.id === params.id);
+                const resultadoBusquedaLugar = this.lugares.find((lugar) => lugar.id === params.id);
+                if (!resultadoBusquedaLugar) {
+                    this.alertService.success('lugar.errorNoEncontrado', {codigo: params.id});
+                    throw new Error(this.translateService.instant('lugar.errorNoEncontrado', {codigo: params.id}));
                 }
 
+                this._lugar = resultadoBusquedaLugar;
                 this.datasetService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
                     this.limpiarAtributos();
                     this.inicializarProcesosElectorales(listaProcesoElectoral);
