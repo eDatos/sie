@@ -150,7 +150,7 @@ export class EvolucionElectoralComponent implements OnInit {
 
     descargarPdf(event: Event, tipoEleccion: string) {
         event.stopPropagation();
-        this.documentoService.descargarPdfEvolucionElectoral(this.procesosPorTipo[tipoEleccion]);
+        this.documentoService.descargarPdfEvolucionElectoral(this.procesosPorTipo[tipoEleccion].slice().reverse());
     }
 
     set lugar(lugar: Lugar) {
