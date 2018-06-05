@@ -13,6 +13,8 @@ public final class Constants {
 
     public static final Locale DEFAULT_LOCALE = Locale.forLanguageTag("es");
 
+    public static final String CARPETA_JASPER_REPORT = "/jasper/";
+    
     private Constants() {
     }
 }

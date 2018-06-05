@@ -150,7 +150,12 @@ export class EvolucionElectoralComponent implements OnInit {
 
     descargarPdf(event: Event, tipoEleccion: string) {
         event.stopPropagation();
-        this.documentoService.descargarPdfEvolucionElectoral(this.procesosPorTipo[tipoEleccion].slice().reverse());
+        const evolucionElectoral = {
+            territorio: this._lugar.nombre,
+            tipoElecciones: this.translateService.instant('evolucionElectoral.tipoEleccion.' + tipoEleccion),
+            procesosElectorales: this.procesosPorTipo[tipoEleccion].slice().reverse()
+        };
+        this.documentoService.descargarPdfEvolucionElectoral(evolucionElectoral);
     }
 
     set lugar(lugar: Lugar) {

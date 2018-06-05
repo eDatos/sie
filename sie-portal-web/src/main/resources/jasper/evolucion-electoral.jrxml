@@ -6,8 +6,6 @@
 	<parameter name="rutaLogo" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="rutaSubinforme" class="java.lang.String"/>
 	<parameter name="dataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
-	<parameter name="TITULO" class="java.lang.String"/>
-	<parameter name="SUBTITULO" class="java.lang.String"/>
 	<parameter name="TERRITORIO" class="java.lang.String"/>
 	<parameter name="TIPO_ELECCIONES" class="java.lang.String"/>
 	<queryString>
@@ -44,13 +42,6 @@
 					</valueAxisFormat>
 				</barPlot>
 			</stackedBarChart>
-			<textField>
-				<reportElement x="440" y="121" width="88" height="20" forecolor="#3B3B3B" uuid="3851f194-5a85-44b1-8171-8089b4d85094"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Liberation Sans" size="9" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("d 'de' MMMMM 'de' yyyy").format(new java.util.Date())]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="130" y="143" width="400" height="1" forecolor="#3B3B3B" uuid="c35a7fd5-15e0-4155-9ed5-d731aedabbb4"/>
 				<graphicElement>
@@ -60,19 +51,19 @@
 			<line>
 				<reportElement x="130" y="169" width="400" height="1" forecolor="#3B3B3B" uuid="fb7e3c32-c990-4f4c-b4e2-c87cfdcdc859"/>
 			</line>
-			<textField>
-				<reportElement x="130" y="101" width="310" height="40" uuid="1e717c0f-acfe-48a2-9cff-ac174629ac09"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="130" y="101" width="400" height="40" uuid="1e717c0f-acfe-48a2-9cff-ac174629ac09"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Liberation Sans" size="18" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{TITULO}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{TERRITORIO}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="130" y="143" width="400" height="26" uuid="a43ebc08-10e4-4375-883e-b5cb6b2c6336"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Liberation Sans" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{SUBTITULO}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Participación electoral en " +$P{TIPO_ELECCIONES}.toLowerCase()]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -144,8 +135,8 @@ comunicacion.istac@gobiernodecanarias.org
 				</textElement>
 				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="40" y="2" width="212" height="46" forecolor="#3498CF" uuid="6ab19936-1e26-43a6-aab8-ff1ecae72182">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="40" y="2" width="330" height="46" forecolor="#3498CF" uuid="6ab19936-1e26-43a6-aab8-ff1ecae72182">
 					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle"/>
