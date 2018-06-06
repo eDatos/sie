@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Notificacion_Decreto_Orden_Dia" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="eb5828a7-98b5-4cd8-88a2-625a5a8842b7">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Usuario Data Adapter"/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<parameter name="rutaLogo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="rutaSubinforme" class="java.lang.String"/>
+	<parameter name="dataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="TERRITORIO" class="java.lang.String"/>
+	<parameter name="TIPO_ELECCIONES" class="java.lang.String"/>
+	<parameter name="GRAFICA" class="java.io.ByteArrayInputStream"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<title>
+		<band height="378">
+			<image hAlign="Right" vAlign="Middle">
+				<reportElement x="50" y="30" width="180" height="55" uuid="3081b5c6-83dc-4967-a3c5-7848d33025d8"/>
+				<imageExpression><![CDATA[$P{rutaLogo}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="130" y="143" width="400" height="1" forecolor="#3B3B3B" uuid="c35a7fd5-15e0-4155-9ed5-d731aedabbb4"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="130" y="169" width="400" height="1" forecolor="#3B3B3B" uuid="fb7e3c32-c990-4f4c-b4e2-c87cfdcdc859"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="130" y="101" width="400" height="40" uuid="1e717c0f-acfe-48a2-9cff-ac174629ac09"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Liberation Sans" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TERRITORIO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="130" y="143" width="400" height="26" uuid="a43ebc08-10e4-4375-883e-b5cb6b2c6336"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Liberation Sans" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Participación electoral en " +$P{TIPO_ELECCIONES}.toLowerCase()]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="130" y="190" width="400" height="170" uuid="fbd62366-e286-4664-a5e3-f3b2d6e15f07"/>
+				<imageExpression class="net.sf.jasperreports.engine.JRRenderable"><![CDATA[net.sf.jasperreports.renderers.BatikRenderer.getInstance($P{GRAFICA})]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="200" splitType="Stretch">
+			<subreport>
+				<reportElement stretchType="RelativeToTallestObject" x="130" y="0" width="400" height="200" uuid="b72cb9d4-649f-4d71-8cff-246625bb6359"/>
+				<dataSourceExpression><![CDATA[$P{dataSource}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{rutaSubinforme}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54">
+			<textField>
+				<reportElement x="430" y="2" width="50" height="46" uuid="0697b3da-58a0-4c1c-a771-926ba3763b46">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Liberation Sans" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="480" y="2" width="50" height="46" uuid="6e326d0e-dbe1-4218-82dd-ead0c512bf15">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Liberation Sans" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="88" y="2" width="164" height="46" forecolor="#3B3B3B" uuid="f342874b-7b21-4ea7-a975-2462ab9728a7">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ISTAC
+www.gobiernodecanarias.org/istac/noticias
+comunicacion.istac@gobiernodecanarias.org
+928 00 00 00 - 922 00 00 00
+@istac_es]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="40" y="2" width="46" height="46" uuid="46f26937-fcac-4929-abef-545d0b0842f4">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+				</reportElement>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA["http://www.gobiernodecanarias.org/istac/"]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<textField>
+				<reportElement x="430" y="2" width="50" height="46" forecolor="#3498CF" uuid="4db626a9-d514-49aa-b5ad-c1301622c143">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Liberation Sans" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="480" y="2" width="50" height="46" forecolor="#3498CF" uuid="323c085b-322c-43f8-b451-6a0caf71b6c8">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Liberation Sans" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="40" y="2" width="330" height="46" forecolor="#3498CF" uuid="6ab19936-1e26-43a6-aab8-ff1ecae72182">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{TERRITORIO}.toUpperCase() + " / " + $P{TIPO_ELECCIONES}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

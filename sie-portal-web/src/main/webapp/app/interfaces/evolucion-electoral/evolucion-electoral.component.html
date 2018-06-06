@@ -13,17 +13,17 @@
             </ng-template>
 
             <ng-template ngbPanelContent>
-                <ac-stacked-bar-chart [data]="graficasPorTipo[tipo]" [isPercentaje]="indicadoresPorTipo[tipo]"></ac-stacked-bar-chart>
+                <ac-stacked-bar-chart [data]="hashGraficas[tipo]" [isPercentaje]="hashIndicadoresEnPorcentaje[tipo]"></ac-stacked-bar-chart>
 
                 <div class="selector-indicador">
-                    <input id="absoluto-{{i}}" type="radio" name="indicadoresEnPorcentajes" [value]="false" [(ngModel)]="indicadoresPorTipo[tipo]" (change)="onChangeIndicador(tipo)">
+                    <input id="absoluto-{{i}}" type="radio" name="indicadoresEnPorcentajes" [value]="false" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
                     <label for="absoluto-{{i}}" jhiTranslate="evolucionElectoral.indicador.absoluto">Num Total</label>
-                    <input id="porcentaje-{{i}}" type="radio" name="indicadoresEnPorcentajes" [value]="true" [(ngModel)]="indicadoresPorTipo[tipo]" (change)="onChangeIndicador(tipo)">
+                    <input id="porcentaje-{{i}}" type="radio" name="indicadoresEnPorcentajes" [value]="true" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
                     <label for="porcentaje-{{i}}" jhiTranslate="evolucionElectoral.indicador.porcentaje">Porcentaje</label>
                 </div>
 
                 <div class="grid-procesos">
-                    <table *ngFor="let proceso of procesosPorTipo[tipo].slice().reverse()" class="proceso-electoral">
+                    <table *ngFor="let proceso of hashProcesos[tipo].slice().reverse()" class="proceso-electoral">
                         <thead class="titulo-tabla">
                             <tr>
                                 <th>

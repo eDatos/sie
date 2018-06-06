@@ -5,6 +5,7 @@ import { DatasetService } from '../../dataset';
 import { Lugar } from '../lugar';
 import { BarChart, YElement } from '../../shared';
 import { TranslateService } from '@ngx-translate/core';
+import { DocumentoService } from '../../documento';
 import { JhiAlertService } from 'ng-jhipster';
 
 const INDICADORES_ABSOLUTOS_GRAFICA = ['VOTOS_VALIDOS', 'VOTOS_BLANCOS', 'VOTOS_NULOS'];
@@ -21,10 +22,10 @@ const INDICADOR_CENSO = 'CENSO_ESCRUTINIO';
 })
 export class EvolucionElectoralComponent implements OnInit {
 
-    procesosPorTipo;
+    hashProcesos;
     tiposEleccion: Set<string>;
-    graficasPorTipo;
-    indicadoresPorTipo;
+    hashGraficas;
+    hashIndicadoresEnPorcentaje;
 
     lugares: Lugar[];
     _lugar: Lugar;
@@ -34,7 +35,8 @@ export class EvolucionElectoralComponent implements OnInit {
         private router: Router,
         private datasetService: DatasetService,
         private translateService: TranslateService,
-        private alertService: JhiAlertService
+        private alertService: JhiAlertService,
+        private documentoService: DocumentoService
     ) { }
 
     ngOnInit() {
@@ -60,17 +62,17 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     private limpiarAtributos() {
-        this.procesosPorTipo = {};
-        this.graficasPorTipo = {};
-        this.indicadoresPorTipo = {};
+        this.hashProcesos = {};
+        this.hashGraficas = {};
+        this.hashIndicadoresEnPorcentaje = {};
     }
 
     private inicializarProcesosElectorales(listaProcesoElectoral: ProcesoElectoral[]) {
         listaProcesoElectoral.forEach((procesoElectoral) => {
-            if (!this.procesosPorTipo[procesoElectoral.tipoProcesoElectoral]) {
-                this.procesosPorTipo[procesoElectoral.tipoProcesoElectoral] = [procesoElectoral];
+            if (!this.hashProcesos[procesoElectoral.tipoProcesoElectoral]) {
+                this.hashProcesos[procesoElectoral.tipoProcesoElectoral] = [procesoElectoral];
             } else {
-                this.procesosPorTipo[procesoElectoral.tipoProcesoElectoral].push(procesoElectoral);
+                this.hashProcesos[procesoElectoral.tipoProcesoElectoral].push(procesoElectoral);
             }
         });
     }
@@ -82,7 +84,7 @@ export class EvolucionElectoralComponent implements OnInit {
 
     private inicializarIndicadoresYGraficas() {
         this.tiposEleccion.forEach((tipoEleccion) => {
-            this.indicadoresPorTipo[tipoEleccion] = INDICADORES_EN_PORCENTAJE_DEFAULT;
+            this.hashIndicadoresEnPorcentaje[tipoEleccion] = INDICADORES_EN_PORCENTAJE_DEFAULT;
             this.inicializarGrafica(tipoEleccion);
         });
     }
@@ -93,13 +95,15 @@ export class EvolucionElectoralComponent implements OnInit {
         const grafica = new BarChart();
         grafica.xAxis = this.crearEjeX(tipoEleccion);
         grafica.yAxis = indicadores.map((indicador) => this.crearElementoEjeY(indicador, tipoEleccion));
-        grafica.yAxis.push(this.crearLineaCenso(tipoEleccion));
+        if (!this.hashIndicadoresEnPorcentaje[tipoEleccion]) {
+            grafica.yAxis.push(this.crearLineaCenso(tipoEleccion));
+        }
 
-        this.graficasPorTipo[tipoEleccion] = grafica;
+        this.hashGraficas[tipoEleccion] = grafica;
     }
 
     private getIndicadores(tipoEleccion: string): string[] {
-        if (this.indicadoresPorTipo[tipoEleccion]) {
+        if (this.hashIndicadoresEnPorcentaje[tipoEleccion]) {
             return INDICADORES_PORCENTAJE_GRAFICA;
         } else {
             return INDICADORES_ABSOLUTOS_GRAFICA;
@@ -108,7 +112,7 @@ export class EvolucionElectoralComponent implements OnInit {
 
     private crearEjeX(tipoEleccion: string): any[] {
         const resultado = [];
-        this.procesosPorTipo[tipoEleccion].forEach((eleccion) => {
+        this.hashProcesos[tipoEleccion].forEach((eleccion) => {
             resultado.push(eleccion.fechaEleccion.getFullYear());
         });
         return resultado;
@@ -119,7 +123,7 @@ export class EvolucionElectoralComponent implements OnInit {
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador);
         resultado.type = TIPO_COLUMNA;
         resultado.data = [];
-        this.procesosPorTipo[tipoEleccion].forEach((eleccion) => {
+        this.hashProcesos[tipoEleccion].forEach((eleccion) => {
             resultado.data.push(parseFloat(eleccion.indicadores[indicador]));
         });
         return resultado;
@@ -130,7 +134,7 @@ export class EvolucionElectoralComponent implements OnInit {
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.CENSO_INE');
         resultado.type = TIPO_LINEA;
         resultado.data = [];
-        this.procesosPorTipo[tipoEleccion].forEach((eleccion) => {
+        this.hashProcesos[tipoEleccion].forEach((eleccion) => {
             resultado.data.push(parseInt(eleccion.indicadores[INDICADOR_CENSO], 10));
         });
         return resultado;
@@ -147,6 +151,13 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     descargarPdf(event: Event, tipoEleccion: string) {
+        event.stopPropagation();
+        const evolucionElectoral = {
+            territorio: this._lugar.nombre,
+            tipoElecciones: this.translateService.instant('evolucionElectoral.tipoEleccion.' + tipoEleccion),
+            procesosElectorales: this.hashProcesos[tipoEleccion].slice().reverse()
+        };
+        this.documentoService.descargarPdfEvolucionElectoral(evolucionElectoral);
     }
 
     set lugar(lugar: Lugar) {

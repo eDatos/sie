@@ -91,10 +91,38 @@
         <yarn.version>v0.27.5</yarn.version>
         <java.cas.client.version>3.4.1</java.cas.client.version>
 
+	    <jasperreports.version>6.6.0</jasperreports.version>
+		<jasperreports-fonts.version>6.0.0</jasperreports-fonts.version>
+		<jasperreports-plugin.version>2.3</jasperreports-plugin.version>
     </properties>
 
 
     <dependencies>
+	    <dependency>
+	      <groupId>net.sf.jasperreports</groupId>
+	      <artifactId>jasperreports</artifactId>
+	      <version>${jasperreports.version}</version>
+	    </dependency>
+	    <dependency>
+		    <groupId>net.sf.barcode4j</groupId>
+		    <artifactId>barcode4j</artifactId>
+		    <version>2.1</version>
+		</dependency>
+		<dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.3.3</version>
+		</dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-bridge</artifactId>
+            <version>1.10</version>
+		</dependency>
+	    <dependency>
+	      <groupId>net.sf.jasperreports</groupId>
+	      <artifactId>jasperreports-fonts</artifactId>
+	      <version>${jasperreports-fonts.version}</version>
+	    </dependency>
     	<dependency>
             <groupId>es.gobcan.istac.sie</groupId>
             <artifactId>sie-graphics</artifactId>
@@ -393,6 +421,31 @@
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
         <plugins>
+		    <plugin>
+		       <groupId>com.alexnederlof</groupId>
+		       <artifactId>jasperreports-plugin</artifactId>
+		       <version>${jasperreports-plugin.version}</version>
+		       <executions>
+		          <execution>
+		             <phase>compile</phase>
+		             <goals>
+		                <goal>jasper</goal>
+		             </goals>
+		          </execution>
+		       </executions>
+		       <configuration>
+		          <!-- These are the default configurations: -->
+		          <compiler>net.sf.jasperreports.engine.design.JRJdtCompiler</compiler>
+		          <sourceDirectory>src/main/resources/jasper</sourceDirectory>
+		          <outputDirectory>${project.build.outputDirectory}/jasper</outputDirectory>
+		          <outputFileExt>.jasper</outputFileExt>
+		          <xmlValidation>true</xmlValidation>
+		          <verbose>false</verbose>
+		          <numberOfThreads>4</numberOfThreads>
+		          <failOnMissingSourceDirectory>true</failOnMissingSourceDirectory>
+		          <sourceScanner>org.codehaus.plexus.compiler.util.scan.StaleSourceScanner</sourceScanner>
+		       </configuration>
+		    </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
