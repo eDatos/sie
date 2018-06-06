@@ -7,7 +7,7 @@
         <div *ngIf="!tiposEleccion" class="loader first-loader"></div>
     </div>
 
-    <ngb-tabset *ngIf="tiposEleccion">
+    <ngb-tabset *ngIf="tiposEleccion" [justify]="'center'">
         <ngb-tab *ngFor="let tipo of tiposEleccion; index as i">
             <ng-template ngbTabTitle>
                 <span jhiTranslate="evolucionElectoral.tipoEleccion.{{tipo}}"></span>
