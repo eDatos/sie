@@ -3,18 +3,25 @@
 	margin: 0 auto;
 }
 
-.titulo-pagina {
-    margin-bottom: 2rem;
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-h1 {
-    display: inline-block;
-    margin-bottom: 0rem;
-    margin-right: 0.3rem;
+.seleccion-territorio {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.first-loader {
+    margin-left: 47%;
+    margin-top: 0.7rem;
 }
 
 ac-autocomplete-short-list {
-    display: inline-block;
+    /deep/ span {
+        max-width: 400px;
+    }
 }
 
 .selector-indicador {

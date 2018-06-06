@@ -1,7 +1,7 @@
 {
     "evolucionElectoral": {
         "pageTitle": "Sistema electoral del ISTAC",
-        "header": "Participación electoral en",
+        "header": "Participación electoral en {{ territorio }}",
         "detail": "Ver detalle",
         "descargarPdf": "Descargar PDF",
         "indicador": {

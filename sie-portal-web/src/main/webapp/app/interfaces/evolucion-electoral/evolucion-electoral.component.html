@@ -1,9 +1,10 @@
 <div class="section">
 
-    <div class="titulo-pagina">
-        <h1 jhiTranslate="evolucionElectoral.header">Historia de la evolución electoral en</h1>
-        <ac-autocomplete-short-list name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombre']" [disabled]="!lugares" (onSelect)="transition()"></ac-autocomplete-short-list>
-        <div *ngIf="!lugares" class="loader first-loader"></div>
+    <h1 *ngIf="lugar" jhiTranslate="evolucionElectoral.header" [translateValues]="{territorio: lugar.nombre}">Historia de la evolución electoral en</h1>
+
+    <div class="seleccion-territorio">
+        <ac-autocomplete-short-list *ngIf="lugar" name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombreConGranularidad']" [disabled]="!lugares" (onSelect)="transition()"></ac-autocomplete-short-list>
+        <div *ngIf="!tiposEleccion" class="loader first-loader"></div>
     </div>
 
     <ngb-accordion [closeOthers]="true" activeIds="panel-id-0" *ngIf="tiposEleccion">

@@ -46,7 +46,7 @@ export class DatasetService {
         const geographicDimension = json.metadata.dimensions.dimension.find((dimension) => dimension.type === GEOGRAPHIC_DIMENSION);
         const lugares = geographicDimension.dimensionValues.value.filter((element) => !/.+_O$/.test(element.id));
         return lugares.map((element) => {
-            return new Lugar(element.id, element.name.text[0].value + ' (' + element.geographicGranularity.name.text[0].value + ')');
+            return new Lugar(element.id, element.name.text[0].value, element.geographicGranularity.name.text[0].value);
         });
     }
 
