@@ -10,9 +10,29 @@ export class DocumentoService {
     constructor(private http: Http) { }
 
     descargarPdfEvolucionElectoral(evolucionElectoral: any) {
-        this.http.post(`${this.resourceUrl}/evolucion-electoral`, evolucionElectoral, { responseType: ResponseContentType.Blob })
+        const formData = new FormData();
+        formData.append('evolucionElectoral', new Blob([JSON.stringify(evolucionElectoral)], { type: 'application/json' }));
+        formData.append('grafica', new Blob([this.sanitizeSvg(document.getElementsByTagName('svg')[0].outerHTML)], { type: 'image/svg+xml' }));
+        this.http.post(`${this.resourceUrl}/evolucion-electoral`, formData, { responseType: ResponseContentType.Blob })
             .map((response) => this.saveToFileSystem(response))
             .subscribe();
+    }
+
+    private sanitizeSvg(svg) {
+        return svg
+            .replace(/zIndex="[^"]+"/g, '')
+            .replace(/isShadow="[^"]+"/g, '')
+            .replace(/symbolName="[^"]+"/g, '')
+            .replace(/jQuery[0-9]+="[^"]+"/g, '')
+            .replace(/isTracker="[^"]+"/g, '')
+            .replace(/url\([^#]+#/g, 'url(#')
+            .replace(/ href=/g, ' xlink:href=')
+            .replace(/\n/, ' ')
+            .replace(/<\/svg>.*?$/, '</svg>') // any HTML added to the container after the SVG (#894)
+            .replace(/&nbsp;/g, '\u00A0') // no-break space
+            .replace(/&shy;/g, '\u00AD') // soft hyphen
+            .replace(/fill="#FFFFFF"/g, 'fill="#FFFFFF"') // set background to white, this is a very bad hack
+            .replace(new RegExp('#FFFFFD', 'g'), '#909090'); // Ugly hack to style correctly the credits
     }
 
     private saveToFileSystem(response) {
