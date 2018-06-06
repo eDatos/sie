@@ -90,7 +90,10 @@ export class DatasetService {
             }
         }
 
-        return listaProcesoElectoral.filter((proceso) => this.tieneDatos(proceso));
+        const listaProcesosConDatos = listaProcesoElectoral.filter((proceso) => this.tieneDatos(proceso));
+        return listaProcesosConDatos.sort((proceso1, proceso2) => {
+            return proceso1.fechaEleccion.getTime() - proceso2.fechaEleccion.getTime();
+        });
     }
 
     private tieneDatos(procesoElectoral: ProcesoElectoral): boolean {
@@ -162,7 +165,7 @@ export class DatasetService {
 
     private creaIndicadores(json: any): any[] {
         return json.data.dimensions.dimension.find((dimension) => dimension.dimensionId === INDICADORES)
-        .representations.representation;
+            .representations.representation;
     }
 
     private calcularIndice(coordenadas: any) {

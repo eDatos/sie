@@ -8,12 +8,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { DocumentoService } from '../../documento';
 import { JhiAlertService } from 'ng-jhipster';
 
-const INDICADORES_ABSOLUTOS_GRAFICA = ['VOTOS_VALIDOS', 'VOTOS_BLANCOS', 'VOTOS_NULOS'];
+const INDICADORES_ABSOLUTOS_GRAFICA = ['VOTOS_VALIDOS_CANDIDATURA', 'VOTOS_VALIDOS_BLANCO', 'VOTOS_NULOS'];
 const INDICADORES_PORCENTAJE_GRAFICA = ['VOTOS_VALIDOS_PORCENTAJE', 'VOTOS_BLANCOS_PORCENTAJE', 'VOTOS_NULOS_PORCENTAJE'];
 const INDICADORES_EN_PORCENTAJE_DEFAULT = false;
 const TIPO_COLUMNA = 'column';
 const TIPO_LINEA = 'spline';
-const INDICADOR_CENSO = 'CENSO_ESCRUTINIO';
+const ELECTORES = 'ELECTORES';
 
 @Component({
     selector: 'jhi-evolucion-electoral',
@@ -131,11 +131,11 @@ export class EvolucionElectoralComponent implements OnInit {
 
     private crearLineaCenso(tipoEleccion: string): YElement {
         const resultado = new YElement();
-        resultado.name = this.translateService.instant('evolucionElectoral.indicador.CENSO_INE');
+        resultado.name = this.translateService.instant('evolucionElectoral.indicador.ELECTORES');
         resultado.type = TIPO_LINEA;
         resultado.data = [];
         this.hashProcesos[tipoEleccion].forEach((eleccion) => {
-            resultado.data.push(parseInt(eleccion.indicadores[INDICADOR_CENSO], 10));
+            resultado.data.push(parseInt(eleccion.indicadores[ELECTORES], 10));
         });
         return resultado;
     }
