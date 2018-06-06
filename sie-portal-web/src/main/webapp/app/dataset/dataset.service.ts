@@ -90,7 +90,18 @@ export class DatasetService {
             }
         }
 
-        return listaProcesoElectoral;
+        return listaProcesoElectoral.filter((proceso) => this.tieneDatos(proceso));
+    }
+
+    private tieneDatos(procesoElectoral: ProcesoElectoral): boolean {
+        let result = true;
+        Object.keys(procesoElectoral.indicadores).find((key) => {
+            if (!procesoElectoral.indicadores[key]) {
+                result = false;
+            }
+            return true;
+        });
+        return result;
     }
 
     private doGetDataByRegionId(id: string): Observable<any> {
