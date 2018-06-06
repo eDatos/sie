@@ -8,6 +8,7 @@
 	<parameter name="dataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<parameter name="TERRITORIO" class="java.lang.String"/>
 	<parameter name="TIPO_ELECCIONES" class="java.lang.String"/>
+	<parameter name="GRAFICA" class="java.io.ByteArrayInputStream"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -17,31 +18,6 @@
 				<reportElement x="50" y="30" width="180" height="55" uuid="3081b5c6-83dc-4967-a3c5-7848d33025d8"/>
 				<imageExpression><![CDATA[$P{rutaLogo}]]></imageExpression>
 			</image>
-			<stackedBarChart>
-				<chart evaluationTime="Report">
-					<reportElement x="130" y="190" width="400" height="170" uuid="2ec37df5-4cdf-429f-a126-d5f661ad0320"/>
-					<chartTitle/>
-					<chartSubtitle/>
-					<chartLegend/>
-				</chart>
-				<categoryDataset>
-					<categorySeries>
-						<seriesExpression><![CDATA["SERIES 1"]]></seriesExpression>
-						<categoryExpression><![CDATA[0]]></categoryExpression>
-						<valueExpression><![CDATA[0]]></valueExpression>
-					</categorySeries>
-				</categoryDataset>
-				<barPlot>
-					<plot/>
-					<itemLabel/>
-					<categoryAxisFormat>
-						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
-					</categoryAxisFormat>
-					<valueAxisFormat>
-						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
-					</valueAxisFormat>
-				</barPlot>
-			</stackedBarChart>
 			<line>
 				<reportElement x="130" y="143" width="400" height="1" forecolor="#3B3B3B" uuid="c35a7fd5-15e0-4155-9ed5-d731aedabbb4"/>
 				<graphicElement>
@@ -65,6 +41,10 @@
 				</textElement>
 				<textFieldExpression><![CDATA["Participación electoral en " +$P{TIPO_ELECCIONES}.toLowerCase()]]></textFieldExpression>
 			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="130" y="190" width="400" height="170" uuid="fbd62366-e286-4664-a5e3-f3b2d6e15f07"/>
+				<imageExpression class="net.sf.jasperreports.engine.JRRenderable"><![CDATA[net.sf.jasperreports.renderers.BatikRenderer.getInstance($P{GRAFICA})]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<detail>

@@ -26,6 +26,7 @@ public final class ErrorConstants {
     public static final String EMAIL_EXISTE = "error.email-existe";
 
     public static final String QUERY_NO_SOPORTADA = "error.query-no-soportada";
+    public static final String ERROR_GENERANDO_PDF = "error.pdf";
 
     private ErrorConstants() {
     }

@@ -1,5 +1,6 @@
 package es.gobcan.istac.sie.service.impl;
 
+import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,19 +20,20 @@ public class DocumentoServiceImpl implements DocumentoService {
     private static final String LOGO_CABECERA = "logo_istac.png";
     private static final String EVOLUCION_ELECTORAL_TEMPLATE = "evolucion-electoral.jasper";
     private static final String EVOLUCION_ELECTORAL_SUBINFORME_TEMPLATE = "tablas.jasper";
-    
+
     private static final Logger LOGGER = LoggerFactory.getLogger(DocumentoServiceImpl.class);
 
     private ReportsService reportsService;
-    
+
     public DocumentoServiceImpl(ReportsService reportsService) {
         this.reportsService = reportsService; 
     }
-    
+
     @Override
-    public byte[] generarPdfEvolucionElectoral(EvolucionElectoralDTO evolucionElectoral) {
+    public byte[] generarPdfEvolucionElectoral(EvolucionElectoralDTO evolucionElectoral, byte[] grafica) {
         LOGGER.debug("Request to print Evolucion Electoral");
         Map<String, Object> parametros = new HashMap<>();
+        parametros.put("GRAFICA", new ByteArrayInputStream(grafica));
         parametros.put("TERRITORIO", evolucionElectoral.getTerritorio());
         parametros.put("TIPO_ELECCIONES", evolucionElectoral.getTipoElecciones());
         parametros.put("dataSource", new JRBeanCollectionDataSource(evolucionElectoral.getProcesosElectorales()));
