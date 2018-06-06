@@ -92,8 +92,41 @@ export class DatasetService {
 
         const listaProcesosConDatos = listaProcesoElectoral.filter((proceso) => this.tieneDatos(proceso));
         return listaProcesosConDatos.sort((proceso1, proceso2) => {
-            return proceso1.fechaEleccion.getTime() - proceso2.fechaEleccion.getTime();
+            const ordenPorProceso = this.tipoEleccionesToNumber(proceso1.tipoProcesoElectoral) - this.tipoEleccionesToNumber(proceso2.tipoProcesoElectoral);
+            if (ordenPorProceso === 0) {
+                return proceso1.fechaEleccion.getTime() - proceso2.fechaEleccion.getTime();
+            } else {
+                return ordenPorProceso;
+            }
         });
+    }
+
+    private tipoEleccionesToNumber(tipoElecciones: string) {
+        switch (tipoElecciones) {
+            case 'MUNICIPALES': {
+                return 0;
+            }
+            case 'CABILDO': {
+                return 1;
+            }
+            case 'AUTONOMICAS': {
+                return 2;
+            }
+            case 'CONGRESO': {
+                return 3;
+            }
+            case 'SENADO': {
+                return 4;
+            }
+            case 'PARLAMENTO_EUROPEO': {
+                return 5;
+            }
+            case 'REFERENDUM': {
+                return 6;
+            }
+            default:
+                return 7;
+        }
     }
 
     private tieneDatos(procesoElectoral: ProcesoElectoral): boolean {
