@@ -62,16 +62,10 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
                 title: {
                     text: ''
                 },
-                stackLabels: {
-                    enabled: true
-                }
             },
             plotOptions: {
                 column: {
                     stacking: 'normal',
-                    dataLabels: {
-                        enabled: true,
-                    }
                 }
             },
             credits: {
