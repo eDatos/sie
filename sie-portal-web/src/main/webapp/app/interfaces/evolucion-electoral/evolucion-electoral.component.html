@@ -7,13 +7,13 @@
         <div *ngIf="!tiposEleccion" class="loader first-loader"></div>
     </div>
 
-    <ngb-accordion [closeOthers]="true" activeIds="panel-id-0" *ngIf="tiposEleccion">
-        <ngb-panel *ngFor="let tipo of tiposEleccion; index as i" id="panel-id-{{i}}">
-            <ng-template ngbPanelTitle>
+    <ngb-tabset *ngIf="tiposEleccion">
+        <ngb-tab *ngFor="let tipo of tiposEleccion; index as i">
+            <ng-template ngbTabTitle>
                 <span jhiTranslate="evolucionElectoral.tipoEleccion.{{tipo}}"></span>
             </ng-template>
 
-            <ng-template ngbPanelContent>
+            <ng-template ngbTabContent>
                 <ac-stacked-bar-chart [data]="hashGraficas[tipo]" [isPercentaje]="hashIndicadoresEnPorcentaje[tipo]"></ac-stacked-bar-chart>
 
                 <div class="selector-indicador">
@@ -95,7 +95,7 @@
                     </button>
                 </div>
             </ng-template>
-        </ngb-panel>
-    </ngb-accordion>
+        </ngb-tab>
+    </ngb-tabset>
 
 </div>
