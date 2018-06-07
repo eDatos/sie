@@ -9,7 +9,7 @@ import { DocumentoService } from '../../documento';
 import { JhiAlertService } from 'ng-jhipster';
 
 const INDICADORES_ABSOLUTOS_GRAFICA = ['VOTOS_VALIDOS_CANDIDATURA', 'VOTOS_VALIDOS_BLANCO', 'VOTOS_NULOS'];
-const INDICADORES_PORCENTAJE_GRAFICA = ['TASA_VOTOS_VALIDOS_CANDIDATURA', 'TASA_VOTOS_VALIDOS_BLANCO', 'TASA_VOTOS_NULOS'];
+const INDICADORES_PORCENTAJE_GRAFICA = ['TASA_ABSTENCION', 'TASA_PARTICIPACION'];
 const INDICADORES_EN_PORCENTAJE_DEFAULT = false;
 const TIPO_COLUMNA = 'column';
 const TIPO_LINEA = 'spline';
@@ -121,7 +121,7 @@ export class EvolucionElectoralComponent implements OnInit {
     private crearElementoEjeY(indicador: string, tipoEleccion: string): YElement {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador);
-        resultado.type = TIPO_COLUMNA;
+        resultado.type = this.hashIndicadoresEnPorcentaje[tipoEleccion] ? TIPO_LINEA : TIPO_COLUMNA;
         resultado.data = [];
         this.hashProcesos[tipoEleccion].forEach((eleccion) => {
             resultado.data.push(parseFloat(eleccion.indicadores[indicador]));
