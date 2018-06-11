@@ -14,10 +14,17 @@
     background-color: $white;
 
     h1 {
+        display: inline;
         padding-left: $page-padding;
         margin: 0;
         font-size: 1.5rem;
         font-weight: 500;
         color: $title-color;
+    }
+
+    .content {
+        display: initial;
+        float: right;
+        padding-right: $page-padding;
     }
 }

@@ -1,3 +1,5 @@
+@import '~scss/variables';
+
 .section {
     max-width: 1200px;
     margin: 0 auto;
@@ -5,7 +7,6 @@
 }
 
 h1 {
-    text-align: center;
     margin-bottom: 1rem;
 }
 
@@ -22,6 +23,25 @@ h1 {
 ac-autocomplete-short-list {
     /deep/ span {
         max-width: 400px;
+    }
+
+    /deep/ .ui-autocomplete .ui-autocomplete-input.ui-inputtext, .ui-autocomplete .ui-autocomplete-multiple-container.ui-inputtext {
+        padding-top: 0.2rem;
+        padding-right: 0.75rem;
+        padding-bottom: 0.2rem !important;
+        padding-left: 0.75rem;
+        width: 390px;
+    }
+
+    /deep/ button.ui-state-default {
+        background: $title-color;
+        color: $white;
+
+        &:hover {
+            border-color: $navbar-color;
+            border-left-color: $navbar-color;
+            background: $navbar-color;
+        }
     }
 }
 

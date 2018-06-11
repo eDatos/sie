@@ -1,11 +1,12 @@
-<jhi-title-bar></jhi-title-bar>
+<jhi-title-bar>
+    <ac-autocomplete-short-list *ngIf="lugar" name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombreConGranularidad']" [disabled]="!lugares" (onSelect)="transition()"></ac-autocomplete-short-list>
+</jhi-title-bar>
 
 <div class="section">
 
     <h1 *ngIf="lugar" jhiTranslate="evolucionElectoral.header" [translateValues]="{territorio: lugar.nombre}">Historia de la evolución electoral en</h1>
 
     <div class="seleccion-territorio">
-        <ac-autocomplete-short-list *ngIf="lugar" name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombreConGranularidad']" [disabled]="!lugares" (onSelect)="transition()"></ac-autocomplete-short-list>
         <div *ngIf="!tiposEleccion" class="loader first-loader"></div>
     </div>
 
