@@ -19,10 +19,17 @@ $severidad-menor: #85bb43;
 $severidad-mayor: #ff9900;
 $severidad-menor: #d4333f;
 
-$navbar-content-height: 30px;
-$navbar-padding-y: 5px;
-$navbar-height: $navbar-content-height + ($navbar-padding-y)*2;
+$navbar-color: #00a3e8;
+$navbar-content-height: 50px;
+$navbar-padding-y: 10px;
+$navbar-height: 70px;
+$navbar-font-size: 1.2rem;
 $nav-link-padding: $navbar-padding-y 1em;
+
+$footer-padding-y: 10px;
+$footer-height: 70px;
+$footer-content-height: 50px;
+$footer-color: #c3c3c3;
 
 $font-weight-light: 300;
 
@@ -78,7 +85,7 @@ $enable-transitions: true;
 $font-size-base: 1rem;
 
 $font-size-h1: 2rem;
-$font-size-h2: 1.8rem;
+$font-size-h2: 1.5rem;
 $font-size-h3: 1.3rem;
 $font-size-h4: 1.2rem;
 $font-size-h5: 1.1rem;
@@ -135,8 +142,10 @@ $tooltip-bg:                  $white;
 $tooltip-arrow-color:         $grey-medium;
 // end bootstrap
 $page-padding: 36px;
-$page-padding-left: $page-padding * 2;
+$page-padding-left: $page-padding;
 $page-padding-right: $page-padding;
 
 $dataTable-toggle-width: $page-padding-left;
 $primeng-dropdown-button-width: 2em;
+
+$title-color: #7f7f7f;

@@ -1,5 +1,9 @@
+<div class="title-bar">
+    <h1 jhiTranslate="global.title">Sistema electoral del ISTAC</h1>
+</div>
+
 <div class="section">
-    <h1 jhiTranslate="lugar.header">¿De qué lugar deseas conocer su evolución en materia electoral?</h1>
+    <h2 jhiTranslate="lugar.header">¿De qué lugar deseas conocer su evolución en materia electoral?</h2>
 
     <div class="form-group">
         <ac-autocomplete-short-list name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombreConGranularidad']" [disabled]="!lugares"></ac-autocomplete-short-list>

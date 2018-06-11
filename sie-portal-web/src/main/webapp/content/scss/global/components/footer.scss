@@ -1,0 +1,18 @@
+@import '~scss/variables';
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+jhi-main {
+    margin-bottom: $footer-height;
+}
+
+footer {
+    bottom: 0;
+    height: $footer-height;
+    position: absolute;
+    width: 100%;
+    background-color: $footer-color;
+}

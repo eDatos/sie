@@ -2,13 +2,30 @@
     <div class="navbar-collapse">
         <a class="navbar-brand logo" routerLink="/">
             <img class="logo-img" src="~images/logo_istac.png" alt="Logo" />
-            <span jhiTranslate="global.title" class="navbar-title">Sie</span>
         </a>
     </div>
     <div class="d-flex justify-content-end">
         <div class="navbar-collapse collapse" id="navbarResponsive">
             <ul class="navbar-nav">
+                <ng-container *ngTemplateOutlet="menuElecciones"></ng-container>
+                <ng-container *ngTemplateOutlet="menuAtlas"></ng-container>
             </ul>
         </div>
     </div>
 </nav>
+
+<ng-template #menuElecciones>
+    <li class="nav-item pointer">
+        <a class="nav-link" routerLink="elecciones" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" (click)="collapseNavbar()">
+            <span jhiTranslate="global.menu.elecciones">Elecciones</span>
+        </a>
+    </li>
+</ng-template>
+
+<ng-template #menuAtlas>
+    <li class="nav-item pointer">
+        <a class="nav-link" routerLink="atlas" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" (click)="collapseNavbar()">
+            <span jhiTranslate="global.menu.atlas">Atlas</span>
+        </a>
+    </li>
+</ng-template>

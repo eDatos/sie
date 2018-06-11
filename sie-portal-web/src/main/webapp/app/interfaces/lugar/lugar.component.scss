@@ -1,7 +1,14 @@
+@import '~scss/variables';
+
 .section {
-    max-width: 600px;
+    padding-top: $entity-header-height;
+    max-width: 700px;
 	margin: 0 auto;
     text-align: center;
+
+    h2 {
+        font-size: 2rem;
+    }
 }
 
 .form-group {
@@ -9,9 +16,30 @@
 }
 
 ac-autocomplete-short-list /deep/ span.ui-autocomplete {
-    width: 90%;
+    width: 75%;
 }
 
 .first-loader {
     float: right;
+}
+
+.title-bar {
+    border-bottom: 2px solid $title-color;
+    
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    margin-top: -$entity-header-height;
+    margin-right: -$page-padding;
+    margin-left: -$page-padding;
+
+    background-color: $white;
+
+    h1 {
+        padding-left: $page-padding;
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: $title-color;
+    }
 }
