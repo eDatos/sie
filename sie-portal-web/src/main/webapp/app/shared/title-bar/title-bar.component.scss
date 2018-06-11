@@ -1,0 +1,23 @@
+@import '~scss/variables';
+
+.title-bar {
+    border-bottom: 2px solid $title-color;
+    
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    margin-top: -$entity-header-height;
+    margin-right: -$page-padding;
+    margin-bottom: $entity-header-height;
+    margin-left: -$page-padding;
+
+    background-color: $white;
+
+    h1 {
+        padding-left: $page-padding;
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: $title-color;
+    }
+}
