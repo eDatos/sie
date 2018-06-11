@@ -1,7 +1,11 @@
 {
     "global": {
-        "title": "Sistema electoral del ISTAC",
-        "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=en\">actualice su navegador</a> para mejorar su experiencia."
+        "title": "Sistema de Información Electoral",
+        "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=en\">actualice su navegador</a> para mejorar su experiencia.",
+        "menu": {
+            "elecciones": "ELECCIONES",
+            "atlas": "ATLAS"
+        }
     },
     "home": {
         "pageTitle": "Bienvenido",

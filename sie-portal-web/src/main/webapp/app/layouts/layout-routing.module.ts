@@ -3,10 +3,12 @@ import { RouterModule } from '@angular/router';
 
 import { errorRoute } from './';
 import { navbarRoute } from './navbar/app.route';
+import { footerRoute } from './footer/footer.route';
 
 const LAYOUT_ROUTES = [
     ...errorRoute,
-    navbarRoute
+    navbarRoute,
+    footerRoute
 ];
 
 @NgModule({

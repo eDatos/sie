@@ -12,85 +12,12 @@ $zindex-fixed-navs: $zindex-dropdown - 5; // Dont cover navbar dropdown
     margin-top: $navbar-height;
     box-shadow: $nav-shadow;
     background: $grey-lightest;    
-    
-    h2:not(.fullcalendar-title) {
-        position: relative;
-        box-shadow: none;
-        padding-left: 0;
-        padding-right: 0;
-        margin-top: 0;
-        
-        .back-arrow {
-            left: -$entity-header-height
-        }
-    }
 }
 .has-entity-header {
     margin-top: -$entity-header-height;
 }
 
 $error-font-size: 0.8rem;
-// Jhipster always generates the same layout. We can trust h2 is where is needed
-h2:not(.fullcalendar-title) {
-    display: flex;
-    align-items: center;        
-    justify-content: space-between;
-    span {
-        justify-content: unset;
-    }
-    line-height: $entity-header-height;
-
-    background: $grey-lightest;        
-    
-    @include make-narrowed-container();
-    html & {
-        @extend .fixed-top;
-        z-index: $zindex-fixed-navs;
-        margin-top: $navbar-height;
-    }
-    box-shadow: $nav-shadow;
-
-    .back-arrow {
-        position: absolute;
-        left: $page-padding-left/3;
-        padding: 0;
-        margin: auto;
-        height: $entity-header-height;
-
-        .fa-arrow-left:before {
-            content: '';
-        }
-        
-        .fa.fa-arrow-left {    
-            background-image: url("~images/arrow-back.svg");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-            width: 2em;
-            height: 2em;
-            opacity: 0.5;
-        
-            &:hover {
-                opacity: 1;
-            }
-        }
-    }
-
-    // Buttons
-    & > *:last-child {
-        flex-shrink: 0;
-        margin-left: $page-padding-right;        
-    }
-    // Title
-    & > *:first-child {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-
-        flex-shrink: unset;
-        margin-left: 0;
-    }
-}
 
 h3 {
     margin-top: 2 * $spacer-y;
@@ -261,15 +188,6 @@ fieldset {
     &.has-menu {
         position: relative;
         padding-left: $side-menu-width;        
-        h2 {
-            left: $side-menu-width;
-        }
-        .entity-header {
-            left: $side-menu-width;
-            h2 {
-                left: 0;
-            }   
-        }
     }
     &.has-search {
         padding-top: $entity-search-default-height;

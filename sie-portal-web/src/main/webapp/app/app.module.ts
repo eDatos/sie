@@ -10,7 +10,7 @@ import { PaginationConfig } from './blocks/config/uib-pagination.config';
 import { SieConfigModule } from './config/config.module';
 import { SieDatasetServiceModule } from './dataset/dataset.module';
 import { SieInterfacesModule } from './interfaces/interfaces.module';
-import { JhiMainComponent, LayoutRoutingModule, ErrorComponent, notFoundRoute, NavbarComponent } from './layouts';
+import { JhiMainComponent, LayoutRoutingModule, ErrorComponent, notFoundRoute, NavbarComponent, FooterComponent } from './layouts';
 import { SieSharedModule } from './shared';
 import { SieVisualizerModule } from './visualizer/visualizer.module';
 
@@ -36,7 +36,8 @@ const APP_ROUTES = [
     declarations: [
         JhiMainComponent,
         ErrorComponent,
-        NavbarComponent
+        NavbarComponent,
+        FooterComponent
     ],
     providers: [
         customHttpProvider(),
