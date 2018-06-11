@@ -45,11 +45,20 @@ ac-autocomplete-short-list {
     }
 }
 
-.selector-indicador {
-    text-align: center;
+.barra-comandos {
+    padding: 15px 5px 20px 5px;
+
+    .selector-grafica {
+        display: inline;
+    }
 
     input:not(:first-child) {
         margin-left: 1rem;
+    }
+
+    button {
+        float: right;
+        margin-top: -0.3rem;
     }
 }
 
@@ -72,10 +81,6 @@ ac-autocomplete-short-list {
 
 .titulo-tabla {
     border-bottom: 1px solid;
-}
-
-.download {
-    text-align: center;
 }
 
 ngb-tabset {
