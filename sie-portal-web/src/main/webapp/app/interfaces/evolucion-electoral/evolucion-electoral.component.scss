@@ -77,3 +77,33 @@ ac-autocomplete-short-list {
 .download {
     text-align: center;
 }
+
+ngb-tabset {
+    /deep/ ul.nav.nav-tabs {
+        border: none;
+        
+        li:not(:last-child) {
+            margin-right: 0.5rem;
+        }
+
+        a {
+            border: none;
+            border-radius: unset;
+            color: $white;
+            font-weight: 500;
+            font-size: 0.8rem;
+            background-color: $footer-color;
+
+            &.nav-link {
+                padding: 10px 40px;
+            }
+
+            &.active {
+                background-color: $navbar-color;
+            }
+
+            &:hover {
+            }
+        }
+    }
+}
