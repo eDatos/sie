@@ -23,13 +23,13 @@
             "TASA_VOTOS_VALIDOS_CANDIDATURA": "Tasa de votos válidos a candidaturas"
         },
         "tipoEleccion": {
-            "AUTONOMICAS": "Autonómicas",
-            "CABILDO": "Cabildo",
-            "CONGRESO": "Congreso",
-            "MUNICIPALES": "Municipales",
-            "PARLAMENTO_EUROPEO": "Parlamento Europeo",
-            "REFERENDUM": "Referéndum",
-            "SENADO": "Senado"
+            "AUTONOMICAS": "AUTONÓMICAS",
+            "CABILDO": "CABILDO",
+            "CONGRESO": "CONGRESO",
+            "MUNICIPALES": "MUNICIPALES",
+            "PARLAMENTO_EUROPEO": "PARLAMENTO EUROPEO",
+            "REFERENDUM": "REFERÉNDUM",
+            "SENADO": "SENADO"
         }
     }
 }

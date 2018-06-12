@@ -1,3 +1,5 @@
+@import '~scss/variables';
+
 .section {
     max-width: 1200px;
     margin: 0 auto;
@@ -5,7 +7,6 @@
 }
 
 h1 {
-    text-align: center;
     margin-bottom: 1rem;
 }
 
@@ -23,19 +24,48 @@ ac-autocomplete-short-list {
     /deep/ span {
         max-width: 400px;
     }
+
+    /deep/ .ui-autocomplete .ui-autocomplete-input.ui-inputtext, .ui-autocomplete .ui-autocomplete-multiple-container.ui-inputtext {
+        padding-top: 0.2rem;
+        padding-right: 0.75rem;
+        padding-bottom: 0.2rem !important;
+        padding-left: 0.75rem;
+        width: 390px;
+    }
+
+    /deep/ button.ui-state-default {
+        background: $title-color;
+        color: $white;
+
+        &:hover {
+            border-color: $navbar-color;
+            border-left-color: $navbar-color;
+            background: $navbar-color;
+        }
+    }
 }
 
-.selector-indicador {
-    text-align: center;
+.barra-comandos {
+    padding: 15px 5px 20px 5px;
+
+    .selector-grafica {
+        display: inline;
+    }
 
     input:not(:first-child) {
         margin-left: 1rem;
+    }
+
+    button {
+        float: right;
+        margin-top: -0.3rem;
     }
 }
 
 .grid-procesos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(305px, 1fr));
+    padding: 2px;
 }
 
 .proceso-electoral {
@@ -46,14 +76,46 @@ ac-autocomplete-short-list {
     margin-bottom: 2rem;
 }
 
-.proceso-electoral td {
-    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+table.proceso-electoral {
+    border: 1px solid $footer-color;
+    color: $title-color;
+
+    thead {
+        background-color: $footer-color;
+        color: $white;
+    }
+
+    th {
+        padding: 0.3rem 1rem;
+        font-size: 1.1rem;
+    }
+
+    td {
+        padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    }
 }
 
-.titulo-tabla {
-    border-bottom: 1px solid;
-}
+ngb-tabset {
+    /deep/ ul.nav.nav-tabs {
+        border: none;
+        text-align: center;
 
-.download {
-    text-align: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-gap: 0.5rem;
+
+        a {
+            margin-bottom: 0;
+            border: none;
+            border-radius: unset;
+            font-weight: 500;
+            font-size: 0.8rem;
+            background-color: $footer-color;
+            color: $white;
+
+            &.active {
+                background-color: $navbar-color;
+            }
+        }
+    }
 }

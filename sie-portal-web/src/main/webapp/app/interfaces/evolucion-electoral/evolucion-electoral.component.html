@@ -1,9 +1,12 @@
+<jhi-title-bar>
+    <ac-autocomplete-short-list *ngIf="lugar" name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombreConGranularidad']" [disabled]="!lugares" (onSelect)="transition()"></ac-autocomplete-short-list>
+</jhi-title-bar>
+
 <div class="section">
 
     <h1 *ngIf="lugar" jhiTranslate="evolucionElectoral.header" [translateValues]="{territorio: lugar.nombre}">Historia de la evolución electoral en</h1>
 
     <div class="seleccion-territorio">
-        <ac-autocomplete-short-list *ngIf="lugar" name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombreConGranularidad']" [disabled]="!lugares" (onSelect)="transition()"></ac-autocomplete-short-list>
         <div *ngIf="!tiposEleccion" class="loader first-loader"></div>
     </div>
 
@@ -14,20 +17,27 @@
             </ng-template>
 
             <ng-template ngbTabContent>
-                <ac-stacked-bar-chart [data]="hashGraficas[tipo]" [isPercentaje]="hashIndicadoresEnPorcentaje[tipo]"></ac-stacked-bar-chart>
+                <div class="barra-comandos">
+                    <div class="selector-grafica">
+                        <input id="absoluto-{{i}}" type="radio" name="indicadoresEnPorcentajes" [value]="false" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
+                        <label for="absoluto-{{i}}" jhiTranslate="evolucionElectoral.indicador.absoluto">Num Total</label>
+                        <input id="porcentaje-{{i}}" type="radio" name="indicadoresEnPorcentajes" [value]="true" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
+                        <label for="porcentaje-{{i}}" jhiTranslate="evolucionElectoral.indicador.porcentaje">Porcentaje</label>
+                    </div>
 
-                <div class="selector-indicador">
-                    <input id="absoluto-{{i}}" type="radio" name="indicadoresEnPorcentajes" [value]="false" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
-                    <label for="absoluto-{{i}}" jhiTranslate="evolucionElectoral.indicador.absoluto">Num Total</label>
-                    <input id="porcentaje-{{i}}" type="radio" name="indicadoresEnPorcentajes" [value]="true" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
-                    <label for="porcentaje-{{i}}" jhiTranslate="evolucionElectoral.indicador.porcentaje">Porcentaje</label>
+                    <button type="button" class="btn btn-sm btn-secondary" [title]="'evolucionElectoral.descargarPdf' | translate" (click)="descargarPdf($event, tipo)">
+                        <i class="fa fa-download"></i>
+                        <span jhiTranslate="evolucionElectoral.descargarPdf">Descargar PDF</span>
+                    </button>
                 </div>
+
+                <ac-stacked-bar-chart [data]="hashGraficas[tipo]" [isPercentaje]="hashIndicadoresEnPorcentaje[tipo]"></ac-stacked-bar-chart>
 
                 <div class="grid-procesos">
                     <table *ngFor="let proceso of hashProcesos[tipo].slice().reverse()" class="proceso-electoral">
-                        <thead class="titulo-tabla">
+                        <thead>
                             <tr>
-                                <th>
+                                <th colspan="3">
                                     <!-- <a [routerLink]="['/visualizer', lugar.id, proceso.id]">{{proceso.fechaEleccion | date: 'yyyy'}}</a> -->
                                     {{proceso.fechaEleccion | date: 'yyyy'}}
                                 </th>
@@ -74,13 +84,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-
-                <div class="download">
-                    <button type="button" class="btn btn-sm btn-secondary" [title]="'evolucionElectoral.descargarPdf' | translate" (click)="descargarPdf($event, tipo)">
-                        <i class="fa fa-download"></i>
-                        <span jhiTranslate="evolucionElectoral.descargarPdf">Descargar PDF</span>
-                    </button>
                 </div>
             </ng-template>
         </ngb-tab>
