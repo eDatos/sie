@@ -65,6 +65,7 @@ ac-autocomplete-short-list {
 .grid-procesos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(305px, 1fr));
+    padding: 2px;
 }
 
 .proceso-electoral {
@@ -75,12 +76,23 @@ ac-autocomplete-short-list {
     margin-bottom: 2rem;
 }
 
-.proceso-electoral td {
-    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
-}
+table.proceso-electoral {
+    border: 1px solid $footer-color;
+    color: $title-color;
 
-.titulo-tabla {
-    border-bottom: 1px solid;
+    thead {
+        background-color: $footer-color;
+        color: $white;
+    }
+
+    th {
+        padding: 0.3rem 1rem;
+        font-size: 1.1rem;
+    }
+
+    td {
+        padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    }
 }
 
 ngb-tabset {
