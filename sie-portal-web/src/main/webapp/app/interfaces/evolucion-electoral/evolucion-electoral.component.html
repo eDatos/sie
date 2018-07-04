@@ -6,8 +6,8 @@
 
     <h1 *ngIf="lugar" jhiTranslate="evolucionElectoral.header" [translateValues]="{territorio: lugar.nombre}">Historia de la evolución electoral en</h1>
 
-    <div class="seleccion-territorio">
-        <div *ngIf="!tiposEleccion" class="loader first-loader"></div>
+    <div *ngIf="!tiposEleccion" class="seleccion-territorio">
+        <div class="loader first-loader"></div>
     </div>
 
     <ngb-tabset *ngIf="tiposEleccion" [justify]="'center'">
