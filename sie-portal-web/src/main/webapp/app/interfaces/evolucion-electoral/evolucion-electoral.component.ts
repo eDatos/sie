@@ -8,7 +8,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { DocumentoService } from '../../documento';
 import { JhiAlertService } from 'ng-jhipster';
 
-const INDICADORES_ABSOLUTOS_GRAFICA = ['VOTOS_VALIDOS_CANDIDATURA', 'VOTOS_VALIDOS_BLANCO', 'VOTOS_NULOS'];
+const INDICADORES_ABSOLUTOS_GRAFICA = [
+    {nombre: 'VOTOS_VALIDOS_CANDIDATURA', color: '#008BD0', indicadorPorcentaje: 'TASA_VOTOS_VALIDOS_CANDIDATURA'},
+    {nombre: 'VOTOS_VALIDOS_BLANCO', color: '#67A23F', indicadorPorcentaje: 'TASA_VOTOS_VALIDOS_BLANCO'},
+    {nombre: 'VOTOS_NULOS', color: '#8C5C1D', indicadorPorcentaje: 'TASA_VOTOS_NULOS'}
+];
 const INDICADORES_PORCENTAJE_GRAFICA = ['TASA_ABSTENCION', 'TASA_PARTICIPACION'];
 const INDICADORES_EN_PORCENTAJE_DEFAULT = false;
 const TIPO_COLUMNA = 'column';
@@ -102,7 +106,7 @@ export class EvolucionElectoralComponent implements OnInit {
         this.hashGraficas[tipoEleccion] = grafica;
     }
 
-    private getIndicadores(tipoEleccion: string): string[] {
+    private getIndicadores(tipoEleccion: string): any[] {
         if (this.hashIndicadoresEnPorcentaje[tipoEleccion]) {
             return INDICADORES_PORCENTAJE_GRAFICA;
         } else {
@@ -118,13 +122,18 @@ export class EvolucionElectoralComponent implements OnInit {
         return resultado;
     }
 
-    private crearElementoEjeY(indicador: string, tipoEleccion: string): YElement {
+    private crearElementoEjeY(indicador: any, tipoEleccion: string): YElement {
         const resultado = new YElement();
-        resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador);
+        resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador.nombre);
+        resultado.color = indicador.color;
         resultado.type = this.hashIndicadoresEnPorcentaje[tipoEleccion] ? TIPO_LINEA : TIPO_COLUMNA;
+        resultado.alternativeName = this.translateService.instant('evolucionElectoral.indicador.' + indicador.indicadorPorcentaje);
         resultado.data = [];
         this.hashProcesos[tipoEleccion].forEach((eleccion) => {
-            resultado.data.push(parseFloat(eleccion.indicadores[indicador]));
+            resultado.data.push({
+                y: parseFloat(eleccion.indicadores[indicador.nombre]),
+                tasa: parseFloat(eleccion.indicadores[indicador.indicadorPorcentaje])
+            });
         });
         return resultado;
     }
@@ -132,7 +141,9 @@ export class EvolucionElectoralComponent implements OnInit {
     private crearLineaCenso(tipoEleccion: string): YElement {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.ELECTORES');
+        resultado.color = '#E5772D';
         resultado.type = TIPO_LINEA;
+        resultado['tooltip'] = { pointFormat: '{series.name}: {point.y}'}
         resultado.data = [];
         this.hashProcesos[tipoEleccion].forEach((eleccion) => {
             resultado.data.push(parseInt(eleccion.indicadores[ELECTORES], 10));
