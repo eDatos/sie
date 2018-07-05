@@ -19,10 +19,10 @@
             <ng-template ngbTabContent>
                 <div class="barra-comandos">
                     <div class="selector-grafica">
-                        <input id="absoluto-{{i}}" type="radio" name="indicadoresEnPorcentajes" [value]="false" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
-                        <label for="absoluto-{{i}}" jhiTranslate="evolucionElectoral.indicador.absoluto">Num Total</label>
-                        <input id="porcentaje-{{i}}" type="radio" name="indicadoresEnPorcentajes" [value]="true" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
-                        <label for="porcentaje-{{i}}" jhiTranslate="evolucionElectoral.indicador.porcentaje">Porcentaje</label>
+                        <input id="votos-{{i}}" type="radio" name="tipoGrafica" [value]="false" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
+                        <label for="votos-{{i}}" jhiTranslate="evolucionElectoral.indicador.votos">Votos</label>
+                        <input id="participacion-{{i}}" type="radio" name="tipoGrafica" [value]="true" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
+                        <label for="participacion-{{i}}" jhiTranslate="evolucionElectoral.indicador.participacion">Participacion</label>
                     </div>
 
                     <button type="button" class="btn btn-sm btn-secondary" [title]="'evolucionElectoral.descargarPdf' | translate" (click)="descargarPdf($event, tipo)">

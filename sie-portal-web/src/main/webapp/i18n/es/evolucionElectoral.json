@@ -5,8 +5,8 @@
         "detail": "Ver detalle",
         "descargarPdf": "Descargar PDF",
         "indicador": {
-            "absoluto": "Votos",
-            "porcentaje": "Participación",
+            "votos": "Votos",
+            "participacion": "Participación",
             "ELECTORES": "Electores",
             "ELECTORES_VOTANTES": "Electores votantes",
             "TASA_PARTICIPACION": "Tasa de participación",
