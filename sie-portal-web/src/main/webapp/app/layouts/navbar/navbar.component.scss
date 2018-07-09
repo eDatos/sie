@@ -15,10 +15,10 @@ nav {
     }    
 }
 .jh-navbar {
-    background-color: $navbar-color;
+    background-color: $istac-blue;
 
     .dropdown-item.active, .dropdown-item.active:focus, .dropdown-item.active:hover {
-        background-color: $navbar-color;
+        background-color: $istac-blue;
     }
     .dropdown-toggle::after {
         margin-left: 0.15em;

@@ -6,8 +6,8 @@
 
     <h1 *ngIf="lugar" jhiTranslate="evolucionElectoral.header" [translateValues]="{territorio: lugar.nombre}">Historia de la evolución electoral en</h1>
 
-    <div class="seleccion-territorio">
-        <div *ngIf="!tiposEleccion" class="loader first-loader"></div>
+    <div *ngIf="!tiposEleccion" class="seleccion-territorio">
+        <div class="loader first-loader"></div>
     </div>
 
     <ngb-tabset *ngIf="tiposEleccion" [justify]="'center'">
@@ -19,10 +19,10 @@
             <ng-template ngbTabContent>
                 <div class="barra-comandos">
                     <div class="selector-grafica">
-                        <input id="absoluto-{{i}}" type="radio" name="indicadoresEnPorcentajes" [value]="false" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
-                        <label for="absoluto-{{i}}" jhiTranslate="evolucionElectoral.indicador.absoluto">Num Total</label>
-                        <input id="porcentaje-{{i}}" type="radio" name="indicadoresEnPorcentajes" [value]="true" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
-                        <label for="porcentaje-{{i}}" jhiTranslate="evolucionElectoral.indicador.porcentaje">Porcentaje</label>
+                        <input id="votos-{{i}}" type="radio" name="tipoGrafica" [value]="false" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
+                        <label for="votos-{{i}}" jhiTranslate="evolucionElectoral.indicador.votos">Votos</label>
+                        <input id="participacion-{{i}}" type="radio" name="tipoGrafica" [value]="true" [(ngModel)]="hashIndicadoresEnPorcentaje[tipo]" (change)="onChangeIndicador(tipo)">
+                        <label for="participacion-{{i}}" jhiTranslate="evolucionElectoral.indicador.participacion">Participacion</label>
                     </div>
 
                     <button type="button" class="btn btn-sm btn-secondary" [title]="'evolucionElectoral.descargarPdf' | translate" (click)="descargarPdf($event, tipo)">
@@ -47,6 +47,7 @@
                             <tr>
                                 <td>&#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.ELECTORES"></span></td>
                                 <td>{{proceso.indicadores['ELECTORES'] | number:'1.0-0'}}</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>&nbsp;&nbsp;&nbsp;&#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.ELECTORES_VOTANTES"></span></td>
@@ -61,6 +62,7 @@
                             <tr>
                                 <td>&#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.VOTOS"></span></td>
                                 <td>{{proceso.indicadores['VOTOS'] | number:'1.0-0'}}</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>&nbsp;&nbsp;&nbsp;&#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS"></span></td>

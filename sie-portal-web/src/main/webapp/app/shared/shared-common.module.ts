@@ -22,7 +22,6 @@ import {
 } from './';
 
 import { StackedBarChartComponent } from './stacked-bar-chart/stacked-bar-chart.component';
-import { TitleBarComponent } from './title-bar/title-bar.component';
 
 @NgModule({
     imports: [
@@ -38,7 +37,6 @@ import { TitleBarComponent } from './title-bar/title-bar.component';
         AutocompleteLongListComponent,
         AutocompleteEnumComponent,
         StackedBarChartComponent,
-        TitleBarComponent,
         OrderListComponent,
         HelpTooltipComponent,
         PaginationComponent,
@@ -66,7 +64,6 @@ import { TitleBarComponent } from './title-bar/title-bar.component';
         AutocompleteLongListComponent,
         AutocompleteEnumComponent,
         StackedBarChartComponent,
-        TitleBarComponent,
         OrderListComponent,
         HelpTooltipComponent,
         PaginationComponent,
