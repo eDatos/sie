@@ -8,14 +8,21 @@ import { TranslateService } from '@ngx-translate/core';
 import { DocumentoService } from '../../documento';
 import { JhiAlertService } from 'ng-jhipster';
 
+const ISTAC_ORANGE = '#E5772D';
+const ISTAC_GREEN = '#67A23F';
+const ISTAC_BROWN = '#8C5C1D';
+const ISTAC_BLUE = '#008BD0';
+const ISTAC_BLUE_LIGHT = '#2CBCE2';
+const ISTAC_BLUE_LIGHTEST = '#D5EDFA';
+
 const INDICADORES_GRAFICA_VOTOS = [
-    {nombre: 'VOTOS_VALIDOS_CANDIDATURA', color: '#008BD0', indicadorPorcentaje: 'TASA_VOTOS_VALIDOS_CANDIDATURA'},
-    {nombre: 'VOTOS_VALIDOS_BLANCO', color: '#67A23F', indicadorPorcentaje: 'TASA_VOTOS_VALIDOS_BLANCO'},
-    {nombre: 'VOTOS_NULOS', color: '#8C5C1D', indicadorPorcentaje: 'TASA_VOTOS_NULOS'}
+    {nombre: 'VOTOS_VALIDOS_CANDIDATURA', color: ISTAC_BLUE, indicadorAlternativo: 'TASA_VOTOS_VALIDOS_CANDIDATURA'},
+    {nombre: 'VOTOS_VALIDOS_BLANCO', color: ISTAC_GREEN, indicadorAlternativo: 'TASA_VOTOS_VALIDOS_BLANCO'},
+    {nombre: 'VOTOS_NULOS', color: ISTAC_BROWN, indicadorAlternativo: 'TASA_VOTOS_NULOS'}
 ];
 const INDICADORES_GRAFICA_PARTICIPACION = [
-    { nombre: 'TASA_ABSTENCION', color: '#008BD0', indicadorPorcentaje: 'ELECTORES_ABSTENIDOS' },
-    { nombre: 'TASA_PARTICIPACION', color: '#67A23F', indicadorPorcentaje: 'ELECTORES_VOTANTES' }
+    { nombre: 'TASA_ABSTENCION', color: ISTAC_GREEN, indicadorAlternativo: 'ELECTORES_ABSTENIDOS' },
+    { nombre: 'TASA_PARTICIPACION', color: ISTAC_BLUE, indicadorAlternativo: 'ELECTORES_VOTANTES' }
 ];
 const GRAFICA_PARTICIPACION_DEFAULT = false;
 const TIPO_COLUMNA = 'column';
@@ -107,8 +114,8 @@ export class EvolucionElectoralComponent implements OnInit {
         if (!this.hashTipoGrafica[tipoEleccion]) {
             grafica.yAxis.push(this.crearLineaCenso(tipoEleccion));
         } else {
-            grafica.yAxis.push(this.crearAreaAvance(tipoEleccion, 'TASA_PARTICIPACION_A1', '#D5EDFA'));
-            grafica.yAxis.push(this.crearAreaAvance(tipoEleccion, 'TASA_PARTICIPACION_A2', '#2CBCE2'));
+            grafica.yAxis.push(this.crearAreaAvance(tipoEleccion, 'TASA_PARTICIPACION_A2', ISTAC_BLUE_LIGHT));
+            grafica.yAxis.push(this.crearAreaAvance(tipoEleccion, 'TASA_PARTICIPACION_A1', ISTAC_BLUE_LIGHTEST));
         }
 
         this.hashGraficas[tipoEleccion] = grafica;
@@ -135,12 +142,12 @@ export class EvolucionElectoralComponent implements OnInit {
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador.nombre);
         resultado.color = indicador.color;
         resultado.type = this.hashTipoGrafica[tipoEleccion] ? TIPO_AREA : TIPO_COLUMNA;
-        resultado.alternativeName = this.translateService.instant('evolucionElectoral.indicador.' + indicador.indicadorPorcentaje);
+        resultado.alternativeName = this.translateService.instant('evolucionElectoral.indicador.' + indicador.indicadorAlternativo);
         resultado.data = [];
         this.hashProcesos[tipoEleccion].forEach((eleccion) => {
             resultado.data.push({
                 y: parseFloat(eleccion.indicadores[indicador.nombre]),
-                tasa: parseFloat(eleccion.indicadores[indicador.indicadorPorcentaje])
+                altData: parseFloat(eleccion.indicadores[indicador.indicadorAlternativo])
             });
         });
         return resultado;
@@ -149,7 +156,7 @@ export class EvolucionElectoralComponent implements OnInit {
     private crearLineaCenso(tipoEleccion: string): YElement {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.ELECTORES');
-        resultado.color = '#E5772D';
+        resultado.color = ISTAC_ORANGE;
         resultado.type = TIPO_LINEA;
         resultado['tooltip'] = { pointFormat: '{series.name}: {point.y}'}
         resultado.data = [];
