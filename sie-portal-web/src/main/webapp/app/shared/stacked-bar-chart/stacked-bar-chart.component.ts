@@ -3,8 +3,6 @@ import { BarChart } from '.';
 
 declare var Highcharts: any;
 
-const EJE_Y = 'y';
-
 @Component({
     selector: 'ac-stacked-bar-chart',
     templateUrl: './stacked-bar-chart.component.html'

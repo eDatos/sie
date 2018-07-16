@@ -10,6 +10,8 @@
             "ELECTORES": "Electores",
             "ELECTORES_VOTANTES": "Electores votantes",
             "TASA_PARTICIPACION": "Tasa de participación",
+            "TASA_PARTICIPACION_A1": "Tasa de participación en el primer avance",
+            "TASA_PARTICIPACION_A2": "Tasa de participación en el segundo avance",
             "ELECTORES_ABSTENIDOS": "Electores abstenidos",
             "TASA_ABSTENCION": "Tasa de abstención",
             "VOTOS": "Votos",
