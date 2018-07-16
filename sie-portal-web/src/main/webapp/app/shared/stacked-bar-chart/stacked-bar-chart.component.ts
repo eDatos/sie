@@ -52,7 +52,7 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
             },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>{series.options.alternativeName}: {point.altData'.concat(this.isPercentage ? ':,.0f' : ':,.2f').concat('}')
+                pointFormat: '{series.name}: {point.y}<br/>{series.options.alternativeName}: {point.altData:,.f}'
             },
             yAxis: {
                 min: 0,
