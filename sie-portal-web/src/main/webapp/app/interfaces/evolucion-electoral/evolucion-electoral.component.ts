@@ -13,9 +13,14 @@ const INDICADORES_GRAFICA_VOTOS = [
     {nombre: 'VOTOS_VALIDOS_BLANCO', color: '#67A23F', indicadorPorcentaje: 'TASA_VOTOS_VALIDOS_BLANCO'},
     {nombre: 'VOTOS_NULOS', color: '#8C5C1D', indicadorPorcentaje: 'TASA_VOTOS_NULOS'}
 ];
-const INDICADORES_GRAFICA_PARTICIPACION = ['TASA_ABSTENCION', 'TASA_PARTICIPACION'];
+const INDICADORES_GRAFICA_PARTICIPACION = [
+    { nombre: 'TASA_ABSTENCION', color: '#008BD0', indicadorPorcentaje: 'ELECTORES_ABSTENIDOS' },
+    { nombre: 'TASA_PARTICIPACION', color: '#67A23F', indicadorPorcentaje: 'ELECTORES_VOTANTES' }
+];
 const GRAFICA_PARTICIPACION_DEFAULT = false;
 const TIPO_COLUMNA = 'column';
+const TIPO_AREA_CON_LINEA = 'areaspline';
+const TIPO_AREA = 'area';
 const TIPO_LINEA = 'spline';
 const ELECTORES = 'ELECTORES';
 
@@ -101,6 +106,9 @@ export class EvolucionElectoralComponent implements OnInit {
         grafica.yAxis = indicadores.map((indicador) => this.crearElementoEjeY(indicador, tipoEleccion));
         if (!this.hashTipoGrafica[tipoEleccion]) {
             grafica.yAxis.push(this.crearLineaCenso(tipoEleccion));
+        } else {
+            grafica.yAxis.push(this.crearAreaAvance(tipoEleccion, 'TASA_PARTICIPACION_A1', '#D5EDFA'));
+            grafica.yAxis.push(this.crearAreaAvance(tipoEleccion, 'TASA_PARTICIPACION_A2', '#2CBCE2'));
         }
 
         this.hashGraficas[tipoEleccion] = grafica;
@@ -126,7 +134,7 @@ export class EvolucionElectoralComponent implements OnInit {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador.nombre);
         resultado.color = indicador.color;
-        resultado.type = this.hashTipoGrafica[tipoEleccion] ? TIPO_LINEA : TIPO_COLUMNA;
+        resultado.type = this.hashTipoGrafica[tipoEleccion] ? TIPO_AREA : TIPO_COLUMNA;
         resultado.alternativeName = this.translateService.instant('evolucionElectoral.indicador.' + indicador.indicadorPorcentaje);
         resultado.data = [];
         this.hashProcesos[tipoEleccion].forEach((eleccion) => {
@@ -147,6 +155,21 @@ export class EvolucionElectoralComponent implements OnInit {
         resultado.data = [];
         this.hashProcesos[tipoEleccion].forEach((eleccion) => {
             resultado.data.push(parseInt(eleccion.indicadores[ELECTORES], 10));
+        });
+        return resultado;
+    }
+
+    private crearAreaAvance(tipoEleccion: string, indicador: string, color: string): YElement {
+        const resultado = new YElement();
+        resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador);
+        resultado.color = color;
+        resultado.type = TIPO_AREA_CON_LINEA;
+        // resultado['tooltip'] = { pointFormat: '{series.name}: {point.y}'}
+        resultado.data = [];
+        this.hashProcesos[tipoEleccion].forEach((eleccion) => {
+            const valorIndicador = eleccion.indicadores[indicador];
+            const valorParseado = valorIndicador ? parseFloat(valorIndicador) : null;
+            resultado.data.push(valorParseado);
         });
         return resultado;
     }
