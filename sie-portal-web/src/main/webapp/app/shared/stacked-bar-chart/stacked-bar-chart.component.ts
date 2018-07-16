@@ -11,7 +11,7 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
 
     // Parametros externos
     @Input()
-    public isPercentaje = false;
+    public isPercentage = false;
 
     @Input()
     public data: BarChart;
@@ -52,7 +52,7 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
             },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>{series.options.alternativeName}: {point.altData}'
+                pointFormat: '{series.name}: {point.y}<br/>{series.options.alternativeName}: {point.altData'.concat(this.isPercentage ? ':,.0f' : ':,.2f').concat('}')
             },
             yAxis: {
                 min: 0,
@@ -83,6 +83,6 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
     }
 
     private getMaxY() {
-        return this.isPercentaje ? 100 : undefined;
+        return this.isPercentage ? 100 : undefined;
     }
 }
