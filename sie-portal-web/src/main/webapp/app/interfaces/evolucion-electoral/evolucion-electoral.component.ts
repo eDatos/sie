@@ -8,13 +8,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { DocumentoService } from '../../documento';
 import { JhiAlertService } from 'ng-jhipster';
 
-const INDICADORES_ABSOLUTOS_GRAFICA = [
+const INDICADORES_GRAFICA_VOTOS = [
     {nombre: 'VOTOS_VALIDOS_CANDIDATURA', color: '#008BD0', indicadorPorcentaje: 'TASA_VOTOS_VALIDOS_CANDIDATURA'},
     {nombre: 'VOTOS_VALIDOS_BLANCO', color: '#67A23F', indicadorPorcentaje: 'TASA_VOTOS_VALIDOS_BLANCO'},
     {nombre: 'VOTOS_NULOS', color: '#8C5C1D', indicadorPorcentaje: 'TASA_VOTOS_NULOS'}
 ];
-const INDICADORES_PORCENTAJE_GRAFICA = ['TASA_ABSTENCION', 'TASA_PARTICIPACION'];
-const INDICADORES_EN_PORCENTAJE_DEFAULT = false;
+const INDICADORES_GRAFICA_PARTICIPACION = ['TASA_ABSTENCION', 'TASA_PARTICIPACION'];
+const GRAFICA_PARTICIPACION_DEFAULT = false;
 const TIPO_COLUMNA = 'column';
 const TIPO_LINEA = 'spline';
 const ELECTORES = 'ELECTORES';
@@ -29,7 +29,7 @@ export class EvolucionElectoralComponent implements OnInit {
     hashProcesos;
     tiposEleccion: Set<string>;
     hashGraficas;
-    hashIndicadoresEnPorcentaje;
+    hashTipoGrafica;
 
     lugares: Lugar[];
     _lugar: Lugar;
@@ -68,7 +68,7 @@ export class EvolucionElectoralComponent implements OnInit {
     private limpiarAtributos() {
         this.hashProcesos = {};
         this.hashGraficas = {};
-        this.hashIndicadoresEnPorcentaje = {};
+        this.hashTipoGrafica = {};
     }
 
     private inicializarProcesosElectorales(listaProcesoElectoral: ProcesoElectoral[]) {
@@ -88,7 +88,7 @@ export class EvolucionElectoralComponent implements OnInit {
 
     private inicializarIndicadoresYGraficas() {
         this.tiposEleccion.forEach((tipoEleccion) => {
-            this.hashIndicadoresEnPorcentaje[tipoEleccion] = INDICADORES_EN_PORCENTAJE_DEFAULT;
+            this.hashTipoGrafica[tipoEleccion] = GRAFICA_PARTICIPACION_DEFAULT;
             this.inicializarGrafica(tipoEleccion);
         });
     }
@@ -99,7 +99,7 @@ export class EvolucionElectoralComponent implements OnInit {
         const grafica = new BarChart();
         grafica.xAxis = this.crearEjeX(tipoEleccion);
         grafica.yAxis = indicadores.map((indicador) => this.crearElementoEjeY(indicador, tipoEleccion));
-        if (!this.hashIndicadoresEnPorcentaje[tipoEleccion]) {
+        if (!this.hashTipoGrafica[tipoEleccion]) {
             grafica.yAxis.push(this.crearLineaCenso(tipoEleccion));
         }
 
@@ -107,10 +107,10 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     private getIndicadores(tipoEleccion: string): any[] {
-        if (this.hashIndicadoresEnPorcentaje[tipoEleccion]) {
-            return INDICADORES_PORCENTAJE_GRAFICA;
+        if (this.hashTipoGrafica[tipoEleccion]) {
+            return INDICADORES_GRAFICA_PARTICIPACION;
         } else {
-            return INDICADORES_ABSOLUTOS_GRAFICA;
+            return INDICADORES_GRAFICA_VOTOS;
         }
     }
 
@@ -126,7 +126,7 @@ export class EvolucionElectoralComponent implements OnInit {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador.nombre);
         resultado.color = indicador.color;
-        resultado.type = this.hashIndicadoresEnPorcentaje[tipoEleccion] ? TIPO_LINEA : TIPO_COLUMNA;
+        resultado.type = this.hashTipoGrafica[tipoEleccion] ? TIPO_LINEA : TIPO_COLUMNA;
         resultado.alternativeName = this.translateService.instant('evolucionElectoral.indicador.' + indicador.indicadorPorcentaje);
         resultado.data = [];
         this.hashProcesos[tipoEleccion].forEach((eleccion) => {
