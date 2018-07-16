@@ -171,7 +171,7 @@ export class EvolucionElectoralComponent implements OnInit {
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador);
         resultado.color = color;
         resultado.type = TIPO_AREA_CON_LINEA;
-        // resultado['tooltip'] = { pointFormat: '{series.name}: {point.y}'}
+        resultado['tooltip'] = { pointFormat: '{series.name}: {point.y}'}
         resultado.data = [];
         this.hashProcesos[tipoEleccion].forEach((eleccion) => {
             const valorIndicador = eleccion.indicadores[indicador];
