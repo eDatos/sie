@@ -32,6 +32,15 @@
             "PARLAMENTO_EUROPEO": "PARLAMENTO EUROPEO",
             "REFERENDUM": "REFERÉNDUM",
             "SENADO": "SENADO"
+        },
+        "nombreCompletoEleccion": {
+            "AUTONOMICAS": "Elecciones autonómicas",
+            "CABILDO": "Elecciones al Cabildo",
+            "CONGRESO": "Elecciones al Congreso",
+            "MUNICIPALES": "Elecciones municipales",
+            "PARLAMENTO_EUROPEO": "Elecciones al Parlamento Europeo",
+            "REFERENDUM": "Referéndum",
+            "SENADO": "Elecciones al Senado"
         }
     }
 }

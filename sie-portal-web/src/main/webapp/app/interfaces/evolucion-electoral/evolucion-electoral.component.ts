@@ -195,7 +195,7 @@ export class EvolucionElectoralComponent implements OnInit {
         event.stopPropagation();
         const evolucionElectoral = {
             territorio: this._lugar.nombre,
-            tipoElecciones: this.translateService.instant('evolucionElectoral.tipoEleccion.' + tipoEleccion),
+            tipoElecciones: this.translateService.instant('evolucionElectoral.nombreCompletoEleccion.' + tipoEleccion),
             procesosElectorales: this.hashProcesos[tipoEleccion].slice().reverse()
         };
         this.documentoService.descargarPdfEvolucionElectoral(evolucionElectoral);
