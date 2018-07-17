@@ -1,6 +1,5 @@
 package es.gobcan.istac.sie.config;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,9 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
-import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CorsFilter;
 
 import io.github.jhipster.security.Http401UnauthorizedEntryPoint;
@@ -40,13 +37,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         logoutHandler.setClearAuthentication(true);
         logoutHandler.setInvalidateHttpSession(true);
         return logoutHandler;
-    }
-
-    @Bean
-    public LogoutFilter requestCasGlobalLogoutFilter() {
-        LogoutFilter logoutFilter = new LogoutFilter(StringUtils.removeEnd(applicationProperties.getCas().getLogout(), "/"), casLogoutHandler());
-        logoutFilter.setLogoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"));
-        return logoutFilter;
     }
 
     @Bean
@@ -79,7 +69,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         //@formatter:off
         http
             .addFilter(corsFilter)
-	    	.addFilter(requestCasGlobalLogoutFilter())
             .exceptionHandling()
         .and() 
             .csrf().disable()
