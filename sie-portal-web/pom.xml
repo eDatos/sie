@@ -123,11 +123,6 @@
 	      <artifactId>jasperreports-fonts</artifactId>
 	      <version>${jasperreports-fonts.version}</version>
 	    </dependency>
-    	<dependency>
-            <groupId>es.gobcan.istac.sie</groupId>
-            <artifactId>sie-graphics</artifactId>
-            <version>1.0.0-SNAPSHOT</version><!--  FIXME revisar esta versión aqui, usar variables? -->
-		</dependency>
         <dependency>
             <groupId>io.github.jhipster</groupId>
             <artifactId>jhipster</artifactId>
