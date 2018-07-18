@@ -4,4 +4,12 @@ export interface GenericConfig {
         metadata,
         data
     };
+
+    navbar: {
+        url
+    };
+
+    footer: {
+        url
+    }
 };

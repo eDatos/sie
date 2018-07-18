@@ -109,3 +109,6 @@ jhipster:
 application:
     estadisticas:
         endpoint: https://docker-machine:9443/estadisticas #Required: dataset endpoint
+    estaticos:
+        navbarUrl: ./visualizer-static/navbar.html #Default navbar
+        footerUrl: ./visualizer-static/footer.html #Default footer

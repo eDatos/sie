@@ -43,6 +43,9 @@ jhipster:
 application:
     estadisticas:
         endpoint: FILL_ESTADISTICAS_ENDPOINT #Required: dataset endpoint
+#    estaticos:
+#        navbarUrl: FILL_NAVBAR_ENDPOINT #NOT Required: URL to navbar HTML
+#        footerUrl: FILL_FOOTER_ENDPOINT #NOT Required: URL to footer HTML
         
 # ===================================================================        
 # Application debug properties
