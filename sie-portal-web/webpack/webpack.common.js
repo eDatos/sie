@@ -84,7 +84,6 @@ module.exports = (options) => {
             ),
             new CopyWebpackPlugin([
                 { from: './src/main/webapp/visualizer-static/', to: 'visualizer-static' },
-                // FIXME Modificar el favicon con el correspondiente a la aplicación
                 { from: './src/main/webapp/favicon.ico', to: 'favicon.ico' },
                 { from: './src/main/webapp/manifest.webapp', to: 'manifest.webapp' },
                 { from: './src/main/webapp/robots.txt', to: 'robots.txt' }

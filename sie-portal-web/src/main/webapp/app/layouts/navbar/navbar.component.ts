@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TemplateService } from '../template';
 
 @Component({
     selector: 'jhi-navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: ['navbar.component.scss']
+    templateUrl: './navbar.component.html'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
-    constructor() { }
+    public navbar: string;
+
+    constructor(
+        private templateService: TemplateService
+    ) { }
+
+    ngOnInit() {
+        this.templateService.getNavbar().subscribe((navbarHtml) => this.navbar = navbarHtml);
+    }
 }
