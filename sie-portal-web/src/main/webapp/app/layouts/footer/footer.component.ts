@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TemplateService } from '../template';
 
 @Component({
     selector: 'jhi-footer',
-    templateUrl: './footer.component.html',
-    styleUrls: ['footer.component.scss']
+    templateUrl: './footer.component.html'
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
 
-    constructor() { }
+    public footer: string;
+
+    constructor(
+        private templateService: TemplateService
+    ) { }
+
+    ngOnInit() {
+        this.templateService.getFooter().subscribe((footerHtml) => this.footer = footerHtml);
+    }
 }

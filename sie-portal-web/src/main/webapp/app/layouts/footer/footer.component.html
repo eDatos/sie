@@ -1,9 +1,1 @@
-<footer>
-    <a class="footer-brand logo left" routerLink="/">
-        <img class="logo-img" src="~images/logo_istac.png" alt="Logo" />
-    </a>
-
-    <a class="footer-brand logo right" routerLink="/">
-        <img class="logo-img" src="~images/logo_edatos.png" alt="Logo" />
-    </a>
-</footer>
+<div [innerHTML]="footer | safeHtml"></div>
