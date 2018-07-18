@@ -16,8 +16,8 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import es.gobcan.istac.sie.config.ApplicationProperties;
 
 @Controller
-public class DefaultController {
 
+public class DefaultController {
     @Autowired
     private ApplicationProperties applicationProperties;
 
@@ -29,6 +29,7 @@ public class DefaultController {
         log.debug("DefaultController: Contextpath" + request.getContextPath() + "  ServletPath = " + request.getServletPath());
         Map<String, Object> model = new HashMap<>();
         model.put("estadisticas", applicationProperties.getEstadisticas());
+        model.put("estaticos", applicationProperties.getEstaticos());
         Map<String, Object> flashMap = (Map<String, Object>) RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
             model.putAll(flashMap);

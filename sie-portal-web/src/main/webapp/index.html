@@ -26,9 +26,9 @@
         window.CONFIGURATION.dataset.metadata = '?fields=-data&lang=es';
         window.CONFIGURATION.dataset.data = '?fields=-metadata&lang=es&dim=TERRITORIO:';
         window.CONFIGURATION.navbar = {};
-        window.CONFIGURATION.navbar.url = './visualizer-static/navbar.html';
+        window.CONFIGURATION.navbar.url = /*[[${estaticos.getNavbarUrl()}]]*/ './visualizer-static/navbar.html';
         window.CONFIGURATION.footer = {};
-        window.CONFIGURATION.footer.url = './visualizer-static/footer.html';
+        window.CONFIGURATION.footer.url = /*[[${estaticos.getFooterUrl()}]]*/ './visualizer-static/footer.html';
        	/*]]>*/
     </script>
 
