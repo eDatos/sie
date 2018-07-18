@@ -39,7 +39,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Liberation Sans" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Participación electoral en " +$P{TIPO_ELECCIONES}.toLowerCase()]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Participación electoral en " + $P{TIPO_ELECCIONES}.substring(0, 1).toLowerCase() + $P{TIPO_ELECCIONES}.substring(1)]]></textFieldExpression>
 			</textField>
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="130" y="190" width="400" height="170" uuid="fbd62366-e286-4664-a5e3-f3b2d6e15f07"/>
