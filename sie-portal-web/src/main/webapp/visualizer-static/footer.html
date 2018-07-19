@@ -1,36 +1,187 @@
 <style>
-    .footer-brand.logo {
-        padding: 10px 36px 10px 36px;
+    html {
+        min-height: 100%;
+        position: relative;
     }
 
-    .footer-brand.logo .logo-img {
+    body {
+        margin-bottom: 170px;
+    }
+
+    footer {
+        bottom: 0;
+        height: 170px;
+        position: absolute;
+        width: 100%;
+        color: white;
+    }
+
+    footer .footer-content {
+        width: 100%;
+        padding: 10px 36px;
+        background-color: #8C9BA3;
+        min-height: 170px;
+        justify-content: center;
+    }
+
+    footer .flex-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    footer .flex-container-vertical {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    footer .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(305px, max-content));
+        flex-grow: 1;
+        grid-gap: 20px 50px;
+    }
+
+    /* Inicio imágenes */
+    footer .footer-brand.logo .logo-img-50 {
         height: 50px;
     }
 
-    .left {
-        float: left;
-        margin-right: 1rem;
+    footer .footer-brand.logo .logo-img-65 {
+        height: 65px;
+    }
+    /* Fin imágenes */
+
+    /* Inicio Tabla del footer */
+    footer table {
+        font-weight: 500;
     }
 
-    .left .logo-img {
-        margin-right: 30px / 2;
+    footer table th {
+        font-size: 12px;
+        padding: 0.3rem 1.6rem 0.3rem 0;
     }
 
-    .right {
-        float: right;
-        margin-left: 1rem;
+    footer table td {
+        font-size: 10px;
+        padding: 0.15rem 1.6rem 0.15rem 0;
+    }
+    /* Fin Tabla del footer */
+
+    /* Inicio zona de enlaces */
+    footer .istac-links a {
+        color: white;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    /* Fin zona de enlaces */
+
+    /* Inicio iconos sociales */
+    footer .social {
+        padding: 20px 0;
     }
 
-    .right .logo-img {
-        margin-left: 30px / 2;
+    footer .social a {
+        height: 35px;
+        width: 35px;
+        font-size: 25px;
+        background-color: white;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+
+    footer .social a:not(:last-child) {
+        margin-right: 10px;
+    }
+
+    footer .social a:hover {
+        text-decoration: none;
+    }
+
+    footer .social a i {
+        color: grey;
+    }
+
+    footer .social a i:hover {
+        color: black;
+    }
+    /* Fin iconos sociales */
 </style>
-<footer>
-    <a class="footer-brand logo left" routerLink="/">
-        <img class="logo-img" src="./visualizer-static/logo_istac.png" alt="Logo" />
-    </a>
 
-    <a class="footer-brand logo right" routerLink="/">
-        <img class="logo-img" src="./visualizer-static/logo_edatos.png" alt="Logo" />
-    </a>
+<footer>
+    <div class="footer-content flex-container">
+        <div class="grid-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <a class="footer-brand logo" routerLink="/">
+                                <img class="logo-img-50" src="./visualizer-static/gobcan.png" alt="Logo" />
+                            </a>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            &#169;&nbsp;Instituto Canario de Estad&#237;stica
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Luis Doreste Silva 101, 7ª planta</td>
+                        <td>Rambla de Santa Cruz, 149, Bajo</td>
+                    </tr>
+                    <tr>
+                        <td>35004 Las Palmas de Gran Canaria</td>
+                        <td>38001 Santa Cruz de Tenerife</td>
+                    </tr>
+                    <tr>
+                        <td>Tel: 928290062 / 928290104</td>
+                        <td>Tel: 922922801</td>
+                    </tr>
+                    <tr>
+                        <td>Fax: 928243354</td>
+                        <td>Fax: 922922840</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="flex-container-vertical">
+                <a class="footer-brand logo" routerLink="/">
+                    <img class="logo-img-65" src="./visualizer-static/logo_edatos.png" alt="Logo" />
+                </a>
+                <a class="footer-brand logo" routerLink="/">
+                    <img class="logo-img-65" src="./visualizer-static/datosabiertos.png" alt="Logo" />
+                </a>
+            </div>
+
+            <div class="flex-container-vertical istac-links">
+                <a target="_blank" href="./">Sugerencias y relamaciones</a>
+                <a target="_blank" href="./">Aviso Legal</a>
+                <a target="_blank" href="./">Consultas</a>
+                <a target="_blank" href="./">Cat&#225;logo API</a>
+            </div>
+        </div>
+        <div class="flex-container social">
+            <a target="_blank" href="./">
+                <i class="fa fa-microchip"></i>
+            </a>
+            <a target="_blank" href="./">
+                <i class="fa fa-twitter"></i>
+            </a>
+            <a target="_blank" href="./">
+                <i class="fa fa-microchip"></i>
+            </a>
+            <a target="_blank" href="./">
+                <i class="fa fa-rss"></i>
+            </a>
+            <a target="_blank" href="./">
+                <i class="fa fa-youtube-play"></i>
+            </a>
+        </div>
+    </div>
 </footer>
