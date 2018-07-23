@@ -39,9 +39,26 @@
 
     footer .grid-container {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(305px, max-content));
+        grid-template-columns: repeat(auto-fill, minmax(335px, max-content));
         flex-grow: 1;
-        grid-gap: 20px 50px;
+        row-gap: 20px;
+    }
+
+    @media(min-width: 957px) {
+        footer .grid-container .istac-contact {
+            padding-right: 25px;
+        }
+        footer .grid-container .istac-logos {
+            padding: 0 25px;
+            border-left: white solid 5px;
+        }
+    }
+
+    @media(min-width: 1292px) {
+        footer .grid-container .istac-links {
+            padding-left: 25px;
+            border-left: white solid 5px;
+        }
     }
 
     /* Inicio imágenes */
@@ -115,42 +132,44 @@
 <footer>
     <div class="footer-content flex-container">
         <div class="grid-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            <a class="footer-brand logo" routerLink="/">
-                                <img class="logo-img-50" src="./visualizer-static/gobcan.png" alt="Logo" />
-                            </a>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            &#169;&nbsp;Instituto Canario de Estad&#237;stica
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Luis Doreste Silva 101, 7ª planta</td>
-                        <td>Rambla de Santa Cruz, 149, Bajo</td>
-                    </tr>
-                    <tr>
-                        <td>35004 Las Palmas de Gran Canaria</td>
-                        <td>38001 Santa Cruz de Tenerife</td>
-                    </tr>
-                    <tr>
-                        <td>Tel: 928290062 / 928290104</td>
-                        <td>Tel: 922922801</td>
-                    </tr>
-                    <tr>
-                        <td>Fax: 928243354</td>
-                        <td>Fax: 922922840</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="flex-container-vertical">
+            <div class="istac-contact">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <a class="footer-brand logo" routerLink="/">
+                                    <img class="logo-img-50" src="./visualizer-static/gobcan.png" alt="Logo" />
+                                </a>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                &#169;&nbsp;Instituto Canario de Estad&#237;stica
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Luis Doreste Silva 101, 7ª planta</td>
+                            <td>Rambla de Santa Cruz, 149, Bajo</td>
+                        </tr>
+                        <tr>
+                            <td>35004 Las Palmas de Gran Canaria</td>
+                            <td>38001 Santa Cruz de Tenerife</td>
+                        </tr>
+                        <tr>
+                            <td>Tel: 928290062 / 928290104</td>
+                            <td>Tel: 922922801</td>
+                        </tr>
+                        <tr>
+                            <td>Fax: 928243354</td>
+                            <td>Fax: 922922840</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="flex-container-vertical istac-logos">
                 <a class="footer-brand logo" routerLink="/">
                     <img class="logo-img-65" src="./visualizer-static/logo_edatos.png" alt="Logo" />
                 </a>
