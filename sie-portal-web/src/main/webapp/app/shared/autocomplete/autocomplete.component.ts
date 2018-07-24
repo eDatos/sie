@@ -35,6 +35,8 @@ export class AutocompleteComponent implements ControlValueAccessor, OnInit, Afte
 
     public filteredSuggestions: any[];
 
+    private focusMustOpenPanel = true;
+
     public field: string = null;
 
     private myNewLabel = '';
@@ -224,6 +226,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnInit, Afte
 
     onSelectMethod($event) {
         this.onSelect.emit($event);
+        this.focusMustOpenPanel = false;
     }
 
     onUnselectMethod($event) {
@@ -324,19 +327,20 @@ export class AutocompleteComponent implements ControlValueAccessor, OnInit, Afte
     }
 
     handleOnFocusOutSuggestions($event) {
+        this.focusMustOpenPanel = true;
         this.onModelTouched();
         this.onBlur.emit($event);
     }
 
     // https://github.com/primefaces/primeng/issues/745
     handleDropdownSuggestions($event) {
+        this.focusMustOpenPanel = !this.autoComplete.panelVisible;
         const queryValue = this.getQueryValue();
         if (!this.debouncedMode || queryValue.length >= this.minLength) {
-
-            this.updateFilteredSuggestions('');
+            this.updateFilteredSuggestions();
 
             setTimeout(() => {
-                if (!this.autoComplete.panelVisible) {
+                if (this.focusMustOpenPanel) {
                     this.autoComplete.show();
                 } else {
                     this.autoComplete.hide();
