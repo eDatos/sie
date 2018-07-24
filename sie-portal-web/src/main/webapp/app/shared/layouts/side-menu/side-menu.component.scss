@@ -22,3 +22,9 @@
         padding-left: $page-padding;
     }
 }
+
+@media(max-width: 1199px) {
+    .side-menu {
+        top: $mobile-navbar-height;
+    }
+}

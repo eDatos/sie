@@ -13,6 +13,13 @@ $zindex-fixed-navs: $zindex-dropdown - 5; // Dont cover navbar dropdown
     box-shadow: $nav-shadow;
     background: $grey-lightest;    
 }
+
+@media(max-width: 1199px) {
+    .entity-header {
+        margin-top: $mobile-navbar-height;
+    }
+}
+
 .has-entity-header {
     margin-top: -$entity-header-height;
 }
