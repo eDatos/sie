@@ -79,11 +79,11 @@ ac-autocomplete-short-list {
 }
 
 table.proceso-electoral {
-    border: 1px solid $istac-grey-light;
+    border: 1px solid $color-tablas-evolucion-electoral;
     color: $istac-grey-dark;
 
     thead {
-        background-color: $istac-grey-light;
+        background-color: $color-tablas-evolucion-electoral;
         color: $white;
     }
 
@@ -112,7 +112,7 @@ ngb-tabset {
             border-radius: unset;
             font-weight: 500;
             font-size: 0.8rem;
-            background-color: $istac-grey-light;
+            background-color: $color-tabs-tipo-eleccion;
             color: $white;
 
             &.active {
