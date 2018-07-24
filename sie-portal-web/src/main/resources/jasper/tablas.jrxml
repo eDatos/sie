@@ -26,161 +26,161 @@
 			<textField>
 				<reportElement x="5" y="5" width="190" height="14" forecolor="#3B3B3B" uuid="cb3c25d9-7272-4607-b62b-e233a04473dd"/>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Liberation Sans" isBold="true"/>
+					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{dateFormatter}.format($F{fechaEleccion})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="23" width="110" height="14" forecolor="#3B3B3B" uuid="dd24facc-c104-4833-8555-ba87590d8e9d"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["- Electores"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="115" y="23" width="40" height="14" forecolor="#3B3B3B" uuid="1ecaaf9d-21a8-4fee-aee5-b267651b9880"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("ELECTORES")))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="37" width="110" height="14" forecolor="#3B3B3B" uuid="fcd731e2-e765-47bb-934f-2d529fbfd565"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["   - Electores votantes"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="115" y="37" width="40" height="14" forecolor="#3B3B3B" uuid="46991ad5-248d-41ad-b326-5f1bf3040cb1"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("ELECTORES_VOTANTES")))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="155" y="37" width="40" height="14" forecolor="#3B3B3B" uuid="e694844d-a5a2-40e9-b22d-eee2f16f6725"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Double.parseDouble((String) $F{indicadores}.get("TASA_PARTICIPACION"))) + "%"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="51" width="110" height="14" forecolor="#3B3B3B" uuid="f2819873-57f3-4d18-8299-a71ffd6e344b"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["   - Electores abstenidos"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="115" y="51" width="40" height="14" forecolor="#3B3B3B" uuid="0afe7f1b-a8a2-4cfe-ba1d-74f94de978f0"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("ELECTORES_ABSTENIDOS")))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="155" y="51" width="40" height="14" forecolor="#3B3B3B" uuid="3d9fc192-774a-4083-8a9d-7a2955f7f51b"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Double.parseDouble((String) $F{indicadores}.get("TASA_ABSTENCION"))) + "%"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="121" width="110" height="14" forecolor="#3B3B3B" uuid="2c3eab60-9c62-473b-b4b0-dcf354d5ad64"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["   - Votos nulos"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="115" y="121" width="40" height="14" forecolor="#3B3B3B" uuid="270a49a5-3876-4b53-9224-f57c6845d239"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("VOTOS_NULOS")))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="155" y="121" width="40" height="14" forecolor="#3B3B3B" uuid="4a65aa21-d1c7-4c61-bf50-54a4e32d4ee3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Double.parseDouble((String) $F{indicadores}.get("TASA_VOTOS_NULOS"))) + "%"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="155" y="107" width="40" height="14" forecolor="#3B3B3B" uuid="cb365e9e-39bc-408c-b1b1-f594805510c6"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Double.parseDouble((String) $F{indicadores}.get("TASA_VOTOS_VALIDOS_BLANCO"))) + "%"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="115" y="107" width="40" height="14" forecolor="#3B3B3B" uuid="185ad3a0-fbe7-4d5b-b485-f0324086d7b7"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("VOTOS_VALIDOS_BLANCO")))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="107" width="110" height="14" forecolor="#3B3B3B" uuid="c41f26ad-accd-4eaa-90be-06c5d84f8e40"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["      - Votos válidos en blanco"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="93" width="110" height="14" forecolor="#3B3B3B" uuid="3940b501-4841-42c0-9849-dd57646eba76"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["      - Votos válidos a candidatura"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="115" y="93" width="40" height="14" forecolor="#3B3B3B" uuid="067eb90c-65e0-4459-af4e-8c8b74148e9d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("VOTOS_VALIDOS_CANDIDATURA")))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="155" y="93" width="40" height="14" forecolor="#3B3B3B" uuid="8d0c14e3-eed4-47af-a569-72019be802d0"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Double.parseDouble((String) $F{indicadores}.get("TASA_VOTOS_VALIDOS_CANDIDATURA"))) + "%"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="155" y="79" width="40" height="14" forecolor="#3B3B3B" uuid="47a80893-acaa-425f-b789-a271cfc26160"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Double.parseDouble((String) $F{indicadores}.get("TASA_VOTOS_VALIDOS"))) + "%"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="115" y="79" width="40" height="14" forecolor="#3B3B3B" uuid="b90cdd0a-a024-43d7-b524-06e2c57562f0"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("VOTOS_VALIDOS")))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="79" width="110" height="14" forecolor="#3B3B3B" uuid="502be356-bf87-4707-88e2-9a7f31d291c4"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["   - Votos válidos"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="65" width="110" height="14" forecolor="#3B3B3B" uuid="44f1acb4-2359-4a32-9a9d-ed2abc6b30bb"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["- Votos"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="115" y="65" width="40" height="14" forecolor="#3B3B3B" uuid="6507b3ae-953a-46f4-bbbd-3bba764db140"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="7.5"/>
+					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("VOTOS")))]]></textFieldExpression>
 			</textField>

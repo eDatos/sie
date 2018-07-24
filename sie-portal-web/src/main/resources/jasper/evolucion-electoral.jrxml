@@ -30,14 +30,14 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement x="130" y="101" width="400" height="40" uuid="1e717c0f-acfe-48a2-9cff-ac174629ac09"/>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Liberation Sans" size="18" isBold="true"/>
+					<font fontName="SansSerif" size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{TERRITORIO}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="130" y="143" width="400" height="26" uuid="a43ebc08-10e4-4375-883e-b5cb6b2c6336"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Liberation Sans" size="14"/>
+					<font fontName="SansSerif" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Participación electoral en " + $P{TIPO_ELECCIONES}.substring(0, 1).toLowerCase() + $P{TIPO_ELECCIONES}.substring(1)]]></textFieldExpression>
 			</textField>
@@ -63,7 +63,7 @@
 					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" isBold="false"/>
+					<font fontName="SansSerif" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -72,7 +72,7 @@
 					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" isBold="false"/>
+					<font fontName="SansSerif" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -102,7 +102,7 @@ comunicacion.istac@gobiernodecanarias.org
 					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" isBold="false"/>
+					<font fontName="SansSerif" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -111,7 +111,7 @@ comunicacion.istac@gobiernodecanarias.org
 					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Liberation Sans" isBold="false"/>
+					<font fontName="SansSerif" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
