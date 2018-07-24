@@ -4,7 +4,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Usuario Data Adapter"/>
 	<property name="com.jaspersoft.studio.report.description" value=""/>
 	<parameter name="rutaLogo" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="rutaSubinforme" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
 	<parameter name="dataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<parameter name="TERRITORIO" class="java.lang.String"/>
 	<parameter name="TIPO_ELECCIONES" class="java.lang.String"/>
@@ -52,7 +52,7 @@
 			<subreport>
 				<reportElement stretchType="RelativeToTallestObject" x="130" y="0" width="400" height="200" uuid="b72cb9d4-649f-4d71-8cff-246625bb6359"/>
 				<dataSourceExpression><![CDATA[$P{dataSource}]]></dataSourceExpression>
-				<subreportExpression><![CDATA[$P{rutaSubinforme}]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "tablas.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
