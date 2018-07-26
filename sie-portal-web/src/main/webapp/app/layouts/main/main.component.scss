@@ -2,12 +2,5 @@
 
 .jh-card {
     padding-top: $entity-header-height;
-    margin-top: $navbar-height;
     border: none;
-}
-
-@media(max-width: 1199px) {
-    .jh-card {
-        margin-top: $mobile-navbar-height;
-    }
 }

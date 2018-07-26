@@ -6,7 +6,13 @@
 
 .istac-navbar {
     background-color: #008BD0;
-    margin-bottom: 120px;
+    margin-bottom: 70px;
+}
+
+@media(max-width: 1199px) {
+    .istac-navbar {
+        margin-bottom: 50px;
+    }
 }
 
 .istac-navbar .dropdown-item.active,
@@ -86,7 +92,7 @@
     display: inline-block;
 }
 
-.navbar-brand.logo {
+.istac-navbar .navbar-brand.logo {
     padding: 10px 36px 10px 36px;
 }
 
@@ -107,14 +113,14 @@
 }
 
 @media(max-width: 767px) {
-    .navbar-brand.logo,
+    .istac-navbar .navbar-brand.logo,
     .istac-navbar .istac-navbar-toggler {
         padding: 10px;
     }
 }
 
 @media(min-width: 768px) {
-    .navbar-brand.logo,
+    .istac-navbar .navbar-brand.logo,
     .istac-navbar .istac-navbar-toggler {
         padding: 10px 36px 10px 36px;
     }
