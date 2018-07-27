@@ -6,7 +6,6 @@ export const evolucionElectoralRoute: Routes = [
         path: 'evolucion-electoral/:id',
         component: EvolucionElectoralComponent,
         data: {
-            roles: [],
             pageTitle: 'evolucionElectoral.pageTitle'
         }
     }

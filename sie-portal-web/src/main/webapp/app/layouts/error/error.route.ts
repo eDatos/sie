@@ -7,7 +7,6 @@ export const errorRoute: Routes = [
         path: 'error',
         component: ErrorComponent,
         data: {
-            roles: [],
             pageTitle: 'error.title'
         },
     },
@@ -15,7 +14,6 @@ export const errorRoute: Routes = [
         path: 'accessdenied',
         component: ErrorComponent,
         data: {
-            roles: [],
             pageTitle: 'error.title',
             error403: true
         },
@@ -24,7 +22,6 @@ export const errorRoute: Routes = [
         path: 'notfound',
         component: ErrorComponent,
         data: {
-            roles: [],
             pageTitle: 'error.title',
             error404: true
         }
@@ -33,7 +30,6 @@ export const errorRoute: Routes = [
         path: 'non-existent-user',
         component: ErrorComponent,
         data: {
-            roles: [],
             pageTitle: 'error.title',
             nonExistentUser: true
         }
@@ -42,7 +38,6 @@ export const errorRoute: Routes = [
         path: 'blocked',
         component: ErrorComponent,
         data: {
-            roles: [],
             pageTitle: 'error.title',
             blockedUser: true
         }

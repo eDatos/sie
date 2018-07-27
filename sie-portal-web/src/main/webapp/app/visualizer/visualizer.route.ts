@@ -13,8 +13,7 @@ export const visualizerRoute: Routes = [
         matcher: visualizerUrls,
         component: VisualizerComponent,
         data: {
-            roles: [],
-            pageTitle: 'home.pageTitle'
+            pageTitle: 'visualizer.pageTitle'
         }
     }
 ];
