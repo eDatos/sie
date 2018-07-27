@@ -1,0 +1,354 @@
+@charset "UTF-8";
+/* Bootstrap */
+.istac-footer html {
+  box-sizing: border-box; }
+
+.istac-footer *,
+.istac-footer *::before,
+.istac-footer *::after {
+  box-sizing: inherit; }
+
+@-ms-viewport {
+  width: device-width; }
+
+.istac-footer html {
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: transparent; }
+
+.istac-footer body {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #292b2c;
+  background-color: #fff; }
+
+.istac-footer [tabindex="-1"]:focus {
+  outline: none !important; }
+
+.istac-footer h1, .istac-footer h2, .istac-footer h3, .istac-footer h4, .istac-footer h5, .istac-footer h6 {
+  margin-top: 0;
+  margin-bottom: .5rem; }
+
+.istac-footer p {
+  margin-top: 0;
+  margin-bottom: 1rem; }
+
+.istac-footer abbr[title],
+.istac-footer abbr[data-original-title] {
+  cursor: help; }
+
+.istac-footer address {
+  margin-bottom: 1rem;
+  font-style: normal;
+  line-height: inherit; }
+
+.istac-footer ol,
+.istac-footer ul,
+.istac-footer dl {
+  margin-top: 0;
+  margin-bottom: 1rem; }
+
+.istac-footer ol ol,
+.istac-footer ul ul,
+.istac-footer ol ul,
+.istac-footer ul ol {
+  margin-bottom: 0; }
+
+.istac-footer dt {
+  font-weight: bold; }
+
+.istac-footer dd {
+  margin-bottom: .5rem;
+  margin-left: 0; }
+
+.istac-footer blockquote {
+  margin: 0 0 1rem; }
+
+.istac-footer a {
+  color: #0275d8;
+  text-decoration: none; }
+  .istac-footer a:focus, .istac-footer a:hover {
+    color: #014c8c;
+    text-decoration: underline; }
+
+.istac-footer a:not([href]):not([tabindex]) {
+  color: inherit;
+  text-decoration: none; }
+  .istac-footer a:not([href]):not([tabindex]):focus, .istac-footer a:not([href]):not([tabindex]):hover {
+    color: inherit;
+    text-decoration: none; }
+  .istac-footer a:not([href]):not([tabindex]):focus {
+    outline: 0; }
+
+.istac-footer pre {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  overflow: auto; }
+
+.istac-footer figure {
+  margin: 0 0 1rem; }
+
+.istac-footer img {
+  vertical-align: middle; }
+
+.istac-footer [role="button"] {
+  cursor: pointer; }
+
+.istac-footer a,
+.istac-footer area,
+.istac-footer button,
+.istac-footer [role="button"],
+.istac-footer input,
+.istac-footer label,
+.istac-footer select,
+.istac-footer summary,
+.istac-footer textarea {
+  touch-action: manipulation; }
+
+.istac-footer table {
+  border-collapse: collapse;
+  background-color: transparent; }
+
+.istac-footer caption {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #636c72;
+  text-align: left;
+  caption-side: bottom; }
+
+.istac-footer th {
+  text-align: left; }
+
+.istac-footer label {
+  display: inline-block;
+  margin-bottom: .5rem; }
+
+.istac-footer button:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color; }
+
+.istac-footer input,
+.istac-footer button,
+.istac-footer select,
+.istac-footer textarea {
+  line-height: inherit; }
+
+.istac-footer input[type="radio"]:disabled,
+.istac-footer input[type="checkbox"]:disabled {
+  cursor: not-allowed; }
+
+.istac-footer input[type="date"],
+.istac-footer input[type="time"],
+.istac-footer input[type="datetime-local"],
+.istac-footer input[type="month"] {
+  -webkit-appearance: listbox; }
+
+.istac-footer textarea {
+  resize: vertical; }
+
+.istac-footer fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0; }
+
+.istac-footer legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: .5rem;
+  font-size: 1.5rem;
+  line-height: inherit; }
+
+.istac-footer input[type="search"] {
+  -webkit-appearance: none; }
+
+.istac-footer output {
+  display: inline-block; }
+
+.istac-footer [hidden] {
+  display: none !important; }
+
+/* Roboto font */
+/* Roboto thin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100;
+  src: local("Roboto Thin"), local("Roboto-Thin"), url("/visualizer-static/fonts/roboto/Roboto-Thin.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 100;
+  src: local("Roboto Thin Italic"), local("Roboto-Thin-Italic"), url("/visualizer-static/fonts/roboto/Roboto-ThinItalic.ttf") format("truetype"); }
+
+/* Roboto light */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Roboto Light"), local("Roboto-Light"), url("/visualizer-static/fonts/roboto/Roboto-Light.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 300;
+  src: local("Roboto Light Italic"), local("Roboto-Light-Italic"), url("/visualizer-static/fonts/roboto/Roboto-LightItalic.ttf") format("truetype"); }
+
+/* Roboto regular */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  src: local("Roboto Regular"), local("Roboto-Regular"), url("/visualizer-static/fonts/roboto/Roboto-Regular.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: normal;
+  src: local("Roboto Italic"), local("Roboto-Italic"), url("/visualizer-static/fonts/roboto/Roboto-Italic.ttf") format("truetype"); }
+
+/* Roboto medium */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: local("Roboto Medium"), local("Roboto-Medium"), url("/visualizer-static/fonts/roboto/Roboto-Medium.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 500;
+  src: local("Roboto Medium Italic"), local("Roboto-Medium-Italic"), url("/visualizer-static/fonts/roboto/Roboto-MediumItalic.ttf") format("truetype"); }
+
+/* Roboto bold */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  src: local("Roboto Bold"), local("Roboto-Bold"), url("/visualizer-static/fonts/roboto/Roboto-Bold.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: bold;
+  src: local("Roboto Bold Italic"), local("Roboto-Bold-Italic"), url("/visualizer-static/fonts/roboto/Roboto-BoldItalic.ttf") format("truetype"); }
+
+/* Roboto black */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  src: local("Roboto Black"), local("Roboto-Black"), url("/visualizer-static/fonts/roboto/Roboto-Black.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 900;
+  src: local("Roboto Black Italic"), local("Roboto-Black-Italic"), url("/visualizer-static/fonts/roboto/Roboto-BlackItalic.ttf") format("truetype"); }
+
+/* Footer CSS */
+html {
+  min-height: 100%;
+  position: relative;
+  box-sizing: border-box; }
+
+body {
+  margin: 0 0 170px; }
+
+footer.istac-footer {
+  bottom: 0;
+  height: 170px;
+  position: absolute;
+  width: 100%;
+  color: white;
+  box-sizing: border-box; }
+
+footer.istac-footer .footer-content {
+  /* box-sizing: inherit; */
+  width: 100%;
+  padding: 10px 36px;
+  background-color: #59656E;
+  min-height: 170px;
+  justify-content: center; }
+
+footer.istac-footer .flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+footer.istac-footer .flex-container-vertical {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around; }
+
+footer.istac-footer .grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(335px, max-content));
+  flex-grow: 1;
+  row-gap: 20px; }
+
+footer.istac-footer .grid-container .istac-logos div a:not(:last-child) {
+  margin-right: 10px; }
+
+@media (min-width: 957px) {
+  footer.istac-footer .grid-container .istac-contact {
+    padding-right: 25px; }
+  footer.istac-footer .grid-container .istac-logos {
+    padding: 0 25px;
+    border-left: white solid 5px; } }
+
+@media (min-width: 1292px) {
+  footer.istac-footer .grid-container .istac-links {
+    padding-left: 25px;
+    border-left: white solid 5px; } }
+
+/* Inicio imágenes */
+footer.istac-footer .footer-brand.logo .logo-img-50 {
+  height: 50px; }
+
+footer.istac-footer .footer-brand.logo .logo-img-65 {
+  height: 65px; }
+
+/* Fin imágenes */
+/* Inicio Tabla del footer */
+footer.istac-footer table {
+  font-weight: 500; }
+
+footer.istac-footer table th {
+  font-size: 12px;
+  padding: 0.3rem 1.6rem 0.3rem 0; }
+
+footer.istac-footer table td {
+  font-size: 10px;
+  padding: 0.15rem 1.6rem 0.15rem 0; }
+
+/* Fin Tabla del footer */
+/* Inicio zona de enlaces */
+footer.istac-footer .istac-links a {
+  color: white;
+  font-size: 12px;
+  font-weight: 500; }
+
+/* Fin zona de enlaces */
+/* Inicio iconos sociales */
+footer.istac-footer .social {
+  padding: 20px 0; }
+
+footer.istac-footer .social a {
+  height: 30px;
+  width: 30px;
+  display: flex; }
+
+footer.istac-footer .social a img {
+  width: inherit; }
+
+footer.istac-footer .social a:not(:last-child) {
+  margin-right: 10px; }
+
+/* Fin iconos sociales */
+.istac-footer {
+  font-family: "Roboto", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
