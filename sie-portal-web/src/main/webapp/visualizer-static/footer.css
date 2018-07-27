@@ -119,3 +119,7 @@ footer.istac-footer .social a:not(:last-child) {
     margin-right: 10px;
 }
 /* Fin iconos sociales */
+
+.istac-footer {
+    font-family: "Roboto", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}

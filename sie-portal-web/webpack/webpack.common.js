@@ -83,6 +83,8 @@ module.exports = (options) => {
                 utils.root('src/main/webapp/app'), {}
             ),
             new CopyWebpackPlugin([
+                { from: './src/main/webapp/content/fonts/roboto', to: 'visualizer-static/fonts/roboto' },
+                { from: './node_modules/font-awesome/fonts', to: 'visualizer-static/fonts/font-awesome' },
                 { from: './src/main/webapp/visualizer-static/', to: 'visualizer-static' },
                 { from: './src/main/webapp/favicon.ico', to: 'favicon.ico' },
                 { from: './src/main/webapp/manifest.webapp', to: 'manifest.webapp' },

@@ -125,3 +125,7 @@
         padding: 10px 36px 10px 36px;
     }
 }
+
+.istac-navbar {
+    font-family: "Roboto", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}

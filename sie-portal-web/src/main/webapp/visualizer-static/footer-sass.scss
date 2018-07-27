@@ -1,0 +1,6 @@
+.istac-footer {
+    @import 'node_modules/bootstrap/scss/bootstrap';
+}
+@import "./footer";
+$roboto-font-path: '/visualizer-static/fonts/roboto';
+@import "src/main/webapp/content/fonts/roboto/roboto";

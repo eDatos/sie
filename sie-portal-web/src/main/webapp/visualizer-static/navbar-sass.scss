@@ -1,0 +1,8 @@
+.istac-navbar {
+    @import 'node_modules/bootstrap/scss/bootstrap';
+}
+@import "./navbar";
+$fa-font-path: '/visualizer-static/fonts/font-awesome';
+@import 'node_modules/font-awesome/scss/font-awesome';
+$roboto-font-path: '/visualizer-static/fonts/roboto';
+@import "src/main/webapp/content/fonts/roboto/roboto";
