@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { ConfigService } from '../config';
 import { Lugar } from '../interfaces/lugar/lugar.model';
 import { ProcesoElectoral } from '../interfaces/evolucion-electoral/proceso-electoral.model';

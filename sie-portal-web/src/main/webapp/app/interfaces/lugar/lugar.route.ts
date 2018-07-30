@@ -7,7 +7,6 @@ export const lugarRoute: Routes = [
         pathMatch: 'full',
         component: LugarComponent,
         data: {
-            roles: [],
             pageTitle: 'lugar.pageTitle'
         }
     }

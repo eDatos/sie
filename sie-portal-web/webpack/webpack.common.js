@@ -84,6 +84,7 @@ module.exports = (options) => {
             ),
             new CopyWebpackPlugin([
                 { from: './src/main/webapp/visualizer-static/', to: 'visualizer-static' },
+                { from: './src/main/webapp/external-static/', to: 'external-static' },
                 { from: './src/main/webapp/favicon.ico', to: 'favicon.ico' },
                 { from: './src/main/webapp/manifest.webapp', to: 'manifest.webapp' },
                 { from: './src/main/webapp/robots.txt', to: 'robots.txt' }

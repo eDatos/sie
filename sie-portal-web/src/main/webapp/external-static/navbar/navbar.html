@@ -1,0 +1,39 @@
+<link href="/external-static/navbar/navbar.css" rel="stylesheet" />
+<script src="/external-static/navbar/bootstrap-util-4.0.0-alpha.6.js"></script>
+<script src="/external-static/navbar/bootstrap-collapse-4.0.0-alpha.6.js"></script>
+<script>
+    function setActiveLink(linkId) {
+        document.getElementById(linkId).classList.add("active");;
+    }
+</script>
+
+<div class="istac-navbar">
+    <nav class="navbar-inverse fixed-top navbar-toggleable-lg istac-navbar d-flex justify-content-between">
+        <div class="navbar-collapse">
+            <a class="navbar-brand logo hidden-lg-down" href="http://www.gobiernodecanarias.org/istac/">
+                <img class="logo-img" src="./external-static/logos/logo_istac.png" alt="Logo del ISTAC" />
+            </a>
+            <a class="navbar-brand logo hidden-xl-up" href="http://www.gobiernodecanarias.org/istac/">
+                <img class="logo-img" src="./external-static/logos/logo_C_ISTAC.png" alt="Logo pequeño del ISTAC" />
+            </a>
+        </div>
+        <div class="d-flex justify-content-end">
+            <div class="navbar-collapse collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    <li class="nav-item pointer">
+                        <a id="eleccionesLink" class="nav-link" href="/">ELECCIONES</a>
+                    </li>
+                    <li class="nav-item pointer">
+                        <a class="nav-link" href="/">ATLAS</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="hidden-xl-up">
+                <a class="istac-navbar-toggler" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+</div>
