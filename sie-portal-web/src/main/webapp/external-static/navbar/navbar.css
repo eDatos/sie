@@ -2382,8 +2382,8 @@
     .istac-navbar .navbar-toggleable-lg .navbar-nav {
       flex-direction: row; }
       .istac-navbar .navbar-toggleable-lg .navbar-nav .nav-link {
-        padding-right: .5rem;
-        padding-left: .5rem; }
+        padding-right: 7px;
+        padding-left: 7px; }
     .istac-navbar .navbar-toggleable-lg > .container {
       display: flex;
       flex-wrap: nowrap;
@@ -4740,8 +4740,8 @@
 /* Navbar CSS */
 .istac-navbar .collapse.show .nav-link,
 .istac-navbar .collapsing .nav-link {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem; }
+  padding-left: 7px;
+  padding-right: 7px; }
 
 .istac-navbar {
   background-color: #008BD0;
@@ -4760,11 +4760,11 @@
   margin-left: 0.15em; }
 
 .istac-navbar ul.navbar-nav .nav-item {
-  margin-left: 0.5rem;
+  margin-left: 7px;
   white-space: nowrap; }
 
 .istac-navbar ul.navbar-nav .nav-item .nav-link {
-  font-size: 1.2rem; }
+  font-size: 16.8px; }
 
 .istac-navbar ul.navbar-nav .nav-item .nav-link:hover {
   color: #e7e7e7; }
@@ -4792,7 +4792,7 @@
 
 .istac-navbar .istac-navbar-toggler {
   color: white !important;
-  font-size: 1.5em;
+  font-size: 21px;
   vertical-align: middle;
   display: inline-block; }
 
