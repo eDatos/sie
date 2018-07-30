@@ -1,6 +1,9 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { TemplateService } from '../template';
 
+declare var setActiveLink: Function;
+export const APPLICATION_LINK_ID = 'eleccionesLink';
+
 @Component({
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html'
@@ -17,7 +20,10 @@ export class NavbarComponent implements OnInit {
     ngOnInit() {
         this.templateService.getNavbar().subscribe((navbarHtml) => {
             this.navbar = navbarHtml;
-            setTimeout(() => this.reinsertScripts());
+            setTimeout(() => {
+                this.reinsertScripts();
+                setActiveLink(APPLICATION_LINK_ID);
+            });
         });
     }
 
