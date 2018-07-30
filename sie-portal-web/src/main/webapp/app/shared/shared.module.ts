@@ -14,7 +14,7 @@ import {
     SideMenuComponent,
     SplitButtonComponent,
     StateStorageService
-} from './';
+} from '.';
 
 @NgModule({
     imports: [

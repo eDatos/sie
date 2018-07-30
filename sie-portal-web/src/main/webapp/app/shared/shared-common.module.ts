@@ -19,7 +19,7 @@ import {
     StickyTableHeaderDirective,
     TriInputSwitchComponent,
     CurrencyComponent
-} from './';
+} from '.';
 
 import { StackedBarChartComponent } from './stacked-bar-chart/stacked-bar-chart.component';
 

@@ -5,7 +5,7 @@ import { SieSharedModule } from '../shared';
 import {
     VisualizerComponent,
     visualizerRoute
-} from './';
+} from '.';
 
 const ENTITY_STATES = [
     ...visualizerRoute
