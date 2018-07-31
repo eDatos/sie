@@ -8,16 +8,16 @@
 
         routes: {
 
-            "visualizer": "home",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha": "home",
 
-            "visualizer/selection": "selection",
-            "visualizer/selection/permalink/:permalinkId": "selectionPermalink",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha/selection": "selection",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha/selection/permalink/:permalinkId": "selectionPermalink",
 
-            "visualizer/visualization": "visualization",
-            "visualizer/visualization/permalink/:permalinkId": "visualizationPermalink",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha/visualization": "visualization",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha/visualization/permalink/:permalinkId": "visualizationPermalink",
 
-            "visualizer/visualization/:visualizationType": "visualizationType",
-            "visualizer/visualization/:visualizationType/permalink/:permalinkId": "visualizationTypePermalink",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha/visualization/:visualizationType": "visualizationType",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha/visualization/:visualizationType/permalink/:permalinkId": "visualizationTypePermalink",
 
             "*path": "error"
         },
@@ -38,37 +38,43 @@
         },
 
         home: function () {
-            this.datasetController.showDataset(App.queryParams);
+			var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
+            args = _.defaults(args, App.queryParams);
+            this.datasetController.showDataset(args);
         },
 
         selection: function () {
-            this.datasetController.showDatasetSelection(App.queryParams);
+			var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
+            args = _.defaults(args, App.queryParams);
+            this.datasetController.showDatasetSelection(args);
         },
 
         selectionPermalink: function () {
-            var args = this._nameArguments(["permalinkId"], arguments);
+            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "permalinkId"], arguments);
             args = _.defaults(args, App.queryParams);
             this.datasetController.showDatasetSelection(args);
         },
 
         visualization: function () {
-            this.datasetController.showDatasetVisualization(App.queryParams);
+			var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
+            args = _.defaults(args, App.queryParams);
+            this.datasetController.showDatasetVisualization(args);
         },
 
         visualizationPermalink: function () {
-            var args = this._nameArguments(["permalinkId"], arguments);
+            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "permalinkId"], arguments);
             args = _.defaults(args, App.queryParams);
             this.datasetController.showDatasetVisualization(args);
         },
 
         visualizationType: function () {
-            var args = this._nameArguments(["visualizationType"], arguments);
+            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "visualizationType"], arguments);
             args = _.defaults(args, App.queryParams);
             this.datasetController.showDatasetVisualization(args);
         },
 
         visualizationTypePermalink: function () {
-            var args = this._nameArguments(["visualizationType", "permalinkId"], arguments);
+            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "visualizationType", "permalinkId"], arguments);
             args = _.defaults(args, App.queryParams);
             this.datasetController.showDatasetVisualization(args);
         },

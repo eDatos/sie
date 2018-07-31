@@ -63,7 +63,7 @@
             ]).join('&');
         },
 
-        idAttributes: ["type", "agency", "identifier", "version", "indicatorSystem", "permalinkId", "multidatasetId"],
+        idAttributes: ["type", "agency", "identifier", "version", "indicatorSystem", "permalinkId", "multidatasetId", "territorio", "tipoElecciones", "fecha"],
 
         equals: function (metadata) {
             if (_.isUndefined(metadata)) return false;

@@ -163,7 +163,6 @@ module.exports = (grunt) ->
                 # canvas table
                 paths.js + "/libs/lru.js"
                 paths.js + "/libs/jquery.hotkeys.js"
-                paths.js + "/libs/key_status.js"
                 paths.js + "/libs/jquery.ajaxmanager.js"
                 paths.js + "/metamac/modules/dataset/visual-element/table/Utils.js"
                 paths.js + "/metamac/modules/dataset/visual-element/table/primitives/Point.js"

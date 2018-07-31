@@ -17,14 +17,12 @@
                     var routeParts = [];
 
                     if (self.metadata.getAutoOpen()) {
-                        routeParts.push("visualizer");
                         routeParts.push("visualization");
                     } else {
-                        routeParts.push("visualizer");
                         routeParts.push("selection");
                     }
 
-                    var route = routeParts.join("/");
+                    var route = window.location.hash + "/" + routeParts.join("/");
                     Backbone.history.navigate(route, { trigger: true, replace: true });
                 });
         },
@@ -45,7 +43,7 @@
             this.router.navigate(link);
 
             var self = this;
-            var datasetIdentifier = _.pick(options, "type", "agency", "identifier", "version", "permalinkId", "indicatorSystem", "geo", "multidatasetId");
+            var datasetIdentifier = _.pick(options, "type", "agency", "identifier", "version", "permalinkId", "indicatorSystem", "geo", "multidatasetId", "territorio", "tipoElecciones", "fecha");
             this._loadMetadata(datasetIdentifier)
                 .then(function () {
                     options = _.defaults(options, {
@@ -88,7 +86,7 @@
             var self = this;
             var deferred = $.Deferred();
 
-            var metadata = new App.dataset.Metadata(_.pick(datasetIdentifier, "type", "agency", "identifier", "version", "indicatorSystem", "permalinkId", "multidatasetId"));
+            var metadata = new App.dataset.Metadata(_.pick(datasetIdentifier, "type", "agency", "identifier", "version", "indicatorSystem", "permalinkId", "multidatasetId", "territorio", "tipoElecciones", "fecha"));
             if (metadata.equals(this.metadata)) {
                 deferred.resolve();
             } else {

@@ -19821,6 +19821,9 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
         "identifier": undefined,
         "version": undefined,
         "type": undefined,
+		"territorio": undefined,
+		"tipoElecciones": undefined,
+		"fecha": undefined,
 
         "indicatorSystem": undefined, // Only for indicatorsInstances
 
@@ -59744,16 +59747,16 @@ if(this.$element.prop("multiple"))this.current(function(d){var e=[];a=[a],a.push
 
         routes: {
 
-            "visualizer": "home",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha": "home",
 
-            "visualizer/selection": "selection",
-            "visualizer/selection/permalink/:permalinkId": "selectionPermalink",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha/selection": "selection",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha/selection/permalink/:permalinkId": "selectionPermalink",
 
-            "visualizer/visualization": "visualization",
-            "visualizer/visualization/permalink/:permalinkId": "visualizationPermalink",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha/visualization": "visualization",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha/visualization/permalink/:permalinkId": "visualizationPermalink",
 
-            "visualizer/visualization/:visualizationType": "visualizationType",
-            "visualizer/visualization/:visualizationType/permalink/:permalinkId": "visualizationTypePermalink",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha/visualization/:visualizationType": "visualizationType",
+            "proceso-electoral/:territorio/:tipoElecciones/:fecha/visualization/:visualizationType/permalink/:permalinkId": "visualizationTypePermalink",
 
             "*path": "error"
         },
@@ -59774,37 +59777,43 @@ if(this.$element.prop("multiple"))this.current(function(d){var e=[];a=[a],a.push
         },
 
         home: function () {
-            this.datasetController.showDataset(App.queryParams);
+			var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
+            args = _.defaults(args, App.queryParams);
+            this.datasetController.showDataset(args);
         },
 
         selection: function () {
-            this.datasetController.showDatasetSelection(App.queryParams);
+			var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
+            args = _.defaults(args, App.queryParams);
+            this.datasetController.showDatasetSelection(args);
         },
 
         selectionPermalink: function () {
-            var args = this._nameArguments(["permalinkId"], arguments);
+            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "permalinkId"], arguments);
             args = _.defaults(args, App.queryParams);
             this.datasetController.showDatasetSelection(args);
         },
 
         visualization: function () {
-            this.datasetController.showDatasetVisualization(App.queryParams);
+			var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
+            args = _.defaults(args, App.queryParams);
+            this.datasetController.showDatasetVisualization(args);
         },
 
         visualizationPermalink: function () {
-            var args = this._nameArguments(["permalinkId"], arguments);
+            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "permalinkId"], arguments);
             args = _.defaults(args, App.queryParams);
             this.datasetController.showDatasetVisualization(args);
         },
 
         visualizationType: function () {
-            var args = this._nameArguments(["visualizationType"], arguments);
+            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "visualizationType"], arguments);
             args = _.defaults(args, App.queryParams);
             this.datasetController.showDatasetVisualization(args);
         },
 
         visualizationTypePermalink: function () {
-            var args = this._nameArguments(["visualizationType", "permalinkId"], arguments);
+            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "visualizationType", "permalinkId"], arguments);
             args = _.defaults(args, App.queryParams);
             this.datasetController.showDatasetVisualization(args);
         },
@@ -64118,7 +64127,7 @@ I18n.translations.pt = {
             ]).join('&');
         },
 
-        idAttributes: ["type", "agency", "identifier", "version", "indicatorSystem", "permalinkId", "multidatasetId"],
+        idAttributes: ["type", "agency", "identifier", "version", "indicatorSystem", "permalinkId", "multidatasetId", "territorio", "tipoElecciones", "fecha"],
 
         equals: function (metadata) {
             if (_.isUndefined(metadata)) return false;
@@ -71443,23 +71452,6 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
 
 })( jQuery );
 
-/* ;$(function() {
-  window.keydown = {};
-  
-  function keyName(event) {
-    return jQuery.hotkeys.specialKeys[event.which] ||
-      String.fromCharCode(event.which).toLowerCase();
-  }
-  
-  $(document).bind("keydown", function(event) {
-    keydown[keyName(event)] = true;
-  });
-  
-  $(document).bind("keyup", function(event) {
-    keydown[keyName(event)] = false;
-  });
-}); */
-
 ;/**!
  * project-site: http://plugins.jquery.com/project/AjaxManager
  * repository: http://github.com/aFarkas/Ajaxmanager
@@ -76538,14 +76530,12 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                     var routeParts = [];
 
                     if (self.metadata.getAutoOpen()) {
-                        routeParts.push("visualizer");
                         routeParts.push("visualization");
                     } else {
-                        routeParts.push("visualizer");
                         routeParts.push("selection");
                     }
 
-                    var route = routeParts.join("/");
+                    var route = window.location.hash + "/" + routeParts.join("/");
                     Backbone.history.navigate(route, { trigger: true, replace: true });
                 });
         },
@@ -76566,7 +76556,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
             this.router.navigate(link);
 
             var self = this;
-            var datasetIdentifier = _.pick(options, "type", "agency", "identifier", "version", "permalinkId", "indicatorSystem", "geo", "multidatasetId");
+            var datasetIdentifier = _.pick(options, "type", "agency", "identifier", "version", "permalinkId", "indicatorSystem", "geo", "multidatasetId", "territorio", "tipoElecciones", "fecha");
             this._loadMetadata(datasetIdentifier)
                 .then(function () {
                     options = _.defaults(options, {
@@ -76609,7 +76599,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
             var self = this;
             var deferred = $.Deferred();
 
-            var metadata = new App.dataset.Metadata(_.pick(datasetIdentifier, "type", "agency", "identifier", "version", "indicatorSystem", "permalinkId", "multidatasetId"));
+            var metadata = new App.dataset.Metadata(_.pick(datasetIdentifier, "type", "agency", "identifier", "version", "indicatorSystem", "permalinkId", "multidatasetId", "territorio", "tipoElecciones", "fecha"));
             if (metadata.equals(this.metadata)) {
                 deferred.resolve();
             } else {

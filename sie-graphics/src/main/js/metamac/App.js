@@ -38,6 +38,9 @@
         "identifier": undefined,
         "version": undefined,
         "type": undefined,
+		"territorio": undefined,
+		"tipoElecciones": undefined,
+		"fecha": undefined,
 
         "indicatorSystem": undefined, // Only for indicatorsInstances
 

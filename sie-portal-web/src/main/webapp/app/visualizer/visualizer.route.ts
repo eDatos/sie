@@ -5,7 +5,7 @@ export function visualizerUrls(url: UrlSegment[]) {
     if (url.length === 0) {
         return null;
     }
-    return url[0].path === 'visualizer' ? { consumed: url } : null;
+    return url[0].path === 'proceso-electoral' ? { consumed: url } : null;
 }
 
 export const visualizerRoute: Routes = [
