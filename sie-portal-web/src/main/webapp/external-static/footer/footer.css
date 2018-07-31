@@ -264,7 +264,9 @@ footer.istac-footer {
   position: absolute;
   width: 100%;
   color: white;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font-family: "Roboto", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.05; }
 
 footer.istac-footer .footer-content {
   /* box-sizing: inherit; */
@@ -350,5 +352,3 @@ footer.istac-footer .social a:not(:last-child) {
   margin-right: 10px; }
 
 /* Fin iconos sociales */
-.istac-footer {
-  font-family: "Roboto", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
