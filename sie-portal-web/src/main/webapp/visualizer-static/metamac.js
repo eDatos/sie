@@ -19788,10 +19788,6 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 
     var App = new Backbone.Marionette.Application();
 
-    App.addRegions({
-        mainRegion: ".metamac-container"
-    });
-
     App.addInitializer(function () {
         App.collectionController = new App.modules.collection.CollectionController({ region: this.mainRegion });
         App.datasetController = new App.modules.dataset.DatasetController({ region: this.mainRegion });

@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 
 declare var I18n: any;
 declare var App: any;
+declare var Backbone: any;
 
 @Component({
     selector: 'jhi-visualizer',
@@ -14,6 +15,10 @@ export class VisualizerComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit() {
         I18n.defaultLocale = 'es';
         I18n.locale = 'es';
+
+        App.addRegions({
+            mainRegion: '.metamac-container'
+        });
 
         // http://estadisticas.arte-consultores.com/statistical-resources
         App.endpoints['statistical-resources'] = 'http://estadisticas.arte-consultores.com/statistical-resources-internal/apis/statistical-resources-internal/v1.0';
@@ -54,6 +59,10 @@ export class VisualizerComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        App.removeRegion('mainRegion');
+        App._initCallbacks.reset();
+        Backbone.history.stop();
+
         this.setGlobalStyleSheetsDisabled(false);
     }
 

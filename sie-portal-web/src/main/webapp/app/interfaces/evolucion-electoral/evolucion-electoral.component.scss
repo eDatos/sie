@@ -84,7 +84,9 @@ table.proceso-electoral {
 
     thead {
         background-color: $color-tablas-evolucion-electoral;
-        color: $white;
+        a {
+            color: $white;
+        }
     }
 
     th {

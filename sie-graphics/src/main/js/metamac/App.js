@@ -5,10 +5,6 @@
 
     var App = new Backbone.Marionette.Application();
 
-    App.addRegions({
-        mainRegion: ".metamac-container"
-    });
-
     App.addInitializer(function () {
         App.collectionController = new App.modules.collection.CollectionController({ region: this.mainRegion });
         App.datasetController = new App.modules.dataset.DatasetController({ region: this.mainRegion });
