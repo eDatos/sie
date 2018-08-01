@@ -70,32 +70,42 @@ ac-autocomplete-short-list {
     padding: 2px;
 }
 
-.proceso-electoral {
-    margin: auto;
-}
+a.proceso-electoral {
+    margin: 0  auto 2rem;
 
-.proceso-electoral {
-    margin-bottom: 2rem;
-}
+    &:focus {
+        text-decoration: none;
+    }
 
-table.proceso-electoral {
-    border: 1px solid $color-tablas-evolucion-electoral;
-    color: $istac-grey-dark;
+    &:hover {
+        text-decoration: none;
 
-    thead {
-        background-color: $color-tablas-evolucion-electoral;
-        a {
-            color: $white;
+        table {
+            border: 1px solid $istac-blue;
+            thead {
+                background-color: $istac-blue;
+            }
         }
     }
+    
 
-    th {
-        padding: 0.3rem 1rem;
-        font-size: 1.1rem;
-    }
-
-    td {
-        padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    table {
+        border: 1px solid $color-tablas-evolucion-electoral;
+        color: $istac-grey-dark;
+    
+        thead {
+            background-color: $color-tablas-evolucion-electoral;
+            color: $white;
+        }
+    
+        th {
+            padding: 0.3rem 1rem;
+            font-size: 1.1rem;
+        }
+    
+        td {
+            padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+        }
     }
 }
 
