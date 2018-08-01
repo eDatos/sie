@@ -337,7 +337,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnInit, Afte
         this.focusMustOpenPanel = !this.autoComplete.panelVisible;
         const queryValue = this.getQueryValue();
         if (!this.debouncedMode || queryValue.length >= this.minLength) {
-            this.updateFilteredSuggestions();
+            this.updateFilteredSuggestions('');
 
             setTimeout(() => {
                 if (this.focusMustOpenPanel) {
