@@ -4,6 +4,10 @@ declare var I18n: any;
 declare var App: any;
 declare var Backbone: any;
 
+export const METAMAC_CSS_ID = 'metamac-css';
+export const METAMAC_CSS_LINK = './visualizer-static/metamac.css';
+export const METAMAC_CSS_REL = 'stylesheet';
+
 @Component({
     selector: 'jhi-visualizer',
     templateUrl: './visualizer.component.html'
@@ -13,6 +17,8 @@ export class VisualizerComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor() { }
 
     ngOnInit() {
+        this.insertMetamacStyles();
+
         I18n.defaultLocale = 'es';
         I18n.locale = 'es';
 
@@ -64,6 +70,7 @@ export class VisualizerComponent implements OnInit, AfterViewInit, OnDestroy {
         Backbone.history.stop();
 
         this.setGlobalStyleSheetsDisabled(false);
+        this.deleteMetamacStyles();
     }
 
     private setGlobalStyleSheetsDisabled(disabled: boolean) {
@@ -74,5 +81,18 @@ export class VisualizerComponent implements OnInit, AfterViewInit, OnDestroy {
                 styleSheet.disabled = disabled;
             }
         }
+    }
+
+    private insertMetamacStyles() {
+        const estilosMetamac = document.createElement('link');
+        estilosMetamac.id = METAMAC_CSS_ID;
+        estilosMetamac.href = METAMAC_CSS_LINK;
+        estilosMetamac.rel = METAMAC_CSS_REL;
+        document.head.appendChild(estilosMetamac);
+    }
+
+    private deleteMetamacStyles() {
+        const estilosMetamac = document.getElementById(METAMAC_CSS_ID);
+        document.head.removeChild(estilosMetamac);
     }
 }
