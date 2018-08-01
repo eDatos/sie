@@ -4,6 +4,7 @@ declare var I18n: any;
 declare var App: any;
 declare var Backbone: any;
 
+export const COMPILED_SASS_SUFFIX = '-sass';
 export const METAMAC_CSS_ID = 'metamac-css';
 export const METAMAC_CSS_LINK = './visualizer-static/metamac.css';
 export const METAMAC_CSS_REL = 'stylesheet';
@@ -77,7 +78,7 @@ export class VisualizerComponent implements OnInit, AfterViewInit, OnDestroy {
         const styleSheetList = document.styleSheets;
         for (let i = 0; i < styleSheetList.length; i++) {
             const styleSheet = styleSheetList.item(i);
-            if (!styleSheet.href) {
+            if (!styleSheet.href || styleSheet.href.includes(COMPILED_SASS_SUFFIX)) {
                 styleSheet.disabled = disabled;
             }
         }
