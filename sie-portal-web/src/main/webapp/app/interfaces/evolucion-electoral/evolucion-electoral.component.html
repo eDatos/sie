@@ -19,10 +19,10 @@
             <ng-template ngbTabContent>
                 <div class="barra-comandos">
                     <div class="selector-grafica">
-                        <input id="votos-{{i}}" type="radio" name="tipoGrafica" [value]="false" [(ngModel)]="hashTipoGrafica[tipo]" (change)="onChangeIndicador(tipo)">
-                        <label for="votos-{{i}}" jhiTranslate="evolucionElectoral.indicador.votos">Votos</label>
-                        <input id="participacion-{{i}}" type="radio" name="tipoGrafica" [value]="true" [(ngModel)]="hashTipoGrafica[tipo]" (change)="onChangeIndicador(tipo)">
-                        <label for="participacion-{{i}}" jhiTranslate="evolucionElectoral.indicador.participacion">Participacion</label>
+                        <input id="votos" type="radio" name="tipoGrafica" [value]="false" [(ngModel)]="tipoGrafica" (change)="onChangeIndicador()">
+                        <label for="votos" jhiTranslate="evolucionElectoral.indicador.votos">Votos</label>
+                        <input id="participacion" type="radio" name="tipoGrafica" [value]="true" [(ngModel)]="tipoGrafica" (change)="onChangeIndicador()">
+                        <label for="participacion" jhiTranslate="evolucionElectoral.indicador.participacion">Participacion</label>
                     </div>
 
                     <button type="button" class="btn btn-sm btn-secondary" [title]="'evolucionElectoral.descargarPdf' | translate" (click)="descargarPdf($event, tipo)">
@@ -31,7 +31,7 @@
                     </button>
                 </div>
 
-                <ac-stacked-bar-chart [data]="hashGraficas[tipo]" [isPercentage]="hashTipoGrafica[tipo]"></ac-stacked-bar-chart>
+                <ac-stacked-bar-chart [data]="hashGraficas[tipo]" [isPercentage]="tpoGrafica"></ac-stacked-bar-chart>
 
                 <div class="grid-procesos">
                     <ng-container *ngFor="let proceso of hashProcesos[tipo].slice().reverse()">

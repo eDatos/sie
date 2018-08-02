@@ -24,7 +24,7 @@ const INDICADORES_GRAFICA_PARTICIPACION = [
     { nombre: 'TASA_ABSTENCION', color: ISTAC_GREEN, indicadorAlternativo: 'ELECTORES_ABSTENIDOS' },
     { nombre: 'TASA_PARTICIPACION', color: ISTAC_BLUE, indicadorAlternativo: 'ELECTORES_VOTANTES' }
 ];
-const GRAFICA_PARTICIPACION_DEFAULT = false;
+const GRAFICA_VOTOS_DEFAULT = false;
 const TIPO_COLUMNA = 'column';
 const TIPO_AREA_CON_LINEA = 'areaspline';
 const TIPO_AREA = 'area';
@@ -41,7 +41,7 @@ export class EvolucionElectoralComponent implements OnInit {
     hashProcesos;
     tiposEleccion: Set<string>;
     hashGraficas;
-    hashTipoGrafica;
+    tipoGrafica = GRAFICA_VOTOS_DEFAULT;
 
     lugares: Lugar[];
     _lugar: Lugar;
@@ -71,7 +71,7 @@ export class EvolucionElectoralComponent implements OnInit {
                     this.limpiarAtributos();
                     this.inicializarProcesosElectorales(listaProcesoElectoral);
                     this.inicializarTiposEleccion(listaProcesoElectoral);
-                    this.inicializarIndicadoresYGraficas();
+                    this.inicializarGraficas();
                 });
             });
         });
@@ -80,7 +80,6 @@ export class EvolucionElectoralComponent implements OnInit {
     private limpiarAtributos() {
         this.hashProcesos = {};
         this.hashGraficas = {};
-        this.hashTipoGrafica = {};
     }
 
     private inicializarProcesosElectorales(listaProcesoElectoral: ProcesoElectoral[]) {
@@ -98,9 +97,8 @@ export class EvolucionElectoralComponent implements OnInit {
         this.tiposEleccion = new Set(tiposEleccion);
     }
 
-    private inicializarIndicadoresYGraficas() {
+    private inicializarGraficas() {
         this.tiposEleccion.forEach((tipoEleccion) => {
-            this.hashTipoGrafica[tipoEleccion] = GRAFICA_PARTICIPACION_DEFAULT;
             this.inicializarGrafica(tipoEleccion);
         });
     }
@@ -111,7 +109,7 @@ export class EvolucionElectoralComponent implements OnInit {
         const grafica = new BarChart();
         grafica.xAxis = this.crearEjeX(tipoEleccion);
         grafica.yAxis = indicadores.map((indicador) => this.crearElementoEjeY(indicador, tipoEleccion));
-        if (!this.hashTipoGrafica[tipoEleccion]) {
+        if (!this.tipoGrafica) {
             grafica.yAxis.push(this.crearLineaCenso(tipoEleccion));
         } else {
             grafica.yAxis.push(this.crearAreaAvance(tipoEleccion, 'TASA_PARTICIPACION_A2', ISTAC_BLUE_LIGHT));
@@ -122,7 +120,7 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     private getIndicadores(tipoEleccion: string): any[] {
-        if (this.hashTipoGrafica[tipoEleccion]) {
+        if (this.tipoGrafica) {
             return INDICADORES_GRAFICA_PARTICIPACION;
         } else {
             return INDICADORES_GRAFICA_VOTOS;
@@ -141,7 +139,7 @@ export class EvolucionElectoralComponent implements OnInit {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador.nombre);
         resultado.color = indicador.color;
-        resultado.type = this.hashTipoGrafica[tipoEleccion] ? TIPO_AREA : TIPO_COLUMNA;
+        resultado.type = this.tipoGrafica ? TIPO_AREA : TIPO_COLUMNA;
         resultado.alternativeName = this.translateService.instant('evolucionElectoral.indicador.' + indicador.indicadorAlternativo);
         resultado.data = [];
         this.hashProcesos[tipoEleccion].forEach((eleccion) => {
@@ -181,8 +179,8 @@ export class EvolucionElectoralComponent implements OnInit {
         return resultado;
     }
 
-    onChangeIndicador(tipoEleccion: string) {
-        this.inicializarGrafica(tipoEleccion);
+    onChangeIndicador() {
+        this.inicializarGraficas();
     }
 
     transition() {
