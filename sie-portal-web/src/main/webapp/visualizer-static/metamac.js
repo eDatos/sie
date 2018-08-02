@@ -56782,7 +56782,7 @@ var PieSeries = {
 		// Set each point's properties
 		for (i = 0; i < len; i++) {
 			point = points[i];
-			point.percentage = (point.y / total) * 100;
+			point.percentage = total > 0 ? (point.y / total) * 100 : 0;
 			point.total = total;
 		}
 		
@@ -56835,8 +56835,9 @@ var PieSeries = {
 			end,
 			angle,
 			startAngleRad = series.startAngleRad = mathPI / 180 * ((options.startAngle || 0) % 360 - 90),
+			endAngleRad = series.endAngleRad = mathPI / 180 * (pick(options.endAngle, 360) % 360 - 90),
+			circ = endAngleRad - startAngleRad, //2 * mathPI,
 			points = series.points,
-			circ = 2 * mathPI,
 			radiusX, // the x component of the radius vector for a given point
 			radiusY,
 			labelDistance = options.dataLabels.distance,
@@ -56903,7 +56904,7 @@ var PieSeries = {
 				positions[1] + radiusY * 0.7
 			];
 			
-			point.half = angle < circ / 4 ? 0 : 1;
+			point.half = angle < -mathPI / 2 || angle > mathPI / 2 ? 1 : 0;
 			point.angle = angle;
 
 			// set the anchor point for data labels
@@ -61549,6 +61550,35 @@ I18n.translations.pt = {
                     }
                 }
             },
+            pie: {
+                zones: {
+                    axisy: {
+                        icon: "axis-y",
+                        draggable: false,
+                        location: "left",
+                        showHeader: true,
+                        showMeasureAttribute: true
+                    },
+                    left: {
+                        icon: "axis-x",
+                        draggable: false,
+                        location: "left",
+                        showHeader: true
+                    },
+                    top: {
+                        icon: "line",
+                        draggable: true,
+                        location: "right",
+                        showHeader: true
+                    },
+                    fixed: {
+                        icon: "lock",
+                        draggable: true,
+                        location: "right",
+                        showHeader: true
+                    }
+                }
+            },
             map: {
                 zones: {
                     left: {
@@ -62030,6 +62060,7 @@ I18n.translations.pt = {
                 info: new App.VisualElement.Info(options),
                 column: new App.VisualElement.ColumnChart(options),
                 line: new App.VisualElement.LineChart(options),
+                pie: new App.VisualElement.SemiCircleChart(options),
                 table: new App.VisualElement.Table(options),
                 map: new App.VisualElement.Map(_.extend(options, { mapType: 'map' })),
                 mapbubble: new App.VisualElement.Map(_.extend(options, { mapType: 'mapbubble' }))
@@ -70474,6 +70505,161 @@ App.VisualElement.PieChart = (function () {
 
 })();
 
+;(function () {
+    "use strict";
+
+    var Constants = App.Constants;
+
+    App.namespace("App.VisualElement.SemiCircleChart");
+
+    App.VisualElement.SemiCircleChart = function (options) {
+        this.initialize(options);
+        this._type = 'pie';
+
+        _.extend(this._chartOptions, {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            title: {
+                text: 'Browser<br>shares<br>2017',
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 40
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: true,
+                        distance: -50,
+                        style: {
+                            fontWeight: 'bold',
+                            color: 'white'
+                        }
+                    },
+                    startAngle: -90,
+                    endAngle: 90,
+                    center: ['50%', '75%']
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                innerSize: '50%',
+                data: [
+                    ['Chrome', 58.9],
+                    ['Firefox', 13.29],
+                    ['Internet Explorer', 13],
+                    ['Edge', 3.78],
+                    ['Safari', 3.42],
+                    {
+                        name: 'Other',
+                        y: 7.61,
+                        dataLabels: {
+                            enabled: false
+                        }
+                    }
+                ]
+            }]
+        });
+    };
+
+    App.VisualElement.SemiCircleChart.prototype = new App.VisualElement.Base();
+
+    _.extend(App.VisualElement.SemiCircleChart.prototype, {
+
+        load: function () {
+            if (!this.assertAllDimensionsHaveSelections()) {
+                return;
+            }
+            this.render();
+        },
+
+        destroy: function () {
+            this._unbindEvents();
+
+            if (this.chart && this.chart.renderTo) {
+                this.chart.destroy();
+                this.chart = null;
+            }
+        },
+
+        _unbindEvents: function () {
+            this.stopListening();
+            this.$el.off("resize");
+        },
+
+        updatingDimensionPositions: function () {
+            this._applyVisualizationRestrictions();
+            this.resetDimensionsLimits();
+
+            this.filterDimensions.zones.get('top').set('maxSize', 1);
+            this.filterDimensions.zones.get('left').set('fixedSize', 1);
+            this.filterDimensions.zones.get('axisy').set('maxSize', 1);
+        },
+
+        _applyVisualizationRestrictions: function () {
+            if (this._mustApplyVisualizationRestrictions()) {
+                this._moveAllDimensionsToZone('left');
+
+                this._forceMeasureDimensionInZone('axisy');
+                this._forceTimeDimensionInZone('fixed');
+                this._forceGeographicDimensionInZone('fixed');
+
+                this._applyVisualizationPreselections();
+            }
+        },
+
+        _applyVisualizationPreselections: function () {
+            this._preselectBiggestHierarchyGeographicValue();
+            this._preselectMostPopulatedTemporalGranularityRepresentations();
+        },
+
+        render: function () {
+            var self = this;
+            this.dataset.data.loadAllSelectedData().then(function () {
+                self.$el.empty();
+                self.$title = $('<h3></h3>');
+                self.updateTitle();
+                self.$el.append(self.$title);
+
+                self._renderContainers();
+                self._renderChart();
+            });
+        },
+
+        _renderContainers: function () {
+            this.$chartContainer = $('<div></div>');
+            var newHeight = this.$el.height() - this.$title.height() - this.getRightsHolderHeight();
+            this.$chartContainer.height(newHeight);
+
+            this.$el.append(this.$chartContainer);
+            this._chartOptions.chart.renderTo = this.$chartContainer[0];
+        },
+
+        _renderChart: function () {
+            /* var data = this.getData();
+            this._chartOptions.series = data.series;
+            this._chartOptions.xAxis.categories = data.xAxis;
+            this._chartOptions.chart.renderTo = this.$chartContainer[0]; */
+
+            this._chartOptions.credits.text = this.getRightsHolderText();
+            if (!this.showRightsHolderText()) {
+                this._chartOptions.credits.style = {
+                    color: App.Constants.colors.hiddenText
+                }
+            }
+
+            this.chart = new Highcharts.Chart(this._chartOptions);
+            this.$el.on("resize", function () { });
+        }
+    });
+
+}());
 ;(function () {
     "use strict";
 
