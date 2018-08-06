@@ -32,12 +32,7 @@
         },
 
         _initializeVisualElements: function () {
-            var visualElements = ["info", "table", "column", "line"];
-            if (_.findWhere(this.metadata.getDimensions(), { type: 'GEOGRAPHIC_DIMENSION' })) {
-                visualElements.push("map");
-                visualElements.push("mapbubble");
-            }
-            this.visualElements = visualElements;
+            this.visualElements = ["info", "table", "column", "pie", "map"];
         },
 
         _initializeSidebarView: function () {

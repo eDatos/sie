@@ -15,6 +15,7 @@ I18n.translations.es = {
             info: "Información",
             table: "Tabla de datos",
             column: "Gráfico de columnas",
+            pie: "Gráfico de tarta",
             line: "Gráfico de líneas",
             map: "Mapa",
             mapbubble: "Mapa de símbolos",
@@ -84,6 +85,11 @@ I18n.translations.es = {
                     left: "Eje X",
                     axisy: "Eje Y",
                     top: "Columnas"
+                },
+                pie: {
+                    fixed: "Fijadas",
+                    left: "Eje X",
+                    axisy: "Eje Y"
                 },
                 line: {
                     fixed: "Fijadas",

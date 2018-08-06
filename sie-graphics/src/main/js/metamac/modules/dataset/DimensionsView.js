@@ -102,26 +102,26 @@
                     axisy: {
                         icon: "axis-y",
                         draggable: false,
-                        location: "left",
+                        location: "none",
                         showHeader: true,
                         showMeasureAttribute: true
                     },
                     left: {
                         icon: "axis-x",
                         draggable: false,
-                        location: "left",
+                        location: "none",
                         showHeader: true
                     },
                     top: {
                         icon: "line",
-                        draggable: true,
-                        location: "right",
+                        draggable: false,
+                        location: "none",
                         showHeader: true
                     },
                     fixed: {
                         icon: "lock",
-                        draggable: true,
-                        location: "right",
+                        draggable: false,
+                        location: "none",
                         showHeader: true
                     }
                 }
