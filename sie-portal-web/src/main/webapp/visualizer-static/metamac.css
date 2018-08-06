@@ -231,6 +231,7 @@ button {
 .icon-reverse:before,
 .icon-rows:before,
 .icon-search:before,
+.icon-semi-circle-chart:before,
 .icon-separator:before,
 .icon-share:before,
 .icon-shp:before,
@@ -482,65 +483,68 @@ button {
 .icon-search:before {
   content: "\f14b";
 }
-.icon-separator:before {
+.icon-semi-circle-chart:before {
   content: "\f14c";
 }
-.icon-share:before {
+.icon-separator:before {
   content: "\f14d";
 }
-.icon-shp:before {
+.icon-share:before {
   content: "\f14e";
 }
-.icon-sort:before {
+.icon-shp:before {
   content: "\f14f";
 }
-.icon-svg:before {
+.icon-sort:before {
   content: "\f150";
 }
-.icon-table:before {
+.icon-svg:before {
   content: "\f151";
 }
-.icon-table2:before {
+.icon-table:before {
   content: "\f152";
 }
-.icon-tags:before {
+.icon-table2:before {
   content: "\f153";
 }
-.icon-tar:before {
+.icon-tags:before {
   content: "\f154";
 }
-.icon-times:before {
+.icon-tar:before {
   content: "\f155";
 }
-.icon-tuenti:before {
+.icon-times:before {
   content: "\f156";
 }
-.icon-twitter:before {
+.icon-tuenti:before {
   content: "\f157";
 }
-.icon-uncheck:before {
+.icon-twitter:before {
   content: "\f158";
 }
-.icon-up:before {
+.icon-uncheck:before {
   content: "\f159";
 }
-.icon-up_blank:before {
+.icon-up:before {
   content: "\f15a";
 }
-.icon-visualize:before {
+.icon-up_blank:before {
   content: "\f15b";
 }
-.icon-xls:before {
+.icon-visualize:before {
   content: "\f15c";
 }
-.icon-xlsx:before {
+.icon-xls:before {
   content: "\f15d";
 }
-.icon-xml2:before {
+.icon-xlsx:before {
   content: "\f15e";
 }
-.icon-yahoo:before {
+.icon-xml2:before {
   content: "\f15f";
+}
+.icon-yahoo:before {
+  content: "\f160";
 }
 .metamac-container .btn {
   padding: 2px 4px;
@@ -878,7 +882,7 @@ input[type="color"] select,
   text-decoration: inherit;
 }
 .sidebar-splitter i:before {
-  content: "\f14c";
+  content: "\f14d";
 }
 .sidebar-opener {
   position: absolute;
@@ -971,7 +975,7 @@ input[type="color"] select,
   text-decoration: inherit;
 }
 .searchbar .searchbar-icon-clear:before {
-  content: "\f155";
+  content: "\f156";
 }
 .searchbar .searchbar-clear:link,
 .searchbar .searchbar-clear:active,
@@ -3095,7 +3099,7 @@ input[type="color"] select,
   text-decoration: inherit;
 }
 .dataset-options-type-table:before {
-  content: "\f151";
+  content: "\f152";
 }
 .dataset-options-type-column {
   height: 18px;
@@ -3126,6 +3130,36 @@ input[type="color"] select,
 }
 .dataset-options-type-column:before {
   content: "\f10c";
+}
+.dataset-options-type-pie {
+  height: 18px;
+  width: 20px;
+  padding-left: 0;
+  font-size: 18px;
+  line-height: 18px;
+}
+.btn-with-label .dataset-options-type-pie {
+  font-size: 13px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.dataset-options-type-pie:before {
+  color: #808080;
+  padding: 2px 2px;
+}
+.active .dataset-options-type-pie:before,
+.dataset-options-type-pie:hover:before {
+  color: #003366;
+}
+.dataset-options-type-pie:before {
+  font-family: "icons";
+  display: inline-block;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+}
+.dataset-options-type-pie:before {
+  content: "\f14c";
 }
 .dataset-options-type-line {
   height: 18px;
@@ -3305,7 +3339,7 @@ input[type="color"] select,
   text-decoration: inherit;
 }
 .dataset-options-share:before {
-  content: "\f14d";
+  content: "\f14e";
 }
 .dataset-options-embed {
   height: 18px;
@@ -3395,7 +3429,7 @@ input[type="color"] select,
   text-decoration: inherit;
 }
 .dataset-options-visualize:before {
-  content: "\f15b";
+  content: "\f15c";
 }
 .dataset-download {
   font-size: 44px;
@@ -3458,7 +3492,7 @@ input[type="color"] select,
   text-decoration: inherit;
 }
 .dataset-share .dataset-share-icons .addthis_button_twitter:before {
-  content: "\f157";
+  content: "\f158";
 }
 .dataset-share .dataset-share-icons .addthis_button_twitter:hover:before {
   color: #2CA8D2;
@@ -3550,7 +3584,7 @@ input[type="color"] select,
   text-decoration: inherit;
 }
 .dataset-share .dataset-share-icons .addthis_button_tuenti:before {
-  content: "\f156";
+  content: "\f157";
 }
 .dataset-share .dataset-share-icons .addthis_button_tuenti:hover:before {
   color: #5F729D;
@@ -3688,7 +3722,7 @@ input[type="color"] select,
   text-decoration: inherit;
 }
 .dataset-share .dataset-share-icons .addthis_button_yahoobkm:before {
-  content: "\f15f";
+  content: "\f160";
 }
 .dataset-share .dataset-share-icons .addthis_button_yahoobkm:hover:before {
   color: #791998;
@@ -4950,7 +4984,7 @@ svg {
   text-decoration: inherit;
 }
 .filter-sidebar-icon-order:before {
-  content: "\f14f";
+  content: "\f150";
 }
 .filter-sidebar-search {
   width: 100%;
@@ -5334,7 +5368,7 @@ svg {
   text-decoration: inherit;
 }
 .filter-sidebar-category-icon-unchecked:before {
-  content: "\f158";
+  content: "\f159";
 }
 .filter-sidebar-category-any-children-icon-check {
   position: static;
@@ -5380,7 +5414,7 @@ svg {
   text-decoration: inherit;
 }
 .filter-sidebar-category-any-children-icon-unchecked:before {
-  content: "\f158";
+  content: "\f159";
 }
 .filter-sidebar-category-icon-expand {
   position: static;
