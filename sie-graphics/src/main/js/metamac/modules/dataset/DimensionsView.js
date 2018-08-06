@@ -97,6 +97,35 @@
                     }
                 }
             },
+            pie: {
+                zones: {
+                    axisy: {
+                        icon: "axis-y",
+                        draggable: false,
+                        location: "none",
+                        showHeader: true,
+                        showMeasureAttribute: true
+                    },
+                    left: {
+                        icon: "axis-x",
+                        draggable: false,
+                        location: "none",
+                        showHeader: true
+                    },
+                    top: {
+                        icon: "line",
+                        draggable: false,
+                        location: "none",
+                        showHeader: true
+                    },
+                    fixed: {
+                        icon: "lock",
+                        draggable: false,
+                        location: "none",
+                        showHeader: true
+                    }
+                }
+            },
             map: {
                 zones: {
                     left: {

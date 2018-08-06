@@ -155,6 +155,7 @@ module.exports = (grunt) ->
                 paths.js + "/metamac/modules/dataset/visual-element/Column.js"
                 paths.js + "/metamac/modules/dataset/visual-element/Line.js"
                 paths.js + "/metamac/modules/dataset/visual-element/Pie.js"
+                paths.js + "/metamac/modules/dataset/visual-element/SemiCircle.js"
                 paths.js + "/metamac/modules/dataset/visual-element/Table.js"
                 paths.js + "/metamac/modules/dataset/visual-element/line/DetailZoomModel.js"
                 paths.js + "/metamac/modules/dataset/visual-element/line/DetailZoomView.js"

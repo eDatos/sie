@@ -56782,7 +56782,7 @@ var PieSeries = {
 		// Set each point's properties
 		for (i = 0; i < len; i++) {
 			point = points[i];
-			point.percentage = (point.y / total) * 100;
+			point.percentage = total > 0 ? (point.y / total) * 100 : 0;
 			point.total = total;
 		}
 		
@@ -56835,8 +56835,9 @@ var PieSeries = {
 			end,
 			angle,
 			startAngleRad = series.startAngleRad = mathPI / 180 * ((options.startAngle || 0) % 360 - 90),
+			endAngleRad = series.endAngleRad = mathPI / 180 * (pick(options.endAngle, 360) % 360 - 90),
+			circ = endAngleRad - startAngleRad, //2 * mathPI,
 			points = series.points,
-			circ = 2 * mathPI,
 			radiusX, // the x component of the radius vector for a given point
 			radiusY,
 			labelDistance = options.dataLabels.distance,
@@ -56903,7 +56904,7 @@ var PieSeries = {
 				positions[1] + radiusY * 0.7
 			];
 			
-			point.half = angle < circ / 4 ? 0 : 1;
+			point.half = angle < -mathPI / 2 || angle > mathPI / 2 ? 1 : 0;
 			point.angle = angle;
 
 			// set the anchor point for data labels
@@ -60074,6 +60075,7 @@ I18n.translations.es = {
             info: "Información",
             table: "Tabla de datos",
             column: "Gráfico de columnas",
+            pie: "Gráfico de tarta",
             line: "Gráfico de líneas",
             map: "Mapa",
             mapbubble: "Mapa de símbolos",
@@ -60143,6 +60145,11 @@ I18n.translations.es = {
                     left: "Eje X",
                     axisy: "Eje Y",
                     top: "Columnas"
+                },
+                pie: {
+                    fixed: "Fijadas",
+                    left: "Eje X",
+                    axisy: "Eje Y"
                 },
                 line: {
                     fixed: "Fijadas",
@@ -61011,12 +61018,7 @@ I18n.translations.pt = {
         },
 
         _initializeVisualElements: function () {
-            var visualElements = ["info", "table", "column", "line"];
-            if (_.findWhere(this.metadata.getDimensions(), { type: 'GEOGRAPHIC_DIMENSION' })) {
-                visualElements.push("map");
-                visualElements.push("mapbubble");
-            }
-            this.visualElements = visualElements;
+            this.visualElements = ["info", "table", "column", "pie", "map"];
         },
 
         _initializeSidebarView: function () {
@@ -61549,6 +61551,35 @@ I18n.translations.pt = {
                     }
                 }
             },
+            pie: {
+                zones: {
+                    axisy: {
+                        icon: "axis-y",
+                        draggable: false,
+                        location: "none",
+                        showHeader: true,
+                        showMeasureAttribute: true
+                    },
+                    left: {
+                        icon: "axis-x",
+                        draggable: false,
+                        location: "none",
+                        showHeader: true
+                    },
+                    top: {
+                        icon: "line",
+                        draggable: false,
+                        location: "none",
+                        showHeader: true
+                    },
+                    fixed: {
+                        icon: "lock",
+                        draggable: false,
+                        location: "none",
+                        showHeader: true
+                    }
+                }
+            },
             map: {
                 zones: {
                     left: {
@@ -62030,6 +62061,7 @@ I18n.translations.pt = {
                 info: new App.VisualElement.Info(options),
                 column: new App.VisualElement.ColumnChart(options),
                 line: new App.VisualElement.LineChart(options),
+                pie: new App.VisualElement.SemiCircleChart(options),
                 table: new App.VisualElement.Table(options),
                 map: new App.VisualElement.Map(_.extend(options, { mapType: 'map' })),
                 mapbubble: new App.VisualElement.Map(_.extend(options, { mapType: 'mapbubble' }))
@@ -70474,6 +70506,199 @@ App.VisualElement.PieChart = (function () {
 
 })();
 
+;(function () {
+    "use strict";
+
+    App.namespace("App.VisualElement.SemiCircleChart");
+
+    App.VisualElement.SemiCircleChart = function (options) {
+        this.initialize(options);
+        _.extend(this._chartOptions, {
+            chart: {
+                animation: false,
+                renderTo: '',
+                defaultSeriesType: 'pie',
+                backgroundColor: App.Constants.colors.istacWhite
+            },
+            title: {
+                text: '',
+                style: {
+                    color: App.Constants.colors.hiddenText
+                }
+            },
+            subtitle: {
+                text: '',
+                style: {
+                    color: App.Constants.colors.hiddenText
+                }
+            },
+            yAxis: {
+                title: {
+                    text: ""
+                }
+            },
+            tooltip: {
+                headerFormat: '<b>{point.key}</b><br/>',
+                pointFormat: '{series.options.extraTooltip}: {point.y}<br/>{series.options.extraTooltip1}: {point.y1:,.f}%<br/>{series.options.extraTooltip2}: {point.y2:,.f}'
+            },
+            plotOptions: {
+                series: {
+                    animation: false
+                },
+                pie: {
+                    startAngle: -90,
+                    endAngle: 90,
+                    innerSize: '50%',
+                    center: ['50%', '75%']
+                }
+            }
+        });
+    };
+
+    App.VisualElement.SemiCircleChart.prototype = new App.VisualElement.Base();
+
+    _.extend(App.VisualElement.SemiCircleChart.prototype, {
+
+        load: function () {
+            if (!this.assertAllDimensionsHaveSelections()) {
+                return;
+            }
+            this.render();
+        },
+
+        destroy: function () {
+            this._unbindEvents();
+
+            if (this.chart && this.chart.renderTo) {
+                this.chart.destroy();
+                this.chart = null;
+            }
+        },
+
+        _unbindEvents: function () {
+            this.stopListening();
+            this.$el.off("resize");
+        },
+
+        updatingDimensionPositions: function () {
+            this._applyVisualizationRestrictions();
+            this.resetDimensionsLimits();
+
+            this.filterDimensions.zones.get('left').set('fixedSize', 1);
+            this.filterDimensions.zones.get('axisy').set('maxSize', 1);
+        },
+
+        _applyVisualizationRestrictions: function () {
+            if (this._mustApplyVisualizationRestrictions()) {
+                this._moveAllDimensionsToZone('left');
+
+                this._forceMeasureDimensionInZone('top');
+                this._forceTimeDimensionInZone('fixed');
+                this._forceGeographicDimensionInZone('fixed');
+
+                this._applyVisualizationPreselections();
+            }
+        },
+
+        _applyVisualizationPreselections: function () {
+            this._preselectBiggestHierarchyGeographicValue();
+            this._preselectMostPopulatedTemporalGranularityRepresentations();
+        },
+
+        render: function () {
+            var self = this;
+            this.dataset.data.loadAllSelectedData().then(function () {
+                self._updateTitle();
+                self._renderContainers();
+                self._renderChart();
+            });
+        },
+
+        _updateTitle: function () {
+            this.$el.empty();
+            this.$title = $('<h3></h3>');
+            /* this.updateTitle();
+            this.$el.append(this.$title); */
+        },
+
+        _renderContainers: function () {
+            this.$chartContainer = $('<div></div>');
+            var newHeight = this.$el.height() - this.$title.height() - this.getRightsHolderHeight();
+            this.$chartContainer.height(newHeight);
+
+            this.$el.append(this.$chartContainer);
+        },
+
+        _renderChart: function () {
+            var data = this.getData();
+            this._chartOptions.series = data.series;
+            this._chartOptions.chart.renderTo = this.$chartContainer[0];
+
+            this._chartOptions.credits.text = this.getRightsHolderText();
+            if (!this.showRightsHolderText()) {
+                this._chartOptions.credits.style = {
+                    color: App.Constants.colors.hiddenText
+                }
+            }
+
+            this.chart = new Highcharts.Chart(this._chartOptions);
+            this.$el.on("resize", function () { });
+        },
+
+        getData: function () {
+            var self = this;
+
+            var fixedPermutation = this.getFixedPermutation();
+
+            var horizontalDimension = this.filterDimensions.dimensionsAtZone('left').at(0);
+            var horizontalDimensionSelectedCategories = this.getDrawableRepresentations(horizontalDimension);
+
+            var columnsDimension = this.filterDimensions.dimensionsAtZone('fixed').at(0);
+            var columnsDimensionSelectedCategories = this.getDrawableRepresentations(columnsDimension);
+
+            var extraData = this.filterDimensions.dimensionsAtZone('top').at(0);
+            var extraDataSelectedCategories = this.getDrawableRepresentations(extraData);
+
+            var listSeries = [];
+            _.each(columnsDimensionSelectedCategories, function (columnCategory) {
+                var serie = {};
+                serie.data = [];
+                _.each(extraDataSelectedCategories, function (extraCategory, index) {
+                    var attrName = 'extraTooltip' + (index > 0 ? index : '');
+                    serie[attrName] = extraCategory.get('visibleLabel');
+                });
+
+                _.each(horizontalDimensionSelectedCategories, function (horizontalCategory) {
+                    var element = {};
+                    element.name = horizontalCategory.get('visibleLabel');
+
+                    _.each(extraDataSelectedCategories, function (extraCategory, index) {
+                        var currentPermutation = {};
+                        currentPermutation[horizontalDimension.id] = horizontalCategory.id;
+                        currentPermutation[columnsDimension.id] = columnCategory.id;
+                        currentPermutation[extraData.id] = extraCategory.id;
+                        _.extend(currentPermutation, fixedPermutation);
+
+                        var y = self.dataset.data.getNumberData({ ids: currentPermutation });
+                        var attrName = 'y' + (index > 0 ? index : '');
+                        element[attrName] = y;
+                    });
+
+                    serie.data.push(element);
+                });
+
+                serie.name = columnCategory.get('visibleLabel');
+                listSeries.push(serie);
+            });
+
+            // Changing the options of the chart
+            var result = {};
+            result.series = listSeries;
+            return result;
+        }
+    });
+
+}());
 ;(function () {
     "use strict";
 

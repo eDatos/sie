@@ -16005,7 +16005,7 @@ var PieSeries = {
 		// Set each point's properties
 		for (i = 0; i < len; i++) {
 			point = points[i];
-			point.percentage = (point.y / total) * 100;
+			point.percentage = total > 0 ? (point.y / total) * 100 : 0;
 			point.total = total;
 		}
 		
@@ -16058,8 +16058,9 @@ var PieSeries = {
 			end,
 			angle,
 			startAngleRad = series.startAngleRad = mathPI / 180 * ((options.startAngle || 0) % 360 - 90),
+			endAngleRad = series.endAngleRad = mathPI / 180 * (pick(options.endAngle, 360) % 360 - 90),
+			circ = endAngleRad - startAngleRad, //2 * mathPI,
 			points = series.points,
-			circ = 2 * mathPI,
 			radiusX, // the x component of the radius vector for a given point
 			radiusY,
 			labelDistance = options.dataLabels.distance,
@@ -16126,7 +16127,7 @@ var PieSeries = {
 				positions[1] + radiusY * 0.7
 			];
 			
-			point.half = angle < circ / 4 ? 0 : 1;
+			point.half = angle < -mathPI / 2 || angle > mathPI / 2 ? 1 : 0;
 			point.angle = angle;
 
 			// set the anchor point for data labels
