@@ -318,6 +318,8 @@ footer.istac-footer .footer-brand.logo .logo-img-65 {
 /* Fin imágenes */
 /* Inicio Tabla del footer */
 footer.istac-footer table {
+  line-height: 1.05;
+  color: white;
   font-weight: 500; }
 
 footer.istac-footer table th {

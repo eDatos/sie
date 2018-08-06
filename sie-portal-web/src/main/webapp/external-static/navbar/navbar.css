@@ -4797,6 +4797,7 @@
   display: inline-block; }
 
 .istac-navbar .istac-navbar-toggler:hover {
+  cursor: pointer;
   color: #f8f8f8; }
 
 .navbar-title {
