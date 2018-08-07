@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
 import { errorRoute } from '.';
 import { navbarRoute } from './navbar/app.route';
-import { footerRoute } from './footer/footer.route';
 import { TemplateService } from './template';
 import { SafeHtmlPipe } from './template/safe-html.pipe';
 
 const LAYOUT_ROUTES = [
     ...errorRoute,
-    navbarRoute,
-    footerRoute
+    navbarRoute
 ];
 
 @NgModule({

@@ -1,12 +1,19 @@
 import { EvolucionElectoralComponent } from './evolucion-electoral.component';
 import { Routes } from '@angular/router';
+import { footerRoute } from '../../layouts/footer/footer.route';
 
 export const evolucionElectoralRoute: Routes = [
     {
         path: 'evolucion-electoral/:id',
-        component: EvolucionElectoralComponent,
-        data: {
-            pageTitle: 'evolucionElectoral.pageTitle'
-        }
+        children: [
+            {
+                path: '',
+                component: EvolucionElectoralComponent,
+                data: {
+                    pageTitle: 'evolucionElectoral.pageTitle'
+                }
+            },
+            footerRoute
+        ]
     }
 ];

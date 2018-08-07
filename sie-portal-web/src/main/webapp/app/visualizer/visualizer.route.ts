@@ -1,5 +1,6 @@
 import { Routes, UrlSegment } from '@angular/router';
 import { VisualizerComponent } from './visualizer.component';
+import { footerRoute } from '../layouts/footer/footer.route';
 
 export function visualizerUrls(url: UrlSegment[]) {
     if (url.length === 0) {
@@ -11,9 +12,15 @@ export function visualizerUrls(url: UrlSegment[]) {
 export const visualizerRoute: Routes = [
     {
         matcher: visualizerUrls,
-        component: VisualizerComponent,
-        data: {
-            pageTitle: 'visualizer.pageTitle'
-        }
+        children: [
+            {
+                path: '',
+                component: VisualizerComponent,
+                data: {
+                    pageTitle: 'visualizer.pageTitle'
+                },
+            },
+            footerRoute
+        ]
     }
 ];
