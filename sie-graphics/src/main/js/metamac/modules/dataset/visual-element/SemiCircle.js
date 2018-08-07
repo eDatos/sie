@@ -52,6 +52,7 @@
     _.extend(App.VisualElement.SemiCircleChart.prototype, {
 
         load: function () {
+            this._bindEvents();
             if (!this.assertAllDimensionsHaveSelections()) {
                 return;
             }
@@ -65,6 +66,11 @@
                 this.chart.destroy();
                 this.chart = null;
             }
+        },
+
+        _bindEvents: function () {
+            var debounceUpdate = _.debounce(this.update, 20);
+            this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", debounceUpdate);
         },
 
         _unbindEvents: function () {
@@ -187,6 +193,27 @@
             var result = {};
             result.series = listSeries;
             return result;
+        },
+
+        update: function () {
+            if (!this.assertAllDimensionsHaveSelections()) {
+                return;
+            }
+            if (!this.chart) {
+                this.load();
+            } else {
+                this.chart.showLoading();
+
+                var self = this;
+                this.dataset.data.loadAllSelectedData().then(function () {
+                    self.chart.hideLoading();
+
+                    var data = self.getData();
+                    self.replaceSeries(self.chart, data.series);
+                    self.chart.counters.color = 0;
+                    self.chart.redraw(false);
+                });
+            }
         }
     });
 
