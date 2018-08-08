@@ -61018,7 +61018,7 @@ I18n.translations.pt = {
         },
 
         _initializeVisualElements: function () {
-            this.visualElements = ["info", "table", "column", "pie", "map"];
+            this.visualElements = ["info", "pie", "map", "table", "column"];
         },
 
         _initializeSidebarView: function () {
@@ -76808,7 +76808,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
             this._loadMetadata(datasetIdentifier)
                 .then(function () {
                     options = _.defaults(options, {
-                        visualizationType: "table",
+                        visualizationType: "pie",
                         fullScreen: false
                     });
                     if (self.region.currentView !== self.visualizationView) {

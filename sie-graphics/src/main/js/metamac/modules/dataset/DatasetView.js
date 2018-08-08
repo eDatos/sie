@@ -32,7 +32,7 @@
         },
 
         _initializeVisualElements: function () {
-            this.visualElements = ["info", "table", "column", "pie", "map"];
+            this.visualElements = ["info", "pie", "map", "table", "column"];
         },
 
         _initializeSidebarView: function () {
