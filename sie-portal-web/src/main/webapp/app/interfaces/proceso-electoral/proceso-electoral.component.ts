@@ -5,7 +5,6 @@ declare var App: any;
 declare var Backbone: any;
 
 export const STYLES_IDENTIFIER_CLASS = 'vendorStyles';
-export const METAMAC_CSS_ID = 'metamac-css';
 export const METAMAC_CSS_LINK = './visualizer-static/metamac.css';
 export const METAMAC_CSS_REL = 'stylesheet';
 
@@ -66,12 +65,11 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     ngOnDestroy() {
+        this.setGlobalStyleSheetsDisabled(false);
+
         App.removeRegion('mainRegion');
         App._initCallbacks.reset();
         Backbone.history.stop();
-
-        this.setGlobalStyleSheetsDisabled(false);
-        this.deleteMetamacStyles();
     }
 
     private setGlobalStyleSheetsDisabled(disabled: boolean) {
@@ -83,14 +81,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
 
     private insertMetamacStyles() {
         const estilosMetamac = document.createElement('link');
-        estilosMetamac.id = METAMAC_CSS_ID;
         estilosMetamac.href = METAMAC_CSS_LINK;
         estilosMetamac.rel = METAMAC_CSS_REL;
         this.host.nativeElement.appendChild(estilosMetamac);
-    }
-
-    private deleteMetamacStyles() {
-        const estilosMetamac = this.host.nativeElement.getElementById(METAMAC_CSS_ID);
-        this.host.nativeElement.removeChild(estilosMetamac);
     }
 }
