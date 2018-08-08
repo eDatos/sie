@@ -20,8 +20,12 @@ h1 {
 }
 
 ac-autocomplete-short-list {
-    /deep/ span {
-        max-width: 400px;
+    max-width: 390px;
+    min-width: 240px;
+    width: 100%;
+    
+    @media(max-width: 668px) {
+        margin-top: 10px;
     }
 
     /deep/ .ui-autocomplete .ui-autocomplete-input.ui-inputtext, .ui-autocomplete .ui-autocomplete-multiple-container.ui-inputtext {
@@ -29,9 +33,6 @@ ac-autocomplete-short-list {
         padding-right: 0.75rem;
         padding-bottom: 0.2rem !important;
         padding-left: 0.75rem;
-        @media (min-width: 768px) {
-            width: 390px;
-        }
     }
 
     /deep/ button.ui-state-default {
