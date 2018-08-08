@@ -4,6 +4,8 @@ declare var I18n: any;
 declare var App: any;
 declare var Backbone: any;
 
+export const LINK_TAG = 'link';
+export const COMPILED_SASS_NAME = 'main-sass';
 export const STYLES_IDENTIFIER_CLASS = 'vendorStyles';
 export const METAMAC_CSS_LINK = './visualizer-static/metamac.css';
 export const METAMAC_CSS_REL = 'stylesheet';
@@ -76,6 +78,13 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         const styleSheetList = <any> document.head.getElementsByClassName(STYLES_IDENTIFIER_CLASS);
         for (const sheet of styleSheetList) {
             sheet.disabled = disabled;
+        }
+
+        const linkList = <any> document.head.getElementsByTagName(LINK_TAG);
+        for (const link of linkList) {
+            if (link.href.includes(COMPILED_SASS_NAME)) {
+                link.disabled = disabled;
+            }
         }
     }
 
