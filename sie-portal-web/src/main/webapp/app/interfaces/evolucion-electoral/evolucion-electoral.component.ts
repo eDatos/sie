@@ -104,7 +104,7 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     private inicializarGrafica(tipoEleccion: string) {
-        const indicadores = this.getIndicadores(tipoEleccion);
+        const indicadores = this.getIndicadores();
 
         const grafica = new BarChart();
         grafica.xAxis = this.crearEjeX(tipoEleccion);
@@ -119,7 +119,7 @@ export class EvolucionElectoralComponent implements OnInit {
         this.hashGraficas[tipoEleccion] = grafica;
     }
 
-    private getIndicadores(tipoEleccion: string): any[] {
+    private getIndicadores(): any[] {
         if (this.tipoGrafica) {
             return INDICADORES_GRAFICA_PARTICIPACION;
         } else {

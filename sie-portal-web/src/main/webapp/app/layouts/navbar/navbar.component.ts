@@ -10,7 +10,7 @@ export const APPLICATION_LINK_ID = 'eleccionesLink';
 })
 export class NavbarComponent implements OnInit {
 
-    public navbar: string;
+    public navbar = '';
 
     constructor(
         private elementRef: ElementRef,

@@ -7,7 +7,7 @@ import { TemplateService } from '../template';
 })
 export class FooterComponent implements OnInit {
 
-    public footer: string;
+    public footer = '';
 
     constructor(
         private templateService: TemplateService
