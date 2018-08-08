@@ -12,7 +12,6 @@ import { SieDatasetServiceModule } from './dataset/dataset.module';
 import { SieInterfacesModule } from './interfaces/interfaces.module';
 import { JhiMainComponent, LayoutRoutingModule, ErrorComponent, notFoundRoute, NavbarComponent, FooterComponent } from './layouts';
 import { SieSharedModule } from './shared';
-import { SieVisualizerModule } from './visualizer/visualizer.module';
 
 const APP_ROUTES = [
     notFoundRoute
@@ -28,7 +27,6 @@ const APP_ROUTES = [
         SieDatasetServiceModule,
         SieInterfacesModule,
         SieSharedModule,
-        SieVisualizerModule,
 
         // jhipster-needle-angular-add-module JHipster will add new module here
         RouterModule.forRoot(APP_ROUTES, { useHash: true })

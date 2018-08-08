@@ -47,7 +47,7 @@
             this._loadMetadata(datasetIdentifier)
                 .then(function () {
                     options = _.defaults(options, {
-                        visualizationType: "table",
+                        visualizationType: "pie",
                         fullScreen: false
                     });
                     if (self.region.currentView !== self.visualizationView) {

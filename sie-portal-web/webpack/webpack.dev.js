@@ -60,7 +60,16 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
             exclude: /(vendor\.scss|global\.scss)/
         },
         {
-            test: /(vendor\.scss|global\.scss)/,
+            test: /(vendor\.scss)/,
+            use: [
+                { loader: 'style-loader', options: { attrs: { class: 'vendorStyles' } } },
+                { loader: 'css-loader' },
+                { loader: 'postcss-loader' },
+                { loader: 'sass-loader' }
+            ]
+        },
+        {
+            test: /(global\.scss)/,
             loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
         },
         {
