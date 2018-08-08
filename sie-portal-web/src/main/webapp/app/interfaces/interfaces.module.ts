@@ -5,10 +5,12 @@ import { RouterModule } from '@angular/router';
 import { lugarRoute, LugarComponent } from './lugar';
 import { SieDocumentoModule } from '../documento/documento.module';
 import { evolucionElectoralRoute, EvolucionElectoralComponent } from './evolucion-electoral';
+import { procesoElectoralRoute, ProcesoElectoralComponent } from './proceso-electoral';
 
 const ENTITY_STATES = [
     ...lugarRoute,
-    ...evolucionElectoralRoute
+    ...evolucionElectoralRoute,
+    ...procesoElectoralRoute
 ];
 
 @NgModule({
@@ -20,7 +22,8 @@ const ENTITY_STATES = [
     declarations: [
         TitleBarComponent,
         LugarComponent,
-        EvolucionElectoralComponent
+        EvolucionElectoralComponent,
+        ProcesoElectoralComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

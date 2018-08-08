@@ -4,16 +4,17 @@ declare var I18n: any;
 declare var App: any;
 declare var Backbone: any;
 
-export const HEAD_TAG = 'HEAD';
+export const STYLES_IDENTIFIER_CLASS = 'vendorStyles';
 export const METAMAC_CSS_ID = 'metamac-css';
 export const METAMAC_CSS_LINK = './visualizer-static/metamac.css';
 export const METAMAC_CSS_REL = 'stylesheet';
 
 @Component({
-    selector: 'jhi-visualizer',
-    templateUrl: './visualizer.component.html'
+    selector: 'jhi-proceso-electoral',
+    styleUrls: ['proceso-electoral.component.scss'],
+    templateUrl: './proceso-electoral.component.html'
 })
-export class VisualizerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(private host: ElementRef) { }
 
@@ -74,12 +75,9 @@ export class VisualizerComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private setGlobalStyleSheetsDisabled(disabled: boolean) {
-        const styleSheetList = document.styleSheets;
-        for (let i = 0; i < styleSheetList.length; i++) {
-            const styleSheet = styleSheetList.item(i);
-            if (styleSheet.ownerNode.parentElement.tagName.toUpperCase() === HEAD_TAG) {
-                styleSheet.disabled = disabled;
-            }
+        const styleSheetList = <any> document.head.getElementsByClassName(STYLES_IDENTIFIER_CLASS);
+        for (const sheet of styleSheetList) {
+            sheet.disabled = disabled;
         }
     }
 

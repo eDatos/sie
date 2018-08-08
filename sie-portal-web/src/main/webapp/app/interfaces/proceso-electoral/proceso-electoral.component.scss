@@ -1,0 +1,14 @@
+@import '~scss/variables';
+
+:host {
+    /deep/ jhi-title-bar {
+        font-family: $font-family-sans-serif;
+        @import '~scss/vendor/fontawesome';
+        a {
+            text-decoration: none;
+            h1 {
+                line-height: 1.1;
+            }
+        }
+    }
+}
