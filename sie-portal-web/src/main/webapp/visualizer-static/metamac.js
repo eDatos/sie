@@ -21075,6 +21075,69 @@ function program1(depth0,data) {
   else { return ''; }
   });
 
+this["Handlebars"]["templates"]["dataset/dataset-filters"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data,depth1) {
+  
+  var buffer = "", stack1, stack2;
+  buffer += "\r\n        <div class=\"order-sidebar-zone has-selector\" data-selector=\"";
+  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\r\n            <div class=\"order-sidebar-dimensions\">\r\n                <a href=\"#\" class=\"order-sidebar-dimension\" data-dimension-id=\"";
+  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\r\n                    ";
+  if (stack1 = helpers.label) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.label; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\r\n                    <select class=\"fixed-dimension-select-category\" data-dimension-id=\""
+    + escapeExpression(((stack1 = depth1.id),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\">\r\n                        ";
+  stack2 = helpers.each.call(depth0, depth0.options, {hash:{},inverse:self.noop,fn:self.programWithDepth(2, program2, data, depth0),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\r\n                    </select>\r\n                </a>\r\n            </div>\r\n        </div>\r\n        ";
+  return buffer;
+  }
+function program2(depth0,data,depth1) {
+  
+  var buffer = "", stack1, stack2, options;
+  buffer += "\r\n                        <option value=\"";
+  if (stack1 = helpers.value) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.value; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" ";
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data};
+  stack2 = ((stack1 = helpers.compare || depth1.compare),stack1 ? stack1.call(depth0, depth1['default'], "==", depth0.key, options) : helperMissing.call(depth0, "compare", depth1['default'], "==", depth0.key, options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += ">";
+  if (stack2 = helpers.name) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.name; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</option>\r\n                        ";
+  return buffer;
+  }
+function program3(depth0,data) {
+  
+  
+  return "selected";
+  }
+
+  buffer += "<div class=\"dataset-dimensions\">\r\n    <div class=\"dataset-dimensions-left dataset-dimensions-left-";
+  if (stack1 = helpers.leftColumns) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.leftColumns; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\r\n        ";
+  stack1 = helpers.each.call(depth0, depth0.selectors, {hash:{},inverse:self.noop,fn:self.programWithDepth(1, program1, data, depth0),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n    </div>\r\n</div>";
+  return buffer;
+  });
+
 this["Handlebars"]["templates"]["dataset/dataset-header-info"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -21641,7 +21704,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"dataset-visualization\">\r\n    <div class=\"dataset-visualization-dimensions\">\r\n\r\n    </div>\r\n    <div class=\"dataset-visualization-visual-element\">\r\n\r\n    </div>\r\n</div>";
+  return "<div class=\"dataset-visualization\">\r\n    <div class=\"dataset-visualization-dimensions\">\r\n\r\n    </div>\r\n    <div class=\"dataset-visualization-filters\">\r\n\r\n    </div>\r\n    <div class=\"dataset-visualization-visual-element\">\r\n\r\n    </div>\r\n</div>";
   });
 
 this["Handlebars"]["templates"]["dataset/dataset-widget-page"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -60169,6 +60232,13 @@ I18n.translations.es = {
             }
         },
         selector: {
+            pie: {
+                grupos: {
+                    label: "Tipo de candidatura",
+                    grupos: "Grupos",
+                    partidos: "Partidos"
+                }
+            },
             level: "Nivel {{level}}"
         }
     },
@@ -60996,7 +61066,8 @@ I18n.translations.pt = {
         regions: {
             content: ".dataset-sidebar-visualization-container",
             optionsBar: ".dataset-visualization-options-bar",
-            dimensions: ".dataset-visualization-dimensions"
+            dimensions: ".dataset-visualization-dimensions",
+            filters: ".dataset-visualization-filters"
         },
 
         initialize: function (options) {
@@ -61018,7 +61089,7 @@ I18n.translations.pt = {
         },
 
         _initializeVisualElements: function () {
-            this.visualElements = ["info", "pie", "map", "table", "column"];
+            this.visualElements = ["info", "pie", "map", "column", "table"];
         },
 
         _initializeSidebarView: function () {
@@ -61043,6 +61114,10 @@ I18n.translations.pt = {
                 dataset: this.dataset,
                 filterDimensions: this.filterDimensions,
                 optionsModel: this.optionsModel
+            });
+
+            this.filtersView = new App.modules.dataset.FiltersView({
+                optionsModel: this.optionsModel,
             });
 
             // sidebarView
@@ -61114,6 +61189,7 @@ I18n.translations.pt = {
             this.content.show(this.sidebarView);
             this.optionsBar.show(this.optionsView);
             this.dimensions.show(this.dimensionsView);
+            this.filters.show(this.filtersView);
             this.fullScreen.setContainer($('.metamac-container'));
             if (this.optionsModel.get('widget')) {
                 this._initializeWidget();
@@ -61161,6 +61237,7 @@ I18n.translations.pt = {
                 this.visualizationView.activeVisualElement(type);
                 this.visualizationView.load();
                 this.dimensionsView.render();
+                this.filtersView.render();
 
                 var controllerParams = this.metadata.identifier();
                 controllerParams.visualizationType = type;
@@ -61984,6 +62061,112 @@ I18n.translations.pt = {
     });
 
 
+}());
+;(function () {
+    "use strict";
+
+    App.namespace("App.modules.dataset");
+
+    App.modules.dataset.FiltersView = Backbone.View.extend({
+
+        template: App.templateManager.get('dataset/dataset-filters'),
+
+        initialize: function (options) {
+            this.dataset = options.dataset;
+            this.filterDimensions = options.filterDimensions;
+            this.optionsModel = options.optionsModel;
+            this.measureAttribute = null;
+        },
+
+        configuration: {
+            pie: {
+                selectors: {
+                    grupos: {
+                        default: "grupos",
+                        options: [
+                            {
+                                key: "grupos",
+                                value: "G_"
+                            },
+                            {
+                                key: "partidos",
+                                value: "P_"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+
+        events: {
+            "click a.order-sidebar-dimension": "_dontFollowLinks",
+            "click a.order-sidebar-measure-attribute": "_dontFollowLinks",
+            "change .fixed-dimension-select-category": "_onChangeCategory",
+            "change .dimension-select-level": "_onChangeLevel",
+            "change .dimension-select-granularity": "_onChangeGranularity",
+
+            "focusin .order-sidebar-dimension": "_onFocusin",
+            "focusout .order-sidebar-dimension": "_onFocusout"
+        },
+
+        _dontFollowLinks: function (e) {
+            e.preventDefault();
+        },
+
+        render: function () {
+            var context = this._renderContext();
+            this.$el.html(this.template(context));
+            this.$el.find('select').select2({
+                dropdownParent: $('.metamac-container')
+            });
+        },
+
+        _renderContext: function () {
+            var selectorsIds = this._getSelectorsByChartType();
+            var selectors = _.map(selectorsIds, function (selector) {
+                return {
+                    id: selector,
+                    label: this._getLiteral(selector, "label"),
+                    default: this._getDefault(selector),
+                    options: this._getOptionsFromSelector(selector),
+                };
+            }, this);
+
+            return {
+                leftColumns: selectors.length,
+                selectors: selectors
+            };
+        },
+
+        _getSelectorsByChartType: function () {
+            var currentChartType = this._getCurrentChartType();
+            return currentChartType ? Object.keys(this.configuration[currentChartType].selectors) : [];
+        },
+
+        _getLiteral: function (selector, key) {
+            var currentChartType = this._getCurrentChartType();
+            return I18n.t("filter.selector." + currentChartType + "." + selector + "." + key);
+        },
+
+        _getDefault: function (selector) {
+            var currentChartType = this._getCurrentChartType();
+            return currentChartType ? this.configuration[currentChartType].selectors[selector].default : "";
+        },
+
+        _getOptionsFromSelector: function (selector) {
+            var currentChartType = this._getCurrentChartType();
+            var options = currentChartType ? this.configuration[currentChartType].selectors[selector].options : [];
+            var self = this;
+            options.forEach(function (option) {
+                option.name = self._getLiteral(selector, option.key);
+            });
+            return options;
+        },
+
+        _getCurrentChartType: function () {
+            return this.optionsModel.get("type");
+        },
+    });
 }());
 ;(function () {
     "use strict";

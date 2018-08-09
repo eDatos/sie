@@ -109,6 +109,13 @@ I18n.translations.es = {
             }
         },
         selector: {
+            pie: {
+                grupos: {
+                    label: "Tipo de candidatura",
+                    grupos: "Grupos",
+                    partidos: "Partidos"
+                }
+            },
             level: "Nivel {{level}}"
         }
     },

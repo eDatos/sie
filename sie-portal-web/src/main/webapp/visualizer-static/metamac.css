@@ -2562,21 +2562,26 @@ input[type="color"] select,
   color: #1c547e;
   text-decoration: none;
 }
+.dataset-visualization-container .dataset-visualization-filters,
 .dataset-visualization-container .dataset-visualization-dimensions {
   background: #ffffff;
   position: absolute;
   width: 100%;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions {
   margin-top: -1px;
   margin-left: -1px;
   margin-right: -1px;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone.drag-over .order-sidebar-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone.drag-over .order-sidebar-dimensions,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone.drag-over h2,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone.drag-over h2 {
   background: #ebebeb;
   color: #222222;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone h2,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone h2 {
   margin: 0;
   margin-bottom: -1px;
@@ -2591,28 +2596,36 @@ input[type="color"] select,
   height: 23px;
   line-height: 23px;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone h2 i:before,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone h2 i:before {
   margin-top: -2px;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimensions {
   white-space: nowrap;
   height: 23px;
   border: 1px solid #acacac;
   color: #acacac;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimensions.has-header,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimensions.has-header {
   margin-left: 86px;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone.has-selector h2,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone.has-selector h2,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone.has-selector .order-sidebar-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone.has-selector .order-sidebar-dimensions {
   height: 39px;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone.has-selector .order-sidebar-dimension.dimension-pill,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone.has-selector .order-sidebar-dimension.dimension-pill {
   -webkit-border-radius: 10px 10px 0 0;
   -moz-border-radius: 10px 10px 0 0;
   border-radius: 10px 10px 0 0;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension {
   padding: 2px;
   /* IE9 bug changed divs with a, so this correct the new style */
@@ -2627,22 +2640,34 @@ input[type="color"] select,
   background-color: #acacac;
   color: #ffffff;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute.drag-over,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.drag-over,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension.drag-over,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension.drag-over {
   opacity: 0.8;
   border: 1px dashed #003366;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute.active,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.active,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension.active,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension.active {
   background-color: #003366;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute .dimension-select-level,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute .dimension-select-level,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension .dimension-select-level,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension .dimension-select-level,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute .dimension-select-granularity,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute .dimension-select-granularity,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension .dimension-select-granularity,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension .dimension-select-granularity,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute .fixed-dimension-select-category,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute .fixed-dimension-select-category,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension .fixed-dimension-select-category,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension .fixed-dimension-select-category,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute .select2-container .selection,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute .select2-container .selection,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension .select2-container .selection,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension .select2-container .selection {
   background: #ffffff;
   color: #acacac;
@@ -2656,7 +2681,9 @@ input[type="color"] select,
   width: 114px;
   font-size: 100%;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension.dimension-pill,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension.dimension-pill {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -2664,22 +2691,33 @@ input[type="color"] select,
   border-bottom: 1px solid #acacac;
   margin: 3px 2px 2px 2px;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill.drag-over,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill.drag-over,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension.dimension-pill.drag-over,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension.dimension-pill.drag-over {
   opacity: 0.8;
   border: 1px dashed #003366;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill .dimension-select-level,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill .dimension-select-level,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension.dimension-pill .dimension-select-level,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension.dimension-pill .dimension-select-level,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill .dimension-select-granularity,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill .dimension-select-granularity,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension.dimension-pill .dimension-select-granularity,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension.dimension-pill .dimension-select-granularity,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill .fixed-dimension-select-category,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill .fixed-dimension-select-category,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension.dimension-pill .fixed-dimension-select-category,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension.dimension-pill .fixed-dimension-select-category,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill .select2-container .selection,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill .select2-container .selection,
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension.dimension-pill .select2-container .selection,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension.dimension-pill .select2-container .selection {
   padding: 0px 2px;
   height: inherit;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute {
   margin: 0 -1px 0px -1px;
   display: table;
@@ -2689,88 +2727,113 @@ input[type="color"] select,
   cursor: default;
   text-decoration: none;
 }
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute .order-sidebar-measure-attribute-inner,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute .order-sidebar-measure-attribute-inner {
   display: table-cell;
   vertical-align: middle;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left {
   padding-left: 1px;
   width: 100%;
   float: left;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left.dataset-dimensions-left-0,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left.dataset-dimensions-left-0 {
   width: 0;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left.dataset-dimensions-left-1,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left.dataset-dimensions-left-1 {
   width: 116px;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left.dataset-dimensions-left-2,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left.dataset-dimensions-left-2 {
   width: 230px;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left.dataset-dimensions-left-1 .order-sidebar-zone:last-child .order-sidebar-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left.dataset-dimensions-left-1 .order-sidebar-zone:last-child .order-sidebar-dimensions,
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left.dataset-dimensions-left-2 .order-sidebar-zone:last-child .order-sidebar-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left.dataset-dimensions-left-2 .order-sidebar-zone:last-child .order-sidebar-dimensions {
   -webkit-border-radius: 0 0 9px 0;
   -moz-border-radius: 0 0 9px 0;
   border-radius: 0 0 9px 0;
   overflow: hidden;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left .order-sidebar-zone,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left .order-sidebar-zone {
   float: left;
   margin-left: -1px;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left .order-sidebar-zone h2,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left .order-sidebar-zone h2 {
   float: none;
   width: initial;
   margin-right: 0;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left .order-sidebar-zone .order-sidebar-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left .order-sidebar-zone .order-sidebar-dimensions {
   margin-left: 0;
   margin-top: -1px;
   margin-right: 0;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left .order-sidebar-zone .order-sidebar-dimension,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left .order-sidebar-zone .order-sidebar-dimension {
   margin: 0 -1px 0px -1px;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left .order-sidebar-zone .order-sidebar-dimension.dimension-pill,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left .order-sidebar-zone .order-sidebar-dimension.dimension-pill {
   margin: 2px;
   width: 102px;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left .order-sidebar-zone.has-selector,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left .order-sidebar-zone.has-selector {
   padding-top: 0;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left .order-sidebar-zone.has-selector h2,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left .order-sidebar-zone.has-selector h2 {
   height: 23px;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right {
   padding-left: 0;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right.dataset-dimensions-left-1,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right.dataset-dimensions-left-1 {
   padding-left: 130px;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right.dataset-dimensions-left-2,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right.dataset-dimensions-left-2 {
   padding-left: 244px;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right.dataset-dimensions-left-1 .order-sidebar-zone:last-child .order-sidebar-dimensions.no-header,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right.dataset-dimensions-left-1 .order-sidebar-zone:last-child .order-sidebar-dimensions.no-header,
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right.dataset-dimensions-left-2 .order-sidebar-zone:last-child .order-sidebar-dimensions.no-header,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right.dataset-dimensions-left-2 .order-sidebar-zone:last-child .order-sidebar-dimensions.no-header,
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right.dataset-dimensions-left-1 .order-sidebar-zone:last-child h2,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right.dataset-dimensions-left-1 .order-sidebar-zone:last-child h2,
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right.dataset-dimensions-left-2 .order-sidebar-zone:last-child h2,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right.dataset-dimensions-left-2 .order-sidebar-zone:last-child h2 {
   -webkit-border-radius: 0 0 0 9px;
   -moz-border-radius: 0 0 0 9px;
   border-radius: 0 0 0 9px;
   overflow: hidden;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right .order-sidebar-zone,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right .order-sidebar-zone {
   width: 100%;
   float: left;
   box-sizing: border-box;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right .order-sidebar-zone h2,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right .order-sidebar-zone h2 {
   width: 72px;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right .order-sidebar-zone .order-sidebar-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right .order-sidebar-zone .order-sidebar-dimensions {
   margin-left: 77px;
   border-right: none;
 }
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right .order-sidebar-zone .order-sidebar-dimensions.no-header,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right .order-sidebar-zone .order-sidebar-dimensions.no-header {
   margin-left: 0;
 }
