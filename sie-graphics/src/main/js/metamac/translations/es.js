@@ -110,10 +110,10 @@ I18n.translations.es = {
         },
         selector: {
             pie: {
-                grupos: {
+                candidacyType: {
                     label: "Tipo de candidatura",
-                    grupos: "Grupos",
-                    partidos: "Partidos"
+                    groups: "Grupos",
+                    parties: "Partidos"
                 }
             },
             level: "Nivel {{level}}"

@@ -168,7 +168,7 @@
                 });
 
                 _.each(horizontalDimensionSelectedCategories, function (horizontalCategory) {
-                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('pie').grupos)) {
+                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('pie').candidacyType)) {
                         return;
                     }
 

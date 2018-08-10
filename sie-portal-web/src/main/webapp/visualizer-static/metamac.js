@@ -60231,10 +60231,10 @@ I18n.translations.es = {
         },
         selector: {
             pie: {
-                grupos: {
+                candidacyType: {
                     label: "Tipo de candidatura",
-                    grupos: "Grupos",
-                    partidos: "Partidos"
+                    groups: "Grupos",
+                    parties: "Partidos"
                 }
             },
             level: "Nivel {{level}}"
@@ -61537,7 +61537,7 @@ I18n.translations.pt = {
     App.modules.dataset.FiltersModel = Backbone.Model.extend({
         defaults: {
             pie: {
-                grupos: App.Constants.candidacyType.DEFAULT_VALUE
+                candidacyType: App.Constants.candidacyType.DEFAULT_VALUE
             }
         }
     });
@@ -61559,14 +61559,14 @@ I18n.translations.pt = {
         configuration: {
             pie: {
                 selectors: {
-                    grupos: {
+                    candidacyType: {
                         options: [
                             {
-                                key: "grupos",
+                                key: "groups",
                                 value: "G_"
                             },
                             {
-                                key: "partidos",
+                                key: "parties",
                                 value: "P_"
                             }
                         ]
@@ -70879,7 +70879,7 @@ App.VisualElement.PieChart = (function () {
                 });
 
                 _.each(horizontalDimensionSelectedCategories, function (horizontalCategory) {
-                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('pie').grupos)) {
+                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('pie').candidacyType)) {
                         return;
                     }
 

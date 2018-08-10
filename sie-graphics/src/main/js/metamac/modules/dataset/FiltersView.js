@@ -15,14 +15,14 @@
         configuration: {
             pie: {
                 selectors: {
-                    grupos: {
+                    candidacyType: {
                         options: [
                             {
-                                key: "grupos",
+                                key: "groups",
                                 value: "G_"
                             },
                             {
-                                key: "partidos",
+                                key: "parties",
                                 value: "P_"
                             }
                         ]
