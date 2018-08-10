@@ -21106,7 +21106,7 @@ function program2(depth0,data,depth1) {
   buffer += escapeExpression(stack1)
     + "\" ";
   options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data};
-  stack2 = ((stack1 = helpers.compare || depth1.compare),stack1 ? stack1.call(depth0, depth1['default'], "==", depth0.key, options) : helperMissing.call(depth0, "compare", depth1['default'], "==", depth0.key, options));
+  stack2 = ((stack1 = helpers.compare || depth1.compare),stack1 ? stack1.call(depth0, depth1.selectedValue, "==", depth0.value, options) : helperMissing.call(depth0, "compare", depth1.selectedValue, "==", depth0.value, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += ">";
   if (stack2 = helpers.name) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
@@ -59741,7 +59741,6 @@ if(this.$element.prop("multiple"))this.current(function(d){var e=[];a=[a],a.push
         },
 
         candidacyType: {
-            DEFAULT_KEY: "grupos",
             DEFAULT_VALUE: "G_"
         }
     };
@@ -61561,7 +61560,6 @@ I18n.translations.pt = {
             pie: {
                 selectors: {
                     grupos: {
-                        default: App.Constants.candidacyType.DEFAULT_KEY,
                         options: [
                             {
                                 key: "grupos",
@@ -61613,7 +61611,7 @@ I18n.translations.pt = {
                 return {
                     id: selector,
                     label: this._getLiteral(selector, "label"),
-                    default: this._getDefault(selector),
+                    selectedValue: this._getSelected(selector),
                     options: this._getOptionsFromSelector(selector),
                 };
             }, this);
@@ -61634,14 +61632,14 @@ I18n.translations.pt = {
             return I18n.t("filter.selector." + currentChartType + "." + selector + "." + key);
         },
 
-        _getDefault: function (selector) {
+        _getSelected: function (selector) {
             var currentChartType = this._getCurrentChartType();
-            return currentChartType ? this.configuration[currentChartType].selectors[selector].default : "";
+            return this.filtersModel.get(currentChartType)[selector];
         },
 
         _getOptionsFromSelector: function (selector) {
             var currentChartType = this._getCurrentChartType();
-            var options = currentChartType ? this.configuration[currentChartType].selectors[selector].options : [];
+            var options = this.configuration[currentChartType].selectors[selector].options;
             var self = this;
             options.forEach(function (option) {
                 option.name = self._getLiteral(selector, option.key);

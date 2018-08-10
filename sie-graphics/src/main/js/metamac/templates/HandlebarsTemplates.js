@@ -926,7 +926,7 @@ function program2(depth0,data,depth1) {
   buffer += escapeExpression(stack1)
     + "\" ";
   options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data};
-  stack2 = ((stack1 = helpers.compare || depth1.compare),stack1 ? stack1.call(depth0, depth1['default'], "==", depth0.key, options) : helperMissing.call(depth0, "compare", depth1['default'], "==", depth0.key, options));
+  stack2 = ((stack1 = helpers.compare || depth1.compare),stack1 ? stack1.call(depth0, depth1.selectedValue, "==", depth0.value, options) : helperMissing.call(depth0, "compare", depth1.selectedValue, "==", depth0.value, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += ">";
   if (stack2 = helpers.name) { stack2 = stack2.call(depth0, {hash:{},data:data}); }

@@ -7,7 +7,7 @@
                     {{ label }}
                     <select class="fixed-dimension-select-category" data-selector-id="{{id}}">
                         {{#each options }}
-                        <option value="{{ value }}" {{#compare ../default "==" key}}selected{{/compare}}>{{ name }}</option>
+                        <option value="{{ value }}" {{#compare ../selectedValue "==" value}}selected{{/compare}}>{{ name }}</option>
                         {{/each}}
                     </select>
                 </a>

@@ -42,7 +42,6 @@
         },
 
         candidacyType: {
-            DEFAULT_KEY: "grupos",
             DEFAULT_VALUE: "G_"
         }
     };

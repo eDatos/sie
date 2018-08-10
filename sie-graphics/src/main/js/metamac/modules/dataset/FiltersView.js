@@ -16,7 +16,6 @@
             pie: {
                 selectors: {
                     grupos: {
-                        default: App.Constants.candidacyType.DEFAULT_KEY,
                         options: [
                             {
                                 key: "grupos",
@@ -68,7 +67,7 @@
                 return {
                     id: selector,
                     label: this._getLiteral(selector, "label"),
-                    default: this._getDefault(selector),
+                    selectedValue: this._getSelected(selector),
                     options: this._getOptionsFromSelector(selector),
                 };
             }, this);
@@ -89,14 +88,14 @@
             return I18n.t("filter.selector." + currentChartType + "." + selector + "." + key);
         },
 
-        _getDefault: function (selector) {
+        _getSelected: function (selector) {
             var currentChartType = this._getCurrentChartType();
-            return currentChartType ? this.configuration[currentChartType].selectors[selector].default : "";
+            return this.filtersModel.get(currentChartType)[selector];
         },
 
         _getOptionsFromSelector: function (selector) {
             var currentChartType = this._getCurrentChartType();
-            var options = currentChartType ? this.configuration[currentChartType].selectors[selector].options : [];
+            var options = this.configuration[currentChartType].selectors[selector].options;
             var self = this;
             options.forEach(function (option) {
                 option.name = self._getLiteral(selector, option.key);
