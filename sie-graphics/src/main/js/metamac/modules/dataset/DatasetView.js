@@ -24,6 +24,8 @@
                 menu: false,
                 filter: this.filterDimensions.hasMultidataset()
             });
+
+            this.filtersModel = new App.modules.dataset.FiltersModel();
             this.dataset = new App.dataset.Dataset({ metadata: this.metadata, filterDimensions: this.filterDimensions });
 
             this._initializeVisualElements();
@@ -51,7 +53,8 @@
                 filterDimensions: this.filterDimensions,
                 optionsModel: this.optionsModel,
                 veElements: this.visualElements,
-                optionsView: this.optionsView
+                optionsView: this.optionsView,
+                filtersModel: this.filtersModel
             });
 
             this.dimensionsView = new App.modules.dataset.DimensionsView({
@@ -62,6 +65,7 @@
 
             this.filtersView = new App.modules.dataset.FiltersView({
                 optionsModel: this.optionsModel,
+                filtersModel: this.filtersModel
             });
 
             // sidebarView

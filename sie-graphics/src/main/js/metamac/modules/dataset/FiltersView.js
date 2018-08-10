@@ -8,17 +8,15 @@
         template: App.templateManager.get('dataset/dataset-filters'),
 
         initialize: function (options) {
-            this.dataset = options.dataset;
-            this.filterDimensions = options.filterDimensions;
             this.optionsModel = options.optionsModel;
-            this.measureAttribute = null;
+            this.filtersModel = options.filtersModel;
         },
 
         configuration: {
             pie: {
                 selectors: {
                     grupos: {
-                        default: "grupos",
+                        default: App.Constants.candidacyType.DEFAULT_KEY,
                         options: [
                             {
                                 key: "grupos",
@@ -37,10 +35,19 @@
         events: {
             "click a.order-sidebar-dimension": "_dontFollowLinks",
             "click a.order-sidebar-measure-attribute": "_dontFollowLinks",
-            "change .fixed-dimension-select-category": "_onChangeCategory",
+            "change .fixed-dimension-select-category": "_onChangeSelector"
+        },
 
-            "focusin .order-sidebar-dimension": "_onFocusin",
-            "focusout .order-sidebar-dimension": "_onFocusout"
+        _onChangeSelector: function (e) {
+            var currentTarget = $(e.currentTarget);
+            var selectorValue = currentTarget.val();
+            var selectorId = currentTarget.data("selector-id");
+            if (selectorId) {
+                var currentChartType = this._getCurrentChartType();
+                var attribute = {}
+                attribute[selectorId] = selectorValue;
+                this.filtersModel.set(currentChartType, attribute);
+            }
         },
 
         _dontFollowLinks: function (e) {
@@ -74,7 +81,7 @@
 
         _getSelectorsByChartType: function () {
             var currentChartType = this._getCurrentChartType();
-            return currentChartType ? Object.keys(this.configuration[currentChartType].selectors) : [];
+            return (currentChartType && this.configuration[currentChartType]) ? Object.keys(this.configuration[currentChartType].selectors) : [];
         },
 
         _getLiteral: function (selector, key) {

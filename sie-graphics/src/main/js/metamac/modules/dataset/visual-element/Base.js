@@ -18,6 +18,7 @@
 
             this.filterOptions = options.filterOptions; //deprecated
             this.filterDimensions = options.filterDimensions;
+            this.filtersModel = options.filtersModel;
 
             this.el = options.el;
 

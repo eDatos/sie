@@ -13,6 +13,7 @@
 
             this.filterDimensions = options.filterDimensions;
 
+            this.filtersModel = options.filtersModel;
             this.optionsModel = options.optionsModel;
             this.veElements = options.veElements;
             options.optionsView.on("enterFullScreen", this.enterFullScreen, this);
@@ -26,7 +27,8 @@
                 dataset: this.dataset,
                 filterDimensions: this.filterDimensions,
                 animation: this.options.animation,
-                optionsModel: this.optionsModel
+                optionsModel: this.optionsModel,
+                filtersModel: this.filtersModel
             };
             this.ve = {
                 info: new App.VisualElement.Info(options),

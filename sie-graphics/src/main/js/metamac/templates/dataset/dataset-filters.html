@@ -1,11 +1,11 @@
 <div class="dataset-dimensions">
     <div class="dataset-dimensions-left dataset-dimensions-left-{{leftColumns}}">
         {{#each selectors}}
-        <div class="order-sidebar-zone has-selector" data-selector="{{ id }}">
+        <div class="order-sidebar-zone has-selector">
             <div class="order-sidebar-dimensions">
-                <a href="#" class="order-sidebar-dimension" data-dimension-id="{{id}}">
+                <a href="#" class="order-sidebar-dimension">
                     {{ label }}
-                    <select class="fixed-dimension-select-category" data-dimension-id="{{ ../id }}">
+                    <select class="fixed-dimension-select-category" data-selector-id="{{id}}">
                         {{#each options }}
                         <option value="{{ value }}" {{#compare ../default "==" key}}selected{{/compare}}>{{ name }}</option>
                         {{/each}}
