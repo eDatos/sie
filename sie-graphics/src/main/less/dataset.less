@@ -230,11 +230,26 @@
         .box-sizing(border-box);
     }
 
+    .dataset-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .dataset-visualization-dimensions {
+        flex-grow: 1;
+    }
+
+    .dataset-visualization-filters {
+        .has-content {
+            padding-right: 14px;
+        }
+    }
+
     .dataset-visualization-filters,
     .dataset-visualization-dimensions {
         background: @istacWhite;
-        position: absolute;
-        width: 100%;
 
         .dataset-dimensions {
             margin-top: -1px;
@@ -354,7 +369,7 @@
     }
             
     .dataset-visualization-visual-element {
-        padding-top: @dimensionsBarTypeDefault;            
+        padding-top: 10px;
     }
 
     &.dataset-visualization-type-line {

@@ -2562,11 +2562,21 @@ input[type="color"] select,
   color: #1c547e;
   text-decoration: none;
 }
+.dataset-visualization-container .dataset-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.dataset-visualization-container .dataset-visualization-dimensions {
+  flex-grow: 1;
+}
+.dataset-visualization-container .dataset-visualization-filters .has-content {
+  padding-right: 14px;
+}
 .dataset-visualization-container .dataset-visualization-filters,
 .dataset-visualization-container .dataset-visualization-dimensions {
   background: #ffffff;
-  position: absolute;
-  width: 100%;
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions {
@@ -3030,7 +3040,7 @@ input[type="color"] select,
   z-index: 1010;
 }
 .dataset-sidebar-visualization-container .dataset-visualization-visual-element {
-  padding-top: 73px;
+  padding-top: 10px;
 }
 .dataset-sidebar-visualization-container.dataset-visualization-type-line #detail-container {
   padding-right: 10px;

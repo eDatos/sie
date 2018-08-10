@@ -1,5 +1,5 @@
-<div class="dataset-dimensions">
-    <div class="dataset-dimensions-left dataset-dimensions-left-{{leftColumns}}">
+<div class="dataset-dimensions {{#compare selectorCount '>' '0'}}has-content{{/compare}}">
+    <div class="dataset-dimensions-left dataset-dimensions-left-{{selectorCount}}">
         {{#each selectors}}
         <div class="order-sidebar-zone has-selector">
             <div class="order-sidebar-dimensions">
