@@ -61739,21 +61739,21 @@ I18n.translations.pt = {
                     },
                     left: {
                         icon: "axis-x",
-                        draggable: true,
+                        draggable: false,
                         location: "right",
                         showHeader: true,
                         width: "225px"
                     },
                     top: {
                         icon: "column",
-                        draggable: true,
+                        draggable: false,
                         location: "right",
                         showHeader: true,
                         width: "calc(100% - 225px)"
                     },
                     fixed: {
                         icon: "lock",
-                        draggable: true,
+                        draggable: false,
                         location: "right",
                         showHeader: true
                     }
