@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Component;
 
-import es.gobcan.istac.sie.service.criteria.IdiomaCriteriaProcessor;
 import com.arte.libs.grammar.antlr.DefaultQueryExprVisitor;
 import com.arte.libs.grammar.antlr.QueryExprCompiler;
 import com.arte.libs.grammar.domain.QueryRequest;
@@ -20,10 +19,6 @@ public class QueryUtil {
     private static final Logger logger = LoggerFactory.getLogger(QueryUtil.class);
     private static final String INCLUDE_DELETED_HINT = "HINT INCLUDE_DELETED SET 'true'";
     private QueryExprCompiler queryExprCompiler = new QueryExprCompiler();
-
-    public DetachedCriteria queryToIdiomaCriteria(Pageable pageable, String query) {
-        return queryToCriteria(pageable, query, new IdiomaCriteriaProcessor());
-    }
 
     public String queryIncludingDeleted(String query) {
         return new StringBuilder(query).append(" ").append(INCLUDE_DELETED_HINT).toString();
