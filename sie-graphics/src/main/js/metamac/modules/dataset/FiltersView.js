@@ -54,10 +54,7 @@
             var selectorValue = currentTarget.val();
             var selectorId = currentTarget.data("selector-id");
             if (selectorId) {
-                var currentChartType = this._getCurrentChartType();
-                var attribute = {}
-                attribute[selectorId] = selectorValue;
-                this.filtersModel.set(currentChartType, attribute);
+                this.filtersModel.set(selectorId, selectorValue);
             }
         },
 
@@ -101,8 +98,7 @@
         },
 
         _getSelected: function (selector) {
-            var currentChartType = this._getCurrentChartType();
-            return this.filtersModel.get(currentChartType)[selector];
+            return this.filtersModel.get(selector);
         },
 
         _getOptionsFromSelector: function (selector) {

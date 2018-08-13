@@ -71,7 +71,7 @@
         _bindEvents: function () {
             var debounceUpdate = _.debounce(this.update, 20);
             this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", debounceUpdate);
-            this.listenTo(this.filtersModel, "change:pie", debounceUpdate);
+            this.listenTo(this.filtersModel, "change:candidacyType", debounceUpdate);
         },
 
         _unbindEvents: function () {
@@ -168,7 +168,7 @@
                 });
 
                 _.each(horizontalDimensionSelectedCategories, function (horizontalCategory) {
-                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('pie').candidacyType)) {
+                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('candidacyType'))) {
                         return;
                     }
 

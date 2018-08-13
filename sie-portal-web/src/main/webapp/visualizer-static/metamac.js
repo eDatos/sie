@@ -61555,15 +61555,7 @@ I18n.translations.pt = {
 
     App.modules.dataset.FiltersModel = Backbone.Model.extend({
         defaults: {
-            pie: {
-                candidacyType: App.Constants.candidacyType.DEFAULT_VALUE
-            },
-            map: {
-                candidacyType: App.Constants.candidacyType.DEFAULT_VALUE
-            },
-            column: {
-                candidacyType: App.Constants.candidacyType.DEFAULT_VALUE
-            }
+            candidacyType: App.Constants.candidacyType.DEFAULT_VALUE
         }
     });
 })();
@@ -61623,10 +61615,7 @@ I18n.translations.pt = {
             var selectorValue = currentTarget.val();
             var selectorId = currentTarget.data("selector-id");
             if (selectorId) {
-                var currentChartType = this._getCurrentChartType();
-                var attribute = {}
-                attribute[selectorId] = selectorValue;
-                this.filtersModel.set(currentChartType, attribute);
+                this.filtersModel.set(selectorId, selectorValue);
             }
         },
 
@@ -61670,8 +61659,7 @@ I18n.translations.pt = {
         },
 
         _getSelected: function (selector) {
-            var currentChartType = this._getCurrentChartType();
-            return this.filtersModel.get(currentChartType)[selector];
+            return this.filtersModel.get(selector);
         },
 
         _getOptionsFromSelector: function (selector) {
@@ -69969,7 +69957,7 @@ App.widget.filter.FilterView = Backbone.View.extend({
         _bindEvents: function () {
             var debounceUpdate = _.debounce(this.update, 20);
             this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", debounceUpdate);
-            this.listenTo(this.filtersModel, "change:column", debounceUpdate);
+            this.listenTo(this.filtersModel, "change:candidacyType", debounceUpdate);
 
             var resize = _.debounce(_.bind(this._updateSize, this), 200);
             var self = this;
@@ -70078,7 +70066,7 @@ App.widget.filter.FilterView = Backbone.View.extend({
                 serie.name = "";
 
                 _.each(horizontalDimensionSelectedCategories, function (horizontalCategory) {
-                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('column').candidacyType)) {
+                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('candidacyType'))) {
                         return;
                     }
 
@@ -70798,7 +70786,7 @@ App.VisualElement.PieChart = (function () {
         _bindEvents: function () {
             var debounceUpdate = _.debounce(this.update, 20);
             this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", debounceUpdate);
-            this.listenTo(this.filtersModel, "change:pie", debounceUpdate);
+            this.listenTo(this.filtersModel, "change:candidacyType", debounceUpdate);
         },
 
         _unbindEvents: function () {
@@ -70895,7 +70883,7 @@ App.VisualElement.PieChart = (function () {
                 });
 
                 _.each(horizontalDimensionSelectedCategories, function (horizontalCategory) {
-                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('pie').candidacyType)) {
+                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('candidacyType'))) {
                         return;
                     }
 
