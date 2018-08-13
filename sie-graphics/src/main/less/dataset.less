@@ -189,6 +189,10 @@
     .clearfix;
 
     .dataset-visualization-visual-element {
+        position: absolute;
+        width: 100%;
+        top: 0px;
+        z-index: -1;
         height: 100%;
         .box-sizing(border-box);
         background: @istacWhite;
@@ -369,7 +373,7 @@
     }
             
     .dataset-visualization-visual-element {
-        padding-top: 10px;
+        padding-top: @dimensionsBarTypeDefault;            
     }
 
     &.dataset-visualization-type-line {
