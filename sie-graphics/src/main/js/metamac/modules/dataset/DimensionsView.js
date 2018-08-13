@@ -48,21 +48,21 @@
                     },
                     left: {
                         icon: "axis-x",
-                        draggable: true,
+                        draggable: false,
                         location: "right",
                         showHeader: true,
                         width: "225px"
                     },
                     top: {
                         icon: "column",
-                        draggable: true,
+                        draggable: false,
                         location: "right",
                         showHeader: true,
                         width: "calc(100% - 225px)"
                     },
                     fixed: {
                         icon: "lock",
-                        draggable: true,
+                        draggable: false,
                         location: "right",
                         showHeader: true
                     }
@@ -98,33 +98,7 @@
                 }
             },
             pie: {
-                zones: {
-                    axisy: {
-                        icon: "axis-y",
-                        draggable: false,
-                        location: "none",
-                        showHeader: true,
-                        showMeasureAttribute: true
-                    },
-                    left: {
-                        icon: "axis-x",
-                        draggable: false,
-                        location: "none",
-                        showHeader: true
-                    },
-                    top: {
-                        icon: "line",
-                        draggable: false,
-                        location: "none",
-                        showHeader: true
-                    },
-                    fixed: {
-                        icon: "lock",
-                        draggable: false,
-                        location: "none",
-                        showHeader: true
-                    }
-                }
+                zones: {}
             },
             map: {
                 zones: {

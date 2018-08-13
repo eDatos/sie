@@ -3,6 +3,19 @@
 
     App.namespace("App.modules.dataset");
 
+    var CANDIDACY_TYPE_SELECTOR = {
+        options: [
+            {
+                key: "groups",
+                value: "G_"
+            },
+            {
+                key: "parties",
+                value: "P_"
+            }
+        ]
+    };
+
     App.modules.dataset.FiltersView = Backbone.View.extend({
 
         template: App.templateManager.get('dataset/dataset-filters'),
@@ -15,18 +28,17 @@
         configuration: {
             pie: {
                 selectors: {
-                    candidacyType: {
-                        options: [
-                            {
-                                key: "groups",
-                                value: "G_"
-                            },
-                            {
-                                key: "parties",
-                                value: "P_"
-                            }
-                        ]
-                    }
+                    candidacyType: CANDIDACY_TYPE_SELECTOR
+                }
+            },
+            map: {
+                selectors: {
+                    candidacyType: CANDIDACY_TYPE_SELECTOR
+                }
+            },
+            column: {
+                selectors: {
+                    candidacyType: CANDIDACY_TYPE_SELECTOR
                 }
             }
         },
@@ -42,10 +54,7 @@
             var selectorValue = currentTarget.val();
             var selectorId = currentTarget.data("selector-id");
             if (selectorId) {
-                var currentChartType = this._getCurrentChartType();
-                var attribute = {}
-                attribute[selectorId] = selectorValue;
-                this.filtersModel.set(currentChartType, attribute);
+                this.filtersModel.set(selectorId, selectorValue);
             }
         },
 
@@ -73,7 +82,7 @@
             }, this);
 
             return {
-                leftColumns: selectors.length,
+                selectorCount: selectors.length,
                 selectors: selectors
             };
         },
@@ -89,8 +98,7 @@
         },
 
         _getSelected: function (selector) {
-            var currentChartType = this._getCurrentChartType();
-            return this.filtersModel.get(currentChartType)[selector];
+            return this.filtersModel.get(selector);
         },
 
         _getOptionsFromSelector: function (selector) {

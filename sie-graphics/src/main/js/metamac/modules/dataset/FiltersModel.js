@@ -3,9 +3,7 @@
 
     App.modules.dataset.FiltersModel = Backbone.Model.extend({
         defaults: {
-            pie: {
-                candidacyType: App.Constants.candidacyType.DEFAULT_VALUE
-            }
+            candidacyType: App.Constants.candidacyType.DEFAULT_VALUE
         }
     });
 })();

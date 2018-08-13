@@ -2508,6 +2508,10 @@ input[type="color"] select,
   clear: both;
 }
 .dataset-visualization .dataset-visualization-visual-element {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  z-index: -1;
   height: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -2562,11 +2566,21 @@ input[type="color"] select,
   color: #1c547e;
   text-decoration: none;
 }
+.dataset-visualization-container .dataset-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.dataset-visualization-container .dataset-visualization-dimensions {
+  flex-grow: 1;
+}
+.dataset-visualization-container .dataset-visualization-filters .has-content {
+  padding-right: 14px;
+}
 .dataset-visualization-container .dataset-visualization-filters,
 .dataset-visualization-container .dataset-visualization-dimensions {
   background: #ffffff;
-  position: absolute;
-  width: 100%;
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions {

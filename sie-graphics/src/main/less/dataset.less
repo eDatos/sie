@@ -189,6 +189,10 @@
     .clearfix;
 
     .dataset-visualization-visual-element {
+        position: absolute;
+        width: 100%;
+        top: 0px;
+        z-index: -1;
         height: 100%;
         .box-sizing(border-box);
         background: @istacWhite;
@@ -230,11 +234,26 @@
         .box-sizing(border-box);
     }
 
+    .dataset-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .dataset-visualization-dimensions {
+        flex-grow: 1;
+    }
+
+    .dataset-visualization-filters {
+        .has-content {
+            padding-right: 14px;
+        }
+    }
+
     .dataset-visualization-filters,
     .dataset-visualization-dimensions {
         background: @istacWhite;
-        position: absolute;
-        width: 100%;
 
         .dataset-dimensions {
             margin-top: -1px;

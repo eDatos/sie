@@ -86,11 +86,6 @@ I18n.translations.es = {
                     axisy: "Eje Y",
                     top: "Columnas"
                 },
-                pie: {
-                    fixed: "Fijadas",
-                    left: "Eje X",
-                    axisy: "Eje Y"
-                },
                 line: {
                     fixed: "Fijadas",
                     left: "Eje X",
@@ -110,6 +105,20 @@ I18n.translations.es = {
         },
         selector: {
             pie: {
+                candidacyType: {
+                    label: "Tipo de candidatura",
+                    groups: "Grupos",
+                    parties: "Partidos"
+                }
+            },
+            map: {
+                candidacyType: {
+                    label: "Tipo de candidatura",
+                    groups: "Grupos",
+                    parties: "Partidos"
+                }
+            },
+            column: {
                 candidacyType: {
                     label: "Tipo de candidatura",
                     groups: "Grupos",
