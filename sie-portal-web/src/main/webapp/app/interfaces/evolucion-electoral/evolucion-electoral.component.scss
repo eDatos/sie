@@ -71,9 +71,7 @@ ac-autocomplete-short-list {
     padding: 2px;
 }
 
-a.proceso-electoral {
-    margin: 0  auto 2rem;
-
+a[href].proceso-electoral {
     &:focus {
         text-decoration: none;
     }
@@ -88,7 +86,16 @@ a.proceso-electoral {
             }
         }
     }
-    
+}
+
+a:not([href]).proceso-electoral {
+    &:hover {
+        cursor: default;
+    }
+}
+
+a.proceso-electoral {
+    margin: 0  auto 2rem;
 
     table {
         border: 1px solid $color-tablas-evolucion-electoral;

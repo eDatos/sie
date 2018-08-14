@@ -1,5 +1,7 @@
 export class ProcesoElectoral {
 
+    public clickable = false;
+
     constructor(
         public id: string,
         public indiceDimension: number,

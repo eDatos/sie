@@ -17,7 +17,7 @@ import es.gobcan.istac.sie.web.rest.mapper.TipoEleccionesDatasetMapper;
 import io.github.jhipster.web.util.ResponseUtil;
 
 @RestController
-@RequestMapping("/api/dataset-url")
+@RequestMapping("/api/tipo-elecciones-dataset")
 public class TipoEleccionesDatasetResource extends AbstractResource {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(TipoEleccionesDatasetResource.class);
