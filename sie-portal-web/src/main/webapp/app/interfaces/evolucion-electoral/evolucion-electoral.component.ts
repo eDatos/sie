@@ -185,8 +185,8 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     private comprobarDatosPagina3() {
-        this.procesoElectoralDatasetService.getDatasetsByTipoElecciones(this.tipoEleccionesVisible).then((listaDatasets) => {
-            listaDatasets.forEach((dataset) => {
+        this.procesoElectoralDatasetService.getDatasetsByTipoElecciones(this.tipoEleccionesVisible).then((multidataset) => {
+            multidataset.datasetList.forEach((dataset) => {
                 const procesoElectoral = this.hashProcesos[this.tipoEleccionesVisible].find((proceso) => proceso.id.includes(dataset.year));
                 if (procesoElectoral) {
                     procesoElectoral.clickable = true;
