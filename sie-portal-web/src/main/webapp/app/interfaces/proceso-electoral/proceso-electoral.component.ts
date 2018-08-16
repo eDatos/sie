@@ -1,4 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
+import { ProcesoElectoralDatasetService } from '../../dataset';
+import { ActivatedRoute } from '@angular/router';
 
 declare var I18n: any;
 declare var App: any;
@@ -17,9 +19,34 @@ export const METAMAC_CSS_REL = 'stylesheet';
 })
 export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    constructor(private host: ElementRef) { }
+    constructor(
+        private host: ElementRef,
+        private activatedRoute: ActivatedRoute,
+        private procesoElectoralDatasetService: ProcesoElectoralDatasetService
+    ) { }
 
     ngOnInit() {
+        this.activatedRoute.parent.params.subscribe((params) => {
+            this.procesoElectoralDatasetService.getDatasetsByTipoElecciones(params.tipoElecciones).then((multidataset) => {
+                if (App.mainRegion) {
+                    this.stopBackbone();
+                }
+                this.startBackbone(multidataset.id);
+            });
+        });
+    }
+
+    ngAfterViewInit() {
+        this.setGlobalStyleSheetsDisabled(true);
+        this.insertMetamacStyles();
+    }
+
+    ngOnDestroy() {
+        this.setGlobalStyleSheetsDisabled(false);
+        this.stopBackbone();
+    }
+
+    private startBackbone(multidatasetId: string) {
         I18n.defaultLocale = 'es';
         I18n.locale = 'es';
 
@@ -51,24 +78,13 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         App.config['installationType'] = 'INTERNAL';
 
         App.queryParams['agency'] = 'ISTAC';
-        App.queryParams['identifier'] = 'C00010A_000005';
-        App.queryParams['version'] = '001.001';
         App.queryParams['type'] = 'dataset';
-        App.queryParams['indicatorSystem'] = '';
-        App.queryParams['geo'] = '';
-        App.queryParams['multidatasetId'] = '';
+        App.queryParams['multidatasetId'] = multidatasetId;
 
         App.start();
     }
 
-    ngAfterViewInit() {
-        this.setGlobalStyleSheetsDisabled(true);
-        this.insertMetamacStyles();
-    }
-
-    ngOnDestroy() {
-        this.setGlobalStyleSheetsDisabled(false);
-
+    private stopBackbone() {
         App.removeRegion('mainRegion');
         App._initCallbacks.reset();
         Backbone.history.stop();

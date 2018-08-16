@@ -6,7 +6,17 @@ export function procesoElectoralUrls(url: UrlSegment[]) {
     if (url.length === 0) {
         return null;
     }
-    return url[0].path === 'proceso-electoral' ? { consumed: url } : null;
+
+    let result = null;
+    if (url.length >= 4 && url[0].path === 'proceso-electoral') {
+        result = {
+            consumed: url,
+            posParams: {
+                'tipoElecciones': url[2]
+            }
+        };
+    }
+    return result;
 }
 
 export const procesoElectoralRoute: Routes = [

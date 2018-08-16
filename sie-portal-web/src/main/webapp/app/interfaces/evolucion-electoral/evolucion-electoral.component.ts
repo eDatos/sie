@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProcesoElectoral } from './proceso-electoral.model';
-import { DatasetService } from '../../dataset';
+import { DatasetService, ProcesoElectoralDatasetService } from '../../dataset';
 import { Lugar } from '../lugar';
 import { BarChart, YElement } from '../../shared';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,6 +31,8 @@ const TIPO_AREA = 'area';
 const TIPO_LINEA = 'spline';
 const ELECTORES = 'ELECTORES';
 
+const TIPO_ELECCIONES_DEFAULT = 'MUNICIPALES';
+
 @Component({
     selector: 'jhi-evolucion-electoral',
     styleUrls: ['evolucion-electoral.component.scss'],
@@ -42,6 +44,7 @@ export class EvolucionElectoralComponent implements OnInit {
     tiposEleccion: Set<string>;
     hashGraficas;
     tipoGrafica = GRAFICA_VOTOS_DEFAULT;
+    tipoEleccionesVisible = TIPO_ELECCIONES_DEFAULT;
 
     lugares: Lugar[];
     _lugar: Lugar;
@@ -52,7 +55,8 @@ export class EvolucionElectoralComponent implements OnInit {
         private datasetService: DatasetService,
         private translateService: TranslateService,
         private alertService: JhiAlertService,
-        private documentoService: DocumentoService
+        private documentoService: DocumentoService,
+        private procesoElectoralDatasetService: ProcesoElectoralDatasetService
     ) { }
 
     ngOnInit() {
@@ -72,6 +76,7 @@ export class EvolucionElectoralComponent implements OnInit {
                     this.inicializarProcesosElectorales(listaProcesoElectoral);
                     this.inicializarTiposEleccion(listaProcesoElectoral);
                     this.inicializarGraficas();
+                    this.comprobarDatosPagina3();
                 });
             });
         });
@@ -177,6 +182,22 @@ export class EvolucionElectoralComponent implements OnInit {
             resultado.data.push(valorParseado);
         });
         return resultado;
+    }
+
+    private comprobarDatosPagina3() {
+        this.procesoElectoralDatasetService.getDatasetsByTipoElecciones(this.tipoEleccionesVisible).then((multidataset) => {
+            multidataset.datasetList.forEach((dataset) => {
+                const procesoElectoral = this.hashProcesos[this.tipoEleccionesVisible].find((proceso) => proceso.id.includes(dataset.year));
+                if (procesoElectoral) {
+                    procesoElectoral.clickable = true;
+                }
+            });
+        });
+    }
+
+    onTabChange(event) {
+        this.tipoEleccionesVisible = event.nextId;
+        this.comprobarDatosPagina3();
     }
 
     onChangeIndicador() {

@@ -31,10 +31,9 @@
                 attributes.agency = urlPartMatches[1];
                 attributes.identifier = urlPartMatches[2];
                 attributes.version = urlPartMatches[3];
-                attributes.url = "?agencyId=" + attributes.agency + "&resourceId=" + attributes.identifier + "&version=" + attributes.version + "&resourceType=" + attributes.type;
             }
 
-            attributes.url += "&multidatasetId=" + multidatasetIdentifier + window.location.hash;
+            attributes.url = window.location.hash.replace(resourceIdentifier.fecha, attributes.name);
 
             if (response.nodes) {
                 this.nodes = App.modules.multidataset.MultidatasetNode.parseNodes(response.nodes);

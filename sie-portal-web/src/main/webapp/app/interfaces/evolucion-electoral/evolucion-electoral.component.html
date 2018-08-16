@@ -10,8 +10,8 @@
         <div class="loader first-loader"></div>
     </div>
 
-    <ngb-tabset *ngIf="tiposEleccion" [justify]="'center'">
-        <ngb-tab *ngFor="let tipo of tiposEleccion; index as i">
+    <ngb-tabset *ngIf="tiposEleccion" [justify]="'center'" [activeId]="tipoEleccionesVisible" (tabChange)="onTabChange($event)">
+        <ngb-tab *ngFor="let tipo of tiposEleccion; index as i" id="{{tipo}}">
             <ng-template ngbTabTitle>
                 <span jhiTranslate="evolucionElectoral.tipoEleccion.{{tipo}}"></span>
             </ng-template>
@@ -35,74 +35,11 @@
 
                 <div class="grid-procesos">
                     <ng-container *ngFor="let proceso of hashProcesos[tipo].slice().reverse()">
-                        <a [routerLink]="['/proceso-electoral', lugar.id, proceso.tipoProcesoElectoral, proceso.fechaEleccion | date: 'yyyy']" class="proceso-electoral">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th colspan="3">
-                                            <a>{{proceso.fechaEleccion | date: 'yyyy'}}</a>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            &#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.ELECTORES"></span>
-                                        </td>
-                                        <td>{{proceso.indicadores['ELECTORES'] | number:'1.0-0'}}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            &nbsp;&nbsp;&nbsp;&#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.ELECTORES_VOTANTES"></span>
-                                        </td>
-                                        <td>{{proceso.indicadores['ELECTORES_VOTANTES'] | number:'1.0-0'}}</td>
-                                        <td>{{proceso.indicadores['TASA_PARTICIPACION'] | number:'1.1-2'}}&#37;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            &nbsp;&nbsp;&nbsp;&#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.ELECTORES_ABSTENIDOS"></span>
-                                        </td>
-                                        <td>{{proceso.indicadores['ELECTORES_ABSTENIDOS'] | number:'1.0-0'}}</td>
-                                        <td>{{proceso.indicadores['TASA_ABSTENCION'] | number:'1.1-2'}}&#37;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            &#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.VOTOS"></span>
-                                        </td>
-                                        <td>{{proceso.indicadores['VOTOS'] | number:'1.0-0'}}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            &nbsp;&nbsp;&nbsp;&#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS"></span>
-                                        </td>
-                                        <td>{{proceso.indicadores['VOTOS_VALIDOS'] | number:'1.0-0'}}</td>
-                                        <td>{{proceso.indicadores['TASA_VOTOS_VALIDOS'] | number:'1.1-2'}}&#37;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS_CANDIDATURA"></span>
-                                        </td>
-                                        <td>{{proceso.indicadores['VOTOS_VALIDOS_CANDIDATURA'] | number:'1.0-0'}}</td>
-                                        <td>{{proceso.indicadores['TASA_VOTOS_VALIDOS_CANDIDATURA'] | number:'1.1-2'}}&#37;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS_BLANCO"></span>
-                                        </td>
-                                        <td>{{proceso.indicadores['VOTOS_VALIDOS_BLANCO'] | number:'1.0-0'}}</td>
-                                        <td>{{proceso.indicadores['TASA_VOTOS_VALIDOS_BLANCO'] | number:'1.1-2'}}&#37;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            &nbsp;&nbsp;&nbsp;&#45;&nbsp;<span jhiTranslate="evolucionElectoral.indicador.VOTOS_NULOS"></span>
-                                        </td>
-                                        <td>{{proceso.indicadores['VOTOS_NULOS'] | number:'1.0-0'}}</td>
-                                        <td>{{proceso.indicadores['TASA_VOTOS_NULOS'] | number:'1.1-2'}}&#37;</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <a *ngIf="proceso.clickable" [routerLink]="['/proceso-electoral', lugar.id, proceso.tipoProcesoElectoral, proceso.fechaEleccion | date: 'yyyy']" class="proceso-electoral">
+                            <ng-container *ngTemplateOutlet="tablaProcesoElectoral; context: {$implicit: proceso}"></ng-container>
+                        </a>
+                        <a *ngIf="!proceso.clickable" class="proceso-electoral">
+                            <ng-container *ngTemplateOutlet="tablaProcesoElectoral; context: {$implicit: proceso}"></ng-container>
                         </a>
                     </ng-container>
                 </div>
@@ -111,3 +48,81 @@
     </ngb-tabset>
 
 </div>
+
+<ng-template #tablaProcesoElectoral let-proceso>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <a>{{proceso.fechaEleccion | date: 'yyyy'}}</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    &#45;&nbsp;
+                    <span jhiTranslate="evolucionElectoral.indicador.ELECTORES"></span>
+                </td>
+                <td>{{proceso.indicadores['ELECTORES'] | number:'1.0-0'}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&#45;&nbsp;
+                    <span jhiTranslate="evolucionElectoral.indicador.ELECTORES_VOTANTES"></span>
+                </td>
+                <td>{{proceso.indicadores['ELECTORES_VOTANTES'] | number:'1.0-0'}}</td>
+                <td>{{proceso.indicadores['TASA_PARTICIPACION'] | number:'1.1-2'}}&#37;</td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&#45;&nbsp;
+                    <span jhiTranslate="evolucionElectoral.indicador.ELECTORES_ABSTENIDOS"></span>
+                </td>
+                <td>{{proceso.indicadores['ELECTORES_ABSTENIDOS'] | number:'1.0-0'}}</td>
+                <td>{{proceso.indicadores['TASA_ABSTENCION'] | number:'1.1-2'}}&#37;</td>
+            </tr>
+            <tr>
+                <td>
+                    &#45;&nbsp;
+                    <span jhiTranslate="evolucionElectoral.indicador.VOTOS"></span>
+                </td>
+                <td>{{proceso.indicadores['VOTOS'] | number:'1.0-0'}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&#45;&nbsp;
+                    <span jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS"></span>
+                </td>
+                <td>{{proceso.indicadores['VOTOS_VALIDOS'] | number:'1.0-0'}}</td>
+                <td>{{proceso.indicadores['TASA_VOTOS_VALIDOS'] | number:'1.1-2'}}&#37;</td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#45;&nbsp;
+                    <span jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS_CANDIDATURA"></span>
+                </td>
+                <td>{{proceso.indicadores['VOTOS_VALIDOS_CANDIDATURA'] | number:'1.0-0'}}</td>
+                <td>{{proceso.indicadores['TASA_VOTOS_VALIDOS_CANDIDATURA'] | number:'1.1-2'}}&#37;</td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#45;&nbsp;
+                    <span jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS_BLANCO"></span>
+                </td>
+                <td>{{proceso.indicadores['VOTOS_VALIDOS_BLANCO'] | number:'1.0-0'}}</td>
+                <td>{{proceso.indicadores['TASA_VOTOS_VALIDOS_BLANCO'] | number:'1.1-2'}}&#37;</td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&#45;&nbsp;
+                    <span jhiTranslate="evolucionElectoral.indicador.VOTOS_NULOS"></span>
+                </td>
+                <td>{{proceso.indicadores['VOTOS_NULOS'] | number:'1.0-0'}}</td>
+                <td>{{proceso.indicadores['TASA_VOTOS_NULOS'] | number:'1.1-2'}}&#37;</td>
+            </tr>
+        </tbody>
+    </table>
+</ng-template>

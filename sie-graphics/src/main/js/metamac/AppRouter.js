@@ -38,49 +38,110 @@
         },
 
         home: function () {
-			var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
-            args = _.defaults(args, App.queryParams);
-            this.datasetController.showDataset(args);
+            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
+            var self = this;
+            this._processArgs(args).done(function (processedArgs) {
+                self.datasetController.showDataset(processedArgs);
+            });
         },
 
         selection: function () {
-			var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
-            args = _.defaults(args, App.queryParams);
-            this.datasetController.showDatasetSelection(args);
+            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
+            var self = this;
+            this._processArgs(args).done(function (processedArgs) {
+                self.datasetController.showDatasetSelection(processedArgs);
+            });
         },
 
         selectionPermalink: function () {
             var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "permalinkId"], arguments);
-            args = _.defaults(args, App.queryParams);
-            this.datasetController.showDatasetSelection(args);
+            var self = this;
+            this._processArgs(args).done(function (processedArgs) {
+                self.datasetController.showDatasetSelection(processedArgs);
+            });
         },
 
         visualization: function () {
-			var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
-            args = _.defaults(args, App.queryParams);
-            this.datasetController.showDatasetVisualization(args);
+            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
+            var self = this;
+            this._processArgs(args).done(function (processedArgs) {
+                self.datasetController.showDatasetVisualization(processedArgs);
+            });
         },
 
         visualizationPermalink: function () {
             var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "permalinkId"], arguments);
-            args = _.defaults(args, App.queryParams);
-            this.datasetController.showDatasetVisualization(args);
+            var self = this;
+            this._processArgs(args).done(function (processedArgs) {
+                self.datasetController.showDatasetVisualization(processedArgs);
+            });
         },
 
         visualizationType: function () {
             var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "visualizationType"], arguments);
-            args = _.defaults(args, App.queryParams);
-            this.datasetController.showDatasetVisualization(args);
+            var self = this;
+            this._processArgs(args).done(function (processedArgs) {
+                self.datasetController.showDatasetVisualization(processedArgs);
+            });
         },
 
         visualizationTypePermalink: function () {
             var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "visualizationType", "permalinkId"], arguments);
-            args = _.defaults(args, App.queryParams);
-            this.datasetController.showDatasetVisualization(args);
+            var self = this;
+            this._processArgs(args).done(function (processedArgs) {
+                self.datasetController.showDatasetVisualization(processedArgs);
+            });
         },
 
         error: function () {
             console.error("error");
+        },
+
+        _processArgs: function (args) {
+            args = _.defaults(args, App.queryParams);
+            return this._getDatasetsByTipoElecciones(args['tipoElecciones']).then(function (datasetList) {
+                var dataset = datasetList.find(function (element) {
+                    return args['fecha'] === element.year;
+                });
+                if (dataset) {
+                    args.identifier = dataset.id;
+                    args.agency = dataset.agency;
+                    args.version = dataset.version;
+                }
+                return args;
+            });
+        },
+
+        _getDatasetsByTipoElecciones: function () {
+            if (!this.multidatasetCache) {
+                this.multidatasetCache = new $.Deferred();
+
+                var identifiers = App.queryParams.multidatasetId.split(":");
+                var agency = identifiers[0];
+                var identifier = identifiers[1];
+                var request = $.get(App.endpoints["statistical-resources"] + '/multidatasets/' + agency + '/' + identifier + '?_type=json');
+
+                var self = this;
+                $.when(request).done(function (multidataset) {
+                    var datasetList = multidataset.data.nodes.node;
+                    var result = datasetList.map(function (element) {
+                        var urn = element.dataset.urn;
+                        var datasetIdentifier = _.last(urn.split('='));
+                        var urlPartMatches = datasetIdentifier.match(/(.*):(.*)\(([^\)]*?)\)/);
+                        var agency = urlPartMatches[1];
+                        var identifier = urlPartMatches[2];
+                        var version = urlPartMatches[3];
+                        return {
+                            id: identifier,
+                            agency: agency,
+                            version: version,
+                            year: element.name.text[0].value
+                        }
+                    });
+                    self.multidatasetCache.resolveWith(null, [result]);
+                });
+            }
+            return this.multidatasetCache.promise();
         },
 
         linkTo: function (routeName, params) {
@@ -116,10 +177,6 @@
                     break;
                 default:
                     return this.error();
-            }
-
-            if (_.isUndefined(App.queryParams.identifier)) {
-                return this.error();
             }
 
             if (_.isUndefined(App.queryParams.type)) {

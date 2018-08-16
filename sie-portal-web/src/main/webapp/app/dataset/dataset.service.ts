@@ -38,7 +38,7 @@ export class DatasetService {
 
     private doGetMetadata(): Observable<any> {
         const config = this.configService.getConfig();
-        return this.http.get(`${config.dataset.endpoint}${config.dataset.metadata}`)
+        return this.http.get(`${config.dataset.endpointExternal}${config.dataset.evolucionElectoral}${config.dataset.metadata}`)
             .map((res: Response) => res.json());
     }
 
@@ -142,7 +142,7 @@ export class DatasetService {
 
     private doGetDataByRegionId(id: string): Observable<any> {
         const config = this.configService.getConfig();
-        return this.http.get(`${config.dataset.endpoint}${config.dataset.data}${id}`)
+        return this.http.get(`${config.dataset.endpointExternal}${config.dataset.evolucionElectoral}${config.dataset.data}${id}`)
             .map((res: Response) => res.json());
     }
 
