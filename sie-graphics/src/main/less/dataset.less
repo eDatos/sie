@@ -192,7 +192,6 @@
         position: absolute;
         width: 100%;
         top: 0px;
-        z-index: -1;
         height: 100%;
         .box-sizing(border-box);
         background: @istacWhite;
@@ -239,6 +238,8 @@
         flex-direction: row;
         justify-content: flex-start;
         flex-wrap: wrap;
+        position: absolute;
+        z-index: 1000;
     }
 
     .dataset-visualization-dimensions {

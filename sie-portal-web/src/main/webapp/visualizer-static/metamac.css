@@ -2511,7 +2511,6 @@ input[type="color"] select,
   position: absolute;
   width: 100%;
   top: 0px;
-  z-index: -1;
   height: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -2571,6 +2570,8 @@ input[type="color"] select,
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
+  position: absolute;
+  z-index: 1000;
 }
 .dataset-visualization-container .dataset-visualization-dimensions {
   flex-grow: 1;
