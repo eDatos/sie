@@ -55,8 +55,8 @@
             }
         },
 
-        parse: function (attributes) {
-            attributes.representations = App.modules.dataset.filter.models.FilterRepresentations.initializeWithRepresentations(attributes.representations);
+        parse: function (attributes, options) {
+            attributes.representations = App.modules.dataset.filter.models.FilterRepresentations.initializeWithRepresentations(attributes, options);
             attributes.representations.on('all', this._onRepresentationEvent, this);
             return attributes;
         },

@@ -67443,7 +67443,8 @@ I18n.translations.pt = {
             visibleLabelType: VISIBLE_LABEL_TYPES.LABEL
         },
 
-        initialize: function () {
+        initialize: function (representation, options) {
+            this.set("selected", options.defaultSelectedValue);
             this.children = new Backbone.Collection();
             this.listenTo(this.children, 'change:selected change:childrenSelected reset', this._updateChildrenSelected);
             this.listenTo(this, 'change:open', this._onChangeOpen);
@@ -67539,10 +67540,14 @@ I18n.translations.pt = {
             this.stopListening();
         },
 
-        initializeHierarchy: function () {
+        initializeHierarchy: function (attributes, options) {
             var hasHierarchy = false;
             this.each(function (representation) {
                 var children = this.where({ parent: representation.id });
+                if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.options.territorio === representation.id) {
+                    representation.set("selected", true);
+                }
+
                 if (children.length) {
                     hasHierarchy = true;
                     representation.children.reset(children);
@@ -67726,10 +67731,12 @@ I18n.translations.pt = {
 
 
     }, {
-            initializeWithRepresentations: function (representations) {
-                var filterRepresentations = new App.modules.dataset.filter.models.FilterRepresentations(representations, { parse: true });
-                filterRepresentations.initializeHierarchy();
-
+            initializeWithRepresentations: function (attributes, options) {
+                var isGeographicDimension = attributes.type === "GEOGRAPHIC_DIMENSION";
+                options['defaultSelectedValue'] = !isGeographicDimension;
+                options['parse'] = true;
+                var filterRepresentations = new App.modules.dataset.filter.models.FilterRepresentations(attributes.representations, options);
+                filterRepresentations.initializeHierarchy(attributes, options);
                 return filterRepresentations;
             }
         });
@@ -67792,8 +67799,8 @@ I18n.translations.pt = {
             }
         },
 
-        parse: function (attributes) {
-            attributes.representations = App.modules.dataset.filter.models.FilterRepresentations.initializeWithRepresentations(attributes.representations);
+        parse: function (attributes, options) {
+            attributes.representations = App.modules.dataset.filter.models.FilterRepresentations.initializeWithRepresentations(attributes, options);
             attributes.representations.on('all', this._onRepresentationEvent, this);
             return attributes;
         },

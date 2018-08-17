@@ -24,10 +24,14 @@
             this.stopListening();
         },
 
-        initializeHierarchy: function () {
+        initializeHierarchy: function (attributes, options) {
             var hasHierarchy = false;
             this.each(function (representation) {
                 var children = this.where({ parent: representation.id });
+                if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.options.territorio === representation.id) {
+                    representation.set("selected", true);
+                }
+
                 if (children.length) {
                     hasHierarchy = true;
                     representation.children.reset(children);
@@ -211,10 +215,12 @@
 
 
     }, {
-            initializeWithRepresentations: function (representations) {
-                var filterRepresentations = new App.modules.dataset.filter.models.FilterRepresentations(representations, { parse: true });
-                filterRepresentations.initializeHierarchy();
-
+            initializeWithRepresentations: function (attributes, options) {
+                var isGeographicDimension = attributes.type === "GEOGRAPHIC_DIMENSION";
+                options['defaultSelectedValue'] = !isGeographicDimension;
+                options['parse'] = true;
+                var filterRepresentations = new App.modules.dataset.filter.models.FilterRepresentations(attributes.representations, options);
+                filterRepresentations.initializeHierarchy(attributes, options);
                 return filterRepresentations;
             }
         });
