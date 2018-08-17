@@ -23,7 +23,8 @@
             visibleLabelType: VISIBLE_LABEL_TYPES.LABEL
         },
 
-        initialize: function () {
+        initialize: function (representation, options) {
+            this.set("selected", options.defaultSelectedValue);
             this.children = new Backbone.Collection();
             this.listenTo(this.children, 'change:selected change:childrenSelected reset', this._updateChildrenSelected);
             this.listenTo(this, 'change:open', this._onChangeOpen);
