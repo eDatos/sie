@@ -1,5 +1,15 @@
 {
     "procesoElectoral": {
-        "pageTitle": "Sistema electoral del ISTAC"
+        "pageTitle": "Sistema electoral del ISTAC",
+        "loading": "Cargando...",
+        "header": {
+            "AUTONOMICAS": "{{ lugar }}. Resultados en las elecciones autonómicas de {{ fecha }}",
+            "CABILDO": "{{ lugar }}. Resultados en las elecciones al Cabildo de {{ fecha }}",
+            "CONGRESO": "{{ lugar }}. Resultados en las elecciones al Congreso de {{ fecha }}",
+            "MUNICIPALES": "{{ lugar }}. Resultados en las elecciones municipales de {{ fecha }}",
+            "PARLAMENTO_EUROPEO": "{{ lugar }}. Resultados en las elecciones al Parlamento Europeo de {{ fecha }}",
+            "REFERENDUM": "{{ lugar }}. Resultados en el referéndum de {{ fecha }}",
+            "SENADO": "{{ lugar }}. Resultados en las elecciones al Senado de {{ fecha }}"
+        }
     }
 }

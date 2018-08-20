@@ -36,6 +36,10 @@ export class DatasetService {
         return this.promesaLugares;
     }
 
+    getLugarById(id: string): Promise<Lugar> {
+        return this.getListaLugares().then((listaLugares) => listaLugares.find((element) => element.id === id));
+    }
+
     private doGetMetadata(): Observable<any> {
         const config = this.configService.getConfig();
         return this.http.get(`${config.dataset.endpointExternal}${config.dataset.evolucionElectoral}${config.dataset.metadata}`)

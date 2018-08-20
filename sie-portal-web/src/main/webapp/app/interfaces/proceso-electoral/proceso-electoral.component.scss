@@ -12,9 +12,18 @@
         }
     }
 
-    .metamac-container {
+    .section {
+        max-width: 1200px;
         margin: 0 auto;
+    }
+
+    .no-metamac {
+        font-family: $font-family-sans-serif;
+        color: #3c3c3c;
+    }
+
+    .metamac-container {
         padding-bottom: 2rem;
         min-width: 760px;
-      }
+    }
 }

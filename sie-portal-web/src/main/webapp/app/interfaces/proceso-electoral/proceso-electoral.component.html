@@ -1,3 +1,9 @@
 <jhi-title-bar></jhi-title-bar>
 
-<div class="metamac-container" id="metamac-container">Cargando...</div>
+<div class="section">
+    <div class="no-metamac">
+        <h1 *ngIf="tipoElecciones && lugar && fecha" jhiTranslate="procesoElectoral.header.{{tipoElecciones}}" [translateValues]="{lugar: lugar.nombre, fecha: fecha}"></h1>
+    </div>
+
+    <div class="metamac-container" id="metamac-container"><span jhiTranslate="procesoElectoral.loading"></span></div>
+</div>
