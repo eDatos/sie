@@ -33,12 +33,12 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
 
     ngOnInit() {
         this.activatedRoute.parent.params.subscribe((params) => {
-            this.tipoElecciones = params.tipoElecciones;
-            this.fecha = this.activatedRoute.parent.snapshot.url[3].path;
-
-            const lugarId = this.activatedRoute.parent.snapshot.url[1];
-            this.datasetService.getLugarById(lugarId.path).then((lugar) => this.lugar = lugar);
             this.procesoElectoralDatasetService.getDatasetsByTipoElecciones(params.tipoElecciones).then((multidataset) => {
+                const lugarId = this.activatedRoute.parent.snapshot.url[1];
+                this.datasetService.getLugarById(lugarId.path).then((lugar) => this.lugar = lugar);
+                this.fecha = this.activatedRoute.parent.snapshot.url[3].path;
+                this.tipoElecciones = params.tipoElecciones;
+
                 if (App.mainRegion) {
                     this.stopBackbone();
                 }
