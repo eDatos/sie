@@ -38,10 +38,11 @@
                     animation: false
                 },
                 pie: {
-                    startAngle: -90,
+                    colors: ["#008BD0", "#67A23F", "#8C5C1D", "#7F5B97", "#C01A41", "#E5772D", "#8C9BA3"],
+                    center: ['50%', '75%'],
+                    innerSize: '40%',
                     endAngle: 90,
-                    innerSize: '50%',
-                    center: ['50%', '75%']
+                    startAngle: -90
                 }
             }
         });
