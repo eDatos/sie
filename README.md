@@ -1,7 +1,13 @@
-# Arte Application Template
+# Elecciones
 
-En este tutorial se explica el proceso a seguir para llevar a cabo el proceso de instalación de la aplicación. Se recomienda llevar a cabo una lectura rápida de todo el tutorial antes de comenzar con el proceso de instalación.
-Además, podrá encontrar otros anexos de utilidad en los que se detallan algunas cuestiones relacionadas con el desarrollo, los diferentes perfiles de compilación,...
+El visualizador se copia del siguiente commit de metamac-portal:
+
+Commit: 908e4dfae8a133b19c63232b3299b4c4f0334c0e [908e4df]
+Parents: 993e8268c1
+Author: Francisco Javier Rodríguez García <frodgar@arte-consultores.com>
+Date: jueves, 10 de mayo de 2018 15:47:08
+Committer: Francisco Javier Rodríguez García
+METAMAC-2721 - Adaptar el visualizador para visualizar multidatasets
 
 ----------
 
