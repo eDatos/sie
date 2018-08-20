@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
-import { ProcesoElectoralDatasetService } from '../../dataset';
+import { ProcesoElectoralDatasetService, DatasetService } from '../../dataset';
 import { ActivatedRoute } from '@angular/router';
+import { Lugar } from '../lugar';
 
 declare var I18n: any;
 declare var App: any;
@@ -19,15 +20,25 @@ export const METAMAC_CSS_REL = 'stylesheet';
 })
 export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestroy {
 
+    tipoElecciones: string;
+    fecha: string;
+    lugar: Lugar;
+
     constructor(
         private host: ElementRef,
         private activatedRoute: ActivatedRoute,
-        private procesoElectoralDatasetService: ProcesoElectoralDatasetService
+        private procesoElectoralDatasetService: ProcesoElectoralDatasetService,
+        private datasetService: DatasetService
     ) { }
 
     ngOnInit() {
         this.activatedRoute.parent.params.subscribe((params) => {
             this.procesoElectoralDatasetService.getDatasetsByTipoElecciones(params.tipoElecciones).then((multidataset) => {
+                const lugarId = this.activatedRoute.parent.snapshot.url[1];
+                this.datasetService.getLugarById(lugarId.path).then((lugar) => this.lugar = lugar);
+                this.fecha = this.activatedRoute.parent.snapshot.url[3].path;
+                this.tipoElecciones = params.tipoElecciones;
+
                 if (App.mainRegion) {
                     this.stopBackbone();
                 }
