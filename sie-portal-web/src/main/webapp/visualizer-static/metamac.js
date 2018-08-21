@@ -67535,7 +67535,9 @@ I18n.translations.pt = {
             var childrenSelected = this.children.any(function (child) {
                 return child.get('selected') || child.get('childrenSelected');
             });
+            if (childrenSelected != this.get('childrenSelected')) {
             this.set('childrenSelected', childrenSelected);
+            }
         },
 
         _close: function () {
@@ -67620,7 +67622,7 @@ I18n.translations.pt = {
             this.hasHierarchy = hasHierarchy;
         },
 
-        _setSelectedGeographicDimension(attributes, options) {
+        _setSelectedGeographicDimension: function (attributes, options) {
             this.each(function (representation) {
                 // TODO mejorar el rendimiento de esto
                 if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.options.territorio === representation.id) {
@@ -70248,9 +70250,12 @@ App.widget.filter.FilterView = Backbone.View.extend({
 
         render: function () {
             var self = this;
+            self.showLoading();
 
             this.dataset.data.loadAllSelectedData()
                 .then(function () {
+                    self.hideLoading();
+
                     self.$el.html("");
                     self.$title = $('<h3></h3>');
                     self.updateTitle();
@@ -70398,14 +70403,14 @@ App.widget.filter.FilterView = Backbone.View.extend({
             if (!this.assertAllDimensionsHaveSelections()) {
                 return;
             }
+
             if (!this.chart) {
                 this.load();
             } else {
-                this.chart.showLoading();
-
                 var self = this;
+                self.showLoading();
                 this.dataset.data.loadAllSelectedData().then(function () {
-                    self.chart.hideLoading();
+                    self.hideLoading();
 
                     self.updateTitle();
                     var data = self.getData();
@@ -70647,8 +70652,12 @@ App.widget.filter.FilterView = Backbone.View.extend({
 
         render: function () {
             var self = this;
+
+            self.showLoading();
             this.dataset.data.loadAllSelectedData()
                 .then(function () {
+                    self.hideLoading();
+
                     self.$el.empty();
                     self.$title = $('<h3></h3>');
                     self.updateTitle();
@@ -70730,12 +70739,11 @@ App.widget.filter.FilterView = Backbone.View.extend({
             if (!this.masterChart || !this.detailChart) {
                 this.load();
             } else {
-                self.detailChart.showLoading();
-                self.masterChart.showLoading();
+                self.showLoading();
 
                 this.dataset.data.loadAllSelectedData().then(function () {
-                    self.detailChart.hideLoading();
-                    self.masterChart.hideLoading();
+                    self.hideLoading();
+
                     self.updateTitle();
                     self._updateMaster();
                     self._updateDetail();
@@ -71694,13 +71702,12 @@ App.VisualElement.PieChart = (function () {
         load: function () {
             var self = this;
             this._bindEvents();
-            if (!this.assertAllDimensionsHaveSelections()) {
                 if (this.$title) { this.$title.hide(); }
+            if (!this.assertAllDimensionsHaveSelections()) {
                 return;
             }
-            if (this.$title) { this.$title.show(); }
-            this.visible = true;
 
+            this.visible = true;
             this.showLoading();
 
             var normCodes = this._getGeographicDimensionNormCodes();
@@ -71800,6 +71807,7 @@ App.VisualElement.PieChart = (function () {
             this._initTitleView();
 
             this._setUpListeners();
+            if (this.$title) { this.$title.show(); }
             this.render();
             this.hideLoading();
         },
