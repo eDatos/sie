@@ -45,6 +45,8 @@
             DEFAULT_VALUE: "G_"
         },
 
+        minSemiCirclePercentage: 1,
+
         maxUrlQueryLength: 1700
 
     };

@@ -59752,6 +59752,8 @@ if(this.$element.prop("multiple"))this.current(function(d){var e=[];a=[a],a.push
             DEFAULT_VALUE: "G_"
         },
 
+        minSemiCirclePercentage: 1,
+
         maxUrlQueryLength: 1700
 
     };
@@ -60325,7 +60327,8 @@ I18n.translations.es = {
             nomap: "Mapa no disponible"
         },
         noSelection: "Debe seleccionar al menos una categoría en cada dimensión",
-        loading: "Cargando datos..."
+        loading: "Cargando datos...",
+        others: "Otros"
     },
 
     entity: {
@@ -71225,16 +71228,39 @@ App.VisualElement.PieChart = (function () {
                 listSeries.push(serie);
             });
 
-            _.each(listSeries, function (serie) {
-                serie.data = _.sortBy(serie.data, function(data) {
-                    return -data.y;
-                });
-            });
-
             // Changing the options of the chart
             var result = {};
-            result.series = listSeries;
+            result.series = this._sortAndfilterSeries(listSeries);
             return result;
+        },
+
+        _sortAndfilterSeries: function (listSeries) {
+            var resultSeries = listSeries;
+            _.each(resultSeries, function (serie) {
+                var data = _.sortBy(serie.data, function (data) {
+                    return -data.y;
+                });
+
+                var othersData = {
+                    name: I18n.t("ve.others"),
+                    y: 0,
+                    y1: 0,
+                    y2: 0
+                };
+                while (data.length > 0 && (!data[data.length - 1].y1 || data[data.length - 1].y1 < App.Constants.minSemiCirclePercentage)) {
+                    var element = data.pop();
+                    othersData.y += element.y ? element.y : 0;
+                    othersData.y1 += element.y1 ? element.y1 : 0;
+                    othersData.y2 += element.y2 ? element.y2 : 0;
+                }
+
+                if (othersData.y1) {
+                    data.push(othersData);
+                }
+
+                serie.data = data;
+            });
+            return resultSeries;
         },
 
         update: function () {
