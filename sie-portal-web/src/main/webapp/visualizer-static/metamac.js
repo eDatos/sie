@@ -61661,11 +61661,6 @@ I18n.translations.pt = {
                     candidacyType: CANDIDACY_TYPE_SELECTOR
                 }
             },
-            map: {
-                selectors: {
-                    candidacyType: CANDIDACY_TYPE_SELECTOR
-                }
-            },
             column: {
                 selectors: {
                     candidacyType: CANDIDACY_TYPE_SELECTOR
