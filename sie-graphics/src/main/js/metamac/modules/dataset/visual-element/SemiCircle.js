@@ -195,6 +195,12 @@
                 listSeries.push(serie);
             });
 
+            _.each(listSeries, function (serie) {
+                serie.data = _.sortBy(serie.data, function(data) {
+                    return -data.y;
+                });
+            });
+
             // Changing the options of the chart
             var result = {};
             result.series = listSeries;
