@@ -21150,7 +21150,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n<br>\r\n<div>\r\n    Notas de la categoría\r\n    <ul>\r\n    ";
+  buffer += "\r\n<br>\r\n<div>\r\n    Notas de la categoría\r\n    <ul>\r\n        ";
   stack1 = helpers.each.call(depth0, depth0.attributes, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n    </ul>\r\n</div>\r\n";
@@ -21159,19 +21159,19 @@ function program1(depth0,data) {
 function program2(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "        \r\n        <li>\r\n            ";
+  buffer += "\r\n        <li>\r\n            ";
   stack1 = helpers['if'].call(depth0, depth0.href, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n            ";
+  buffer += " ";
   stack1 = helpers.unless.call(depth0, depth0.href, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n        </li>\r\n    ";
+  buffer += "\r\n        </li>\r\n        ";
   return buffer;
   }
 function program3(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\r\n                <a href=\"";
+  buffer += "\r\n            <a href=\"";
   if (stack1 = helpers.href) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.href; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -21186,9 +21186,9 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   var buffer = "";
-  buffer += "\r\n                "
+  buffer += " "
     + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + "\r\n            ";
+    + " ";
   return buffer;
   }
 
@@ -21482,13 +21482,26 @@ function program20(depth0,data) {
   return buffer;
   });
 
+this["Handlebars"]["templates"]["dataset/dataset-loading"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class=\"dataset-message-container\">\r\n    <div class=\"dataset-message-text\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.message || depth0.message),stack1 ? stack1.call(depth0, "ve.loading", options) : helperMissing.call(depth0, "message", "ve.loading", options)))
+    + "\r\n    </div>\r\n</div>";
+  return buffer;
+  });
+
 this["Handlebars"]["templates"]["dataset/dataset-no-selection"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div class=\"no-selection-container\">\r\n    <div class=\"no-selection-message\">";
+  buffer += "<div class=\"dataset-message-container\">\r\n    <div class=\"dataset-message-text\">";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.message || depth0.message),stack1 ? stack1.call(depth0, "ve.noSelection", options) : helperMissing.call(depth0, "message", "ve.noSelection", options)))
     + "\r\n    </div>\r\n</div>";
@@ -22169,10 +22182,34 @@ function program5(depth0,data) {
   return buffer;
   });
 
+this["Handlebars"]["templates"]["dataset/filter/sidebar/filter-sidebar-multidataset-node"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<a href=\""
+    + escapeExpression(((stack1 = ((stack1 = depth0.multidatasetNode),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" title=\"";
+  if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.title; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\">\r\n    <div class=\"filter-sidebar-category-left-actions\">\r\n        <i class=\"category-state  ";
+  if (stack2 = helpers.stateClass) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.stateClass; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + " level0\"></i>\r\n    </div>\r\n    <span class=\"filter-sidebar-category-label\">\r\n        ";
+  if (stack2 = helpers.label) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.label; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\r\n    </span>\r\n</a>";
+  return buffer;
+  });
+
 this["Handlebars"]["templates"]["dataset/filter/sidebar/filter-sidebar-multidataset"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, stack2, self=this, functionType="function", escapeExpression=this.escapeExpression;
 
 function program1(depth0,data) {
   
@@ -22186,42 +22223,6 @@ function program3(depth0,data) {
   return " in ";
   }
 
-function program5(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\r\n            <div class=\"filter-sidebar-category\">\r\n                <a href=\"";
-  if (stack1 = helpers.url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\" title=\"";
-  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\">\r\n                    <div class=\"filter-sidebar-category-left-actions\">\r\n                        <i class=\"category-state ";
-  stack1 = helpers['if'].call(depth0, depth0.isCurrentResource, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "  ";
-  stack1 = helpers.unless.call(depth0, depth0.isCurrentResource, {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += " level0\"></i>\r\n                    </div>\r\n                    <span class=\"filter-sidebar-category-label\">\r\n                        ";
-  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\r\n                    </span>\r\n                </a>\r\n            </div>\r\n            ";
-  return buffer;
-  }
-function program6(depth0,data) {
-  
-  
-  return " filter-sidebar-category-icon-radio-check ";
-  }
-
-function program8(depth0,data) {
-  
-  
-  return " filter-sidebar-category-icon-radio-unchecked ";
-  }
-
   buffer += "<div class=\"filter-sidebar-multidataset\">\r\n    <div class=\"filter-sidebar-multidataset-title ";
   stack2 = helpers['if'].call(depth0, ((stack1 = depth0.multidataset),stack1 == null || stack1 === false ? stack1 : stack1.open), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
@@ -22230,10 +22231,7 @@ function program8(depth0,data) {
     + "\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"filter-sidebar-multidataset-content collapse ";
   stack2 = helpers['if'].call(depth0, ((stack1 = depth0.multidataset),stack1 == null || stack1 === false ? stack1 : stack1.open), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\">\r\n        <div class=\"filter-sidebar-categories\">\r\n            ";
-  stack2 = helpers.each.call(depth0, depth0.nodes, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\r\n        </div>\r\n    </div>\r\n\r\n</div>";
+  buffer += "\">\r\n        <div class=\"filter-sidebar-multidataset-searchbar\"></div>\r\n\r\n        <div class=\"filter-sidebar-multidataset-nodes\">\r\n        </div>\r\n    </div>\r\n\r\n</div>";
   return buffer;
   });
 
@@ -59752,7 +59750,10 @@ if(this.$element.prop("multiple"))this.current(function(d){var e=[];a=[a],a.push
 
         candidacyType: {
             DEFAULT_VALUE: "G_"
-        }
+        },
+
+        maxUrlQueryLength: 1700
+
     };
 
 }());
@@ -60323,7 +60324,8 @@ I18n.translations.es = {
         mapbubble: {
             nomap: "Mapa no disponible"
         },
-        noSelection: "Debe seleccionar al menos una categoría en cada dimensión"
+        noSelection: "Debe seleccionar al menos una categoría en cada dimensión",
+        loading: "Cargando datos..."
     },
 
     entity: {
@@ -60564,7 +60566,8 @@ I18n.translations.en = {
         mapbubble: {
             nomap: "No map available"
         },
-        noSelection: "You must choose at least one category on each dimension"
+        noSelection: "You must choose at least one category on each dimension",
+        loading: "Loading data..."
     },
 
     entity: {
@@ -60802,7 +60805,8 @@ I18n.translations.pt = {
         mapbubble: {
             nomap: "Mapa indisponível"
         },
-        noSelection: "Você deve escolher pelo menos uma categoria em cada dimensão"
+        noSelection: "Você deve escolher pelo menos uma categoria em cada dimensão",
+        loading: "Carregando dados..."
     },
 
     entity: {
@@ -61152,7 +61156,8 @@ I18n.translations.pt = {
             this.optionsModel = new App.modules.dataset.OptionsModel({
                 widget: App.config.widget,
                 menu: false,
-                filter: this.filterDimensions.hasMultidataset()
+                filter: this.filterDimensions.hasMultidataset(),
+                mustApplyVisualizationRestrictions: !this.metadata.identifier().permalinkId
             });
 
             this.filtersModel = new App.modules.dataset.FiltersModel();
@@ -61389,7 +61394,8 @@ I18n.translations.pt = {
             widget: false,
             widgetButton: true,
             widgetInitialType: '',
-            menu: true
+            menu: true,
+            mustApplyVisualizationRestrictions: true
         }
     });
 
@@ -61514,9 +61520,15 @@ I18n.translations.pt = {
         },
 
         _isVisualizationButtonEnabled: function (type) {
-            if (this.filterDimensions.metadata.apiType == App.Constants.api.type.INDICATOR) {
-                if (type == "map" || type == "mapbubble") return false;
+
+            if (type == "line" && !this.filterDimensions.canDrawLineVisualizations()) {
+                return false;
             }
+
+            if ((type == "map" || type == "mapbubble") && !this.filterDimensions.canDrawMapVisualizations()) {
+                return false;
+            }
+
             if (this.optionsModel.get('widget')) {
                 return type == "info" || type == this.optionsModel.get('widgetInitialType');
             }
@@ -61751,6 +61763,9 @@ I18n.translations.pt = {
             this.filterDimensions = options.filterDimensions;
             this.optionsModel = options.optionsModel;
             this.measureAttribute = null;
+
+            this.currentSelectedLevel = null;
+            this.currentSelectedGranularity = null;
         },
 
         configuration: {
@@ -61944,12 +61959,14 @@ I18n.translations.pt = {
         _updateRepresentations: function (filterDimensionId, e) {
             // TODO Refactor this to avoid accesing the DOM
             var selectedLevel = this.$el.find('select.dimension-select-level[data-dimension-id=' + filterDimensionId + ']').val();
-            if (selectedLevel) {
+            if (selectedLevel && this.currentSelectedLevel != selectedLevel) {
+                this.currentSelectedLevel = selectedLevel;
                 this._updateDrawableRepresentationsBySelectedLevel(filterDimensionId, selectedLevel);
             }
 
             var selectedGranularity = this.$el.find('select.dimension-select-granularity[data-dimension-id=' + filterDimensionId + ']').val();
-            if (selectedGranularity) {
+            if (selectedGranularity && this.currentSelectedGranularity != selectedGranularity) {
+                this.currentSelectedGranularity = selectedGranularity;
                 this._updateDrawableRepresentationsBySelectedGranularity(filterDimensionId, selectedGranularity);
             }
         },
@@ -61993,8 +62010,8 @@ I18n.translations.pt = {
         _bindEvents: function () {
             var self = this;
             this.filterDimensions.each(function (filterDimension) {
-                self.listenTo(filterDimension.get('representations'), 'change:drawable', _.debounce(_.bind(self._updateSelectedCategory, self, filterDimension.get('id')), 100));
-                self.listenTo(self.filterDimensions, 'change:selected', _.debounce(_.bind(self._updateRepresentations, self, filterDimension.get('id')), 100));
+                self.listenTo(filterDimension.get('representations'), 'change:drawable', _.debounce(_.bind(self._updateSelectedCategory, self, filterDimension.get('id')), 300));
+                self.listenTo(self.filterDimensions, 'change:selected', _.debounce(_.bind(self._updateRepresentations, self, filterDimension.get('id')), 300));
             });
             this.listenTo(this.filterDimensions, "change:zone change:selected", _.throttle(self.render, 500));
             this.listenTo(this.dataset.data, "hasNewData", self.hasNewdata);
@@ -62822,6 +62839,7 @@ I18n.translations.pt = {
 
             this.primaryMeasureAttributes = this.getPrimaryMeasureAttributesValues();
             this.combinatedDimensionsAttributes = this.getCombinatedDimensionsAttributes();
+            this.dimensionsAttributes = this.getDimensionsAttributes();
             this.datasetAttributes = this.getDatasetAttributes();
         },
 
@@ -62853,26 +62871,46 @@ I18n.translations.pt = {
         getCellAttributes: function (observationPosition, dimensionsPositions) {
             return {
                 primaryMeasureAttributes: this.getPrimaryMeasureAttributesByPos(observationPosition),
-                combinatedDimensionsAttributes: this.getCombinatedDimensionsAttributesByDimensionsPositions(dimensionsPositions)
+                combinatedDimensionsAttributes: this.getCombinatedDimensionsAttributesByDimensionsPositions(dimensionsPositions),
+                dimensionsAttributes: this.getDimensionsAttributesByDimensionsPositions(dimensionsPositions)
             };
         },
 
-        getCombinatedDimensionsAttributes: function (dimensionsPositions) {
+        getDimensionsAttributesByDimensionsPositions: function (dimensionsPositions) {
+            return _.map(this.dimensionsAttributes, function (combinatedDimensionAttribute) {
+                self.dimensionsMultiplicators = combinatedDimensionAttribute.dimensionsMultiplicators;
+                var pos = 0;
+                pos = _.reduceRight(this, function (pos, arrayPosition, index) {
+                    return pos += self.dimensionsMultiplicators[index] * arrayPosition;
+                }, pos, self);
+                return { value: combinatedDimensionAttribute.values[pos], dimensionId: combinatedDimensionAttribute.attributeDimensionsIds[0] };
+            }, dimensionsPositions);
+        },
+
+        getCombinatedDimensionsAttributes: function () {
+            if (this.hasAttributes()) {
+                var dimensionAttributesRawValues = _.where(this.attributes, { attachmentLevel: ATTACHMENT_LEVELS.DIMENSION });
+                var dimensionAttributesRawValuesForCell = this._filterCombinatedDimensionAttributesForCell(dimensionAttributesRawValues);
+
+                return _(dimensionAttributesRawValuesForCell).map(this._parseDimensionAttribute, this);
+            }
+        },
+
+        getDimensionsAttributes: function () {
             if (this.hasAttributes()) {
                 var dimensionAttributesRawValues = _.where(this.attributes, { attachmentLevel: ATTACHMENT_LEVELS.DIMENSION });
                 var dimensionAttributesRawValuesForCell = this._filterDimensionAttributesForCell(dimensionAttributesRawValues);
 
-                return _(dimensionAttributesRawValuesForCell).map(this._parseCombinatedDimension, this);
+                return _(dimensionAttributesRawValuesForCell).map(this._parseDimensionAttribute, this);
             }
         },
 
-        _parseCombinatedDimension: function (attribute, index) {
-            var attributeDimensionsIds = _.pluck(attribute.dimensions.dimension, "dimensionId");
-            var dimensionsMultiplicators = this._getDimensionsMultiplicators(attributeDimensionsIds);
-
+        _parseDimensionAttribute: function (attribute) {
+            var attributeDimensionIds = _.pluck(attribute.dimensions.dimension, "dimensionId");
+            var dimensionsMultiplicators = this._getDimensionsMultiplicators(attributeDimensionIds);
             var values = this._parseAttributeValuesList(attribute);
 
-            return { values: values, dimensionsMultiplicators: dimensionsMultiplicators };
+            return { values: values, dimensionsMultiplicators: dimensionsMultiplicators, attributeDimensionsIds: attributeDimensionIds };
         },
 
         _getDimensionsMultiplicators: function (attributeDimensionsIds) {
@@ -62925,11 +62963,18 @@ I18n.translations.pt = {
             });
         },
 
-        _filterDimensionAttributesForCell: function (attributes) {
+        _filterCombinatedDimensionAttributesForCell: function (attributes) {
             return _.filter(attributes, function (attribute) {
                 return attribute.dimensions.total != 1;
             });
         },
+
+        _filterDimensionAttributesForCell: function (attributes) {
+            return _.filter(attributes, function (attribute) {
+                return attribute.dimensions.total == 1;
+            });
+        },
+
 
         hasAttributes: function () {
             return !_.isEmpty(this.attributesValues) && !_.isEmpty(this.attributesMetadata);
@@ -63382,7 +63427,6 @@ I18n.translations.pt = {
                     stub: {
                         dimensionId: ["TIME"] // Always this ones
                     },
-                    selfLink: {},
                     autoOpen: true
                 },
                 dimensions: {
@@ -63703,6 +63747,9 @@ I18n.translations.pt = {
         },
 
         getDimensions: function (callback) {
+
+            if (!this.metadata.metadata.relatedDsd.selfLink) { return; }
+
             var requestParams = {
                 url: this.metadata.metadata.relatedDsd.selfLink.href + "?_type=json",
                 method: "GET",
@@ -63735,7 +63782,9 @@ I18n.translations.pt = {
                 measureConcept = this.metadata.metadata.measureCoverages.resource;
             } else if (this.metadata.metadata.attributes) {
                 var measureAttribute = _.findWhere(this.metadata.metadata.attributes.attribute, { type: "MEASURE", attachmentLevel: "DATASET" });
-                measureConcept = measureAttribute.attributeValues.value;
+                if (measureAttribute) {
+                    measureConcept = measureAttribute.attributeValues.value;
+                }
             }
 
             if (measureConcept) {
@@ -63943,29 +63992,18 @@ I18n.translations.pt = {
             options.size = { width: this.cacheBlockSize.columns, height: this.cacheBlockSize.rows };
             this.cache[i][j] = new BigDataCacheBlock(options);
         },
-
         initializeCacheBlockSize: function () {
             this.cacheBlockSize = {};
-            if (this.rows > this.size && this.columns > this.size) {
+
+            this.cacheBlockSize.rows = this.rows;
+            this.cacheBlockSize.columns = this.columns;
+
+            if (this.rows > this.size) {
                 this.cacheBlockSize.rows = this.size;
+            }
+
+            if (this.columns > this.size) {
                 this.cacheBlockSize.columns = this.size;
-            } else if (this.rows > this.size) {
-                this.cacheBlockSize.rows = Math.ceil(this.size * this.size / this.columns);
-                this.cacheBlockSize.columns = this.columns;
-
-                if (this.cacheBlockSize.rows > this.rows) {
-                    this.cacheBlockSize.rows = this.rows;
-                }
-            } else if (this.columns > this.size) {
-                this.cacheBlockSize.rows = this.rows;
-                this.cacheBlockSize.columns = Math.ceil(this.size * this.size / this.rows);
-
-                if (this.cacheBlockSize.columns > this.columns) {
-                    this.cacheBlockSize.columns = this.columns;
-                }
-            } else {
-                this.cacheBlockSize.rows = this.rows;
-                this.cacheBlockSize.columns = this.columns;
             }
         },
 
@@ -64106,16 +64144,50 @@ I18n.translations.pt = {
 
         getCache: function () {
             if (!this.cache) {
-                this.cache = new Cache(this.filterDimensions.getTableInfo().getTableSize());
+                this.cache = new Cache(_.extend({}, this.filterDimensions.getTableInfo().getTableSize(), { size: this._calculateCacheSize() }));
             }
             return this.cache;
         },
 
+        // We'll approximate a size for the cache based on the max length of the representation codes, 
+        // because this is directly related to the API request that we´ll execute later
+        // 
+        // App.Constants.maxUrlQueryLength > cacheSize * maxRepresentationLength[1] + cacheSize * maxRepresentationLength[2]...
+        // App.Constants.maxUrlQueryLength > cacheSize * (maxRepresentationLength[1] +  maxRepresentationLength[2]...)
+        // cacheSize < App.Constants.maxUrlQueryLength / (maxRepresentationLength[1] +  maxRepresentationLength[2]...)
+        _calculateCacheSize: function () {
+            var availableQueryLength = App.Constants.maxUrlQueryLength;
+            var summatoryRepresentationLengths = 0;
+            this.filterDimensions.each(function (filterDimension) {
+                var drawableRepresentations = filterDimension.get('representations').where({ drawable: true });
+                if (!drawableRepresentations.length) { return; }
+                var maxRepresentationLength = _.max(drawableRepresentations, function (representation) { return representation.id.length; }).id.length + 1;
+                if (drawableRepresentations.length == 1) {
+                    // If we only have one representation selected, we simply add it to the query
+                    availableQueryLength -= maxRepresentationLength * 2;
+                } else {
+                    // Else, we add it to later divide for it
+                    summatoryRepresentationLengths += maxRepresentationLength;
+                }
+            });
+
+            if (availableQueryLength < 0) {
+                console.warn("Too many dimensions");
+                return;
+            }
+
+            if (!summatoryRepresentationLengths) {
+                return; // Use default value
+            }
+
+            var cacheSize = Math.floor(availableQueryLength / summatoryRepresentationLengths) || 1;
+            return cacheSize;
+        },
+
         _initializeAjaxManager: function () {
             this.ajaxManager = $.manageAjax.create('DataSourceDatasetCache', {
-                queue: 'limit',
-                cacheResponse: true,
-                queueLimit: 9 // neighbours
+                queue: true,
+                cacheResponse: true
             });
         },
 
@@ -64140,10 +64212,36 @@ I18n.translations.pt = {
         getAttributes: function (selection) {
             var cell = selection.cell || this.filterDimensions.getTableInfo().getCellForCategoryIds(selection.ids);
 
+            var self = this;
+            return this.getCacheBlock(cell, function (cacheBlock) {
+                var ids = self.filterDimensions.getTableInfo().getCategoryIdsForCell(cell);
+                return cacheBlock.apiResponse.getDataById(ids).attributes;
+            });
+        },
+
+        getDatasetAttributes: function () {
+            return this.getRootCacheBlock(function (rootCacheBlock) {
+                return rootCacheBlock.apiResponse.getDatasetAttributes();
+            });
+        },
+
+        getDimensionAttributesById: function (dimensionsIds) {
+            var cell = this.filterDimensions.getTableInfo().getCellForCategoryIds(dimensionsIds);
+            return this.getCacheBlock(cell, function (cacheBlock) {
+                return cacheBlock.apiResponse.getDimensionAttributesById(dimensionsIds);
+            });
+        },
+
+        // Simplified access to root block
+        getRootCacheBlock: function (callback) {
+            var cell = { x: 0, y: 0 };
+            return this.getCacheBlock(cell, callback);
+        },
+
+        getCacheBlock: function (cell, callback) {
             var cacheBlock = this.getCache().cacheBlockForCell(cell);
             if (this.getCache().isBlockReady(cacheBlock)) {
-                var ids = this.filterDimensions.getTableInfo().getCategoryIdsForCell(cell);
-                return cacheBlock.apiResponse.getDataById(ids).attributes;
+                return callback(cacheBlock);
             } else if (cacheBlock) {
                 this._loadCacheBlock(cacheBlock, true);
             }
@@ -64156,35 +64254,6 @@ I18n.translations.pt = {
                 }, this);
             }
         },
-
-        getDatasetAttributes: function () {
-            return this.getRootCacheBlock(function (rootCacheBlock) {
-                return rootCacheBlock.apiResponse.getDatasetAttributes();
-            });
-        },
-
-        getDimensionAttributesById: function (dimensionsIds) {
-            return this.getRootCacheBlock(function (rootCacheBlock) {
-                return rootCacheBlock.apiResponse.getDimensionAttributesById(dimensionsIds);
-            });
-        },
-
-        getDimensionsAttributes: function () {
-            return this.getDimensionAttributesById(_.pluck(this.filterDimensions.models, 'id'));
-        },
-
-        // Simplified access to root block
-        getRootCacheBlock: function (callback) {
-            var cell = { x: 0, y: 0 };
-
-            var cacheBlock = this.getCache().cacheBlockForCell(cell);
-            if (this.getCache().isBlockReady(cacheBlock)) {
-                return callback(cacheBlock);
-            } else if (cacheBlock) {
-                this._loadCacheBlock(cacheBlock, true);
-            }
-        },
-
 
         getNumberData: function (selection) {
             var value = this.getData(selection);
@@ -65362,20 +65431,20 @@ I18n.translations.pt = {
 
     App.components.sidebar.SidebarView = Backbone.View.extend({
 
-        template : App.templateManager.get("components/sidebar/sidebar-container"),
+        template: App.templateManager.get("components/sidebar/sidebar-container"),
 
-        className : "sidebar-container",
+        className: "sidebar-container",
 
-        menuWidth : 50, // sidebar.less, @sidebarMenuWidth
+        menuWidth: 50, // sidebar.less, @sidebarMenuWidth
 
-        initialize : function (options) {
+        initialize: function (options) {
             this.sideViews = options.sideViews;
             this.contentView = options.contentView;
             this.optionsModel = options.optionsModel;
             this.defaultCurrentSideView = options.defaultCurrentSideView;
 
             var stateOptions = {
-                sideViewsIds : _.pluck(this.sideViews, "id")
+                sideViewsIds: _.pluck(this.sideViews, "id")
             };
             this.state = new App.components.sidebar.SidebarStateModel(stateOptions);
 
@@ -65384,12 +65453,12 @@ I18n.translations.pt = {
             _.bindAll(this, "_onClickSplitter", "_onMousemoveSplitter", "_onMouseupSplitter");
         },
 
-        events : {
-            "click .sidebar-menu-item" : "_onClickMenuItem",
-            "mousedown .sidebar-splitter" : "_onClickSplitter"
+        events: {
+            "click .sidebar-menu-item": "_onClickMenuItem",
+            "mousedown .sidebar-splitter": "_onClickSplitter"
         },
 
-        _bindEvents : function () {
+        _bindEvents: function () {
             this.listenTo(this.state, "change:currentSideView", this._onChangeCurrentSideView);
             this.listenTo(this.state, "change:width", this._updateSidebar);
             this.listenTo(this.state, "change:visible", this._updateVisibility);
@@ -65399,62 +65468,62 @@ I18n.translations.pt = {
             this.delegateEvents();
         },
 
-        _unbindEvents : function () {
+        _unbindEvents: function () {
             this.stopListening();
         },
 
-        _onToggleFilter : function() {        
+        _onToggleFilter: function () {
             this.state.set('visible', this.optionsModel.get('filter'));
         },
 
-        _onClickMenuItem : function (e) {
+        _onClickMenuItem: function (e) {
             e.preventDefault();
             var $currentTarget = $(e.currentTarget);
             var sideViewId = $currentTarget.data("view-id");
 
             this.state.toggleSideView(sideViewId);
         },
-        
-        _updateVisibility : function() {
+
+        _updateVisibility: function () {
             this._updateSidebar();
             if (this.state.get("visible")) {
                 if (!this.state.get("currentSideView")) {
                     this.state.set("currentSideView", this.defaultCurrentSideView);
-                }                
+                }
             } else {
                 this.state.set("currentSideView", undefined);
             }
         },
 
-        _updateSidebar : function () {
+        _updateSidebar: function () {
             var width = this.state.get('width');
             var menuWidth = this.optionsModel.get('menu') ? this.menuWidth : 0;
-            if (this.state.get('visible')) {                
-                this.$sidebar.css({width : width, left : menuWidth});
+            if (this.state.get('visible')) {
+                this.$sidebar.css({ width: width, left: menuWidth });
                 this.$content.css('padding-left', menuWidth + width);
             } else {
-                this.$sidebar.css({width : width, left : -width});
+                this.$sidebar.css({ width: width, left: -width });
                 this.$content.css('padding-left', menuWidth);
             }
-            
+
             this.$sidebar.toggleClass('without-menu', !this.optionsModel.get('menu'));
             this.$content.toggleClass('without-menu', !this.optionsModel.get('menu'));
 
             this.updateSidebarHeight();
         },
-        updateSidebarHeight : function () {
+        updateSidebarHeight: function () {
             var menuHeight = $(".js-sidebar-container-sibling").height();
             if (menuHeight) {
-                this.$el.css({height : menuHeight});
+                this.$el.css({ height: menuHeight });
             }
         },
-        
-        _onClickSplitter : function (e) {
+
+        _onClickSplitter: function (e) {
             e.preventDefault();
 
             this._splitterInitialState = {
-                pageX : e.pageX,
-                width : this.$sidebar.outerWidth()
+                pageX: e.pageX,
+                width: this.$sidebar.outerWidth()
             };
 
             var isFullScreen = this.optionsModel.get('fullScreen');
@@ -65467,37 +65536,37 @@ I18n.translations.pt = {
                 .on('mouseup.sidebar', this._onMouseupSplitter);
         },
 
-        _onMousemoveSplitter : function (e) {
+        _onMousemoveSplitter: function (e) {
             e.stopImmediatePropagation();
             if (e.which === 1) {
                 var diff = e.pageX - this._splitterInitialState.pageX;
                 var newWidth = this._splitterInitialState.width + diff;
-                this.state.set('width', newWidth, {validate : true});
+                this.state.set('width', newWidth, { validate: true });
             } else {
                 this._onMouseupSplitter();
             }
         },
 
-        _onMouseupSplitter : function () {
+        _onMouseupSplitter: function () {
             if (this.$overlay) {
                 this.$overlay.remove();
             }
         },
 
-        _getSideView : function (id) {
+        _getSideView: function (id) {
             return _.find(this.sideViews, function (view) {
                 return view.id === id;
             });
         },
 
-        _onChangeCurrentSideView : function () {            
+        _onChangeCurrentSideView: function () {
             var currentSideViewId = this.state.get('currentSideView');
             var currentView = currentSideViewId ? this._getSideView(currentSideViewId) : undefined;
             if (currentView) {
                 currentView.render();
                 this.$el.toggleClass("sidebar-slideRight", true);
                 this.state.set('visible', true);
-                this.$("li[data-view-id='" + currentSideViewId + "']").addClass("active");                                                                         
+                this.$("li[data-view-id='" + currentSideViewId + "']").addClass("active");
             } else {
                 this.state.set('visible', false);
             }
@@ -65510,23 +65579,23 @@ I18n.translations.pt = {
                 }
                 this.$("li[data-view-id='" + previousViewId + "']").removeClass("active");
             }
-            
+
         },
 
-        render : function () {
+        render: function () {
             this._unbindEvents();
             this._bindEvents();
 
             var context = {
-                menu : this.optionsModel.get('menu'),
-                menuClass : this.optionsModel.get('menu') ? '' : 'without-menu'
+                menu: this.optionsModel.get('menu'),
+                menuClass: this.optionsModel.get('menu') ? '' : 'without-menu'
             };
             context.menuItems = _.map(this.sideViews, function (view) {
-                return {id : view.id, icon : view.icon, title : view.title};
+                return { id: view.id, icon: view.icon, title: view.title };
             });
             this.$el.html(this.template(context));
 
-            
+
             this.$sidebarContainer = this.$el;
             this.$menu = this.$('.sidebar-menu');
             this.$sidebar = this.$('.sidebar-sidebar');
@@ -65538,11 +65607,11 @@ I18n.translations.pt = {
 
             if (this.sideViews.length) {
                 this.sideViews[0].render();
-            }            
+            }
 
             if (this.contentView != null) {
-            	this.contentView.setElement(this.$content);
-            	this.contentView.render();
+                this.contentView.setElement(this.$content);
+                this.contentView.render();
             }
 
             this._updateVisibility();
@@ -65550,7 +65619,7 @@ I18n.translations.pt = {
             return this;
         },
 
-        close : function () {
+        close: function () {
             this.state.restoreDefaults();
         }
 
@@ -67220,19 +67289,18 @@ I18n.translations.pt = {
 
     App.modules.dataset.filter.models.FilterZone = Backbone.Model.extend({
 
-        defaults : {
-            dimensions : undefined,
-            fixedSize : undefined,
-            maxSize : undefined,
-            type : undefined,
-            preferredType : undefined,
-            selectedLimit : Infinity,
-            drawableLimit : Infinity
+        defaults: {
+            dimensions: undefined,
+            fixedSize: undefined,
+            maxSize: undefined,
+            type: undefined,
+            preferredType: undefined,
+            drawableLimit: Infinity
         },
 
-        initialize : function () {
+        initialize: function () {
             this.set('dimensions', new Backbone.Collection());
-            this.on('change:selectedLimit change:drawableLimit', this._onChangeLimitForDimension, this);            
+            this.on('change:drawableLimit', this._onChangeLimitForDimension, this);
         },
 
         remove : function (dimension) {
@@ -67253,8 +67321,7 @@ I18n.translations.pt = {
             this.get('dimensions').each(this._updateLimitForDimension, this);
         },
 
-        _updateLimitForDimension : function (dimension) {
-            dimension.get('representations').setSelectedLimit(this.get('selectedLimit'));
+        _updateLimitForDimension: function (dimension) {
             dimension.get('representations').setDrawableLimit(this.get('drawableLimit'));
         },
 
@@ -67524,7 +67591,6 @@ I18n.translations.pt = {
         model: App.modules.dataset.filter.models.FilterRepresentation,
 
         initialize: function () {
-            this.selectedLimit = Infinity;
             this.drawableLimit = Infinity;
 
             this.selectedGeographicalLevel = null;
@@ -67540,13 +67606,10 @@ I18n.translations.pt = {
             this.stopListening();
         },
 
-        initializeHierarchy: function (attributes, options) {
+        initializeHierarchy: function () {
             var hasHierarchy = false;
             this.each(function (representation) {
                 var children = this.where({ parent: representation.id });
-                if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.options.territorio === representation.id) {
-                    representation.set("selected", true);
-                }
 
                 if (children.length) {
                     hasHierarchy = true;
@@ -67555,6 +67618,15 @@ I18n.translations.pt = {
                 }
             }, this);
             this.hasHierarchy = hasHierarchy;
+        },
+
+        _setSelectedGeographicDimension(attributes, options) {
+            this.each(function (representation) {
+                // TODO mejorar el rendimiento de esto
+                if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.options.territorio === representation.id) {
+                    representation.setMeAndMyChildren("selected", true);
+                }
+            }, this);
         },
 
         _updateDrawables: function () {
@@ -67575,17 +67647,12 @@ I18n.translations.pt = {
         },
 
         selectAll: function () {
-            var nModelsToSelected = this.selectedLimit - this.length;
-            var modelsToSelect = this.models.slice(0, nModelsToSelected);
-            _.invoke(modelsToSelect, 'set', { selected: true });
+            _.invoke(this.models, 'set', { selected: true });
         },
 
         selectVisible: function () {
             var visibleModels = this.where({ visible: true, selected: false });
-            var selectedModels = this.getSelectedRepresentations();
-            var visibleModelsToSelect = this.selectedLimit - selectedModels.length;
-            var modelsToSelect = visibleModels.slice(0, visibleModelsToSelect);
-            _.invoke(modelsToSelect, 'set', { selected: true });
+            _.invoke(visibleModels, 'set', { selected: true });
         },
 
         deselectVisible: function () {
@@ -67593,24 +67660,9 @@ I18n.translations.pt = {
             _.invoke(visibleModels, 'set', { selected: false });
         },
 
-        setSelectedLimit: function (selectedLimit) {
-            this.selectedLimit = selectedLimit;
-            var selectedModels = this.getSelectedRepresentations();
-            _.invoke(selectedModels.slice(selectedLimit), 'set', { selected: false });
-            this.updateDrawableUpperLimit();
-        },
-
         setDrawableLimit: function (drawableLimit) {
-            this.drawableLimit = this._getUpperDrawableLimit(drawableLimit);
+            this.drawableLimit = drawableLimit;
             this._updateDrawables();
-        },
-
-        updateDrawableUpperLimit: function () {
-            this.setDrawableLimit(this.drawableLimit);
-        },
-
-        _getUpperDrawableLimit: function (drawableLimit) {
-            return this.selectedLimit < drawableLimit ? this.selectedLimit : drawableLimit;
         },
 
         toggleRepresentationsVisibleRange: function (start, end, state) {
@@ -67620,13 +67672,6 @@ I18n.translations.pt = {
         },
 
         _onChangeSelected: function (model) {
-            var selectedModels = this.getSelectedRepresentations();
-            if (model.get('selected') && selectedModels.length > this.selectedLimit) {
-                var otherModel = _.find(selectedModels, function (selectedModel) {
-                    return selectedModel.id !== model.id;
-                });
-                otherModel.set('selected', false);
-            }
             this._updateDrawables();
             this.updateSelectedGeographicLevel();
         },
@@ -67736,7 +67781,8 @@ I18n.translations.pt = {
                 options['defaultSelectedValue'] = !isGeographicDimension;
                 options['parse'] = true;
                 var filterRepresentations = new App.modules.dataset.filter.models.FilterRepresentations(attributes.representations, options);
-                filterRepresentations.initializeHierarchy(attributes, options);
+                filterRepresentations.initializeHierarchy();
+                filterRepresentations._setSelectedGeographicDimension(attributes, options);
                 return filterRepresentations;
             }
         });
@@ -67806,7 +67852,10 @@ I18n.translations.pt = {
         },
 
         _onRepresentationEvent: function (event, model, collection, options) {
-            this.trigger.apply(this, arguments);
+            // Don´t propagate this one from children to parents again, it´s already propagated from parent to children
+            if (event != "change:visibleLabelType") {
+                this.trigger.apply(this, arguments);
+            }
         },
 
         _cleanFilterQuery: function (query) {
@@ -67814,9 +67863,7 @@ I18n.translations.pt = {
         },
 
         _onChangeFilterQuery: function () {
-            this.stopListening(this, 'change:filterLevel', this._onChangeFilterLevel); //unbind to not trigger _onChangeFilterLevel
-            this.set('filterLevel', this.defaults.filterLevel);
-            this.listenTo(this, 'change:filterLevel', this._onChangeFilterLevel);
+            this.set('filterLevel', this.defaults.filterLevel, { silent: true });
 
             var filterQuery = this._cleanFilterQuery(this.get('filterQuery'));
             var filterQueryLength = filterQuery.length;
@@ -68003,8 +68050,8 @@ I18n.translations.pt = {
 
         _closeDimensions: function (model, dimensions) {
             var otherOpenDimensions = _.find(dimensions, function (openDimension) {
-                    return !model || openDimension.id !== model.id;
-                });
+                return !model || openDimension.id !== model.id;
+            });
             if (otherOpenDimensions) {
                 otherOpenDimensions.set({ open: false });
             }
@@ -68032,6 +68079,15 @@ I18n.translations.pt = {
                 }
                 this.importJSON(json);
             }
+        },
+
+        canDrawLineVisualizations: function () {
+            var timeDimensions = this.where({ type: "TIME_DIMENSION" });
+            return timeDimensions && timeDimensions.length > 0;
+        },
+
+        canDrawMapVisualizations: function () {
+            return this.metadata.apiType != App.Constants.api.type.INDICATOR;
         },
 
         importJSON: function (json) {
@@ -69118,7 +69174,7 @@ App.widget.filter.FilterView = Backbone.View.extend({
 
     App.namespace("App.widget.filter.sidebar");
 
-    var FilterSidebarCategoryView = App.widget.filter.sidebar.FilterSidebarCategoryView;
+    var FilterSidebarMultidatasetNodeView = App.widget.filter.sidebar.FilterSidebarMultidatasetNodeView;
     var FilterRepresentation = App.modules.dataset.filter.models.FilterRepresentation;
 
     App.widget.filter.sidebar.FilterSidebarMultidatasetView = Backbone.View.extend({
@@ -69128,11 +69184,12 @@ App.widget.filter.FilterView = Backbone.View.extend({
         initialize: function (options) {
             this.filterDimensions = options.filterDimensions;
             this.multidatasetId = this.filterDimensions.getMultidatasetId();
-            this.resetLastIndex();
             this.collapsable = _(options).has('collapsable') ? options.collapsable : true;
+            this.loadMultidataset(this.multidatasetId).then(_.bind(this.render, this));
         },
 
         destroy: function () {
+            _.invoke(this.subviews, 'destroy');
             this._unbindEvents();
             this.remove();
         },
@@ -69146,7 +69203,6 @@ App.widget.filter.FilterView = Backbone.View.extend({
         },
 
         _bindEvents: function () {
-            this.listenTo(this.filterDimensions, "change:visible", this.resetLastIndex);
             this.listenTo(this.filterDimensions, "change:open", this._onChangeOpenFilterDimensions);
             if (this.multidataset) {
 
@@ -69179,18 +69235,35 @@ App.widget.filter.FilterView = Backbone.View.extend({
             this._bindEvents();
             var self = this;
 
-            this.loadMultidataset(this.multidatasetId)
-                .then(function () {
-                    if (self.multidataset.nodes) {
-                    self.$el.html(self.template({
-                            multidataset: self.multidataset.toJSON(),
-                        nodes: self.multidataset.nodes.toJSON()
-                    }));
-                    }
-                });
+            this.$el.html(this.template({
+                multidataset: self.multidataset.toJSON(),
+                // nodes: this.multidataset.nodes.toJSON()
+            }));
 
-            var $categories = this.$(".filter-sidebar-categories");
-            $categories.perfectScrollbar();
+            this.subviews = [];
+
+            var $nodes = this.$(".filter-sidebar-multidataset-nodes");
+            if (this.multidataset.get('nodes')) {
+                this.nodesSubviews = this.multidataset.get('nodes').map(function (multidatasetNode) {
+                    var view = new App.widget.filter.sidebar.FilterSidebarMultidatasetNodeView({
+                        multidatasetNode: multidatasetNode
+                    });
+                    view.render();
+                    $nodes.append(view.el);
+                    return view;
+                }, this);
+
+                this.subviews = this.subviews.concat(this.nodesSubviews);
+            }
+            $nodes.perfectScrollbar();
+
+            this.searchbarView = new App.components.searchbar.SearchbarView({
+                model: this.multidataset,
+                modelAttribute: "filterQuery",
+                el: this.$(".filter-sidebar-multidataset-searchbar")
+            });
+            this.searchbarView.render();
+            this.subviews.push(this.searchbarView);
 
             this.setMaxHeight(this.maxHeight);
             this._onChangeOpenFilterDimensions(this.filterDimensions);
@@ -69202,7 +69275,7 @@ App.widget.filter.FilterView = Backbone.View.extend({
         updateScrollbar: function () {
             // Wait for DOM
             setTimeout(function () {
-                this.$(".filter-sidebar-categories").perfectScrollbar('update');
+                this.$(".filter-sidebar-multidataset-nodes").perfectScrollbar('update');
             }, 10);
         },
 
@@ -69241,12 +69314,88 @@ App.widget.filter.FilterView = Backbone.View.extend({
             this.$('.collapse').css('max-height', maxHeight);
             var SIDEBAR_MULTIDATASET_HEADER_HEIGHT = 65;
             var height = maxHeight - SIDEBAR_MULTIDATASET_HEADER_HEIGHT;
-            this.$('.filter-sidebar-categories').css('height', height);
+            this.$('.filter-sidebar-multidataset-nodes').css('height', height);
             this.updateScrollbar();
         },
 
-        resetLastIndex: function () {
-            this.lastIndex = -1;
+    });
+}());
+;(function () {
+    "use strict";
+
+    App.namespace("App.widget.filter.sidebar");
+
+    App.widget.filter.sidebar.FilterSidebarMultidatasetNodeView = Backbone.View.extend({
+
+        template: App.templateManager.get('dataset/filter/sidebar/filter-sidebar-multidataset-node'),
+
+        className: "filter-sidebar-multidataset-node",
+
+        initialize: function (options) {
+            this.multidatasetNode = options.multidatasetNode;
+        },
+
+        _bindEvents: function () {
+            var renderEvents = 'change:selected change:visible change:matchIndexBegin change:matchIndexEnd';
+            //debounce for multiple changes when searching
+            this.listenTo(this.multidatasetNode, renderEvents, _.debounce(this.render, 15));
+        },
+
+        _unbindEvents: function () {
+            this.stopListening();
+        },
+
+        destroy: function () {
+            this._unbindEvents();
+            this.remove();
+        },
+
+        _stateClass: function () {
+            return this.multidatasetNode.get('selected') ?
+                'filter-sidebar-multidataset-node-icon-check' :
+                'filter-sidebar-multidataset-node-icon-unchecked';
+        },
+
+        _strongZone: function (str, begin, end) {
+            if (begin >= 0 && end > begin) {
+                var p1 = str.substring(0, begin);
+                var p2 = str.substring(begin, end);
+                var p3 = str.substring(end);
+                return p1 + "<strong>" + p2 + "</strong>" + p3;
+            } else {
+                return str;
+            }
+        },
+
+        render: function () {
+            this._unbindEvents();
+            this._bindEvents();
+
+            var visible = this.multidatasetNode.get('visible');
+
+            if (visible) {
+                this.$el.removeClass('hide');
+                var stateClass = this._stateClass();
+                var multidatasetNode = this.multidatasetNode.toJSON();
+                var label = this._strongZone(multidatasetNode.name, multidatasetNode.matchIndexBegin, multidatasetNode.matchIndexEnd);
+
+                var context = {
+                    multidatasetNode: multidatasetNode,
+                    label: new Handlebars.SafeString(label),
+                    stateClass: stateClass,
+                    title: _.compact([multidatasetNode.name, this._getTextFromHTML(multidatasetNode.description)]).join(" - ")
+                };
+                this.$el.html(this.template(context));
+            } else {
+                this.$el.addClass('hide');
+                this.$el.html('');
+            }
+
+            return this.el;
+        },
+
+        _getTextFromHTML: function (html) {
+            return $('<div/>').html(html).text();
         }
 
     });
@@ -69534,6 +69683,7 @@ App.widget.filter.FilterView = Backbone.View.extend({
     App.VisualElement.Base.prototype = {
 
         _noSelectionTemplate: App.templateManager.get('dataset/dataset-no-selection'),
+        _loadingTemplate: App.templateManager.get('dataset/dataset-loading'),
 
         initialize: function (options) {
             options = options || {};
@@ -69542,6 +69692,7 @@ App.widget.filter.FilterView = Backbone.View.extend({
             this.filterOptions = options.filterOptions; //deprecated
             this.filterDimensions = options.filterDimensions;
             this.filtersModel = options.filtersModel;
+            this.optionsModel = options.optionsModel;
 
             this.el = options.el;
 
@@ -69647,7 +69798,14 @@ App.widget.filter.FilterView = Backbone.View.extend({
         },
 
         _mustApplyVisualizationRestrictions: function () {
-            return !this.dataset.metadata.identifier().permalinkId;
+            return this.optionsModel.get('mustApplyVisualizationRestrictions');
+        },
+
+        _updateMustApplyVisualizationRestrictions: function () {
+            // We only ignore the visualization restrictions the first time we load the permalink
+            if (!this.optionsModel.get('mustApplyVisualizationRestrictions')) {
+                this.optionsModel.set('mustApplyVisualizationRestrictions', true);
+            }
         },
 
         _forceDimensionTypeInZone: function (dimensionType, zone) {
@@ -69783,7 +69941,7 @@ App.widget.filter.FilterView = Backbone.View.extend({
 
         setupNoSelectionViewIfNeeded: function () {
             if (this.$el.find('.dataset-no-selection').length) { return; }
-            this.$noSelection = $('<div class="dataset-no-selection"></div>');
+            this.$noSelection = $('<div class="dataset-no-selection dataset-message"></div>');
             this.$noSelection.hide();
             this.$el.append(this.$noSelection);
         },
@@ -69797,6 +69955,25 @@ App.widget.filter.FilterView = Backbone.View.extend({
             } else {
                 this.renderNoSelectionView();
                 return false;
+            }
+        },
+
+        showLoading: function () {
+            this.setupLoadingViewIfNeeded();
+            this.$loading.html(this._loadingTemplate());
+            this.$loading.show();
+        },
+
+        setupLoadingViewIfNeeded: function () {
+            if (this.$el.find('.dataset-loading').length) { return; }
+            this.$loading = $('<div class="dataset-loading dataset-message"></div>');
+            this.$loading.hide();
+            this.$el.append(this.$loading);
+        },
+
+        hideLoading: function () {
+            if (this.$loading) {
+                this.$loading.hide();
             }
         }
 
@@ -69831,7 +70008,6 @@ App.widget.filter.FilterView = Backbone.View.extend({
                 this.getDimensions();
                 this.getMeasureConcepts();
                 this.getDatasetAttributes();
-                // this.dimensionAttributes = this.dataset.data.getDimensionsAttributes();
                 this._bindEvents();
                 this.render();
             }
@@ -69919,12 +70095,18 @@ App.widget.filter.FilterView = Backbone.View.extend({
             };
 
             this.$el.html(this.template(context));
-            this.$el.find('.metadata-group').perfectScrollbar();
+            var scrollGroup = this.$el.find('.metadata-group');
+            scrollGroup.perfectScrollbar();
             this.$el.find('.metadata-accordion').accordion({
                 collapsible: true,
                 active: this._isIndicator() ? 0 : false,
-                heightStyle: "content"
+                heightStyle: "content",
+                activate: function () {
+                    scrollGroup.perfectScrollbar('update');
+                }
             });
+
+            scrollGroup.perfectScrollbar('update');
         },
 
         _isIndicator: function () {
@@ -70055,6 +70237,8 @@ App.widget.filter.FilterView = Backbone.View.extend({
 
                 this._applyVisualizationPreselections();
             }
+
+            this._updateMustApplyVisualizationRestrictions();
         },
 
         _applyVisualizationPreselections: function () {
@@ -70094,6 +70278,8 @@ App.widget.filter.FilterView = Backbone.View.extend({
                     // self._chartOptions.subtitle.text = self.getTitle();
 
                     self.chart = new Highcharts.Chart(self._chartOptions);
+                    self.chart.counters.color = 0;
+
                     self.$el.on("resize", function () { });
                 });
         },
@@ -70124,16 +70310,20 @@ App.widget.filter.FilterView = Backbone.View.extend({
             var columnsDimensionSelectedCategories = this.getDrawableRepresentations(columnsDimension);
 
             var listSeries = [];
-            _.each(columnsDimensionSelectedCategories, function (columnCategory) {
-                var serie = {};
-                serie.data = [];
-                serie.name = "";
+            var horizontalAxisCategories = [];
+            var columnAxisCategories = [];
+            var filteredHorizontalDimensionSelectedCategories = [];
+            var countedHorizontalCategoryIndex = 0;
+            _.each(horizontalDimensionSelectedCategories, function (horizontalCategory, horizontalCategoryIndex) {
+                if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('candidacyType'))) {
+                    return;
+                }
+                filteredHorizontalDimensionSelectedCategories[countedHorizontalCategoryIndex] = horizontalCategory;
 
-                _.each(horizontalDimensionSelectedCategories, function (horizontalCategory) {
-                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('candidacyType'))) {
-                        return;
-                    }
-
+                var columnSeries = [];
+                var index = null;
+                _.each(columnsDimensionSelectedCategories, function (columnCategory, columnCategoryIndex) {
+                    var serie = {};
                     var currentPermutation = {};
                     currentPermutation[horizontalDimension.id] = horizontalCategory.id;
                     currentPermutation[columnsDimension.id] = columnCategory.id;
@@ -70141,17 +70331,65 @@ App.widget.filter.FilterView = Backbone.View.extend({
 
                     var y = self.dataset.data.getNumberData({ ids: currentPermutation });
                     var name = self.dataset.data.getStringData({ ids: currentPermutation });
-                    serie.data.push({ y: y, name: name });
+                    // Instead of saving the data as an array on the same serie, we create as many series as needed so we can sort them independtly
+                    serie.data = [{ y: y, name: name, x: countedHorizontalCategoryIndex }];
+                    serie.name = columnCategory.get('visibleLabel');
+
+                    // We keep track on the categories assigned to each serie, so later we can assign the proper x (order) and column color
+                    serie.horizontalCategory = countedHorizontalCategoryIndex;
+                    serie.columnCategory = columnCategoryIndex;
+
+                    // Instead of checking if we are working with nested columns or not, we simply store the last order. 
+                    // In the case of not nested columns, the x axis will be sorted properly
+                    horizontalAxisCategories[countedHorizontalCategoryIndex] = { horizontalCategoryIndex: countedHorizontalCategoryIndex, order: y };
+
+                    columnSeries.push(serie);
                 });
 
-                serie.name = columnCategory.get('visibleLabel');
-                listSeries.push(serie);
+
+                // We cheat Highcharts, stacking columns with the same columnCategory with themselves, so we get the proper width. We also sort them
+                columnSeries = _.sortBy(columnSeries, function (serie) {
+                    return -serie.data[0].y;
+                }).map(function (serie, index) {
+                    serie.stack = index;
+                    serie.stacking = true;
+                    return serie;
+                });
+
+                listSeries = [].concat(listSeries, columnSeries);
+                countedHorizontalCategoryIndex++;
             });
 
-            var xaxis = _.invoke(horizontalDimensionSelectedCategories, 'get', 'visibleLabel');
+            // Normalize horizontal axis order so the columns are contiguous
+            horizontalAxisCategories = _.indexBy(_.sortBy(horizontalAxisCategories, function (horizontalAxisCategory) {
+                return -horizontalAxisCategory.order;
+            }).map(function (horizontalAxisCategory, index) {
+                horizontalAxisCategory.order = index;
+                return horizontalAxisCategory;
+            }), 'horizontalCategoryIndex');
 
-            // Changing the options of the chart
-            result.series = listSeries;
+            // Build and order xaxis
+            var xaxis = _.invoke(filteredHorizontalDimensionSelectedCategories, 'get', 'visibleLabel');
+            xaxis = _.sortBy(xaxis, function (label, horizontalDimensionSelectedCategoryIndex) {
+                return horizontalAxisCategories[horizontalDimensionSelectedCategoryIndex].order;
+            });
+
+            // We need to reprocess the series so we assign each column each proper sorted color and x value
+            result.series = _.map(listSeries, function (serie, index) {
+                // We decide the colors the first time we get the value, because that will be the same value they will use on the legend
+                if (!columnAxisCategories[serie.columnCategory]) {
+                    columnAxisCategories[serie.columnCategory] = Highcharts.getOptions().colors[index];
+                } else { // Else, we don´t have to show the label on the legend
+                    serie.showInLegend = false;
+                    serie.dataLabels = {
+                        enabled: false
+                    };
+                }
+                serie.data[0].x = horizontalAxisCategories[serie.horizontalCategory].order;
+                serie.data[0].color = columnAxisCategories[serie.columnCategory];
+                return serie;
+            });
+
             result.xAxis = xaxis;
             return result;
         },
@@ -70184,8 +70422,10 @@ App.widget.filter.FilterView = Backbone.View.extend({
             var newHeight = this.$el.height() - this.$title.height() - this.getRightsHolderHeight();
             this.$chartContainer.height(newHeight);
             this.chart.setSize(this.$chartContainer.width(), this.$chartContainer.height(), false);
-        }
 
+            // Necesario para evitar error en el dibujado tras cambiar a stacked columns     
+            this.chart.xAxis[0].update();
+        }
     });
 
 
@@ -70392,6 +70632,8 @@ App.widget.filter.FilterView = Backbone.View.extend({
 
                 this._applyVisualizationPreselections();
             }
+
+            this._updateMustApplyVisualizationRestrictions();
         },
 
         _applyVisualizationPreselections: function () {
@@ -71012,6 +71254,7 @@ App.VisualElement.PieChart = (function () {
         this.dataset = options.dataset;
 
         this.filterDimensions = options.filterDimensions;
+        this.optionsModel = options.optionsModel;
 
         this._chartOptions = {
             title: {
@@ -71084,6 +71327,8 @@ App.VisualElement.PieChart = (function () {
             if (this._mustApplyVisualizationRestrictions()) {
                 this._forceDimensionsByMetadataInfo();
             }
+
+            this._updateMustApplyVisualizationRestrictions();
         },
 
         updateTitle: function () {
@@ -71395,6 +71640,8 @@ App.VisualElement.PieChart = (function () {
         initialize: function (options) {
             this.filterDimensions = options.filterDimensions;
             this.dataset = options.dataset;
+            this.optionsModel = options.optionsModel;
+
             this.shapes = new App.Map.Shapes();
             this.mapType = options.mapType;
             this._type = "map";
@@ -71434,6 +71681,8 @@ App.VisualElement.PieChart = (function () {
 
                 this._applyVisualizationPreselections();
             }
+
+            this._updateMustApplyVisualizationRestrictions();
         },
 
         _applyVisualizationPreselections: function () {
@@ -71451,6 +71700,8 @@ App.VisualElement.PieChart = (function () {
             }
             if (this.$title) { this.$title.show(); }
             this.visible = true;
+
+            this.showLoading();
 
             var normCodes = this._getGeographicDimensionNormCodes();
             var allNormCodes = this._getAllGeographicDimensionNormCodes();
@@ -71550,6 +71801,7 @@ App.VisualElement.PieChart = (function () {
 
             this._setUpListeners();
             this.render();
+            this.hideLoading();
         },
 
         _initTitleView: function () {
@@ -72595,143 +72847,134 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
     App.DataSourceDataset = function (options) {
         this.dataset = options.dataset;
         this.filterDimensions = options.filterDimensions;
-
-        if (this.dataset) {
-            this.listenTo(this.dataset.data, "hasNewData", this.updateHeaderAttributes ); 
-        }
     };
 
     App.DataSourceDataset.prototype = {
 
-        leftHeaderColumns : function () {
+        leftHeaderColumns: function () {
             return 1;
         },
 
-        leftHeaderValues : function () {
+        leftHeaderValues: function () {
             return this.filterDimensions.getTableInfo().leftHeaderValues;
         },
 
-        leftHeaderValuesByDimension : function() {
+        leftHeaderValuesByDimension: function () {
             return this.filterDimensions.getTableInfo().left.representationsValues;
         },
-        
+
         leftHeaderDimensionsLengths: function () {
-        	return this.filterDimensions.getTableInfo().left.representationsLengths;
-        },
-                
-        
-        leftHeaderDimensionsElements: function(dimension) {
-        	return this.filterDimensions.getTableInfo().elementsByLeftDimension(this.leftHeaderDimensionsLengths(), dimension);
-        },
-        
-        leftHeaderDimensionsBlanks: function(dimension) {
-        	return this.filterDimensions.getTableInfo().blanksByLeftDimension(this.leftHeaderDimensionsLengths(), dimension);
+            return this.filterDimensions.getTableInfo().left.representationsLengths;
         },
 
-        topHeaderRows : function () {
+
+        leftHeaderDimensionsElements: function (dimension) {
+            return this.filterDimensions.getTableInfo().elementsByLeftDimension(this.leftHeaderDimensionsLengths(), dimension);
+        },
+
+        leftHeaderDimensionsBlanks: function (dimension) {
+            return this.filterDimensions.getTableInfo().blanksByLeftDimension(this.leftHeaderDimensionsLengths(), dimension);
+        },
+
+        topHeaderRows: function () {
             return this.filterDimensions.getTableInfo().top.representationsValues.length;
         },
 
-        topHeaderValues : function () {
+        topHeaderValues: function () {
             return this.filterDimensions.getTableInfo().top.representationsValues;
         },
 
-        updateHeaderAttributes : function() {
-            this.topHeaderAttributes = this.dataset.data.getDimensionAttributesById(this.filterDimensions.getTableInfo().top.ids);
-            this.leftHeaderAttributes = this.dataset.data.getDimensionAttributesById(this.filterDimensions.getTableInfo().left.ids);
-        },
-        
-        cellAtIndex : function (cell) {
-            return this.dataset.data.getStringData({cell : cell});
+        cellAtIndex: function (cell) {
+            return this.dataset.data.getStringData({ cell: cell });
         },
 
-        cellExists : function (cell) {
+        cellExists: function (cell) {
             var tableSize = this.filterDimensions.getTableInfo().getTableSize();
             return (cell.y >= 0 && cell.x >= 0) &&
                 (tableSize.rows > cell.y && tableSize.columns > cell.x);
         },
 
-        cellHasPrimaryAttributes : function (cell) {        	
-            var cellAttributes = this.dataset.data.getAttributes({cell : cell});
-        	return !_.isUndefined(cellAttributes) 
-                && !_.isUndefined(cellAttributes.primaryMeasureAttributes) 
+        cellHasPrimaryAttributes: function (cell) {
+            var cellAttributes = this.dataset.data.getAttributes({ cell: cell });
+            return !_.isUndefined(cellAttributes)
+                && !_.isUndefined(cellAttributes.primaryMeasureAttributes)
                 && _.compact(cellAttributes.primaryMeasureAttributes).length > 0;
         },
-        
-        cellAttributesAtIndex : function (cell) {
-        	return this.dataset.data.getAttributes({cell : cell});
+
+        cellAttributesAtIndex: function (cell) {
+            return this.dataset.data.getAttributes({ cell: cell });
         },
 
-        cellInfoAtIndex : function (cell) {
+        cellInfoAtIndex: function (cell) {
             var categoryValues = this.filterDimensions.getTableInfo().getCategoryValuesForCell(cell);
             var formattedCategories = this._formatCategories(categoryValues);
-            return { 
-                attributes : this.cellAttributesAtIndex(cell),
-                categories : formattedCategories
+            return {
+                attributes: this.cellAttributesAtIndex(cell),
+                categories: formattedCategories
             };
         },
 
-        _formatCategories : function (categoryValues) {
-            var self = this; 
-            return _.map(categoryValues, function(value, key) { 
-                return { 
-                    dimension : self.filterDimensions.get(key).get('label'), 
-                    value : value 
-                }; 
+        _formatCategories: function (categoryValues) {
+            var self = this;
+            return _.map(categoryValues, function (value, key) {
+                return {
+                    dimension: self.filterDimensions.get(key).get('label'),
+                    value: value
+                };
             });
         },
 
-        datasetAttributes : function () {
+        datasetAttributes: function () {
             return this.dataset.data.getDatasetAttributes();
         },
 
-        rows : function () {
+        rows: function () {
             return this.filterDimensions.getTableInfo().getTableSize().rows;
         },
 
-        columns : function () {
+        columns: function () {
             return this.filterDimensions.getTableInfo().getTableSize().columns;
         },
-        
-        isBlankRow : function(row) {
-        	var dimensionElements = 0;
-        	var pos = row; 
-        	// Starts on one because the first one is not nested on another dimension
-        	for (var dimension = 1; dimension < this.leftHeaderDimensionsLengths().length; dimension++) {
 
-        		dimensionElements = this.leftHeaderDimensionsElements(dimension);
-        		
-        		// Check if the current row is the first of this dimension; if not, 'enter' the next nested dimension
-        		pos = pos % dimensionElements;        		
-        		if (pos == dimension - 1)
-        			return true;        		
-        	}
-        	return false;
+        isBlankRow: function (row) {
+            var dimensionElements = 0;
+            var pos = row;
+            // Starts on one because the first one is not nested on another dimension
+            for (var dimension = 1; dimension < this.leftHeaderDimensionsLengths().length; dimension++) {
+
+                dimensionElements = this.leftHeaderDimensionsElements(dimension);
+
+                // Check if the current row is the first of this dimension; if not, 'enter' the next nested dimension
+                pos = pos % dimensionElements;
+                if (pos == dimension - 1)
+                    return true;
+            }
+            return false;
         },
-        
-        blankRowsOffset : function (row) {
-        	var dimensionElements = 0;
-        	var pos = row; 
-        	var blanks = 0;
-        	
-        	// Starts on one because the first one is not nested on another dimension
-        	var blanksElementsForDimension = 0;
-        	for (var dimension = 1; dimension < this.leftHeaderDimensionsLengths().length; dimension++) {
 
-        		dimensionElements = this.leftHeaderDimensionsElements(dimension);
-        		blanksElementsForDimension = this.leftHeaderDimensionsBlanks(dimension);
-        		
-        		blanks += Math.floor(pos / dimensionElements) * blanksElementsForDimension;
-        		     
-        		pos = pos % dimensionElements;
-        		if (pos == 0) { // Blank row
-        			return blanks;        			 
-        		} else { // "Enter" next dimension level
-        			pos--;
-        			blanks++;
-        		}        		
-        	}
-        	return blanks;
+        blankRowsOffset: function (row) {
+            var dimensionElements = 0;
+            var pos = row;
+            var blanks = 0;
+
+            // Starts on one because the first one is not nested on another dimension
+            var blanksElementsForDimension = 0;
+            for (var dimension = 1; dimension < this.leftHeaderDimensionsLengths().length; dimension++) {
+
+                dimensionElements = this.leftHeaderDimensionsElements(dimension);
+                blanksElementsForDimension = this.leftHeaderDimensionsBlanks(dimension);
+
+                blanks += Math.floor(pos / dimensionElements) * blanksElementsForDimension;
+
+                pos = pos % dimensionElements;
+                if (pos == 0) { // Blank row
+                    return blanks;
+                } else { // "Enter" next dimension level
+                    pos--;
+                    blanks++;
+                }
+            }
+            return blanks;
         },
 
         /**
@@ -72739,9 +72982,8 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
          * {dimension.label} : {category.label}
          * @returns {Array}
          */
-        topHeaderTooltipValues : function () {
-            this.updateHeaderAttributes();
-            return this._generateTooltipValues(this.topHeaderValues(),  this.topHeaderAttributes);
+        topHeaderTooltipValues: function () {
+            return this._generateTooltipValues(this.topHeaderValues(), this.filterDimensions.getTableInfo().top.ids);
         },
 
         /**
@@ -72749,34 +72991,30 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
          * {dimension.label} : {category.label}
          * @returns {Array}
          */
-        leftHeaderTooltipValues : function () {            
-            this.updateHeaderAttributes();
-            var leftHeaderTooltipValuesByDimension = this._generateTooltipValues(this.leftHeaderValuesByDimension(),  this.leftHeaderAttributes);
+        leftHeaderTooltipValues: function () {
+            var leftHeaderTooltipValuesByDimension = this._generateTooltipValues(this.leftHeaderValuesByDimension(), this.filterDimensions.getTableInfo().left.ids);
 
             return this._compressLeftHeaderValuesByDimension(leftHeaderTooltipValuesByDimension);
         },
 
-        _compressLeftHeaderValuesByDimension : function(valuesByDimension) {
+        _compressLeftHeaderValuesByDimension: function (valuesByDimension) {
             var memo = [];
-            return [ _.flatten(_.reduceRight(valuesByDimension, function(memo, values) { 
-                return _.map(values, function(value) {
-                    return [ value ].concat(memo);
+            return [_.flatten(_.reduceRight(valuesByDimension, function (memo, values) {
+                return _.map(values, function (value) {
+                    return [value].concat(memo);
                 });
-            }, memo , this)) ];
+            }, memo, this))];
         },
-        
-        _generateTooltipValues : function (titlesByDimension, attributesByDimension) {            
-            var result = [];
-            var attributes;
 
-            _.each(titlesByDimension, function(titles, index) { 
-                attributes = attributesByDimension ? _.zip.apply(_, attributesByDimension[index]) : [];              
+        _generateTooltipValues: function (titlesByDimension, dimensionIds) {
+            var result = [];
+
+            _.each(titlesByDimension, function (titles, dimensionIndex) {
                 result.push(
-                    _.map(titlesByDimension[index], function(title, index) {
-                        var tooltipAttributes = attributes[index] ? attributes[index] : [];
-                        return { title : title, attributes : tooltipAttributes}
+                    _.map(titlesByDimension[dimensionIndex], function (title) {
+                        return { title: title, dimensionId: dimensionIds[dimensionIndex] }
                     })
-                ); 
+                );
             });
 
             return result;
@@ -72949,7 +73187,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
             var template = App.templateManager.get("dataset/dataset-header-info");
             var context = {
                 title: headerInfo.title,
-                attributes: this.formatHeaderAttributes(headerInfo.attributes)
+                attributes: this.formatHeaderAttributes(_.pluck(headerInfo.attributes, 'value'))
             }
             return template(context);
         },
@@ -73673,7 +73911,8 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
 ;(function () {
     "use strict";
 
-    var Size = App.Table.Size,
+    var Cell = App.Table.Cell,
+        Size = App.Table.Size,
         Rectangle = App.Table.Rectangle,
         Utils = App.Table.Utils,
         Point = App.Table.Point;
@@ -73752,13 +73991,26 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                     var indexEnd = index + columnsValuesLengthAc[i];
                     var cellHeight = this.incrementalCellSize.rows[indexEnd] - this.incrementalCellSize.rows[index];
 
-                    var row = indexInValue % columnsValuesLength[i];
-                    var content = columnsValues[i][row] ? columnsValues[i][row].label : "";
-                    var level = columnsValues[i][row] ? columnsValues[i][row].level : 0;
+                    var rowIndex = indexInValue % columnsValuesLength[i];
+                    var content = columnsValues[i][rowIndex] ? columnsValues[i][rowIndex].label : "";
+                    var level = columnsValues[i][rowIndex] ? columnsValues[i][rowIndex].level : 0;
 
-                    var cellAttributes = tooltipValues[i][row] ? !_.isEmpty(tooltipValues[i][row].attributes) ? _.compact(tooltipValues[i][row].attributes) : [] : [];
-                    var cellTitle = tooltipValues[i][row] ? tooltipValues[i][row].title : "";
+                    var associatedBodyCellWithAttributes = new Cell(0, row.indexCell);
+                    var cellAttributesAtIndex = this.dataSource.cellAttributesAtIndex(associatedBodyCellWithAttributes);
+                    var cellAttributes = [];
+                    var cellTitle = "";
 
+                    var cellInfo = tooltipValues[i][rowIndex];
+                    if (cellInfo) {
+                        cellAttributes = cellAttributesAtIndex ? cellAttributesAtIndex.dimensionsAttributes : [];
+                        cellAttributes = _.filter(cellAttributes, function (cellAttribute) {
+                            return cellAttribute.dimensionId == cellInfo.dimensionId;
+                        });
+                        if (!_.compact(_.pluck(cellAttributes, 'value')).length) {
+                            cellAttributes = [];
+                        }
+                        cellTitle = cellInfo.title;
+                    }
 
                     result[i].push({
                         index: index,
@@ -73788,7 +74040,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
         });
     }
 
-    App.Table.LeftHeaderZone.prototype.titleAtPoint = function (absolutePoint) {
+    App.Table.LeftHeaderZone.prototype.cellInfoAtPoint = function (absolutePoint) {
         var headerCellAtPoint = this.cellAtPoint(absolutePoint);
         if (headerCellAtPoint) {
             return this.delegate.formatHeaderInfo({
@@ -73901,7 +74153,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                 this.ctx.fillText(cell.content || "", cell.x + margin, cell.y + margin);
 
                 // Attributes triangle
-                if (_.compact(cell.attributes).length) {
+                if (cell.attributes.length) {
                     this.ctx.beginPath();
                     var marginMark = this.delegate.style.attributeCellMark.margin;
                     var sizeMark = this.delegate.style.attributeCellMark.size;
@@ -73942,7 +74194,8 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
 ;(function () {
     "use strict";
 
-    var Size = App.Table.Size,
+    var Cell = App.Table.Cell,
+        Size = App.Table.Size,
         Rectangle = App.Table.Rectangle,
         Utils = App.Table.Utils,
         Point = App.Table.Point;
@@ -74024,12 +74277,25 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                     var indexEnd = index + rowsValuesLengthAc[i];
                     var cellWidth = this.incrementalCellSize.columns[indexEnd] - this.incrementalCellSize.columns[index];
 
-                    var column = indexInValue % rowsValuesLength[i];
-                    var content = rowsValues[i][column];
+                    var columnIndex = indexInValue % rowsValuesLength[i];
+                    var content = rowsValues[i][columnIndex];
 
-                    var cellAttributes = tooltipValues[i][column] ? !_.isEmpty(tooltipValues[i][column].attributes) ? tooltipValues[i][column].attributes : [] : [];
-                    var cellTitle = tooltipValues[i][column] ? tooltipValues[i][column].title : "";
+                    var associatedBodyCellWithAttributes = new Cell(column.index, 0);
+                    var cellAttributesAtIndex = this.dataSource.cellAttributesAtIndex(associatedBodyCellWithAttributes);
+                    var cellAttributes = [];
+                    var cellTitle = "";
 
+                    var cellInfo = tooltipValues[i][columnIndex];
+                    if (cellInfo) {
+                        cellAttributes = cellAttributesAtIndex ? cellAttributesAtIndex.dimensionsAttributes : [];
+                        cellAttributes = _.filter(cellAttributes, function (cellAttribute) {
+                            return cellAttribute.dimensionId == cellInfo.dimensionId;
+                        });
+                        if (!_.compact(_.pluck(cellAttributes, 'value')).length) {
+                            cellAttributes = [];
+                        }
+                        cellTitle = cellInfo.title;
+                    }
 
                     result[i].push({
                         index: index,
@@ -74057,7 +74323,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
         });
     }
 
-    App.Table.TopHeaderZone.prototype.titleAtPoint = function (absolutePoint) {
+    App.Table.TopHeaderZone.prototype.cellInfoAtPoint = function (absolutePoint) {
         var headerCellAtPoint = this.cellAtPoint(absolutePoint);
         if (headerCellAtPoint) {
             return this.delegate.formatHeaderInfo({
@@ -74156,8 +74422,8 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                 this.ctx.beginPath();
                 this.ctx.rect(cell.x + 0.5, cell.y + 0.5, cell.width, cell.height);
 
-                this.ctx.fillStyle = this.delegate.style.headerCell.background({ 
-                    columns : _.range(cell.index, cell.indexEnd) 
+                this.ctx.fillStyle = this.delegate.style.headerCell.background({
+                    columns: _.range(cell.index, cell.indexEnd)
                 }, this.view);
                 this.ctx.stroke();
                 this.ctx.fill();
@@ -74165,7 +74431,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
 
                 this.ctx.fillStyle = this.delegate.style.headerCell.color;
                 this.ctx.fillText(cell.content || "", cell.x + margin, Math.ceil(cell.y + cell.height / 2));
-                if (_.compact(cell.attributes).length) {
+                if (cell.attributes.length) {
                     this.ctx.beginPath();
                     var marginMark = this.delegate.style.attributeCellMark.margin;
                     var sizeMark = this.delegate.style.attributeCellMark.size;
@@ -74315,7 +74581,6 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
         };
 
         this.initializeZones();
-        this.initializeMouseOverTooltip();
         this.initializeClickTooltip();
     };
 
@@ -74411,16 +74676,6 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                 this.spinnerZone.size.height
             )
         );
-    };
-
-    App.Table.View.prototype.initializeMouseOverTooltip = function () {
-        var self = this;
-        this.mouseOverTooltipDelegate = {
-            getTitleAtMousePosition: function (position) {
-                return self.getTitleAtMousePosition(position);
-            }
-        };
-        this.mouseOverTooltip = new Tooltip({ el: this.$canvas, delegate: this.mouseOverTooltipDelegate, trigger: "mouseOver" });
     };
 
     App.Table.View.prototype.initializeClickTooltip = function () {
@@ -74560,7 +74815,6 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
         this.canvas.width = size.width;
         this.canvas.height = size.height;
         this.update();
-        this.mouseOverTooltip.setEl(this.$canvas);
         this.clickTooltip.setEl(this.$canvas);
     };
 
@@ -74675,20 +74929,19 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
 
     App.Table.View.prototype.getTitleAtMousePosition = function (point) {
         var title;
-        if (this.mouseZone === "leftHeaderZone") {
-            title = this.leftHeaderZone.titleAtPoint(point);
-        } else if (this.mouseZone === "topHeaderZone") {
-            title = this.topHeaderZone.titleAtPoint(point);
-        }
         return title;
     };
 
     App.Table.View.prototype.getCellInfoAtMousePosition = function (point) {
-        var attribute;
+        var cellInfo;
         if (this.mouseZone === "bodyZone") {
-            attribute = this.bodyZone.cellInfoAtPoint(point);
+            cellInfo = this.bodyZone.cellInfoAtPoint(point);
+        } else if (this.mouseZone === "leftHeaderZone") {
+            cellInfo = this.leftHeaderZone.cellInfoAtPoint(point);
+        } else if (this.mouseZone === "topHeaderZone") {
+            cellInfo = this.topHeaderZone.cellInfoAtPoint(point);
         }
-        return attribute;
+        return cellInfo;
     };
 
     App.Table.View.prototype.setLastClickZone = function (zone) {
@@ -74702,7 +74955,6 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
 
     App.Table.View.prototype.destroy = function () {
         this.clickTooltip.destroy();
-        this.mouseOverTooltip.destroy();
     };
 
     App.Table.View.prototype.columnSeparatorIndex = function (point) {
@@ -75287,8 +75539,8 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
 
     // Collection that allow indexing granularityOrder by normCode
     var GranularityOrderCollection = Backbone.Collection.extend({
-        model : Backbone.Model.extend({
-            idAttribute : "urn"
+        model: Backbone.Model.extend({
+            idAttribute: "urn"
         })
     });
 
@@ -75299,9 +75551,29 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
 
     App.Map.Shapes.prototype = {
 
-        fetchShapes : function (normCodes, cb) {
+        _chunkNormCodesIntoValidUrlSize: function (normCodes) {
+            if (!normCodes) { return []; }
+
+            var chunks = [];
+            var i = 0;
+            while (i < normCodes.length) {
+                var chunk = [];
+                var totalQueryLength = 0;
+                while (i < normCodes.length && totalQueryLength + normCodes[i].length + 1 < App.Constants.maxUrlQueryLength) {
+                    chunk.push(normCodes[i]);
+                    totalQueryLength += (normCodes[i].length + 1);
+                    i++;
+                }
+
+                chunks.push(chunk);
+            }
+            return chunks;
+        },
+
+        fetchShapes: function (normCodes, cb) {
             var self = this;
             var validNormCodes = this._filterValidNormCodes(normCodes);
+
             self._validateCache(validNormCodes, function (err) {
                 if (err) return cb(err);
 
@@ -75314,19 +75586,36 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                         return self._setShapesHierarchy(dbShapes, cb);
                     }
 
-                    self.api.getShapes(notDbNormCodes, function (err, apiShapes) {
-                        if (err) return cb(err);
-                        self.store.put(apiShapes, function () {
-                            //ignore error saving shapes
-                            var shapes = self._mixDbAndApiShapes(dbShapes, apiShapes);
-                            self._setShapesHierarchy(shapes, cb);
+                    var shapeRequests = self._chunkNormCodesIntoValidUrlSize(notDbNormCodes)
+                        .map(function (normCodesChunk) {
+
+                            function getShapes(normCodesChunk, cb) {
+                                var self = this;
+                                self.api.getShapes(normCodesChunk, function (err, apiShapes) {
+                                    if (err) return cb(err);
+                                    self.store.put(apiShapes, function (dbShapes) {
+                                        cb(null, dbShapes);
+                                    });
+                                });
+                            }
+
+                            return _.bind(getShapes, self, normCodesChunk);
                         });
+
+                    async.parallel(shapeRequests, function (err) {
+                        if (err) return cb(err);
+
+                        self.store.get(normCodes, function (err, dbShapes) {
+                            if (err) return cb(err);
+                            self._setShapesHierarchy(dbShapes, cb);
+                        });
+
                     });
                 });
             });
         },
 
-        fetchContainer : function (normCodes, cb) {
+        fetchContainer: function (normCodes, cb) {
             var self = this;
 
             var validNormCodes = this._filterValidNormCodes(normCodes);
@@ -75340,13 +75629,13 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                 self.fetchShapes([containerNormCode], function (err, shapes) {
                     if (err) return cb(err);
 
-                    var shape = shapes? shapes[0] : undefined;
+                    var shape = shapes ? shapes[0] : undefined;
                     cb(null, shape);
                 });
             });
         },
 
-        _setShapesHierarchy : function (shapes, cb) {
+        _setShapesHierarchy: function (shapes, cb) {
             this._loadGranularityOrder(function (err, granularityOrderCollection) {
                 if (err) return cb(err);
 
@@ -75363,7 +75652,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
             });
         },
 
-        _loadGranularityOrder : function (cb) {
+        _loadGranularityOrder: function (cb) {
             var self = this;
             if (!this.granularityOrderCollection) {
                 self.api.getGranularityOrder(function (err, granularityOrder) {
@@ -75376,28 +75665,16 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
             }
         },
 
-        _mixDbAndApiShapes : function (dbShapes, apiShapes) {
-            var allShapes = [];
-            for (var i = 0; i < dbShapes.length; i++) {
-                if (_.isUndefined(dbShapes[i])) {
-                    allShapes[i] = apiShapes.splice(0, 1)[0];
-                } else {
-                    allShapes[i] = dbShapes[i];
-                }
-            }
-            return allShapes;
-        },
-
-        _normCodesFromShapes : function (shapes) {
+        _normCodesFromShapes: function (shapes) {
             return _.chain(shapes).compact().pluck("normCode").value();
         },
 
-        _filterValidNormCodes : function (normCodes) {
+        _filterValidNormCodes: function (normCodes) {
             var notNullNormCodes = _.compact(normCodes);
             return notNullNormCodes;
         },
 
-        _validateCache : function (normCodes, cb) {
+        _validateCache: function (normCodes, cb) {
             var self = this;
             if (self.lastUpdatedDate) {
                 cb();
@@ -76953,8 +77230,8 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
             var zones = this.collection.zones;
 
             // Remove restrictions
-            zones.get("left").set({ fixedSize: undefined, selectedLimit: Infinity });
-            zones.get("top").set({ fixedSize: undefined, selectedLimit: Infinity });
+            zones.get("left").set({ fixedSize: undefined, drawableLimit: Infinity });
+            zones.get("top").set({ fixedSize: undefined, drawableLimit: Infinity });
 
             zones
                 .getFixedZones()
@@ -77138,6 +77415,9 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                         App.modules.dataset.DatasetPermalink.retrievePermalink(datasetIdentifier.permalinkId)
                             .done(function (content) {
                                 self.filterDimensions.importJSON(content.selection);
+                                if (!window.location.hash.includes(content.hash)) {
+                                    self.visualizationView.optionsModel.set('mustApplyVisualizationRestrictions', true);
+                                }
                                 deferred.resolve();
                             })
                             .fail(function () {
@@ -77331,6 +77611,13 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
 
     App.modules.multidataset.MultidatasetNode = Backbone.Model.extend({
 
+        defaults: {
+            visible: true,
+            matchIndexBegin: undefined,
+            matchIndexEnd: undefined,
+            selected: false
+        },
+
         parse: function (response, options) {
             var attributes = {};
             var multidatasetIdentifier = options.multidatasetIdentifier;
@@ -77365,7 +77652,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                 this.nodes = App.modules.multidataset.MultidatasetNode.parseNodes(response.nodes);
             }
 
-            attributes.isCurrentResource = App.modules.multidataset.MultidatasetNode.areSameResource(resourceIdentifier, attributes);
+            attributes.selected = App.modules.multidataset.MultidatasetNode.areSameResource(resourceIdentifier, attributes);
 
             return attributes;
         }
@@ -77397,6 +77684,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
     App.modules.multidataset.Multidataset = Backbone.Model.extend({
 
         defaults: {
+            filterQuery: '',
             open: true
         },
 
@@ -77410,6 +77698,37 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
 
             this.agency = identifiers[0];
             this.identifier = identifiers[1];
+
+            this._bindEvents();
+        },
+
+        _bindEvents: function () {
+            this.listenTo(this, 'change:filterQuery', this._onChangeFilterQuery);
+        },
+
+        _cleanFilterQuery: function (query) {
+            return s.trim(s.cleanDiacritics(query).toLowerCase());
+        },
+
+        _onChangeFilterQuery: function () {
+            var filterQuery = this._cleanFilterQuery(this.get('filterQuery'));
+            var filterQueryLength = filterQuery.length;
+
+            var nodes = this.get('nodes');
+            nodes.each(function (model) {
+                model.set({ open: false }, { trigger: false });
+            });
+
+            var matchedElement = {};
+            nodes.each(function (model) {
+                var matchIndex = this._cleanFilterQuery(model.get('name')).indexOf(filterQuery);
+                var match = matchIndex !== -1;
+                if (match) {
+                    model.set({ visible: true, matchIndexBegin: matchIndex, matchIndexEnd: matchIndex + filterQueryLength });
+                } else {
+                    model.set({ visible: false, matchIndexBegin: undefined, matchIndexEnd: undefined });
+                }
+            }, this);
         },
 
         url: function () {
@@ -77420,7 +77739,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
             var attributes = {};
             attributes.name = App.i18n.localizeText(response.name);
             attributes.description = App.i18n.localizeText(response.description);
-            this.nodes = App.modules.multidataset.MultidatasetNode.parseNodes(response.data.nodes, this.multidatasetIdentifier, this.filterDimensions.metadata.identifier());
+            this.set('nodes', App.modules.multidataset.MultidatasetNode.parseNodes(response.data.nodes, this.multidatasetIdentifier, this.filterDimensions.metadata.identifier()));
             return attributes;
         },
 

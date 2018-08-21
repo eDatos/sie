@@ -103,6 +103,12 @@
         // Puestos del trabajo
         //App.queryParams = { "agency": "ISTAC", "identifier": "C00098A_000001", "version": "001.000", "type": "dataset" };
 
+        // METAMAC-2783 - Los filtros laterales del visualizador no muestran los códigos de todos los val
+        // App.queryParams = { "agency": "ISTAC", "identifier": "C00010A_000005", "version": "001.001", "type": "dataset" };
+
+        // METAMAC-2786 - No se muestran todas las notas a nivel de dimensión
+        App.queryParams = { "agency": "ISTAC", "identifier": "C00010A_000007", "version": "001.004", "type": "dataset" };
+
         // http://estadisticas.arte-consultores.com/statistical-visualizer/visualizer/data.html?resourceType=indicatorInstance&resourceId=0a36fed2-5c42-4c42-8162-a247f55fe4ed&indicatorSystem=E30308A&measure=ABSOLUTE,ANNUAL_PERCENTAGE_RATE,INTERPERIOD_PERCENTAGE_RATE&geo=ES611#visualization/table
         //        App.queryParams = { "identifier": "0a36fed2-5c42-4c42-8162-a247f55fe4ed", "indicatorSystem": "E30308A", "type": "indicatorInstance", "geo": "ES611" };
 
@@ -110,6 +116,10 @@
         // http://estadisticas.arte-consultores.com/statistical-resources/v1.0/multidatasets/ISTAC/C00031A_000001.json
         // App.queryParams = { "agency": "ISTAC", "identifier": "C00031A_000004", "version": "001.000", "type": "dataset" };
         App.queryParams = { "agency": "ISTAC", "identifier": "C00031A_000004", "version": "001.000", "type": "dataset", "multidatasetId": "ISTAC:C00031A_000001" };
+        // Dataset sin dimensión temporal
+        App.queryParams = { "agency": "ISTAC", "identifier": "C00010A_000004", "version": "001.000", "type": "dataset" };
+        // METAMAC-2729 - Los permalinks fallan al cambiar de visualización
+        App.queryParams = { "agency": "ISTAC", "identifier": "C00031A_000002", "version": "001.006", "type": "dataset", "permalinkId": "1cfqto8w12ekcxc0tmz6v35g0" };
 
         // Vista widget
         // App.config.widget = true;

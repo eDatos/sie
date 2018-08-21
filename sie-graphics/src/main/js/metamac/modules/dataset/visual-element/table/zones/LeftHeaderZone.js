@@ -1,7 +1,8 @@
 (function () {
     "use strict";
 
-    var Size = App.Table.Size,
+    var Cell = App.Table.Cell,
+        Size = App.Table.Size,
         Rectangle = App.Table.Rectangle,
         Utils = App.Table.Utils,
         Point = App.Table.Point;
@@ -80,13 +81,26 @@
                     var indexEnd = index + columnsValuesLengthAc[i];
                     var cellHeight = this.incrementalCellSize.rows[indexEnd] - this.incrementalCellSize.rows[index];
 
-                    var row = indexInValue % columnsValuesLength[i];
-                    var content = columnsValues[i][row] ? columnsValues[i][row].label : "";
-                    var level = columnsValues[i][row] ? columnsValues[i][row].level : 0;
+                    var rowIndex = indexInValue % columnsValuesLength[i];
+                    var content = columnsValues[i][rowIndex] ? columnsValues[i][rowIndex].label : "";
+                    var level = columnsValues[i][rowIndex] ? columnsValues[i][rowIndex].level : 0;
 
-                    var cellAttributes = tooltipValues[i][row] ? !_.isEmpty(tooltipValues[i][row].attributes) ? _.compact(tooltipValues[i][row].attributes) : [] : [];
-                    var cellTitle = tooltipValues[i][row] ? tooltipValues[i][row].title : "";
+                    var associatedBodyCellWithAttributes = new Cell(0, row.indexCell);
+                    var cellAttributesAtIndex = this.dataSource.cellAttributesAtIndex(associatedBodyCellWithAttributes);
+                    var cellAttributes = [];
+                    var cellTitle = "";
 
+                    var cellInfo = tooltipValues[i][rowIndex];
+                    if (cellInfo) {
+                        cellAttributes = cellAttributesAtIndex ? cellAttributesAtIndex.dimensionsAttributes : [];
+                        cellAttributes = _.filter(cellAttributes, function (cellAttribute) {
+                            return cellAttribute.dimensionId == cellInfo.dimensionId;
+                        });
+                        if (!_.compact(_.pluck(cellAttributes, 'value')).length) {
+                            cellAttributes = [];
+                        }
+                        cellTitle = cellInfo.title;
+                    }
 
                     result[i].push({
                         index: index,
@@ -116,7 +130,7 @@
         });
     }
 
-    App.Table.LeftHeaderZone.prototype.titleAtPoint = function (absolutePoint) {
+    App.Table.LeftHeaderZone.prototype.cellInfoAtPoint = function (absolutePoint) {
         var headerCellAtPoint = this.cellAtPoint(absolutePoint);
         if (headerCellAtPoint) {
             return this.delegate.formatHeaderInfo({
@@ -229,7 +243,7 @@
                 this.ctx.fillText(cell.content || "", cell.x + margin, cell.y + margin);
 
                 // Attributes triangle
-                if (_.compact(cell.attributes).length) {
+                if (cell.attributes.length) {
                     this.ctx.beginPath();
                     var marginMark = this.delegate.style.attributeCellMark.margin;
                     var sizeMark = this.delegate.style.attributeCellMark.size;

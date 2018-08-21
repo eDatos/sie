@@ -32,6 +32,7 @@
 
             this.primaryMeasureAttributes = this.getPrimaryMeasureAttributesValues();
             this.combinatedDimensionsAttributes = this.getCombinatedDimensionsAttributes();
+            this.dimensionsAttributes = this.getDimensionsAttributes();
             this.datasetAttributes = this.getDatasetAttributes();
         },
 
@@ -63,26 +64,46 @@
         getCellAttributes: function (observationPosition, dimensionsPositions) {
             return {
                 primaryMeasureAttributes: this.getPrimaryMeasureAttributesByPos(observationPosition),
-                combinatedDimensionsAttributes: this.getCombinatedDimensionsAttributesByDimensionsPositions(dimensionsPositions)
+                combinatedDimensionsAttributes: this.getCombinatedDimensionsAttributesByDimensionsPositions(dimensionsPositions),
+                dimensionsAttributes: this.getDimensionsAttributesByDimensionsPositions(dimensionsPositions)
             };
         },
 
-        getCombinatedDimensionsAttributes: function (dimensionsPositions) {
+        getDimensionsAttributesByDimensionsPositions: function (dimensionsPositions) {
+            return _.map(this.dimensionsAttributes, function (combinatedDimensionAttribute) {
+                self.dimensionsMultiplicators = combinatedDimensionAttribute.dimensionsMultiplicators;
+                var pos = 0;
+                pos = _.reduceRight(this, function (pos, arrayPosition, index) {
+                    return pos += self.dimensionsMultiplicators[index] * arrayPosition;
+                }, pos, self);
+                return { value: combinatedDimensionAttribute.values[pos], dimensionId: combinatedDimensionAttribute.attributeDimensionsIds[0] };
+            }, dimensionsPositions);
+        },
+
+        getCombinatedDimensionsAttributes: function () {
+            if (this.hasAttributes()) {
+                var dimensionAttributesRawValues = _.where(this.attributes, { attachmentLevel: ATTACHMENT_LEVELS.DIMENSION });
+                var dimensionAttributesRawValuesForCell = this._filterCombinatedDimensionAttributesForCell(dimensionAttributesRawValues);
+
+                return _(dimensionAttributesRawValuesForCell).map(this._parseDimensionAttribute, this);
+            }
+        },
+
+        getDimensionsAttributes: function () {
             if (this.hasAttributes()) {
                 var dimensionAttributesRawValues = _.where(this.attributes, { attachmentLevel: ATTACHMENT_LEVELS.DIMENSION });
                 var dimensionAttributesRawValuesForCell = this._filterDimensionAttributesForCell(dimensionAttributesRawValues);
 
-                return _(dimensionAttributesRawValuesForCell).map(this._parseCombinatedDimension, this);
+                return _(dimensionAttributesRawValuesForCell).map(this._parseDimensionAttribute, this);
             }
         },
 
-        _parseCombinatedDimension: function (attribute, index) {
-            var attributeDimensionsIds = _.pluck(attribute.dimensions.dimension, "dimensionId");
-            var dimensionsMultiplicators = this._getDimensionsMultiplicators(attributeDimensionsIds);
-
+        _parseDimensionAttribute: function (attribute) {
+            var attributeDimensionIds = _.pluck(attribute.dimensions.dimension, "dimensionId");
+            var dimensionsMultiplicators = this._getDimensionsMultiplicators(attributeDimensionIds);
             var values = this._parseAttributeValuesList(attribute);
 
-            return { values: values, dimensionsMultiplicators: dimensionsMultiplicators };
+            return { values: values, dimensionsMultiplicators: dimensionsMultiplicators, attributeDimensionsIds: attributeDimensionIds };
         },
 
         _getDimensionsMultiplicators: function (attributeDimensionsIds) {
@@ -135,11 +156,18 @@
             });
         },
 
-        _filterDimensionAttributesForCell: function (attributes) {
+        _filterCombinatedDimensionAttributesForCell: function (attributes) {
             return _.filter(attributes, function (attribute) {
                 return attribute.dimensions.total != 1;
             });
         },
+
+        _filterDimensionAttributesForCell: function (attributes) {
+            return _.filter(attributes, function (attribute) {
+                return attribute.dimensions.total == 1;
+            });
+        },
+
 
         hasAttributes: function () {
             return !_.isEmpty(this.attributesValues) && !_.isEmpty(this.attributesMetadata);

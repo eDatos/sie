@@ -8,7 +8,6 @@
         model: App.modules.dataset.filter.models.FilterRepresentation,
 
         initialize: function () {
-            this.selectedLimit = Infinity;
             this.drawableLimit = Infinity;
 
             this.selectedGeographicalLevel = null;
@@ -24,13 +23,10 @@
             this.stopListening();
         },
 
-        initializeHierarchy: function (attributes, options) {
+        initializeHierarchy: function () {
             var hasHierarchy = false;
             this.each(function (representation) {
                 var children = this.where({ parent: representation.id });
-                if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.options.territorio === representation.id) {
-                    representation.set("selected", true);
-                }
 
                 if (children.length) {
                     hasHierarchy = true;
@@ -39,6 +35,15 @@
                 }
             }, this);
             this.hasHierarchy = hasHierarchy;
+        },
+
+        _setSelectedGeographicDimension(attributes, options) {
+            this.each(function (representation) {
+                // TODO mejorar el rendimiento de esto
+                if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.options.territorio === representation.id) {
+                    representation.setMeAndMyChildren("selected", true);
+                }
+            }, this);
         },
 
         _updateDrawables: function () {
@@ -59,17 +64,12 @@
         },
 
         selectAll: function () {
-            var nModelsToSelected = this.selectedLimit - this.length;
-            var modelsToSelect = this.models.slice(0, nModelsToSelected);
-            _.invoke(modelsToSelect, 'set', { selected: true });
+            _.invoke(this.models, 'set', { selected: true });
         },
 
         selectVisible: function () {
             var visibleModels = this.where({ visible: true, selected: false });
-            var selectedModels = this.getSelectedRepresentations();
-            var visibleModelsToSelect = this.selectedLimit - selectedModels.length;
-            var modelsToSelect = visibleModels.slice(0, visibleModelsToSelect);
-            _.invoke(modelsToSelect, 'set', { selected: true });
+            _.invoke(visibleModels, 'set', { selected: true });
         },
 
         deselectVisible: function () {
@@ -77,24 +77,9 @@
             _.invoke(visibleModels, 'set', { selected: false });
         },
 
-        setSelectedLimit: function (selectedLimit) {
-            this.selectedLimit = selectedLimit;
-            var selectedModels = this.getSelectedRepresentations();
-            _.invoke(selectedModels.slice(selectedLimit), 'set', { selected: false });
-            this.updateDrawableUpperLimit();
-        },
-
         setDrawableLimit: function (drawableLimit) {
-            this.drawableLimit = this._getUpperDrawableLimit(drawableLimit);
+            this.drawableLimit = drawableLimit;
             this._updateDrawables();
-        },
-
-        updateDrawableUpperLimit: function () {
-            this.setDrawableLimit(this.drawableLimit);
-        },
-
-        _getUpperDrawableLimit: function (drawableLimit) {
-            return this.selectedLimit < drawableLimit ? this.selectedLimit : drawableLimit;
         },
 
         toggleRepresentationsVisibleRange: function (start, end, state) {
@@ -104,13 +89,6 @@
         },
 
         _onChangeSelected: function (model) {
-            var selectedModels = this.getSelectedRepresentations();
-            if (model.get('selected') && selectedModels.length > this.selectedLimit) {
-                var otherModel = _.find(selectedModels, function (selectedModel) {
-                    return selectedModel.id !== model.id;
-                });
-                otherModel.set('selected', false);
-            }
             this._updateDrawables();
             this.updateSelectedGeographicLevel();
         },
@@ -220,7 +198,8 @@
                 options['defaultSelectedValue'] = !isGeographicDimension;
                 options['parse'] = true;
                 var filterRepresentations = new App.modules.dataset.filter.models.FilterRepresentations(attributes.representations, options);
-                filterRepresentations.initializeHierarchy(attributes, options);
+                filterRepresentations.initializeHierarchy();
+                filterRepresentations._setSelectedGeographicDimension(attributes, options);
                 return filterRepresentations;
             }
         });

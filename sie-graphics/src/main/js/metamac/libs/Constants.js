@@ -43,7 +43,10 @@
 
         candidacyType: {
             DEFAULT_VALUE: "G_"
-        }
+        },
+
+        maxUrlQueryLength: 1700
+
     };
 
 }());

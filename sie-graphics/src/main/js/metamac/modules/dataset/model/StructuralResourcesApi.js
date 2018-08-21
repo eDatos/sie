@@ -62,6 +62,9 @@
         },
 
         getDimensions: function (callback) {
+
+            if (!this.metadata.metadata.relatedDsd.selfLink) { return; }
+
             var requestParams = {
                 url: this.metadata.metadata.relatedDsd.selfLink.href + "?_type=json",
                 method: "GET",
@@ -94,7 +97,9 @@
                 measureConcept = this.metadata.metadata.measureCoverages.resource;
             } else if (this.metadata.metadata.attributes) {
                 var measureAttribute = _.findWhere(this.metadata.metadata.attributes.attribute, { type: "MEASURE", attachmentLevel: "DATASET" });
-                measureConcept = measureAttribute.attributeValues.value;
+                if (measureAttribute) {
+                    measureConcept = measureAttribute.attributeValues.value;
+                }
             }
 
             if (measureConcept) {

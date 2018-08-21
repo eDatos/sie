@@ -11,6 +11,7 @@
     App.VisualElement.Base.prototype = {
 
         _noSelectionTemplate: App.templateManager.get('dataset/dataset-no-selection'),
+        _loadingTemplate: App.templateManager.get('dataset/dataset-loading'),
 
         initialize: function (options) {
             options = options || {};
@@ -19,6 +20,7 @@
             this.filterOptions = options.filterOptions; //deprecated
             this.filterDimensions = options.filterDimensions;
             this.filtersModel = options.filtersModel;
+            this.optionsModel = options.optionsModel;
 
             this.el = options.el;
 
@@ -124,7 +126,14 @@
         },
 
         _mustApplyVisualizationRestrictions: function () {
-            return !this.dataset.metadata.identifier().permalinkId;
+            return this.optionsModel.get('mustApplyVisualizationRestrictions');
+        },
+
+        _updateMustApplyVisualizationRestrictions: function () {
+            // We only ignore the visualization restrictions the first time we load the permalink
+            if (!this.optionsModel.get('mustApplyVisualizationRestrictions')) {
+                this.optionsModel.set('mustApplyVisualizationRestrictions', true);
+            }
         },
 
         _forceDimensionTypeInZone: function (dimensionType, zone) {
@@ -260,7 +269,7 @@
 
         setupNoSelectionViewIfNeeded: function () {
             if (this.$el.find('.dataset-no-selection').length) { return; }
-            this.$noSelection = $('<div class="dataset-no-selection"></div>');
+            this.$noSelection = $('<div class="dataset-no-selection dataset-message"></div>');
             this.$noSelection.hide();
             this.$el.append(this.$noSelection);
         },
@@ -274,6 +283,25 @@
             } else {
                 this.renderNoSelectionView();
                 return false;
+            }
+        },
+
+        showLoading: function () {
+            this.setupLoadingViewIfNeeded();
+            this.$loading.html(this._loadingTemplate());
+            this.$loading.show();
+        },
+
+        setupLoadingViewIfNeeded: function () {
+            if (this.$el.find('.dataset-loading').length) { return; }
+            this.$loading = $('<div class="dataset-loading dataset-message"></div>');
+            this.$loading.hide();
+            this.$el.append(this.$loading);
+        },
+
+        hideLoading: function () {
+            if (this.$loading) {
+                this.$loading.hide();
             }
         }
 

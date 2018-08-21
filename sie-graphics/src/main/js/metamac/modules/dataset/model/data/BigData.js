@@ -57,16 +57,50 @@
 
         getCache: function () {
             if (!this.cache) {
-                this.cache = new Cache(this.filterDimensions.getTableInfo().getTableSize());
+                this.cache = new Cache(_.extend({}, this.filterDimensions.getTableInfo().getTableSize(), { size: this._calculateCacheSize() }));
             }
             return this.cache;
         },
 
+        // We'll approximate a size for the cache based on the max length of the representation codes, 
+        // because this is directly related to the API request that we´ll execute later
+        // 
+        // App.Constants.maxUrlQueryLength > cacheSize * maxRepresentationLength[1] + cacheSize * maxRepresentationLength[2]...
+        // App.Constants.maxUrlQueryLength > cacheSize * (maxRepresentationLength[1] +  maxRepresentationLength[2]...)
+        // cacheSize < App.Constants.maxUrlQueryLength / (maxRepresentationLength[1] +  maxRepresentationLength[2]...)
+        _calculateCacheSize: function () {
+            var availableQueryLength = App.Constants.maxUrlQueryLength;
+            var summatoryRepresentationLengths = 0;
+            this.filterDimensions.each(function (filterDimension) {
+                var drawableRepresentations = filterDimension.get('representations').where({ drawable: true });
+                if (!drawableRepresentations.length) { return; }
+                var maxRepresentationLength = _.max(drawableRepresentations, function (representation) { return representation.id.length; }).id.length + 1;
+                if (drawableRepresentations.length == 1) {
+                    // If we only have one representation selected, we simply add it to the query
+                    availableQueryLength -= maxRepresentationLength * 2;
+                } else {
+                    // Else, we add it to later divide for it
+                    summatoryRepresentationLengths += maxRepresentationLength;
+                }
+            });
+
+            if (availableQueryLength < 0) {
+                console.warn("Too many dimensions");
+                return;
+            }
+
+            if (!summatoryRepresentationLengths) {
+                return; // Use default value
+            }
+
+            var cacheSize = Math.floor(availableQueryLength / summatoryRepresentationLengths) || 1;
+            return cacheSize;
+        },
+
         _initializeAjaxManager: function () {
             this.ajaxManager = $.manageAjax.create('DataSourceDatasetCache', {
-                queue: 'limit',
-                cacheResponse: true,
-                queueLimit: 9 // neighbours
+                queue: true,
+                cacheResponse: true
             });
         },
 
@@ -91,10 +125,36 @@
         getAttributes: function (selection) {
             var cell = selection.cell || this.filterDimensions.getTableInfo().getCellForCategoryIds(selection.ids);
 
+            var self = this;
+            return this.getCacheBlock(cell, function (cacheBlock) {
+                var ids = self.filterDimensions.getTableInfo().getCategoryIdsForCell(cell);
+                return cacheBlock.apiResponse.getDataById(ids).attributes;
+            });
+        },
+
+        getDatasetAttributes: function () {
+            return this.getRootCacheBlock(function (rootCacheBlock) {
+                return rootCacheBlock.apiResponse.getDatasetAttributes();
+            });
+        },
+
+        getDimensionAttributesById: function (dimensionsIds) {
+            var cell = this.filterDimensions.getTableInfo().getCellForCategoryIds(dimensionsIds);
+            return this.getCacheBlock(cell, function (cacheBlock) {
+                return cacheBlock.apiResponse.getDimensionAttributesById(dimensionsIds);
+            });
+        },
+
+        // Simplified access to root block
+        getRootCacheBlock: function (callback) {
+            var cell = { x: 0, y: 0 };
+            return this.getCacheBlock(cell, callback);
+        },
+
+        getCacheBlock: function (cell, callback) {
             var cacheBlock = this.getCache().cacheBlockForCell(cell);
             if (this.getCache().isBlockReady(cacheBlock)) {
-                var ids = this.filterDimensions.getTableInfo().getCategoryIdsForCell(cell);
-                return cacheBlock.apiResponse.getDataById(ids).attributes;
+                return callback(cacheBlock);
             } else if (cacheBlock) {
                 this._loadCacheBlock(cacheBlock, true);
             }
@@ -107,35 +167,6 @@
                 }, this);
             }
         },
-
-        getDatasetAttributes: function () {
-            return this.getRootCacheBlock(function (rootCacheBlock) {
-                return rootCacheBlock.apiResponse.getDatasetAttributes();
-            });
-        },
-
-        getDimensionAttributesById: function (dimensionsIds) {
-            return this.getRootCacheBlock(function (rootCacheBlock) {
-                return rootCacheBlock.apiResponse.getDimensionAttributesById(dimensionsIds);
-            });
-        },
-
-        getDimensionsAttributes: function () {
-            return this.getDimensionAttributesById(_.pluck(this.filterDimensions.models, 'id'));
-        },
-
-        // Simplified access to root block
-        getRootCacheBlock: function (callback) {
-            var cell = { x: 0, y: 0 };
-
-            var cacheBlock = this.getCache().cacheBlockForCell(cell);
-            if (this.getCache().isBlockReady(cacheBlock)) {
-                return callback(cacheBlock);
-            } else if (cacheBlock) {
-                this._loadCacheBlock(cacheBlock, true);
-            }
-        },
-
 
         getNumberData: function (selection) {
             var value = this.getData(selection);

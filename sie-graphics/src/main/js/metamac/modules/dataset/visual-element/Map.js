@@ -12,6 +12,8 @@
         initialize: function (options) {
             this.filterDimensions = options.filterDimensions;
             this.dataset = options.dataset;
+            this.optionsModel = options.optionsModel;
+
             this.shapes = new App.Map.Shapes();
             this.mapType = options.mapType;
             this._type = "map";
@@ -51,6 +53,8 @@
 
                 this._applyVisualizationPreselections();
             }
+
+            this._updateMustApplyVisualizationRestrictions();
         },
 
         _applyVisualizationPreselections: function () {
@@ -68,6 +72,8 @@
             }
             if (this.$title) { this.$title.show(); }
             this.visible = true;
+
+            this.showLoading();
 
             var normCodes = this._getGeographicDimensionNormCodes();
             var allNormCodes = this._getAllGeographicDimensionNormCodes();
@@ -167,6 +173,7 @@
 
             this._setUpListeners();
             this.render();
+            this.hideLoading();
         },
 
         _initTitleView: function () {

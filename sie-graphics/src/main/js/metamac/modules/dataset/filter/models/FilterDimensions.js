@@ -95,8 +95,8 @@
 
         _closeDimensions: function (model, dimensions) {
             var otherOpenDimensions = _.find(dimensions, function (openDimension) {
-                    return !model || openDimension.id !== model.id;
-                });
+                return !model || openDimension.id !== model.id;
+            });
             if (otherOpenDimensions) {
                 otherOpenDimensions.set({ open: false });
             }
@@ -124,6 +124,15 @@
                 }
                 this.importJSON(json);
             }
+        },
+
+        canDrawLineVisualizations: function () {
+            var timeDimensions = this.where({ type: "TIME_DIMENSION" });
+            return timeDimensions && timeDimensions.length > 0;
+        },
+
+        canDrawMapVisualizations: function () {
+            return this.metadata.apiType != App.Constants.api.type.INDICATOR;
         },
 
         importJSON: function (json) {

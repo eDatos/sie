@@ -118,9 +118,15 @@
         },
 
         _isVisualizationButtonEnabled: function (type) {
-            if (this.filterDimensions.metadata.apiType == App.Constants.api.type.INDICATOR) {
-                if (type == "map" || type == "mapbubble") return false;
+
+            if (type == "line" && !this.filterDimensions.canDrawLineVisualizations()) {
+                return false;
             }
+
+            if ((type == "map" || type == "mapbubble") && !this.filterDimensions.canDrawMapVisualizations()) {
+                return false;
+            }
+
             if (this.optionsModel.get('widget')) {
                 return type == "info" || type == this.optionsModel.get('widgetInitialType');
             }
