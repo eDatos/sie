@@ -213,8 +213,12 @@ App.namespace("App.VisualElement.LineChart");
 
         render: function () {
             var self = this;
+
+            self.showLoading();
             this.dataset.data.loadAllSelectedData()
                 .then(function () {
+                    self.hideLoading();
+
                     self.$el.empty();
                     self.$title = $('<h3></h3>');
                     self.updateTitle();
@@ -296,12 +300,11 @@ App.namespace("App.VisualElement.LineChart");
             if (!this.masterChart || !this.detailChart) {
                 this.load();
             } else {
-                self.detailChart.showLoading();
-                self.masterChart.showLoading();
+                self.showLoading();
 
                 this.dataset.data.loadAllSelectedData().then(function () {
-                    self.detailChart.hideLoading();
-                    self.masterChart.hideLoading();
+                    self.hideLoading();
+
                     self.updateTitle();
                     self._updateMaster();
                     self._updateDetail();
