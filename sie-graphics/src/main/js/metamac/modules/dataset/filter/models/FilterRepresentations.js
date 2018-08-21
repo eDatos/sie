@@ -37,7 +37,7 @@
             this.hasHierarchy = hasHierarchy;
         },
 
-        _setSelectedGeographicDimension(attributes, options) {
+        _setSelectedGeographicDimension: function (attributes, options) {
             this.each(function (representation) {
                 // TODO mejorar el rendimiento de esto
                 if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.options.territorio === representation.id) {
