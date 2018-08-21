@@ -61844,7 +61844,13 @@ I18n.translations.pt = {
                 }
             },
             pie: {
-                zones: {}
+                zones: {
+                    fixed: {
+                        draggable: false,
+                        location: "left",
+                        showHeader: false
+                    }
+                }
             },
             map: {
                 zones: {
