@@ -71063,8 +71063,15 @@ App.VisualElement.PieChart = (function () {
                 }
             },
             tooltip: {
-                headerFormat: '<b>{point.key}</b><br/>',
-                pointFormat: '{series.options.extraTooltip}: {point.y}<br/>{series.options.extraTooltip1}: {point.y1:,.f}%<br/>{series.options.extraTooltip2}: {point.y2:,.f}'
+                formatter: function () {
+                    var tooltip = "<b>" + this.point.name + "</b><br/>";
+                    tooltip += this.series.options.extraTooltip + ": " + Highcharts.numberFormat(this.point.y, -1, ',', '.') + "<br/>";
+                    tooltip += this.series.options.extraTooltip1 + ": " + Highcharts.numberFormat(this.point.y1, -1, ',', '.') + "%<br/>";
+                    if (this.point.y2) {
+                        tooltip += this.series.options.extraTooltip2 + ": " + Highcharts.numberFormat(this.point.y2, -1, ',', '.');
+                    }
+                    return tooltip;
+                }
             },
             plotOptions: {
                 series: {
