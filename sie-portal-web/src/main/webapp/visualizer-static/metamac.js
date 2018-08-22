@@ -71147,7 +71147,9 @@ App.VisualElement.PieChart = (function () {
 
         render: function () {
             var self = this;
+            self.showLoading();
             this.dataset.data.loadAllSelectedData().then(function () {
+                self.hideLoading();
                 self._updateTitle();
                 self._renderContainers();
                 self._renderChart();
@@ -71277,11 +71279,10 @@ App.VisualElement.PieChart = (function () {
             if (!this.chart) {
                 this.load();
             } else {
-                this.chart.showLoading();
-
                 var self = this;
+                self.showLoading();
                 this.dataset.data.loadAllSelectedData().then(function () {
-                    self.chart.hideLoading();
+                    self.hideLoading();
 
                     var data = self.getData();
                     self.replaceSeries(self.chart, data.series);
