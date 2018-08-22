@@ -104,6 +104,10 @@ a.proceso-electoral {
         thead {
             background-color: $color-tablas-evolucion-electoral;
             color: $white;
+
+            th.clickable-header-icon {
+                text-align: right;
+            }
         }
     
         th {

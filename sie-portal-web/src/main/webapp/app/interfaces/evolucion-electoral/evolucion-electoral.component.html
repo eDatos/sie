@@ -36,10 +36,10 @@
                 <div class="grid-procesos">
                     <ng-container *ngFor="let proceso of hashProcesos[tipo].slice().reverse()">
                         <a *ngIf="proceso.clickable" [routerLink]="['/proceso-electoral', lugar.id, proceso.tipoProcesoElectoral, proceso.fechaEleccion | date: 'yyyy']" class="proceso-electoral">
-                            <ng-container *ngTemplateOutlet="tablaProcesoElectoral; context: {$implicit: proceso}"></ng-container>
+                            <ng-container *ngTemplateOutlet="tablaProcesoElectoral; context: {proceso: proceso, headerTemplate: clickableHeader}"></ng-container>
                         </a>
                         <a *ngIf="!proceso.clickable" class="proceso-electoral">
-                            <ng-container *ngTemplateOutlet="tablaProcesoElectoral; context: {$implicit: proceso}"></ng-container>
+                            <ng-container *ngTemplateOutlet="tablaProcesoElectoral; context: {proceso: proceso, headerTemplate: notClickableHeader}"></ng-container>
                         </a>
                     </ng-container>
                 </div>
@@ -49,13 +49,24 @@
 
 </div>
 
-<ng-template #tablaProcesoElectoral let-proceso>
+<ng-template #clickableHeader let-proceso="proceso">
+    <th colspan="2">
+        {{proceso.fechaEleccion | date: 'yyyy'}}
+    </th>
+    <th class="clickable-header-icon">&#43;</th>
+</ng-template>
+
+<ng-template #notClickableHeader let-proceso="proceso">
+    <th colspan="3">
+        {{proceso.fechaEleccion | date: 'yyyy'}}
+    </th>
+</ng-template>
+
+<ng-template #tablaProcesoElectoral let-proceso="proceso" let-headerTemplate="headerTemplate">
     <table>
         <thead>
             <tr>
-                <th colspan="3">
-                    <a>{{proceso.fechaEleccion | date: 'yyyy'}}</a>
-                </th>
+                <ng-container *ngTemplateOutlet="headerTemplate; context: {proceso: proceso}"></ng-container>
             </tr>
         </thead>
         <tbody>
