@@ -1,0 +1,16 @@
+.fa.fa-istac-home {
+    background-image: url("~images/casa.svg");
+    @extend %custom-icon;
+}
+
+.fa.fa-istac-plus {
+    background-image: url("~images/plus.svg");
+    @extend %custom-icon;
+}
+
+%custom-icon {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 1;
+}

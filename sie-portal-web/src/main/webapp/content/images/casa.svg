@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="9mm"
+   height="9mm"
+   viewBox="0 0 9 9"
+   version="1.1"
+   id="svg8038"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="casa.svg">
+  <defs
+     id="defs8032" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="15.839192"
+     inkscape:cx="-6.7886916"
+     inkscape:cy="18.923064"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata8035">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-288)">
+    <g
+       id="g4534"
+       transform="matrix(0.98985274,0,0,0.98985274,-380.49218,-23.020152)"
+       style="display:inline;opacity:1;stroke-width:0.94507337">
+      <g
+         inkscape:export-ydpi="150"
+         inkscape:export-xdpi="150"
+         style="display:inline;fill:#666666;fill-opacity:0.99215686;stroke-width:2.84847951"
+         id="XMLID_2_"
+         transform="matrix(0.08778391,0,0,0.08778391,384.72523,314.2738)">
+        <path
+           style="fill:#666666;fill-opacity:0.99215686;stroke-width:2.84847951"
+           d="M 48,18 15.2,42.9 19.8,49 48,27.5 76.2,49 80.8,42.9 Z M 48,31.5 22.1,51.2 V 78 H 41.9 V 57 h 12 V 78 H 74 V 51.3 Z"
+           class="st0"
+           id="XMLID_6_"
+           inkscape:connector-curvature="0" />
+      </g>
+      <circle
+         r="4.2763124"
+         cy="318.75464"
+         cx="388.93884"
+         id="path4528"
+         style="opacity:0.6;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.53963685;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+  </g>
+</svg>
