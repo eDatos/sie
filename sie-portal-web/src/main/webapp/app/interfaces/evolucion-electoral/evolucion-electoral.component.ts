@@ -26,10 +26,10 @@ const INDICADORES_GRAFICA_PARTICIPACION = [
 ];
 const GRAFICA_VOTOS_DEFAULT = false;
 const TIPO_COLUMNA = 'column';
-const TIPO_AREA_CON_LINEA = 'areaspline';
 const TIPO_AREA = 'area';
-const TIPO_LINEA = 'spline';
+const TIPO_LINEA = 'line';
 const ELECTORES = 'ELECTORES';
+const STACKING_TYPE = 'normal';
 
 const TIPO_ELECCIONES_DEFAULT = 'MUNICIPALES';
 
@@ -144,6 +144,7 @@ export class EvolucionElectoralComponent implements OnInit {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador.nombre);
         resultado.color = indicador.color;
+        resultado.stacking = STACKING_TYPE;
         resultado.type = this.tipoGrafica ? TIPO_AREA : TIPO_COLUMNA;
         resultado.alternativeName = this.translateService.instant('evolucionElectoral.indicador.' + indicador.indicadorAlternativo);
         resultado.data = [];
@@ -173,7 +174,7 @@ export class EvolucionElectoralComponent implements OnInit {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador);
         resultado.color = color;
-        resultado.type = TIPO_AREA_CON_LINEA;
+        resultado.type = TIPO_AREA;
         resultado['tooltip'] = { pointFormat: '{series.name}: {point.y}'}
         resultado.data = [];
         this.hashProcesos[tipoEleccion].forEach((eleccion) => {

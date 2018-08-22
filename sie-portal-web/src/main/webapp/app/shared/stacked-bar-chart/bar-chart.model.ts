@@ -4,6 +4,7 @@ export class YElement {
     public type: string;
     public data: any[];
     public alternativeName: string;
+    public stacking: string;
 }
 
 export class BarChart {

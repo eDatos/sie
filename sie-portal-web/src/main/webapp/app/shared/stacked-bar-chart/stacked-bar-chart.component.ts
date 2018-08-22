@@ -62,14 +62,7 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
                 },
             },
             plotOptions: {
-                column: {
-                    stacking: 'normal',
-                },
                 area: {
-                    stacking: 'normal',
-                    fillOpacity: 0.5
-                },
-                areaspline: {
                     fillOpacity: 0.5
                 }
             },
