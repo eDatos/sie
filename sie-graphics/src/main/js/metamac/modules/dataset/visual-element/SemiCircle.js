@@ -33,7 +33,7 @@
             },
             tooltip: {
                 formatter: function () {
-                    var tooltip = "<b>" + this.point.name + "</b><br/>";
+                    var tooltip = "<b>" + this.point.longName + "</b><br/>";
                     tooltip += this.series.options.extraTooltip + ": " + Highcharts.numberFormat(this.point.y, -1, ',', '.') + "<br/>";
                     tooltip += this.series.options.extraTooltip1 + ": " + Highcharts.numberFormat(this.point.y1, -1, ',', '.') + "%<br/>";
                     if (this.point.y2) {
@@ -185,7 +185,8 @@
                     }
 
                     var element = {};
-                    element.name = horizontalCategory.get('visibleLabel');
+                    element.longName = horizontalCategory.get('visibleLabel');
+                    element.name = self._getShortName(element.longName);
 
                     _.each(extraDataSelectedCategories, function (extraCategory, index) {
                         var currentPermutation = {};
@@ -212,6 +213,16 @@
             return result;
         },
 
+        _getShortName: function (longName) {
+            var result = longName;
+            var textBetweenParentheses = longName.match(/\(.+?\)/g);
+            if (textBetweenParentheses) {
+                var lastElement = textBetweenParentheses.length - 1;
+                result = textBetweenParentheses[lastElement].replace(/[()]/g, "");
+            }
+            return result;
+        },
+
         _sortAndfilterSeries: function (listSeries) {
             var resultSeries = listSeries;
             _.each(resultSeries, function (serie) {
@@ -221,6 +232,7 @@
 
                 var othersData = {
                     name: I18n.t("ve.others"),
+                    longName: I18n.t("ve.others"),
                     y: 0,
                     y1: 0,
                     y2: 0
