@@ -67595,10 +67595,10 @@ I18n.translations.pt = {
             this.setMeAndMyChildren(property, newSelectedValue);
         },
 
-        setMeAndMyChildren: function (property, value) {
-            this.set(property, value);
+        setMeAndMyChildren: function (property, value, options) {
+            this.set(property, value, options);
             this.children.each(function (child) {
-                child.setMeAndMyChildren(property, value);
+                child.setMeAndMyChildren(property, value, options);
             });
         }
 
@@ -67652,7 +67652,7 @@ I18n.translations.pt = {
             this.each(function (representation) {
                 // TODO mejorar el rendimiento de esto
                 if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.options.territorio === representation.id) {
-                    representation.setMeAndMyChildren("selected", true);
+                    representation.setMeAndMyChildren("selected", true, { silent: true });
                 }
             }, this);
         },
@@ -76557,8 +76557,8 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
         },
 
         _centerAndZoom: function () {
-            if (this.map && this.map.get('featuresContainerSerie')) {
-                var featuresContainerSerie = this.map.get('featuresContainerSerie');
+            if (this.map && this.map.get('choroplethDataSerie')) {
+                var featuresContainerSerie = this.map.get('choroplethDataSerie');
                 if (featuresContainerSerie.maxX
                     && featuresContainerSerie.maxY
                     && featuresContainerSerie.minX
@@ -76566,7 +76566,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                     // featuresContainerSerie.points[0].zoomTo();
                     // this.map.redraw();
 
-                    this._zoomToSerie(this.map.get('featuresContainerSerie'));
+                    this._zoomToSerie(this.map.get('choroplethDataSerie'));
                 }
             }
         },

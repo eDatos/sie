@@ -322,8 +322,8 @@
         },
 
         _centerAndZoom: function () {
-            if (this.map && this.map.get('featuresContainerSerie')) {
-                var featuresContainerSerie = this.map.get('featuresContainerSerie');
+            if (this.map && this.map.get('choroplethDataSerie')) {
+                var featuresContainerSerie = this.map.get('choroplethDataSerie');
                 if (featuresContainerSerie.maxX
                     && featuresContainerSerie.maxY
                     && featuresContainerSerie.minX
@@ -331,7 +331,7 @@
                     // featuresContainerSerie.points[0].zoomTo();
                     // this.map.redraw();
 
-                    this._zoomToSerie(this.map.get('featuresContainerSerie'));
+                    this._zoomToSerie(this.map.get('choroplethDataSerie'));
                 }
             }
         },

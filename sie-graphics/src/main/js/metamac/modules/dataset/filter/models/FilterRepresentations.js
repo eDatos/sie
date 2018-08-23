@@ -41,7 +41,7 @@
             this.each(function (representation) {
                 // TODO mejorar el rendimiento de esto
                 if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.options.territorio === representation.id) {
-                    representation.setMeAndMyChildren("selected", true);
+                    representation.setMeAndMyChildren("selected", true, { silent: true });
                 }
             }, this);
         },

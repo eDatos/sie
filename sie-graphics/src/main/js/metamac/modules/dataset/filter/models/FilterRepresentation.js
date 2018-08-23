@@ -80,10 +80,10 @@
             this.setMeAndMyChildren(property, newSelectedValue);
         },
 
-        setMeAndMyChildren: function (property, value) {
-            this.set(property, value);
+        setMeAndMyChildren: function (property, value, options) {
+            this.set(property, value, options);
             this.children.each(function (child) {
-                child.setMeAndMyChildren(property, value);
+                child.setMeAndMyChildren(property, value, options);
             });
         }
 
