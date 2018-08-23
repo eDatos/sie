@@ -23,6 +23,7 @@
 
         _bindEvents: function () {
             var debounceReload = _.debounce(_.bind(this.reload, this), 20);
+            this.listenTo(this.filterDimensions, "loading", this.showLoading);
             this.listenTo(this.filterDimensions, "change:drawable change:zone", debounceReload);
         },
 
@@ -66,7 +67,6 @@
         load: function () {
             var self = this;
             this._bindEvents();
-                if (this.$title) { this.$title.hide(); }
             if (!this.assertAllDimensionsHaveSelections()) {
                 return;
             }
@@ -171,9 +171,8 @@
             this._initTitleView();
 
             this._setUpListeners();
-            if (this.$title) { this.$title.show(); }
+            this.showTitle();
             this.render();
-            this.hideLoading();
         },
 
         _initTitleView: function () {
@@ -200,7 +199,8 @@
                 mapType: this.mapType,
                 title: this.getTitle(),
                 rightsHolder: this.getRightsHolderText(),
-                showRightsHolder: this.showRightsHolderText()
+                showRightsHolder: this.showRightsHolderText(),
+                callback: this.hideLoading
             });
         },
 

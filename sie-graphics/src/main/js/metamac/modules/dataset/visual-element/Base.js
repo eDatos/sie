@@ -111,6 +111,14 @@
             }
         },
 
+        hideTitle: function () {
+            if (this.$title) { this.$title.hide(); }
+        },
+
+        showTitle: function () {
+            if (this.$title) { this.$title.show(); }
+        },
+
         replaceSeries: function (chart, series) {
             while (chart.series.length > 0) {
                 chart.series[0].remove(false);
@@ -264,6 +272,7 @@
         renderNoSelectionView: function () {
             this.setupNoSelectionViewIfNeeded();
             this.$noSelection.html(this._noSelectionTemplate());
+            this.hideTitle();
             this.$noSelection.show();
         },
 
@@ -289,6 +298,7 @@
         showLoading: function () {
             this.setupLoadingViewIfNeeded();
             this.$loading.html(this._loadingTemplate());
+            this.hideTitle();
             this.$loading.show();
         },
 

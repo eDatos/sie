@@ -16,15 +16,16 @@
             this.metadata = options.metadata;
             this.filterDimensions = options.filterDimensions;
 
-            this._initializeAjaxManager();
+            this._updateAjaxManager(9); // neighbours
             this.onUpdateFilter();
 
             this._bindEvents();
         },
 
         _bindEvents: function () {
-            if (this.filterDimensions != null)
-                this.filterDimensions.on('change:drawable change:zone', this.onUpdateFilter, this);
+            if (this.filterDimensions != null) {
+                this.filterDimensions.on('change:drawable change:zone', _.debounce(this.onUpdateFilter, 20, true), this);
+            }
         },
 
         isAllSelectedDataLoaded: function () {
@@ -58,6 +59,7 @@
         getCache: function () {
             if (!this.cache) {
                 this.cache = new Cache(_.extend({}, this.filterDimensions.getTableInfo().getTableSize(), { size: this._calculateCacheSize() }));
+                this._updateAjaxManager(this.getCache().getAllCacheBlocks().length);
             }
             return this.cache;
         },
@@ -97,10 +99,14 @@
             return cacheSize;
         },
 
-        _initializeAjaxManager: function () {
+        _updateAjaxManager: function (queueLimit) {
+            if (!this.queueLimiteAjaxManager || this.queueLimiteAjaxManager < queueLimit) {
+                this.queueLimiteAjaxManager = queueLimit;
+            }
             this.ajaxManager = $.manageAjax.create('DataSourceDatasetCache', {
-                queue: true,
-                cacheResponse: true
+                queue: 'limit',
+                cacheResponse: true,
+                queueLimit: this.queueLimiteAjaxManager
             });
         },
 

@@ -15,7 +15,7 @@
         },
 
         _bindEvents: function () {
-            this.listenTo(this, 'change:selected', this._onChangeSelected);
+            this.listenTo(this, 'change:selected', _.debounce(this._onChangeSelected, 100));
             this.listenTo(this, 'change:drawable', this._onChangeDrawable);
         },
 
@@ -47,11 +47,11 @@
         },
 
         _updateDrawables: function () {
-            var modelsToUndraw = this.where({ drawable: true });
             var modelsToDraw = this._getModelsToDraw();
 
-            _.invoke(modelsToUndraw, 'set', { drawable: false }, { silent: true });
+            _.invoke(this.models, 'set', { drawable: false }, { silent: true });
             _.invoke(modelsToDraw, 'set', { drawable: true });
+            this.trigger("change:drawable");
         },
 
         _getModelsToDraw: function () {

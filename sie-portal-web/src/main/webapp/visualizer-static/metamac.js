@@ -61983,6 +61983,8 @@ I18n.translations.pt = {
                 this.currentSelectedGranularity = selectedGranularity;
                 this._updateDrawableRepresentationsBySelectedGranularity(filterDimensionId, selectedGranularity);
             }
+
+            this.render();
         },
 
         _onChangeLevel: function (e) {
@@ -62024,10 +62026,10 @@ I18n.translations.pt = {
         _bindEvents: function () {
             var self = this;
             this.filterDimensions.each(function (filterDimension) {
-                self.listenTo(filterDimension.get('representations'), 'change:drawable', _.debounce(_.bind(self._updateSelectedCategory, self, filterDimension.get('id')), 300));
-                self.listenTo(self.filterDimensions, 'change:selected', _.debounce(_.bind(self._updateRepresentations, self, filterDimension.get('id')), 300));
+                self.listenTo(filterDimension.get('representations'), 'change:drawable', _.debounce(_.bind(self._updateSelectedCategory, self, filterDimension.get('id')), 400));
+                self.listenTo(filterDimension.get('representations'), 'change:selected', _.debounce(_.bind(self._updateRepresentations, self, filterDimension.get('id')), 300));
             });
-            this.listenTo(this.filterDimensions, "change:zone change:selected", _.throttle(self.render, 500));
+            this.listenTo(this.filterDimensions, "change:zone", _.throttle(self.render, 500));
             this.listenTo(this.dataset.data, "hasNewData", self.hasNewdata);
             if (this.optionsModel.get('widget')) {
                 this.listenTo(this.optionsModel, "change:filter", this.toggleVisibility);
@@ -64123,15 +64125,16 @@ I18n.translations.pt = {
             this.metadata = options.metadata;
             this.filterDimensions = options.filterDimensions;
 
-            this._initializeAjaxManager();
+            this._updateAjaxManager(9); // neighbours
             this.onUpdateFilter();
 
             this._bindEvents();
         },
 
         _bindEvents: function () {
-            if (this.filterDimensions != null)
-                this.filterDimensions.on('change:drawable change:zone', this.onUpdateFilter, this);
+            if (this.filterDimensions != null) {
+                this.filterDimensions.on('change:drawable change:zone', _.debounce(this.onUpdateFilter, 20, true), this);
+            }
         },
 
         isAllSelectedDataLoaded: function () {
@@ -64165,6 +64168,7 @@ I18n.translations.pt = {
         getCache: function () {
             if (!this.cache) {
                 this.cache = new Cache(_.extend({}, this.filterDimensions.getTableInfo().getTableSize(), { size: this._calculateCacheSize() }));
+                this._updateAjaxManager(this.getCache().getAllCacheBlocks().length);
             }
             return this.cache;
         },
@@ -64204,10 +64208,14 @@ I18n.translations.pt = {
             return cacheSize;
         },
 
-        _initializeAjaxManager: function () {
+        _updateAjaxManager: function (queueLimit) {
+            if (!this.queueLimiteAjaxManager || this.queueLimiteAjaxManager < queueLimit) {
+                this.queueLimiteAjaxManager = queueLimit;
+            }
             this.ajaxManager = $.manageAjax.create('DataSourceDatasetCache', {
-                queue: true,
-                cacheResponse: true
+                queue: 'limit',
+                cacheResponse: true,
+                queueLimit: this.queueLimiteAjaxManager
             });
         },
 
@@ -67555,9 +67563,7 @@ I18n.translations.pt = {
             var childrenSelected = this.children.any(function (child) {
                 return child.get('selected') || child.get('childrenSelected');
             });
-            if (childrenSelected != this.get('childrenSelected')) {
             this.set('childrenSelected', childrenSelected);
-            }
         },
 
         _close: function () {
@@ -67620,7 +67626,7 @@ I18n.translations.pt = {
         },
 
         _bindEvents: function () {
-            this.listenTo(this, 'change:selected', this._onChangeSelected);
+            this.listenTo(this, 'change:selected', _.debounce(this._onChangeSelected, 100));
             this.listenTo(this, 'change:drawable', this._onChangeDrawable);
         },
 
@@ -67652,11 +67658,11 @@ I18n.translations.pt = {
         },
 
         _updateDrawables: function () {
-            var modelsToUndraw = this.where({ drawable: true });
             var modelsToDraw = this._getModelsToDraw();
 
-            _.invoke(modelsToUndraw, 'set', { drawable: false }, { silent: true });
+            _.invoke(this.models, 'set', { drawable: false }, { silent: true });
             _.invoke(modelsToDraw, 'set', { drawable: true });
+            this.trigger("change:drawable");
         },
 
         _getModelsToDraw: function () {
@@ -67869,15 +67875,12 @@ I18n.translations.pt = {
 
         parse: function (attributes, options) {
             attributes.representations = App.modules.dataset.filter.models.FilterRepresentations.initializeWithRepresentations(attributes, options);
-            attributes.representations.on('all', this._onRepresentationEvent, this);
+            this.listenTo(attributes.representations, 'change:drawable', this._onRepresentationDrawableEvent);
             return attributes;
         },
 
-        _onRepresentationEvent: function (event, model, collection, options) {
-            // Don´t propagate this one from children to parents again, it´s already propagated from parent to children
-            if (event != "change:visibleLabelType") {
-                this.trigger.apply(this, arguments);
-            }
+        _onRepresentationDrawableEvent: function (model, collection, options) {
+            this.trigger("change:drawable", model, collection, options);
         },
 
         _cleanFilterQuery: function (query) {
@@ -68845,47 +68848,47 @@ App.widget.filter.FilterView = Backbone.View.extend({
 
     App.widget.filter.sidebar.FilterSidebarCategoryView = Backbone.View.extend({
 
-        template : App.templateManager.get('dataset/filter/sidebar/filter-sidebar-category'),
+        template: App.templateManager.get('dataset/filter/sidebar/filter-sidebar-category'),
 
-        className : "filter-sidebar-category",
+        className: "filter-sidebar-category",
 
-        initialize : function (options) {
+        initialize: function (options) {
             this.filterRepresentation = options.filterRepresentation;
             this.filterDimension = options.filterDimension;
             this.filterSidebarDimensionView = options.filterSidebarDimensionView;
         },
 
-        events : {
+        events: {
             "click .filter-sidebar-category-label" : "toggleSelected",
             "click .category-state" : "toggleSelected",
 
-            "dblclick .filter-sidebar-category-label" : "toggleSelectedElementAndChildren",
-            "dblclick .category-state" : "toggleSelectedElementAndChildren",
+            "dblclick .filter-sidebar-category-label": "toggleSelectedElementAndChildren",
+            "dblclick .category-state": "toggleSelectedElementAndChildren",
 
-            "click .category-expand" : "toggleOpen"
+            "click .category-expand": "toggleOpen"
         },
 
-        _bindEvents : function () {
+        _bindEvents: function () {
             var renderEvents = 'change:visibleLabel change:selected change:childrenSelected change:visible change:open change:matchIndexBegin change:matchIndexEnd';
-            //debounce for multiple changes when searching
-            this.listenTo(this.filterRepresentation, renderEvents, _.debounce(this.render, 15));
+            // Debounce 0 is strange, but needed, because if put the render as inmediate, the views reset, losing the events pointing to them
+            this.listenTo(this.filterRepresentation, renderEvents, this.render);
         },
 
-        _unbindEvents : function () {
+        _unbindEvents: function () {
             this.stopListening();
         },
 
-        destroy : function () {
+        destroy: function () {
             this._unbindEvents();
             this.remove();
         },
 
-        toggleOpen : function (e) {
+        toggleOpen: function (e) {
             e.preventDefault();
             this.filterRepresentation.toggle('open');
         },
 
-        toggleSelected : function (e) {
+        toggleSelected: function (e) {
             e.preventDefault();
             var representations = this.filterDimension.get('representations');
             var currentIndex = representations.indexOf(this.filterRepresentation);
@@ -68894,17 +68897,28 @@ App.widget.filter.FilterView = Backbone.View.extend({
                 var sortedIndex = [currentIndex, this.filterSidebarDimensionView.lastIndex].sort();
                 representations.toggleRepresentationsVisibleRange(sortedIndex[0], sortedIndex[1], newState);
             } else {
-                this.filterRepresentation.toggle('selected');
+                // We do this to avoid interactions with the inmediate rendering and toggleSelectedElementAndChildren
+                var selected = this.filterRepresentation.get('selected');
+                var self = this;
+                // Wait for double click events to happen
+                setTimeout(function () {
+                    var currentSelected = self.filterRepresentation.get('selected');
+                    // If after the timeout the seleted value is still the same, you can toggle it safely
+                    if (selected == currentSelected) {
+                        self.filterRepresentation.toggle('selected');
+                    }
+                }, 400);
             }
             this.filterSidebarDimensionView.lastIndex = currentIndex;
         },
 
-        toggleSelectedElementAndChildren : function (e) {
+        toggleSelectedElementAndChildren: function (e) {
             e.preventDefault();
+            this.filterRepresentation.trigger("loading");
             this.filterRepresentation.toggleMeAndMyChildren('selected');
         },
 
-        _stateClass : function () {
+        _stateClass: function () {
             var stateClass;
             if (this.filterRepresentation.children.length > 0 && this.filterRepresentation.get('childrenSelected')) {
                 stateClass = this.filterRepresentation.get('selected') ?
@@ -68918,7 +68932,7 @@ App.widget.filter.FilterView = Backbone.View.extend({
             return stateClass;
         },
 
-        _collapseClass : function () {
+        _collapseClass: function () {
             if (this.filterRepresentation.children.length > 0) {
                 if (this.filterRepresentation.get('open')) {
                     return this.filterRepresentation.get('childrenSelected') ? 'filter-sidebar-category-any-children-icon-collapse' : 'filter-sidebar-category-icon-collapse';
@@ -68928,7 +68942,7 @@ App.widget.filter.FilterView = Backbone.View.extend({
             }
         },
 
-        _strongZone : function (str, begin, end) {
+        _strongZone: function (str, begin, end) {
             if (begin >= 0 && end > begin) {
                 var p1 = str.substring(0, begin);
                 var p2 = str.substring(begin, end);
@@ -68939,7 +68953,7 @@ App.widget.filter.FilterView = Backbone.View.extend({
             }
         },
 
-        render : function () {
+        render: function () {
             this._unbindEvents();
             this._bindEvents();
 
@@ -68953,10 +68967,10 @@ App.widget.filter.FilterView = Backbone.View.extend({
                 var label = this._strongZone(filterRepresentation.visibleLabel, filterRepresentation.matchIndexBegin, filterRepresentation.matchIndexEnd);
 
                 var context = {
-                    filterRepresentation : filterRepresentation,
-                    label : new Handlebars.SafeString(label),
-                    stateClass : stateClass,
-                    collapseClass : collapseClass
+                    filterRepresentation: filterRepresentation,
+                    label: new Handlebars.SafeString(label),
+                    stateClass: stateClass,
+                    collapseClass: collapseClass
                 };
                 this.$el.html(this.template(context));
                 this.$el.css("padding-left", this.filterRepresentation.get('level') * 18);
@@ -68977,51 +68991,53 @@ App.widget.filter.FilterView = Backbone.View.extend({
 
     App.widget.filter.sidebar.FilterSidebarDimensionActionsView = Backbone.View.extend({
 
-        template : App.templateManager.get('dataset/filter/sidebar/filter-sidebar-dimension-actions'),
+        template: App.templateManager.get('dataset/filter/sidebar/filter-sidebar-dimension-actions'),
 
-        initialize : function (options) {
+        initialize: function (options) {
             this.filterDimension = options.filterDimension;
         },
 
-        destroy : function () {
+        destroy: function () {
             this._unbindEvents();
         },
 
-        events : {
-            "click .filter-sidebar-selectAll" : "_onSelectAll",
-            "click .filter-sidebar-unselectAll" : "_onDeselectAll",
-            "click .filter-sidebar-reverse" : "_onReverse"
+        events: {
+            "click .filter-sidebar-selectAll": "_onSelectAll",
+            "click .filter-sidebar-unselectAll": "_onDeselectAll",
+            "click .filter-sidebar-reverse": "_onReverse"
         },
 
-        _bindEvents : function () {
+        _bindEvents: function () {
             var throttleRender = _.throttle(this.render, 40);
             this.listenTo(this.filterDimension, 'change:zone', throttleRender);
         },
 
-        _unbindEvents : function () {
+        _unbindEvents: function () {
             this.stopListening();
         },
 
-        render : function (){
+        render: function () {
             this._unbindEvents();
             this._bindEvents();
             var context = {
-                isTimeDimension : this.filterDimension.isTimeDimension()
+                isTimeDimension: this.filterDimension.isTimeDimension()
             };
             this.$el.html(this.template(context));
         },
 
-        _onSelectAll : function (e) {
+        _onSelectAll: function (e) {
             e.preventDefault();
+            this.filterDimension.trigger("loading");
             this.filterDimension.get('representations').selectVisible();
         },
 
-        _onDeselectAll : function (e) {
+        _onDeselectAll: function (e) {
             e.preventDefault();
+            this.filterDimension.trigger("loading");
             this.filterDimension.get('representations').deselectVisible();
         },
 
-        _onReverse : function (e) {
+        _onReverse: function (e) {
             e.preventDefault();
             this.filterDimension.get('representations').reverse();
         }
@@ -69820,6 +69836,14 @@ App.widget.filter.FilterView = Backbone.View.extend({
             }
         },
 
+        hideTitle: function () {
+            if (this.$title) { this.$title.hide(); }
+        },
+
+        showTitle: function () {
+            if (this.$title) { this.$title.show(); }
+        },
+
         replaceSeries: function (chart, series) {
             while (chart.series.length > 0) {
                 chart.series[0].remove(false);
@@ -69973,6 +69997,7 @@ App.widget.filter.FilterView = Backbone.View.extend({
         renderNoSelectionView: function () {
             this.setupNoSelectionViewIfNeeded();
             this.$noSelection.html(this._noSelectionTemplate());
+            this.hideTitle();
             this.$noSelection.show();
         },
 
@@ -69998,6 +70023,7 @@ App.widget.filter.FilterView = Backbone.View.extend({
         showLoading: function () {
             this.setupLoadingViewIfNeeded();
             this.$loading.html(this._loadingTemplate());
+            this.hideTitle();
             this.$loading.show();
         },
 
@@ -71396,7 +71422,7 @@ App.VisualElement.PieChart = (function () {
             this.listenTo(this.dataset.data, "hasNewData", this.hasNewData);
 
             var debouncedUpdate = _.debounce(_.bind(this.update, this), 20);
-            this.listenTo(this.filterDimensions, "change:selected change:zone change:visibleLabelType reverse", debouncedUpdate);
+            this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", debouncedUpdate);
 
             var resize = _.debounce(_.bind(this._updateSize, this), 200);
             this.$el.on("resize", function (e) {
@@ -71745,6 +71771,7 @@ App.VisualElement.PieChart = (function () {
 
         _bindEvents: function () {
             var debounceReload = _.debounce(_.bind(this.reload, this), 20);
+            this.listenTo(this.filterDimensions, "loading", this.showLoading);
             this.listenTo(this.filterDimensions, "change:drawable change:zone", debounceReload);
         },
 
@@ -71788,7 +71815,6 @@ App.VisualElement.PieChart = (function () {
         load: function () {
             var self = this;
             this._bindEvents();
-                if (this.$title) { this.$title.hide(); }
             if (!this.assertAllDimensionsHaveSelections()) {
                 return;
             }
@@ -71893,9 +71919,8 @@ App.VisualElement.PieChart = (function () {
             this._initTitleView();
 
             this._setUpListeners();
-            if (this.$title) { this.$title.show(); }
+            this.showTitle();
             this.render();
-            this.hideLoading();
         },
 
         _initTitleView: function () {
@@ -71922,7 +71947,8 @@ App.VisualElement.PieChart = (function () {
                 mapType: this.mapType,
                 title: this.getTitle(),
                 rightsHolder: this.getRightsHolderText(),
-                showRightsHolder: this.showRightsHolderText()
+                showRightsHolder: this.showRightsHolderText(),
+                callback: this.hideLoading
             });
         },
 
@@ -76116,6 +76142,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
             this.title = options.title;
             this.rightsHolder = options.rightsHolder;
             this.showRightsHolder = options.showRightsHolder;
+            this.callback = options.callback;
             this.$el.empty();
             this._initInternalViews();
         },
@@ -76175,7 +76202,8 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
                 mapType: this.mapType,
                 title: this.title,
                 rightsHolder: this.rightsHolder,
-                showRightsHolder: this.showRightsHolder
+                showRightsHolder: this.showRightsHolder,
+                callback: this.callback
             });
         },
 
@@ -76224,7 +76252,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
         _defaultMapOptions: {
             chart: {
                 className: 'map',
-                animation: false,
+                animation: false
             },
 
             title: {
@@ -76325,6 +76353,7 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
             this._defaultMapOptions.tooltip.formatter = _.partial(function (formatter, mapView) {
                 return mapView.tooltipDelegate._getLabelFromNormCode(this.point.code) + ': ' + this.point.value;
             }, _, this);
+            this._defaultMapOptions.chart.events = { load: options.callback };
         },
 
         events: {
