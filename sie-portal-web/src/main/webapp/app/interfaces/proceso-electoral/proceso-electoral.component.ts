@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
-import { ProcesoElectoralDatasetService, DatasetService } from '../../dataset';
-import { ActivatedRoute } from '@angular/router';
-import { Lugar } from '../lugar';
+import { ProcesoElectoralDatasetService } from '../../dataset';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MultidatasetProcesosElectorales } from '../../dataset/multidataset-procesos-electorales.model';
 
 declare var I18n: any;
 declare var App: any;
@@ -22,28 +22,22 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
 
     tipoElecciones: string;
     fecha: string;
-    lugar: Lugar;
+    multidataset: MultidatasetProcesosElectorales;
 
     constructor(
         private host: ElementRef,
         private activatedRoute: ActivatedRoute,
-        private procesoElectoralDatasetService: ProcesoElectoralDatasetService,
-        private datasetService: DatasetService
+        private router: Router,
+        private procesoElectoralDatasetService: ProcesoElectoralDatasetService
     ) { }
 
     ngOnInit() {
         this.activatedRoute.parent.params.subscribe((params) => {
-            this.procesoElectoralDatasetService.getDatasetsByTipoElecciones(params.tipoElecciones).then((multidataset) => {
-                const lugarId = this.activatedRoute.parent.snapshot.url[1];
-                this.datasetService.getLugarById(lugarId.path).then((lugar) => this.lugar = lugar);
-                this.fecha = this.activatedRoute.parent.snapshot.url[3].path;
-                this.tipoElecciones = params.tipoElecciones;
-
-                if (App.mainRegion) {
-                    this.stopBackbone();
-                }
-                this.startBackbone(multidataset.id);
-            });
+            if (params.tipoElecciones !== this.tipoElecciones) {
+                this.onChangeTipoElecciones(params);
+            } else if (params.fecha !== this.fecha) {
+                this.onChangeFecha(params);
+            }
         });
     }
 
@@ -55,6 +49,30 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     ngOnDestroy() {
         this.setGlobalStyleSheetsDisabled(false);
         this.stopBackbone();
+    }
+
+    private onChangeTipoElecciones(params: Params) {
+        this.procesoElectoralDatasetService.getDatasetsByTipoElecciones(params.tipoElecciones).then((multidataset) => {
+            this.tipoElecciones = params.tipoElecciones;
+            this.multidataset = multidataset;
+            this.onChangeFecha(params);
+
+            if (App.mainRegion) {
+                this.stopBackbone();
+            }
+            this.startBackbone(multidataset.id);
+        }).catch(() => {
+            this.router.navigate(['not-found'], { skipLocationChange: true });
+        });
+    }
+
+    private onChangeFecha(params: Params) {
+        const dataset = this.multidataset.datasetList.find((element) => element.year === params.fecha);
+        if (dataset) {
+            this.fecha = params.fecha;
+        } else {
+            this.router.navigate(['not-found'], { skipLocationChange: true });
+        }
     }
 
     private startBackbone(multidatasetId: string) {

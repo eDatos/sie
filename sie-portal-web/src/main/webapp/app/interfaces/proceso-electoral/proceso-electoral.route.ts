@@ -12,7 +12,8 @@ export function procesoElectoralUrls(url: UrlSegment[]) {
         result = {
             consumed: url,
             posParams: {
-                'tipoElecciones': url[2]
+                'tipoElecciones': url[2],
+                'fecha': url[3]
             }
         };
     }

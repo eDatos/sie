@@ -66,7 +66,7 @@ export class EvolucionElectoralComponent implements OnInit {
             this.activatedRoute.params.subscribe((params) => {
                 const resultadoBusquedaLugar = this.lugares.find((lugar) => lugar.id === params.id);
                 if (!resultadoBusquedaLugar) {
-                    this.alertService.success('lugar.errorNoEncontrado', { codigo: params.id });
+                    this.alertService.error('lugar.errorNoEncontrado', { codigo: params.id });
                     throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: params.id }));
                 }
 

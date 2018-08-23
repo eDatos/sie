@@ -19,10 +19,14 @@ export class ProcesoElectoralDatasetService {
 
     getDatasetsByTipoElecciones(tipoElecciones: string): Promise<MultidatasetProcesosElectorales> {
         if (!this.multidatasetsCache[tipoElecciones]) {
-            this.multidatasetsCache[tipoElecciones] = new Promise<MultidatasetProcesosElectorales>((resolve) => {
-                this.getDatasetIdByTipoElecciones(tipoElecciones).subscribe((tipoEleccionesDataset) => {
-                    this.doGetDatasets(tipoEleccionesDataset).subscribe((json) => resolve(this.parseMultidataset(json)));
-                });
+            this.multidatasetsCache[tipoElecciones] = new Promise<MultidatasetProcesosElectorales>((resolve, reject) => {
+                this.getDatasetIdByTipoElecciones(tipoElecciones).subscribe(
+                    (tipoEleccionesDataset) => {
+                        this.doGetDatasets(tipoEleccionesDataset).subscribe((json) => resolve(this.parseMultidataset(json)));
+                    },
+                    (error) => {
+                        reject(error);
+                    });
             });
         }
         return this.multidatasetsCache[tipoElecciones];

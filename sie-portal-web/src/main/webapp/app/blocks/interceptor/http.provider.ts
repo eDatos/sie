@@ -19,8 +19,6 @@ export function interceptableFactory(
         backend,
         defaultOptions,
         [
-            // Other interceptors can be added here
-            new ErrorHandlerInterceptor(eventManager)
         ]
     );
 };
