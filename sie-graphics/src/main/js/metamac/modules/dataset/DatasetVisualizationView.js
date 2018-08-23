@@ -76,6 +76,10 @@
             this.ve[this.currentElement].load();
         },
 
+        showLoading: function () {
+            this. _getCurrentVe().showLoading();
+        },
+
         _removeCurrentElement: function () {
             var currentVe = this._getCurrentVe();
             if (currentVe) {

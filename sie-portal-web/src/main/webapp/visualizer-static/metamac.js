@@ -61378,8 +61378,13 @@ I18n.translations.pt = {
             this.content.$el.addClass('dataset-widget');
             this._updateSidebarHeight($('html').height());
         },
+
         _updateSidebarHeight: function (height) {
             this.content.$el.outerHeight(height);
+        },
+
+        showLoading: function () {
+            this.visualizationView.showLoading();
         }
     });
 
@@ -62380,6 +62385,10 @@ I18n.translations.pt = {
 
         load: function () {
             this.ve[this.currentElement].load();
+        },
+
+        showLoading: function () {
+            this. _getCurrentVe().showLoading();
         },
 
         _removeCurrentElement: function () {
@@ -77408,6 +77417,9 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
 
             var self = this;
             var datasetIdentifier = _.pick(options, "type", "agency", "identifier", "version", "permalinkId", "indicatorSystem", "geo", "multidatasetId", "territorio", "tipoElecciones", "fecha");
+            if (this.visualizationView) {
+                this.visualizationView.showLoading();
+            }
             this._loadMetadata(datasetIdentifier)
                 .then(function () {
                     options = _.defaults(options, {

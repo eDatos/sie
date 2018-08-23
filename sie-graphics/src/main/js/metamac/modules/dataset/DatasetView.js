@@ -241,8 +241,13 @@
             this.content.$el.addClass('dataset-widget');
             this._updateSidebarHeight($('html').height());
         },
+
         _updateSidebarHeight: function (height) {
             this.content.$el.outerHeight(height);
+        },
+
+        showLoading: function () {
+            this.visualizationView.showLoading();
         }
     });
 

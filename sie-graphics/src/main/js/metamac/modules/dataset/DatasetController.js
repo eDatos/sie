@@ -44,6 +44,9 @@
 
             var self = this;
             var datasetIdentifier = _.pick(options, "type", "agency", "identifier", "version", "permalinkId", "indicatorSystem", "geo", "multidatasetId", "territorio", "tipoElecciones", "fecha");
+            if (this.visualizationView) {
+                this.visualizationView.showLoading();
+            }
             this._loadMetadata(datasetIdentifier)
                 .then(function () {
                     options = _.defaults(options, {
