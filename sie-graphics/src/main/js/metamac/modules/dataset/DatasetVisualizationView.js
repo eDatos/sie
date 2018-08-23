@@ -77,7 +77,9 @@
         },
 
         showLoading: function () {
-            this. _getCurrentVe().showLoading();
+            if (this._getCurrentVe()) {
+                this._getCurrentVe().showLoading();
+            }
         },
 
         _removeCurrentElement: function () {
