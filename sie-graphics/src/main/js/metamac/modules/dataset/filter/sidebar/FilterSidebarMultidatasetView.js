@@ -101,6 +101,15 @@
             return this.el;
         },
 
+        updateMultidatasetUrls: function (oldChart, newChart) {
+            this.multidataset.get('nodes').forEach(function(node) {
+                var url = node.get("url");
+                url = url.replace(oldChart, newChart);
+                node.set("url", url);
+            });
+            this.render();
+        },
+
         updateScrollbar: function () {
             // Wait for DOM
             setTimeout(function () {

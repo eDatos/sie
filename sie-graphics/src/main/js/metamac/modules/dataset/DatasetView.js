@@ -175,14 +175,19 @@
 
         _onSelectChartType: function () {
             var currentVe = this.visualizationView._getCurrentVe();
+            var oldChart;
             if (currentVe) {
                 currentVe._unbindEvents();
+                oldChart = currentVe._type;
             }
 
             var type = this.optionsModel.get('type');
             if (type) {
                 this._toggleClassByChartType(type);
 
+                if (oldChart) {
+                    this.filterSidebarView.updateMultidatasetUrlsIfExist(oldChart, type);
+                }
                 this.visualizationView.activeVisualElement(type);
                 this.visualizationView.load();
                 this.dimensionsView.render();

@@ -61311,15 +61311,21 @@ I18n.translations.pt = {
         },
 
         _onSelectChartType: function () {
+            // TODO Actualizar enlaces del multidataset
             var currentVe = this.visualizationView._getCurrentVe();
+            var oldChart;
             if (currentVe) {
                 currentVe._unbindEvents();
+                oldChart = currentVe._type;
             }
 
             var type = this.optionsModel.get('type');
             if (type) {
                 this._toggleClassByChartType(type);
 
+                if (oldChart) {
+                    this.filterSidebarView.updateMultidatasetUrlsIfExist(oldChart, type);
+                }
                 this.visualizationView.activeVisualElement(type);
                 this.visualizationView.load();
                 this.dimensionsView.render();
@@ -69289,6 +69295,15 @@ App.widget.filter.FilterView = Backbone.View.extend({
             return this.el;
         },
 
+        updateMultidatasetUrls: function (oldChart, newChart) {
+            this.multidataset.get('nodes').forEach(function(node) {
+                var url = node.get("url");
+                url = url.replace(oldChart, newChart);
+                node.set("url", url);
+            });
+            this.render();
+        },
+
         updateScrollbar: function () {
             // Wait for DOM
             setTimeout(function () {
@@ -69492,6 +69507,12 @@ App.widget.filter.FilterView = Backbone.View.extend({
             }
 
             this._onResize();
+        },
+
+        updateMultidatasetUrlsIfExist: function (oldChart, newChart) {
+            if (this.filterDimensions.hasMultidataset()) {
+                this.multidataset.updateMultidatasetUrls(oldChart, newChart);
+            }
         },
 
         _onSubviewChangeCollapsed: function (changedView) {
@@ -71049,6 +71070,8 @@ App.VisualElement.PieChart = (function () {
 
     App.VisualElement.SemiCircleChart = function (options) {
         this.initialize(options);
+        this._type = 'pie';
+
         _.extend(this._chartOptions, {
             chart: {
                 animation: false,

@@ -5,6 +5,8 @@
 
     App.VisualElement.SemiCircleChart = function (options) {
         this.initialize(options);
+        this._type = 'pie';
+
         _.extend(this._chartOptions, {
             chart: {
                 animation: false,

@@ -75,6 +75,12 @@
             this._onResize();
         },
 
+        updateMultidatasetUrlsIfExist: function (oldChart, newChart) {
+            if (this.filterDimensions.hasMultidataset()) {
+                this.multidataset.updateMultidatasetUrls(oldChart, newChart);
+            }
+        },
+
         _onSubviewChangeCollapsed: function (changedView) {
             if (!changedView.stateModel.get('collapsed')) {
                 _.chain(this.subviews)
