@@ -61684,7 +61684,10 @@ I18n.translations.pt = {
         events: {
             "click a.order-sidebar-dimension": "_dontFollowLinks",
             "click a.order-sidebar-measure-attribute": "_dontFollowLinks",
-            "change .fixed-dimension-select-category": "_onChangeSelector"
+            "change .fixed-dimension-select-category": "_onChangeSelector",
+
+            "focusin .order-sidebar-dimension": "_onFocusin",
+            "focusout .order-sidebar-dimension": "_onFocusout"
         },
 
         _onChangeSelector: function (e) {
@@ -61694,6 +61697,14 @@ I18n.translations.pt = {
             if (selectorId) {
                 this.filtersModel.set(selectorId, selectorValue);
             }
+        },
+
+        _onFocusin: function (e) {
+            $(e.currentTarget).addClass('active');
+        },
+
+        _onFocusout: function (e) {
+            $(e.currentTarget).removeClass('active');
         },
 
         _dontFollowLinks: function (e) {

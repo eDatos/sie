@@ -55,7 +55,7 @@
             }
 
             .order-sidebar-dimension.dimension-pill {
-                .border-radius(10px 10px 0 0);
+                .border-radius(@borderRadiusGreat @borderRadiusGreat 0 0);
             }
         }
         
@@ -81,7 +81,7 @@
             color: @istacWhite;
 
             &.active {
-                background-color: @istacBlueDark;
+                background-color: @istacBlueMedium;
             }
                     
             .dimension-select-level,
@@ -104,8 +104,7 @@
             }
 
             &.dimension-pill {
-                .border-radius(10px);
-                border-bottom: 1px solid @istacGreyMedium;
+                .border-radius(@borderRadiusGreat);
                 &.drag-over {
                     .drag-over-dimension;
                 }
@@ -155,7 +154,7 @@
         &.dataset-dimensions-left-2 { 
             .order-sidebar-zone:last-child {
                 .order-sidebar-dimensions {
-                    .border-radius(0 0 9px 0); 
+                    .border-radius(0 0 @borderRadiusMedium 0); 
                     overflow: hidden;
                 }
             }
@@ -208,7 +207,7 @@
             .order-sidebar-zone:last-child { 
                 .order-sidebar-dimensions.no-header, 
                 h2 {
-                    .border-radius(0 0 0 9px);
+                    .border-radius(0 0 0 @borderRadiusMedium);
                     overflow: hidden;
                 }
             }

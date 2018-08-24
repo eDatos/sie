@@ -297,6 +297,13 @@ module.exports = (grunt) ->
                 expand: true
             }
 
+            dependency: {
+                src: 'target/*',
+                dest: '../sie-portal-web/src/main/webapp/visualizer-static/',
+                flatten: true,
+                expand: true
+            }
+
         clean:
             build: "target",
 
@@ -370,8 +377,8 @@ module.exports = (grunt) ->
         grunt.task.run('mocha:spec')
 
     grunt.registerTask 'test', ['concat','mocha:all']
-    grunt.registerTask 'dev', ['clean', 'copy', 'less:dev', 'less:map', 'handlebars', 'concat']
-    grunt.registerTask 'build', ['clean', 'copy', 'less:pro', 'less:map', 'handlebars', 'uglify']
+    grunt.registerTask 'dev', ['clean', 'copy', 'less:dev', 'less:map', 'handlebars', 'concat', 'copy:dependency']
+    grunt.registerTask 'build', ['clean', 'copy', 'less:pro', 'less:map', 'handlebars', 'uglify', 'copy:dependency']
     grunt.registerTask 'deploy', ['package', 'zip']
 
     grunt.registerTask 'bdd', ['connect', 'open:test', 'watch' ]

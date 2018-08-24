@@ -211,7 +211,7 @@
     .box-sizing(border-box);
 
     border: 1px solid @istacGreyMedium;
-    .border-radius(0 0 10px 10px);
+    .border-radius(0 0 @borderRadiusGreat @borderRadiusGreat);
     overflow: hidden;
     .clearfix;
 
@@ -267,7 +267,7 @@
     
     .dataset-visualization-options-bar {
         .options-bar;
-        .border-radius(0 0 6px 6px);        
+        .border-radius(0 0 @borderRadiusLittle @borderRadiusLittle);        
         .btn {
             .options-bar-btn;
 
@@ -456,7 +456,7 @@
     
     .active &:before,
     &:hover:before {
-        color: @istacBlueDark;
+        color: @istacBlueMedium;
     }
 }
 

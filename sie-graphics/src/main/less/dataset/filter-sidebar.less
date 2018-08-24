@@ -58,7 +58,7 @@
     background-color: @istacBlueDark;
     color: @istacWhite;
     .user-select(none);
-    .border-radius(6px 6px 0 0);
+    .border-radius(@borderRadiusLittle @borderRadiusLittle 0 0);
 }
 
 .filter-sidebar-dimensions {
@@ -66,11 +66,7 @@
     .filter-sidebar-dimension {
         .filter-sidebar-dimension-title {
             color: @istacWhite;
-            background-color: @istacGreyDark;
-                                
-            &.active {
-                background-color: @istacBlueDark;
-            }
+            background-color: @istacBlueMedium;
         }
     }        
 }
@@ -82,7 +78,7 @@
     .filter-sidebar-dimension-title {
         .sidebar-title;
         cursor: pointer;        
-        .border-radius(6px 6px 0 0);
+        .border-radius(@borderRadiusLittle @borderRadiusLittle 0 0);
     }
 
     .filter-sidebar-dimension-label {
@@ -97,7 +93,7 @@
         margin-bottom: 8px;
 
         background:@istacGreyMedium;
-        .border-radius(0 0 6px 6px);
+        .border-radius(0 0 @borderRadiusLittle @borderRadiusLittle);
 
         .filter-sidebar-dimension-actionsbar-wrapper {
             background: @istacWhite;
@@ -105,7 +101,7 @@
         }        
 
         .filter-sidebar-selectAll {
-            .border-radius(0 0 0 6px);
+            .border-radius(0 0 0 @borderRadiusLittle);
         }
 
         .filter-sidebar-dimension-levels, 
@@ -143,11 +139,7 @@
     .filter-sidebar-multidataset {
         .filter-sidebar-multidataset-title {
             color: @istacWhite;
-            background-color: @istacGreyDark;
-                                
-            &.active {
-                background-color: @istacBlueDark;
-            }
+            background-color: @istacBlueMedium;
         }
     }        
 }
@@ -159,7 +151,7 @@
     .filter-sidebar-multidataset-title {
         .sidebar-title;
         cursor: pointer;        
-        .border-radius(6px 6px 0 0);
+        .border-radius(@borderRadiusLittle @borderRadiusLittle 0 0);
     }
 
     .filter-sidebar-multidataset-label {
@@ -229,14 +221,14 @@
             display: inline-block;
         }
 
-        @levelBaseColor : @istacBlueDark;
-
-        .level0  { color: @levelBaseColor; }
-        .level1 { color: lighten(@levelBaseColor, 5%); }
-        .level2 { color: lighten(@levelBaseColor, 10%); }
-        .level3 { color: lighten(@levelBaseColor, 15%); }
-        .level4 { color: lighten(@levelBaseColor, 20%); }
-        .level5 { color: lighten(@levelBaseColor, 25%); }
+        .level0,
+        .level1,
+        .level2,
+        .level3,
+        .level4,
+        .level5 {
+             color: @istacBlueMedium; 
+        }
     }
 
     .filter-sidebar-category-right-actions {

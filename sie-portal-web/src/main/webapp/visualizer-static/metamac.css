@@ -662,7 +662,7 @@ button {
   cursor: pointer;
 }
 .contenido ul.capitulos .dimension-depth-1 .tree-icon:hover:before {
-  color: #003366;
+  color: #005980;
 }
 .contenido ul.capitulos .dimension-depth-1 .open .tree-icon:before {
   font-family: "icons";
@@ -693,7 +693,7 @@ button {
   cursor: pointer;
 }
 .contenido ul.capitulos .icon-collection-table:hover {
-  color: #003366;
+  color: #005980;
 }
 textarea,
 input[type="text"],
@@ -768,7 +768,7 @@ input[type="color"] select,
   overflow: hidden;
 }
 .sidebar-menu {
-  background-color: #003366;
+  background-color: #005980;
   color: #ffffff;
   width: 50px;
   height: 100%;
@@ -786,7 +786,7 @@ input[type="color"] select,
 .sidebar-menu ul li {
   text-align: center;
   padding: 10px 3px 5px 3px;
-  border-bottom: 1px solid #1c547e;
+  border-bottom: 1px solid #008bd0;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
   font-size: 11px;
   cursor: pointer;
@@ -799,7 +799,7 @@ input[type="color"] select,
   border-radius: 6px 0 0 0;
 }
 .sidebar-menu ul li.active {
-  background-color: #1c547e;
+  background-color: #008bd0;
 }
 .sidebar-menu ul li i {
   font-size: 25px;
@@ -1109,9 +1109,9 @@ input[type="color"] select,
   min-width: 260px;
   margin-left: -220px;
   margin-top: -175px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   border: 2px solid #808080;
 }
 .modal .modal-close {
@@ -1192,9 +1192,9 @@ input[type="color"] select,
   padding: 0 10px;
   height: 40px;
   margin-right: 5px;
-  -webkit-border-radius: 0 0 0 6px;
-  -moz-border-radius: 0 0 0 6px;
-  border-radius: 0 0 0 6px;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   border-right: 1px solid #acacac;
 }
 .options-bar .options-bar-btn-side-left i {
@@ -1205,16 +1205,16 @@ input[type="color"] select,
   padding: 0 10px;
   height: 40px;
   margin-left: 5px;
-  -webkit-border-radius: 0 0 6px 0;
-  -moz-border-radius: 0 0 6px 0;
-  border-radius: 0 0 6px 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   border-left: 1px solid #acacac;
 }
 .options-bar .options-bar-btn-side-right i {
   font-size: 28px;
 }
 .options-bar .options-bar-btn-side-active {
-  background-color: #003366;
+  background-color: #008bd0;
   color: #ffffff;
 }
 .options-bar .options-bar-btn-side-active i:before {
@@ -1256,9 +1256,9 @@ input[type="color"] select,
   height: 39px;
 }
 .order-dimensions .order-sidebar-zone.has-selector .order-sidebar-dimension.dimension-pill {
-  -webkit-border-radius: 10px 10px 0 0;
-  -moz-border-radius: 10px 10px 0 0;
-  border-radius: 10px 10px 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
 }
 .order-dimensions .order-sidebar-zone .order-sidebar-measure-attribute,
 .order-dimensions .order-sidebar-zone .order-sidebar-dimension {
@@ -1278,11 +1278,11 @@ input[type="color"] select,
 .order-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.drag-over,
 .order-dimensions .order-sidebar-zone .order-sidebar-dimension.drag-over {
   opacity: 0.8;
-  border: 1px dashed #003366;
+  border: 1px dashed #005980;
 }
 .order-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.active,
 .order-dimensions .order-sidebar-zone .order-sidebar-dimension.active {
-  background-color: #003366;
+  background-color: #008bd0;
 }
 .order-dimensions .order-sidebar-zone .order-sidebar-measure-attribute .dimension-select-level,
 .order-dimensions .order-sidebar-zone .order-sidebar-dimension .dimension-select-level,
@@ -1306,16 +1306,15 @@ input[type="color"] select,
 }
 .order-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill,
 .order-dimensions .order-sidebar-zone .order-sidebar-dimension.dimension-pill {
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  border-bottom: 1px solid #acacac;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   margin: 3px 2px 2px 2px;
 }
 .order-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill.drag-over,
 .order-dimensions .order-sidebar-zone .order-sidebar-dimension.dimension-pill.drag-over {
   opacity: 0.8;
-  border: 1px dashed #003366;
+  border: 1px dashed #005980;
 }
 .order-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill .dimension-select-level,
 .order-dimensions .order-sidebar-zone .order-sidebar-dimension.dimension-pill .dimension-select-level,
@@ -1357,9 +1356,9 @@ input[type="color"] select,
 }
 .order-dimensions .dataset-dimensions-left.dataset-dimensions-left-1 .order-sidebar-zone:last-child .order-sidebar-dimensions,
 .order-dimensions .dataset-dimensions-left.dataset-dimensions-left-2 .order-sidebar-zone:last-child .order-sidebar-dimensions {
-  -webkit-border-radius: 0 0 9px 0;
-  -moz-border-radius: 0 0 9px 0;
-  border-radius: 0 0 9px 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   overflow: hidden;
 }
 .order-dimensions .dataset-dimensions-left .order-sidebar-zone {
@@ -1402,9 +1401,9 @@ input[type="color"] select,
 .order-dimensions .dataset-dimensions-right.dataset-dimensions-left-2 .order-sidebar-zone:last-child .order-sidebar-dimensions.no-header,
 .order-dimensions .dataset-dimensions-right.dataset-dimensions-left-1 .order-sidebar-zone:last-child h2,
 .order-dimensions .dataset-dimensions-right.dataset-dimensions-left-2 .order-sidebar-zone:last-child h2 {
-  -webkit-border-radius: 0 0 0 9px;
-  -moz-border-radius: 0 0 0 9px;
-  border-radius: 0 0 0 9px;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   overflow: hidden;
 }
 .order-dimensions .dataset-dimensions-right .order-sidebar-zone {
@@ -1432,16 +1431,16 @@ input[type="color"] select,
   margin-bottom: 5px;
   font-size: 13.2px;
   line-height: 1.25em;
-  background-color: #003366;
+  background-color: #005980;
   color: #ffffff;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
-  -webkit-border-radius: 6px 6px 0 0;
-  -moz-border-radius: 6px 6px 0 0;
-  border-radius: 6px 6px 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   margin: 0;
   margin-bottom: 3px;
 }
@@ -1489,7 +1488,7 @@ input[type="color"] select,
 }
 .drag-over-dimension {
   opacity: 0.8;
-  border: 1px dashed #003366;
+  border: 1px dashed #005980;
 }
 .scroll-buttons {
   position: relative;
@@ -1562,14 +1561,14 @@ input[type="color"] select,
 .captcha button {
   border: none;
   background: none;
-  color: #003366;
+  color: #005980;
   font-size: 1.2em;
   margin-top: 10px;
 }
 .filter-sidebar-toggleVisibility.active,
 .filter-sidebar-toggleVisibility:hover {
   color: #ffffff;
-  background: #003366;
+  background: #005980;
 }
 /* perfect-scrollbar v0.6.16 */
 .ps-container {
@@ -2352,13 +2351,13 @@ input[type="color"] select,
 .dataset-header-info .dataset-header-title {
   font-size: 20px;
   line-height: 25px;
-  color: #003366;
+  color: #005980;
   max-height: 50px;
   margin-top: 0;
 }
 .dataset-header-info .dataset-header-categories {
   font-style: italic;
-  color: #56b5e6;
+  color: #8cd2ea;
 }
 .dataset-header-actions {
   width: 250px;
@@ -2460,7 +2459,7 @@ input[type="color"] select,
   word-wrap: break-word;
 }
 .metadata-group .field .metadata-value a {
-  color: #1c547e;
+  color: #008bd0;
 }
 .metadata-group .field .metadata-value ul {
   margin-top: 0;
@@ -2482,17 +2481,17 @@ input[type="color"] select,
   margin-bottom: 17px;
 }
 .dataset-export .dropdown-menu li > a:hover {
-  background-color: #3481b3;
-  background-image: -moz-linear-gradient(top, #56b5e6, #003366);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#56b5e6), to(#003366));
-  background-image: -webkit-linear-gradient(top, #56b5e6, #003366);
-  background-image: -o-linear-gradient(top, #56b5e6, #003366);
-  background-image: linear-gradient(to bottom, #56b5e6, #003366);
+  background-color: #54a2c0;
+  background-image: -moz-linear-gradient(top, #8cd2ea, #005980);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#8cd2ea), to(#005980));
+  background-image: -webkit-linear-gradient(top, #8cd2ea, #005980);
+  background-image: -o-linear-gradient(top, #8cd2ea, #005980);
+  background-image: linear-gradient(to bottom, #8cd2ea, #005980);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff56b5e6', endColorstr='#ff003366', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8cd2ea', endColorstr='#ff005980', GradientType=0);
 }
 .btn-group.open .btn-primary.dropdown-toggle {
-  background-color: #003366;
+  background-color: #005980;
 }
 .dataset-visualization {
   position: relative;
@@ -2532,9 +2531,9 @@ input[type="color"] select,
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   border: 1px solid #acacac;
-  -webkit-border-radius: 0 0 10px 10px;
-  -moz-border-radius: 0 0 10px 10px;
-  border-radius: 0 0 10px 10px;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   overflow: hidden;
   *zoom: 1;
 }
@@ -2563,7 +2562,7 @@ input[type="color"] select,
   box-sizing: border-box;
 }
 .dataset-visualization-container .dataset-visualization-title a {
-  color: #1c547e;
+  color: #008bd0;
   text-decoration: none;
 }
 .dataset-visualization-container .dataset-bar {
@@ -2636,9 +2635,9 @@ input[type="color"] select,
 }
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone.has-selector .order-sidebar-dimension.dimension-pill,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone.has-selector .order-sidebar-dimension.dimension-pill {
-  -webkit-border-radius: 10px 10px 0 0;
-  -moz-border-radius: 10px 10px 0 0;
-  border-radius: 10px 10px 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
 }
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute,
@@ -2662,13 +2661,13 @@ input[type="color"] select,
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension.drag-over,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension.drag-over {
   opacity: 0.8;
-  border: 1px dashed #003366;
+  border: 1px dashed #005980;
 }
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute.active,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.active,
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension.active,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension.active {
-  background-color: #003366;
+  background-color: #008bd0;
 }
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute .dimension-select-level,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute .dimension-select-level,
@@ -2702,10 +2701,9 @@ input[type="color"] select,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill,
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension.dimension-pill,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension.dimension-pill {
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  border-bottom: 1px solid #acacac;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   margin: 3px 2px 2px 2px;
 }
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill.drag-over,
@@ -2713,7 +2711,7 @@ input[type="color"] select,
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension.dimension-pill.drag-over,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension.dimension-pill.drag-over {
   opacity: 0.8;
-  border: 1px dashed #003366;
+  border: 1px dashed #005980;
 }
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill .dimension-select-level,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill .dimension-select-level,
@@ -2771,9 +2769,9 @@ input[type="color"] select,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left.dataset-dimensions-left-1 .order-sidebar-zone:last-child .order-sidebar-dimensions,
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left.dataset-dimensions-left-2 .order-sidebar-zone:last-child .order-sidebar-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left.dataset-dimensions-left-2 .order-sidebar-zone:last-child .order-sidebar-dimensions {
-  -webkit-border-radius: 0 0 9px 0;
-  -moz-border-radius: 0 0 9px 0;
-  border-radius: 0 0 9px 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   overflow: hidden;
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left .order-sidebar-zone,
@@ -2830,9 +2828,9 @@ input[type="color"] select,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right.dataset-dimensions-left-1 .order-sidebar-zone:last-child h2,
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right.dataset-dimensions-left-2 .order-sidebar-zone:last-child h2,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right.dataset-dimensions-left-2 .order-sidebar-zone:last-child h2 {
-  -webkit-border-radius: 0 0 0 9px;
-  -moz-border-radius: 0 0 0 9px;
-  border-radius: 0 0 0 9px;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   overflow: hidden;
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right .order-sidebar-zone,
@@ -2864,9 +2862,9 @@ input[type="color"] select,
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   border-left: 0;
-  -webkit-border-radius: 0 0 6px 6px;
-  -moz-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   position: absolute;
   bottom: 0;
 }
@@ -2903,9 +2901,9 @@ input[type="color"] select,
   padding: 0 10px;
   height: 40px;
   margin-right: 5px;
-  -webkit-border-radius: 0 0 0 6px;
-  -moz-border-radius: 0 0 0 6px;
-  border-radius: 0 0 0 6px;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   border-right: 1px solid #acacac;
 }
 .dataset-visualization-container .dataset-visualization-options-bar .options-bar-btn-side-left i {
@@ -2916,16 +2914,16 @@ input[type="color"] select,
   padding: 0 10px;
   height: 40px;
   margin-left: 5px;
-  -webkit-border-radius: 0 0 6px 0;
-  -moz-border-radius: 0 0 6px 0;
-  border-radius: 0 0 6px 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   border-left: 1px solid #acacac;
 }
 .dataset-visualization-container .dataset-visualization-options-bar .options-bar-btn-side-right i {
   font-size: 28px;
 }
 .dataset-visualization-container .dataset-visualization-options-bar .options-bar-btn-side-active {
-  background-color: #003366;
+  background-color: #008bd0;
   color: #ffffff;
 }
 .dataset-visualization-container .dataset-visualization-options-bar .options-bar-btn-side-active i:before {
@@ -2947,16 +2945,16 @@ input[type="color"] select,
   padding: 0 10px;
   height: 40px;
   margin-left: 5px;
-  -webkit-border-radius: 0 0 6px 0;
-  -moz-border-radius: 0 0 6px 0;
-  border-radius: 0 0 6px 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   border-left: 1px solid #acacac;
 }
 .dataset-visualization-container .dataset-visualization-options-bar .btn.visual-element-options-fs i {
   font-size: 28px;
 }
 .dataset-visualization-container .dataset-visualization-options-bar .btn.visual-element-options-fs.active {
-  background-color: #003366;
+  background-color: #008bd0;
   color: #ffffff;
 }
 .dataset-visualization-container .dataset-visualization-options-bar .btn.visual-element-options-fs.active i:before {
@@ -2967,16 +2965,16 @@ input[type="color"] select,
   padding: 0 10px;
   height: 40px;
   margin-right: 5px;
-  -webkit-border-radius: 0 0 0 6px;
-  -moz-border-radius: 0 0 0 6px;
-  border-radius: 0 0 0 6px;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   border-right: 1px solid #acacac;
 }
 .dataset-visualization-container .dataset-visualization-options-bar .btn.dataset-options-filter i {
   font-size: 28px;
 }
 .dataset-visualization-container .dataset-visualization-options-bar .btn.dataset-options-filter.active {
-  background-color: #003366;
+  background-color: #008bd0;
   color: #ffffff;
 }
 .dataset-visualization-container .dataset-visualization-options-bar .btn.dataset-options-filter.active i:before {
@@ -3112,7 +3110,7 @@ input[type="color"] select,
 }
 .active .dataset-options-type-icon:before,
 .dataset-options-type-icon:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-type-info {
   height: 18px;
@@ -3132,7 +3130,7 @@ input[type="color"] select,
 }
 .active .dataset-options-type-info:before,
 .dataset-options-type-info:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-type-info:before {
   font-family: "icons";
@@ -3162,7 +3160,7 @@ input[type="color"] select,
 }
 .active .dataset-options-type-table:before,
 .dataset-options-type-table:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-type-table:before {
   font-family: "icons";
@@ -3192,7 +3190,7 @@ input[type="color"] select,
 }
 .active .dataset-options-type-column:before,
 .dataset-options-type-column:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-type-column:before {
   font-family: "icons";
@@ -3222,7 +3220,7 @@ input[type="color"] select,
 }
 .active .dataset-options-type-pie:before,
 .dataset-options-type-pie:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-type-pie:before {
   font-family: "icons";
@@ -3252,7 +3250,7 @@ input[type="color"] select,
 }
 .active .dataset-options-type-line:before,
 .dataset-options-type-line:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-type-line:before {
   font-family: "icons";
@@ -3282,7 +3280,7 @@ input[type="color"] select,
 }
 .active .dataset-options-type-mapbubble:before,
 .dataset-options-type-mapbubble:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-type-mapbubble:before {
   font-family: "icons";
@@ -3312,7 +3310,7 @@ input[type="color"] select,
 }
 .active .dataset-options-type-map:before,
 .dataset-options-type-map:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-type-map:before {
   font-family: "icons";
@@ -3342,7 +3340,7 @@ input[type="color"] select,
 }
 .active .dataset-options-full-screen:before,
 .dataset-options-full-screen:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-full-screen:before {
   font-family: "icons";
@@ -3372,7 +3370,7 @@ input[type="color"] select,
 }
 .active .options-filter:before,
 .options-filter:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .options-filter:before {
   font-family: "icons";
@@ -3402,7 +3400,7 @@ input[type="color"] select,
 }
 .active .dataset-options-share:before,
 .dataset-options-share:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-share:before {
   font-family: "icons";
@@ -3432,7 +3430,7 @@ input[type="color"] select,
 }
 .active .dataset-options-embed:before,
 .dataset-options-embed:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-embed:before {
   font-family: "icons";
@@ -3462,7 +3460,7 @@ input[type="color"] select,
 }
 .active .dataset-options-download:before,
 .dataset-options-download:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-download:before {
   font-family: "icons";
@@ -3492,7 +3490,7 @@ input[type="color"] select,
 }
 .active .dataset-options-visualize:before,
 .dataset-options-visualize:hover:before {
-  color: #003366;
+  color: #008bd0;
 }
 .dataset-options-visualize:before {
   font-family: "icons";
@@ -3520,7 +3518,7 @@ input[type="color"] select,
   color: #808080;
 }
 .dataset-download a:hover {
-  color: #1c547e;
+  color: #008bd0;
 }
 .dataset-download .dataset-download-group {
   margin-top: 20px;
@@ -3824,7 +3822,7 @@ input[type="color"] select,
 }
 .highlight-short {
   opacity: 0.8 !important;
-  border: 1px dashed #56b5e6 !important;
+  border: 1px dashed #8cd2ea !important;
 }
 .filter-container {
   /*margin: 0 0 10px 0;*/
@@ -3870,7 +3868,7 @@ input[type="color"] select,
 .filter-container div.div-dimension-text {
   /*width: 100%;*/
 
-  color: #003366;
+  color: #005980;
   font-size: 14px;
   width: 30%;
   height: auto;
@@ -3930,9 +3928,9 @@ input[type="color"] select,
   display: inline-block;
   padding: 3px 10px 4px 10px;
   line-height: 18px;
-  background: #1c547e;
+  background: #008bd0;
   border-radius: 4px 4px 0 0;
-  border: 1px solid #003366;
+  border: 1px solid #005980;
   border-bottom: none;
   color: #ffffff;
   margin-top: 10px;
@@ -3973,7 +3971,7 @@ input[type="color"] select,
   margin: 0;
 }
 .filter-container .button-cancel {
-  color: #56b5e6;
+  color: #8cd2ea;
   text-decoration: none;
   position: absolute;
   bottom: 12px;
@@ -3981,7 +3979,7 @@ input[type="color"] select,
   cursor: pointer;
 }
 .filter-container .button-cancel:hover {
-  color: #1c547e;
+  color: #008bd0;
   text-decoration: underline;
 }
 .filter-container .button-categories-big {
@@ -4002,8 +4000,8 @@ input[type="color"] select,
   width: 100%;
   height: 28px;
   float: left;
-  background-color: #003366;
-  border: 2px solid #003366;
+  background-color: #005980;
+  border: 2px solid #005980;
   margin-bottom: 4px;
   border-radius: 0 5px 5px 5px;
   color: #ffffff;
@@ -4027,7 +4025,7 @@ input[type="color"] select,
 .filter-container div.div-categories-advanced-container-big {
   background-color: #ebebeb;
   border-radius: 0 5px 5px 5px;
-  border: 1px solid #003366;
+  border: 1px solid #005980;
   border-top: 1px solid #ebebeb;
   height: 290px;
   /*overflow: hidden;*/
@@ -4104,7 +4102,7 @@ input[type="color"] select,
   margin: 3px 5px;
   height: 16px;
   float: left;
-  background-color: #56b5e6;
+  background-color: #8cd2ea;
   cursor: pointer;
   border-radius: 5px;
   color: #ffffff;
@@ -4139,7 +4137,7 @@ input[type="color"] select,
   width: 10px;
   height: 0;
   border-top: 5px solid transparent;
-  border-left: 5px solid #003366;
+  border-left: 5px solid #005980;
   border-right: 0;
   border-bottom: 5px solid transparent;
   float: right;
@@ -4157,7 +4155,7 @@ input[type="color"] select,
   display: none;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 5px solid #003366;
+  border-bottom: 5px solid #005980;
   margin: 2px 7px;
   height: 7px;
   float: right;
@@ -4244,7 +4242,7 @@ also from the same elements starting with .filter-container
   cursor: auto;
   outline: none;
   z-index: 2;
-  border: 1px solid #003366;
+  border: 1px solid #005980;
   border-left: none;
 }
 #div-left-dimensions div.div-categories-big {
@@ -4420,7 +4418,7 @@ also from the same elements starting with .filter-container
   z-index: 2;
   top: -1px;
   right: -1px;
-  border-top: 1px solid #003366;
+  border-top: 1px solid #005980;
 }
 #div-fixed-dimensions div.div-categories-big {
   width: 100%;
@@ -4507,8 +4505,8 @@ also from the same elements starting with .filter-container
 .filter-container div[class*=div-dimension-container] {
   /*float: left;*/
 
-  background-color: #003366;
-  border: 2px solid #003366;
+  background-color: #005980;
+  border: 2px solid #005980;
   border-radius: 0 5px 5px 5px;
   color: #ffffff;
 }
@@ -4538,7 +4536,7 @@ also from the same elements starting with .filter-container
 .legend {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 11px;
-  fill: #003366;
+  fill: #005980;
 }
 .legendBg {
   fill: #ffffff;
@@ -4803,7 +4801,7 @@ svg {
   stroke-width: 0.01px;
 }
 .map path.active {
-  stroke: #56b5e6;
+  stroke: #8cd2ea;
   stroke-width: 0.02px;
 }
 #tooltip {
@@ -4903,7 +4901,7 @@ svg {
 }
 #leyend-container .leyend-item .leyend-item-text {
   font: 11px Helvetica, Arial, sans-serif;
-  color: #003366;
+  color: #005980;
 }
 #ranges-container {
   position: absolute;
@@ -4919,7 +4917,7 @@ svg {
   margin-right: 10px;
   vertical-align: middle;
   font: 11px Helvetica, Arial, sans-serif;
-  color: #003366;
+  color: #005980;
 }
 #ranges-container #line-container {
   position: relative;
@@ -4954,7 +4952,7 @@ svg {
   display: inline-block;
   width: 10px;
   font-size: 10px;
-  color: #003366;
+  color: #005980;
 }
 .map-error-container {
   height: 100%;
@@ -5067,23 +5065,20 @@ svg {
   margin-bottom: 5px;
   font-size: 13.2px;
   line-height: 1.25em;
-  background-color: #003366;
+  background-color: #005980;
   color: #ffffff;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
-  -webkit-border-radius: 6px 6px 0 0;
-  -moz-border-radius: 6px 6px 0 0;
-  border-radius: 6px 6px 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
 }
 .filter-sidebar-dimensions .filter-sidebar-dimension .filter-sidebar-dimension-title {
   color: #ffffff;
-  background-color: #808080;
-}
-.filter-sidebar-dimensions .filter-sidebar-dimension .filter-sidebar-dimension-title.active {
-  background-color: #003366;
+  background-color: #008bd0;
 }
 .filter-sidebar-dimension {
   background-color: #ffffff;
@@ -5093,7 +5088,7 @@ svg {
   margin-bottom: 5px;
   font-size: 13.2px;
   line-height: 1.25em;
-  background-color: #003366;
+  background-color: #005980;
   color: #ffffff;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -5101,9 +5096,9 @@ svg {
   -o-user-select: none;
   user-select: none;
   cursor: pointer;
-  -webkit-border-radius: 6px 6px 0 0;
-  -moz-border-radius: 6px 6px 0 0;
-  border-radius: 6px 6px 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
 }
 .filter-sidebar-dimension .filter-sidebar-dimension-label {
   font-size: 11px;
@@ -5113,9 +5108,9 @@ svg {
   margin-top: 5px;
   margin-bottom: 8px;
   background: #acacac;
-  -webkit-border-radius: 0 0 6px 6px;
-  -moz-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
 }
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar:before,
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar:after {
@@ -5131,9 +5126,9 @@ svg {
   display: inline-block;
 }
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar .filter-sidebar-selectAll {
-  -webkit-border-radius: 0 0 0 6px;
-  -moz-border-radius: 0 0 0 6px;
-  border-radius: 0 0 0 6px;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
 }
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar .filter-sidebar-dimension-levels,
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar .filter-sidebar-dimension-visibleLabelType,
@@ -5221,10 +5216,7 @@ svg {
 }
 .filter-sidebar-multidatasets .filter-sidebar-multidataset .filter-sidebar-multidataset-title {
   color: #ffffff;
-  background-color: #808080;
-}
-.filter-sidebar-multidatasets .filter-sidebar-multidataset .filter-sidebar-multidataset-title.active {
-  background-color: #003366;
+  background-color: #008bd0;
 }
 .filter-sidebar-multidataset {
   background-color: #ffffff;
@@ -5234,7 +5226,7 @@ svg {
   margin-bottom: 5px;
   font-size: 13.2px;
   line-height: 1.25em;
-  background-color: #003366;
+  background-color: #005980;
   color: #ffffff;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -5242,9 +5234,9 @@ svg {
   -o-user-select: none;
   user-select: none;
   cursor: pointer;
-  -webkit-border-radius: 6px 6px 0 0;
-  -moz-border-radius: 6px 6px 0 0;
-  border-radius: 6px 6px 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
 }
 .filter-sidebar-multidataset .filter-sidebar-multidataset-label {
   font-size: 11px;
@@ -5321,28 +5313,18 @@ svg {
   display: inline-block;
 }
 .filter-sidebar-multidataset-node .filter-sidebar-category-left-actions .level0,
-.filter-sidebar-category .filter-sidebar-category-left-actions .level0 {
-  color: #003366;
-}
+.filter-sidebar-category .filter-sidebar-category-left-actions .level0,
 .filter-sidebar-multidataset-node .filter-sidebar-category-left-actions .level1,
-.filter-sidebar-category .filter-sidebar-category-left-actions .level1 {
-  color: #004080;
-}
+.filter-sidebar-category .filter-sidebar-category-left-actions .level1,
 .filter-sidebar-multidataset-node .filter-sidebar-category-left-actions .level2,
-.filter-sidebar-category .filter-sidebar-category-left-actions .level2 {
-  color: #004c99;
-}
+.filter-sidebar-category .filter-sidebar-category-left-actions .level2,
 .filter-sidebar-multidataset-node .filter-sidebar-category-left-actions .level3,
-.filter-sidebar-category .filter-sidebar-category-left-actions .level3 {
-  color: #0059b3;
-}
+.filter-sidebar-category .filter-sidebar-category-left-actions .level3,
 .filter-sidebar-multidataset-node .filter-sidebar-category-left-actions .level4,
-.filter-sidebar-category .filter-sidebar-category-left-actions .level4 {
-  color: #0066cc;
-}
+.filter-sidebar-category .filter-sidebar-category-left-actions .level4,
 .filter-sidebar-multidataset-node .filter-sidebar-category-left-actions .level5,
 .filter-sidebar-category .filter-sidebar-category-left-actions .level5 {
-  color: #0073e6;
+  color: #008bd0;
 }
 .filter-sidebar-multidataset-node.active,
 .filter-sidebar-category.active {
@@ -5744,9 +5726,9 @@ svg {
   padding: 0 10px;
   height: 40px;
   margin-right: 5px;
-  -webkit-border-radius: 0 0 0 6px;
-  -moz-border-radius: 0 0 0 6px;
-  border-radius: 0 0 0 6px;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   border-right: 1px solid #acacac;
 }
 .selection-dimensions .selection-options-bar .options-bar-btn-side-left i {
@@ -5757,16 +5739,16 @@ svg {
   padding: 0 10px;
   height: 40px;
   margin-left: 5px;
-  -webkit-border-radius: 0 0 6px 0;
-  -moz-border-radius: 0 0 6px 0;
-  border-radius: 0 0 6px 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   border-left: 1px solid #acacac;
 }
 .selection-dimensions .selection-options-bar .options-bar-btn-side-right i {
   font-size: 28px;
 }
 .selection-dimensions .selection-options-bar .options-bar-btn-side-active {
-  background-color: #003366;
+  background-color: #008bd0;
   color: #ffffff;
 }
 .selection-dimensions .selection-options-bar .options-bar-btn-side-active i:before {
