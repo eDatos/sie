@@ -186,6 +186,9 @@
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: space-around;
+    }
+
+    footer.istac-footer .istac-logos {
         align-items: center;
     }
 
@@ -195,12 +198,6 @@
 
     @media (min-width: 712px) {
         footer.istac-footer .istac-contact {
-            border-right: white solid 2px;
-        }
-    }
-
-    @media (min-width: 712px) and (max-width: 1031px), (min-width: 1352px) {
-        footer.istac-footer .istac-links {
             border-right: white solid 2px;
         }
     }
@@ -254,6 +251,18 @@
     /* Fin Tabla del footer */
 
     /* Inicio zona de enlaces */
+
+    @media (max-width: 711px) {
+        footer.istac-footer .istac-links {
+            align-items: center;
+        }
+    }
+
+    @media (min-width: 1032px) {
+        footer.istac-footer .istac-links {
+           padding-left: 36px; 
+        }
+    }
 
     footer.istac-footer .istac-links .istac-links-wrapper {
         align-items: baseline;
