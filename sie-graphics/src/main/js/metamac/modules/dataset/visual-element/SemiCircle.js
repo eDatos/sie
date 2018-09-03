@@ -119,17 +119,16 @@
             self.showLoading();
             this.dataset.data.loadAllSelectedData().then(function () {
                 self.hideLoading();
-                self._updateTitle();
+                self._initTitle();
+                self.showTitle();
                 self._renderContainers();
                 self._renderChart();
             });
         },
 
-        _updateTitle: function () {
-            this.$el.html("");
-            this.$title = $('<h3></h3>');
+        _initTitle: function () {
+            this.$title = $('<h3></h3>').prependTo(this.$el);
             this.updateTitle();
-            this.$el.append(this.$title);
         },
 
         _renderContainers: function () {
@@ -225,32 +224,41 @@
 
         _sortAndfilterSeries: function (listSeries) {
             var resultSeries = listSeries;
+            var self = this;
             _.each(resultSeries, function (serie) {
                 var data = _.sortBy(serie.data, function (data) {
                     return -data.y;
                 });
 
-                var othersData = {
-                    name: I18n.t("ve.others"),
-                    longName: I18n.t("ve.others"),
-                    y: 0,
-                    y1: 0,
-                    y2: 0
-                };
-                while (data.length > 0 && (!data[data.length - 1].y1 || data[data.length - 1].y1 < App.Constants.minSemiCirclePercentage)) {
-                    var element = data.pop();
-                    othersData.y += element.y ? element.y : 0;
-                    othersData.y1 += element.y1 ? element.y1 : 0;
-                    othersData.y2 += element.y2 ? element.y2 : 0;
-                }
+                if (data.length > App.Constants.maxSemiCircleElements) {
+                    var othersData = {
+                        name: I18n.t("ve.others"),
+                        longName: I18n.t("ve.others"),
+                        y: 0,
+                        y1: 0,
+                        y2: 0
+                    };
+                    while (data.length > App.Constants.maxSemiCircleElements) {
+                        var element = data.pop();
+                        othersData.y += element.y ? element.y : 0;
+                        othersData.y1 += element.y1 ? element.y1 : 0;
+                        othersData.y2 += element.y2 ? element.y2 : 0;
+                    }
 
-                if (othersData.y1) {
+                    othersData.y = self._round(othersData.y);
+                    othersData.y1 = self._round(othersData.y1);
+                    othersData.y2 = self._round(othersData.y2);
+
                     data.push(othersData);
                 }
 
                 serie.data = data;
             });
             return resultSeries;
+        },
+
+        _round: function (number) {
+            return Math.round(number * 100) / 100;
         },
 
         update: function () {
@@ -264,8 +272,9 @@
                 self.showLoading();
                 this.dataset.data.loadAllSelectedData().then(function () {
                     self.hideLoading();
-                    self._updateTitle();
-                    
+                    self.updateTitle();
+                    self.showTitle();
+
                     var data = self.getData();
                     self.replaceSeries(self.chart, data.series);
                     self.chart.counters.color = 0;

@@ -45,7 +45,7 @@
             DEFAULT_VALUE: "G_"
         },
 
-        minSemiCirclePercentage: 1,
+        maxSemiCircleElements: 5,
 
         maxUrlQueryLength: 1700
 
