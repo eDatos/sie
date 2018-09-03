@@ -126,10 +126,10 @@
         },
 
         _updateTitle: function () {
-            this.$el.empty();
+            this.$el.html("");
             this.$title = $('<h3></h3>');
-            /* this.updateTitle();
-            this.$el.append(this.$title); */
+            this.updateTitle();
+            this.$el.append(this.$title);
         },
 
         _renderContainers: function () {
@@ -264,7 +264,8 @@
                 self.showLoading();
                 this.dataset.data.loadAllSelectedData().then(function () {
                     self.hideLoading();
-
+                    self._updateTitle();
+                    
                     var data = self.getData();
                     self.replaceSeries(self.chart, data.series);
                     self.chart.counters.color = 0;
