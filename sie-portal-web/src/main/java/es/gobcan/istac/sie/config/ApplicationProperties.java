@@ -8,28 +8,138 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
 
-    private final Estadisticas estadisticas = new Estadisticas();
+    private final Endpoints endpoints = new Endpoints();
+    
+    private final Dataset dataset = new Dataset();
+    
+    private final Visualizer visualizer = new Visualizer();
     
     private final Estaticos estaticos = new Estaticos();
-
-    public Estadisticas getEstadisticas() {
-        return estadisticas;
-    }
     
+    public Endpoints getEndpoints() {
+        return endpoints;
+    }
+
+    public Dataset getDataset() {
+        return dataset;
+    }
+
+    public Visualizer getVisualizer() {
+        return visualizer;
+    }
+
     public Estaticos getEstaticos() {
         return estaticos;
     }
 
-    public static class Estadisticas {
-
-        private String endpoint;
-
-        public String getEndpoint() {
-            return endpoint;
+    public static class Endpoints {
+        
+        private String statisticalResources;
+        private String structuralResources;
+        private String statisticalVisualizer;
+        private String permalinks;
+        private String export;
+        private String indicators;
+        
+        public String getStatisticalResources() {
+            return statisticalResources;
         }
+        
+        public void setStatisticalResources(String statisticalResources) {
+            this.statisticalResources = statisticalResources;
+        }
+        
+        public String getStructuralResources() {
+            return structuralResources;
+        }
+        
+        public void setStructuralResources(String structuralResources) {
+            this.structuralResources = structuralResources;
+        }
+        
+        public String getStatisticalVisualizer() {
+            return statisticalVisualizer;
+        }
+        
+        public void setStatisticalVisualizer(String statisticalVisualizer) {
+            this.statisticalVisualizer = statisticalVisualizer;
+        }
+        
+        public String getPermalinks() {
+            return permalinks;
+        }
+        
+        public void setPermalinks(String permalinks) {
+            this.permalinks = permalinks;
+        }
+        
+        public String getExport() {
+            return export;
+        }
+        
+        public void setExport(String export) {
+            this.export = export;
+        }
+        
+        public String getIndicators() {
+            return indicators;
+        }
+        
+        public void setIndicators(String indicators) {
+            this.indicators = indicators;
+        }
+    }
 
-        public void setEndpoint(String endpoint) {
-            this.endpoint = endpoint;
+    public static class Dataset {
+        
+        private String evolucionElectoral;
+
+        public String getEvolucionElectoral() {
+            return evolucionElectoral;
+        }
+        
+        public void setEvolucionElectoral(String evolucionElectoral) {
+            this.evolucionElectoral = evolucionElectoral;
+        }
+    }
+
+    public static class Visualizer {
+        
+        private Boolean showHeader;
+        private Boolean showRightsHolder;
+        private String organisationUrn;
+        private String installationType;
+        
+        public Boolean getShowHeader() {
+            return showHeader;
+        }
+        
+        public void setShowHeader(Boolean showHeader) {
+            this.showHeader = showHeader;
+        }
+        
+        public Boolean getShowRightsHolder() {
+            return showRightsHolder;
+        }
+        
+        public void setShowRightsHolder(Boolean showRightsHolder) {
+            this.showRightsHolder = showRightsHolder;
+        }
+        
+        public String getOrganisationUrn() {
+            return organisationUrn;
+        }
+        
+        public void setOrganisationUrn(String organisationUrn) {
+            this.organisationUrn = organisationUrn;
+        }
+        
+        public String getInstallationType() {
+            return installationType;
+        }
+        
+        public void setInstallationType(String installationType) {
+            this.installationType = installationType;
         }
     }
     

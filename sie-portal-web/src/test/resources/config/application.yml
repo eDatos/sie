@@ -107,8 +107,20 @@ jhipster:
 # ===================================================================
 
 application:
-    estadisticas:
-        endpoint: https://docker-machine:9443/estadisticas #Required: dataset endpoint
+    endpoints:
+        statisticalResources: https://docker-machine:9443/estadisticas #Required: dataset endpoint
+        structuralResources: FILL_STRUCTURAL_RESOURCES_ENDPOINT #Required: structural resources endpoint
+        statisticalVisualizer: FILL_STATISTICAL_VISUALIZER_ENDPOINT #Required: statistical visualizer endpoint
+        permalinks: FILL_PERMALINKS_ENDPOINT #Required: permalinks endpoint
+        export: FILL_EXPORT_ENDPOINT #Required: export endpoint
+        indicators: FILL_INDICATORS_ENDPOINT #Required: indicators endpoint
+    dataset:
+        evolucionElectoral: /datasets/ISTAC/C00010A_000007/~latest.json
+    visualizer:
+        showHeader: false
+        showRightsHolder: false
+        organisationUrn: urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ISTAC
+        installationType: INTERNAL #Required: installation type
     estaticos:
         navbarUrl: ./external-static/navbar/navbar.html #Default navbar
         footerUrl: ./external-static/footer/footer.html #Default footer

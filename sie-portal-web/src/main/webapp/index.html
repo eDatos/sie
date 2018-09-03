@@ -19,11 +19,25 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
         window.CONFIGURATION = {};
+
+        window.CONFIGURATION.endpoints = {};
+        window.CONFIGURATION.endpoints.statisticalResources = /*[[${endpoints.getStatisticalResources()}]]*/ 'http://estadisticas.arte-consultores.com/statistical-resources-internal/apis/statistical-resources-internal/v1.0';
+        window.CONFIGURATION.endpoints.structuralResources = /*[[${endpoints.getStructuralResources()}]]*/ 'http://estadisticas.arte-consultores.com/structural-resources-internal/apis/structural-resources-internal/v1.0';
+        window.CONFIGURATION.endpoints.statisticalVisualizer = /*[[${endpoints.getStatisticalVisualizer()}]]*/ 'http://estadisticas.arte-consultores.com/statistical-visualizer';
+        window.CONFIGURATION.endpoints.permalinks = /*[[${endpoints.getPermalinks()}]]*/ 'http://estadisticas.arte-consultores.com/permalinks/v1.0';
+        window.CONFIGURATION.endpoints.export = /*[[${endpoints.getExport()}]]*/ 'http://estadisticas.arte-consultores.com/export/v1.0';
+        window.CONFIGURATION.endpoints.indicators = /*[[${endpoints.getIndicators()}]]*/ 'http://estadisticas.arte-consultores.com/indicators-internal/internal/api/indicators/v1.0';
+
         window.CONFIGURATION.dataset = {};
-        window.CONFIGURATION.dataset.endpointExternal = /*[[${estadisticas.getEndpoint()}]]*/ 'http://estadisticas.arte-consultores.com/statistical-resources-internal/apis/statistical-resources-internal/v1.0/';
-        window.CONFIGURATION.dataset.evolucionElectoral = 'datasets/ISTAC/C00010A_000007/~latest.json';
+        window.CONFIGURATION.dataset.evolucionElectoral = /*[[${dataset.getEvolucionElectoral()}]]*/ '/datasets/ISTAC/C00010A_000007/~latest.json';
         window.CONFIGURATION.dataset.metadata = '?fields=-data&lang=es';
         window.CONFIGURATION.dataset.data = '?fields=-metadata&lang=es&dim=TERRITORIO:';
+
+        window.CONFIGURATION.visualizer = {};
+        window.CONFIGURATION.visualizer.showHeader = /*[[${visualizer.getShowHeader()}]]*/ false;
+        window.CONFIGURATION.visualizer.showRightsHolder = /*[[${visualizer.getShowRightsHolder()}]]*/ false;
+        window.CONFIGURATION.visualizer.organisationUrn = /*[[${visualizer.getOrganisationUrn()}]]*/ 'urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ISTAC';
+        window.CONFIGURATION.visualizer.installationType = /*[[${visualizer.getInstallationType()}]]*/ 'INTERNAL';
 
         window.CONFIGURATION.navbar = {};
         window.CONFIGURATION.navbar.url = /*[[${estaticos.getNavbarUrl()}]]*/ './external-static/navbar/navbar.html';

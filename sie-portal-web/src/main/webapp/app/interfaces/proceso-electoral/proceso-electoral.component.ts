@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angula
 import { ProcesoElectoralDatasetService } from '../../dataset';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MultidatasetProcesosElectorales } from '../../dataset/multidataset-procesos-electorales.model';
+import { ConfigService } from '../../config';
 
 declare var I18n: any;
 declare var App: any;
@@ -28,7 +29,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         private host: ElementRef,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private procesoElectoralDatasetService: ProcesoElectoralDatasetService
+        private procesoElectoralDatasetService: ProcesoElectoralDatasetService,
+        private configService: ConfigService
     ) { }
 
     ngOnInit() {
@@ -83,28 +85,18 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             mainRegion: '.metamac-container'
         });
 
-        // http://estadisticas.arte-consultores.com/statistical-resources
-        App.endpoints['statistical-resources'] = 'http://estadisticas.arte-consultores.com/statistical-resources-internal/apis/statistical-resources-internal/v1.0';
+        const config = this.configService.getConfig();
+        App.endpoints['statistical-resources'] = config.endpoints.statisticalResources;
+        App.endpoints['structural-resources'] = config.endpoints.structuralResources;
+        App.endpoints['statistical-visualizer'] = config.endpoints.statisticalVisualizer;
+        App.endpoints['permalinks'] = config.endpoints.permalinks;
+        App.endpoints['export'] = config.endpoints.export;
+        App.endpoints['indicators'] = config.endpoints.indicators;
 
-        // http://estadisticas.arte-consultores.com/structural-resources-internal/apis/structural-resources-internal
-        App.endpoints['structural-resources'] = 'http://estadisticas.arte-consultores.com/structural-resources-internal/apis/structural-resources-internal/v1.0';
-
-        // http://estadisticas.arte-consultores.com/statistical-visualizer
-        App.endpoints['statistical-visualizer'] = 'http://estadisticas.arte-consultores.com/statistical-visualizer';
-
-        // http://estadisticas.arte-consultores.com/permalinks
-        App.endpoints['permalinks'] = 'http://estadisticas.arte-consultores.com/permalinks/v1.0';
-
-        // http://estadisticas.arte-consultores.com/export
-        App.endpoints['export'] = 'http://estadisticas.arte-consultores.com/export/v1.0';
-
-        // http://estadisticas.arte-consultores.com/indicators
-        App.endpoints['indicators'] = 'http://estadisticas.arte-consultores.com/indicators-internal/internal/api/indicators/v1.0';
-
-        App.config['showHeader'] = false;
-        App.config['showRightsHolder'] = false;
-        App.config['organisationUrn'] = 'urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ISTAC';
-        App.config['installationType'] = 'INTERNAL';
+        App.config['showHeader'] = config.visualizer.showHeader;
+        App.config['showRightsHolder'] = config.visualizer.showRightsHolder;
+        App.config['organisationUrn'] = config.visualizer.organisationUrn;
+        App.config['installationType'] = config.visualizer.installationType;
 
         App.queryParams['agency'] = 'ISTAC';
         App.queryParams['type'] = 'dataset';

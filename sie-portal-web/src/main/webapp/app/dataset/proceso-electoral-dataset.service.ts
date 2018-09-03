@@ -38,7 +38,7 @@ export class ProcesoElectoralDatasetService {
 
     private doGetDatasets(tipoEleccionesDataset: TipoEleccionesDataset): Observable<any> {
         const config = this.configService.getConfig();
-        return this.http.get(`${config.dataset.endpointExternal}${tipoEleccionesDataset.datasetId}?_type=json`).map((response) => response.json());
+        return this.http.get(`${config.endpoints.statisticalResources}${tipoEleccionesDataset.datasetId}?_type=json`).map((response) => response.json());
     }
 
     private parseMultidataset(json: any): MultidatasetProcesosElectorales {

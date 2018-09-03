@@ -1,9 +1,24 @@
 export interface GenericConfig {
+    endpoints: {
+        statisticalResources,
+        structuralResources,
+        statisticalVisualizer,
+        permalinks,
+        export,
+        indicators
+    };
+
     dataset: {
-        endpointExternal,
         evolucionElectoral,
         metadata,
         data
+    };
+
+    visualizer: {
+        showHeader,
+        showRightsHolder,
+        organisationUrn,
+        installationType
     };
 
     navbar: {
