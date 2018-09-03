@@ -291,10 +291,10 @@
                 self.showLoading();
                 this.dataset.data.loadAllSelectedData().then(function () {
                     self.hideLoading();
-
                     self.updateTitle();
-                    var data = self.getData();
+                    self.showTitle();
 
+                    var data = self.getData();
                     self.replaceSeries(self.chart, data.series);
                     self.chart.xAxis[0].setCategories(data.xAxis, false);
                     self.chart.counters.color = 0;
