@@ -35,13 +35,13 @@
   float: left;
 }
 .metamac-container {
-  font: 11px Helvetica, Arial, sans-serif;
+  font: 12px Helvetica, Arial, sans-serif;
 }
 input,
 textarea,
 select,
 button {
-  font-size: 11px;
+  font-size: 12px;
 }
 .full-screen-no-support #visual-element-container,
 .full-screen-no-support #visual-element-and-filter {
@@ -551,7 +551,7 @@ button {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   border: none;
   white-space: nowrap;
   -webkit-user-select: none;
@@ -560,7 +560,7 @@ button {
   -o-user-select: none;
   user-select: none;
   display: inline-block;
-  line-height: 16px;
+  line-height: 17px;
   background-color: #bbc8d0;
   color: #ffffff;
 }
@@ -606,8 +606,8 @@ button {
   display: block;
 }
 .metamac-container .btn-mini i {
-  font-size: 10px;
-  line-height: 15px;
+  font-size: 11px;
+  line-height: 16px;
 }
 .collection-description {
   line-height: 1.6;
@@ -999,10 +999,10 @@ input[type="color"] select,
   display: block;
   visibility: visible;
   padding: 5px;
-  font-size: 11px;
+  font-size: 12px;
   opacity: 0;
   filter: alpha(opacity=0);
-  font: 11px Helvetica, Arial, sans-serif;
+  font: 12px Helvetica, Arial, sans-serif;
 }
 .tooltip.in {
   opacity: 0.95;
@@ -1113,8 +1113,8 @@ input[type="color"] select,
 .modal {
   background-color: #ffffff;
   overflow: auto;
-  font: 11px Helvetica, Arial, sans-serif;
-  font-size: 11px;
+  font: 12px Helvetica, Arial, sans-serif;
+  font-size: 12px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -1250,7 +1250,7 @@ input[type="color"] select,
   float: left;
   overflow: hidden;
   white-space: nowrap;
-  font-size: 11px;
+  font-size: 12px;
   border: 1px solid #bbc8d0;
   color: #bbc8d0;
   padding-left: 4px;
@@ -1457,7 +1457,7 @@ input[type="color"] select,
 .sidebar-sidebar-content .order-sidebar-zone h2 {
   padding: 5px;
   margin-bottom: 5px;
-  font-size: 13.2px;
+  font-size: 14.399999999999999px;
   line-height: 1.25em;
   background-color: #005980;
   color: #ffffff;
@@ -2683,7 +2683,7 @@ input[type="color"] select,
   float: left;
   overflow: hidden;
   white-space: nowrap;
-  font-size: 11px;
+  font-size: 12px;
   border: 1px solid #bbc8d0;
   color: #bbc8d0;
   padding-left: 4px;
@@ -4208,7 +4208,7 @@ input[type="color"] select,
   cursor: pointer;
   border-radius: 5px;
   color: #ffffff;
-  font-size: 11px;
+  font-size: 12px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -4224,7 +4224,7 @@ input[type="color"] select,
   color: #8c9ba3;
   /*opacity: 0.4;*/
 
-  font-size: 11px;
+  font-size: 12px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -5016,7 +5016,7 @@ svg {
   margin-right: 5px;
 }
 #leyend-container .leyend-item .leyend-item-text {
-  font: 11px Helvetica, Arial, sans-serif;
+  font: 12px Helvetica, Arial, sans-serif;
   color: #005980;
 }
 #ranges-container {
@@ -5032,7 +5032,7 @@ svg {
   display: inline-block;
   margin-right: 10px;
   vertical-align: middle;
-  font: 11px Helvetica, Arial, sans-serif;
+  font: 12px Helvetica, Arial, sans-serif;
   color: #005980;
 }
 #ranges-container #line-container {
@@ -5100,7 +5100,7 @@ svg {
   display: block;
 }
 .filter-sidebar {
-  font-size: 11px;
+  font-size: 12px;
   height: 100%;
 }
 .filter-sidebar-icon {
@@ -5179,7 +5179,7 @@ svg {
 .sidebar-title {
   padding: 5px;
   margin-bottom: 5px;
-  font-size: 13.2px;
+  font-size: 14.399999999999999px;
   line-height: 1.25em;
   background-color: #005980;
   color: #ffffff;
@@ -5202,7 +5202,7 @@ svg {
 .filter-sidebar-dimension .filter-sidebar-dimension-title {
   padding: 5px;
   margin-bottom: 5px;
-  font-size: 13.2px;
+  font-size: 14.399999999999999px;
   line-height: 1.25em;
   background-color: #005980;
   color: #ffffff;
@@ -5217,7 +5217,7 @@ svg {
   border-radius: 0 0 0 0;
 }
 .filter-sidebar-dimension .filter-sidebar-dimension-label {
-  font-size: 11px;
+  font-size: 12px;
 }
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar {
   *zoom: 1;
@@ -5262,7 +5262,7 @@ svg {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   border: none;
   white-space: nowrap;
   -webkit-user-select: none;
@@ -5271,7 +5271,7 @@ svg {
   -o-user-select: none;
   user-select: none;
   display: inline-block;
-  line-height: 16px;
+  line-height: 17px;
   background-color: #bbc8d0;
   color: #ffffff;
   padding: 3px 4px;
@@ -5343,7 +5343,7 @@ svg {
 .filter-sidebar-multidataset .filter-sidebar-multidataset-title {
   padding: 5px;
   margin-bottom: 5px;
-  font-size: 13.2px;
+  font-size: 14.399999999999999px;
   line-height: 1.25em;
   background-color: #005980;
   color: #ffffff;
@@ -5358,7 +5358,7 @@ svg {
   border-radius: 0 0 0 0;
 }
 .filter-sidebar-multidataset .filter-sidebar-multidataset-label {
-  font-size: 11px;
+  font-size: 12px;
 }
 .filter-sidebar-multidataset .filter-sidebar-multidataset-node a {
   text-decoration: none;
