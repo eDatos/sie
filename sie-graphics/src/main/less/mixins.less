@@ -329,6 +329,9 @@
   -webkit-box-sizing: @boxmodel;
      -moz-box-sizing: @boxmodel;
           box-sizing: @boxmodel;
+  & > * {
+    box-sizing: content-box;
+  }    
 }
 
 // User select

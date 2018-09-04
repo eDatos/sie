@@ -1427,7 +1427,7 @@ function program10(depth0,data) {
   buffer += "\r\n</div>\r\n\r\n";
   stack2 = helpers.unless.call(depth0, depth0.visualize, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\r\n\r\n<div class=\"change-visual-element\">\r\n    <div class=\"btn-group\" data-toggle=\"buttons-radio\">\r\n        ";
+  buffer += "\r\n\r\n<div class=\"change-visual-element\">\r\n    <div data-toggle=\"buttons-radio\">\r\n        ";
   stack2 = helpers.each.call(depth0, depth0.veTypeButton, {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\r\n    </div>\r\n</div>\r\n\r\n";

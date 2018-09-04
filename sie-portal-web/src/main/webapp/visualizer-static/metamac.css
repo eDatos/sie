@@ -25,6 +25,9 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+.input-block-level > * {
+  box-sizing: content-box;
+}
 .pull-right {
   float: right;
 }
@@ -540,6 +543,9 @@ button {
   content: "\f160";
 }
 .metamac-container .btn {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   padding: 2px 4px;
   margin-bottom: 0;
   text-align: center;
@@ -835,6 +841,9 @@ input[type="color"] select,
   box-sizing: border-box;
   z-index: 1;
 }
+.sidebar-sidebar > * {
+  box-sizing: content-box;
+}
 .sidebar-sidebar .sidebar-sidebar-content {
   height: 100%;
   margin-right: 8px;
@@ -895,6 +904,9 @@ input[type="color"] select,
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+.sidebar-content > * {
+  box-sizing: content-box;
+}
 .sidebar-content.without-menu {
   padding-left: 0;
 }
@@ -938,6 +950,9 @@ input[type="color"] select,
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
+}
+.searchbar input > * {
+  box-sizing: content-box;
 }
 .searchbar .searchbar-icon {
   position: absolute;
@@ -1168,6 +1183,9 @@ input[type="color"] select,
 .options-bar:after {
   clear: both;
 }
+.options-bar > * {
+  box-sizing: content-box;
+}
 .options-bar .options-bar-btn {
   display: inline-block;
   background-image: none;
@@ -1330,11 +1348,16 @@ input[type="color"] select,
 .order-dimensions .order-sidebar-zone .order-sidebar-measure-attribute {
   margin: 0 -1px 0px -1px;
   display: table;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   white-space: normal;
   height: 100%;
   cursor: default;
   text-decoration: none;
+}
+.order-dimensions .order-sidebar-zone .order-sidebar-measure-attribute > * {
+  box-sizing: content-box;
 }
 .order-dimensions .order-sidebar-zone .order-sidebar-measure-attribute .order-sidebar-measure-attribute-inner {
   display: table-cell;
@@ -1409,7 +1432,12 @@ input[type="color"] select,
 .order-dimensions .dataset-dimensions-right .order-sidebar-zone {
   width: 100%;
   float: left;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.order-dimensions .dataset-dimensions-right .order-sidebar-zone > * {
+  box-sizing: content-box;
 }
 .order-dimensions .dataset-dimensions-right .order-sidebar-zone h2 {
   width: 72px;
@@ -1729,19 +1757,29 @@ input[type="color"] select,
   width: 7px;
 }
 .select2-container {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   display: inline-block;
   margin: 0;
   position: relative;
   vertical-align: middle;
 }
+.select2-container > * {
+  box-sizing: content-box;
+}
 .select2-container .select2-selection--single {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   cursor: pointer;
   display: block;
   height: 28px;
   user-select: none;
   -webkit-user-select: none;
+}
+.select2-container .select2-selection--single > * {
+  box-sizing: content-box;
 }
 .select2-container .select2-selection--single .select2-selection__rendered {
   display: block;
@@ -1759,12 +1797,17 @@ input[type="color"] select,
   padding-left: 20px;
 }
 .select2-container .select2-selection--multiple {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   cursor: pointer;
   display: block;
   min-height: 32px;
   user-select: none;
   -webkit-user-select: none;
+}
+.select2-container .select2-selection--multiple > * {
+  box-sizing: content-box;
 }
 .select2-container .select2-selection--multiple .select2-selection__rendered {
   display: inline-block;
@@ -1777,11 +1820,16 @@ input[type="color"] select,
   float: left;
 }
 .select2-container .select2-search--inline .select2-search__field {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   border: none;
   font-size: 100%;
   margin-top: 5px;
   padding: 0;
+}
+.select2-container .select2-search--inline .select2-search__field > * {
+  box-sizing: content-box;
 }
 .select2-container .select2-search--inline .select2-search__field::-webkit-search-cancel-button {
   -webkit-appearance: none;
@@ -1790,12 +1838,17 @@ input[type="color"] select,
   background-color: white;
   border: 1px solid #aaa;
   border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   display: block;
   position: absolute;
   left: -100000px;
   width: 100%;
   z-index: 1051;
+}
+.select2-dropdown > * {
+  box-sizing: content-box;
 }
 .select2-results {
   display: block;
@@ -1833,7 +1886,12 @@ input[type="color"] select,
 .select2-search--dropdown .select2-search__field {
   padding: 4px;
   width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.select2-search--dropdown .select2-search__field > * {
+  box-sizing: content-box;
 }
 .select2-search--dropdown .select2-search__field::-webkit-search-cancel-button {
   -webkit-appearance: none;
@@ -1929,11 +1987,16 @@ input[type="color"] select,
   cursor: text;
 }
 .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   list-style: none;
   margin: 0;
   padding: 0 5px;
   width: 100%;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__rendered > * {
+  box-sizing: content-box;
 }
 .select2-container--default .select2-selection--multiple .select2-selection__rendered li {
   list-style: none;
@@ -2300,6 +2363,11 @@ input[type="color"] select,
 .select2-container--open .select2-dropdown {
   left: -3px;
   top: -4px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.select2-container--open .select2-dropdown > * {
   box-sizing: content-box;
 }
 .ui-accordion-header:before {
@@ -2517,7 +2585,11 @@ input[type="color"] select,
   box-sizing: border-box;
   background: #ffffff;
 }
+.dataset-visualization .dataset-visualization-visual-element > * {
+  box-sizing: content-box;
+}
 .dataset-visualization .dataset-visualization-visual-element h3 {
+  font-size: 13px;
   margin-top: 5px;
   background: none;
   color: #8c9ba3;
@@ -2536,6 +2608,9 @@ input[type="color"] select,
   border-radius: 0 0 0 0;
   overflow: hidden;
   *zoom: 1;
+}
+.dataset-visualization-container > * {
+  box-sizing: content-box;
 }
 .dataset-visualization-container:before,
 .dataset-visualization-container:after {
@@ -2564,6 +2639,9 @@ input[type="color"] select,
 .dataset-visualization-container .dataset-visualization-title a {
   color: #008bd0;
   text-decoration: none;
+}
+.dataset-visualization-container .dataset-visualization-title > * {
+  box-sizing: content-box;
 }
 .dataset-visualization-container .dataset-bar {
   display: flex;
@@ -2736,11 +2814,17 @@ input[type="color"] select,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute {
   margin: 0 -1px 0px -1px;
   display: table;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   white-space: normal;
   height: 100%;
   cursor: default;
   text-decoration: none;
+}
+.dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute > *,
+.dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute > * {
+  box-sizing: content-box;
 }
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute .order-sidebar-measure-attribute-inner,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute .order-sidebar-measure-attribute-inner {
@@ -2837,7 +2921,13 @@ input[type="color"] select,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right .order-sidebar-zone {
   width: 100%;
   float: left;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right .order-sidebar-zone > *,
+.dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right .order-sidebar-zone > * {
+  box-sizing: content-box;
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right .order-sidebar-zone h2,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right .order-sidebar-zone h2 {
@@ -2876,6 +2966,9 @@ input[type="color"] select,
 }
 .dataset-visualization-container .dataset-visualization-options-bar:after {
   clear: both;
+}
+.dataset-visualization-container .dataset-visualization-options-bar > * {
+  box-sizing: content-box;
 }
 .dataset-visualization-container .dataset-visualization-options-bar .options-bar-btn {
   display: inline-block;
@@ -3008,6 +3101,9 @@ input[type="color"] select,
 }
 .dataset-sidebar-visualization-container.dataset-widget .sidebar-container {
   display: block;
+}
+.dataset-sidebar-visualization-container > * {
+  box-sizing: content-box;
 }
 .dataset-sidebar-visualization-container .rights-holder {
   font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
@@ -3813,6 +3909,9 @@ input[type="color"] select,
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+.dataset-embed textarea > * {
+  box-sizing: content-box;
+}
 .shaded {
   opacity: 0.4 !important;
 }
@@ -4049,6 +4148,9 @@ input[type="color"] select,
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   display: block;
+}
+.filter-container div.div-categories-advanced-container-big div.categories-options > * {
+  box-sizing: content-box;
 }
 .filter-container div.div-categories {
   /*margin-left: 150px;*/
@@ -4342,6 +4444,9 @@ also from the same elements starting with .filter-container
   width: -webkit-calc(50% - 8px);
   width: calc(50% - 8px);
 }
+#div-fixed-dimensions div[class*=div-dimension-short] > * {
+  box-sizing: content-box;
+}
 #div-fixed-dimensions div[class*=div-dimension-short]:hover {
   height: 30px;
   overflow: visible;
@@ -4362,6 +4467,9 @@ also from the same elements starting with .filter-container
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+#div-fixed-dimensions div.div-dimension-text > * {
+  box-sizing: content-box;
 }
 #div-fixed-dimensions .div-dimension-short-static {
   cursor: not-allowed;
@@ -4446,6 +4554,9 @@ also from the same elements starting with .filter-container
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+#div-fixed-dimensions div.div-categories > * {
+  box-sizing: content-box;
 }
 #div-fixed-dimensions div.div-categories-advanced-container {
   width: 40%;
@@ -4790,7 +4901,12 @@ svg {
   height: 100%;
   padding-top: 25px;
   padding-bottom: 5px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+}
+.svgContainer > * {
+  box-sizing: content-box !important;
 }
 .background {
   fill: none;
@@ -5138,6 +5254,9 @@ svg {
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar .filter-sidebar-dimension-levels select,
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar .filter-sidebar-dimension-visibleLabelType select,
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar .filter-sidebar-dimension-actions select {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   padding: 2px 4px;
   margin-bottom: 0;
   text-align: center;
@@ -5603,6 +5722,9 @@ svg {
   box-sizing: border-box;
   cursor: all-scroll;
 }
+.detailZoomView .selection > * {
+  box-sizing: content-box;
+}
 .detailZoomView .bar {
   position: absolute;
   background-color: #bbc8d0;
@@ -5701,6 +5823,9 @@ svg {
 }
 .selection-dimensions .selection-options-bar:after {
   clear: both;
+}
+.selection-dimensions .selection-options-bar > * {
+  box-sizing: content-box;
 }
 .selection-dimensions .selection-options-bar .options-bar-btn {
   display: inline-block;

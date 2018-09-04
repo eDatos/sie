@@ -1,29 +1,54 @@
 @import '~scss/variables';
 
 :host {
-    /deep/ jhi-title-bar {
-        font-family: $font-family-sans-serif;
-        @import '~scss/vendor/fontawesome';
-        a {
-            text-decoration: none;
-            h1 {
-                line-height: 1.1;
-            }
-        }
+    /* Override primeng classes */ 
+    /deep/ .ui-state-default {
+        border: none;
+        background: none;
     }
 
-    .section {
-        max-width: 1200px;
-        margin: 0 auto;
+    /deep/ .ui-icon {
+        display: inline;
     }
 
-    .no-metamac {
-        font-family: $font-family-sans-serif;
-        color: #3c3c3c;
+    /deep/ .ui-widget {
+        font-family:"Helvetica Neue", Arial, sans-serif;
     }
 
-    .metamac-container {
-        padding-bottom: 2rem;
-        min-width: 760px;
+    /deep/ .ui-accordion .ui-accordion-header {
+        cursor: default;
     }
+
+    /deep/ .ui-accordion .ui-accordion-header:not(.ui-state-active):not(.ui-state-disabled):hover {
+        border: none;
+        background: none;
+        color: #222222;;
+    }
+
+    /deep/ .ui-accordion .ui-accordion-content {
+        padding: 0;
+        border: none;
+    }
+
+    /deep/ .ui-helper-reset {
+        line-height: normal;
+    }
+
+    /deep/ ol, /deep/ ul, /deep/ dl {
+        margin-bottom: 11px;
+    }
+}
+
+.section {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.metamac-container {
+    padding-bottom: 2rem;
+    min-width: 760px;
+}
+
+h1 {
+    margin-bottom: 1rem;
 }
