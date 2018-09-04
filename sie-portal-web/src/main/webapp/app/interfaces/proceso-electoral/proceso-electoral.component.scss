@@ -37,6 +37,10 @@
     /deep/ ol, /deep/ ul, /deep/ dl {
         margin-bottom: 11px;
     }
+
+    /deep/ .btn {
+        transition: none;
+    }
 }
 
 .section {
