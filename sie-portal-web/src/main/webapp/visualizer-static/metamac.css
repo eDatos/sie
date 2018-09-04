@@ -605,9 +605,12 @@ button {
   cursor: pointer;
   display: block;
 }
-.metamac-container .btn-mini i {
+.metamac-container .btn-mini {
   font-size: 11px;
-  line-height: 16px;
+}
+.metamac-container .btn-mini i {
+  font-size: 10px;
+  line-height: 15px;
 }
 .collection-description {
   line-height: 1.6;
@@ -5219,6 +5222,9 @@ svg {
 .filter-sidebar-dimension .filter-sidebar-dimension-label {
   font-size: 12px;
 }
+.filter-sidebar-dimension .filter-sidebar-dimension-searchbar input {
+  font-size: 11px;
+}
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar {
   *zoom: 1;
   margin-top: 5px;
@@ -5276,6 +5282,7 @@ svg {
   color: #ffffff;
   padding: 3px 4px;
   margin-right: 3px;
+  font-size: 11px;
 }
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar .filter-sidebar-dimension-levels select:link,
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar .filter-sidebar-dimension-visibleLabelType select:link,
@@ -5379,6 +5386,9 @@ svg {
 }
 .filter-sidebar-multidataset-searchbar {
   margin-bottom: 5px;
+}
+.filter-sidebar-multidataset-searchbar input {
+  font-size: 11px;
 }
 .filter-sidebar-multidataset-node,
 .filter-sidebar-category {
