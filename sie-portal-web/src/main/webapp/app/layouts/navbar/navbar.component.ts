@@ -1,7 +1,9 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { TemplateService } from '../template';
+import { ConfigService } from '../../config';
 
 declare var setActiveLink: Function;
+declare var setNavbarMode: Function;
 export const APPLICATION_LINK_ID = 'eleccionesLink';
 
 @Component({
@@ -14,7 +16,8 @@ export class NavbarComponent implements OnInit {
 
     constructor(
         private elementRef: ElementRef,
-        private templateService: TemplateService
+        private templateService: TemplateService,
+        private configService: ConfigService
     ) { }
 
     ngOnInit() {
@@ -23,6 +26,9 @@ export class NavbarComponent implements OnInit {
             setTimeout(() => {
                 this.reinsertScripts();
                 setActiveLink(APPLICATION_LINK_ID);
+
+                const config = this.configService.getConfig();
+                setNavbarMode(config.visualizer.installationType);
             });
         });
     }
