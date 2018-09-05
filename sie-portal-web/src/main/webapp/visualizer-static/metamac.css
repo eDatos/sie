@@ -35,13 +35,13 @@
   float: left;
 }
 .metamac-container {
-  font: 11px Helvetica, Arial, sans-serif;
+  font: 12px Helvetica, Arial, sans-serif;
 }
 input,
 textarea,
 select,
 button {
-  font-size: 11px;
+  font-size: 12px;
 }
 .full-screen-no-support #visual-element-container,
 .full-screen-no-support #visual-element-and-filter {
@@ -551,7 +551,7 @@ button {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   border: none;
   white-space: nowrap;
   -webkit-user-select: none;
@@ -560,7 +560,7 @@ button {
   -o-user-select: none;
   user-select: none;
   display: inline-block;
-  line-height: 16px;
+  line-height: 17px;
   background-color: #bbc8d0;
   color: #ffffff;
 }
@@ -604,6 +604,9 @@ button {
 .metamac-container .btn-with-label label {
   cursor: pointer;
   display: block;
+}
+.metamac-container .btn-mini {
+  font-size: 11px;
 }
 .metamac-container .btn-mini i {
   font-size: 10px;
@@ -999,10 +1002,10 @@ input[type="color"] select,
   display: block;
   visibility: visible;
   padding: 5px;
-  font-size: 11px;
+  font-size: 12px;
   opacity: 0;
   filter: alpha(opacity=0);
-  font: 11px Helvetica, Arial, sans-serif;
+  font: 12px Helvetica, Arial, sans-serif;
 }
 .tooltip.in {
   opacity: 0.95;
@@ -1113,8 +1116,8 @@ input[type="color"] select,
 .modal {
   background-color: #ffffff;
   overflow: auto;
-  font: 11px Helvetica, Arial, sans-serif;
-  font-size: 11px;
+  font: 12px Helvetica, Arial, sans-serif;
+  font-size: 12px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -1250,7 +1253,7 @@ input[type="color"] select,
   float: left;
   overflow: hidden;
   white-space: nowrap;
-  font-size: 11px;
+  font-size: 12px;
   border: 1px solid #bbc8d0;
   color: #bbc8d0;
   padding-left: 4px;
@@ -1280,11 +1283,11 @@ input[type="color"] select,
 }
 .order-dimensions .order-sidebar-zone .order-sidebar-measure-attribute,
 .order-dimensions .order-sidebar-zone .order-sidebar-dimension {
-  padding: 2px;
+  padding: 1px;
   /* IE9 bug changed divs with a, so this correct the new style */
 
   display: inline-block;
-  width: 110px;
+  width: 120px;
   text-overflow: ellipsis;
   overflow: hidden;
   text-align: center;
@@ -1319,7 +1322,7 @@ input[type="color"] select,
   overflow: hidden;
   border: none;
   display: block;
-  width: 114px;
+  width: 124px;
   font-size: 100%;
 }
 .order-dimensions .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill,
@@ -1372,10 +1375,10 @@ input[type="color"] select,
   width: 0;
 }
 .order-dimensions .dataset-dimensions-left.dataset-dimensions-left-1 {
-  width: 116px;
+  width: 126px;
 }
 .order-dimensions .dataset-dimensions-left.dataset-dimensions-left-2 {
-  width: 230px;
+  width: 250px;
 }
 .order-dimensions .dataset-dimensions-left.dataset-dimensions-left-1 .order-sidebar-zone:last-child .order-sidebar-dimensions,
 .order-dimensions .dataset-dimensions-left.dataset-dimensions-left-2 .order-sidebar-zone:last-child .order-sidebar-dimensions {
@@ -1403,7 +1406,7 @@ input[type="color"] select,
 }
 .order-dimensions .dataset-dimensions-left .order-sidebar-zone .order-sidebar-dimension.dimension-pill {
   margin: 2px;
-  width: 102px;
+  width: 112px;
 }
 .order-dimensions .dataset-dimensions-left .order-sidebar-zone.has-selector {
   padding-top: 0;
@@ -1415,10 +1418,10 @@ input[type="color"] select,
   padding-left: 0;
 }
 .order-dimensions .dataset-dimensions-right.dataset-dimensions-left-1 {
-  padding-left: 130px;
+  padding-left: 140px;
 }
 .order-dimensions .dataset-dimensions-right.dataset-dimensions-left-2 {
-  padding-left: 244px;
+  padding-left: 264px;
 }
 .order-dimensions .dataset-dimensions-right.dataset-dimensions-left-1 .order-sidebar-zone:last-child .order-sidebar-dimensions.no-header,
 .order-dimensions .dataset-dimensions-right.dataset-dimensions-left-2 .order-sidebar-zone:last-child .order-sidebar-dimensions.no-header,
@@ -1440,10 +1443,10 @@ input[type="color"] select,
   box-sizing: content-box;
 }
 .order-dimensions .dataset-dimensions-right .order-sidebar-zone h2 {
-  width: 72px;
+  width: 80px;
 }
 .order-dimensions .dataset-dimensions-right .order-sidebar-zone .order-sidebar-dimensions {
-  margin-left: 77px;
+  margin-left: 85px;
   border-right: none;
 }
 .order-dimensions .dataset-dimensions-right .order-sidebar-zone .order-sidebar-dimensions.no-header {
@@ -1457,7 +1460,7 @@ input[type="color"] select,
 .sidebar-sidebar-content .order-sidebar-zone h2 {
   padding: 5px;
   margin-bottom: 5px;
-  font-size: 13.2px;
+  font-size: 14.399999999999999px;
   line-height: 1.25em;
   background-color: #005980;
   color: #ffffff;
@@ -2342,7 +2345,7 @@ input[type="color"] select,
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   line-height: inherit;
   color: inherit;
-  padding-top: 2px;
+  padding-top: 1px;
 }
 .select2-container--default .select2-selection--single .select2-selection__arrow {
   height: 0;
@@ -2683,7 +2686,7 @@ input[type="color"] select,
   float: left;
   overflow: hidden;
   white-space: nowrap;
-  font-size: 11px;
+  font-size: 12px;
   border: 1px solid #bbc8d0;
   color: #bbc8d0;
   padding-left: 4px;
@@ -2721,11 +2724,11 @@ input[type="color"] select,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-measure-attribute,
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-dimension,
 .dataset-visualization-container .dataset-visualization-dimensions .order-sidebar-zone .order-sidebar-dimension {
-  padding: 2px;
+  padding: 1px;
   /* IE9 bug changed divs with a, so this correct the new style */
 
   display: inline-block;
-  width: 110px;
+  width: 120px;
   text-overflow: ellipsis;
   overflow: hidden;
   text-align: center;
@@ -2772,7 +2775,7 @@ input[type="color"] select,
   overflow: hidden;
   border: none;
   display: block;
-  width: 114px;
+  width: 124px;
   font-size: 100%;
 }
 .dataset-visualization-container .dataset-visualization-filters .order-sidebar-zone .order-sidebar-measure-attribute.dimension-pill,
@@ -2843,11 +2846,11 @@ input[type="color"] select,
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left.dataset-dimensions-left-1,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left.dataset-dimensions-left-1 {
-  width: 116px;
+  width: 126px;
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left.dataset-dimensions-left-2,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left.dataset-dimensions-left-2 {
-  width: 230px;
+  width: 250px;
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left.dataset-dimensions-left-1 .order-sidebar-zone:last-child .order-sidebar-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left.dataset-dimensions-left-1 .order-sidebar-zone:last-child .order-sidebar-dimensions,
@@ -2882,7 +2885,7 @@ input[type="color"] select,
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left .order-sidebar-zone .order-sidebar-dimension.dimension-pill,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left .order-sidebar-zone .order-sidebar-dimension.dimension-pill {
   margin: 2px;
-  width: 102px;
+  width: 112px;
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-left .order-sidebar-zone.has-selector,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-left .order-sidebar-zone.has-selector {
@@ -2898,11 +2901,11 @@ input[type="color"] select,
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right.dataset-dimensions-left-1,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right.dataset-dimensions-left-1 {
-  padding-left: 130px;
+  padding-left: 140px;
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right.dataset-dimensions-left-2,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right.dataset-dimensions-left-2 {
-  padding-left: 244px;
+  padding-left: 264px;
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right.dataset-dimensions-left-1 .order-sidebar-zone:last-child .order-sidebar-dimensions.no-header,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right.dataset-dimensions-left-1 .order-sidebar-zone:last-child .order-sidebar-dimensions.no-header,
@@ -2931,11 +2934,11 @@ input[type="color"] select,
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right .order-sidebar-zone h2,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right .order-sidebar-zone h2 {
-  width: 72px;
+  width: 80px;
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right .order-sidebar-zone .order-sidebar-dimensions,
 .dataset-visualization-container .dataset-visualization-dimensions .dataset-dimensions-right .order-sidebar-zone .order-sidebar-dimensions {
-  margin-left: 77px;
+  margin-left: 85px;
   border-right: none;
 }
 .dataset-visualization-container .dataset-visualization-filters .dataset-dimensions-right .order-sidebar-zone .order-sidebar-dimensions.no-header,
@@ -4208,7 +4211,7 @@ input[type="color"] select,
   cursor: pointer;
   border-radius: 5px;
   color: #ffffff;
-  font-size: 11px;
+  font-size: 12px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -4224,7 +4227,7 @@ input[type="color"] select,
   color: #8c9ba3;
   /*opacity: 0.4;*/
 
-  font-size: 11px;
+  font-size: 12px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -5016,7 +5019,7 @@ svg {
   margin-right: 5px;
 }
 #leyend-container .leyend-item .leyend-item-text {
-  font: 11px Helvetica, Arial, sans-serif;
+  font: 12px Helvetica, Arial, sans-serif;
   color: #005980;
 }
 #ranges-container {
@@ -5032,7 +5035,7 @@ svg {
   display: inline-block;
   margin-right: 10px;
   vertical-align: middle;
-  font: 11px Helvetica, Arial, sans-serif;
+  font: 12px Helvetica, Arial, sans-serif;
   color: #005980;
 }
 #ranges-container #line-container {
@@ -5100,7 +5103,7 @@ svg {
   display: block;
 }
 .filter-sidebar {
-  font-size: 11px;
+  font-size: 12px;
   height: 100%;
 }
 .filter-sidebar-icon {
@@ -5179,7 +5182,7 @@ svg {
 .sidebar-title {
   padding: 5px;
   margin-bottom: 5px;
-  font-size: 13.2px;
+  font-size: 14.399999999999999px;
   line-height: 1.25em;
   background-color: #005980;
   color: #ffffff;
@@ -5202,7 +5205,7 @@ svg {
 .filter-sidebar-dimension .filter-sidebar-dimension-title {
   padding: 5px;
   margin-bottom: 5px;
-  font-size: 13.2px;
+  font-size: 14.399999999999999px;
   line-height: 1.25em;
   background-color: #005980;
   color: #ffffff;
@@ -5217,6 +5220,9 @@ svg {
   border-radius: 0 0 0 0;
 }
 .filter-sidebar-dimension .filter-sidebar-dimension-label {
+  font-size: 12px;
+}
+.filter-sidebar-dimension .filter-sidebar-dimension-searchbar input {
   font-size: 11px;
 }
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar {
@@ -5262,7 +5268,7 @@ svg {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   border: none;
   white-space: nowrap;
   -webkit-user-select: none;
@@ -5271,11 +5277,12 @@ svg {
   -o-user-select: none;
   user-select: none;
   display: inline-block;
-  line-height: 16px;
+  line-height: 17px;
   background-color: #bbc8d0;
   color: #ffffff;
   padding: 3px 4px;
   margin-right: 3px;
+  font-size: 11px;
 }
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar .filter-sidebar-dimension-levels select:link,
 .filter-sidebar-dimension .filter-sidebar-dimension-actionsbar .filter-sidebar-dimension-visibleLabelType select:link,
@@ -5343,7 +5350,7 @@ svg {
 .filter-sidebar-multidataset .filter-sidebar-multidataset-title {
   padding: 5px;
   margin-bottom: 5px;
-  font-size: 13.2px;
+  font-size: 14.399999999999999px;
   line-height: 1.25em;
   background-color: #005980;
   color: #ffffff;
@@ -5358,7 +5365,7 @@ svg {
   border-radius: 0 0 0 0;
 }
 .filter-sidebar-multidataset .filter-sidebar-multidataset-label {
-  font-size: 11px;
+  font-size: 12px;
 }
 .filter-sidebar-multidataset .filter-sidebar-multidataset-node a {
   text-decoration: none;
@@ -5379,6 +5386,9 @@ svg {
 }
 .filter-sidebar-multidataset-searchbar {
   margin-bottom: 5px;
+}
+.filter-sidebar-multidataset-searchbar input {
+  font-size: 11px;
 }
 .filter-sidebar-multidataset-node,
 .filter-sidebar-category {

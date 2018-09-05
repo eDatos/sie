@@ -1,9 +1,9 @@
-@dimensionPillWidth: 110px;
+@dimensionPillWidth: 120px;
 @dimensionPillFrameWidth: 4px;
 @dimensionTitleWidth: 85px;
 @dimensionHeight: 23px;
 @zonesHorizontalPadding: 16px;
-@dimensionTitleWidthColumn: 72px;
+@dimensionTitleWidthColumn: 80px;
 @h2LeftPadding: 4px;
 .order-dimensions {
     .order-sidebar-zone {
@@ -23,7 +23,7 @@
 
             overflow: hidden;
             white-space: nowrap;
-            font-size: 11px;
+            font-size: @defaultFontSize;
 
             border: 1px solid @istacGreyMedium;        
             color: @istacGreyMedium;
@@ -61,7 +61,7 @@
         
         .order-sidebar-measure-attribute,
         .order-sidebar-dimension {            
-            padding: 2px;
+            padding: 1px;
 
             /* IE9 bug changed divs with a, so this correct the new style */
             display: inline-block;
