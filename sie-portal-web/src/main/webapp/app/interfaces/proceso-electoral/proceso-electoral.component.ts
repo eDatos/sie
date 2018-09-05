@@ -1,8 +1,10 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { ProcesoElectoralDatasetService } from '../../dataset';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MultidatasetProcesosElectorales } from '../../dataset/multidataset-procesos-electorales.model';
 import { ConfigService } from '../../config';
+import { Lugar } from '../lugar';
+import { TerritorioAutocompleteComponent } from '../../shared';
 
 declare var I18n: any;
 declare var App: any;
@@ -22,6 +24,11 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     fecha: string;
     multidataset: MultidatasetProcesosElectorales;
 
+    lugar: Lugar;
+
+    @ViewChild(TerritorioAutocompleteComponent)
+    territorioAutocomplete: TerritorioAutocompleteComponent;
+
     constructor(
         private host: ElementRef,
         private activatedRoute: ActivatedRoute,
@@ -31,6 +38,14 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     ) { }
 
     ngOnInit() {
+        this.territorioAutocomplete.initListaLugares().then(() => {
+            this.activatedRoute.parent.url.subscribe((url) => {
+                if (!this.lugar || this.lugar.id !== url[1].path) {
+                    this.territorioAutocomplete.initLugar(url[1].path);
+                }
+            });
+        });
+
         this.activatedRoute.parent.params.subscribe((params) => {
             if (params.tipoElecciones !== this.tipoElecciones) {
                 this.onChangeTipoElecciones(params);
@@ -46,6 +61,18 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
 
     ngOnDestroy() {
         this.stopBackbone();
+    }
+
+    transition() {
+        if (this.lugar) {
+            /* const urlSegments = this.activatedRoute.parent.snapshot.url.map((element) => element.path);
+            urlSegments[1] = this.lugar.id;
+            this.router.navigateByUrl(urlSegments.join('/'), { replaceUrl: true }); */
+
+            // TODO Mejorar esto porque es la gran kk
+            const urlSegments = this.activatedRoute.parent.snapshot.url;
+            window.location.hash = window.location.hash.replace(urlSegments[1].path, this.lugar.id);
+        }
     }
 
     private onChangeTipoElecciones(params: Params) {

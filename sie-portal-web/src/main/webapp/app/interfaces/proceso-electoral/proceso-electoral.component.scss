@@ -1,6 +1,9 @@
 @import '~scss/variables';
 
-:host {
+.metamac-container {
+    padding-bottom: 2rem;
+    min-width: 760px;
+
     /* Override primeng classes */ 
     /deep/ .ui-state-default {
         border: none;
@@ -46,11 +49,6 @@
 .section {
     max-width: 1200px;
     margin: 0 auto;
-}
-
-.metamac-container {
-    padding-bottom: 2rem;
-    min-width: 760px;
 }
 
 h1 {
