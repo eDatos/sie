@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProcesoElectoral } from './proceso-electoral.model';
 import { DatasetService, ProcesoElectoralDatasetService } from '../../dataset';
 import { Lugar } from '../lugar';
-import { BarChart, YElement } from '../../shared';
+import { BarChart, YElement, TerritorioAutocompleteComponent } from '../../shared';
 import { TranslateService } from '@ngx-translate/core';
 import { DocumentoService } from '../../documento';
-import { JhiAlertService } from 'ng-jhipster';
 
 const ISTAC_ORANGE = '#E5772D';
 const ISTAC_GREEN = '#67A23F';
@@ -46,31 +45,25 @@ export class EvolucionElectoralComponent implements OnInit {
     tipoGrafica = GRAFICA_VOTOS_DEFAULT;
     tipoEleccionesVisible = TIPO_ELECCIONES_DEFAULT;
 
-    lugares: Lugar[];
-    _lugar: Lugar;
+    lugar: Lugar;
+
+    @ViewChild(TerritorioAutocompleteComponent)
+    territorioAutocomplete: TerritorioAutocompleteComponent;
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private datasetService: DatasetService,
         private translateService: TranslateService,
-        private alertService: JhiAlertService,
         private documentoService: DocumentoService,
         private procesoElectoralDatasetService: ProcesoElectoralDatasetService
     ) { }
 
     ngOnInit() {
-        this.datasetService.getListaLugares().then((listaLugares) => {
-            this.lugares = listaLugares;
-
+        this.territorioAutocomplete.initListaLugares().then(() => {
             this.activatedRoute.params.subscribe((params) => {
-                const resultadoBusquedaLugar = this.lugares.find((lugar) => lugar.id === params.id);
-                if (!resultadoBusquedaLugar) {
-                    this.alertService.error('lugar.errorNoEncontrado', { codigo: params.id });
-                    throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: params.id }));
-                }
+                this.territorioAutocomplete.initLugar(params.id);
 
-                this._lugar = resultadoBusquedaLugar;
                 this.datasetService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
                     this.limpiarAtributos();
                     this.inicializarProcesosElectorales(listaProcesoElectoral);
@@ -206,28 +199,18 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     transition() {
-        if (this._lugar) {
-            this.router.navigate(['evolucion-electoral', this._lugar.id]);
+        if (this.lugar) {
+            this.router.navigate(['evolucion-electoral', this.lugar.id]);
         }
     }
 
     descargarPdf(event: Event, tipoEleccion: string) {
         event.stopPropagation();
         const evolucionElectoral = {
-            territorio: this._lugar.nombre,
+            territorio: this.lugar.nombre,
             tipoElecciones: this.translateService.instant('evolucionElectoral.nombreCompletoEleccion.' + tipoEleccion),
             procesosElectorales: this.hashProcesos[tipoEleccion].slice().reverse()
         };
         this.documentoService.descargarPdfEvolucionElectoral(evolucionElectoral);
-    }
-
-    set lugar(lugar: Lugar) {
-        if (lugar instanceof Lugar) {
-            this._lugar = lugar;
-        }
-    }
-
-    get lugar(): Lugar {
-        return this._lugar;
     }
 }
