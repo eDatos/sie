@@ -54,14 +54,14 @@
                         draggable: false,
                         location: "right",
                         showHeader: true,
-                        width: "225px"
+                        width: "235px"
                     },
                     top: {
                         icon: "column",
                         draggable: false,
                         location: "right",
                         showHeader: true,
-                        width: "calc(100% - 225px)"
+                        width: "calc(100% - 235px)"
                     },
                     fixed: {
                         icon: "lock",
