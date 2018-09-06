@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProcesoElectoral } from './proceso-electoral.model';
 import { DatasetService, ProcesoElectoralDatasetService } from '../../dataset';
