@@ -140,3 +140,5 @@ application:
 #    estaticos:
 #        navbarUrl: FILL_NAVBAR_ENDPOINT #NOT Required: URL to navbar HTML
 #        footerUrl: FILL_FOOTER_ENDPOINT #NOT Required: URL to footer HTML
+    analytics:
+        googleTrackingId: FILL_GA_TRACKING_ID #Required: google analytics tracking id

@@ -32,6 +32,7 @@ public class DefaultController {
         model.put("dataset", applicationProperties.getDataset());
         model.put("visualizer", applicationProperties.getVisualizer());
         model.put("estaticos", applicationProperties.getEstaticos());
+        model.put("analytics", applicationProperties.getAnalytics());
         Map<String, Object> flashMap = (Map<String, Object>) RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
             model.putAll(flashMap);

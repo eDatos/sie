@@ -2,6 +2,15 @@
 <html class="no-js" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="es">
 
 <head>
+    <script async="async" th:src="'https://www.googletagmanager.com/gtag/js?id=' + ${analytics.getGoogleTrackingId()}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', /*[[${analytics.getGoogleTrackingId()}]]*/);
+        /*]]>*/
+    </script>
     <base href="/" th:href="@{/}" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />

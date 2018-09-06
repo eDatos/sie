@@ -16,6 +16,8 @@ public class ApplicationProperties {
     
     private final Estaticos estaticos = new Estaticos();
     
+    private final Analytics analytics = new Analytics();
+    
     public Endpoints getEndpoints() {
         return endpoints;
     }
@@ -30,6 +32,10 @@ public class ApplicationProperties {
 
     public Estaticos getEstaticos() {
         return estaticos;
+    }
+    
+    public Analytics getAnalytics() {
+        return analytics;
     }
 
     public static class Endpoints {
@@ -163,6 +169,19 @@ public class ApplicationProperties {
 
         public void setFooterUrl(String footerUrl) {
             this.footerUrl = footerUrl;
+        }
+    }
+    
+    public static class Analytics {
+        
+        private String googleTrackingId;
+        
+        public String getGoogleTrackingId() {
+            return googleTrackingId;
+        }
+
+        public void setGoogleTrackingId(String googleTrackingId) {
+            this.googleTrackingId = googleTrackingId;
         }
     }
 }

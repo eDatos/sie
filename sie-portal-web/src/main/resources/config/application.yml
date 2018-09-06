@@ -218,3 +218,5 @@ application:
     estaticos:
         navbarUrl: ./external-static/navbar/navbar.html #Default navbar
         footerUrl: ./external-static/footer/footer.html #Default footer
+    analytics:
+        googleTrackingId: FILL_GA_TRACKING_ID #Required: google analytics tracking id
