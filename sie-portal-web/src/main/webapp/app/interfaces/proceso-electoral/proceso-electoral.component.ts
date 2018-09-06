@@ -22,6 +22,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     fecha: string;
     multidataset: MultidatasetProcesosElectorales;
 
+    lugarId: string;
+
     constructor(
         private host: ElementRef,
         private activatedRoute: ActivatedRoute,
@@ -31,6 +33,12 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     ) { }
 
     ngOnInit() {
+        this.activatedRoute.parent.url.subscribe((url) => {
+            if (!this.lugarId || this.lugarId !== url[1].path) {
+                this.lugarId = url[1].path;
+            }
+        });
+
         this.activatedRoute.parent.params.subscribe((params) => {
             if (params.tipoElecciones !== this.tipoElecciones) {
                 this.onChangeTipoElecciones(params);
@@ -46,6 +54,11 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
 
     ngOnDestroy() {
         this.stopBackbone();
+    }
+
+    transition(lugarId) {
+        const urlSegments = this.activatedRoute.parent.snapshot.url;
+        window.location.hash = window.location.hash.replace(urlSegments[1].path, lugarId);
     }
 
     private onChangeTipoElecciones(params: Params) {

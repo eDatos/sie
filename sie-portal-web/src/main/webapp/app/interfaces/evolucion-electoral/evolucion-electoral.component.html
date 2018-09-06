@@ -1,16 +1,16 @@
 <jhi-title-bar>
-    <ac-autocomplete-short-list *ngIf="lugar" name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombreConGranularidad']" [disabled]="!lugares" (onSelect)="transition()"></ac-autocomplete-short-list>
+    <jhi-territorio-autocomplete [lugarIdentifier]="lugarId" (onTransition)="transition($event)"></jhi-territorio-autocomplete>
 </jhi-title-bar>
 
 <div class="section">
 
     <h1 *ngIf="lugar" jhiTranslate="evolucionElectoral.header" [translateValues]="{territorio: lugar.nombre}">Historia de la evolución electoral en</h1>
 
-    <div *ngIf="!tiposEleccion" class="seleccion-territorio">
+    <div *ngIf="!tiposEleccion || !lugar" class="seleccion-territorio">
         <div class="loader first-loader"></div>
     </div>
 
-    <ngb-tabset *ngIf="tiposEleccion" [justify]="'center'" [activeId]="tipoEleccionesVisible" (tabChange)="onTabChange($event)">
+    <ngb-tabset *ngIf="tiposEleccion && lugar" [justify]="'center'" [activeId]="tipoEleccionesVisible" (tabChange)="onTabChange($event)">
         <ngb-tab *ngFor="let tipo of tiposEleccion; index as i" id="{{tipo}}">
             <ng-template ngbTabTitle>
                 <span jhiTranslate="evolucionElectoral.tipoEleccion.{{tipo}}"></span>

@@ -46,8 +46,8 @@ export class EvolucionElectoralComponent implements OnInit {
     tipoGrafica = GRAFICA_VOTOS_DEFAULT;
     tipoEleccionesVisible = TIPO_ELECCIONES_DEFAULT;
 
-    lugares: Lugar[];
-    _lugar: Lugar;
+    lugar: Lugar;
+    lugarId: string;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -60,24 +60,24 @@ export class EvolucionElectoralComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.datasetService.getListaLugares().then((listaLugares) => {
-            this.lugares = listaLugares;
+        this.activatedRoute.params.subscribe((params) => {
+            this.lugarId = params.id;
 
-            this.activatedRoute.params.subscribe((params) => {
-                const resultadoBusquedaLugar = this.lugares.find((lugar) => lugar.id === params.id);
+            this.datasetService.getLugarById(params.id).then((resultadoBusquedaLugar) => {
                 if (!resultadoBusquedaLugar) {
                     this.alertService.error('lugar.errorNoEncontrado', { codigo: params.id });
                     throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: params.id }));
                 }
 
-                this._lugar = resultadoBusquedaLugar;
-                this.datasetService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
-                    this.limpiarAtributos();
-                    this.inicializarProcesosElectorales(listaProcesoElectoral);
-                    this.inicializarTiposEleccion(listaProcesoElectoral);
-                    this.inicializarGraficas();
-                    this.comprobarDatosPagina3();
-                });
+                this.lugar = resultadoBusquedaLugar;
+            });
+
+            this.datasetService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
+                this.limpiarAtributos();
+                this.inicializarProcesosElectorales(listaProcesoElectoral);
+                this.inicializarTiposEleccion(listaProcesoElectoral);
+                this.inicializarGraficas();
+                this.comprobarDatosPagina3();
             });
         });
     }
@@ -205,29 +205,17 @@ export class EvolucionElectoralComponent implements OnInit {
         this.inicializarGraficas();
     }
 
-    transition() {
-        if (this._lugar) {
-            this.router.navigate(['evolucion-electoral', this._lugar.id]);
-        }
+    transition(lugarId) {
+        this.router.navigate(['evolucion-electoral', lugarId]);
     }
 
     descargarPdf(event: Event, tipoEleccion: string) {
         event.stopPropagation();
         const evolucionElectoral = {
-            territorio: this._lugar.nombre,
+            territorio: this.lugar.nombre,
             tipoElecciones: this.translateService.instant('evolucionElectoral.nombreCompletoEleccion.' + tipoEleccion),
             procesosElectorales: this.hashProcesos[tipoEleccion].slice().reverse()
         };
         this.documentoService.descargarPdfEvolucionElectoral(evolucionElectoral);
-    }
-
-    set lugar(lugar: Lugar) {
-        if (lugar instanceof Lugar) {
-            this._lugar = lugar;
-        }
-    }
-
-    get lugar(): Lugar {
-        return this._lugar;
     }
 }

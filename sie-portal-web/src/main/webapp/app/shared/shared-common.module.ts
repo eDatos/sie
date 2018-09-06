@@ -22,6 +22,7 @@ import {
 } from '.';
 
 import { StackedBarChartComponent } from './stacked-bar-chart/stacked-bar-chart.component';
+import { TerritorioAutocompleteComponent } from './territorio-autocomplete/territorio-autocomplete.component';
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import { StackedBarChartComponent } from './stacked-bar-chart/stacked-bar-chart.
         AutocompleteShortListComponent,
         AutocompleteLongListComponent,
         AutocompleteEnumComponent,
+        TerritorioAutocompleteComponent,
         StackedBarChartComponent,
         OrderListComponent,
         HelpTooltipComponent,
@@ -63,6 +65,7 @@ import { StackedBarChartComponent } from './stacked-bar-chart/stacked-bar-chart.
         AutocompleteShortListComponent,
         AutocompleteLongListComponent,
         AutocompleteEnumComponent,
+        TerritorioAutocompleteComponent,
         StackedBarChartComponent,
         OrderListComponent,
         HelpTooltipComponent,
