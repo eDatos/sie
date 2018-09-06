@@ -2655,6 +2655,9 @@ input[type="color"] select,
   z-index: 1000;
   width: 100%;
 }
+.dataset-visualization-container .dataset-loading {
+  z-index: 1010;
+}
 .dataset-visualization-container .dataset-visualization-dimensions {
   flex-grow: 1;
 }
