@@ -1,60 +1,59 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { Lugar } from '../../interfaces/lugar';
 import { DatasetService } from '../../dataset';
-import { TranslateService } from '@ngx-translate/core';
-import { JhiAlertService } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-territorio-autocomplete',
     styleUrls: ['territorio-autocomplete.component.scss'],
     templateUrl: './territorio-autocomplete.component.html'
 })
-export class TerritorioAutocompleteComponent {
+export class TerritorioAutocompleteComponent implements OnInit {
 
     lugares: Lugar[];
     _lugar: Lugar;
 
-    @Output()
-    lugarChange = new EventEmitter<Lugar>();
+    _lugarIdentifier: string;
 
     @Output()
-    onTransition: EventEmitter<any> = new EventEmitter();
+    onTransition = new EventEmitter<string>();
 
     constructor(
-        private datasetService: DatasetService,
-        private translateService: TranslateService,
-        private alertService: JhiAlertService
+        private datasetService: DatasetService
     ) { }
 
-    public initListaLugares(): Promise<any> {
-        return this.datasetService.getListaLugares().then((listaLugares) => {
+    ngOnInit(): void {
+        this.datasetService.getListaLugares().then((listaLugares) => {
             this.lugares = listaLugares;
+            if (this._lugarIdentifier) {
+                this.lugar = this.lugares.find((lugar) => lugar.id === this._lugarIdentifier);
+            }
         });
     }
 
-    public initLugar(lugarId: string) {
-        const resultadoBusquedaLugar = this.lugares.find((lugar) => lugar.id === lugarId);
-        if (!resultadoBusquedaLugar) {
-            this.alertService.error('lugar.errorNoEncontrado', { codigo: lugarId });
-            throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: lugarId }));
-        }
+    onTransitionMethod() {
+        this.onTransition.emit(this._lugar.id);
+    }
 
-        this.lugar = resultadoBusquedaLugar;
+    set lugarIdentifier(lugarIdentifier: string) {
+        if (this.lugares && this._lugarIdentifier !== lugarIdentifier) {
+            this.lugar = this.lugares.find((lugar) => lugar.id === lugarIdentifier);
+        }
+        this._lugarIdentifier = lugarIdentifier;
+    }
+
+    @Input()
+    get lugarIdentifier(): string {
+        return this._lugarIdentifier;
     }
 
     set lugar(lugar: Lugar) {
         if (lugar instanceof Lugar) {
             this._lugar = lugar;
-            this.lugarChange.emit(this._lugar);
+            this._lugarIdentifier = lugar.id;
         }
     }
 
-    @Input()
     get lugar(): Lugar {
         return this._lugar;
-    }
-
-    onTransitionMethod($event) {
-        this.onTransition.emit($event);
     }
 }

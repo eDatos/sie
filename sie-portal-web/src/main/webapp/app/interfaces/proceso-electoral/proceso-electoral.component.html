@@ -1,5 +1,5 @@
 <jhi-title-bar>
-    <jhi-territorio-autocomplete [(lugar)]="lugar" (onTransition)="transition()"></jhi-territorio-autocomplete>
+    <jhi-territorio-autocomplete [lugarIdentifier]="lugarId" (onTransition)="transition($event)"></jhi-territorio-autocomplete>
 </jhi-title-bar>
 
 <div class="section">

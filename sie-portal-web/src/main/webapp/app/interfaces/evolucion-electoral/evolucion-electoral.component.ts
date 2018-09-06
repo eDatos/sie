@@ -3,9 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProcesoElectoral } from './proceso-electoral.model';
 import { DatasetService, ProcesoElectoralDatasetService } from '../../dataset';
 import { Lugar } from '../lugar';
-import { BarChart, YElement, TerritorioAutocompleteComponent } from '../../shared';
+import { BarChart, YElement } from '../../shared';
 import { TranslateService } from '@ngx-translate/core';
 import { DocumentoService } from '../../documento';
+import { JhiAlertService } from 'ng-jhipster';
 
 const ISTAC_ORANGE = '#E5772D';
 const ISTAC_GREEN = '#67A23F';
@@ -46,31 +47,37 @@ export class EvolucionElectoralComponent implements OnInit {
     tipoEleccionesVisible = TIPO_ELECCIONES_DEFAULT;
 
     lugar: Lugar;
-
-    @ViewChild(TerritorioAutocompleteComponent)
-    territorioAutocomplete: TerritorioAutocompleteComponent;
+    lugarId: string;
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private datasetService: DatasetService,
         private translateService: TranslateService,
+        private alertService: JhiAlertService,
         private documentoService: DocumentoService,
         private procesoElectoralDatasetService: ProcesoElectoralDatasetService
     ) { }
 
     ngOnInit() {
-        this.territorioAutocomplete.initListaLugares().then(() => {
-            this.activatedRoute.params.subscribe((params) => {
-                this.territorioAutocomplete.initLugar(params.id);
+        this.activatedRoute.params.subscribe((params) => {
+            this.lugarId = params.id;
 
-                this.datasetService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
-                    this.limpiarAtributos();
-                    this.inicializarProcesosElectorales(listaProcesoElectoral);
-                    this.inicializarTiposEleccion(listaProcesoElectoral);
-                    this.inicializarGraficas();
-                    this.comprobarDatosPagina3();
-                });
+            this.datasetService.getLugarById(params.id).then((resultadoBusquedaLugar) => {
+                if (!resultadoBusquedaLugar) {
+                    this.alertService.error('lugar.errorNoEncontrado', { codigo: params.id });
+                    throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: params.id }));
+                }
+
+                this.lugar = resultadoBusquedaLugar;
+            });
+
+            this.datasetService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
+                this.limpiarAtributos();
+                this.inicializarProcesosElectorales(listaProcesoElectoral);
+                this.inicializarTiposEleccion(listaProcesoElectoral);
+                this.inicializarGraficas();
+                this.comprobarDatosPagina3();
             });
         });
     }
@@ -198,10 +205,8 @@ export class EvolucionElectoralComponent implements OnInit {
         this.inicializarGraficas();
     }
 
-    transition() {
-        if (this.lugar) {
-            this.router.navigate(['evolucion-electoral', this.lugar.id]);
-        }
+    transition(lugarId) {
+        this.router.navigate(['evolucion-electoral', lugarId]);
     }
 
     descargarPdf(event: Event, tipoEleccion: string) {
