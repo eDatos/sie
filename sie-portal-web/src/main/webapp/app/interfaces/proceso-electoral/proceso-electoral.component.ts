@@ -65,11 +65,6 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
 
     transition() {
         if (this.lugar) {
-            /* const urlSegments = this.activatedRoute.parent.snapshot.url.map((element) => element.path);
-            urlSegments[1] = this.lugar.id;
-            this.router.navigateByUrl(urlSegments.join('/'), { replaceUrl: true }); */
-
-            // TODO Mejorar esto porque es la gran kk
             const urlSegments = this.activatedRoute.parent.snapshot.url;
             window.location.hash = window.location.hash.replace(urlSegments[1].path, this.lugar.id);
         }
