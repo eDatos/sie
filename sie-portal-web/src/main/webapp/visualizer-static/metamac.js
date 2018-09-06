@@ -59714,15 +59714,15 @@ if(this.$element.prop("multiple"))this.current(function(d){var e=[];a=[a],a.push
         // See variables.less        
         colors: {
             istacBlueWhite: "#B3D9FF",
-            istacBlueLight: "#56B5E6",
-            istacBlueMedium: "#1C547E",
-            istacBlueDark: "#003366",
+            istacBlueLight: "#8CD2EA",
+            istacBlueMedium: "#008BD0",
+            istacBlueDark: "#005980",
             istacYellow: '#EBCC5C',
 
             istacWhite: "#FFFFFF",
             istacGreyLight: "#EBEBEB",
-            istacGreyMedium: "#ACACAC",
-            istacGreyDark: "#808080",
+            istacGreyMedium: "#BBC8D0",
+            istacGreyDark: "#8C9BA3",
             istacBlack: "#222222",
 
             hiddenText: "#FFFFFD"
