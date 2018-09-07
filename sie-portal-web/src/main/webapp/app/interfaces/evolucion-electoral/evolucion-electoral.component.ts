@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProcesoElectoral } from './proceso-electoral.model';
 import { DatasetService, ProcesoElectoralDatasetService } from '../../dataset';
 import { Lugar } from '../lugar';
-import { BarChart, YElement } from '../../shared';
+import { Chart, YElement } from '../../shared';
 import { TranslateService } from '@ngx-translate/core';
 import { DocumentoService } from '../../documento';
 import { JhiAlertService } from 'ng-jhipster';
@@ -111,7 +111,7 @@ export class EvolucionElectoralComponent implements OnInit {
     private inicializarGrafica(tipoEleccion: string) {
         const indicadores = this.getIndicadores();
 
-        const grafica = new BarChart();
+        const grafica = new Chart();
         grafica.xAxis = this.crearEjeX(tipoEleccion);
         grafica.yAxis = indicadores.map((indicador) => this.crearElementoEjeY(indicador, tipoEleccion));
         if (!this.tipoGrafica) {

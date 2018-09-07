@@ -31,7 +31,7 @@
                     </button>
                 </div>
 
-                <ac-stacked-bar-chart [data]="hashGraficas[tipo]" [isPercentage]="tipoGrafica"></ac-stacked-bar-chart>
+                <ac-chart [data]="hashGraficas[tipo]" [isPercentage]="tipoGrafica"></ac-chart>
 
                 <div class="grid-procesos">
                     <ng-container *ngFor="let proceso of hashProcesos[tipo].slice().reverse()">

@@ -7,7 +7,7 @@ export class YElement {
     public stacking: string;
 }
 
-export class BarChart {
+export class Chart {
     public xAxis: any[];
     public yAxis: YElement[];
 }

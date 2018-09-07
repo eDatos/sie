@@ -1,20 +1,20 @@
 import { Component, Input, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
-import { BarChart } from '.';
+import { Chart } from '.';
 
 declare var Highcharts: any;
 
 @Component({
-    selector: 'ac-stacked-bar-chart',
-    templateUrl: './stacked-bar-chart.component.html'
+    selector: 'ac-chart',
+    templateUrl: './chart.component.html'
 })
-export class StackedBarChartComponent implements OnChanges, AfterViewInit {
+export class ChartComponent implements OnChanges, AfterViewInit {
 
     // Parametros externos
     @Input()
     public isPercentage = false;
 
     @Input()
-    public data: BarChart;
+    public data: Chart;
 
     // Atributos de uso interno
     public name: string = 'container-' + new Date().getTime().toString() + '-' + Math.floor(Math.random() * 10000).toString();
@@ -23,7 +23,7 @@ export class StackedBarChartComponent implements OnChanges, AfterViewInit {
 
     ngOnChanges(changes: SimpleChanges) {
         if (!this.data) {
-            throw new Error('Data parameter is required for ac-stacked-bar-chart');
+            throw new Error('Data parameter is required for ac-chart');
         }
 
         if (this.grafica) {
