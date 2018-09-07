@@ -13,8 +13,6 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-contrib-copy'
     grunt.loadNpmTasks 'grunt-contrib-clean'
     grunt.loadNpmTasks 'grunt-webfont'
-    grunt.loadNpmTasks 'grunt-zip'
-    grunt.loadNpmTasks 'grunt-package'
 
     paths = {}
     paths.theme = 'src/main'
@@ -358,19 +356,6 @@ module.exports = (grunt) ->
                     types: 'eot,woff,ttf,svg';
                 }
 
-        package:
-            release:
-                pretty: false
-                srcDir: "./"
-                destDir: "target"
-                remove: ["dependencies", "devDependencies"]
-                add:
-                    main: "metamac.js"
-                    files: ["metamac.css", "metamac.js"]
-
-        zip:
-            'target/sie-graphics.zip': ['target/metamac.css', 'target/metamac.js', 'target/package.json']
-
 
     grunt.registerTask 'spec', 'Runs a task on a specified file', (fileName) ->
         globalConfig.mocha.grep = fileName
@@ -379,7 +364,6 @@ module.exports = (grunt) ->
     grunt.registerTask 'test', ['concat','mocha:all']
     grunt.registerTask 'dev', ['clean', 'copy', 'less:dev', 'less:map', 'handlebars', 'concat', 'copy:dependency']
     grunt.registerTask 'build', ['clean', 'copy', 'less:pro', 'less:map', 'handlebars', 'uglify', 'copy:dependency']
-    grunt.registerTask 'deploy', ['package', 'zip']
 
     grunt.registerTask 'bdd', ['connect', 'open:test', 'watch' ]
     grunt.registerTask 'serve', ['connect', 'open:preview', 'watch' ]
