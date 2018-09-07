@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { ConfigService } from '../config';
-import { Lugar } from '../interfaces/lugar/lugar.model';
-import { ProcesoElectoral } from '../interfaces/evolucion-electoral/proceso-electoral.model';
+import { Lugar } from './lugar.model';
+import { ProcesoElectoral } from './proceso-electoral.model';
 
 const GEOGRAPHIC_DIMENSION = 'GEOGRAPHIC_DIMENSION';
 const FECHA_ELECCION = 'FECHA_ELECCION';

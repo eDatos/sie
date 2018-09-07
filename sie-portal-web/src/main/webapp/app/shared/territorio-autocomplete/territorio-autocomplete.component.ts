@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
-import { Lugar } from '../../interfaces/lugar';
-import { DatasetService } from '../../dataset';
+import {  } from '../../interfaces/lugar';
+import { DatasetService, Lugar } from '../../dataset';
 
 @Component({
     selector: 'jhi-territorio-autocomplete',

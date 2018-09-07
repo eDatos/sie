@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProcesoElectoral } from './proceso-electoral.model';
-import { DatasetService, ProcesoElectoralDatasetService } from '../../dataset';
-import { Lugar } from '../lugar';
+import { DatasetService, ProcesoElectoralDatasetService, ProcesoElectoral, Lugar } from '../../dataset';
 import { Chart, YElement } from '../../shared';
 import { TranslateService } from '@ngx-translate/core';
 import { DocumentoService } from '../../documento';

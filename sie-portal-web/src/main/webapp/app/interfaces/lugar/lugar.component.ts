@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Lugar } from './lugar.model';
-import { DatasetService } from '../../dataset';
+import { DatasetService, Lugar } from '../../dataset';
 
 const BACKGROUND_CLASS = 'lugar-background';
 

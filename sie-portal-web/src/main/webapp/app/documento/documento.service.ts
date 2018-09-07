@@ -9,7 +9,6 @@ export class DocumentoService {
 
     constructor(private http: Http) { }
 
-    // TODO Mejorar esto!
     descargarPdfEvolucionElectoral(evolucionElectoral: any) {
         const formData = new FormData();
         formData.append('evolucionElectoral', new Blob([JSON.stringify(evolucionElectoral)], { type: 'application/json' }));
