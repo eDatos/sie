@@ -22,7 +22,10 @@ export class MultidatasetProcesosElectoralesService {
             this.multidatasetsCache[tipoElecciones] = new Promise<MultidatasetProcesosElectorales>((resolve, reject) => {
                 this.getDatasetIdByTipoElecciones(tipoElecciones).subscribe(
                     (tipoEleccionesDataset) => {
-                        this.doGetDatasets(tipoEleccionesDataset).subscribe((json) => resolve(this.parseMultidataset(json)));
+                        this.doGetDatasets(tipoEleccionesDataset).subscribe(
+                            (json) => resolve(this.parseMultidataset(json)),
+                            (error) => reject(error)
+                        );
                     },
                     (error) => {
                         reject(error);
