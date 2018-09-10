@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Http, ResponseContentType } from '@angular/http';
 import * as FileSaver from 'file-saver';
+import { TranslateService } from '@ngx-translate/core';
+import { JhiAlertService } from 'ng-jhipster';
 
 @Injectable()
 export class DocumentoService {
 
     public resourceUrl = 'api/documento';
 
-    constructor(private http: Http) { }
+    constructor(
+        private http: Http,
+        private translateService: TranslateService,
+        private alertService: JhiAlertService
+    ) { }
 
     descargarPdfEvolucionElectoral(evolucionElectoral: any) {
         const formData = new FormData();
         formData.append('evolucionElectoral', new Blob([JSON.stringify(evolucionElectoral)], { type: 'application/json' }));
         formData.append('grafica', new Blob([this.sanitizeSvg(document.getElementsByTagName('svg')[0].outerHTML)], { type: 'image/svg+xml' }));
         this.http.post(`${this.resourceUrl}/evolucion-electoral`, formData, { responseType: ResponseContentType.Blob })
-            .map((response) => this.saveToFileSystem(response))
-            .subscribe();
+            .subscribe(
+                (response) => this.saveToFileSystem(response),
+                () => this.alertService.error('error.cannotDownloadDocument'));
     }
 
     private sanitizeSvg(svg) {
