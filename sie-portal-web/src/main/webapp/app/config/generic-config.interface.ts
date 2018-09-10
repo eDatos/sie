@@ -6,6 +6,7 @@ export interface GenericConfig {
         permalinks,
         export,
         indicators
+        metadata
     };
 
     dataset: {
@@ -27,5 +28,14 @@ export interface GenericConfig {
 
     footer: {
         url
-    }
+    };
+
+    metadata: {
+        statisticalResourcesEndpoint,
+        structuralResourcesEndpoint,
+        statisticalVisualizerEndpoint,
+        permalinksEndpoint,
+        exportEndpoint,
+        indicatorsEndpoint
+    };
 };

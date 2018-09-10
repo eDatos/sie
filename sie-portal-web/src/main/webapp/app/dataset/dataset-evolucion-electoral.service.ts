@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
-import { ConfigService } from '../config';
+import { ConfigService, MetadataService } from '../config';
 import { Lugar } from './lugar.model';
 import { ProcesoElectoral } from './proceso-electoral.model';
 
@@ -23,7 +23,11 @@ export class DatasetEvolucionElectoralService {
     private multiplicadores = {};
     private idsDimensiones: string[] = [];
 
-    constructor(private http: Http, private configService: ConfigService) { }
+    constructor(
+        private http: Http,
+        private configService: ConfigService,
+        private metadataService: MetadataService
+    ) { }
 
     getListaLugares(): Promise<Lugar[]> {
         if (!this.promesaLugares) {

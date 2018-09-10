@@ -18,6 +18,8 @@ public class ApplicationProperties {
     
     private final Analytics analytics = new Analytics();
     
+    private final Metadata metadata = new Metadata();
+    
     public Endpoints getEndpoints() {
         return endpoints;
     }
@@ -37,6 +39,10 @@ public class ApplicationProperties {
     public Analytics getAnalytics() {
         return analytics;
     }
+    
+    public Metadata getMetadata() {
+        return metadata;
+    }
 
     public static class Endpoints {
         
@@ -46,6 +52,7 @@ public class ApplicationProperties {
         private String permalinks;
         private String export;
         private String indicators;
+        private String metadata;
         
         public String getStatisticalResources() {
             return statisticalResources;
@@ -93,6 +100,14 @@ public class ApplicationProperties {
         
         public void setIndicators(String indicators) {
             this.indicators = indicators;
+        }
+
+        public String getMetadata() {
+            return metadata;
+        }
+
+        public void setMetadata(String metadata) {
+            this.metadata = metadata;
         }
     }
 
@@ -176,6 +191,73 @@ public class ApplicationProperties {
         
         private String googleTrackingId;
         
+        public String getGoogleTrackingId() {
+            return googleTrackingId;
+        }
+
+        public void setGoogleTrackingId(String googleTrackingId) {
+            this.googleTrackingId = googleTrackingId;
+        }
+    }
+    
+    public static class Metadata {
+        
+        private String statisticalResourcesEndpoint;
+        private String structuralResourcesEndpoint;
+        private String statisticalVisualizerEndpoint;
+        private String permalinksEndpoint;
+        private String exportEndpoint;
+        private String indicatorsEndpoint;
+        private String googleTrackingId;
+        
+        public String getStatisticalResourcesEndpoint() {
+            return statisticalResourcesEndpoint;
+        }
+
+        public void setStatisticalResourcesEndpoint(String statisticalResourcesEndpoint) {
+            this.statisticalResourcesEndpoint = statisticalResourcesEndpoint;
+        }
+
+        public String getStructuralResourcesEndpoint() {
+            return structuralResourcesEndpoint;
+        }
+
+        public void setStructuralResourcesEndpoint(String structuralResourcesEndpoint) {
+            this.structuralResourcesEndpoint = structuralResourcesEndpoint;
+        }
+
+        public String getStatisticalVisualizerEndpoint() {
+            return statisticalVisualizerEndpoint;
+        }
+        
+        public void setStatisticalVisualizerEndpoint(String statisticalVisualizerEndpoint) {
+            this.statisticalVisualizerEndpoint = statisticalVisualizerEndpoint;
+        }
+        
+        public String getPermalinksEndpoint() {
+            return permalinksEndpoint;
+        }
+        
+        public void setPermalinksEndpoint(String permalinksEndpoint) {
+            this.permalinksEndpoint = permalinksEndpoint;
+        }
+
+        public String getExportEndpoint() {
+            return exportEndpoint;
+        }
+
+        public void setExportEndpoint(String exportEndpoint) {
+            this.exportEndpoint = exportEndpoint;
+        }
+        
+        public String getIndicatorsEndpoint() {
+            return indicatorsEndpoint;
+        }
+
+        public void setIndicatorsEndpoint(String indicatorsEndpoint) {
+            this.indicatorsEndpoint = indicatorsEndpoint;
+        }
+
         public String getGoogleTrackingId() {
             return googleTrackingId;
         }
