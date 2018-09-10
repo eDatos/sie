@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
                 setActiveLink(APPLICATION_LINK_ID);
 
                 const config = this.configService.getConfig();
-                setNavbarMode(config.visualizer.installationType);
+                setNavbarMode(config.metadata.installationType);
             });
         });
     }

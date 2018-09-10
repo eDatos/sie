@@ -46,8 +46,10 @@ export class DatasetEvolucionElectoralService {
 
     private doGetMetadata(): Observable<any> {
         const config = this.configService.getConfig();
-        return this.http.get(`${config.endpoints.statisticalResources}${config.dataset.evolucionElectoral}${config.dataset.metadata}`)
-            .map((res: Response) => res.json());
+        return this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey).flatMap((endpoint) => {
+            return this.http.get(`${endpoint}/v1.0${config.dataset.evolucionElectoral}${config.dataset.metadata}`)
+                .map((res: Response) => res.json());
+        });
     }
 
     private parseListaLugares(json: any): Lugar[] {
@@ -150,8 +152,10 @@ export class DatasetEvolucionElectoralService {
 
     private doGetDataByRegionId(id: string): Observable<any> {
         const config = this.configService.getConfig();
-        return this.http.get(`${config.endpoints.statisticalResources}${config.dataset.evolucionElectoral}${config.dataset.data}${id}`)
+        return this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey).flatMap((endpoint) => {
+            return this.http.get(`${endpoint}/v1.0${config.dataset.evolucionElectoral}${config.dataset.data}${id}`)
             .map((res: Response) => res.json());
+        });
     }
 
     private procesaAtributo(json: any, nombreAtributo: string): string[] {

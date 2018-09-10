@@ -1,14 +1,4 @@
 export interface GenericConfig {
-    endpoints: {
-        statisticalResources,
-        structuralResources,
-        statisticalVisualizer,
-        permalinks,
-        export,
-        indicators
-        metadata
-    };
-
     dataset: {
         evolucionElectoral,
         metadata,
@@ -18,8 +8,7 @@ export interface GenericConfig {
     visualizer: {
         showHeader,
         showRightsHolder,
-        organisationUrn,
-        installationType
+        organisationUrn
     };
 
     navbar: {
@@ -31,11 +20,14 @@ export interface GenericConfig {
     };
 
     metadata: {
-        statisticalResourcesEndpoint,
-        structuralResourcesEndpoint,
-        statisticalVisualizerEndpoint,
-        permalinksEndpoint,
-        exportEndpoint,
-        indicatorsEndpoint
+        endpoint,
+        installationType,
+        statisticalResourcesKey,
+        structuralResourcesKey,
+        indicatorsKey,
+        statisticalVisualizerKey,
+        permalinksEndpointKey,
+        exportEndpointKey,
+        googleTrackingIdKey
     };
 };

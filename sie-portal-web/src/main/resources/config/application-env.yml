@@ -41,25 +41,29 @@ jhipster:
 # ===================================================================
 
 application:
-    endpoints:
-        statisticalResources: FILL_STATISTICAL_RESOURCES_ENDPOINT #Required: statistical resources endpoint
-        structuralResources: FILL_STRUCTURAL_RESOURCES_ENDPOINT #Required: structural resources endpoint
-        statisticalVisualizer: FILL_STATISTICAL_VISUALIZER_ENDPOINT #Required: statistical visualizer endpoint
-        permalinks: FILL_PERMALINKS_ENDPOINT #Required: permalinks endpoint
-        export: FILL_EXPORT_ENDPOINT #Required: export endpoint
-        indicators: FILL_INDICATORS_ENDPOINT #Required: indicators endpoint
 #    dataset:
 #        evolucionElectoral: FILL_EVOLUCION_ELECTORAL_DATASET #NOT Required: evolucion electoral dataset
-    visualizer:
+#    visualizer:
 #        showHeader: FILL_SHOW_HEADER #NOT Required: show header
 #        showRightsHolder: FILL_SHOW_RIGHTS_HOLDER #NOT Required: show rights holder
 #        organisationUrn: FILL_ORGANIZATION_URN #NOT Required: organization urn
-        installationType: FILL_INSTALLATION_TYPE #Required: installation type
 #    estaticos:
 #        navbarUrl: FILL_NAVBAR_ENDPOINT #NOT Required: URL to navbar HTML
 #        footerUrl: FILL_FOOTER_ENDPOINT #NOT Required: URL to footer HTML
-    analytics:
-        googleTrackingId: FILL_GA_TRACKING_ID #Required: google analytics tracking id
+    metadata:
+        endpoint: FILL_COMMON_METADATA_ENDPOINT #Required: common metadata endpoint
+        installationType: FILL_INSTALLATION_TYPE #Required: installation type
+#        statisticalResourcesInternalKey: FILL_STATISTICAL_RESOURCES_INTERNAL_KEY #NOT Required: statistical resources internal key
+#        statisticalResourcesExternalKey: FILL_STATISTICAL_RESOURCES_EXTERNAL_KEY #NOT Required: statistical resources external key
+#        structuralResourcesInternalKey: FILL_STRUCTURAL_RESOURCES_INTERNAL_KEY #NOT Required: structural resources internal key
+#        structuralResourcesExternalKey: FILL_STRUCTURAL_RESOURCES_EXTERNAL_KEY #NOT Required: structural resources external key
+#        indicatorsInternalKey: FILL_INDICATORS_INTERNAL_KEY #NOT Required: indicators internal key
+#        indicatorsExternalKey: FILL_INDICATORS_EXTERNAL_KEY #NOT Required: indicators external key
+#        statisticalVisualizerInternalKey: FILL_STATISTICAL_VISUALIZER_INTERNAL_KEY #NOT Required: statistical visualizer internal key
+#        statisticalVisualizerExternalKey: FILL_STATISTICAL_VISUALIZER_EXTERNAL_KEY #NOT Required: statistical visualizer external key
+#        permalinksEndpointKey: FILL_PERMALINKS_ENDPOINT_KEY #NOT Required: permalinks endpoint key
+#        exportEndpointKey: FILL_EXPORT_ENDPOINT_KEY #NOT Required: export endpoint key
+#        googleTrackingIdKey: FILL_GA_TRACKING_ID_KEY #NOT Required: google analytics tracking id key
         
 # ===================================================================        
 # Application debug properties

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { ConfigService } from '../config';
+import { ConfigService, MetadataService } from '../config';
 import { DatasetProcesoElectoral } from './dataset-proceso-electoral.model';
 import { Observable } from 'rxjs';
 import { MultidatasetProcesosElectorales } from './multidataset-procesos-electorales.model';
@@ -14,7 +14,8 @@ export class MultidatasetProcesosElectoralesService {
 
     constructor(
         private http: Http,
-        private configService: ConfigService
+        private configService: ConfigService,
+        private metadataService: MetadataService
     ) { }
 
     getDatasetsByTipoElecciones(tipoElecciones: string): Promise<MultidatasetProcesosElectorales> {
@@ -41,7 +42,9 @@ export class MultidatasetProcesosElectoralesService {
 
     private doGetDatasets(tipoEleccionesDataset: TipoEleccionesDataset): Observable<any> {
         const config = this.configService.getConfig();
-        return this.http.get(`${config.endpoints.statisticalResources}${tipoEleccionesDataset.datasetId}?_type=json`).map((response) => response.json());
+        return this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey).flatMap((endpoint) => {
+            return this.http.get(`${endpoint}/v1.0${tipoEleccionesDataset.datasetId}?_type=json`).map((response) => response.json());
+        });
     }
 
     private parseMultidataset(json: any): MultidatasetProcesosElectorales {

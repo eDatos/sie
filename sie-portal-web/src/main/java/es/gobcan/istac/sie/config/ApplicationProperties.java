@@ -8,22 +8,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
 
-    private final Endpoints endpoints = new Endpoints();
-    
     private final Dataset dataset = new Dataset();
     
     private final Visualizer visualizer = new Visualizer();
     
     private final Estaticos estaticos = new Estaticos();
     
-    private final Analytics analytics = new Analytics();
-    
     private final Metadata metadata = new Metadata();
     
-    public Endpoints getEndpoints() {
-        return endpoints;
-    }
-
     public Dataset getDataset() {
         return dataset;
     }
@@ -36,79 +28,8 @@ public class ApplicationProperties {
         return estaticos;
     }
     
-    public Analytics getAnalytics() {
-        return analytics;
-    }
-    
     public Metadata getMetadata() {
         return metadata;
-    }
-
-    public static class Endpoints {
-        
-        private String statisticalResources;
-        private String structuralResources;
-        private String statisticalVisualizer;
-        private String permalinks;
-        private String export;
-        private String indicators;
-        private String metadata;
-        
-        public String getStatisticalResources() {
-            return statisticalResources;
-        }
-        
-        public void setStatisticalResources(String statisticalResources) {
-            this.statisticalResources = statisticalResources;
-        }
-        
-        public String getStructuralResources() {
-            return structuralResources;
-        }
-        
-        public void setStructuralResources(String structuralResources) {
-            this.structuralResources = structuralResources;
-        }
-        
-        public String getStatisticalVisualizer() {
-            return statisticalVisualizer;
-        }
-        
-        public void setStatisticalVisualizer(String statisticalVisualizer) {
-            this.statisticalVisualizer = statisticalVisualizer;
-        }
-        
-        public String getPermalinks() {
-            return permalinks;
-        }
-        
-        public void setPermalinks(String permalinks) {
-            this.permalinks = permalinks;
-        }
-        
-        public String getExport() {
-            return export;
-        }
-        
-        public void setExport(String export) {
-            this.export = export;
-        }
-        
-        public String getIndicators() {
-            return indicators;
-        }
-        
-        public void setIndicators(String indicators) {
-            this.indicators = indicators;
-        }
-
-        public String getMetadata() {
-            return metadata;
-        }
-
-        public void setMetadata(String metadata) {
-            this.metadata = metadata;
-        }
     }
 
     public static class Dataset {
@@ -129,7 +50,6 @@ public class ApplicationProperties {
         private Boolean showHeader;
         private Boolean showRightsHolder;
         private String organisationUrn;
-        private String installationType;
         
         public Boolean getShowHeader() {
             return showHeader;
@@ -154,20 +74,11 @@ public class ApplicationProperties {
         public void setOrganisationUrn(String organisationUrn) {
             this.organisationUrn = organisationUrn;
         }
-        
-        public String getInstallationType() {
-            return installationType;
-        }
-        
-        public void setInstallationType(String installationType) {
-            this.installationType = installationType;
-        }
     }
     
     public static class Estaticos {
         
         private String navbarUrl;
-        
         private String footerUrl;
 
         public String getNavbarUrl() {
@@ -187,83 +98,160 @@ public class ApplicationProperties {
         }
     }
     
-    public static class Analytics {
-        
-        private String googleTrackingId;
-        
-        public String getGoogleTrackingId() {
-            return googleTrackingId;
-        }
-
-        public void setGoogleTrackingId(String googleTrackingId) {
-            this.googleTrackingId = googleTrackingId;
-        }
-    }
-    
     public static class Metadata {
         
-        private String statisticalResourcesEndpoint;
-        private String structuralResourcesEndpoint;
-        private String statisticalVisualizerEndpoint;
-        private String permalinksEndpoint;
-        private String exportEndpoint;
-        private String indicatorsEndpoint;
-        private String googleTrackingId;
+        private String endpoint;
+        private String installationType;
+        private String statisticalResourcesInternalKey;
+        private String statisticalResourcesExternalKey;
+        private String structuralResourcesInternalKey;
+        private String structuralResourcesExternalKey;
+        private String indicatorsInternalKey;
+        private String indicatorsExternalKey;
+        private String statisticalVisualizerInternalKey;
+        private String statisticalVisualizerExternalKey;
+        private String permalinksEndpointKey;
+        private String exportEndpointKey;
+        private String googleTrackingIdKey;
         
-        public String getStatisticalResourcesEndpoint() {
-            return statisticalResourcesEndpoint;
+        public String getEndpoint() {
+            return endpoint;
         }
 
-        public void setStatisticalResourcesEndpoint(String statisticalResourcesEndpoint) {
-            this.statisticalResourcesEndpoint = statisticalResourcesEndpoint;
+        public void setEndpoint(String endpoint) {
+            this.endpoint = endpoint;
         }
 
-        public String getStructuralResourcesEndpoint() {
-            return structuralResourcesEndpoint;
-        }
-
-        public void setStructuralResourcesEndpoint(String structuralResourcesEndpoint) {
-            this.structuralResourcesEndpoint = structuralResourcesEndpoint;
-        }
-
-        public String getStatisticalVisualizerEndpoint() {
-            return statisticalVisualizerEndpoint;
+        public String getInstallationType() {
+            return installationType;
         }
         
-        public void setStatisticalVisualizerEndpoint(String statisticalVisualizerEndpoint) {
-            this.statisticalVisualizerEndpoint = statisticalVisualizerEndpoint;
+        public void setInstallationType(String installationType) {
+            this.installationType = installationType;
+        }
+
+        public String getStatisticalResourcesInternalKey() {
+            return statisticalResourcesInternalKey;
+        }
+
+        public void setStatisticalResourcesInternalKey(String statisticalResourcesInternalKey) {
+            this.statisticalResourcesInternalKey = statisticalResourcesInternalKey;
+        }
+
+        public String getStatisticalResourcesExternalKey() {
+            return statisticalResourcesExternalKey;
+        }
+
+        public void setStatisticalResourcesExternalKey(String statisticalResourcesExternalKey) {
+            this.statisticalResourcesExternalKey = statisticalResourcesExternalKey;
         }
         
-        public String getPermalinksEndpoint() {
-            return permalinksEndpoint;
+        public String getStructuralResourcesInternalKey() {
+            return structuralResourcesInternalKey;
+        }
+
+        public void setStructuralResourcesInternalKey(String structuralResourcesInternalKey) {
+            this.structuralResourcesInternalKey = structuralResourcesInternalKey;
+        }
+
+        public String getStructuralResourcesExternalKey() {
+            return structuralResourcesExternalKey;
+        }
+
+        public void setStructuralResourcesExternalKey(String structuralResourcesExternalKey) {
+            this.structuralResourcesExternalKey = structuralResourcesExternalKey;
         }
         
-        public void setPermalinksEndpoint(String permalinksEndpoint) {
-            this.permalinksEndpoint = permalinksEndpoint;
+        public String getIndicatorsInternalKey() {
+            return indicatorsInternalKey;
         }
 
-        public String getExportEndpoint() {
-            return exportEndpoint;
+        public void setIndicatorsInternalKey(String indicatorsInternalKey) {
+            this.indicatorsInternalKey = indicatorsInternalKey;
         }
 
-        public void setExportEndpoint(String exportEndpoint) {
-            this.exportEndpoint = exportEndpoint;
+        public String getIndicatorsExternalKey() {
+            return indicatorsExternalKey;
+        }
+
+        public void setIndicatorsExternalKey(String indicatorsExternalKey) {
+            this.indicatorsExternalKey = indicatorsExternalKey;
+        }
+
+        public String getStatisticalVisualizerInternalKey() {
+            return statisticalVisualizerInternalKey;
+        }
+
+        public void setStatisticalVisualizerInternalKey(String statisticalVisualizerInternalKey) {
+            this.statisticalVisualizerInternalKey = statisticalVisualizerInternalKey;
+        }
+
+        public String getStatisticalVisualizerExternalKey() {
+            return statisticalVisualizerExternalKey;
+        }
+
+        public void setStatisticalVisualizerExternalKey(String statisticalVisualizerExternalKey) {
+            this.statisticalVisualizerExternalKey = statisticalVisualizerExternalKey;
+        }
+
+        public String getPermalinksEndpointKey() {
+            return permalinksEndpointKey;
+        }
+
+        public void setPermalinksEndpointKey(String permalinksEndpointKey) {
+            this.permalinksEndpointKey = permalinksEndpointKey;
         }
         
-        public String getIndicatorsEndpoint() {
-            return indicatorsEndpoint;
+        public String getExportEndpointKey() {
+            return exportEndpointKey;
         }
 
-        public void setIndicatorsEndpoint(String indicatorsEndpoint) {
-            this.indicatorsEndpoint = indicatorsEndpoint;
+        public void setExportEndpointKey(String exportEndpointKey) {
+            this.exportEndpointKey = exportEndpointKey;
         }
 
-        public String getGoogleTrackingId() {
-            return googleTrackingId;
+        public String getGoogleTrackingIdKey() {
+            return googleTrackingIdKey;
         }
 
-        public void setGoogleTrackingId(String googleTrackingId) {
-            this.googleTrackingId = googleTrackingId;
+        public void setGoogleTrackingIdKey(String googleTrackingIdKey) {
+            this.googleTrackingIdKey = googleTrackingIdKey;
+        }
+
+        public String getStatisticalResourcesKey() {
+            if (this.isInternal()) {
+                return this.getStatisticalResourcesInternalKey();
+            } else {
+                return this.getStatisticalResourcesExternalKey();
+            }
+        }
+        
+        public String getStructuralResourcesKey() {
+            if (this.isInternal()) {
+                return this.getStructuralResourcesInternalKey();
+            } else {
+                return this.getStructuralResourcesExternalKey();
+            }
+        }
+        
+        public String getIndicatorsKey() {
+            if (this.isInternal()) {
+                return this.getIndicatorsInternalKey();
+            } else {
+                return this.getIndicatorsExternalKey();
+            }
+        }
+
+        public String getStatisticalVisualizerKey() {
+            if (this.isInternal()) {
+                return this.getStatisticalVisualizerInternalKey();
+            } else {
+                return this.getStatisticalVisualizerExternalKey();
+            }
+        }
+        
+        private boolean isInternal() {
+            return Constants.INTERNAL_CONFIG_ID.equalsIgnoreCase(this.getInstallationType());
         }
     }
 }

@@ -13,20 +13,15 @@ export class MetadataService {
         private configService: ConfigService
     ) { }
 
-    getPropertyById(propertyId: string): Promise<string> {
+    getPropertyById(propertyId: string): Observable<string> {
         if (!this.metadataCache[propertyId]) {
-            this.metadataCache[propertyId] = new Promise<string>((resolve, reject) => {
-                this.doGetPropertyById(propertyId).subscribe(
-                    (json) => resolve(json.value),
-                    (error) => reject(error)
-                );
-            });
+            this.metadataCache[propertyId] = this.doGetPropertyById(propertyId).publishReplay(1).refCount();
         }
         return this.metadataCache[propertyId];
     }
 
-    private doGetPropertyById(propertyId: string): Observable<any> {
+    private doGetPropertyById(propertyId: string): Observable<string> {
         const config = this.configService.getConfig();
-        return this.http.get(`${config.endpoints.metadata}/properties/${propertyId}?_type=json`).map((response) => response.json());
+        return this.http.get(`${config.metadata.endpoint}/properties/${propertyId}?_type=json`).map((response) => response.json().value);
     }
 }

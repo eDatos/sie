@@ -18,21 +18,21 @@ import es.gobcan.istac.sie.config.ApplicationProperties;
 @Controller
 
 public class DefaultController {
+    
+    private final Logger log = LoggerFactory.getLogger(DefaultController.class);
+    
     @Autowired
     private ApplicationProperties applicationProperties;
-
-    private final Logger log = LoggerFactory.getLogger(DefaultController.class);
 
     @RequestMapping(value = {"", "/index.html", "/**/{path:[^\\.]*}"})
     @SuppressWarnings("unchecked")
     public ModelAndView index(HttpServletRequest request) {
         log.debug("DefaultController: Contextpath" + request.getContextPath() + "  ServletPath = " + request.getServletPath());
         Map<String, Object> model = new HashMap<>();
-        model.put("endpoints", applicationProperties.getEndpoints());
         model.put("dataset", applicationProperties.getDataset());
         model.put("visualizer", applicationProperties.getVisualizer());
         model.put("estaticos", applicationProperties.getEstaticos());
-        model.put("analytics", applicationProperties.getAnalytics());
+        model.put("metadata", applicationProperties.getMetadata());
         Map<String, Object> flashMap = (Map<String, Object>) RequestContextUtils.getInputFlashMap(request);
         if (flashMap != null) {
             model.putAll(flashMap);
