@@ -1,4 +1,4 @@
-export class ProcesoElectoralDataset {
+export class DatasetProcesoElectoral {
 
     constructor(
         public id: string,

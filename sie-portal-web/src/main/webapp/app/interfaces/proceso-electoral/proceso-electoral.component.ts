@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
-import { ProcesoElectoralDatasetService } from '../../dataset';
+import { MultidatasetProcesosElectoralesService } from '../../dataset';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MultidatasetProcesosElectorales } from '../../dataset/multidataset-procesos-electorales.model';
 import { ConfigService } from '../../config';
@@ -28,7 +28,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         private host: ElementRef,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private procesoElectoralDatasetService: ProcesoElectoralDatasetService,
+        private multidatasetProcesosElectoralesService: MultidatasetProcesosElectoralesService,
         private configService: ConfigService
     ) { }
 
@@ -62,7 +62,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private onChangeTipoElecciones(params: Params) {
-        this.procesoElectoralDatasetService.getDatasetsByTipoElecciones(params.tipoElecciones).then((multidataset) => {
+        this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(params.tipoElecciones).then((multidataset) => {
             this.tipoElecciones = params.tipoElecciones;
             this.multidataset = multidataset;
             this.onChangeFecha(params);

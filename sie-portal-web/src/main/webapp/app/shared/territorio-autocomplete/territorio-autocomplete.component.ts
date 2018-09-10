@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import {  } from '../../interfaces/lugar';
-import { DatasetService, Lugar } from '../../dataset';
+import { DatasetEvolucionElectoralService, Lugar } from '../../dataset';
 
 @Component({
     selector: 'jhi-territorio-autocomplete',
@@ -18,11 +18,11 @@ export class TerritorioAutocompleteComponent implements OnInit {
     onTransition = new EventEmitter<string>();
 
     constructor(
-        private datasetService: DatasetService
+        private datasetEvolucionElectoralService: DatasetEvolucionElectoralService
     ) { }
 
     ngOnInit(): void {
-        this.datasetService.getListaLugares().then((listaLugares) => {
+        this.datasetEvolucionElectoralService.getListaLugares().then((listaLugares) => {
             this.lugares = listaLugares;
             if (this._lugarIdentifier) {
                 this.lugar = this.lugares.find((lugar) => lugar.id === this._lugarIdentifier);

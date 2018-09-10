@@ -1,9 +1,9 @@
-import { ProcesoElectoralDataset } from './proceso-electoral-dataset.model';
+import { DatasetProcesoElectoral } from './dataset-proceso-electoral.model';
 
 export class MultidatasetProcesosElectorales {
 
     constructor(
         public id: string,
-        public datasetList: ProcesoElectoralDataset[]
+        public datasetList: DatasetProcesoElectoral[]
     ) { }
 }

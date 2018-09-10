@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { DatasetService, Lugar } from '../../dataset';
+import { DatasetEvolucionElectoralService, Lugar } from '../../dataset';
 
 const BACKGROUND_CLASS = 'lugar-background';
 
@@ -16,13 +16,13 @@ export class LugarComponent implements OnInit, OnDestroy {
 
     constructor(
         private router: Router,
-        private datasetService: DatasetService,
+        private datasetEvolucionElectoralService: DatasetEvolucionElectoralService,
         private renderer: Renderer2
     ) { }
 
     ngOnInit() {
         this.renderer.addClass(document.body.parentNode, BACKGROUND_CLASS);
-        this.datasetService.getListaLugares().then((listaLugares) => this.lugares = listaLugares);
+        this.datasetEvolucionElectoralService.getListaLugares().then((listaLugares) => this.lugares = listaLugares);
     }
 
     ngOnDestroy() {

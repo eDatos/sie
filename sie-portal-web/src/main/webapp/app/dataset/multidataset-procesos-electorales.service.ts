@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { ConfigService } from '../config';
-import { ProcesoElectoralDataset } from './proceso-electoral-dataset.model';
+import { DatasetProcesoElectoral } from './dataset-proceso-electoral.model';
 import { Observable } from 'rxjs';
 import { MultidatasetProcesosElectorales } from './multidataset-procesos-electorales.model';
 
 @Injectable()
-export class ProcesoElectoralDatasetService {
+export class MultidatasetProcesosElectoralesService {
 
     private mappingUrl = 'api/tipo-elecciones-dataset';
 
@@ -44,7 +44,7 @@ export class ProcesoElectoralDatasetService {
     private parseMultidataset(json: any): MultidatasetProcesosElectorales {
         const nodes = json.data.nodes.node;
         const datasetList = nodes.map((element) => {
-            return new ProcesoElectoralDataset(element.dataset.id, element.name.text[0].value);
+            return new DatasetProcesoElectoral(element.dataset.id, element.name.text[0].value);
         });
         const splittedUrn = json.urn.split('=');
         return new MultidatasetProcesosElectorales(splittedUrn[1], datasetList);

@@ -14,7 +14,7 @@ const PROCESO_ELECTORAL = 'PROCESO_ELECTORAL';
 const INDICADORES = 'INDICADORES';
 
 @Injectable()
-export class DatasetService {
+export class DatasetEvolucionElectoralService {
 
     // Atributos para la lista de lugares
     private promesaLugares: Promise<Lugar[]>;
