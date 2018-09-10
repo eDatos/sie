@@ -5,7 +5,7 @@
     <parent>
         <groupId>es.gobcan.istac.sie</groupId>
         <artifactId>sie</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>sie-portal-web</artifactId>
@@ -14,7 +14,7 @@
 
     <properties>
         <argLine>-Djava.security.egd=file:/dev/./urandom -Xmx256m</argLine>
-        <arte-libs-grammar.version>2.0.1-SNAPSHOT</arte-libs-grammar.version>
+        <arte-libs-grammar.version>2.1.0</arte-libs-grammar.version>
         <assertj.version>3.6.2</assertj.version>
         <awaitility.version>2.0.0</awaitility.version>
         <commons-io.version>2.5</commons-io.version>
@@ -38,7 +38,6 @@
         <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
         <maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
         <maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
-        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.version>3.0.0</maven.version>
@@ -655,14 +654,6 @@
         </plugins>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.2</version>
-                    <configuration>
-                        <useReleaseProfile>false</useReleaseProfile>
-                        <tagNameFormat>${maven.build.timestamp}-v@{project.version}</tagNameFormat>
-                    </configuration>
-                </plugin>
                 <!-- This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. Remove when 
                     the m2e plugin can correctly bind to Maven lifecycle -->
                 <plugin>

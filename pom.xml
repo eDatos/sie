@@ -11,7 +11,7 @@
     
 	<groupId>es.gobcan.istac.sie</groupId>
 	<artifactId>sie</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Sistema de Información Electoral</name>
 	<description>Visualizador del Sistema de Información Electoral de Canarias</description>
@@ -20,6 +20,13 @@
         <module>sie-graphics</module>
 		<module>sie-portal-web</module>
     </modules>
+
+	<scm>
+		<connection>scm:git:http://git.arte-consultores.com/istac/sie/</connection>
+		<developerConnection>scm:git:http://git.arte-consultores.com/istac/sie/</developerConnection>
+		<tag>HEAD</tag>
+		<url>http://git.arte-consultores.com/istac/sie</url>
+	</scm>
 
 	<issueManagement>
 		<system>Jira</system>
@@ -37,6 +44,10 @@
 			<url>http://repository.arte-consultores.com/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
+	
+	<properties>
+		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+	</properties>
 
     <build>
         <plugins>
@@ -46,6 +57,18 @@
             </plugin>
             
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.3</version>
+                    <configuration>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <tagNameFormat>${maven.build.timestamp}-v@{project.version}</tagNameFormat>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>
