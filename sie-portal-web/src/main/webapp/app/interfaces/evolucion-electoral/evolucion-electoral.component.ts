@@ -191,7 +191,9 @@ export class EvolucionElectoralComponent implements OnInit {
                     procesoElectoral.clickable = true;
                 }
             });
-        });
+        }).catch(() => {
+            console.log(this.translateService.instant('error.noMultidatasetForTipoElecciones', { tipoElecciones: this.tipoEleccionesVisible }));
+         });
     }
 
     onTabChange(event) {

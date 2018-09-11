@@ -1,5 +1,4 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
-import {  } from '../../interfaces/lugar';
 import { DatasetEvolucionElectoralService, Lugar } from '../../dataset';
 
 @Component({

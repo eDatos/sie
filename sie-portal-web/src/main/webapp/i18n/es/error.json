@@ -23,6 +23,7 @@
                 "rol-necesita-operaciones": "Es obligatorio que al rol se le asigne, al menos, permisos para una operación."
             }
         },
-        "cannotDownloadDocument": "Lo sentimos, no se ha podido generar el documento PDF."
+        "cannotDownloadDocument": "Lo sentimos, no se ha podido generar el documento PDF.",
+        "noMultidatasetForTipoElecciones": "No hay datos para el tipo de elecciones {{ tipoElecciones }}"
     }
 }
