@@ -1113,7 +1113,7 @@ input[type="color"] select,
   z-index: 1035;
   background-color: rgba(0, 0, 0, 0.2);
 }
-.modal {
+.metamac-modal {
   background-color: #ffffff;
   overflow: auto;
   font: 12px Helvetica, Arial, sans-serif;
@@ -1132,7 +1132,7 @@ input[type="color"] select,
   border-radius: 0;
   border: 2px solid #8c9ba3;
 }
-.modal .modal-close {
+.metamac-modal .modal-close {
   float: right;
   font-size: 30px;
   font-weight: bold;
@@ -1141,7 +1141,7 @@ input[type="color"] select,
   border: 0;
   background: none;
 }
-.modal .modal-close:hover {
+.metamac-modal .modal-close:hover {
   cursor: pointer;
   opacity: .4;
   filter: alpha(opacity=40);

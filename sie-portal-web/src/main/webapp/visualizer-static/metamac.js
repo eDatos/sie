@@ -20270,7 +20270,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, stack2, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function";
 
 
-  buffer += "<div class=\"modal-backdrop\"></div>\r\n<div class=\"modal\">\r\n    <div class=\"modal-header\">\r\n        <button class=\"modal-close\" title='";
+  buffer += "<div class=\"modal-backdrop\"></div>\r\n<div class=\"metamac-modal\">\r\n    <div class=\"modal-header\">\r\n        <button class=\"modal-close\" title='";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.message || depth0.message),stack1 ? stack1.call(depth0, "filter.button.close", options) : helperMissing.call(depth0, "message", "filter.button.close", options)))
     + "'>×</button>\r\n    	<h2>";
@@ -20454,7 +20454,7 @@ function program6(depth0,data) {
   buffer += "<div class=\"dataset-headers-actions-buttons\">\r\n\r\n    <a class=\"btn share\" rel=\"tooltip\" title=\"Compartir\"><i class=\"icon-share\"></i> Compartir</a>\r\n\r\n    ";
   stack1 = helpers['if'].call(depth0, depth0.user, {hash:{},inverse:self.program(6, program6, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n\r\n</div>\r\n\r\n<div class=\"modal hide\" id=\"shareDatasetModel\">\r\n    <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">×</button>\r\n        <h3>Compartir</h3>\r\n    </div>\r\n    <div class=\"modal-body\">\r\n    </div>\r\n</div>";
+  buffer += "\r\n\r\n</div>\r\n\r\n<div class=\"metamac-modal hide\" id=\"shareDatasetModel\">\r\n    <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"metamac-modal\">×</button>\r\n        <h3>Compartir</h3>\r\n    </div>\r\n    <div class=\"modal-body\">\r\n    </div>\r\n</div>";
   return buffer;
   });
 
@@ -60056,7 +60056,7 @@ if(this.$element.prop("multiple"))this.current(function(d){var e=[];a=[a],a.push
         addStyleAsync: function (svg) {
             var self = this;
             var response = new $.Deferred();
-            var request = $.get(App.endpoints["statistical-visualizer"] + "/client/map.css");
+            var request = $.get(App.endpoints["statistical-visualizer"] + "/visualizer-static/map.css");
             $.when(request).done(function (css) {
                 var stiledSvg = self._insertStyleInSvg(svg, css);
                 response.resolveWith(null, [stiledSvg]);
