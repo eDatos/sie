@@ -82,6 +82,13 @@
             var debounceUpdate = _.debounce(this.update, 20);
             this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", debounceUpdate);
             this.listenTo(this.filtersModel, "change:candidacyType", debounceUpdate);
+
+            var resize = _.debounce(_.bind(this._updateSize, this), 200);
+            var self = this;
+            this.$el.on("resize", function (e) {
+                e.stopPropagation();
+                resize();
+            });
         },
 
         _unbindEvents: function () {
@@ -125,6 +132,8 @@
                 self._renderChart();
             });
         },
+
+        resizeFullScreen: function () { },
 
         _initTitle: function () {
             this.$title = $('<h3></h3>').prependTo(this.$el);
@@ -281,6 +290,15 @@
                     self.chart.redraw(false);
                 });
             }
+        },
+
+        _updateSize: function () {
+            var newHeight = this.$el.height() - this.$title.height() - this.getRightsHolderHeight();
+            this.$chartContainer.height(newHeight);
+            this.chart.setSize(this.$chartContainer.width(), this.$chartContainer.height(), false);
+
+            // Necesario para evitar error en el dibujado tras cambiar a stacked columns     
+            this.chart.xAxis[0].update();
         }
     });
 
