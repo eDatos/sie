@@ -21,6 +21,7 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="manifest" href="manifest.webapp" />
     <script type="text/javascript" src="./visualizer-static/metamac.js"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-501fc6f600bacbe9"></script>
 </head>
 
 <body>
@@ -43,15 +44,13 @@
         window.CONFIGURATION.footer = {};
         window.CONFIGURATION.footer.url = /*[[${estaticos.getFooterUrl()}]]*/ './external-static/footer/footer.html';
 
-        window.CONFIGURATION.environment = {};
-        window.CONFIGURATION.environment.baseUrl = /*[[${environment.getBaseUrl()}]]*/ 'http://localhost:9000';
-
         window.CONFIGURATION.metadata = {};
         window.CONFIGURATION.metadata.endpoint = /*[[${metadata.getEndpoint()}]]*/ 'http://estadisticas.arte-consultores.com/cmetadata/v1.0';
         window.CONFIGURATION.metadata.installationType = /*[[${metadata.getInstallationType()}]]*/ 'INTERNAL';
         window.CONFIGURATION.metadata.statisticalResourcesKey = /*[[${metadata.getStatisticalResourcesKey()}]]*/ 'metamac.statistical_resources.rest.internal';
         window.CONFIGURATION.metadata.structuralResourcesKey = /*[[${metadata.getStructuralResourcesKey()}]]*/ 'metamac.srm.rest.internal';
         window.CONFIGURATION.metadata.indicatorsKey = /*[[${metadata.getIndicatorsKey()}]]*/ 'indicators.rest.internal';
+        window.CONFIGURATION.metadata.statisticalVisualizerKey = /*[[${metadata.getStatisticalVisualizerKey()}]]*/ 'metamac.portal.web.external';
         window.CONFIGURATION.metadata.statisticalVisualizerApiKey = /*[[${metadata.getStatisticalVisualizerApiKey()}]]*/ 'metamac.portal.rest.external.base';
         window.CONFIGURATION.metadata.permalinksEndpointKey = /*[[${metadata.getPermalinksEndpointKey()}]]*/ 'metamac.portal.rest.external.permalinks';
         window.CONFIGURATION.metadata.exportEndpointKey = /*[[${metadata.getExportEndpointKey()}]]*/ 'metamac.portal.rest.external.export';

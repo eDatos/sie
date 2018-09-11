@@ -27,6 +27,10 @@ export class JhiMainComponent implements OnInit {
 
     ngOnInit() {
         const config = this.configService.getConfig();
+        this.metadataService.getPropertyById(config.metadata.statisticalVisualizerApiKey).subscribe((statisticalVisualizerApiEndpoint) => {
+            this.addMetamacAuthenticationScriptTag(statisticalVisualizerApiEndpoint);
+        });
+
         this.metadataService.getPropertyById(config.metadata.googleTrackingIdKey).subscribe((googleAnalyticsTrackId) => {
             this.googleAnalyticsTrackId = googleAnalyticsTrackId;
             this.addGoogleAnalyticsScriptTag(googleAnalyticsTrackId);
@@ -48,6 +52,12 @@ export class JhiMainComponent implements OnInit {
         googleAnalyticsScript.setAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=' + googleAnalyticsTrackId);
         googleAnalyticsScript.async = true;
         document.head.appendChild(googleAnalyticsScript);
+    }
+
+    private addMetamacAuthenticationScriptTag(baseUrl: string) {
+        const metamacAuthenticationScript = document.createElement('script');
+        metamacAuthenticationScript.setAttribute('src', baseUrl + '/js/authentication.js');
+        document.head.appendChild(metamacAuthenticationScript);
     }
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {

@@ -14,8 +14,6 @@ public class ApplicationProperties {
     
     private final Estaticos estaticos = new Estaticos();
     
-    private final Environment environment = new Environment();
-    
     private final Metadata metadata = new Metadata();
     
     public Dataset getDataset() {
@@ -30,10 +28,6 @@ public class ApplicationProperties {
         return estaticos;
     }
     
-    public Environment getEnvironment() {
-        return environment;
-    }
-
     public Metadata getMetadata() {
         return metadata;
     }
@@ -104,19 +98,6 @@ public class ApplicationProperties {
         }
     }
 
-    public static class Environment {
-        
-        private String baseUrl;
-
-        public String getBaseUrl() {
-            return baseUrl;
-        }
-
-        public void setBaseUrl(String baseUrl) {
-            this.baseUrl = baseUrl;
-        }
-    }
-    
     public static class Metadata {
         
         private String endpoint;
@@ -127,6 +108,7 @@ public class ApplicationProperties {
         private String structuralResourcesExternalKey;
         private String indicatorsInternalKey;
         private String indicatorsExternalKey;
+        private String statisticalVisualizerKey;
         private String statisticalVisualizerApiKey;
         private String permalinksEndpointKey;
         private String exportEndpointKey;
@@ -194,6 +176,14 @@ public class ApplicationProperties {
 
         public void setIndicatorsExternalKey(String indicatorsExternalKey) {
             this.indicatorsExternalKey = indicatorsExternalKey;
+        }
+
+        public String getStatisticalVisualizerKey() {
+            return statisticalVisualizerKey;
+        }
+        
+        public void setStatisticalVisualizerKey(String statisticalVisualizerKey) {
+            this.statisticalVisualizerKey = statisticalVisualizerKey;
         }
 
         public String getStatisticalVisualizerApiKey() {

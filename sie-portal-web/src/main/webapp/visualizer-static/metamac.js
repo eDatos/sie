@@ -60056,7 +60056,7 @@ if(this.$element.prop("multiple"))this.current(function(d){var e=[];a=[a],a.push
         addStyleAsync: function (svg) {
             var self = this;
             var response = new $.Deferred();
-            var request = $.get(App.endpoints["statistical-visualizer"] + "/visualizer-static/map.css");
+            var request = $.get(App.endpoints["statistical-visualizer"] + "/client/map.css");
             $.when(request).done(function (css) {
                 var stiledSvg = self._insertStyleInSvg(svg, css);
                 response.resolveWith(null, [stiledSvg]);
