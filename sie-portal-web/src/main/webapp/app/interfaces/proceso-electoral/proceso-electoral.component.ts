@@ -100,17 +100,16 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey),
             this.metadataService.getPropertyById(config.metadata.structuralResourcesKey),
             this.metadataService.getPropertyById(config.metadata.indicatorsKey),
-            this.metadataService.getPropertyById(config.metadata.statisticalVisualizerKey),
             this.metadataService.getPropertyById(config.metadata.permalinksEndpointKey),
             this.metadataService.getPropertyById(config.metadata.exportEndpointKey),
-            (statisticalResources, structuralResources, indicators, statisticalVisualizer, permalinks, exportEndpoint) => {
+            (statisticalResources, structuralResources, indicators, permalinks, exportEndpoint) => {
                 App.endpoints['statistical-resources'] = statisticalResources + '/v1.0';
                 App.endpoints['structural-resources'] = structuralResources + '/v1.0';
                 App.endpoints['indicators'] = indicators + '/v1.0';
-                App.endpoints['statistical-visualizer'] = statisticalVisualizer;
                 App.endpoints['permalinks'] = permalinks + '/v1.0';
                 App.endpoints['export'] = exportEndpoint + '/v1.0';
 
+                App.endpoints['statistical-visualizer'] = config.environment.baseUrl;
                 App.config['showHeader'] = config.visualizer.showHeader;
                 App.config['showRightsHolder'] = config.visualizer.showRightsHolder;
                 App.config['organisationUrn'] = config.visualizer.organisationUrn;

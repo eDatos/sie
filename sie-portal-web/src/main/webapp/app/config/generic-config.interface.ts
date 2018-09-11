@@ -19,13 +19,17 @@ export interface GenericConfig {
         url
     };
 
+    environment: {
+        baseUrl
+    };
+
     metadata: {
         endpoint,
         installationType,
         statisticalResourcesKey,
         structuralResourcesKey,
         indicatorsKey,
-        statisticalVisualizerKey,
+        statisticalVisualizerApiKey,
         permalinksEndpointKey,
         exportEndpointKey,
         googleTrackingIdKey

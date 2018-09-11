@@ -14,6 +14,8 @@ public class ApplicationProperties {
     
     private final Estaticos estaticos = new Estaticos();
     
+    private final Environment environment = new Environment();
+    
     private final Metadata metadata = new Metadata();
     
     public Dataset getDataset() {
@@ -28,6 +30,10 @@ public class ApplicationProperties {
         return estaticos;
     }
     
+    public Environment getEnvironment() {
+        return environment;
+    }
+
     public Metadata getMetadata() {
         return metadata;
     }
@@ -97,6 +103,19 @@ public class ApplicationProperties {
             this.footerUrl = footerUrl;
         }
     }
+
+    public static class Environment {
+        
+        private String baseUrl;
+
+        public String getBaseUrl() {
+            return baseUrl;
+        }
+
+        public void setBaseUrl(String baseUrl) {
+            this.baseUrl = baseUrl;
+        }
+    }
     
     public static class Metadata {
         
@@ -108,8 +127,7 @@ public class ApplicationProperties {
         private String structuralResourcesExternalKey;
         private String indicatorsInternalKey;
         private String indicatorsExternalKey;
-        private String statisticalVisualizerInternalKey;
-        private String statisticalVisualizerExternalKey;
+        private String statisticalVisualizerApiKey;
         private String permalinksEndpointKey;
         private String exportEndpointKey;
         private String googleTrackingIdKey;
@@ -178,20 +196,12 @@ public class ApplicationProperties {
             this.indicatorsExternalKey = indicatorsExternalKey;
         }
 
-        public String getStatisticalVisualizerInternalKey() {
-            return statisticalVisualizerInternalKey;
+        public String getStatisticalVisualizerApiKey() {
+            return statisticalVisualizerApiKey;
         }
 
-        public void setStatisticalVisualizerInternalKey(String statisticalVisualizerInternalKey) {
-            this.statisticalVisualizerInternalKey = statisticalVisualizerInternalKey;
-        }
-
-        public String getStatisticalVisualizerExternalKey() {
-            return statisticalVisualizerExternalKey;
-        }
-
-        public void setStatisticalVisualizerExternalKey(String statisticalVisualizerExternalKey) {
-            this.statisticalVisualizerExternalKey = statisticalVisualizerExternalKey;
+        public void setStatisticalVisualizerApiKey(String statisticalVisualizerApiKey) {
+            this.statisticalVisualizerApiKey = statisticalVisualizerApiKey;
         }
 
         public String getPermalinksEndpointKey() {
@@ -242,14 +252,6 @@ public class ApplicationProperties {
             }
         }
 
-        public String getStatisticalVisualizerKey() {
-            if (this.isInternal()) {
-                return this.getStatisticalVisualizerInternalKey();
-            } else {
-                return this.getStatisticalVisualizerExternalKey();
-            }
-        }
-        
         private boolean isInternal() {
             return Constants.INTERNAL_CONFIG_ID.equalsIgnoreCase(this.getInstallationType());
         }

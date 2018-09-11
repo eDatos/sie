@@ -132,6 +132,8 @@ application:
 #    estaticos:
 #        navbarUrl: FILL_NAVBAR_ENDPOINT #NOT Required: URL to navbar HTML
 #        footerUrl: FILL_FOOTER_ENDPOINT #NOT Required: URL to footer HTML
+    environment:
+        baseUrl: FILL_BASE_URL #Required: application base url
     metadata:
         endpoint: FILL_COMMON_METADATA_ENDPOINT #Required: common metadata endpoint
         installationType: FILL_INSTALLATION_TYPE #Required: installation type
@@ -141,8 +143,7 @@ application:
 #        structuralResourcesExternalKey: FILL_STRUCTURAL_RESOURCES_EXTERNAL_KEY #NOT Required: structural resources external key
 #        indicatorsInternalKey: FILL_INDICATORS_INTERNAL_KEY #NOT Required: indicators internal key
 #        indicatorsExternalKey: FILL_INDICATORS_EXTERNAL_KEY #NOT Required: indicators external key
-#        statisticalVisualizerInternalKey: FILL_STATISTICAL_VISUALIZER_INTERNAL_KEY #NOT Required: statistical visualizer internal key
-#        statisticalVisualizerExternalKey: FILL_STATISTICAL_VISUALIZER_EXTERNAL_KEY #NOT Required: statistical visualizer external key
+#        statisticalVisualizerApiKey: FILL_STATISTICAL_VISUALIZER_API_KEY #NOT Required: statistical visualizer api key
 #        permalinksEndpointKey: FILL_PERMALINKS_ENDPOINT_KEY #NOT Required: permalinks endpoint key
 #        exportEndpointKey: FILL_EXPORT_ENDPOINT_KEY #NOT Required: export endpoint key
 #        googleTrackingIdKey: FILL_GA_TRACKING_ID_KEY #NOT Required: google analytics tracking id key

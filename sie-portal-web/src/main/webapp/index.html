@@ -42,14 +42,17 @@
         window.CONFIGURATION.navbar.url = /*[[${estaticos.getNavbarUrl()}]]*/ './external-static/navbar/navbar.html';
         window.CONFIGURATION.footer = {};
         window.CONFIGURATION.footer.url = /*[[${estaticos.getFooterUrl()}]]*/ './external-static/footer/footer.html';
-        
+
+        window.CONFIGURATION.environment = {};
+        window.CONFIGURATION.environment.baseUrl = /*[[${environment.getBaseUrl()}]]*/ 'http://localhost:9000';
+
         window.CONFIGURATION.metadata = {};
         window.CONFIGURATION.metadata.endpoint = /*[[${metadata.getEndpoint()}]]*/ 'http://estadisticas.arte-consultores.com/cmetadata/v1.0';
         window.CONFIGURATION.metadata.installationType = /*[[${metadata.getInstallationType()}]]*/ 'INTERNAL';
         window.CONFIGURATION.metadata.statisticalResourcesKey = /*[[${metadata.getStatisticalResourcesKey()}]]*/ 'metamac.statistical_resources.rest.internal';
         window.CONFIGURATION.metadata.structuralResourcesKey = /*[[${metadata.getStructuralResourcesKey()}]]*/ 'metamac.srm.rest.internal';
         window.CONFIGURATION.metadata.indicatorsKey = /*[[${metadata.getIndicatorsKey()}]]*/ 'indicators.rest.internal';
-        window.CONFIGURATION.metadata.statisticalVisualizerKey = /*[[${metadata.getStatisticalVisualizerKey()}]]*/ 'metamac.portal.rest.external.permalinks'; // TODO resolver problema de este endpoint. Tiene que apuntar a SIE?
+        window.CONFIGURATION.metadata.statisticalVisualizerApiKey = /*[[${metadata.getStatisticalVisualizerApiKey()}]]*/ 'metamac.portal.rest.external.base';
         window.CONFIGURATION.metadata.permalinksEndpointKey = /*[[${metadata.getPermalinksEndpointKey()}]]*/ 'metamac.portal.rest.external.permalinks';
         window.CONFIGURATION.metadata.exportEndpointKey = /*[[${metadata.getExportEndpointKey()}]]*/ 'metamac.portal.rest.external.export';
         window.CONFIGURATION.metadata.googleTrackingIdKey = /*[[${metadata.getGoogleTrackingIdKey()}]]*/ 'metamac.analytics.google.tracking_id';
