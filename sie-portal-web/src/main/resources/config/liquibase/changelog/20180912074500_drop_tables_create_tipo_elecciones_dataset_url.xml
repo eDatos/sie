@@ -10,23 +10,16 @@
     <!-- JHipster core tables. The initial schema has the '00000000000001' id, so that it is over-written if we re-generate it. -->
     <changeSet id="00000000000000" author="jhipster">
 
-		<dropTable tableName="jhi_persistent_audit_event"/>
 		<dropTable tableName="jhi_persistent_audit_evt_data"/>
-		<dropTable tableName="tb_tipo_elecciones_dataset_id"/>
+		<dropTable tableName="jhi_persistent_audit_event"/>
 		
 		<dropSequence sequenceName="hibernate_sequence" />
 		<dropSequence sequenceName="usuario_id_seq" />
 		<dropSequence sequenceName="rol_id_seq" />
 
-        <createTable tableName="tb_tipo_elecciones_dataset_url">
-			<column name="tipo_elecciones" type="varchar(255)">
-				<constraints primaryKey="true" nullable="false" />
-			</column>
-			
-			<column name="dataset_url" type="varchar(255)">
-				<constraints nullable="false" />
-			</column>
-        </createTable>
+        <renameTable newTableName="tb_tipo_elecciones_dataset_url" oldTableName="tb_tipo_elecciones_dataset_id" />
+        <renameColumn columnDataType="varchar(255)" newColumnName="dataset_url" oldColumnName="dataset_id" tableName="tb_tipo_elecciones_dataset_url"/>
+        
     </changeSet>
 
 </databaseChangeLog>

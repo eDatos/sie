@@ -43,7 +43,7 @@ export class MultidatasetProcesosElectoralesService {
     private doGetDatasets(tipoEleccionesDataset: TipoEleccionesDataset): Observable<any> {
         const config = this.configService.getConfig();
         return this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey).flatMap((endpoint) => {
-            return this.http.get(`${endpoint}/v1.0${tipoEleccionesDataset.datasetId}?_type=json`).map((response) => response.json());
+            return this.http.get(`${endpoint}/v1.0${tipoEleccionesDataset.datasetUrl}?_type=json`).map((response) => response.json());
         });
     }
 
@@ -61,6 +61,6 @@ class TipoEleccionesDataset {
 
     constructor(
         public tipoElecciones: string,
-        public datasetId: string
+        public datasetUrl: string
     ) { }
 }
