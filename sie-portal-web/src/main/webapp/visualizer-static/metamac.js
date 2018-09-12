@@ -62514,19 +62514,11 @@ I18n.translations.pt = {
             return DatasetPermalink.savePermalinkShowingCaptchaInElement(permalinkContent, this.$el);
         },
 
-        getSharedVisualizerParams: function (permalinkId) {
-            return [
-                'permalink',
-                '=',
-                permalinkId
-            ].join('')
-        },
-
         getSharedUrl: function (permalinkId) {
             return [
                 this.filterDimensions.metadata.getSharedVisualizerUrl(),
-                '?',
-                this.getSharedVisualizerParams(permalinkId)
+                '/permalink/',
+                permalinkId
             ].join('');
         },
 
@@ -64561,7 +64553,9 @@ I18n.translations.pt = {
             if (!_.isEmpty(App.endpoints["sharedVisualizerUrl"])) {
                 return App.endpoints["sharedVisualizerUrl"];
             } else {
-                return [window.location.protocol, '//', window.location.host, window.location.pathname].join('');
+                var baseUrl = [window.location.protocol, '//', window.location.host, window.location.pathname].join('');
+                var pathParams = window.location.hash.split("/").slice(0,7).join("/");
+                return baseUrl + pathParams;
             }
         },
 

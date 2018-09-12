@@ -38,19 +38,11 @@
             return DatasetPermalink.savePermalinkShowingCaptchaInElement(permalinkContent, this.$el);
         },
 
-        getSharedVisualizerParams: function (permalinkId) {
-            return [
-                'permalink',
-                '=',
-                permalinkId
-            ].join('')
-        },
-
         getSharedUrl: function (permalinkId) {
             return [
                 this.filterDimensions.metadata.getSharedVisualizerUrl(),
-                '?',
-                this.getSharedVisualizerParams(permalinkId)
+                '/permalink/',
+                permalinkId
             ].join('');
         },
 
