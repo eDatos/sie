@@ -107,6 +107,9 @@
                     args.identifier = dataset.id;
                     args.agency = dataset.agency;
                     args.version = dataset.version;
+
+                    App.queryParams['identifier'] = dataset.id;
+                    App.queryParams['version'] = dataset.version;
                 }
                 return args;
             });
