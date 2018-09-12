@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.task.TaskExecutor;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -22,7 +21,6 @@ import liquibase.integration.spring.SpringLiquibase;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "es.gobcan.istac.sie.repository", repositoryFactoryBeanClass = ArteJpaRepositoryFactoryBean.class)
-@EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 @EnableTransactionManagement
 public class DatabaseConfiguration {
 

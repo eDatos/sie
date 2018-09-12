@@ -21,7 +21,7 @@ import {
     CurrencyComponent
 } from '.';
 
-import { StackedBarChartComponent } from './stacked-bar-chart/stacked-bar-chart.component';
+import { ChartComponent } from './chart/chart.component';
 import { TerritorioAutocompleteComponent } from './territorio-autocomplete/territorio-autocomplete.component';
 
 @NgModule({
@@ -38,7 +38,7 @@ import { TerritorioAutocompleteComponent } from './territorio-autocomplete/terri
         AutocompleteLongListComponent,
         AutocompleteEnumComponent,
         TerritorioAutocompleteComponent,
-        StackedBarChartComponent,
+        ChartComponent,
         OrderListComponent,
         HelpTooltipComponent,
         PaginationComponent,
@@ -66,7 +66,7 @@ import { TerritorioAutocompleteComponent } from './territorio-autocomplete/terri
         AutocompleteLongListComponent,
         AutocompleteEnumComponent,
         TerritorioAutocompleteComponent,
-        StackedBarChartComponent,
+        ChartComponent,
         OrderListComponent,
         HelpTooltipComponent,
         PaginationComponent,

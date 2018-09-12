@@ -1,8 +1,9 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
-import { ProcesoElectoralDatasetService } from '../../dataset';
+import { MultidatasetProcesosElectoralesService } from '../../dataset';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MultidatasetProcesosElectorales } from '../../dataset/multidataset-procesos-electorales.model';
-import { ConfigService } from '../../config';
+import { ConfigService, MetadataService } from '../../config';
+import { Observable } from 'rxjs';
 
 declare var I18n: any;
 declare var App: any;
@@ -28,8 +29,9 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         private host: ElementRef,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private procesoElectoralDatasetService: ProcesoElectoralDatasetService,
-        private configService: ConfigService
+        private multidatasetProcesosElectoralesService: MultidatasetProcesosElectoralesService,
+        private configService: ConfigService,
+        private metadataService: MetadataService
     ) { }
 
     ngOnInit() {
@@ -62,7 +64,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private onChangeTipoElecciones(params: Params) {
-        this.procesoElectoralDatasetService.getDatasetsByTipoElecciones(params.tipoElecciones).then((multidataset) => {
+        this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(params.tipoElecciones).then((multidataset) => {
             this.tipoElecciones = params.tipoElecciones;
             this.multidataset = multidataset;
             this.onChangeFecha(params);
@@ -94,23 +96,31 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         });
 
         const config = this.configService.getConfig();
-        App.endpoints['statistical-resources'] = config.endpoints.statisticalResources;
-        App.endpoints['structural-resources'] = config.endpoints.structuralResources;
-        App.endpoints['statistical-visualizer'] = config.endpoints.statisticalVisualizer;
-        App.endpoints['permalinks'] = config.endpoints.permalinks;
-        App.endpoints['export'] = config.endpoints.export;
-        App.endpoints['indicators'] = config.endpoints.indicators;
+        Observable.zip(
+            this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey),
+            this.metadataService.getPropertyById(config.metadata.structuralResourcesKey),
+            this.metadataService.getPropertyById(config.metadata.indicatorsKey),
+            this.metadataService.getPropertyById(config.metadata.permalinksEndpointKey),
+            this.metadataService.getPropertyById(config.metadata.exportEndpointKey),
+            this.metadataService.getPropertyById(config.metadata.statisticalVisualizerKey),
+            (statisticalResources, structuralResources, indicators, permalinks, exportEndpoint, statisticalVisualizer) => {
+                App.endpoints['statistical-resources'] = statisticalResources + '/v1.0';
+                App.endpoints['structural-resources'] = structuralResources + '/v1.0';
+                App.endpoints['indicators'] = indicators + '/v1.0';
+                App.endpoints['permalinks'] = permalinks + '/v1.0';
+                App.endpoints['export'] = exportEndpoint + '/v1.0';
+                App.endpoints['statistical-visualizer'] = statisticalVisualizer;
 
-        App.config['showHeader'] = config.visualizer.showHeader;
-        App.config['showRightsHolder'] = config.visualizer.showRightsHolder;
-        App.config['organisationUrn'] = config.visualizer.organisationUrn;
-        App.config['installationType'] = config.visualizer.installationType;
+                App.config['showHeader'] = config.visualizer.showHeader;
+                App.config['showRightsHolder'] = config.visualizer.showRightsHolder;
+                App.config['organisationUrn'] = config.visualizer.organisationUrn;
+                App.config['installationType'] = config.metadata.installationType;
 
-        App.queryParams['agency'] = 'ISTAC';
-        App.queryParams['type'] = 'dataset';
-        App.queryParams['multidatasetId'] = multidatasetId;
-
-        App.start();
+                App.queryParams['agency'] = 'ISTAC';
+                App.queryParams['type'] = 'dataset';
+                App.queryParams['multidatasetId'] = multidatasetId;
+            }
+        ).subscribe(() => App.start());
     }
 
     private stopBackbone() {

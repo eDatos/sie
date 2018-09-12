@@ -7,5 +7,4 @@ export class ConfigService {
     getConfig(): GenericConfig {
         return (<any>window).CONFIGURATION;
     }
-
 }

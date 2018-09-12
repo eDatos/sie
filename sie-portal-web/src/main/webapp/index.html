@@ -2,14 +2,13 @@
 <html class="no-js" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="es">
 
 <head>
-    <script async="async" th:src="'https://www.googletagmanager.com/gtag/js?id=' + ${analytics.getGoogleTrackingId()}"></script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', /*[[${analytics.getGoogleTrackingId()}]]*/);
-        /*]]>*/
+    <script>
+        function executeGoogleAnalyticsInlineCode(trackingId) {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', trackingId); 
+        }
     </script>
     <base href="/" th:href="@{/}" />
     <meta charset="utf-8" />
@@ -22,20 +21,13 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="manifest" href="manifest.webapp" />
     <script type="text/javascript" src="./visualizer-static/metamac.js"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-501fc6f600bacbe9"></script>
 </head>
 
 <body>
     <script th:inline="javascript">
         /*<![CDATA[*/
         window.CONFIGURATION = {};
-
-        window.CONFIGURATION.endpoints = {};
-        window.CONFIGURATION.endpoints.statisticalResources = /*[[${endpoints.getStatisticalResources()}]]*/ 'http://estadisticas.arte-consultores.com/statistical-resources-internal/apis/statistical-resources-internal/v1.0';
-        window.CONFIGURATION.endpoints.structuralResources = /*[[${endpoints.getStructuralResources()}]]*/ 'http://estadisticas.arte-consultores.com/structural-resources-internal/apis/structural-resources-internal/v1.0';
-        window.CONFIGURATION.endpoints.statisticalVisualizer = /*[[${endpoints.getStatisticalVisualizer()}]]*/ 'http://estadisticas.arte-consultores.com/statistical-visualizer';
-        window.CONFIGURATION.endpoints.permalinks = /*[[${endpoints.getPermalinks()}]]*/ 'http://estadisticas.arte-consultores.com/permalinks/v1.0';
-        window.CONFIGURATION.endpoints.export = /*[[${endpoints.getExport()}]]*/ 'http://estadisticas.arte-consultores.com/export/v1.0';
-        window.CONFIGURATION.endpoints.indicators = /*[[${endpoints.getIndicators()}]]*/ 'http://estadisticas.arte-consultores.com/indicators-internal/internal/api/indicators/v1.0';
 
         window.CONFIGURATION.dataset = {};
         window.CONFIGURATION.dataset.evolucionElectoral = /*[[${dataset.getEvolucionElectoral()}]]*/ '/datasets/ISTAC/C00010A_000007/~latest.json';
@@ -46,12 +38,23 @@
         window.CONFIGURATION.visualizer.showHeader = /*[[${visualizer.getShowHeader()}]]*/ false;
         window.CONFIGURATION.visualizer.showRightsHolder = /*[[${visualizer.getShowRightsHolder()}]]*/ false;
         window.CONFIGURATION.visualizer.organisationUrn = /*[[${visualizer.getOrganisationUrn()}]]*/ 'urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ISTAC';
-        window.CONFIGURATION.visualizer.installationType = /*[[${visualizer.getInstallationType()}]]*/ 'INTERNAL';
-
+        
         window.CONFIGURATION.navbar = {};
         window.CONFIGURATION.navbar.url = /*[[${estaticos.getNavbarUrl()}]]*/ './external-static/navbar/navbar.html';
         window.CONFIGURATION.footer = {};
         window.CONFIGURATION.footer.url = /*[[${estaticos.getFooterUrl()}]]*/ './external-static/footer/footer.html';
+
+        window.CONFIGURATION.metadata = {};
+        window.CONFIGURATION.metadata.endpoint = /*[[${metadata.getEndpoint()}]]*/ 'http://estadisticas.arte-consultores.com/cmetadata/v1.0';
+        window.CONFIGURATION.metadata.installationType = /*[[${metadata.getInstallationType()}]]*/ 'INTERNAL';
+        window.CONFIGURATION.metadata.statisticalResourcesKey = /*[[${metadata.getStatisticalResourcesKey()}]]*/ 'metamac.statistical_resources.rest.internal';
+        window.CONFIGURATION.metadata.structuralResourcesKey = /*[[${metadata.getStructuralResourcesKey()}]]*/ 'metamac.srm.rest.internal';
+        window.CONFIGURATION.metadata.indicatorsKey = /*[[${metadata.getIndicatorsKey()}]]*/ 'indicators.rest.internal';
+        window.CONFIGURATION.metadata.statisticalVisualizerKey = /*[[${metadata.getStatisticalVisualizerKey()}]]*/ 'metamac.portal.web.external';
+        window.CONFIGURATION.metadata.statisticalVisualizerApiKey = /*[[${metadata.getStatisticalVisualizerApiKey()}]]*/ 'metamac.portal.rest.external.base';
+        window.CONFIGURATION.metadata.permalinksEndpointKey = /*[[${metadata.getPermalinksEndpointKey()}]]*/ 'metamac.portal.rest.external.permalinks';
+        window.CONFIGURATION.metadata.exportEndpointKey = /*[[${metadata.getExportEndpointKey()}]]*/ 'metamac.portal.rest.external.export';
+        window.CONFIGURATION.metadata.googleTrackingIdKey = /*[[${metadata.getGoogleTrackingIdKey()}]]*/ 'metamac.analytics.google.tracking_id';
        	/*]]>*/
     </script>
 

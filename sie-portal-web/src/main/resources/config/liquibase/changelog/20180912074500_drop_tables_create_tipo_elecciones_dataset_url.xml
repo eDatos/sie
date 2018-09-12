@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2" />
+    <property name="now" value="current_timestamp" dbms="postgresql" />
+
+    <!-- JHipster core tables. The initial schema has the '00000000000001' id, so that it is over-written if we re-generate it. -->
+    <changeSet id="00000000000000" author="jhipster">
+
+		<dropTable tableName="jhi_persistent_audit_evt_data"/>
+		<dropTable tableName="jhi_persistent_audit_event"/>
+		
+		<dropSequence sequenceName="hibernate_sequence" />
+		<dropSequence sequenceName="usuario_id_seq" />
+		<dropSequence sequenceName="rol_id_seq" />
+
+        <renameTable newTableName="tb_tipo_elecciones_dataset_url" oldTableName="tb_tipo_elecciones_dataset_id" />
+        <renameColumn columnDataType="varchar(255)" newColumnName="dataset_url" oldColumnName="dataset_id" tableName="tb_tipo_elecciones_dataset_url"/>
+        
+    </changeSet>
+
+</databaseChangeLog>

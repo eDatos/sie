@@ -12,7 +12,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.filter.CorsFilter;
 
 import io.github.jhipster.security.Http401UnauthorizedEntryPoint;
@@ -24,19 +23,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final CorsFilter corsFilter;
 
-    private ApplicationProperties applicationProperties;
-
-    public SecurityConfiguration(CorsFilter corsFilter, ApplicationProperties applicationProperties) {
+    public SecurityConfiguration(CorsFilter corsFilter) {
         this.corsFilter = corsFilter;
-        this.applicationProperties = applicationProperties;
-    }
-
-    @Bean
-    public SecurityContextLogoutHandler casLogoutHandler() {
-        SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
-        logoutHandler.setClearAuthentication(true);
-        logoutHandler.setInvalidateHttpSession(true);
-        return logoutHandler;
     }
 
     @Bean

@@ -4,4 +4,5 @@
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false" />
     <include file="config/liquibase/changelog/20180117115714_added_function_lower_unaccent.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20180912074500_drop_tables_create_tipo_elecciones_dataset_url.xml" relativeToChangelogFile="false" />
 </databaseChangeLog>

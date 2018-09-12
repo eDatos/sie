@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProcesoElectoral } from './proceso-electoral.model';
-import { DatasetService, ProcesoElectoralDatasetService } from '../../dataset';
-import { Lugar } from '../lugar';
-import { BarChart, YElement } from '../../shared';
+import { DatasetEvolucionElectoralService, MultidatasetProcesosElectoralesService, ProcesoElectoral, Lugar } from '../../dataset';
+import { Chart, YElement } from '../../shared';
 import { TranslateService } from '@ngx-translate/core';
 import { DocumentoService } from '../../documento';
 import { JhiAlertService } from 'ng-jhipster';
@@ -52,18 +50,18 @@ export class EvolucionElectoralComponent implements OnInit {
     constructor(
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private datasetService: DatasetService,
+        private datasetEvolucionElectoralService: DatasetEvolucionElectoralService,
         private translateService: TranslateService,
         private alertService: JhiAlertService,
         private documentoService: DocumentoService,
-        private procesoElectoralDatasetService: ProcesoElectoralDatasetService
+        private multidatasetProcesosElectoralesService: MultidatasetProcesosElectoralesService
     ) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params) => {
             this.lugarId = params.id;
 
-            this.datasetService.getLugarById(params.id).then((resultadoBusquedaLugar) => {
+            this.datasetEvolucionElectoralService.getLugarById(params.id).then((resultadoBusquedaLugar) => {
                 if (!resultadoBusquedaLugar) {
                     this.alertService.error('lugar.errorNoEncontrado', { codigo: params.id });
                     throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: params.id }));
@@ -72,7 +70,7 @@ export class EvolucionElectoralComponent implements OnInit {
                 this.lugar = resultadoBusquedaLugar;
             });
 
-            this.datasetService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
+            this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
                 this.limpiarAtributos();
                 this.inicializarProcesosElectorales(listaProcesoElectoral);
                 this.inicializarTiposEleccion(listaProcesoElectoral);
@@ -111,7 +109,7 @@ export class EvolucionElectoralComponent implements OnInit {
     private inicializarGrafica(tipoEleccion: string) {
         const indicadores = this.getIndicadores();
 
-        const grafica = new BarChart();
+        const grafica = new Chart();
         grafica.xAxis = this.crearEjeX(tipoEleccion);
         grafica.yAxis = indicadores.map((indicador) => this.crearElementoEjeY(indicador, tipoEleccion));
         if (!this.tipoGrafica) {
@@ -186,14 +184,16 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     private comprobarDatosPagina3() {
-        this.procesoElectoralDatasetService.getDatasetsByTipoElecciones(this.tipoEleccionesVisible).then((multidataset) => {
+        this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(this.tipoEleccionesVisible).then((multidataset) => {
             multidataset.datasetList.forEach((dataset) => {
                 const procesoElectoral = this.hashProcesos[this.tipoEleccionesVisible].find((proceso) => proceso.id.includes(dataset.year));
                 if (procesoElectoral) {
                     procesoElectoral.clickable = true;
                 }
             });
-        });
+        }).catch(() => {
+            console.log(this.translateService.instant('error.noMultidatasetForTipoElecciones', { tipoElecciones: this.tipoEleccionesVisible }));
+         });
     }
 
     onTabChange(event) {

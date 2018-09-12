@@ -1,11 +1,11 @@
-import { DatasetService } from './dataset.service';
+import { DatasetEvolucionElectoralService } from './dataset-evolucion-electoral.service';
 import { NgModule } from '@angular/core';
-import { ProcesoElectoralDatasetService } from './proceso-electoral-dataset.service';
+import { MultidatasetProcesosElectoralesService } from './multidataset-procesos-electorales.service';
 
 @NgModule({
     providers: [
-        DatasetService,
-        ProcesoElectoralDatasetService
+        DatasetEvolucionElectoralService,
+        MultidatasetProcesosElectoralesService
     ],
 })
 export class SieDatasetServiceModule { }

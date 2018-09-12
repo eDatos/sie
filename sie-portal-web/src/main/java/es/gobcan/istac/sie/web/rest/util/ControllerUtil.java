@@ -16,6 +16,10 @@ public final class ControllerUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ControllerUtil.class);
     
+    private ControllerUtil() {
+        super();
+    }
+    
     public static void download(byte[] documento, String nombre, HttpServletResponse response) {
         try (OutputStream os = response.getOutputStream()) {
             response.setContentLength(documento.length);
