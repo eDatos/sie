@@ -31,6 +31,6 @@ public class CacheConfiguration {
 
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
-        return cm -> cm.createCache(es.gobcan.istac.sie.domain.TipoEleccionesDataset.class.getName(), jcacheConfiguration);
+        return cm -> cm.createCache(es.gobcan.istac.sie.domain.TipoEleccionesDatasetUrlEntity.class.getName(), jcacheConfiguration);
     }
 }
