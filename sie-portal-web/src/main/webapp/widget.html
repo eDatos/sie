@@ -33,6 +33,10 @@
 		var exportEndpointKey = /*[[${metadata.getExportEndpointKey()}]]*/ 'metamac.portal.rest.external.export';
 		var statisticalVisualizerKey = /*[[${metadata.getStatisticalVisualizerKey()}]]*/ 'metamac.portal.web.external';
 		var statisticalVisualizerApiKey = /*[[${metadata.getStatisticalVisualizerApiKey()}]]*/ 'metamac.portal.rest.external.base';
+		var sieBaseUrl = /*[[${#httpServletRequest.getRequestURL().toString()}]]*/ 'http://localhost:8080/';
+		var requestURI = /*[[${#httpServletRequest.getRequestURI().toString()}]]*/ '';
+		var contextPath = /*[[${#httpServletRequest.getContextPath().toString()}]]*/ '';
+		sieBaseUrl = sieBaseUrl.replace(requestURI, contextPath);
 
 		getPropertyById(statisticalVisualizerApiKey).done(function (response) {
 			const metamacAuthenticationScript = document.createElement('script');
@@ -62,6 +66,7 @@
 			App.endpoints['permalinks'] = permalinks[0].value + '/v1.0';
 			App.endpoints['export'] = exportEndpoint[0].value + '/v1.0';
 			App.endpoints['statistical-visualizer'] = statisticalVisualizer[0].value;
+			App.endpoints['sie-base-url'] = sieBaseUrl;
 
 			App.config['showHeader'] = /*[[${visualizer.getShowHeader()}]]*/ false;
 			App.config['showRightsHolder'] = /*[[${visualizer.getShowRightsHolder()}]]*/ false;

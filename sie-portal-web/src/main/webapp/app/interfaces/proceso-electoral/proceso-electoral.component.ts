@@ -110,6 +110,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 App.endpoints['permalinks'] = permalinks + '/v1.0';
                 App.endpoints['export'] = exportEndpoint + '/v1.0';
                 App.endpoints['statistical-visualizer'] = statisticalVisualizer;
+                App.endpoints['sie-base-url'] = config.baseUrl;
 
                 App.config['showHeader'] = config.visualizer.showHeader;
                 App.config['showRightsHolder'] = config.visualizer.showRightsHolder;

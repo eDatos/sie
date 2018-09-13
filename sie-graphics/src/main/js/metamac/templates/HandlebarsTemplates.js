@@ -847,35 +847,18 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   buffer += "<div class=\"dataset-embed\">\r\n	<div class=\"dataset-embed-title\">";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.message || depth0.message),stack1 ? stack1.call(depth0, "filter.embed.instructions", options) : helperMissing.call(depth0, "message", "filter.embed.instructions", options)))
-    + "</div>\r\n	<textarea class=\"campo_texto\" readonly=\"readonly\">\r\n<div id=\"";
-  if (stack2 = helpers.defaultId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.defaultId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+    + "</div>\r\n	<textarea class=\"campo_texto\" readonly=\"readonly\">\r\n	<iframe id=\"dataset-widget-iframe\" allowfullscreen=\"\" src=\"";
+  if (stack2 = helpers.baseUrl) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.baseUrl; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2);
+  if (stack2 = helpers.hash) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.hash; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "\"></div>\r\n<script src=\"";
-  if (stack2 = helpers.widgetUrl) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.widgetUrl; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+    + "/permalink/";
+  if (stack2 = helpers.permalink) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.permalink; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "\"></script>\r\n<script>datasetWidget({\r\n		id: \"";
-  if (stack2 = helpers.defaultId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.defaultId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
-    + "\",\r\n		width: ";
-  if (stack2 = helpers.defaultWidth) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.defaultWidth; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
-    + ",\r\n		height: ";
-  if (stack2 = helpers.defaultHeight) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.defaultHeight; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
-    + ",\r\n		params : \"";
-  if (stack2 = helpers.params) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.params; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
-    + "\",\r\n		sharedVisualizerUrl : \"";
-  if (stack2 = helpers.sharedVisualizerUrl) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.sharedVisualizerUrl; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
-    + "\"\r\n})</script>\r\n    </textarea>\r\n</div>";
+    + "\" width=\"500\" height=\"400\" frameborder=\"0\"></iframe>\r\n    </textarea>\r\n</div>";
   return buffer;
   });
 

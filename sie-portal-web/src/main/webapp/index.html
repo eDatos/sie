@@ -55,6 +55,11 @@
         window.CONFIGURATION.metadata.permalinksEndpointKey = /*[[${metadata.getPermalinksEndpointKey()}]]*/ 'metamac.portal.rest.external.permalinks';
         window.CONFIGURATION.metadata.exportEndpointKey = /*[[${metadata.getExportEndpointKey()}]]*/ 'metamac.portal.rest.external.export';
         window.CONFIGURATION.metadata.googleTrackingIdKey = /*[[${metadata.getGoogleTrackingIdKey()}]]*/ 'metamac.analytics.google.tracking_id';
+        
+        var requestURL = /*[[${#httpServletRequest.getRequestURL().toString()}]]*/ 'http://localhost:8080/';
+		var requestURI = /*[[${#httpServletRequest.getRequestURI().toString()}]]*/ '';
+		var contextPath = /*[[${#httpServletRequest.getContextPath().toString()}]]*/ '';
+		window.CONFIGURATION.baseUrl = requestURL.replace(requestURI, contextPath); 
        	/*]]>*/
     </script>
 

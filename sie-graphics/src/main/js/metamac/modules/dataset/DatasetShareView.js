@@ -40,7 +40,8 @@
 
         getSharedUrl: function (permalinkId) {
             return [
-                this.filterDimensions.metadata.getSharedVisualizerUrl(),
+                App.endpoints["sie-base-url"],
+                window.location.hash.split("/").slice(0,6).join("/"),
                 '/permalink/',
                 permalinkId
             ].join('');

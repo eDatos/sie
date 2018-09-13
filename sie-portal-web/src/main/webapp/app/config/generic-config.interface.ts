@@ -31,4 +31,6 @@ export interface GenericConfig {
         exportEndpointKey,
         googleTrackingIdKey
     };
+
+    baseUrl
 };

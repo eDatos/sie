@@ -94,9 +94,7 @@
             if (!_.isEmpty(App.endpoints["sharedVisualizerUrl"])) {
                 return App.endpoints["sharedVisualizerUrl"];
             } else {
-                var baseUrl = [window.location.protocol, '//', window.location.host, window.location.pathname].join('');
-                var pathParams = window.location.hash.split("/").slice(0,7).join("/");
-                return baseUrl + pathParams;
+                return [window.location.protocol, '//', window.location.host, window.location.pathname].join('');
             }
         },
 

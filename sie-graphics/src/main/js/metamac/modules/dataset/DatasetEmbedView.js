@@ -38,32 +38,13 @@
             return DatasetPermalink.savePermalinkShowingCaptchaInElement(permalinkContent, this.$el);
         },
 
-        getWidgetUrl: function () {
-            return App.endpoints["statistical-visualizer"] + '/js/widget.js';
-        },
-
-        getSharedVisualizerParams: function (permalinkId) {
-            return [
-                'permalink',
-                '=',
-                permalinkId
-            ].join('')
-        },
-
         renderEmbed: function (permalinkId) {
             var context = {
-                widgetUrl: this.getWidgetUrl(),
-                params: this.getSharedVisualizerParams(permalinkId),
-                sharedVisualizerUrl: this.filterDimensions.metadata.getSharedVisualizerUrl(),
-                defaultId: 'dataset-widget',
-                defaultWidth: 500,
-                defaultHeight: 400,
-                title: this.filterDimensions.metadata.getTitle(),
-                description: this.filterDimensions.metadata.getDescription()
+                baseUrl: App.endpoints["sie-base-url"],
+                hash: window.location.hash.split("/").slice(0,6).join("/"),
+                permalink: permalinkId
             };
             this.$el.html(this.template(context));
         }
-
     });
-
 }());
