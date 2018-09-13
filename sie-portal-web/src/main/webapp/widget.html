@@ -6,9 +6,9 @@
 	<meta charset="utf-8" />
 	<title>SIE widget</title>
 
-	<link rel="stylesheet" href="/visualizer-static/metamac.css" />
+	<link rel="stylesheet" th:href="@{/visualizer-static/metamac.css}" />
 
-	<script type="text/javascript" src="/visualizer-static/metamac.js"></script>
+	<script type="text/javascript" th:src="@{/visualizer-static/metamac.js}"></script>
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-501fc6f600bacbe9"></script>
 
 	<style>
@@ -37,6 +37,7 @@
 		var requestURI = /*[[${#httpServletRequest.getRequestURI().toString()}]]*/ '';
 		var contextPath = /*[[${#httpServletRequest.getContextPath().toString()}]]*/ '';
 		sieBaseUrl = sieBaseUrl.replace(requestURI, contextPath) + "/";
+		var mappingUrl = /*[[@{/api/tipo-elecciones-dataset/}]]*/ "/api/tipo-elecciones-dataset/";
 
 		getPropertyById(statisticalVisualizerApiKey).done(function (response) {
 			var metamacAuthenticationScript = document.createElement('script');
@@ -80,7 +81,7 @@
 		});
 
 		function getMultidatasetUrl() {
-			return $.getJSON("/api/tipo-elecciones-dataset/" + getParamTipoElecciones());
+			return $.getJSON(mappingUrl + getParamTipoElecciones());
 		}
 
 		function getParamTipoElecciones() {
