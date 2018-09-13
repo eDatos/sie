@@ -27,7 +27,7 @@ public class DefaultController {
     @RequestMapping(value = {"", "/index.html", "/**/{path:[^\\.]*}"})
     @SuppressWarnings("unchecked")
     public ModelAndView index(HttpServletRequest request) {
-        log.debug("DefaultController: Contextpath" + request.getContextPath() + "  ServletPath = " + request.getServletPath());
+        log.debug("DefaultController index: Contextpath" + request.getContextPath() + "  ServletPath = " + request.getServletPath());
         Map<String, Object> model = new HashMap<>();
         model.put("dataset", applicationProperties.getDataset());
         model.put("visualizer", applicationProperties.getVisualizer());
@@ -38,5 +38,14 @@ public class DefaultController {
             model.putAll(flashMap);
         }
         return new ModelAndView("index", model);
+    }
+    
+    @RequestMapping(value = {"/widget"})
+    public ModelAndView widget(HttpServletRequest request) {
+        log.debug("DefaultController widget: Contextpath" + request.getContextPath() + "  ServletPath = " + request.getServletPath());
+        Map<String, Object> model = new HashMap<>();
+        model.put("visualizer", applicationProperties.getVisualizer());
+        model.put("metadata", applicationProperties.getMetadata());
+        return new ModelAndView("widget", model);
     }
 }

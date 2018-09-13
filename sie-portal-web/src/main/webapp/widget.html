@@ -1,0 +1,97 @@
+<!doctype html>
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta charset="utf-8" />
+	<title>SIE widget</title>
+
+	<link rel="stylesheet" href="/visualizer-static/metamac.css" />
+
+	<script type="text/javascript" src="/visualizer-static/metamac.js"></script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-501fc6f600bacbe9"></script>
+
+	<style>
+		html,
+		body {
+			margin: 0;
+			height: 99%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="metamac-container" id="metamac-container">Cargando...</div>
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var metadataEndpoint = /*[[${metadata.getEndpoint()}]]*/ 'http://estadisticas.arte-consultores.com/cmetadata/v1.0';
+		var statisticalResourcesKey = /*[[${metadata.getStatisticalResourcesKey()}]]*/ 'metamac.statistical_resources.rest.internal';
+		var structuralResourcesKey = /*[[${metadata.getStructuralResourcesKey()}]]*/ 'metamac.srm.rest.internal';
+		var indicatorsKey = /*[[${metadata.getIndicatorsKey()}]]*/ 'indicators.rest.internal';
+		var permalinksEndpointKey = /*[[${metadata.getPermalinksEndpointKey()}]]*/ 'metamac.portal.rest.external.permalinks';
+		var exportEndpointKey = /*[[${metadata.getExportEndpointKey()}]]*/ 'metamac.portal.rest.external.export';
+		var statisticalVisualizerKey = /*[[${metadata.getStatisticalVisualizerKey()}]]*/ 'metamac.portal.web.external';
+		var statisticalVisualizerApiKey = /*[[${metadata.getStatisticalVisualizerApiKey()}]]*/ 'metamac.portal.rest.external.base';
+
+		getPropertyById(statisticalVisualizerApiKey).done(function (response) {
+			const metamacAuthenticationScript = document.createElement('script');
+			metamacAuthenticationScript.setAttribute('src', response.value + '/js/authentication.js');
+			document.head.appendChild(metamacAuthenticationScript);
+		})
+
+		I18n.defaultLocale = 'es';
+		I18n.locale = 'es';
+
+		App.addRegions({
+			mainRegion: '.metamac-container'
+		});
+
+		$.when(
+			getMultidatasetUrl(),
+			getPropertyById(statisticalResourcesKey),
+			getPropertyById(structuralResourcesKey),
+			getPropertyById(indicatorsKey),
+			getPropertyById(permalinksEndpointKey),
+			getPropertyById(exportEndpointKey),
+			getPropertyById(statisticalVisualizerKey)
+		).done(function (multidatasetResponse, statisticalResources, structuralResources, indicators, permalinks, exportEndpoint, statisticalVisualizer) {
+			App.endpoints['statistical-resources'] = statisticalResources[0].value + '/v1.0';
+			App.endpoints['structural-resources'] = structuralResources[0].value + '/v1.0';
+			App.endpoints['indicators'] = indicators[0].value + '/v1.0';
+			App.endpoints['permalinks'] = permalinks[0].value + '/v1.0';
+			App.endpoints['export'] = exportEndpoint[0].value + '/v1.0';
+			App.endpoints['statistical-visualizer'] = statisticalVisualizer[0].value;
+
+			App.config['showHeader'] = /*[[${visualizer.getShowHeader()}]]*/ false;
+			App.config['showRightsHolder'] = /*[[${visualizer.getShowRightsHolder()}]]*/ false;
+			App.config['organisationUrn'] = /*[[${visualizer.getOrganisationUrn()}]]*/ 'urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ISTAC';
+			App.config['installationType'] = /*[[${metadata.getInstallationType()}]]*/ 'EXTERNAL';
+
+			App.queryParams['agency'] = 'ISTAC';
+			App.queryParams['type'] = 'dataset';
+			App.queryParams['multidatasetId'] = parseMultidatasetMapping(multidatasetResponse);
+			App.start();
+		});
+
+		function getMultidatasetUrl() {
+			return $.getJSON("/api/tipo-elecciones-dataset/" + getParamTipoElecciones());
+		}
+
+		function getParamTipoElecciones() {
+			return window.location.hash.split("/")[3];
+		}
+
+		function getPropertyById(propertyId) {
+			return $.getJSON(metadataEndpoint + "/properties/" + propertyId + "?_type=json");
+		}
+
+		function parseMultidatasetMapping(response) {
+			var splittedUrl = response[0].datasetUrl.split("/");
+			return splittedUrl[2] + ":" + splittedUrl[3];
+		}
+		/*]]>*/
+	</script>
+</body>
+
+</html>
