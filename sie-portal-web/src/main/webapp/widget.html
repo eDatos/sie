@@ -36,10 +36,10 @@
 		var sieBaseUrl = /*[[${#httpServletRequest.getRequestURL().toString()}]]*/ 'http://localhost:8080/';
 		var requestURI = /*[[${#httpServletRequest.getRequestURI().toString()}]]*/ '';
 		var contextPath = /*[[${#httpServletRequest.getContextPath().toString()}]]*/ '';
-		sieBaseUrl = sieBaseUrl.replace(requestURI, contextPath);
+		sieBaseUrl = sieBaseUrl.replace(requestURI, contextPath) + "/";
 
 		getPropertyById(statisticalVisualizerApiKey).done(function (response) {
-			const metamacAuthenticationScript = document.createElement('script');
+			var metamacAuthenticationScript = document.createElement('script');
 			metamacAuthenticationScript.setAttribute('src', response.value + '/js/authentication.js');
 			document.head.appendChild(metamacAuthenticationScript);
 		})

@@ -59,7 +59,7 @@
         var requestURL = /*[[${#httpServletRequest.getRequestURL().toString()}]]*/ 'http://localhost:8080/';
 		var requestURI = /*[[${#httpServletRequest.getRequestURI().toString()}]]*/ '';
 		var contextPath = /*[[${#httpServletRequest.getContextPath().toString()}]]*/ '';
-		window.CONFIGURATION.baseUrl = requestURL.replace(requestURI, contextPath); 
+		window.CONFIGURATION.baseUrl = requestURL.replace(requestURI, contextPath) + "/"; 
        	/*]]>*/
     </script>
 

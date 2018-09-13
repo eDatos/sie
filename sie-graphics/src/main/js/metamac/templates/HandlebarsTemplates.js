@@ -850,7 +850,8 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     + "</div>\r\n	<textarea class=\"campo_texto\" readonly=\"readonly\">\r\n	<iframe id=\"dataset-widget-iframe\" allowfullscreen=\"\" src=\"";
   if (stack2 = helpers.baseUrl) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.baseUrl; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2);
+  buffer += escapeExpression(stack2)
+    + "widget/";
   if (stack2 = helpers.hash) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.hash; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
