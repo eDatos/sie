@@ -24,7 +24,13 @@ export class MultidatasetProcesosElectoralesService {
                 this.getDatasetIdByTipoElecciones(tipoElecciones).subscribe(
                     (tipoEleccionesDataset) => {
                         this.doGetDatasets(tipoEleccionesDataset).subscribe(
-                            (json) => resolve(this.parseMultidataset(json)),
+                            (json) => {
+                                if (json.data.nodes) {
+                                    resolve(this.parseMultidataset(json));
+                                } else {
+                                    reject();
+                                }
+                            },
                             (error) => reject(error)
                         );
                     },
