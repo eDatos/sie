@@ -83,6 +83,8 @@
     position: absolute;
     width: @sidebarSidebarWidth;
     height: 100%;
+    min-height: @sidebarContentMinHeight;
+
     left: @sidebarMenuWidth - @sidebarSidebarWidth;
 
     padding: 5px;
@@ -140,7 +142,8 @@
 
 .sidebar-content {
     height: 100%;
-    padding-left: @sidebarMenuWidth;    
+    padding-left: @sidebarMenuWidth; 
+    min-height: @sidebarContentMinHeight;
     .box-sizing(border-box);
 
     &.without-menu {

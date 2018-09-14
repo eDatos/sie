@@ -1,7 +1,6 @@
 @import '~scss/variables';
 
 .metamac-container {
-    padding-bottom: 2rem;
     min-width: 760px;
 
     /* Override primeng classes */ 
@@ -44,6 +43,10 @@
     /deep/ .btn {
         transition: none;
     }
+}
+
+.div-margin {
+    padding-bottom: 2rem;
 }
 
 .section {
