@@ -13,14 +13,12 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.arte.libs.grammar.repository.support.ArteJpaRepositoryFactoryBean;
-
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.liquibase.AsyncSpringLiquibase;
 import liquibase.integration.spring.SpringLiquibase;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "es.gobcan.istac.sie.repository", repositoryFactoryBeanClass = ArteJpaRepositoryFactoryBean.class)
+@EnableJpaRepositories(basePackages = "es.gobcan.istac.sie.repository")
 @EnableTransactionManagement
 public class DatabaseConfiguration {
 

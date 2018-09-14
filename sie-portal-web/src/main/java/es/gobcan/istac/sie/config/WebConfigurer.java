@@ -25,10 +25,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.servlet.InstrumentedFilter;
-import com.codahale.metrics.servlets.MetricsServlet;
-
 import io.github.jhipster.config.JHipsterProperties;
 import io.github.jhipster.web.filter.CachingHttpHeadersFilter;
 import io.undertow.UndertowOptions;
@@ -45,8 +41,6 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
 
     private final JHipsterProperties jHipsterProperties;
 
-    private MetricRegistry metricRegistry;
-
     public WebConfigurer(Environment env, JHipsterProperties jHipsterProperties) {
 
         this.env = env;
@@ -59,7 +53,6 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
             log.info("Configuración de aplicación usando perfiles: {}", (Object[]) env.getActiveProfiles());
         }
         EnumSet<DispatcherType> disps = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ASYNC);
-        initMetrics(servletContext, disps);
         if (env.acceptsProfiles(Constants.SPRING_PROFILE_ENV)) {
             initCachingHttpHeadersFilter(servletContext, disps);
         }
@@ -128,28 +121,6 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         cachingHttpHeadersFilter.setAsyncSupported(true);
     }
 
-    /**
-     * Initializes Metrics.
-     */
-    private void initMetrics(ServletContext servletContext, EnumSet<DispatcherType> disps) {
-        log.debug("Inicializando regitros de Metrics");
-        servletContext.setAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE, metricRegistry);
-        servletContext.setAttribute(MetricsServlet.METRICS_REGISTRY, metricRegistry);
-
-        log.debug("Registrando filtros de Metrics");
-        FilterRegistration.Dynamic metricsFilter = servletContext.addFilter("webappMetricsFilter", new InstrumentedFilter());
-
-        metricsFilter.addMappingForUrlPatterns(disps, true, "/*");
-        metricsFilter.setAsyncSupported(true);
-
-        log.debug("Registrando Metrics Servlet");
-        ServletRegistration.Dynamic metricsAdminServlet = servletContext.addServlet("metricsServlet", new MetricsServlet());
-
-        metricsAdminServlet.addMapping("/management/metrics/*");
-        metricsAdminServlet.setAsyncSupported(true);
-        metricsAdminServlet.setLoadOnStartup(2);
-    }
-
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -160,10 +131,5 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
             source.registerCorsConfiguration("/v2/api-docs", config);
         }
         return new CorsFilter(source);
-    }
-
-    @Autowired(required = false)
-    public void setMetricRegistry(MetricRegistry metricRegistry) {
-        this.metricRegistry = metricRegistry;
     }
 }

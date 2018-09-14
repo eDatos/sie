@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.codahale.metrics.annotation.Timed;
-
 import es.gobcan.istac.sie.service.DocumentoService;
 import es.gobcan.istac.sie.web.rest.dto.EvolucionElectoralDTO;
 import es.gobcan.istac.sie.web.rest.errors.CustomParameterizedException;
@@ -35,7 +33,6 @@ public class DocumentoResource extends AbstractResource {
         this.documentoService = documentoService;
     }
 
-    @Timed
     @PostMapping("/evolucion-electoral")
     public void getPdfEvolucionElectoral(@RequestPart("grafica") MultipartFile graficaSvg, @RequestPart("evolucionElectoral") EvolucionElectoralDTO evolucionElectoral, HttpServletResponse response) {
         LOGGER.debug("REST petición para generar PDF de un proceso electoral.");
