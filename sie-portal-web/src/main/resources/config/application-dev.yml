@@ -35,17 +35,6 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
-    mail:
-        host: FILL_HOST
-        port: FILL_PORT
-        username: FILL_USER
-        password: FILL_PASS
-        protocol: smtp
-        tls: true
-        properties.mail.smtp:
-            auth: true
-            starttls.enable: true
-            ssl.trust: smtp.gmail.com
     messages:
         cache-seconds: 1
     thymeleaf:
@@ -98,9 +87,6 @@ jhipster:
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
-    mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: sie@localhost
-        base-url: http://127.0.0.1:8080
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         logs: # Reports Dropwizard metrics in the logs

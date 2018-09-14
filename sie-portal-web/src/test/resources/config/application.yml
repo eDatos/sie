@@ -42,9 +42,6 @@ spring:
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
             hibernate.hbm2ddl.auto: validate
-    mail:
-        host: localhost
-        port: 0
     messages:
         basename: i18n/test_messages, i18n/messages
     mvc:
@@ -82,9 +79,6 @@ jhipster:
             host: localhost
             port: 5000
             queue-size: 512
-    mail:
-        from: test@localhost
-        base-url: http://127.0.0.1:8080
     security:
         authentication:
             jwt:

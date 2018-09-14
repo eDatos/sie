@@ -11,13 +11,6 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
-management:
-    security:
-        enabled: false
-    context-path: /management
-    health:
-        mail:
-            enabled: false # When using the MailService, configure an SMTP server and set this to true
 spring:
     application:
         name: sie
@@ -56,17 +49,6 @@ spring:
       default-domain: FILL_APP_NAME # Ejemplo: ebandeja
     hikari:
         pool-name: FILL_APP_NAME_WITH_POOL # ebandejapool
-    mail:
-        host: FILL_HOST
-        port: FILL_PORT
-        username: FILL_USER
-        password: FILL_PASS
-        protocol: smtp
-        tls: true
-        properties.mail.smtp:
-            auth: true
-            starttls.enable: true
-            ssl.trust: smtp.gmail.com
     messages:
         basename: i18n/messages
     mvc:
@@ -158,9 +140,6 @@ jhipster:
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
-    mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: sie@localhost
-        base-url: http://my-server-url-to-change # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         logs: # Reports Dropwizard metrics in the logs
