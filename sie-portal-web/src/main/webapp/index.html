@@ -39,11 +39,6 @@
         window.CONFIGURATION.visualizer.showRightsHolder = /*[[${visualizer.getShowRightsHolder()}]]*/ false;
         window.CONFIGURATION.visualizer.organisationUrn = /*[[${visualizer.getOrganisationUrn()}]]*/ 'urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ISTAC';
         
-        window.CONFIGURATION.navbar = {};
-        window.CONFIGURATION.navbar.url = /*[[${estaticos.getNavbarUrl()}]]*/ './external-static/navbar/navbar.html';
-        window.CONFIGURATION.footer = {};
-        window.CONFIGURATION.footer.url = /*[[${estaticos.getFooterUrl()}]]*/ './external-static/footer/footer.html';
-
         window.CONFIGURATION.metadata = {};
         window.CONFIGURATION.metadata.endpoint = /*[[${metadata.getEndpoint()}]]*/ 'http://estadisticas.arte-consultores.com/cmetadata/v1.0';
         window.CONFIGURATION.metadata.installationType = /*[[${metadata.getInstallationType()}]]*/ 'INTERNAL';
@@ -55,6 +50,8 @@
         window.CONFIGURATION.metadata.permalinksEndpointKey = /*[[${metadata.getPermalinksEndpointKey()}]]*/ 'metamac.portal.rest.external.permalinks';
         window.CONFIGURATION.metadata.exportEndpointKey = /*[[${metadata.getExportEndpointKey()}]]*/ 'metamac.portal.rest.external.export';
         window.CONFIGURATION.metadata.googleTrackingIdKey = /*[[${metadata.getGoogleTrackingIdKey()}]]*/ 'metamac.analytics.google.tracking_id';
+        window.CONFIGURATION.metadata.navbarPathKey = /*[[${metadata.getNavbarPathKey()}]]*/ 'sie.style.header.url';
+        window.CONFIGURATION.metadata.footerPathKey = /*[[${metadata.getFooterPathKey()}]]*/ 'sie.style.footer.url';
         
         var requestURL = /*[[${#httpServletRequest.getRequestURL().toString()}]]*/ 'http://localhost:8080/';
 		var requestURI = /*[[${#httpServletRequest.getRequestURI().toString()}]]*/ '';

@@ -11,14 +11,6 @@ export interface GenericConfig {
         organisationUrn
     };
 
-    navbar: {
-        url
-    };
-
-    footer: {
-        url
-    };
-
     metadata: {
         endpoint,
         installationType,
@@ -29,7 +21,9 @@ export interface GenericConfig {
         statisticalVisualizerApiKey,
         permalinksEndpointKey,
         exportEndpointKey,
-        googleTrackingIdKey
+        googleTrackingIdKey,
+        navbarPathKey,
+        footerPathKey
     };
 
     baseUrl

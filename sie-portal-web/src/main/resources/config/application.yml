@@ -146,9 +146,6 @@ application:
         showHeader: false
         showRightsHolder: false
         organisationUrn: urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ISTAC
-    estaticos:
-        navbarUrl: ./external-static/navbar/navbar.html #Default navbar
-        footerUrl: ./external-static/footer/footer.html #Default footer
     metadata:
         statisticalResourcesInternalKey: metamac.statistical_resources.rest.internal
         statisticalResourcesExternalKey: metamac.statistical_resources.rest.external
@@ -161,3 +158,5 @@ application:
         permalinksEndpointKey: metamac.portal.rest.external.permalinks
         exportEndpointKey: metamac.portal.rest.external.export
         googleTrackingIdKey: metamac.analytics.google.tracking_id
+        navbarPathKey: sie.style.header.url
+        footerPathKey: sie.style.footer.url

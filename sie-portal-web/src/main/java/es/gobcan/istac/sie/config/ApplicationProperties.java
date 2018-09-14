@@ -12,8 +12,6 @@ public class ApplicationProperties {
     
     private final Visualizer visualizer = new Visualizer();
     
-    private final Estaticos estaticos = new Estaticos();
-    
     private final Metadata metadata = new Metadata();
     
     public Dataset getDataset() {
@@ -24,10 +22,6 @@ public class ApplicationProperties {
         return visualizer;
     }
 
-    public Estaticos getEstaticos() {
-        return estaticos;
-    }
-    
     public Metadata getMetadata() {
         return metadata;
     }
@@ -76,28 +70,6 @@ public class ApplicationProperties {
         }
     }
     
-    public static class Estaticos {
-        
-        private String navbarUrl;
-        private String footerUrl;
-
-        public String getNavbarUrl() {
-            return navbarUrl;
-        }
-
-        public void setNavbarUrl(String navbarUrl) {
-            this.navbarUrl = navbarUrl;
-        }
-
-        public String getFooterUrl() {
-            return footerUrl;
-        }
-
-        public void setFooterUrl(String footerUrl) {
-            this.footerUrl = footerUrl;
-        }
-    }
-
     public static class Metadata {
         
         private String endpoint;
@@ -113,6 +85,8 @@ public class ApplicationProperties {
         private String permalinksEndpointKey;
         private String exportEndpointKey;
         private String googleTrackingIdKey;
+        private String navbarPathKey;
+        private String footerPathKey;
         
         public String getEndpoint() {
             return endpoint;
@@ -216,6 +190,22 @@ public class ApplicationProperties {
 
         public void setGoogleTrackingIdKey(String googleTrackingIdKey) {
             this.googleTrackingIdKey = googleTrackingIdKey;
+        }
+        
+        public String getNavbarPathKey() {
+            return navbarPathKey;
+        }
+
+        public void setNavbarPathKey(String navbarPathKey) {
+            this.navbarPathKey = navbarPathKey;
+        }
+
+        public String getFooterPathKey() {
+            return footerPathKey;
+        }
+
+        public void setFooterPathKey(String footerPathKey) {
+            this.footerPathKey = footerPathKey;
         }
 
         public String getStatisticalResourcesKey() {
