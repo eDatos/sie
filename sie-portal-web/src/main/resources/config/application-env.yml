@@ -17,11 +17,6 @@ spring:
         password: FILL_PASS
     jpa:
         show-sql: false
-    mail:
-        host: FILL_HOST
-        port: FILL_PORT
-        username: FILL_USER
-        password: FILL_PASS
 
 
 # ===================================================================
