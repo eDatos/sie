@@ -1,22 +1,13 @@
 # Elecciones
 
-El visualizador se copia del siguiente commit de metamac-portal:
-
-Commit: 908e4dfae8a133b19c63232b3299b4c4f0334c0e [908e4df]
-Parents: 993e8268c1
-Author: Francisco Javier Rodríguez García <frodgar@arte-consultores.com>
-Date: jueves, 10 de mayo de 2018 15:47:08
-Committer: Francisco Javier Rodríguez García
-METAMAC-2721 - Adaptar el visualizador para visualizar multidatasets
+El módulo sie-graphics (visualizador) se copia del siguiente commit de metamac-portal-web-client (metamac-portal): 908e4dfae8a133b19c63232b3299b4c4f0334c0e con fecha 10 de mayo de 2018 a las 15:47:08.
 
 ----------
 
 ## Introducción
 
 ### Descripción de la aplicación
-Arte Application Template es la plantilla base de aplicaciones web de gestión sobre la que Arte Consultores S.L. crea sus proyectos.
-
-La plantilla está basada en el nuevo stack (ver [Más Información](#M%C3%A1s-informaci%C3%B3n)) aportando toda la arquitectura y configuración necesaria sobre la que trabajar en nuevos proyectos. Para mantenerlo lo más simple posible solo implementa el manejo de los usuarios y roles con acceso a la aplicación. 
+La aplicación SIE es un visualizador de resultados electorales del ISTAC.
 
 ### Requerimientos previos
 
@@ -24,21 +15,12 @@ La plantilla está basada en el nuevo stack (ver [Más Información](#M%C3%A1s-i
 En este apartado se especifican los requisitos necesarios, referidos al entorno, para que la aplicación funcione adecuadamente:
 - Apache Tomcat.  8.5
 - Java. 1.8.x
-- PostgreSQL.  **TODO**
-
-
-#### Dependencias
-La aplicación requiere de determinados servicios para poder estar completamente operativa. Algunos de ellos son necesarios de manera directa y otros de manera indirecta:
-Los servicios necesarios de manera directa (son atacados directamente por la aplicación):
-- CAS. Se utiliza para llevar a cabo las labores de autenticación.
+- PostgreSQL 9.6.2
 
 
 ### Componentes de la instalación
-La plantilla consta de una aplicación con interfaz web y un servicio web REST.
+SIE consta de una aplicación con interfaz web y un servicio web REST.
 
-### Gestión de roles y permisos
-
-* :construction: **_TODO_**
 
 ----------
 
@@ -48,7 +30,7 @@ La plantilla consta de una aplicación con interfaz web y un servicio web REST.
 - Configuración del servidor de aplicaciones según los requisitos del entorno ya especificados.
 - Configuración de la base de datos. 
     1. La aplicación cuenta con un mecanismo para llevar a cabo la gestión de los cambios de base de datos de manera automatizada (liquidbase).
-    2. A priori lo único que es necesario es crear en la aplicación el esquema de base de datos que se va a utilizar. El esquema debe recibir el nombre de "TODO".
+    2. A priori lo único que es necesario es crear en la aplicación el esquema de base de datos que se va a utilizar.
     3. Por otra parte, será necesario que el usuario que use la aplicación tenga permisos para la creación de objetos sobre el esquema anterior.
     4. De esta forma la aplicación, en el momento de arrancar, llevará a cabo la creación de todos los objetos que sean necesarios sobre la base de datos.
 
@@ -67,33 +49,6 @@ Pueden modificarse los ficheros relacionados con la configuración de logging en
 
 ### Paso 4. Arrancar la aplicación.
 
-### Paso 5. Crear usuario administador
-Para poder acceder a la aplicación __*es necesario dar de alta un rol*__ al que se le debe asignar todas las operaciones disponibles __*y al menos un usuario con dicho rol*__ creado (ver [Gestión de roles y permisos](#Gesti%C3%B3n-de-roles-y-permisos), para conocer más detalles).  A continuación, se enumerarán y  explicarán los procesos a realizar para llevar a cabo esta tarea:
-
-1. Crear un rol al que se le asignarán todas las operaciones, para ello es necesario ejecutar la siguiente instrucción SQL:
-
-   ```sql
-   -- Crea el rol y se le asigna todos las operaciones
-   SELECT add_rol_with_all_operaciones('RELLENAR_CODIGO_ROL', 'RELLENAR_NOMBRE_ROL');
-   ```
-
-2. Crear un usuario al que asignarle un rol creado, para ello es necesario ejecutar la siguiente instrucción SQL:
-
-   ```sql
-   -- Crea un usuario y se le asigna un rol existente
-   SELECT add_usuario_with_existing_rol('RELLENAR_USUARIO_LDAP', 'RELLENAR_NOMBRE_USUARIO', 'RELLENAR_PRIMER_APPELLIDO_USUARIO', 'RELLENAR_SEGUNDO_APPELLIDO_USUARIO', 'RELLENAR_CORREO_ELECTRONICO_USUARIO', 'RELLENAR_CODIGO_ROL_EXISTENTE');
-   ```
-
-Una vez generado este usuario administrador (con todos los permisos), este tendrá los permisos necesario para dar de alta el resto de usuarios mediante la aplicación, en la sección de **Gestión de usuarios**.
-
->  **Importante:** Existe un fichero script SQL sobre el que basarse para realizar las acciones anteriores. Dicho fichero se encuentra en: [etc/db/01-configuraciones/01-insercion-roles-y-usuarios.sql](etc/db/01-configuraciones/01-insercion-roles-y-usuarios.sql "Fichero de inserción de roles y usuarios").
-
-----------
-
-## Procedimiento de actualización desde versiones anteriores
-
-### Desde versión 1.0.0 a x.y.z
-
 ----------
 
 ## Anexo. Descripción de las propiedades de configuración
@@ -105,39 +60,12 @@ Una vez generado este usuario administrador (con todos los permisos), este tendr
    - Password de conexión a la base de datos.
 - `spring.jpa.show-sql`
    - Permite añadir al log las sentencias SQL.
-- `spring.mail.host`
-   - Host del servidor para el envío del mail.
-- `spring.mail.port`
-   - Puerto del servidor para el envío del mail.
-- `spring.mail.username`
-   - Nombre del usuario para el envío del mail.
-- `spring.mail.password`
-   - Contraseña del usuario especificado anteriormente.
-- `jhipster.mail.from`
-   - Cuenta desde la que se quiere especificar que se envían los e-mails.
-- `jhipster.mail.base-url`
-   - URL de acceso a la aplicación. Esta URL se usará para enviarla por correo a los nuevos usuarios que sean dados de alta en la aplicación.
-- `application.cas.endpoint`
-   - Endpoint donde se localiza el CAS.
-- `application.cas.applicationHome`
-   - Endpoint de la aplicación, a donde volverá del CAS para terminar la autenticación.
-- `application.cas.login`
-   - URL a la que se debe acceder para realizar la acción de login. Sólo debe cumplimentarse en el caso se que su valor sea distinto a `application.cas.endopoint`+ '/login'.
-- `application.cas.logout`
-   - URL a la que se debe acceder para realizar la acción de logout. Sólo debe cumplimentarse en el caso se que su valor sea distinto a `application.cas.endopoint`+ '/logout'.
-- `application.cas.validate`
-   - URL a la que se debe acceder para realizar la acción de logout. Sólo debe cumplimentarse en el caso se que su valor sea distinto a `application.cas.endopoint`+ '/logout'.
 - `debug`
    - Permite aumentar el nivel de log a DEBUG.    
-- `application.ldap.url`
-   - URL del servidor LDAP. Ejemplo: ldap://ldap.miorganizacion.com
-- `application.ldap.username`
-   - Usuario que se usar para conectarse al servidor LDAP. Ejemplo: cn=username,dc=miorganizacion,dc=com
-- `application.ldap.password`: 
-   - Contraseña del usuario LDAP. 
-- `application.ldap.base`
-   - Ruta relativa dónde se realizarán las operaciones. Ejemplo ou=usuarios,dc=miorganizacion,dc=com
-
+- `application.metadata.endpoint`
+   - URL de metamac-common-metadata, incluyendo versión y sin barra al final. Por ejemplo: http://www.entorno.com/cmetadata/v1.0
+- `application.metadata.installationType`
+   - Tipo de instalación que se está realizando. Puede tomar los siguientes valores: EXTERNAL, INTERNAL
 
 ## Anexo. Perfiles de compilación
 
@@ -202,16 +130,10 @@ Este comando arranca la parte cliente de la aplicación. Al ejecutar `yarn start
 
 A continuación, podemos comenzar a modificar los ficheros que deseemos en la aplicación. 
 Si modificamos algún fichero de la parte servidora de la aplicación (ficheros Java y ficheros de configuración), debemos reiniciar el servidor Tomcat embebido que hemos levantado. 
-Si modificamos algún fichero de la parte cliente de la aplicación (ficheros TS, CSS, HTML...), la aplicación se recargará de forma automática y podremos ver dichos cambios aplicados de forma inmediata en el navegador. 
+Si modificamos algún fichero de la parte cliente de la aplicación (ficheros TS, CSS, HTML...), la aplicación se recargará de forma automática y podremos ver dichos cambios aplicados de forma inmediata en el navegador. Si modificamos algún fichero del módulo sie-graphics tendremos que ejecutar el siguiente comando en el directorio de dicho módulo:
 
-### Ejecución de tests
-En la aplicación se han incluido una serie de tests que permiten probar todas las funcionalidades incluidas.
+    grunt dev
 
-Hay tests solo en la parte servidora. Son tests de [JUnit][] y están ubicados en [src/test/java/](src/test/java/). Pueden ejecutarse mendiante [Maven][]:
-
-```bash
-mvn clean test
-```
 
 ### Más información
 La base de la aplicación ha sido generada usando JHipster 4.6.2. Puede consultarse más información en la [página oficial](http://www.jhipster.tech/documentation-archive/v4.6.2 "JHipster").
