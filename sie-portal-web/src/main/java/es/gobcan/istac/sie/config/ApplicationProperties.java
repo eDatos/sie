@@ -8,35 +8,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
 
-    private final Dataset dataset = new Dataset();
-    
     private final Visualizer visualizer = new Visualizer();
     
     private final Metadata metadata = new Metadata();
     
-    public Dataset getDataset() {
-        return dataset;
-    }
-
     public Visualizer getVisualizer() {
         return visualizer;
     }
 
     public Metadata getMetadata() {
         return metadata;
-    }
-
-    public static class Dataset {
-        
-        private String evolucionElectoral;
-
-        public String getEvolucionElectoral() {
-            return evolucionElectoral;
-        }
-        
-        public void setEvolucionElectoral(String evolucionElectoral) {
-            this.evolucionElectoral = evolucionElectoral;
-        }
     }
 
     public static class Visualizer {

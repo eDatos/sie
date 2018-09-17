@@ -1,6 +1,6 @@
 export interface GenericConfig {
     dataset: {
-        evolucionElectoral,
+        evolucionElectoralKey,
         metadata,
         data
     };

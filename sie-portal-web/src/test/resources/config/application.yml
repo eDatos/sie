@@ -84,8 +84,6 @@ jhipster:
 # ===================================================================
 
 application:
-    dataset:
-        evolucionElectoral: /datasets/ISTAC/C00010A_000007/~latest.json
     visualizer:
         showHeader: false
         showRightsHolder: false

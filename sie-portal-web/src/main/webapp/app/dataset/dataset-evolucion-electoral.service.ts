@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ConfigService, MetadataService } from '../config';
 import { Lugar } from './lugar.model';
 import { ProcesoElectoral } from './proceso-electoral.model';
+import { TipoEleccionesDatasetUrlService } from './tipo-elecciones-dataset-url.service';
 
 const GEOGRAPHIC_DIMENSION = 'GEOGRAPHIC_DIMENSION';
 const FECHA_ELECCION = 'FECHA_ELECCION';
@@ -26,15 +27,20 @@ export class DatasetEvolucionElectoralService {
     constructor(
         private http: Http,
         private configService: ConfigService,
-        private metadataService: MetadataService
+        private metadataService: MetadataService,
+        private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService
     ) { }
 
     getListaLugares(): Promise<Lugar[]> {
         if (!this.promesaLugares) {
             this.promesaLugares = new Promise<Lugar[]>((resolve) => {
-                this.doGetMetadata().subscribe((json) => {
-                    resolve(this.parseListaLugares(json));
-                });
+                this.doGetMetadata().subscribe(
+                    (json) => {
+                        resolve(this.parseListaLugares(json));
+                    },
+                    () => {
+                        resolve([]);
+                    });
             });
         }
         return this.promesaLugares;
@@ -46,8 +52,11 @@ export class DatasetEvolucionElectoralService {
 
     private doGetMetadata(): Observable<any> {
         const config = this.configService.getConfig();
-        return this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey).flatMap((endpoint) => {
-            return this.http.get(`${endpoint}/v1.0${config.dataset.evolucionElectoral}${config.dataset.metadata}`)
+        return Observable.zip(
+            this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey),
+            this.tipoEleccionesDatasetUrlService.getDatasetIdByTipoElecciones(config.dataset.evolucionElectoralKey),
+        ).flatMap((responses) => {
+            return this.http.get(`${responses[0]}/v1.0${responses[1].datasetUrl}${config.dataset.metadata}`)
                 .map((res: Response) => res.json());
         });
     }
@@ -62,9 +71,14 @@ export class DatasetEvolucionElectoralService {
 
     getProcesosElectoralesByRegionId(id: string): Promise<ProcesoElectoral[]> {
         return new Promise<ProcesoElectoral[]>((resolve) => {
-            this.doGetDataByRegionId(id).subscribe((json) => {
-                resolve(this.parseListaProcesosElectorales(json));
-            });
+            this.doGetDataByRegionId(id).subscribe(
+                (json) => {
+                    resolve(this.parseListaProcesosElectorales(json));
+                },
+                () => {
+                    resolve([]);
+                }
+            );
         });
     }
 
@@ -152,9 +166,12 @@ export class DatasetEvolucionElectoralService {
 
     private doGetDataByRegionId(id: string): Observable<any> {
         const config = this.configService.getConfig();
-        return this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey).flatMap((endpoint) => {
-            return this.http.get(`${endpoint}/v1.0${config.dataset.evolucionElectoral}${config.dataset.data}${id}`)
-            .map((res: Response) => res.json());
+        return Observable.zip(
+            this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey),
+            this.tipoEleccionesDatasetUrlService.getDatasetIdByTipoElecciones(config.dataset.evolucionElectoralKey),
+        ).flatMap((responses) => {
+            return this.http.get(`${responses[0]}/v1.0${responses[1].datasetUrl}${config.dataset.data}${id}`)
+                .map((res: Response) => res.json());
         });
     }
 

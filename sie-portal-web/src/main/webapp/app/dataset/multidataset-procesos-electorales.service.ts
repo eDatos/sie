@@ -4,52 +4,45 @@ import { ConfigService, MetadataService } from '../config';
 import { DatasetProcesoElectoral } from './dataset-proceso-electoral.model';
 import { Observable } from 'rxjs';
 import { MultidatasetProcesosElectorales } from './multidataset-procesos-electorales.model';
+import { TipoEleccionesDatasetUrlService } from './tipo-elecciones-dataset-url.service';
 
 @Injectable()
 export class MultidatasetProcesosElectoralesService {
-
-    private mappingUrl = 'api/tipo-elecciones-dataset';
 
     private multidatasetsCache = {};
 
     constructor(
         private http: Http,
         private configService: ConfigService,
-        private metadataService: MetadataService
+        private metadataService: MetadataService,
+        private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService
     ) { }
 
     getDatasetsByTipoElecciones(tipoElecciones: string): Promise<MultidatasetProcesosElectorales> {
         if (!this.multidatasetsCache[tipoElecciones]) {
             this.multidatasetsCache[tipoElecciones] = new Promise<MultidatasetProcesosElectorales>((resolve, reject) => {
-                this.getDatasetIdByTipoElecciones(tipoElecciones).subscribe(
-                    (tipoEleccionesDataset) => {
-                        this.doGetDatasets(tipoEleccionesDataset).subscribe(
-                            (json) => {
-                                if (json.data.nodes) {
-                                    resolve(this.parseMultidataset(json));
-                                } else {
-                                    reject();
-                                }
-                            },
-                            (error) => reject(error)
-                        );
+                this.doGetDatasets(tipoElecciones).subscribe(
+                    (json) => {
+                        if (json.data.nodes) {
+                            resolve(this.parseMultidataset(json));
+                        } else {
+                            reject();
+                        }
                     },
-                    (error) => {
-                        reject(error);
-                    });
+                    (error) => reject(error)
+                );
             });
         }
         return this.multidatasetsCache[tipoElecciones];
     }
 
-    private getDatasetIdByTipoElecciones(tipoElecciones: string): Observable<TipoEleccionesDataset> {
-        return this.http.get(`${this.mappingUrl}/${tipoElecciones}`).map((response) => response.json());
-    }
-
-    private doGetDatasets(tipoEleccionesDataset: TipoEleccionesDataset): Observable<any> {
+    private doGetDatasets(tipoElecciones: string): Observable<any> {
         const config = this.configService.getConfig();
-        return this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey).flatMap((endpoint) => {
-            return this.http.get(`${endpoint}/v1.0${tipoEleccionesDataset.datasetUrl}?_type=json`).map((response) => response.json());
+        return Observable.zip(
+            this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey),
+            this.tipoEleccionesDatasetUrlService.getDatasetIdByTipoElecciones(tipoElecciones),
+        ).flatMap((responses) => {
+            return this.http.get(`${responses[0]}/v1.0${responses[1].datasetUrl}?_type=json`).map((response) => response.json());
         });
     }
 
@@ -61,12 +54,4 @@ export class MultidatasetProcesosElectoralesService {
         const splittedUrn = json.urn.split('=');
         return new MultidatasetProcesosElectorales(splittedUrn[1], datasetList);
     }
-}
-
-class TipoEleccionesDataset {
-
-    constructor(
-        public tipoElecciones: string,
-        public datasetUrl: string
-    ) { }
 }

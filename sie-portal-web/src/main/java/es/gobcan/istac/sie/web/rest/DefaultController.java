@@ -29,7 +29,6 @@ public class DefaultController {
     public ModelAndView index(HttpServletRequest request) {
         log.debug("DefaultController index: Contextpath" + request.getContextPath() + "  ServletPath = " + request.getServletPath());
         Map<String, Object> model = new HashMap<>();
-        model.put("dataset", applicationProperties.getDataset());
         model.put("visualizer", applicationProperties.getVisualizer());
         model.put("metadata", applicationProperties.getMetadata());
         Map<String, Object> flashMap = (Map<String, Object>) RequestContextUtils.getInputFlashMap(request);

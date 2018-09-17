@@ -5,3 +5,5 @@ export * from './lugar.model';
 export * from './multidataset-procesos-electorales.model';
 export * from './multidataset-procesos-electorales.service';
 export * from './proceso-electoral.model';
+export * from './tipo-elecciones-dataset-url.model';
+export * from './tipo-elecciones-dataset-url.service';
