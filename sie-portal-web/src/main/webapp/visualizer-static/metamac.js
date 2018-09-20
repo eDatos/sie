@@ -59697,10 +59697,11 @@ if(this.$element.prop("multiple"))this.current(function(d){var e=[];a=[a],a.push
     App.Constants = {
         // See variables.less        
         colors: {
-            istacBlueWhite: "#B3D9FF",
+            istacBlueScale: ['#EAF6FE', '#D5EDFA', '#8CD2EA', '#2CBCE2', '#00A6DC', '#008BD0', '#0072A2', '#005980', '#003956', '#002E48'],
+            istacBlueWhite: "#EAF6FE",
             istacBlueLight: "#8CD2EA",
             istacBlueMedium: "#008BD0",
-            istacBlueDark: "#005980",
+            istacBlueDark: "#002E48",
             istacYellow: '#EBCC5C',
 
             istacWhite: "#FFFFFF",
@@ -76302,8 +76303,6 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
             },
 
             colorAxis: {
-                minColor: Constants.colors.istacBlueWhite,
-                maxColor: Constants.colors.istacBlueDark
             },
 
             plotOptions: {
@@ -76596,9 +76595,18 @@ if (typeof this === 'object') this.LRUCache = LRUCache;
             var dataClasses = [];
             var rangeLimits = this.model.createRangeLimits();
             for (var i = 0; i < rangeLimits.length - 1; i++) {
-                dataClasses[i] = { from: rangeLimits[i], to: rangeLimits[i + 1] };
+                dataClasses[i] = { 
+                    from: rangeLimits[i],
+                    to: rangeLimits[i + 1],
+                    color: App.Constants.colors.istacBlueScale[this._calculateColorIndex(i + 1, rangeLimits.length)]
+                };
             }
             return dataClasses;
+        },
+
+        _calculateColorIndex: function (elementIndex, totalElements) {
+            console.log("El mapeo es --> " + Math.trunc(elementIndex / totalElements * 10));
+            return Math.trunc(elementIndex / totalElements * 10);
         },
 
         _redrawLegend: function () {

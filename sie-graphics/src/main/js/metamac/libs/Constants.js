@@ -6,10 +6,11 @@
     App.Constants = {
         // See variables.less        
         colors: {
-            istacBlueWhite: "#B3D9FF",
+            istacBlueScale: ['#EAF6FE', '#D5EDFA', '#8CD2EA', '#2CBCE2', '#00A6DC', '#008BD0', '#0072A2', '#005980', '#003956', '#002E48'],
+            istacBlueWhite: "#EAF6FE",
             istacBlueLight: "#8CD2EA",
             istacBlueMedium: "#008BD0",
-            istacBlueDark: "#005980",
+            istacBlueDark: "#002E48",
             istacYellow: '#EBCC5C',
 
             istacWhite: "#FFFFFF",

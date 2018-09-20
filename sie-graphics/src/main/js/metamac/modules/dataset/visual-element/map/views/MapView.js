@@ -61,8 +61,6 @@
             },
 
             colorAxis: {
-                minColor: Constants.colors.istacBlueWhite,
-                maxColor: Constants.colors.istacBlueDark
             },
 
             plotOptions: {
@@ -355,9 +353,18 @@
             var dataClasses = [];
             var rangeLimits = this.model.createRangeLimits();
             for (var i = 0; i < rangeLimits.length - 1; i++) {
-                dataClasses[i] = { from: rangeLimits[i], to: rangeLimits[i + 1] };
+                dataClasses[i] = { 
+                    from: rangeLimits[i],
+                    to: rangeLimits[i + 1],
+                    color: App.Constants.colors.istacBlueScale[this._calculateColorIndex(i + 1, rangeLimits.length)]
+                };
             }
             return dataClasses;
+        },
+
+        _calculateColorIndex: function (elementIndex, totalElements) {
+            console.log("El mapeo es --> " + Math.trunc(elementIndex / totalElements * 10));
+            return Math.trunc(elementIndex / totalElements * 10);
         },
 
         _redrawLegend: function () {
