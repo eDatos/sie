@@ -131,7 +131,7 @@
         },
 
         destroy: function () {
-            if (this.map) {
+            if (this.map && this.map.renderTo) {
                 this.map.destroy();
             }
 

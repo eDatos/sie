@@ -114,8 +114,8 @@
                 this._moveAllDimensionsToZone('left');
 
                 this._forceMeasureDimensionInZone('axisy');
-                this._forceTimeDimensionInZone('fixed');
                 this._forceGeographicDimensionInZone('fixed');
+                this._forceTimeDimensionInZone('fixed');
 
                 this._applyVisualizationPreselections();
             }
