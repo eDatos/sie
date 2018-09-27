@@ -183,31 +183,32 @@ public class ApplicationProperties {
         }
 
         public String getStatisticalResourcesKey() {
-            if (this.isInternal()) {
-                return this.getStatisticalResourcesInternalKey();
+            if (isInternal()) {
+                return getStatisticalResourcesInternalKey();
             } else {
-                return this.getStatisticalResourcesExternalKey();
+                return getStatisticalResourcesExternalKey();
             }
         }
 
         public String getStructuralResourcesKey() {
-            if (this.isInternal()) {
-                return this.getStructuralResourcesInternalKey();
+            if (isInternal()) {
+                return getStructuralResourcesInternalKey();
             } else {
-                return this.getStructuralResourcesExternalKey();
+                return getStructuralResourcesExternalKey();
             }
         }
 
         public String getIndicatorsKey() {
-            if (this.isInternal()) {
-                return this.getIndicatorsInternalKey();
+            if (isInternal()) {
+                return getIndicatorsInternalKey();
             } else {
-                return this.getIndicatorsExternalKey();
+                return getIndicatorsExternalKey();
             }
         }
 
         private boolean isInternal() {
-            return Constants.INTERNAL_CONFIG_ID.equalsIgnoreCase(this.getInstallationType());
+            return Constants.INTERNAL_CONFIG_ID.equalsIgnoreCase(getInstallationType());
+        }
 
         public String getOrganisationUrnKey() {
             return organisationUrnKey;
