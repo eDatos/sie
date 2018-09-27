@@ -7,8 +7,7 @@ export interface GenericConfig {
 
     visualizer: {
         showHeader,
-        showRightsHolder,
-        organisationUrn
+        showRightsHolder
     };
 
     metadata: {
@@ -23,7 +22,9 @@ export interface GenericConfig {
         exportEndpointKey,
         googleTrackingIdKey,
         navbarPathKey,
-        footerPathKey
+        footerPathKey,
+        organisationUrnKey,
+        geographicalGranularityUrnKey
     };
 
     baseUrl

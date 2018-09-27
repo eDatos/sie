@@ -59,8 +59,10 @@
 			getPropertyById(indicatorsKey),
 			getPropertyById(permalinksEndpointKey),
 			getPropertyById(exportEndpointKey),
-			getPropertyById(statisticalVisualizerKey)
-		).done(function (multidatasetResponse, statisticalResources, structuralResources, indicators, permalinks, exportEndpoint, statisticalVisualizer) {
+			getPropertyById(statisticalVisualizerKey),
+			getPropertyById(organisationUrnKey),
+			getPropertyById(geographicalGranularityUrnKey),
+		).done(function (multidatasetResponse, statisticalResources, structuralResources, indicators, permalinks, exportEndpoint, statisticalVisualizer, organisationUrn, geographicalGranularityUrn) {
 			App.endpoints['statistical-resources'] = statisticalResources[0].value + '/v1.0';
 			App.endpoints['structural-resources'] = structuralResources[0].value + '/v1.0';
 			App.endpoints['indicators'] = indicators[0].value + '/v1.0';
@@ -71,7 +73,8 @@
 
 			App.config['showHeader'] = /*[[${visualizer.getShowHeader()}]]*/ false;
 			App.config['showRightsHolder'] = /*[[${visualizer.getShowRightsHolder()}]]*/ false;
-			App.config['organisationUrn'] = /*[[${visualizer.getOrganisationUrn()}]]*/ 'urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ISTAC';
+			App.config['organisationUrn'] = organisationUrn[0].value;
+			App.config['geographicalGranularityUrn'] = geographicalGranularityUrn[0].value;
 			App.config['installationType'] = /*[[${metadata.getInstallationType()}]]*/ 'EXTERNAL';
 
 			App.queryParams['agency'] = 'ISTAC';

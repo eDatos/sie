@@ -5,9 +5,9 @@
     <script>
         function executeGoogleAnalyticsInlineCode(trackingId) {
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
-            gtag('config', trackingId); 
+            gtag('config', trackingId);
         }
     </script>
     <base href="/" th:href="@{/}" />
@@ -37,8 +37,7 @@
         window.CONFIGURATION.visualizer = {};
         window.CONFIGURATION.visualizer.showHeader = /*[[${visualizer.getShowHeader()}]]*/ false;
         window.CONFIGURATION.visualizer.showRightsHolder = /*[[${visualizer.getShowRightsHolder()}]]*/ false;
-        window.CONFIGURATION.visualizer.organisationUrn = /*[[${visualizer.getOrganisationUrn()}]]*/ 'urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ISTAC';
-        
+
         window.CONFIGURATION.metadata = {};
         window.CONFIGURATION.metadata.endpoint = /*[[${metadata.getEndpoint()}]]*/ 'http://estadisticas.arte-consultores.com/cmetadata/v1.0';
         window.CONFIGURATION.metadata.installationType = /*[[${metadata.getInstallationType()}]]*/ 'INTERNAL';
@@ -52,11 +51,13 @@
         window.CONFIGURATION.metadata.googleTrackingIdKey = /*[[${metadata.getGoogleTrackingIdKey()}]]*/ 'metamac.analytics.google.tracking_id';
         window.CONFIGURATION.metadata.navbarPathKey = /*[[${metadata.getNavbarPathKey()}]]*/ 'sie.style.header.url';
         window.CONFIGURATION.metadata.footerPathKey = /*[[${metadata.getFooterPathKey()}]]*/ 'sie.style.footer.url';
-        
+        window.CONFIGURATION.metadata.organisationUrnKey = /*[[${metadata.getOrganisationUrnKey()}]]*/ 'metamac.organisation.urn';
+        window.CONFIGURATION.metadata.geographicalGranularityUrnKey = /*[[${metadata.getGeographicalGranularityUrnKey()}]]*/ 'metamac.default.codelist.geographical_granularity.urn';
+
         var requestURL = /*[[${#httpServletRequest.getRequestURL().toString()}]]*/ 'http://localhost:8080/';
-		var requestURI = /*[[${#httpServletRequest.getRequestURI().toString()}]]*/ '';
-		var contextPath = /*[[${#httpServletRequest.getContextPath().toString()}]]*/ '';
-		window.CONFIGURATION.baseUrl = requestURL.replace(requestURI, contextPath) + "/"; 
+        var requestURI = /*[[${#httpServletRequest.getRequestURI().toString()}]]*/ '';
+        var contextPath = /*[[${#httpServletRequest.getContextPath().toString()}]]*/ '';
+        window.CONFIGURATION.baseUrl = requestURL.replace(requestURI, contextPath) + "/";
        	/*]]>*/
     </script>
 
