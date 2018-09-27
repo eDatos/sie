@@ -9,9 +9,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class ApplicationProperties {
 
     private final Visualizer visualizer = new Visualizer();
-    
-    private final Metadata metadata = new Metadata();
-    
+
+    private final Metadata   metadata   = new Metadata();
+
     public Visualizer getVisualizer() {
         return visualizer;
     }
@@ -21,38 +21,29 @@ public class ApplicationProperties {
     }
 
     public static class Visualizer {
-        
+
         private Boolean showHeader;
         private Boolean showRightsHolder;
-        private String organisationUrn;
-        
+
         public Boolean getShowHeader() {
             return showHeader;
         }
-        
+
         public void setShowHeader(Boolean showHeader) {
             this.showHeader = showHeader;
         }
-        
+
         public Boolean getShowRightsHolder() {
             return showRightsHolder;
         }
-        
+
         public void setShowRightsHolder(Boolean showRightsHolder) {
             this.showRightsHolder = showRightsHolder;
         }
-        
-        public String getOrganisationUrn() {
-            return organisationUrn;
-        }
-        
-        public void setOrganisationUrn(String organisationUrn) {
-            this.organisationUrn = organisationUrn;
-        }
     }
-    
+
     public static class Metadata {
-        
+
         private String endpoint;
         private String installationType;
         private String statisticalResourcesInternalKey;
@@ -68,7 +59,9 @@ public class ApplicationProperties {
         private String googleTrackingIdKey;
         private String navbarPathKey;
         private String footerPathKey;
-        
+        private String organisationUrnKey;
+        private String geographicalGranularityUrnKey;
+
         public String getEndpoint() {
             return endpoint;
         }
@@ -80,7 +73,7 @@ public class ApplicationProperties {
         public String getInstallationType() {
             return installationType;
         }
-        
+
         public void setInstallationType(String installationType) {
             this.installationType = installationType;
         }
@@ -100,7 +93,7 @@ public class ApplicationProperties {
         public void setStatisticalResourcesExternalKey(String statisticalResourcesExternalKey) {
             this.statisticalResourcesExternalKey = statisticalResourcesExternalKey;
         }
-        
+
         public String getStructuralResourcesInternalKey() {
             return structuralResourcesInternalKey;
         }
@@ -116,7 +109,7 @@ public class ApplicationProperties {
         public void setStructuralResourcesExternalKey(String structuralResourcesExternalKey) {
             this.structuralResourcesExternalKey = structuralResourcesExternalKey;
         }
-        
+
         public String getIndicatorsInternalKey() {
             return indicatorsInternalKey;
         }
@@ -136,7 +129,7 @@ public class ApplicationProperties {
         public String getStatisticalVisualizerKey() {
             return statisticalVisualizerKey;
         }
-        
+
         public void setStatisticalVisualizerKey(String statisticalVisualizerKey) {
             this.statisticalVisualizerKey = statisticalVisualizerKey;
         }
@@ -156,7 +149,7 @@ public class ApplicationProperties {
         public void setPermalinksEndpointKey(String permalinksEndpointKey) {
             this.permalinksEndpointKey = permalinksEndpointKey;
         }
-        
+
         public String getExportEndpointKey() {
             return exportEndpointKey;
         }
@@ -172,7 +165,7 @@ public class ApplicationProperties {
         public void setGoogleTrackingIdKey(String googleTrackingIdKey) {
             this.googleTrackingIdKey = googleTrackingIdKey;
         }
-        
+
         public String getNavbarPathKey() {
             return navbarPathKey;
         }
@@ -190,31 +183,47 @@ public class ApplicationProperties {
         }
 
         public String getStatisticalResourcesKey() {
-            if (this.isInternal()) {
-                return this.getStatisticalResourcesInternalKey();
+            if (isInternal()) {
+                return getStatisticalResourcesInternalKey();
             } else {
-                return this.getStatisticalResourcesExternalKey();
+                return getStatisticalResourcesExternalKey();
             }
         }
-        
+
         public String getStructuralResourcesKey() {
-            if (this.isInternal()) {
-                return this.getStructuralResourcesInternalKey();
+            if (isInternal()) {
+                return getStructuralResourcesInternalKey();
             } else {
-                return this.getStructuralResourcesExternalKey();
+                return getStructuralResourcesExternalKey();
             }
         }
-        
+
         public String getIndicatorsKey() {
-            if (this.isInternal()) {
-                return this.getIndicatorsInternalKey();
+            if (isInternal()) {
+                return getIndicatorsInternalKey();
             } else {
-                return this.getIndicatorsExternalKey();
+                return getIndicatorsExternalKey();
             }
         }
 
         private boolean isInternal() {
-            return Constants.INTERNAL_CONFIG_ID.equalsIgnoreCase(this.getInstallationType());
+            return Constants.INTERNAL_CONFIG_ID.equalsIgnoreCase(getInstallationType());
+        }
+
+        public String getOrganisationUrnKey() {
+            return organisationUrnKey;
+        }
+
+        public void setOrganisationUrnKey(String organisationUrnKey) {
+            this.organisationUrnKey = organisationUrnKey;
+        }
+
+        public String getGeographicalGranularityUrnKey() {
+            return geographicalGranularityUrnKey;
+        }
+
+        public void setGeographicalGranularityUrnKey(String geographicalGranularityUrnKey) {
+            this.geographicalGranularityUrnKey = geographicalGranularityUrnKey;
         }
     }
 }

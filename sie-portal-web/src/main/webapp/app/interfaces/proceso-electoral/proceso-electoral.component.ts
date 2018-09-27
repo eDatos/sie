@@ -103,7 +103,9 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             this.metadataService.getPropertyById(config.metadata.permalinksEndpointKey),
             this.metadataService.getPropertyById(config.metadata.exportEndpointKey),
             this.metadataService.getPropertyById(config.metadata.statisticalVisualizerKey),
-            (statisticalResources, structuralResources, indicators, permalinks, exportEndpoint, statisticalVisualizer) => {
+            this.metadataService.getPropertyById(config.metadata.organisationUrnKey),
+            this.metadataService.getPropertyById(config.metadata.geographicalGranularityUrnKey),
+            (statisticalResources, structuralResources, indicators, permalinks, exportEndpoint, statisticalVisualizer, organisationUrn, geographicalGranularityUrn) => {
                 App.endpoints['statistical-resources'] = statisticalResources + '/v1.0';
                 App.endpoints['structural-resources'] = structuralResources + '/v1.0';
                 App.endpoints['indicators'] = indicators + '/v1.0';
@@ -114,7 +116,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
 
                 App.config['showHeader'] = config.visualizer.showHeader;
                 App.config['showRightsHolder'] = config.visualizer.showRightsHolder;
-                App.config['organisationUrn'] = config.visualizer.organisationUrn;
+                App.config['organisationUrn'] = organisationUrn;
+                App.config['geographicalGranularityUrn'] = geographicalGranularityUrn;
                 App.config['installationType'] = config.metadata.installationType;
 
                 App.queryParams['agency'] = 'ISTAC';

@@ -70,7 +70,7 @@ module.exports = (grunt) ->
 
                 paths.js + "/metamac/Controller.js"
                 paths.js + "/metamac/AppRouter.js"
-
+                
                 # svg
                 paths.js + "/metamac/modules/svg/Exporter.js"
                 paths.js + "/metamac/modules/svg/SVGNode.js"
@@ -96,6 +96,11 @@ module.exports = (grunt) ->
                 paths.modules + "/dataset/DatasetShareView.js"
                 paths.modules + "/dataset/DatasetDownloadView.js"
                 paths.modules + "/dataset/DatasetEmbedView.js"
+
+                # Utils
+                paths.js + "/metamac/modules/dataset/utils/VisualElementManager.js"
+                paths.js + "/metamac/modules/dataset/utils/FullScreen.js"
+                paths.js + "/metamac/modules/dataset/utils/URNUtils.js"
 
                 # data
                 paths.js + "/metamac/modules/dataset/model/data/Attributes.js"
@@ -129,7 +134,6 @@ module.exports = (grunt) ->
                 paths.js + "/metamac/modules/dataset/filter/FilterOptionsDimensionRestriction.js"
                 paths.js + "/metamac/modules/dataset/filter/FilterOptionsTable.js"
                 paths.js + "/metamac/modules/dataset/filter/FilterOptions.js"
-
 
                 paths.js + "/metamac/modules/dataset/filter/models/FilterTableInfo.js",
                 paths.js + "/metamac/modules/dataset/filter/models/FilterZone.js",
@@ -198,10 +202,6 @@ module.exports = (grunt) ->
                 paths.js + "/metamac/modules/dataset/visual-element/map/views/LegendView.js"
                 paths.js + "/metamac/modules/dataset/visual-element/map/views/CreditsView.js"
                 paths.js + "/metamac/modules/dataset/visual-element/map/views/RangesView.js"
-
-                # Utils
-                paths.js + "/metamac/modules/dataset/utils/VisualElementManager.js"
-                paths.js + "/metamac/modules/dataset/utils/FullScreen.js"
 
                 # Selection
                 paths.js + "/metamac/modules/selection/SelectionView.js"

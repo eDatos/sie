@@ -145,7 +145,6 @@ application:
     visualizer:
         showHeader: false
         showRightsHolder: false
-        organisationUrn: urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ISTAC
     metadata:
         statisticalResourcesInternalKey: metamac.statistical_resources.rest.internal
         statisticalResourcesExternalKey: metamac.statistical_resources.rest.external
@@ -160,3 +159,5 @@ application:
         googleTrackingIdKey: metamac.analytics.google.tracking_id
         navbarPathKey: sie.style.header.url
         footerPathKey: sie.style.footer.url
+        organisationUrnKey: metamac.organisation.urn
+        geographicalGranularityUrnKey: metamac.default.codelist.geographical_granularity.urn
