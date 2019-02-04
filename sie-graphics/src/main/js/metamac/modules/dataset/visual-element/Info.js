@@ -9,7 +9,7 @@
         this._type = 'info';
         this.dataset = options.dataset;
         this.optionsModel = options.optionsModel;
-
+        this.filterDimensions = options.filterDimensions;
         this.api = new App.dataset.StructuralResourcesApi({ metadata: this.dataset.metadata });
     };
 
@@ -24,6 +24,7 @@
                 this.getDimensions();
                 this.getMeasureConcepts();
                 this.getDatasetAttributes();
+                this._getSelectionApiUrl();
                 this._bindEvents();
                 this.render();
             }
@@ -48,6 +49,21 @@
         getDatasetAttributes: function () {
             this.datasetAttributes = this.dataset.data.getDatasetAttributes();
             // Instead of a callback we use hasNewData
+        },
+
+        _updateSelectionApiUrl: function () {
+            this._getSelectionApiUrl();
+            this.render();
+        },
+
+        _getSelectionApiUrl: function () {
+            var apiUrl = this.dataset.metadata.getApiUrl();
+            var apiRequest = new App.dataset.data.ApiRequest({ metadata: this.dataset.metadata, dimensions: this._getDimensionsForApiUrl(), singleRequest: false });
+            this.selectionApiUrl = {
+                name: apiUrl.name + '?dim=' + apiRequest.request.queryParams().dim,
+                href: apiUrl.href + '?dim=' + apiRequest.request.queryParams().dim,
+                isVisible: !!apiRequest.request.queryParams().dim
+            }
         },
 
         getDimensions: function () {
@@ -92,6 +108,7 @@
 
         _bindEvents: function () {
             this.listenTo(this.dataset.data, "hasNewData", this.updateDatasetAttributes);
+            this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", this._updateSelectionApiUrl);
         },
 
         _unbindEvents: function () {
@@ -106,7 +123,7 @@
                 datasetAttributes: this.datasetAttributes,
                 measureConcepts: this.measureConcepts,
                 nonMeasureDimensions: this.nonMeasureDimensions,
-
+                urlParametersForDimensionSelection: this.selectionApiUrl,
                 rightsHolder: this.showRightsHolderText() ? this.getRightsHolderText() : ''
             };
 
@@ -123,6 +140,18 @@
             });
 
             scrollGroup.perfectScrollbar('update');
+        },
+
+        _getDimensionsForApiUrl() {
+            return _.map(this.filterDimensions.getDimensionsWithSomeRepresentationNotSelected(), function (dimension) {
+                var representations = _.map(dimension.get("representations").where({ selected: true}), function(representation) {
+                    return representation.id;
+                });
+                return {
+                    id: dimension.id,
+                    representations: representations
+                };
+            });
         },
 
         _isIndicator: function () {
