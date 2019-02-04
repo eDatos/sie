@@ -58,11 +58,11 @@
 
         _getSelectionApiUrl: function () {
             var apiUrl = this.dataset.metadata.getApiUrl();
-            var apiRequest = new App.dataset.data.ApiRequest({ metadata: this.dataset.metadata, dimensions: this._getDimensionsForApiUrl(), singleRequest: false });
+            var dimParameter = App.DimensionsUtils.getDimensionsParameterForDatasetRequest(this._getDimensionsForApiUrl());
             this.selectionApiUrl = {
-                name: apiUrl.name + '?dim=' + apiRequest.request.queryParams().dim,
-                href: apiUrl.href + '?dim=' + apiRequest.request.queryParams().dim,
-                isVisible: !!apiRequest.request.queryParams().dim
+                name: apiUrl.name + '?dim=' + dimParameter,
+                href: apiUrl.href + '?dim=' + dimParameter,
+                isVisible: !!dimParameter
             }
         },
 
