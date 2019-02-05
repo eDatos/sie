@@ -132,7 +132,7 @@
         _updateByClick : function (point) {
 	        var attribute = this.delegate.getCellInfoAtMousePosition(point);
 	        if (attribute) {
-                this.view.toggleClickedCellByRelativePoint(point);
+	            this.view.toggleClickedCellByRelativePoint(point);
 	            this.$innerTooltip.html(attribute);
 	            var position = this._getPosition(point);
 	            this.$tooltip.css({	                        
@@ -141,7 +141,7 @@
 	            });
 	            this.$tooltip.toggle();
 	        } else {
-                this.view.clearClickedCell();
+	            this.view.clearClickedCell();
 	            this._hide();
 	        }
         },
