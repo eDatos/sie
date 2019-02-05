@@ -235,7 +235,7 @@
 
                 this.ctx.fillStyle = this.delegate.style.headerCell.background({
                     columns: _.range(cell.index, cell.indexEnd)
-                }, this.view);
+                }, this.view, cell);
                 this.ctx.stroke();
                 this.ctx.fill();
                 this.ctx.closePath();

@@ -17,6 +17,9 @@
                 font: Constants.font.body.size + " " + Constants.font.family.sansSerif,
                 color: Constants.colors.istacBlack,
                 background: function (cell, view) {
+                    if (view.isCellClicked(cell)) {
+                        return Constants.colors.istacGreyMedium;
+                    }
 
                     var isRowSelected = view.isSelectionActive({ rowsCells: [cell.y] });
                     var isColumnSelected = view.isSelectionActive({ columns: [cell.x] });
@@ -45,7 +48,10 @@
                     default: Constants.font.body.size + " " + Constants.font.family.sansSerif,
                 },
                 color: Constants.colors.istacBlack,
-                background: function (current, view) {
+                background: function (current, view, cell) {
+                    if (view.isCellClicked(cell)) {
+                         return Constants.colors.istacGreyMedium;
+                    }
                     if (view.isSelectionActive(current)) {
                         return Constants.colors.istacGreyLight;
                     } else {

@@ -66,6 +66,10 @@
             return new Point(x, y);
         },
 
+        cellAtPoint: function (point) {
+            return this.relativePoint2Cell(point);
+        },
+
         // IDEA: Improve implementation. It is not so transparent METAMAC-2282
         relativePoint2Cell: function (point) {
             var absolutePoint = this.relativePoint2AbsolutePoint(point);
