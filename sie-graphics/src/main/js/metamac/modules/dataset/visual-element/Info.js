@@ -142,7 +142,7 @@
             scrollGroup.perfectScrollbar('update');
         },
 
-        _getDimensionsForApiUrl() {
+        _getDimensionsForApiUrl: function () {
             return _.map(this.filterDimensions.getDimensionsWithSomeRepresentationNotSelected(), function (dimension) {
                 var representations = _.map(dimension.get("representations").where({ selected: true}), function(representation) {
                     return representation.id;
