@@ -358,8 +358,7 @@
         if (!zone || this.clickedCell) {
             this.clearClickedCell();
         } else {
-            var cell = zone.cellAtPoint(point);
-            this.clickedCell = cell;
+            this.clickedCell = zone.cellAtPoint(point);
             this.repaintZonesWithCells();
         }
     };
