@@ -353,7 +353,7 @@
         return this.clickedCell && this.clickedCell.x === cell.x && this.clickedCell.y === cell.y;
     };
 
-    App.Table.View.prototype.setClickedCellByRelativePoint = function (point) {
+    App.Table.View.prototype.toggleClickedCellByRelativePoint = function (point) {
         var zone = this.findZoneWithCellsAtMousePosition();
         if (!zone || this.clickedCell) {
             this.clearClickedCell();
