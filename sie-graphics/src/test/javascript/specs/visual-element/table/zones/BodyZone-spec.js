@@ -182,7 +182,7 @@ describe("[TableCanvas] BodyZone", function () {
         expect(zone.needRepaint).to.be.false;
     });
 
-    it("should convert a relative point to a cell", function () {
+    it("should convert a point to a cell", function () {
         var dataSource = App.Table.DataSource.factory(5, 10);
 
         var zone = new Zone({
