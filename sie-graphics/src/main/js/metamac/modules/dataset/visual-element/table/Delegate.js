@@ -48,10 +48,13 @@
                     default: Constants.font.body.size + " " + Constants.font.family.sansSerif,
                 },
                 color: Constants.colors.istacBlack,
-                background: function (current, view, cell) {
+                background: function (cell, view, isRow) {
                     if (view.isCellClicked(cell)) {
                          return Constants.colors.istacGreyMedium;
                     }
+
+                    var range = _.range(cell.index, cell.indexEnd);
+                    var current = isRow ? { rows: range } : { columns: range };
                     if (view.isSelectionActive(current)) {
                         return Constants.colors.istacGreyLight;
                     } else {
