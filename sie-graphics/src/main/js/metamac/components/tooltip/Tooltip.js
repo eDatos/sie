@@ -167,12 +167,10 @@
 
         _mouseMove : function (e) {
             var offset = this._getOffset();
-            var point = {
-                x : e.pageX - offset.left,
-                y : e.pageY - offset.top
-            };
+            var point = new App.Table.Point(e.pageX - offset.left, e.pageY - offset.top);
             this._update(point);
         },
+
         _click : function (e) {
             var offset = this._getOffset();
             var point = new App.Table.Point(e.pageX - offset.left, e.pageY - offset.top);
@@ -180,5 +178,4 @@
         }
 
     };
-
 }());

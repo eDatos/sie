@@ -317,7 +317,7 @@
 
             if (zone === "bodyZone" || zone === "leftHeaderZone" || zone === "topHeaderZone") {
                 if (zone === "bodyZone") {
-                    cell = this.bodyZone.relativePoint2Cell(arg);
+                    cell = this.bodyZone.cellAtPoint(arg);
                     var isOnlyACellSelected = this.selection.rowsCells.length === 1 && this.selection.columns.length === 1;
                     var firstCellSelectedEqSelectedCell = this.selection.rowsCells[0] === cell.y && this.selection.columns[0] === cell.x;
 
