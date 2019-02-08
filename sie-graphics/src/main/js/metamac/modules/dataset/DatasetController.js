@@ -95,13 +95,15 @@
             } else {
                 this.metadata = metadata;
                 metadata.fetch().then(function () {
+                    self.filtersModel = new App.modules.dataset.FiltersModel();
                     self.filterDimensions = App.modules.dataset.filter.models.FilterDimensions.initializeWithMetadata(metadata);
                     self.selectionView = new App.modules.selection.SelectionView({ controller: self, collection: self.filterDimensions, metadata: metadata });
-                    self.visualizationView = new App.modules.dataset.DatasetView({ controller: self, filterDimensions: self.filterDimensions, metadata: metadata });
+                    self.visualizationView = new App.modules.dataset.DatasetView({ controller: self, filterDimensions: self.filterDimensions, metadata: metadata, filtersModel: self.filtersModel });
 
                     if (datasetIdentifier.permalinkId) {
                         App.modules.dataset.DatasetPermalink.retrievePermalink(datasetIdentifier.permalinkId)
                             .done(function (content) {
+                                self.filtersModel.importJSON(content.filters);
                                 self.filterDimensions.importJSON(content.selection);
                                 if (!window.location.hash.includes(content.hash)) {
                                     self.visualizationView.optionsModel.set('mustApplyVisualizationRestrictions', true);

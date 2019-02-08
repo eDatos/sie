@@ -18,6 +18,7 @@
             this.controller = options.controller;
             this.filterDimensions = options.filterDimensions;
             this.metadata = options.metadata;
+            this.filtersModel = options.filtersModel;
 
             this.optionsModel = new App.modules.dataset.OptionsModel({
                 widget: App.config.widget,
@@ -26,7 +27,6 @@
                 mustApplyVisualizationRestrictions: !this.metadata.identifier().permalinkId
             });
 
-            this.filtersModel = new App.modules.dataset.FiltersModel();
             this.dataset = new App.dataset.Dataset({ metadata: this.metadata, filterDimensions: this.filterDimensions });
 
             this._initializeVisualElements();
@@ -43,6 +43,7 @@
 
             // Options bar
             this.optionsView = new App.modules.dataset.OptionsView({
+                filtersModel: this.filtersModel,
                 filterDimensions: this.filterDimensions,
                 optionsModel: this.optionsModel,
                 buttons: this.visualElements

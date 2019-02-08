@@ -13,6 +13,7 @@
         template: App.templateManager.get('dataset/dataset-options'),
 
         initialize: function (options) {
+            this.filtersModel = options.filtersModel;
             this.filterDimensions = options.filterDimensions;
             this.optionsModel = options.optionsModel;
             this.buttons = options.buttons;
@@ -175,7 +176,7 @@
             if (this.isInternalPortal()) {
                 modalContentView = new DisabledFeatureInternalPortalView();
             } else {
-                modalContentView = new App.modules.dataset.DatasetShareView({ filterDimensions: this.filterDimensions });
+                modalContentView = new App.modules.dataset.DatasetShareView({ filterDimensions: this.filterDimensions, filtersModel: this.filtersModel });
             }
             var title = I18n.t("filter.button.share");
             var modal = new App.components.modal.ModalView({ title: title, contentView: modalContentView });
@@ -188,7 +189,7 @@
             if (this.isInternalPortal()) {
                 modalContentView = new DisabledFeatureInternalPortalView();
             } else {
-                modalContentView = new App.modules.dataset.DatasetEmbedView({ filterDimensions: this.filterDimensions });
+                modalContentView = new App.modules.dataset.DatasetEmbedView({ filterDimensions: this.filterDimensions, filtersModel: this.filtersModel });
             }
             var title = I18n.t("filter.button.embed");
             var modal = new App.components.modal.ModalView({ title: title, contentView: modalContentView });
