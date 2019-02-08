@@ -10,6 +10,7 @@
         template: App.templateManager.get("dataset/dataset-embed"),
 
         initialize: function () {
+            this.filtersModel = this.options.filtersModel;
             this.filterDimensions = this.options.filterDimensions;
         },
 
@@ -34,7 +35,7 @@
         },
 
         savePermalink: function () {
-            var permalinkContent = DatasetPermalink.buildPermalinkContent(this.filterDimensions);
+            var permalinkContent = DatasetPermalink.buildPermalinkContent(this.filterDimensions, this.filtersModel);
             return DatasetPermalink.savePermalinkShowingCaptchaInElement(permalinkContent, this.$el);
         },
 

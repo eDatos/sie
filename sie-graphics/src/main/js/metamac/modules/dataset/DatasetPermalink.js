@@ -11,10 +11,11 @@
             return App.endpoints["permalinks"] + "/permalinks";
         },
 
-        buildPermalinkContent: function (filterDimensions) {
+        buildPermalinkContent: function (filterDimensions, filtersModel) {
             return JSON.stringify({
                 queryParams: App.queryParams,
                 hash: this.removePermalink(window.location.hash),
+                filters: filtersModel.exportJSON(),
                 selection: filterDimensions.exportJSON()
             });
         },
