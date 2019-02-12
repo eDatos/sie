@@ -16890,9 +16890,6 @@
 			fill: 'fillColor'
 		},
 
-		/**
-		 * Apply the fillOpacity to all fill positions
-		 */
 		getFillColor: function (fill) {
 			var markerOptions = this.options.marker;
 
