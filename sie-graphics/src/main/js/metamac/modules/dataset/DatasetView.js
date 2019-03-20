@@ -19,6 +19,7 @@
             this.filterDimensions = options.filterDimensions;
             this.metadata = options.metadata;
             this.filtersModel = options.filtersModel;
+            this.data = options.data;
 
             this.optionsModel = new App.modules.dataset.OptionsModel({
                 widget: App.config.widget,
@@ -26,8 +27,6 @@
                 filter: this.filterDimensions.hasMultidataset(),
                 mustApplyVisualizationRestrictions: !this.metadata.identifier().permalinkId
             });
-
-            this.dataset = new App.dataset.Dataset({ metadata: this.metadata, filterDimensions: this.filterDimensions });
 
             this._initializeVisualElements();
             this._initializeSidebarView();
@@ -51,7 +50,7 @@
 
             // visualization
             this.visualizationView = new App.modules.dataset.DatasetVisualizationView({
-                dataset: this.dataset,
+                data: this.data,
                 filterDimensions: this.filterDimensions,
                 optionsModel: this.optionsModel,
                 veElements: this.visualElements,
@@ -60,7 +59,6 @@
             });
 
             this.dimensionsView = new App.modules.dataset.DimensionsView({
-                dataset: this.dataset,
                 filterDimensions: this.filterDimensions,
                 optionsModel: this.optionsModel
             });
