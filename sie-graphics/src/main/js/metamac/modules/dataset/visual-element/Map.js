@@ -184,7 +184,7 @@
                 return;
             }
 
-            if (!this.chart) {
+            if (!this._mapExists()) {
                 this.load();
                 return;
             }
@@ -197,6 +197,10 @@
 
             this.updateTitle();
             this._mapContainerView.update(this._dataJson, this._geoJson, this.getTitle());
+        },
+
+        _mapExists: function() {
+            return this._mapContainerView && this._mapContainerView.mapView && this._mapContainerView.mapView.map;
         },
 
         updatingDimensionPositions: function (oldElement) {
