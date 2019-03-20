@@ -15,7 +15,7 @@
 
         initialize: function (options) {
             options = options || {};
-            this.dataset = options.dataset;
+            this.data = options.data;
 
             this.filterOptions = options.filterOptions; //deprecated
             this.filterDimensions = options.filterDimensions;
@@ -178,7 +178,7 @@
 
         _forceDimensionsByMetadataInfo: function () {
             var self = this;
-            _.each(this.dataset.metadata.getDimensionsPosition(), function (dimensions, zone) {
+            _.each(this.data.metadata.getDimensionsPosition(), function (dimensions, zone) {
                 _.each(dimensions, function (dimension) {
                     self._forceDimensionIdInZone(dimension, zone);
                 });
@@ -225,16 +225,16 @@
         _preselectMostPopulatedTemporalGranularityRepresentations: function () {
             var fixedTimeDimensions = this.filterDimensions.getAllNonFixedDimensionsCopyByType("TIME_DIMENSION");
             _(fixedTimeDimensions).each(function (timeDimension) {
-                var mostPopulatedTemporalGranularity = timeDimension.get('representations').getSelectedTemporalGranularity();
-                timeDimension.get('representations').updateDrawablesBySelectedGranularity(mostPopulatedTemporalGranularity);
+                timeDimension.get('representations').updateSelectedTemporalGranularityWithMostRepeatedValue();
+                timeDimension.get('representations').updateDrawablesBySelectedGranularity();
             });
         },
 
         _preselectMostPopulatedGeographicLevelRepresentations: function () {
             var nonFixedGeographicDimensions = this.filterDimensions.getAllNonFixedDimensionsCopyByType("GEOGRAPHIC_DIMENSION");
             _(nonFixedGeographicDimensions).each(function (geographicDimension) {
-                var mostPopulatedLevel = geographicDimension.get('representations').getSelectedGeographicLevel();
-                geographicDimension.get('representations').updateDrawablesBySelectedLevel(mostPopulatedLevel);
+                geographicDimension.get('representations').updateSelectedGeographicLevelWithMostRepeatedValue();
+                geographicDimension.get('representations').updateDrawablesBySelectedLevel();
             });
         },
 
@@ -246,7 +246,7 @@
         },
 
         getRightsHolderText: function () {
-            return this.dataset && this.dataset.metadata.getRightsHolder() ? this.dataset.metadata.getRightsHolder().name : '';
+            return this.data && this.data.metadata.getRightsHolder() ? this.data.metadata.getRightsHolder().name : '';
         },
 
         showRightsHolderText: function () {
@@ -312,6 +312,7 @@
         hideLoading: function () {
             if (this.$loading) {
                 this.$loading.hide();
+                this.showTitle();
             }
         }
 
