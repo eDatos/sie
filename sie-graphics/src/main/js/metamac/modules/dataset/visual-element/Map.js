@@ -15,12 +15,12 @@
     _.extend(App.VisualElement.Map.prototype, {
 
         load: function () {
-            this.showLoading();
             this._bindEvents();
             if (!this.assertAllDimensionsHaveSelections()) {
                 return;
             }
 
+            this.showLoading();
             var self = this;
             this._loadShapes().then(function () {
                 self._getBaseShapes();
@@ -46,7 +46,6 @@
 
         _bindEvents: function () {
             this.listenTo(this.filterDimensions, "change:drawable change:zone", _.debounce(this.update, 20));
-            this.listenTo(this.filterDimensions, "loading", this.showLoading);
         },
 
         _unbindEvents: function () {
@@ -182,6 +181,11 @@
 
         update: function () {
             if (!this.assertAllDimensionsHaveSelections()) {
+                return;
+            }
+
+            if (!this.chart) {
+                this.load();
                 return;
             }
             

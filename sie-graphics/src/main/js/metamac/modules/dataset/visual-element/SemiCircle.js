@@ -84,7 +84,6 @@
             this.listenTo(this.filtersModel, "change:candidacyType", debounceUpdate);
 
             var resize = _.debounce(_.bind(this._updateSize, this), 200);
-            var self = this;
             this.$el.on("resize", function (e) {
                 e.stopPropagation();
                 resize();
@@ -122,20 +121,16 @@
         },
 
         render: function () {
-            var self = this;
-            self.showLoading();
-            this.dataset.data.loadAllSelectedData().then(function () {
-                self.hideLoading();
-                self._initTitle();
-                self.showTitle();
-                self._renderContainers();
-                self._renderChart();
-            });
+            this._initTitle();
+            this.showTitle();
+            this._renderContainers();
+            this._renderChart();
         },
 
         resizeFullScreen: function () { },
 
         _initTitle: function () {
+            this.$el.html("");
             this.$title = $('<h3></h3>').prependTo(this.$el);
             this.updateTitle();
         },
@@ -203,7 +198,7 @@
                         currentPermutation[extraData.id] = extraCategory.id;
                         _.extend(currentPermutation, fixedPermutation);
 
-                        var y = self.dataset.data.getNumberData({ ids: currentPermutation });
+                        var y = self.data.getNumberData({ ids: currentPermutation });
                         var attrName = 'y' + (index > 0 ? index : '');
                         element[attrName] = y;
                     });
@@ -276,20 +271,15 @@
             }
             if (!this.chart) {
                 this.load();
-            } else {
-                var self = this;
-                self.showLoading();
-                this.dataset.data.loadAllSelectedData().then(function () {
-                    self.hideLoading();
-                    self.updateTitle();
-                    self.showTitle();
-
-                    var data = self.getData();
-                    self.replaceSeries(self.chart, data.series);
-                    self.chart.counters.color = 0;
-                    self.chart.redraw(false);
-                });
+                return;
             }
+
+            this.updateTitle();
+
+            var data = this.getData();
+            this.replaceSeries(this.chart, data.series);
+            this.chart.counters.color = 0;
+            this.chart.redraw(false);
         },
 
         _updateSize: function () {

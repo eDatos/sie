@@ -41,7 +41,7 @@
         _setSelectedGeographicDimension: function (attributes, options) {
             this.each(function (representation) {
                 // TODO mejorar el rendimiento de esto
-                if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.options.territorio === representation.id) {
+                if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.identifier().territorio === representation.id) {
                     representation.setMeAndMyChildren("selected", true, { silent: true });
                 }
             }, this);
