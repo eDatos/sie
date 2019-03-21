@@ -34,10 +34,12 @@
             tooltip: {
                 formatter: function () {
                     var tooltip = "<b>" + this.point.longName + "</b><br/>";
-                    tooltip += this.series.options.extraTooltip + ": " + Highcharts.numberFormat(this.point.y, -1, ',', '.') + "<br/>";
-                    tooltip += this.series.options.extraTooltip1 + ": " + Highcharts.numberFormat(this.point.y1, -1, ',', '.') + "%<br/>";
+                    tooltip += this.series.options.extraTooltip + ": " + Highcharts.numberFormat(this.point.y, -1, ',', '.') + this.series.options.symbol + "<br/>";
+                    if (this.point.y1) {
+                        tooltip += this.series.options.extraTooltip1 + ": " + Highcharts.numberFormat(this.point.y1, -1, ',', '.') + this.series.options.symbol1 + "<br/>";
+                    }
                     if (this.point.y2) {
-                        tooltip += this.series.options.extraTooltip2 + ": " + Highcharts.numberFormat(this.point.y2, -1, ',', '.');
+                        tooltip += this.series.options.extraTooltip2 + ": " + Highcharts.numberFormat(this.point.y2, -1, ',', '.') + this.series.options.symbol2;
                     }
                     return tooltip;
                 }
@@ -178,8 +180,9 @@
                 var serie = {};
                 serie.data = [];
                 _.each(extraDataSelectedCategories, function (extraCategory, index) {
-                    var attrName = 'extraTooltip' + (index > 0 ? index : '');
-                    serie[attrName] = extraCategory.get('visibleLabel');
+                    var distinguishingName = (index > 0 ? index : '');
+                    serie['extraTooltip' + distinguishingName] = extraCategory.get('visibleLabel');
+                    serie['symbol' + distinguishingName] = extraCategory.id === "RATIO_VOTOS_CANDIDATURA" ? "%" : "";
                 });
 
                 _.each(horizontalDimensionSelectedCategories, function (horizontalCategory) {
