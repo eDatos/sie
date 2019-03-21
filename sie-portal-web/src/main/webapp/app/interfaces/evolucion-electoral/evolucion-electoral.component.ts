@@ -30,6 +30,7 @@ const ELECTORES = 'ELECTORES';
 const STACKING_TYPE = 'normal';
 
 const TIPO_ELECCIONES_DEFAULT = 'MUNICIPALES';
+const TIPO_ELECCIONES_REFERENDUM = 'REFERENDUM';
 
 @Component({
     selector: 'jhi-evolucion-electoral',
@@ -96,7 +97,8 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     private inicializarTiposEleccion(listaProcesoElectoral: ProcesoElectoral[]) {
-        const tiposEleccion = listaProcesoElectoral.map((procesoElectoral) => procesoElectoral.tipoProcesoElectoral);
+        const tiposEleccion = listaProcesoElectoral.map((procesoElectoral) => procesoElectoral.tipoProcesoElectoral)
+            .filter((tipoProcesoElectoral) => tipoProcesoElectoral !== TIPO_ELECCIONES_REFERENDUM);
         this.tiposEleccion = new Set(tiposEleccion);
     }
 
