@@ -26,16 +26,12 @@
 
         initializeHierarchy: function () {
             var hasHierarchy = false;
-            var modelsSortedByLevelReversed = _.sortBy(this.models, function (representation) {
-                return representation.get('level');
-            }).reverse();
-
-            _.each(modelsSortedByLevelReversed, function (representation) {
+            this.each(function (representation) {
                 var children = this.where({ parent: representation.id });
 
                 if (children.length) {
                     hasHierarchy = true;
-                    representation.initChildren(children);
+                    representation.children.reset(children);
                     representation._onChangeOpen();
                 }
             }, this);
