@@ -146,5 +146,4 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-sie-portal-web/src/main/webapp/visualizer-static/map.css
-sie-portal-web/src/main/webapp/visualizer-static/icons.html
+sie-portal-web/src/main/webapp/visualizer-static/
