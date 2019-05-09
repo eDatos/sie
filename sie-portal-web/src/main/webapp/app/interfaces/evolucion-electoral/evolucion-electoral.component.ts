@@ -31,6 +31,9 @@ const STACKING_TYPE = 'normal';
 
 const TIPO_ELECCIONES_DEFAULT = 'MUNICIPALES';
 const TIPO_ELECCIONES_REFERENDUM = 'REFERENDUM';
+const TIPO_ELECCIONES_AUTONOMICAS = 'AUTONOMICAS';
+
+const ELECCIONES_REGIONALES_ID_FRAGMENT = '_REGIONALES_';
 
 @Component({
     selector: 'jhi-evolucion-electoral',
@@ -98,7 +101,7 @@ export class EvolucionElectoralComponent implements OnInit {
 
     private inicializarTiposEleccion(listaProcesoElectoral: ProcesoElectoral[]) {
         const tiposEleccion = listaProcesoElectoral.map((procesoElectoral) => procesoElectoral.tipoProcesoElectoral)
-            .filter((tipoProcesoElectoral) => tipoProcesoElectoral !== TIPO_ELECCIONES_REFERENDUM);
+            .filter((tipoProcesoElectoral) => tipoProcesoElectoral !== TIPO_ELECCIONES_REFERENDUM); // METAMAC-2905 TRAPICHE!
         this.tiposEleccion = new Set(tiposEleccion);
     }
 
@@ -111,14 +114,20 @@ export class EvolucionElectoralComponent implements OnInit {
     private inicializarGrafica(tipoEleccion: string) {
         const indicadores = this.getIndicadores();
 
+        let listaProcesoElectoral = this.hashProcesos[tipoEleccion];
+        // METAMAC- TRAPICHE!
+        if (tipoEleccion === TIPO_ELECCIONES_AUTONOMICAS) {
+            listaProcesoElectoral = listaProcesoElectoral.filter((procesoElectoral) => !procesoElectoral.id.includes(ELECCIONES_REGIONALES_ID_FRAGMENT));
+        }
+
         const grafica = new Chart();
-        grafica.xAxis = this.crearEjeX(tipoEleccion);
-        grafica.yAxis = indicadores.map((indicador) => this.crearElementoEjeY(indicador, tipoEleccion));
+        grafica.xAxis = this.crearEjeX(listaProcesoElectoral);
+        grafica.yAxis = indicadores.map((indicador) => this.crearElementoEjeY(indicador, listaProcesoElectoral));
         if (!this.tipoGrafica) {
-            grafica.yAxis.push(this.crearLineaCenso(tipoEleccion));
+            grafica.yAxis.push(this.crearLineaCenso(listaProcesoElectoral));
         } else {
-            grafica.yAxis.push(this.crearAreaAvance(tipoEleccion, 'TASA_PARTICIPACION_A2', ISTAC_BLUE_LIGHT));
-            grafica.yAxis.push(this.crearAreaAvance(tipoEleccion, 'TASA_PARTICIPACION_A1', ISTAC_BLUE_LIGHTEST));
+            grafica.yAxis.push(this.crearAreaAvance(listaProcesoElectoral, 'TASA_PARTICIPACION_A2', ISTAC_BLUE_LIGHT));
+            grafica.yAxis.push(this.crearAreaAvance(listaProcesoElectoral, 'TASA_PARTICIPACION_A1', ISTAC_BLUE_LIGHTEST));
         }
 
         this.hashGraficas[tipoEleccion] = grafica;
@@ -132,15 +141,15 @@ export class EvolucionElectoralComponent implements OnInit {
         }
     }
 
-    private crearEjeX(tipoEleccion: string): any[] {
+    private crearEjeX(listaProcesoElectoral: ProcesoElectoral[]): any[] {
         const resultado = [];
-        this.hashProcesos[tipoEleccion].forEach((eleccion) => {
+        listaProcesoElectoral.forEach((eleccion) => {
             resultado.push(eleccion.fechaEleccion.getFullYear());
         });
         return resultado;
     }
 
-    private crearElementoEjeY(indicador: any, tipoEleccion: string): YElement {
+    private crearElementoEjeY(indicador: any, listaProcesoElectoral: ProcesoElectoral[]): YElement {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador.nombre);
         resultado.color = indicador.color;
@@ -148,7 +157,7 @@ export class EvolucionElectoralComponent implements OnInit {
         resultado.type = this.tipoGrafica ? TIPO_AREA : TIPO_COLUMNA;
         resultado.alternativeName = this.translateService.instant('evolucionElectoral.indicador.' + indicador.indicadorAlternativo);
         resultado.data = [];
-        this.hashProcesos[tipoEleccion].forEach((eleccion) => {
+        listaProcesoElectoral.forEach((eleccion) => {
             resultado.data.push({
                 y: parseFloat(eleccion.indicadores[indicador.nombre]),
                 altData: parseFloat(eleccion.indicadores[indicador.indicadorAlternativo])
@@ -157,27 +166,27 @@ export class EvolucionElectoralComponent implements OnInit {
         return resultado;
     }
 
-    private crearLineaCenso(tipoEleccion: string): YElement {
+    private crearLineaCenso(listaProcesoElectoral: ProcesoElectoral[]): YElement {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.ELECTORES');
         resultado.color = ISTAC_ORANGE;
         resultado.type = TIPO_LINEA;
         resultado['tooltip'] = { pointFormat: '{series.name}: {point.y}'}
         resultado.data = [];
-        this.hashProcesos[tipoEleccion].forEach((eleccion) => {
+        listaProcesoElectoral.forEach((eleccion) => {
             resultado.data.push(parseInt(eleccion.indicadores[ELECTORES], 10));
         });
         return resultado;
     }
 
-    private crearAreaAvance(tipoEleccion: string, indicador: string, color: string): YElement {
+    private crearAreaAvance(listaProcesoElectoral: ProcesoElectoral[], indicador: string, color: string): YElement {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador);
         resultado.color = color;
         resultado.type = TIPO_AREA;
         resultado['tooltip'] = { pointFormat: '{series.name}: {point.y}'}
         resultado.data = [];
-        this.hashProcesos[tipoEleccion].forEach((eleccion) => {
+        listaProcesoElectoral.forEach((eleccion) => {
             const valorIndicador = eleccion.indicadores[indicador];
             const valorParseado = valorIndicador ? parseFloat(valorIndicador) : null;
             resultado.data.push(valorParseado);
