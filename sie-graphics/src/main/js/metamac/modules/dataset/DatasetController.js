@@ -116,7 +116,7 @@
                 self.visualizationView = new App.modules.dataset.DatasetView({ controller: self, filterDimensions: self.filterDimensions, metadata: self.metadata, data: self.data, filtersModel: self.filtersModel });
 
                 if (result.permalink) {
-                    self.filtersModel.importJSON(content.filters);
+                    self.filtersModel.importJSON(result.permalink.filters);
                     self.filterDimensions.importJSON(result.permalink.selection);
                     if (!window.location.hash.includes(result.permalink.hash)) {
                         self.visualizationView.optionsModel.set('mustApplyVisualizationRestrictions', true);
