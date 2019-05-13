@@ -241,7 +241,9 @@
             }), 'horizontalCategoryIndex');
 
             // Build and order xaxis
-            var xaxis = _.invoke(filteredHorizontalDimensionSelectedCategories, 'get', 'visibleLabel');
+            var xaxis = _.map(filteredHorizontalDimensionSelectedCategories, function (horizontalCategory) {
+                return self._getShortName(horizontalCategory.get('visibleLabel'));
+            });
             xaxis = _.sortBy(xaxis, function (label, horizontalDimensionSelectedCategoryIndex) {
                 return horizontalAxisCategories[horizontalDimensionSelectedCategoryIndex].order;
             });

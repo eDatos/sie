@@ -315,6 +315,16 @@
                 this.$loading.hide();
                 this.showTitle();
             }
+        },
+
+        _getShortName: function (longName) {
+            var result = longName;
+            var textBetweenParentheses = longName.match(/\(.+?\)/g);
+            if (textBetweenParentheses) {
+                var lastElement = textBetweenParentheses.length - 1;
+                result = textBetweenParentheses[lastElement].replace(/[()]/g, "");
+            }
+            return result;
         }
 
     };
