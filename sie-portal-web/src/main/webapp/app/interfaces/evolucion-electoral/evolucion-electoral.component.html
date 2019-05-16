@@ -35,7 +35,7 @@
 
                 <div class="grid-procesos">
                     <ng-container *ngFor="let proceso of hashProcesos[tipo].slice().reverse()">
-                        <a *ngIf="proceso.clickable" [routerLink]="['/proceso-electoral', lugar.id, proceso.tipoProcesoElectoral, proceso.fechaEleccion | date: 'yyyy']" class="proceso-electoral">
+                        <a *ngIf="proceso.clickable" [routerLink]="['/proceso-electoral', lugar.id, proceso.id]" class="proceso-electoral">
                             <ng-container *ngTemplateOutlet="tablaProcesoElectoral; context: {proceso: proceso, headerTemplate: clickableHeader}"></ng-container>
                         </a>
                         <a *ngIf="!proceso.clickable" class="proceso-electoral">
@@ -51,14 +51,14 @@
 
 <ng-template #clickableHeader let-proceso="proceso">
     <th colspan="2">
-        {{proceso.fechaEleccion | date: 'yyyy'}}
+        {{proceso.nombre}}
     </th>
     <th class="clickable-header-icon"><i class="fa fa-istac-plus"></i></th>
 </ng-template>
 
 <ng-template #notClickableHeader let-proceso="proceso">
     <th colspan="3">
-        {{proceso.fechaEleccion | date: 'yyyy'}}
+        {{proceso.nombre}}
     </th>
 </ng-template>
 

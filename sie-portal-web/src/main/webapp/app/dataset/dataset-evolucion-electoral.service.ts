@@ -5,10 +5,12 @@ import { ConfigService, MetadataService } from '../config';
 import { Lugar } from './lugar.model';
 import { ProcesoElectoral } from './proceso-electoral.model';
 import { TipoEleccionesDatasetUrlService } from './tipo-elecciones-dataset-url.service';
+import { DatePipe } from '@angular/common';
 
 const GEOGRAPHIC_DIMENSION = 'GEOGRAPHIC_DIMENSION';
 const FECHA_ELECCION = 'FECHA_ELECCION';
 const TIPO_PROCESO_ELECTORAL = 'TIPO_PROCESO_ELECTORAL';
+const NOMBRE_CORTO_PROCESO_ELECTORAL = 'NOMBRE_CORTO_PROCESO_ELECTORAL';
 const SEPARADOR = '|';
 const TERRITORIO = 'TERRITORIO';
 const PROCESO_ELECTORAL = 'PROCESO_ELECTORAL';
@@ -28,7 +30,8 @@ export class DatasetEvolucionElectoralService {
         private http: Http,
         private configService: ConfigService,
         private metadataService: MetadataService,
-        private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService
+        private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService,
+        private datePipe: DatePipe
     ) { }
 
     getListaLugares(): Promise<Lugar[]> {
@@ -86,6 +89,7 @@ export class DatasetEvolucionElectoralService {
         // Atributos
         const fechas = this.procesaAtributo(json, FECHA_ELECCION);
         const tipos = this.procesaAtributo(json, TIPO_PROCESO_ELECTORAL);
+        const nombres = this.procesaAtributo(json, NOMBRE_CORTO_PROCESO_ELECTORAL);
 
         // Datos
         const datos = this.procesaDatos(json);
@@ -102,6 +106,10 @@ export class DatasetEvolucionElectoralService {
             const procesoElectoral = listaProcesoElectoral[i];
             procesoElectoral.fechaEleccion = new Date(fechas[i].trim());
             procesoElectoral.tipoProcesoElectoral = tipos[i].trim();
+            procesoElectoral.nombre = nombres[i].trim();
+            if (!procesoElectoral.nombre) {
+                procesoElectoral.nombre = this.datePipe.transform(procesoElectoral.fechaEleccion, 'yyyy');
+            }
 
             for (let j = 0; j < listaIndicadores.length; j++) {
                 const indicador = listaIndicadores[j];

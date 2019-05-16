@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MultidatasetProcesosElectorales } from '../../dataset/multidataset-procesos-electorales.model';
 import { ConfigService, MetadataService } from '../../config';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var I18n: any;
 declare var App: any;
@@ -11,6 +12,7 @@ declare var Backbone: any;
 
 export const METAMAC_CSS_LINK = './visualizer-static/metamac.css';
 export const METAMAC_CSS_REL = 'stylesheet';
+const ID_PROCESO_SEPARATOR = '_';
 
 @Component({
     selector: 'jhi-proceso-electoral',
@@ -20,10 +22,11 @@ export const METAMAC_CSS_REL = 'stylesheet';
 export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestroy {
 
     tipoElecciones: string;
-    fecha: string;
+    idProcesoElectoral: string;
     multidataset: MultidatasetProcesosElectorales;
 
     lugarId: string;
+    fecha: string;
 
     constructor(
         private host: ElementRef,
@@ -31,7 +34,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         private router: Router,
         private multidatasetProcesosElectoralesService: MultidatasetProcesosElectoralesService,
         private configService: ConfigService,
-        private metadataService: MetadataService
+        private metadataService: MetadataService,
+        private translateService: TranslateService
     ) { }
 
     ngOnInit() {
@@ -42,10 +46,11 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         });
 
         this.activatedRoute.parent.params.subscribe((params) => {
-            if (params.tipoElecciones !== this.tipoElecciones) {
-                this.onChangeTipoElecciones(params);
-            } else if (params.fecha !== this.fecha) {
-                this.onChangeFecha(params);
+            const tipoElecciones = params.idProcesoElectoral.split(ID_PROCESO_SEPARATOR)[0];
+            if (tipoElecciones !== this.tipoElecciones) {
+                this.onChangeTipoElecciones(params.idProcesoElectoral, tipoElecciones);
+            } else if (params.idProcesoElectoral !== this.idProcesoElectoral) {
+                this.onChangeProcesoElectoral(params.idProcesoElectoral);
             }
         });
     }
@@ -63,11 +68,11 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         window.location.hash = window.location.hash.replace(urlSegments[1].path, lugarId);
     }
 
-    private onChangeTipoElecciones(params: Params) {
-        this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(params.tipoElecciones).then((multidataset) => {
-            this.tipoElecciones = params.tipoElecciones;
+    private onChangeTipoElecciones(idProcesoElectoral: string, tipoElecciones: string) {
+        this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(tipoElecciones).then((multidataset) => {
+            this.tipoElecciones = tipoElecciones;
             this.multidataset = multidataset;
-            this.onChangeFecha(params);
+            this.onChangeProcesoElectoral(idProcesoElectoral);
 
             if (App.mainRegion) {
                 this.stopBackbone();
@@ -78,12 +83,12 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         });
     }
 
-    private onChangeFecha(params: Params) {
-        const dataset = this.multidataset.datasetList.find((element) => element.year === params.fecha);
+    private onChangeProcesoElectoral(idProcesoElectoral: string) {
+        const dataset = this.multidataset.datasetList.find((element) => element.identifier === idProcesoElectoral);
         if (dataset) {
-            this.fecha = params.fecha;
+            this.fecha = idProcesoElectoral.split(ID_PROCESO_SEPARATOR)[1];
         } else {
-            this.router.navigate(['not-found'], { skipLocationChange: true });
+            throw new Error(this.translateService.instant('procesoElectoral.errorNoEncontrado', { id: idProcesoElectoral }));
         }
     }
 
@@ -128,7 +133,9 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private stopBackbone() {
-        App.removeRegion('mainRegion');
+        if (App.mainRegion) {
+            App.removeRegion('mainRegion');
+        }
         App._initCallbacks.reset();
         Backbone.history.stop();
     }

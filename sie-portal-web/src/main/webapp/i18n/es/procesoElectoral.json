@@ -10,6 +10,7 @@
             "PARLAMENTO_EUROPEO": "Resultados en las elecciones al Parlamento Europeo de {{ fecha }}",
             "REFERENDUM": "Resultados en el referéndum de {{ fecha }}",
             "SENADO": "Resultados en las elecciones al Senado de {{ fecha }}"
-        }
+        },
+        "errorNoEncontrado": "No se ha encontrado ningún proceso electoral con el identificador {{ id }}."
     }
 }

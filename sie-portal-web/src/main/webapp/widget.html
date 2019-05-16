@@ -35,7 +35,7 @@
 		var geographicalGranularityUrnKey = /*[[${metadata.getGeographicalGranularityUrnKey()}]]*/ 'metamac.default.codelist.geographical_granularity.urn';
 		var statisticalVisualizerKey = /*[[${metadata.getStatisticalVisualizerKey()}]]*/ 'metamac.portal.web.external';
 		var statisticalVisualizerApiKey = /*[[${metadata.getStatisticalVisualizerApiKey()}]]*/ 'metamac.portal.rest.external.base';
-		var sieBaseUrl = /*[[${#httpServletRequest.getRequestURL().toString()}]]*/ 'http://localhost:8080/';
+		var sieBaseUrl = /*[[${#httpServletRequest.getRequestURL().toString()}]]*/ 'http://localhost:8080';
 		var requestURI = /*[[${#httpServletRequest.getRequestURI().toString()}]]*/ '';
 		var contextPath = /*[[${#httpServletRequest.getContextPath().toString()}]]*/ '';
 		sieBaseUrl = sieBaseUrl.replace(requestURI, contextPath) + "/";
@@ -90,7 +90,8 @@
 		}
 
 		function getParamTipoElecciones() {
-			return window.location.hash.split("/")[3];
+			var idProcesoElectoral = window.location.hash.split("/")[3];
+			return idProcesoElectoral.split("_")[0];
 		}
 
 		function getPropertyById(propertyId) {
