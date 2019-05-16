@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MultidatasetProcesosElectorales } from '../../dataset/multidataset-procesos-electorales.model';
 import { ConfigService, MetadataService } from '../../config';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var I18n: any;
 declare var App: any;
@@ -33,7 +34,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         private router: Router,
         private multidatasetProcesosElectoralesService: MultidatasetProcesosElectoralesService,
         private configService: ConfigService,
-        private metadataService: MetadataService
+        private metadataService: MetadataService,
+        private translateService: TranslateService
     ) { }
 
     ngOnInit() {
@@ -86,7 +88,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         if (dataset) {
             this.fecha = idProcesoElectoral.split(ID_PROCESO_SEPARATOR)[1];
         } else {
-            this.router.navigate(['not-found'], { skipLocationChange: true });
+            throw new Error(this.translateService.instant('procesoElectoral.errorNoEncontrado', { id: idProcesoElectoral }));
         }
     }
 
@@ -131,7 +133,9 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private stopBackbone() {
-        App.removeRegion('mainRegion');
+        if (App.mainRegion) {
+            App.removeRegion('mainRegion');
+        }
         App._initCallbacks.reset();
         Backbone.history.stop();
     }
