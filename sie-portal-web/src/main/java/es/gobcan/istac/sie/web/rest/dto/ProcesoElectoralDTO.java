@@ -11,6 +11,8 @@ public class ProcesoElectoralDTO {
     
     private String idLugar;
     
+    private String nombre;
+    
     private Date fechaEleccion;
     
     private String tipoProcesoElectoral;
@@ -39,6 +41,14 @@ public class ProcesoElectoralDTO {
 
     public void setIdLugar(String idLugar) {
         this.idLugar = idLugar;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Date getFechaEleccion() {

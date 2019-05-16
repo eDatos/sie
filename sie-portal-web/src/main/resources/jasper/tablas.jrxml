@@ -10,10 +10,7 @@
 	<field name="fechaEleccion" class="java.util.Date"/>
 	<field name="tipoProcesoElectoral" class="java.lang.String"/>
 	<field name="indicadores" class="java.util.Map"/>
-	<variable name="dateFormatter" class="java.text.SimpleDateFormat">
-		<variableExpression><![CDATA[$V{dateFormatter}]]></variableExpression>
-		<initialValueExpression><![CDATA[new java.text.SimpleDateFormat("yyyy")]]></initialValueExpression>
-	</variable>
+	<field name="nombre" class="java.lang.String"/>
 	<variable name="numberFormatter" class="java.text.NumberFormat">
 		<variableExpression><![CDATA[$V{numberFormatter}]]></variableExpression>
 		<initialValueExpression><![CDATA[java.text.NumberFormat.getNumberInstance(new java.util.Locale("es", "ES"))]]></initialValueExpression>
@@ -28,7 +25,7 @@
 				<textElement verticalAlignment="Bottom">
 					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{dateFormatter}.format($F{fechaEleccion})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="23" width="110" height="14" forecolor="#3B3B3B" uuid="dd24facc-c104-4833-8555-ba87590d8e9d"/>
