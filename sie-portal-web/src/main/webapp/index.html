@@ -40,10 +40,10 @@
 
         window.CONFIGURATION.metadata = {};
         window.CONFIGURATION.metadata.endpoint = /*[[${metadata.getEndpoint()}]]*/ 'http://estadisticas.arte-consultores.com/cmetadata/v1.0';
-        window.CONFIGURATION.metadata.installationType = /*[[${metadata.getInstallationType()}]]*/ 'INTERNAL';
-        window.CONFIGURATION.metadata.statisticalResourcesKey = /*[[${metadata.getStatisticalResourcesKey()}]]*/ 'metamac.statistical_resources.rest.internal';
-        window.CONFIGURATION.metadata.structuralResourcesKey = /*[[${metadata.getStructuralResourcesKey()}]]*/ 'metamac.srm.rest.internal';
-        window.CONFIGURATION.metadata.indicatorsKey = /*[[${metadata.getIndicatorsKey()}]]*/ 'indicators.rest.internal';
+        window.CONFIGURATION.metadata.installationType = /*[[${metadata.getInstallationType()}]]*/ 'EXTERNAL';
+        window.CONFIGURATION.metadata.statisticalResourcesKey = /*[[${metadata.getStatisticalResourcesKey()}]]*/ 'metamac.statistical_resources.rest.external';
+        window.CONFIGURATION.metadata.structuralResourcesKey = /*[[${metadata.getStructuralResourcesKey()}]]*/ 'metamac.srm.rest.external';
+        window.CONFIGURATION.metadata.indicatorsKey = /*[[${metadata.getIndicatorsKey()}]]*/ 'indicators.rest.external';
         window.CONFIGURATION.metadata.statisticalVisualizerKey = /*[[${metadata.getStatisticalVisualizerKey()}]]*/ 'metamac.portal.web.external';
         window.CONFIGURATION.metadata.statisticalVisualizerApiKey = /*[[${metadata.getStatisticalVisualizerApiKey()}]]*/ 'metamac.portal.rest.external.base';
         window.CONFIGURATION.metadata.permalinksEndpointKey = /*[[${metadata.getPermalinksEndpointKey()}]]*/ 'metamac.portal.rest.external.permalinks';
@@ -54,7 +54,7 @@
         window.CONFIGURATION.metadata.organisationUrnKey = /*[[${metadata.getOrganisationUrnKey()}]]*/ 'metamac.organisation.urn';
         window.CONFIGURATION.metadata.geographicalGranularityUrnKey = /*[[${metadata.getGeographicalGranularityUrnKey()}]]*/ 'metamac.default.codelist.geographical_granularity.urn';
 
-        var requestURL = /*[[${#httpServletRequest.getRequestURL().toString()}]]*/ 'http://localhost:8080/';
+        var requestURL = /*[[${#httpServletRequest.getRequestURL().toString()}]]*/ 'http://localhost:8080';
         var requestURI = /*[[${#httpServletRequest.getRequestURI().toString()}]]*/ '';
         var contextPath = /*[[${#httpServletRequest.getContextPath().toString()}]]*/ '';
         window.CONFIGURATION.baseUrl = requestURL.replace(requestURI, contextPath) + "/";

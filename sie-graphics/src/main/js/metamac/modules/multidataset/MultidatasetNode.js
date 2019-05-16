@@ -40,7 +40,7 @@
                 attributes.version = urlPartMatches[3];
             }
 
-            attributes.url = window.location.hash.replace(resourceIdentifier.fecha, attributes.name);
+            attributes.url = window.location.hash.replace(resourceIdentifier.idProcesoElectoral, response.identifier);
 
             if (response.nodes) {
                 this.nodes = App.modules.multidataset.MultidatasetNode.parseNodes(response.nodes);

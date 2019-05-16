@@ -31,8 +31,7 @@
         "version": undefined,
         "type": undefined,
 		"territorio": undefined,
-		"tipoElecciones": undefined,
-		"fecha": undefined,
+		"idProcesoElectoral": undefined,
 
         "indicatorSystem": undefined, // Only for indicatorsInstances
 

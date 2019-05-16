@@ -8,16 +8,16 @@
 
         routes: {
 
-            "proceso-electoral/:territorio/:tipoElecciones/:fecha": "home",
+            "proceso-electoral/:territorio/:idProcesoElectoral": "home",
 
-            "proceso-electoral/:territorio/:tipoElecciones/:fecha/selection": "selection",
-            "proceso-electoral/:territorio/:tipoElecciones/:fecha/selection/permalink/:permalinkId": "selectionPermalink",
+            "proceso-electoral/:territorio/:idProcesoElectoral/selection": "selection",
+            "proceso-electoral/:territorio/:idProcesoElectoral/selection/permalink/:permalinkId": "selectionPermalink",
 
-            "proceso-electoral/:territorio/:tipoElecciones/:fecha/visualization": "visualization",
-            "proceso-electoral/:territorio/:tipoElecciones/:fecha/visualization/permalink/:permalinkId": "visualizationPermalink",
+            "proceso-electoral/:territorio/:idProcesoElectoral/visualization": "visualization",
+            "proceso-electoral/:territorio/:idProcesoElectoral/visualization/permalink/:permalinkId": "visualizationPermalink",
 
-            "proceso-electoral/:territorio/:tipoElecciones/:fecha/visualization/:visualizationType": "visualizationType",
-            "proceso-electoral/:territorio/:tipoElecciones/:fecha/visualization/:visualizationType/permalink/:permalinkId": "visualizationTypePermalink",
+            "proceso-electoral/:territorio/:idProcesoElectoral/visualization/:visualizationType": "visualizationType",
+            "proceso-electoral/:territorio/:idProcesoElectoral/visualization/:visualizationType/permalink/:permalinkId": "visualizationTypePermalink",
 
             "*path": "error"
         },
@@ -33,7 +33,7 @@
         },
 
         home: function () {
-            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
+            var args = this._nameArguments(["territorio", "idProcesoElectoral"], arguments);
             var self = this;
             this._processArgs(args).done(function (processedArgs) {
                 self.datasetController.showDataset(processedArgs);
@@ -41,7 +41,7 @@
         },
 
         selection: function () {
-            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
+            var args = this._nameArguments(["territorio", "idProcesoElectoral"], arguments);
             var self = this;
             this._processArgs(args).done(function (processedArgs) {
                 self.datasetController.showDatasetSelection(processedArgs);
@@ -49,7 +49,7 @@
         },
 
         selectionPermalink: function () {
-            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "permalinkId"], arguments);
+            var args = this._nameArguments(["territorio", "idProcesoElectoral", "permalinkId"], arguments);
             var self = this;
             this._processArgs(args).done(function (processedArgs) {
                 self.datasetController.showDatasetSelection(processedArgs);
@@ -57,7 +57,7 @@
         },
 
         visualization: function () {
-            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha"], arguments);
+            var args = this._nameArguments(["territorio", "idProcesoElectoral"], arguments);
             var self = this;
             this._processArgs(args).done(function (processedArgs) {
                 self.datasetController.showDatasetVisualization(processedArgs);
@@ -65,7 +65,7 @@
         },
 
         visualizationPermalink: function () {
-            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "permalinkId"], arguments);
+            var args = this._nameArguments(["territorio", "idProcesoElectoral", "permalinkId"], arguments);
             var self = this;
             this._processArgs(args).done(function (processedArgs) {
                 self.datasetController.showDatasetVisualization(processedArgs);
@@ -73,7 +73,7 @@
         },
 
         visualizationType: function () {
-            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "visualizationType"], arguments);
+            var args = this._nameArguments(["territorio", "idProcesoElectoral", "visualizationType"], arguments);
             var self = this;
             this._processArgs(args).done(function (processedArgs) {
                 self.datasetController.showDatasetVisualization(processedArgs);
@@ -81,7 +81,7 @@
         },
 
         visualizationTypePermalink: function () {
-            var args = this._nameArguments(["territorio", "tipoElecciones", "fecha", "visualizationType", "permalinkId"], arguments);
+            var args = this._nameArguments(["territorio", "idProcesoElectoral", "visualizationType", "permalinkId"], arguments);
             var self = this;
             this._processArgs(args).done(function (processedArgs) {
                 self.datasetController.showDatasetVisualization(processedArgs);
@@ -94,9 +94,10 @@
 
         _processArgs: function (args) {
             args = _.defaults(args, App.queryParams);
-            return this._getDatasetsByTipoElecciones(args['tipoElecciones']).then(function (datasetList) {
+            var tipoElecciones = args['idProcesoElectoral'].split('_')[0];
+            return this._getDatasetsByTipoElecciones(tipoElecciones).then(function (datasetList) {
                 var dataset = datasetList.find(function (element) {
-                    return args['fecha'] === element.year;
+                    return args['idProcesoElectoral'] === element.idProcesoElectoral;
                 });
                 if (dataset) {
                     args.identifier = dataset.id;
@@ -126,8 +127,10 @@
                         var agency = urlPartMatches[1];
                         var identifier = urlPartMatches[2];
                         var version = urlPartMatches[3];
+                        var idProcesoElectoral = element.identifier;
                         return {
                             id: identifier,
+                            idProcesoElectoral: idProcesoElectoral,
                             agency: agency,
                             version: version,
                             year: element.name.text[0].value
