@@ -101,7 +101,7 @@ export class EvolucionElectoralComponent implements OnInit {
 
     private inicializarTiposEleccion(listaProcesoElectoral: ProcesoElectoral[]) {
         const tiposEleccion = listaProcesoElectoral.map((procesoElectoral) => procesoElectoral.tipoProcesoElectoral)
-            .filter((tipoProcesoElectoral) => tipoProcesoElectoral !== TIPO_ELECCIONES_REFERENDUM); // METAMAC-2905 TRAPICHE!
+            .filter((tipoProcesoElectoral) => tipoProcesoElectoral !== TIPO_ELECCIONES_REFERENDUM); // METAMAC-2905 TRAPICHE! Se ocultan los referéndums
         this.tiposEleccion = new Set(tiposEleccion);
     }
 
@@ -115,7 +115,7 @@ export class EvolucionElectoralComponent implements OnInit {
         const indicadores = this.getIndicadores();
 
         let listaProcesoElectoral = this.hashProcesos[tipoEleccion];
-        // METAMAC- TRAPICHE!
+        // METAMAC-2931 TRAPICHE! Se ocultan las autonómicas regionales de la gráfica.
         if (tipoEleccion === TIPO_ELECCIONES_AUTONOMICAS) {
             listaProcesoElectoral = listaProcesoElectoral.filter((procesoElectoral) => !procesoElectoral.id.includes(ELECCIONES_REGIONALES_ID_FRAGMENT));
         }
