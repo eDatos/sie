@@ -144,7 +144,7 @@ export class EvolucionElectoralComponent implements OnInit {
     private crearEjeX(listaProcesoElectoral: ProcesoElectoral[]): any[] {
         const resultado = [];
         listaProcesoElectoral.forEach((eleccion) => {
-            resultado.push(eleccion.fechaEleccion.getFullYear());
+            resultado.push(eleccion.nombre);
         });
         return resultado;
     }
