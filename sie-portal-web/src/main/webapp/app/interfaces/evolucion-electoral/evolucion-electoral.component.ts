@@ -197,14 +197,14 @@ export class EvolucionElectoralComponent implements OnInit {
     private comprobarDatosPagina3() {
         this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(this.tipoEleccionesVisible).then((multidataset) => {
             multidataset.datasetList.forEach((dataset) => {
-                const procesoElectoral = this.hashProcesos[this.tipoEleccionesVisible].find((proceso) => proceso.id.includes(dataset.year));
+                const procesoElectoral = this.hashProcesos[this.tipoEleccionesVisible].find((proceso) => proceso.id === dataset.identifier);
                 if (procesoElectoral) {
                     procesoElectoral.clickable = true;
                 }
             });
         }).catch(() => {
             console.log(this.translateService.instant('error.noMultidatasetForTipoElecciones', { tipoElecciones: this.tipoEleccionesVisible }));
-         });
+        });
     }
 
     onTabChange(event) {
