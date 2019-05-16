@@ -8,12 +8,11 @@ export function procesoElectoralUrls(url: UrlSegment[]) {
     }
 
     let result = null;
-    if (url.length >= 4 && url[0].path === 'proceso-electoral') {
+    if (url.length >= 3 && url[0].path === 'proceso-electoral') {
         result = {
             consumed: url,
             posParams: {
-                'tipoElecciones': url[2],
-                'fecha': url[3]
+                'idProcesoElectoral': url[2]
             }
         };
     }
