@@ -5,7 +5,7 @@
     <parent>
         <groupId>es.gobcan.istac.sie</groupId>
         <artifactId>sie</artifactId>
-        <version>1.1.1-SNAPSHOT</version>
+        <version>2.0.0</version>
     </parent>
 
     <artifactId>sie-portal-web</artifactId>
