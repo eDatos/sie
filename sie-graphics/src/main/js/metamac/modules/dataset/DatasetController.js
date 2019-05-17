@@ -15,12 +15,13 @@
             var self = this;
             this._loadMetadataAndData(datasetIdentifier).then(function () {
                 var routeParts = [];
-
-                if (self.metadata.getAutoOpen()) {
-                    routeParts.push("visualization");
-                } else {
-                    routeParts.push("selection");
-                }
+                /* 
+                   Hay problemas en firefox con los routers de angular y backbone.
+                   Para solucionar el problema, de manera temporal, se redirige a 
+                   visualization/pie en vez de a visualization
+                */
+                routeParts.push("visualization");
+                routeParts.push("pie");
 
                 var route = window.location.hash + "/" + routeParts.join("/");
                 Backbone.history.navigate(route, { trigger: true, replace: true });
