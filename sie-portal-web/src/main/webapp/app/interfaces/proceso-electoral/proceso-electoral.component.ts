@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
 import { MultidatasetProcesosElectoralesService } from '../../dataset';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MultidatasetProcesosElectorales } from '../../dataset/multidataset-procesos-electorales.model';
 import { ConfigService, MetadataService } from '../../config';
 import { Observable } from 'rxjs';
@@ -12,7 +12,7 @@ declare var Backbone: any;
 
 export const METAMAC_CSS_LINK = './visualizer-static/metamac.css';
 export const METAMAC_CSS_REL = 'stylesheet';
-const ID_PROCESO_SEPARATOR = '_';
+const TIPO_PROCESO_ELECTORAL_REGEX = /([A-Za-z_]+)\_(\d{4}).*/;
 
 @Component({
     selector: 'jhi-proceso-electoral',
@@ -46,7 +46,12 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         });
 
         this.activatedRoute.parent.params.subscribe((params) => {
-            const tipoElecciones = params.idProcesoElectoral.split(ID_PROCESO_SEPARATOR)[0];
+            const matchResult = params.idProcesoElectoral.match(TIPO_PROCESO_ELECTORAL_REGEX);
+            if (!matchResult) {
+                this.router.navigate(['not-found'], { skipLocationChange: true });
+            }
+
+            const tipoElecciones = matchResult[1];
             if (tipoElecciones !== this.tipoElecciones) {
                 this.onChangeTipoElecciones(params.idProcesoElectoral, tipoElecciones);
             } else if (params.idProcesoElectoral !== this.idProcesoElectoral) {
@@ -86,7 +91,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     private onChangeProcesoElectoral(idProcesoElectoral: string) {
         const dataset = this.multidataset.datasetList.find((element) => element.identifier === idProcesoElectoral);
         if (dataset) {
-            this.fecha = idProcesoElectoral.split(ID_PROCESO_SEPARATOR)[1];
+            this.fecha = idProcesoElectoral.match(TIPO_PROCESO_ELECTORAL_REGEX)[2];
         } else {
             throw new Error(this.translateService.instant('procesoElectoral.errorNoEncontrado', { id: idProcesoElectoral }));
         }
