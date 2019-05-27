@@ -94,8 +94,7 @@
 
         _processArgs: function (args) {
             args = _.defaults(args, App.queryParams);
-            var tipoElecciones = args['idProcesoElectoral'].split('_')[0];
-            return this._getDatasetsByTipoElecciones(tipoElecciones).then(function (datasetList) {
+            return this._getDatasetsByTipoElecciones().then(function (datasetList) {
                 var dataset = datasetList.find(function (element) {
                     return args['idProcesoElectoral'] === element.idProcesoElectoral;
                 });
