@@ -91,7 +91,7 @@
 
 		function getParamTipoElecciones() {
 			var idProcesoElectoral = window.location.hash.split("/")[3];
-			return idProcesoElectoral.split("_")[0];
+			return idProcesoElectoral.match(/([A-Za-z_]+)\_(\d{4}).*/)[1];
 		}
 
 		function getPropertyById(propertyId) {
