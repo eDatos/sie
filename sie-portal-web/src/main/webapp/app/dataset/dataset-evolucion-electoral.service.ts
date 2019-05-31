@@ -106,9 +106,9 @@ export class DatasetEvolucionElectoralService {
             const procesoElectoral = listaProcesoElectoral[i];
             procesoElectoral.fechaEleccion = new Date(fechas[i].trim());
             procesoElectoral.tipoProcesoElectoral = tipos[i].trim();
-            procesoElectoral.nombre = nombres[i].trim();
-            if (!procesoElectoral.nombre) {
-                procesoElectoral.nombre = this.datePipe.transform(procesoElectoral.fechaEleccion, 'yyyy');
+            procesoElectoral.nombre = this.datePipe.transform(procesoElectoral.fechaEleccion, 'yyyy');
+            if (nombres && nombres[i] && nombres[i].trim()) {
+                procesoElectoral.nombre = nombres[i].trim();
             }
 
             for (let j = 0; j < listaIndicadores.length; j++) {
@@ -184,8 +184,10 @@ export class DatasetEvolucionElectoralService {
     }
 
     private procesaAtributo(json: any, nombreAtributo: string): string[] {
-        return json.data.attributes.attribute.find((attribute) => attribute.id === nombreAtributo)
-            .value.split(SEPARADOR);
+        const atributo = json.data.attributes.attribute.find((attribute) => attribute.id === nombreAtributo);
+        if (atributo) {
+            return atributo.value.split(SEPARADOR);
+        }
     }
 
     private procesaDatos(json: any): string[] {
