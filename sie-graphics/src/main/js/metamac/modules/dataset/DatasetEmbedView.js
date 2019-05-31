@@ -42,7 +42,7 @@
         renderEmbed: function (permalinkId) {
             var context = {
                 baseUrl: App.endpoints["sie-base-url"],
-                hash: window.location.hash.split("/").slice(0,7).join("/"),
+                hash: window.location.hash.split("/").slice(0,6).join("/"),
                 permalink: permalinkId
             };
             this.$el.html(this.template(context));
