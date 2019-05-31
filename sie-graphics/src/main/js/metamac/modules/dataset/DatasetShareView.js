@@ -42,7 +42,7 @@
         getSharedUrl: function (permalinkId) {
             return [
                 App.endpoints["sie-base-url"],
-                window.location.hash.split("/").slice(0,7).join("/"),
+                window.location.hash.split("/").slice(0,6).join("/"),
                 '/permalink/',
                 permalinkId
             ].join('');
