@@ -35,13 +35,6 @@
             }
         },
 
-        api: {
-            type: {
-                INDICATOR: "indicator",
-                DATASET: "dataset"
-            }
-        },
-
         candidacyType: {
             DEFAULT_VALUE: "G_"
         },

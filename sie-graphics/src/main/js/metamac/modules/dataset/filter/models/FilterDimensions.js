@@ -138,7 +138,8 @@
         },
 
         canDrawMapVisualizations: function () {
-            return this.metadata.apiType != App.Constants.api.type.INDICATOR;
+            return this.metadata.identifier().type != App.Constants.visualization.type.INDICATOR
+                && this.metadata.identifier().type != App.Constants.visualization.type.INDICATOR_INSTANCE;
         },
 
         importJSON: function (json) {
