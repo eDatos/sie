@@ -53,7 +53,12 @@
                     center: ['50%', '75%'],
                     innerSize: '40%',
                     endAngle: 90,
-                    startAngle: -90
+                    startAngle: -90,
+                    states: {
+                        inactive: {
+                            opacity: 1
+                        }
+                    }
                 }
             }
         });
@@ -271,7 +276,6 @@
 
             var data = this.getData();
             this.replaceSeries(this.chart, data.series);
-            this.chart.counters.color = 0;
             this.chart.redraw(false);
         },
 
