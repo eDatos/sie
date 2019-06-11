@@ -63,7 +63,26 @@ export class ChartComponent implements OnChanges, AfterViewInit {
             },
             plotOptions: {
                 area: {
-                    fillOpacity: 0.5
+                    fillOpacity: 0.5,
+                    states: {
+                        inactive: {
+                            opacity: 1
+                        }
+                    }
+                },
+                line: {
+                    states: {
+                        inactive: {
+                            opacity: 1
+                        }
+                    }
+                },
+                column: {
+                    states: {
+                        inactive: {
+                            opacity: 1
+                        }
+                    }
                 }
             },
             credits: {
