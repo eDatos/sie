@@ -53,80 +53,118 @@
         }
     };
 
-    App.Table.TopHeaderZone.prototype.paintInfo = function () {
+    App.Table.TopHeaderZone.prototype.paintInfo = function() {
         var bodyPaintInfo = this.bodyZone.paintInfo();
 
         var rowsLen = this.dataSource.topHeaderRows();
         var rowsValues = this.dataSource.topHeaderValues();
-        var tooltipValues = this.dataSource.topHeaderTooltipValues();
 
         var rowsValuesLength = _.map(rowsValues, function (rowValue) {
             return rowValue.length;
         });
-
         var rowsValuesLengthAc = Utils.rightProductAcumulate(rowsValuesLength);
+        var columnsTree = {};
+        for (var i = 0; i < bodyPaintInfo.columns.length; i++) {
+            var column = bodyPaintInfo.columns[i];
+            var index = column.index;
+            var pointerColumn = columnsTree;
+            for (var j = 0; j < rowsLen - 1; j++) {
+                var columnIndex = Math.floor(index / rowsValuesLengthAc[j]) % rowsValues[j].length;
+                if (!pointerColumn.hasOwnProperty(columnIndex)) {
+                    pointerColumn[columnIndex] = {}
+                }
+                pointerColumn = pointerColumn[columnIndex];
+            }
+            pointerColumn[index % rowsValues[rowsValues.length - 1].length] = i;
+        }
 
-        var result = [];
+        var paintInfo = [];
+        this.calculateColumns(bodyPaintInfo, columnsTree, paintInfo);
+        this.lastPaintInfo = paintInfo;
+        return paintInfo;
+    }
 
-        for (var i = 0; i < rowsLen; i++) {
-            result[i] = [];
-            var cellHeight = this.delegate.topHeaderRowHeight(i, this.view);
-            var cellY = this.incrementalCellSize.rows[i];
+    App.Table.TopHeaderZone.prototype.calculateColumns = function (bodyPaintInfo, columnsTree, paintInfo, columnLevel, offsets) {
+        columnLevel = columnLevel || 0;
+        offsets = offsets || {};
+        offsets[columnLevel] = offsets[columnLevel] || 0;
+        var tooltipValues = this.dataSource.topHeaderTooltipValues();
+        var rowsValues = this.dataSource.topHeaderValues();
+        var self = this;
+        paintInfo[columnLevel] = paintInfo[columnLevel] || [];
 
-            for (var j = 0; j < bodyPaintInfo.columns.length; j++) {
-                var column = bodyPaintInfo.columns[j];
+        Object.keys(columnsTree).forEach(function(columnKey) {
+            var cellResult = {};
+            var associatedBodyCellWithAttributes;
 
-                var indexInValue = Math.floor(column.index / rowsValuesLengthAc[i]);
-                var index = indexInValue * rowsValuesLengthAc[i];
-                if (result[i].length === 0 || _.last(result[i]).index != index) {
-                    var cellX = this.incrementalCellSize.columns[index] - this.bodyZone.origin.x + this.viewPort.x + this.offset.x;
+            if (typeof columnsTree[columnKey] == 'object') { // Is column with childs
+                self.calculateColumns(bodyPaintInfo, columnsTree[columnKey], paintInfo, columnLevel + 1, offsets);
+                var offset = offsets[columnLevel];
+                var offsetEnd = offset + Object.keys(columnsTree[columnKey]).length;
+                var visibleChilds = paintInfo[columnLevel + 1].slice(offset, offsetEnd);
+                offsets[columnLevel] = offsetEnd;
 
-                    var indexEnd = index + rowsValuesLengthAc[i];
-                    var cellWidth = this.incrementalCellSize.columns[indexEnd] - this.incrementalCellSize.columns[index];
+                var firstChild = visibleChilds[0];
+                var lastChild = visibleChilds[visibleChilds.length -1 ];
+                associatedBodyCellWithAttributes = new Cell(firstChild.index, 0);
+                
+                var resultx = firstChild.x < 0 ? 0 : firstChild.x;
 
-                    var columnIndex = indexInValue % rowsValuesLength[i];
-                    var content = rowsValues[i][columnIndex];
+                cellResult = {
+                    width: (lastChild.x + lastChild.width) - resultx,
+                    index: firstChild.index,
+                    indexEnd: lastChild.indexEnd,
+                    relativeIndex: firstChild.relativeIndex,
+                    relativeIndexEnd: lastChild.relativeIndexEnd,
+                    x: resultx
+                }
 
-                    var associatedBodyCellWithAttributes = new Cell(column.index, 0);
-                    var cellAttributesAtIndex = this.dataSource.cellAttributesAtIndex(associatedBodyCellWithAttributes);
-                    var cellAttributes = [];
-                    var cellTitle = "";
-                    var cellDescription = "";
-                    var cellMeasureUnit = "";
-
-                    var cellInfo = tooltipValues[i][columnIndex];
-                    if (cellInfo) {
-                        cellAttributes = cellAttributesAtIndex ? cellAttributesAtIndex.dimensionsAttributes : [];
-                        cellAttributes = _.filter(cellAttributes, function (cellAttribute) {
-                            return cellAttribute.dimensionId == cellInfo.dimensionId;
-                        });
-                        if (!_.compact(_.pluck(cellAttributes, 'value')).length) {
-                            cellAttributes = [];
-                        }
-                        cellTitle = cellInfo.title;
-                        cellDescription = cellInfo.description;
-                        cellMeasureUnit = cellInfo.measureUnit;
-                    }
-
-                    result[i].push({
-                        index: index,
-                        indexEnd: indexEnd,
-                        height: cellHeight,
-                        y: cellY,
-                        x: cellX,
-                        width: cellWidth,
-                        content: content,
-                        tooltipTitle: cellTitle,
-                        tooltipDescription: cellDescription,
-                        tooltipMeasureUnit: cellMeasureUnit,
-                        attributes: cellAttributes
-                    });
+            } else {
+                var column = bodyPaintInfo.columns[columnsTree[columnKey]];
+                associatedBodyCellWithAttributes = new Cell(column.index, 0);
+                var topHeaderZoneWidth = self.viewPort.width + self.offset.x;
+                cellResult = {
+                    width: (column.x + column.width > topHeaderZoneWidth)? topHeaderZoneWidth - column.x : column.width,
+                    index: column.index,
+                    indexEnd: column.index + 1,
+                    x: column.x,
+                    relativeIndex: column.relativeIndex,
+                    relativeIndexEnd: column.relativeIndex + 1
                 }
             }
-        }
-        this.lastPaintInfo = result;
-        return result;
-    };
+
+            var cellAttributesAtIndex = self.dataSource.cellAttributesAtIndex(associatedBodyCellWithAttributes);
+            var cellAttributes = [];
+            var cellTitle = "";
+            var cellDescription = "";
+            var cellMeasureUnit = "";
+            var cellInfo = tooltipValues[columnLevel][columnKey];
+
+            if (cellInfo) {
+                cellAttributes = cellAttributesAtIndex ? cellAttributesAtIndex.dimensionsAttributes : [];
+                cellAttributes = _.filter(cellAttributes, function (cellAttribute) {
+                    return cellAttribute.dimensionId == cellInfo.dimensionId;
+                });
+                if (!_.compact(_.pluck(cellAttributes, 'value')).length) {
+                    cellAttributes = [];
+                }
+                cellTitle = cellInfo.title;
+                cellDescription = cellInfo.description;
+                cellMeasureUnit = cellInfo.measureUnit;
+            }
+
+            paintInfo[columnLevel].push(_.extend(cellResult, {
+                y: self.incrementalCellSize.rows[columnLevel],
+                height: self.delegate.topHeaderRowHeight(columnLevel, self.view),
+                content: rowsValues[columnLevel][columnKey],
+                tooltipTitle: cellTitle,
+                tooltipDescription: cellDescription,
+                tooltipMeasureUnit: cellMeasureUnit,
+                attributes: cellAttributes
+            }));
+        })
+        
+    }
 
     App.Table.TopHeaderZone.prototype.cellAtPoint = function (absolutePoint) {
         // Optimizable no buscando por todas las celdas, sino buscar por columnas
@@ -271,9 +309,9 @@
         for (var i = 0; i < lastRowPaintInfo.length; i++) {
             var cellPaintInfo = lastRowPaintInfo[i];
             if (rectangle.containsPoint(new Point(cellPaintInfo.x, rectangle.y))) {
-                return cellPaintInfo.index;
+                return cellPaintInfo.relativeIndex;
             } else if (rectangle.containsPoint(new Point(cellPaintInfo.x + cellPaintInfo.width, rectangle.y))) {
-                return cellPaintInfo.indexEnd;
+                return cellPaintInfo.relativeIndexEnd;
             }
         }
     }

@@ -22,6 +22,15 @@
             this.dataSource = options.dataSource;
             this.delegate = options.delegate;
             this.view = options.view;
+            this.valuesToIgnore = [];
+            this.valuesToIgnoreHandlers = {
+                'NULO': function(value) {
+                    return value == null
+                },
+                'CERO': function(value) {
+                    return value === 0;
+                }
+            }
             this.calculateIncrementalSize();
         },
 
@@ -45,18 +54,181 @@
                     columns: columns
                 };
 
-                var widthTotal = columns[columns.length - 1];
-                var heightTotal = rows[rows.length - 1];
-
-                this.setSize(new Size(widthTotal, heightTotal));
+                this.calculateSize();
             }
         },
 
+        calculateSize: function() {
+            this.ignoredCells = this.calculateIgnoredCells();
+            var widthTotal = 0;
+            var heightTotal = 0;
+            var columns = this.incrementalCellSize.columns;
+            var rows = this.incrementalCellSize.rows;
+            if (this.ignoredCells) {
+                widthTotal = columns[columns.length - 1 - Object.keys(this.ignoredCells.columns).length];
+                heightTotal = rows[rows.length - 1 - Object.keys(this.ignoredCells.rows).length];
+            } else {
+                widthTotal = columns[columns.length - 1];
+                heightTotal = rows[rows.length - 1];
+            }
+            this.setSize(new Size(widthTotal, heightTotal));
+        },
+
+        createRowsTree: function(finalLevelIndices, levelsLengths, levelsLengthsAc) {
+            var rowsTree = {};
+            for (var i = 0; i < finalLevelIndices.length; i++) {
+                var finalLevelIndex = finalLevelIndices[i];
+                var branch = rowsTree;
+                for (var j = 0; j < levelsLengths.length - 1; j++) {
+                    var levelIndex = Math.floor(finalLevelIndex / levelsLengthsAc[j]) % levelsLengths[j];
+                    if (!branch.hasOwnProperty(levelIndex)) {
+                        branch[levelIndex] = {}
+                    }
+                    branch = branch[levelIndex];
+                }
+                branch[finalLevelIndex % levelsLengths[ levelsLengths.length - 1]] = finalLevelIndex;
+            }
+            return rowsTree;
+        },
+
+
+        /* BEGIN section Ignore functions */
+
+        calculateIgnoredRows: function(rowsTree, numberLevels, ignoredRows, rowLevel, absoluteIndexParent) {
+            rowLevel = rowLevel || 0;
+            ignoredRows = ignoredRows || {};
+            absoluteIndexParent = absoluteIndexParent || 0;
+            var self = this;
+
+            Object.keys(rowsTree).forEach(function(rowKey) {
+                rowKey = Number(rowKey);
+                if (typeof rowsTree[rowKey] === 'object') {
+                    var absoluteIndex = absoluteIndexParent + self.dataSource.leftHeaderDimensionsElements(rowLevel + 1) * rowKey + (rowLevel? 1 : 0);
+                    if (self.shouldIgnoreBlankRow(rowsTree[rowKey], numberLevels, rowLevel + 1)) {
+                        ignoredRows[absoluteIndex] = {
+                            absoluteIndex: absoluteIndex,
+                            indexCell: _.range(numberLevels - rowLevel).reduce(function(indexCell) {
+                                return (typeof indexCell == 'object')? indexCell[Object.keys(indexCell)[0]] : indexCell;
+                            }, rowsTree[rowKey]),
+                            blank: true,
+                            rowLevel: rowLevel
+                        };
+                    }
+                    self.calculateIgnoredRows(rowsTree[rowKey], numberLevels, ignoredRows, rowLevel + 1, absoluteIndex);
+                } else {
+                    ignoredRows[absoluteIndexParent + rowKey + 1] = {
+                        absoluteIndex: absoluteIndexParent + rowKey + 1,
+                        indexCell: rowsTree[rowKey],
+                        blank: false,
+                        rowLevel: rowLevel
+                    };
+                }
+            });
+
+            return ignoredRows;
+        },
+
+        shouldIgnoreBlankRow: function(rowsBranchTree, numberLevels, currentLevel) {
+            currentLevel = currentLevel || 0;
+            var self = this;
+            var childs = Object.keys(rowsBranchTree);
+            var totalChilds = self.dataSource.leftHeaderDimensionsElements(currentLevel) - 1;
+            if (currentLevel == numberLevels - 1) {
+                return childs.length == totalChilds;
+            }
+            else if (currentLevel < numberLevels - 1) {
+                var ignoredChilds = 0;
+                childs.forEach(function(rowKey) {
+                    if (self.shouldIgnoreBlankRow(rowsBranchTree[rowKey], numberLevels, currentLevel + 1)) {
+                        ignoredChilds++;
+                    }
+                })
+                return ignoredChilds == totalChilds;
+            }
+        },
+
+        shouldIgnore: function(value) {
+            for (var i = 0; i < this.valuesToIgnore.length; i++) {
+                if (this.valuesToIgnoreHandlers[this.valuesToIgnore[i]] && this.valuesToIgnoreHandlers[this.valuesToIgnore[i]](value)) {
+                    return true;
+                }
+            }
+            return false;
+        },
+
+        shouldIgnoreCells: function() {
+            return this.valuesToIgnore && this.valuesToIgnore.length > 0;
+        },
+
+        shouldIgnoreRow: function(iRow) {
+            var totalColumns = this.dataSource.columns();
+            for (var i = 0; i < totalColumns; i++) {
+                var value = this.dataSource.valueAtIndex(new Cell(i, iRow));
+                if (!this.shouldIgnore(value)) {
+                    return false;
+                }
+            }
+            return true;
+        },
+
+        shouldIgnoreColumn: function(iColumn) {
+            var leftHeadersLengths = this.dataSource.leftHeaderDimensionsLengths();
+            var rowsWithvalue = leftHeadersLengths.reduce(function(dimensionsRows, dimensionRows){ return dimensionsRows * dimensionRows }, 1);
+            for (var i = 0; i < rowsWithvalue; i++) {
+                var value = this.dataSource.valueAtIndex(new Cell(iColumn, i));
+                if (!this.shouldIgnore(value)) {
+                    return false;
+                }
+            }
+            return true;
+        },
+
+        calculateIgnoredCells: function() {
+            if (!this.shouldIgnoreCells()) {
+                return null;
+            }
+
+            var ignoredCells = {
+                columns: {},
+                rows: {}
+            }
+            var totalColumns = this.dataSource.columns();
+            var leftHeadersLengths = this.dataSource.leftHeaderDimensionsLengths();
+            var rowsWithvalue = leftHeadersLengths.reduce(function(dimensionsRows, dimensionRows ){ return dimensionsRows * dimensionRows }, 1);
+            var ignoredRowsWithValues = [];
+            
+            for (var i = 0; i < totalColumns; i++) {
+                if (this.shouldIgnoreColumn(i)) {
+                    ignoredCells.columns[i] =  true;
+                }
+            }
+
+            for (var i = 0; i < rowsWithvalue; i++) {
+                if (this.shouldIgnoreRow(i)) {
+                    ignoredRowsWithValues.push(i);
+                }
+            }
+            var leftHeadersAc = Utils.rightProductAcumulate(leftHeadersLengths)
+            var rowsTree = this.createRowsTree(ignoredRowsWithValues, leftHeadersLengths, leftHeadersAc);
+            ignoredCells.rows = this.calculateIgnoredRows(rowsTree, leftHeadersLengths.length);
+
+            ignoredCells.columnsKeys = Object.keys(ignoredCells.columns).map(function(key) {return Number(key)});
+            ignoredCells.rowsKeys = Object.keys(ignoredCells.rows).map(function(key) {return Number(key)});
+            return ignoredCells;
+        },
+
+        recalculateIgnoredValues: function(valuesToIgnore) {
+            this.valuesToIgnore = valuesToIgnore;
+            this.calculateSize();
+        },
+
+        /* END section Ignore functions */
+        
+        
         // Calcula la primera celda visible (en la esquina superior izquierda)
         firstCell: function () {
             var x = Utils.floorIndex(this.incrementalCellSize.columns, this.origin.x),
                 y = Utils.floorIndex(this.incrementalCellSize.rows, this.origin.y);
-
             return new Cell(x, y);
         },
 
@@ -66,12 +238,12 @@
             return new Point(x, y);
         },
 
-        // IDEA: Improve implementation. It is not so transparent METAMAC-2282
         cellAtPoint: function (point) {
-            var absolutePoint = this.relativePoint2AbsolutePoint(point);
-            var x = Utils.floorIndex(this.incrementalCellSize.columns, absolutePoint.x),
-                y = Utils.floorIndex(this.incrementalCellSize.rows, absolutePoint.y);
-            y -= this.dataSource.blankRowsOffset(y);
+            var iX = Utils.floorIndex(this.currentPaintInfo.columns.map(function(c) { return c.x}), point.x);
+            var iY = Utils.floorIndex(this.currentPaintInfo.rows.map(function(r){return r.y}), point.y);
+
+            var x = this.currentPaintInfo.columns[iX].index;
+            var y = this.currentPaintInfo.rows[iY].indexCell;
             return new Cell(x, y);
         },
 
@@ -127,23 +299,66 @@
             var totalRows = this.dataSource.rows();
             var totalColumns = this.dataSource.columns();
 
-            var firstCell = this.firstCell();
-            var firstCellPoint = this.absolutePoint2RelativePoint(this.cell2AbsolutePoint(firstCell));
-            var firstCellSize = this.cellSize(firstCell);
+            var relativeFirstCell = this.firstCell();
+            var absoluteFirstCell = relativeFirstCell;
+            var firstCellPoint = this.absolutePoint2RelativePoint(this.cell2AbsolutePoint(relativeFirstCell));
 
             var columns = [], rows = [];
 
-            var j = firstCell.x;
+            if (this.ignoredCells) {
+                // We need to recalculate the offset for the first column in case it is ignored
+                var iColumn = absoluteFirstCell.x;
+                var ignoredOffset = _.sortedIndex(this.ignoredCells.columnsKeys, iColumn);
+                var offset = 0;
+
+                if (this.ignoredCells.columns.hasOwnProperty(iColumn)) {
+                    ignoredOffset++;
+                }
+                
+                while (offset < ignoredOffset && iColumn < totalRows) {
+                    if (!this.ignoredCells.columns.hasOwnProperty(++iColumn)) {
+                        offset++;
+                    }
+                }
+                
+                // We need to recalculate the offset for the first row in case it is ignored
+                var iRow = absoluteFirstCell.y;
+                var ignoredRowsOffset = _.sortedIndex(this.ignoredCells.rowsKeys, iRow);
+                offset = 0;
+
+                if (this.ignoredCells.rows.hasOwnProperty(iRow)) {
+                    ignoredRowsOffset++;
+                }
+                while (offset < ignoredRowsOffset && iRow < totalRows) {
+                    if (!this.ignoredCells.rows.hasOwnProperty(++iRow)) {
+                        offset++;
+                    }
+                }
+                absoluteFirstCell = {
+                    x: iColumn,
+                    y: iRow
+                }
+            }
+
+            var firstCellSize = this.cellSize(absoluteFirstCell);
+            var j = absoluteFirstCell.x;
+            var relativeJ = relativeFirstCell.x;
             var x = firstCellPoint.x;
             var size;
 
             while (xVisible && j < totalColumns) {
-                size = this.delegate.columnWidth(j);
+                if (this.ignoredCells && this.ignoredCells.columns.hasOwnProperty(j)) {
+                    j++;
+                    continue;
+                }
+
+                size = this.delegate.columnWidth(relativeJ);
 
                 columns.push({
                     x: x,
                     index: j,
-                    width: size
+                    width: size,
+                    relativeIndex: relativeJ++
                 });
 
                 j = j + 1;
@@ -152,12 +367,20 @@
                 xVisible = this.isRelativeRectangleVisible(new Rectangle(x, firstCellPoint.y, size, firstCellSize.height));
             }
 
-            var i = firstCell.y;
+            var i = absoluteFirstCell.y;
             var y = firstCellPoint.y;
-
             // IndexCell to account for the difference that blank rows add
-            var indexCell = i - this.dataSource.blankRowsOffset(firstCell.y);
+            var indexCell = i - this.dataSource.blankRowsOffset(i);
+            
             while (yVisible && i < totalRows) {
+                if (this.ignoredCells && this.ignoredCells.rows.hasOwnProperty(i)) {
+                    if (!this.ignoredCells.rows[i].blank) {
+                        indexCell++;
+                    }
+                    i++;
+                    continue;
+                }
+
                 size = this.delegate.rowHeight(i);
 
                 rows.push({
@@ -192,8 +415,8 @@
             this.ctx.rect(this.viewPort.x, this.viewPort.y, this.viewPort.width, this.viewPort.height);
             this.ctx.clip();
 
-            var limits = this.visibleRowsAndColumns();
             var paintInfo = this.paintInfo();
+            this.currentPaintInfo = paintInfo;
 
             this.paintCells(paintInfo);
 
