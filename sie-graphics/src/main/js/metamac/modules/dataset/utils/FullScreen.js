@@ -98,18 +98,22 @@
             if (this.browserHasFullScreenSupport()) {
                 var fn = function () {
                     setTimeout(function () {
-                        self.$document.unbind(self.events.change, fn);
                         self.trigger('didEnterFullScreen');
                         self._addExitFullScreenListeners();
                     }, this.FS_RESIZE_DELAY); // time out for wait browser animation
                 };
-                self.$document.bind(self.events.change, fn);
+                self.$document.one(self.events.change, fn);
                 self._enterFullScreenSupport();
             } else {
                 self._enterFullScreenNoSupport();
                 self._addExitFullScreenListeners();
                 self.trigger('didEnterFullScreen');
             }
+        },
+
+        refreshFullScreenListeners: function() {
+            this._removeExitFullScreenListeners();
+            this._addExitFullScreenListeners();
         },
 
         _addExitFullScreenListeners : function () {
@@ -176,6 +180,18 @@
             } else {
                 this.get$Container().removeClass('full-screen');
             }
+        },
+
+        isInFullScreen: function() {
+            var fullscreenElement = this._getFullscreenElement();
+            return !!fullscreenElement && this.get$Container()[0] === fullscreenElement;
+        },
+        
+        _getFullscreenElement: function() {
+            return document.fullscreenElement || /* Standard syntax */
+                document.webkitFullscreenElement || /* Chrome, Safari and Opera syntax */
+                document.mozFullScreenElement ||/* Firefox syntax */
+                document.msFullscreenElement; /* IE/Edge syntax */
         }
 
     };

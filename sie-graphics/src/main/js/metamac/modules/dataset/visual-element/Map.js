@@ -191,7 +191,6 @@
             }
             
             this.showLoading();
-
             this._getDrawableShapes();
             this._getData();
             this._calculateAndSetRanges();

@@ -61,6 +61,10 @@ I18n.translations.es = {
             "for": "Para"
         },
         sidebar: {
+            ignore: {
+                null: 'Ocultar categorías con celdas en blanco',
+                zero: 'Ocultar categorías con celdas en cero'
+            },
             info: {
                 title: "Info"
             },
@@ -236,7 +240,8 @@ I18n.translations.es = {
                     FOUR_MONTHLY: "Cuatrimestral",
                     MONTHLY: "Mensual",
                     WEEKLY: "Semanal",
-                    DAILY: "Diario"
+                    DAILY: "Diario",
+                    HOURLY: "Cada hora"
                 }
             }
         }

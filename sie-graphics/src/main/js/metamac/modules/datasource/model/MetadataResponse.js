@@ -312,7 +312,8 @@
 
                 apiUrl: this.getApiUrl(),
                 apiDocumentationUrl: this.getApiDocumentationUrl(),
-                visualizerUrlForWidget: this.getVisualizerUrlForWidget()
+                visualizerUrlForWidget: this.getVisualizerUrlForWidget(),
+                keepAllData: this.getKeepAllData()
             };
         },
 
@@ -407,6 +408,10 @@
 
         getTitle: function () {
             return this.getLocalizedLabel(this.metadataResponse.name);
+        },
+
+        getKeepAllData: function() {
+            return this.metadata.keepAllData;
         },
 
         getSubtitle: function () {
@@ -574,7 +579,7 @@
             return this.getLocalizedLabel(this.metadata.bibliographicCitation);
         },
 
-        _getResourceName: function(resource) {
+        _getResourceName: function (resource) {
             return resource && this.localizeLabel(resource.name.text);
         }
     };
