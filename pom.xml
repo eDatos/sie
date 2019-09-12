@@ -11,7 +11,7 @@
     
 	<groupId>es.gobcan.istac.sie</groupId>
 	<artifactId>sie</artifactId>
-	<version>2.1.0</version>
+	<version>2.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Sistema de Información Electoral</name>
 	<description>Visualizador del Sistema de Información Electoral de Canarias</description>
@@ -24,7 +24,7 @@
 	<scm>
 		<connection>scm:git:http://git.arte-consultores.com/istac/sie/</connection>
 		<developerConnection>scm:git:http://git.arte-consultores.com/istac/sie/</developerConnection>
-		<tag>20190912133123-v2.1.0</tag>
+		<tag>HEAD</tag>
 		<url>http://git.arte-consultores.com/istac/sie</url>
 	</scm>
 
