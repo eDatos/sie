@@ -15,9 +15,6 @@ spring:
         url: jdbc:postgresql://FILL_HOST:FILL_PORT/FILL_DATABASE
         username: FILL_USER
         password: FILL_PASS
-    jpa:
-        show-sql: false
-
 
 # ===================================================================
 # Application specific properties
@@ -26,8 +23,8 @@ spring:
 
 application:
     metadata:
-        endpoint: FILL_COMMON_METADATA_ENDPOINT #Required: common metadata endpoint
-        installationType: FILL_INSTALLATION_TYPE #Required: installation type
+        endpoint: FILL_COMMON_METADATA_ENDPOINT #Required: common metadata endpoint. Example: http://estadisticas.arte-consultores.com/cmetadata/v1.0
+        installationType: FILL_INSTALLATION_TYPE #Required: installation type. Possible values: INTERNAL, EXTERNAL
         
 # ===================================================================        
 # Application debug properties
