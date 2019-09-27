@@ -62,9 +62,7 @@
             }
         },
 
-        maxUrlQueryLength: 1700,
-
-        metamacContainerSelector: '.metamac-container'
+        maxUrlQueryLength: 1700
     };
 
 }());

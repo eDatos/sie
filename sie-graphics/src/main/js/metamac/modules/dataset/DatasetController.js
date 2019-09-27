@@ -123,7 +123,8 @@
 
                 if (result.permalink) {
                     self.filtersModel.importJSON(result.permalink.filters);
-                    self.filterDimensions.importJSON(result.permalink.selection);
+                    self.filterDimensions.importJSONSelection(result.permalink.selection);
+                    self.filterDimensions.importJSONState(result.permalink.state);
                     if (!window.location.hash.includes(result.permalink.hash)) {
                         self.visualizationView.optionsModel.set('mustApplyVisualizationRestrictions', true);
                     }

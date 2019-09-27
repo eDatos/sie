@@ -60,7 +60,8 @@
 
             this.dimensionsView = new App.modules.dataset.DimensionsView({
                 filterDimensions: this.filterDimensions,
-                optionsModel: this.optionsModel
+                optionsModel: this.optionsModel,
+                data: this.data
             });
 
             this.filtersView = new App.modules.dataset.FiltersView({
@@ -138,7 +139,7 @@
             this.optionsBar.show(this.optionsView);
             this.dimensions.show(this.dimensionsView);
             this.filters.show(this.filtersView);
-            this.fullScreen.setContainer($(Constants.metamacContainerSelector));
+            this.fullScreen.setContainer($('.metamac-container'));
             if (this.optionsModel.get('widget')) {
                 this._initializeWidget();
             }
