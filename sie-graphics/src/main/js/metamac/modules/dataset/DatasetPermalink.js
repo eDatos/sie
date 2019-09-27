@@ -16,7 +16,8 @@
                 queryParams: App.queryParams,
                 hash: this.removePermalink(window.location.hash),
                 filters: filtersModel.exportJSON(),
-                selection: filterDimensions.exportJSON()
+                selection: filterDimensions.exportJSONSelection(),
+                state: filterDimensions.exportJSONState()
             });
         },
 
