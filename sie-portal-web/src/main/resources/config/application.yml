@@ -157,7 +157,7 @@ application:
         permalinksEndpointKey: metamac.portal.rest.external.permalinks
         exportEndpointKey: metamac.portal.rest.external.export
         googleTrackingIdKey: metamac.analytics.google.tracking_id
-        navbarPathKey: sie.style.header.url
-        footerPathKey: sie.style.footer.url
+        navbarPathKey: metamac.app.style.header.url
+        footerPathKey: metamac.app.style.footer.url
         organisationUrnKey: metamac.organisation.urn
         geographicalGranularityUrnKey: metamac.default.codelist.geographical_granularity.urn
