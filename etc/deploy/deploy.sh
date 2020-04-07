@@ -5,6 +5,8 @@ TRANSFER_PATH=$HOME_PATH/tmp
 DEMO_ENV=$HOME_PATH/env
 DEPLOY_TARGET_PATH_EXTERNAL=/servers/edatos-external/tomcats/edatos-external01/webapps
 DEPLOY_TARGET_PATH_INTERNAL=/servers/edatos-internal/tomcats/edatos-internal01/webapps
+DATA_RELATIVE_PATH_FILE=WEB-INF/classes/config/data-location.properties
+LOGBACK_RELATIVE_PATH_FILE=WEB-INF/classes/logback.xml
 RESTART=1
 
 if [ "$1" == "--no-restart" ]; then
@@ -35,9 +37,9 @@ ssh -o ProxyCommand="ssh -W %h:%p deploy@estadisticas.arte-consultores.com" depl
     sudo rm -rf $DEPLOY_TARGET_PATH_INTERNAL/sie.war
 
     # Restore Configuration
-    sudo cp $DEMO_ENV/logback_internal.xml $DEPLOY_TARGET_PATH_INTERNAL/sie/WEB-INF/classes/
+    sudo cp $DEMO_ENV/logback_internal.xml $DEPLOY_TARGET_PATH_INTERNAL/sie/$LOGBACK_RELATIVE_PATH_FILE
     sudo rm -f $DEPLOY_TARGET_PATH_INTERNAL/sie/WEB-INF/classes/config/application-env.yml
-    sudo cp $DEMO_ENV/data-location_external.properties $DEPLOY_TARGET_PATH_INTERNAL/sie/WEB-INF/classes/config/data-location.properties
+    sudo cp $DEMO_ENV/data-location_external.properties $DEPLOY_TARGET_PATH_INTERNAL/sie/$DATA_RELATIVE_PATH_FILE
     
     if [ $RESTART -eq 1 ]; then
         sudo chown -R edatos-internal.edatos-internal /servers/edatos-internal     
@@ -60,9 +62,9 @@ ssh -o ProxyCommand="ssh -W %h:%p deploy@estadisticas.arte-consultores.com" depl
     sudo rm -rf $DEPLOY_TARGET_PATH_EXTERNAL/sie.war
 
     # Restore Configuration
-    sudo cp $DEMO_ENV/logback_external.xml $DEPLOY_TARGET_PATH_EXTERNAL/sie/WEB-INF/classes/
+    sudo cp $DEMO_ENV/logback_external.xml $DEPLOY_TARGET_PATH_EXTERNAL/sie/$LOGBACK_RELATIVE_PATH_FILE
     sudo rm -f $DEPLOY_TARGET_PATH_EXTERNAL/sie/WEB-INF/classes/config/application-env.yml
-    sudo cp $DEMO_ENV/data-location_internal.properties $DEPLOY_TARGET_PATH_EXTERNAL/sie/WEB-INF/classes/config/data-location.properties
+    sudo cp $DEMO_ENV/data-location_internal.properties $DEPLOY_TARGET_PATH_EXTERNAL/sie/$DATA_RELATIVE_PATH_FILE
     
     if [ $RESTART -eq 1 ]; then
         sudo chown -R edatos-external.edatos-external /servers/edatos-external        
