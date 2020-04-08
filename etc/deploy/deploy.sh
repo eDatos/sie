@@ -17,7 +17,7 @@ scp -o ProxyCommand="ssh -W %h:%p deploy@estadisticas.arte-consultores.com" -r e
 scp -o ProxyCommand="ssh -W %h:%p deploy@estadisticas.arte-consultores.com" sie-portal-web/target/sie-portal-web-*.war deploy@192.168.10.16:$TRANSFER_PATH/sie.war
 ssh -o ProxyCommand="ssh -W %h:%p deploy@estadisticas.arte-consultores.com" deploy@192.168.10.16 <<EOF
 
-    # chmod a+x $TRANSFER_PATH/deploy/*.sh;
+    chmod a+x $TRANSFER_PATH/deploy/*.sh;
     . $TRANSFER_PATH/deploy/utilities.sh
     
     
