@@ -31,15 +31,15 @@ ssh -o ProxyCommand="ssh -W %h:%p deploy@estadisticas.arte-consultores.com" depl
     fi
 
     # Update Process
-    sudo rm -rf $DEPLOY_TARGET_PATH_INTERNAL/sie
+    sudo rm -rf $DEPLOY_TARGET_PATH_INTERNAL/sie-internal
     sudo cp $TRANSFER_PATH/sie.war $DEPLOY_TARGET_PATH_INTERNAL/sie.war
-    sudo unzip $DEPLOY_TARGET_PATH_INTERNAL/sie.war -d $DEPLOY_TARGET_PATH_INTERNAL/sie
+    sudo unzip $DEPLOY_TARGET_PATH_INTERNAL/sie.war -d $DEPLOY_TARGET_PATH_INTERNAL/sie-internal
     sudo rm -rf $DEPLOY_TARGET_PATH_INTERNAL/sie.war
 
     # Restore Configuration
-    sudo cp $DEMO_ENV/logback_internal.xml $DEPLOY_TARGET_PATH_INTERNAL/sie/$LOGBACK_RELATIVE_PATH_FILE
-    sudo rm -f $DEPLOY_TARGET_PATH_INTERNAL/sie/WEB-INF/classes/config/application-env.yml
-    sudo cp $DEMO_ENV/data-location_external.properties $DEPLOY_TARGET_PATH_INTERNAL/sie/$DATA_RELATIVE_PATH_FILE
+    sudo cp $DEMO_ENV/logback_internal.xml $DEPLOY_TARGET_PATH_INTERNAL/sie-internal/$LOGBACK_RELATIVE_PATH_FILE
+    sudo rm -f $DEPLOY_TARGET_PATH_INTERNAL/sie-internal/WEB-INF/classes/config/application-env.yml
+    sudo cp $DEMO_ENV/data-location_external.properties $DEPLOY_TARGET_PATH_INTERNAL/sie-internal/$DATA_RELATIVE_PATH_FILE
     
     if [ $RESTART -eq 1 ]; then
         sudo chown -R edatos-internal.edatos-internal /servers/edatos-internal     
