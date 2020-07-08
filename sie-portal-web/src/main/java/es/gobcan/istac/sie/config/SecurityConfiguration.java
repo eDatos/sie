@@ -47,7 +47,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/i18n/**")
             .antMatchers("/content/**")
             .antMatchers("/visualizer-static/**")
-            .antMatchers("/external-static/**")
             .antMatchers("/test/**");
         //@formatter:on
     }
