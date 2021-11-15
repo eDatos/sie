@@ -46,7 +46,7 @@ export class EvolucionElectoralComponent implements OnInit {
     tiposEleccion: Set<string>;
     hashGraficas;
     tipoGrafica = GRAFICA_VOTOS_DEFAULT;
-    tipoEleccionesVisible = TIPO_ELECCIONES_DEFAULT;
+    tipoEleccionesVisible: string;
 
     lugar: Lugar;
     lugarId: string;
@@ -62,25 +62,25 @@ export class EvolucionElectoralComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.activatedRoute.params.subscribe((params) => {
-            this.lugarId = params.id;
+        const { params, queryParams } = this.activatedRoute.snapshot;
+        this.lugarId = params.id;
+        this.tipoEleccionesVisible = queryParams.tipoEleccion ? queryParams.tipoEleccion.toUpperCase() : TIPO_ELECCIONES_DEFAULT;
 
-            this.datasetEvolucionElectoralService.getLugarById(params.id).then((resultadoBusquedaLugar) => {
-                if (!resultadoBusquedaLugar) {
-                    this.alertService.error('lugar.errorNoEncontrado', { codigo: params.id });
-                    throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: params.id }));
-                }
+        this.datasetEvolucionElectoralService.getLugarById(params.id).then((resultadoBusquedaLugar) => {
+            if (!resultadoBusquedaLugar) {
+                this.alertService.error('lugar.errorNoEncontrado', { codigo: params.id });
+                throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: params.id }));
+            }
 
-                this.lugar = resultadoBusquedaLugar;
-            });
+            this.lugar = resultadoBusquedaLugar;
+        });
 
-            this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
-                this.limpiarAtributos();
-                this.inicializarProcesosElectorales(listaProcesoElectoral);
-                this.inicializarTiposEleccion(listaProcesoElectoral);
-                this.inicializarGraficas();
-                this.comprobarDatosPagina3();
-            });
+        this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
+            this.limpiarAtributos();
+            this.inicializarProcesosElectorales(listaProcesoElectoral);
+            this.inicializarTiposEleccion(listaProcesoElectoral);
+            this.inicializarGraficas();
+            this.comprobarDatosPagina3();
         });
     }
 

@@ -1,14 +1,210 @@
 <jhi-title-bar></jhi-title-bar>
-
-<div class="section">
-    <h2 jhiTranslate="lugar.header">¿De qué lugar deseas conocer su evolución en materia electoral?</h2>
-
-    <div class="form-group">
-        <ac-autocomplete-short-list name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombreConGranularidad']" [disabled]="!lugares"></ac-autocomplete-short-list>
-        <div *ngIf="!lugares" class="loader first-loader"></div>
+<section class="main">
+    <div class="ring-selector">
+        <svg id="selector" width="384" height="428" viewBox="0 0 384 428" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="coronavirus">
+                <g id="ring">
+                    <g id="Group">
+                        <path id="Vector" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M49.0618 131.411C78.5578 80.323 133.068 48.851 192.06 48.851V63.781C138.403 63.781 88.8208 92.407 61.9918 138.876L49.0618 131.411Z" fill="#B0BCDE"/>
+                    </g>
+                    <g id="Group_2">
+                        <path id="Vector_2" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M49.0618 296.531C19.5658 245.443 19.5658 182.499 49.0618 131.411L61.9918 138.876C35.1628 185.345 35.1628 242.597 61.9918 289.066L49.0618 296.531Z" fill="#B0BCDE"/>
+                    </g>
+                    <g id="Group_3">
+                        <path id="Vector_3" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M192.06 379.091C133.068 379.091 78.558 347.619 49.062 296.531L61.992 289.066C88.821 335.535 138.402 364.161 192.06 364.161V379.091Z" fill="#B0BCDE"/>
+                    </g>
+                    <g id="Group_4">
+                        <path id="Vector_4" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M335.058 296.531C305.562 347.619 251.052 379.091 192.06 379.091V364.161C245.717 364.161 295.299 335.535 322.128 289.066L335.058 296.531Z" fill="#B0BCDE"/>
+                    </g>
+                    <g id="Group_5">
+                        <path id="Vector_5" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M335.058 131.411C364.554 182.499 364.554 245.443 335.058 296.531L322.128 289.066C348.957 242.597 348.957 185.345 322.128 138.876L335.058 131.411Z" fill="#B0BCDE"/>
+                    </g>
+                    <g id="Group_6">
+                        <path id="Vector_6" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M192.06 48.851C251.052 48.851 305.562 80.323 335.058 131.411L322.128 138.876C295.299 92.407 245.718 63.781 192.06 63.781V48.851Z" fill="#B0BCDE"/>
+                    </g>
+                </g>
+                <g id="select-electoral-info">
+                    <g id="Group_7">
+                        <path id="Vector_7" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M118 214.04C118 173.149 151.149 140 192.04 140C232.931 140 266.08 173.149 266.08 214.04C266.08 254.931 232.931 288.08 192.04 288.08C151.149 288.08 118 254.931 118 214.04Z"
+                              fill="#4472C4"/>
+                        <path id="Vector_8"
+                              d="M118 214.04C118 173.149 151.149 140 192.04 140C232.931 140 266.08 173.149 266.08 214.04C266.08 254.931 232.931 288.08 192.04 288.08C151.149 288.08 118 254.931 118 214.04Z"
+                              stroke="white" stroke-miterlimit="8"/>
+                    </g>
+                    <text id="Informaci&#195;&#179;n Electoral de Canarias" fill="white" xml:space="preserve" style="white-space: pre" font-family="Roboto" font-size="18" letter-spacing="0em">
+                        <tspan x="142.984" y="201.652">Informaci&#xf3;n </tspan>
+                        <tspan x="144.681" y="222.652">Electoral de </tspan>
+                        <tspan x="156.106" y="243.652">Canarias</tspan>
+                    </text>
+                </g>
+                <a href="/#/evolucion-electoral/ES70?tipoEleccion=autonomicas">
+                    <g id="select-region">
+                        <g id="Figure">
+                            <g id="Group_8">
+                                <path id="Vector_9" fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M140.22 52.571C140.22 23.941 163.43 0.731018 192.06 0.731018C220.69 0.731018 243.9 23.941 243.9 52.571C243.9 81.201 220.69 104.411 192.06 104.411C163.43 104.411 140.22 81.201 140.22 52.571Z"
+                                      fill="#E12B2B"/>
+                                <path id="Vector_10"
+                                      d="M140.22 52.571C140.22 23.941 163.43 0.731018 192.06 0.731018C220.69 0.731018 243.9 23.941 243.9 52.571C243.9 81.201 220.69 104.411 192.06 104.411C163.43 104.411 140.22 81.201 140.22 52.571Z"
+                                      stroke="white" stroke-miterlimit="8"/>
+                            </g>
+                        </g>
+                        <text id="Auton&#195;&#179;micas" fill="white" xml:space="preserve" style="white-space: pre" font-family="Roboto" font-size="12" letter-spacing="0em">
+                            <tspan x="156" y="57.1016">Auton&#xf3;micas</tspan>
+                        </text>
+                    </g>
+                </a>
+                <a href="/#/evolucion-electoral/ES70?tipoEleccion=cabildo">
+                    <g id="select-councils">
+                        <g id="Figure_2">
+                            <g id="Group_9">
+                                <path id="Vector_11" fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M280.02 133.331C280.02 104.701 303.23 81.491 331.86 81.491C360.49 81.491 383.7 104.701 383.7 133.331C383.7 161.961 360.49 185.171 331.86 185.171C303.23 185.171 280.02 161.961 280.02 133.331Z"
+                                      fill="#00B050"/>
+                                <path id="Vector_12"
+                                      d="M280.02 133.331C280.02 104.701 303.23 81.491 331.86 81.491C360.49 81.491 383.7 104.701 383.7 133.331C383.7 161.961 360.49 185.171 331.86 185.171C303.23 185.171 280.02 161.961 280.02 133.331Z"
+                                      stroke="white" stroke-miterlimit="8"/>
+                            </g>
+                        </g>
+                        <text id="Cabildos" fill="white" xml:space="preserve" style="white-space: pre" font-family="Roboto" font-size="12" letter-spacing="0em">
+                            <tspan x="308" y="137.102">Cabildos</tspan>
+                        </text>
+                    </g>
+                </a>
+                <a href="/#/evolucion-electoral/ES70?tipoEleccion=senado">
+                    <g id="select-senate">
+                        <g id="Figure_3">
+                            <g id="Group_10">
+                                <path id="Vector_13" fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M280.02 294.611C280.02 265.981 303.23 242.771 331.86 242.771C360.49 242.771 383.7 265.981 383.7 294.611C383.7 323.241 360.49 346.451 331.86 346.451C303.23 346.451 280.02 323.241 280.02 294.611Z"
+                                      fill="#DEA900"/>
+                                <path id="Vector_14"
+                                      d="M280.02 294.611C280.02 265.981 303.23 242.771 331.86 242.771C360.49 242.771 383.7 265.981 383.7 294.611C383.7 323.241 360.49 346.451 331.86 346.451C303.23 346.451 280.02 323.241 280.02 294.611Z"
+                                      stroke="white" stroke-miterlimit="8"/>
+                            </g>
+                        </g>
+                        <text id="Senado" fill="white" xml:space="preserve" style="white-space: pre" font-family="Roboto" font-size="12" letter-spacing="0em">
+                            <tspan x="314" y="299.102">Senado</tspan>
+                        </text>
+                    </g>
+                </a>
+                <a href="/#/evolucion-electoral/ES70?tipoEleccion=parlamento_europeo">
+                    <g id="select-europe">
+                        <g id="Figure_4">
+                            <g id="Group_11">
+                                <path id="Vector_15" fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M140.22 375.371C140.22 346.741 163.43 323.531 192.06 323.531C220.69 323.531 243.9 346.741 243.9 375.371C243.9 404.001 220.69 427.211 192.06 427.211C163.43 427.211 140.22 404.001 140.22 375.371Z"
+                                      fill="#919191"/>
+                                <path id="Vector_16"
+                                      d="M140.22 375.371C140.22 346.741 163.43 323.531 192.06 323.531C220.69 323.531 243.9 346.741 243.9 375.371C243.9 404.001 220.69 427.211 192.06 427.211C163.43 427.211 140.22 404.001 140.22 375.371Z"
+                                      stroke="white" stroke-miterlimit="8"/>
+                            </g>
+                        </g>
+                        <text id="Europeas" fill="white" xml:space="preserve" style="white-space: pre" font-family="Roboto" font-size="12" letter-spacing="0em">
+                            <tspan x="167" y="379.102">Europeas</tspan>
+                        </text>
+                    </g>
+                </a>
+                <a href="/#/evolucion-electoral/ES70?tipoEleccion=congreso">
+                    <g id="select-congress">
+                        <g id="Figure_5">
+                            <g id="Group_12">
+                                <path id="Vector_17" fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M0.419983 294.611C0.419983 265.981 23.63 242.771 52.26 242.771C80.89 242.771 104.1 265.981 104.1 294.611C104.1 323.241 80.89 346.451 52.26 346.451C23.63 346.451 0.419983 323.241 0.419983 294.611Z"
+                                      fill="#7030A0"/>
+                                <path id="Vector_18"
+                                      d="M0.419983 294.611C0.419983 265.981 23.63 242.771 52.26 242.771C80.89 242.771 104.1 265.981 104.1 294.611C104.1 323.241 80.89 346.451 52.26 346.451C23.63 346.451 0.419983 323.241 0.419983 294.611Z"
+                                      stroke="white" stroke-miterlimit="8"/>
+                            </g>
+                        </g>
+                        <text id="Congreso" fill="white" xml:space="preserve" style="white-space: pre" font-family="Roboto" font-size="12" letter-spacing="0em">
+                            <tspan x="26" y="299.102">Congreso</tspan>
+                        </text>
+                    </g>
+                </a>
+                <a href="/#/evolucion-electoral/ES70?tipoEleccion=municipales">
+                    <g id="select-municipales">
+                        <g id="Figure_6">
+                            <g id="Group_13">
+                                <path id="Vector_19" fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M0.419983 133.331C0.419983 104.701 23.63 81.491 52.26 81.491C80.89 81.491 104.1 104.701 104.1 133.331C104.1 161.961 80.89 185.171 52.26 185.171C23.63 185.171 0.419983 161.961 0.419983 133.331Z"
+                                      fill="#203864"/>
+                                <path id="Vector_20"
+                                      d="M0.419983 133.331C0.419983 104.701 23.63 81.491 52.26 81.491C80.89 81.491 104.1 104.701 104.1 133.331C104.1 161.961 80.89 185.171 52.26 185.171C23.63 185.171 0.419983 161.961 0.419983 133.331Z"
+                                      stroke="white" stroke-miterlimit="8"/>
+                            </g>
+                        </g>
+                        <text id="Municipales" fill="white" xml:space="preserve" style="white-space: pre" font-family="Roboto" font-size="12" letter-spacing="0em">
+                            <tspan x="20" y="137.102">Municipales</tspan>
+                        </text>
+                    </g>
+                </a>
+            </g>
+        </svg>
     </div>
 
-    <button class="btn btn-primary" (click)="transition()" [disabled]="!lugar">
-        <span jhiTranslate="lugar.continuar">continuar</span>
-    </button>
-</div>
+    <div class="cards-selector">
+        <h1 class="title">Información electoral de Canarias</h1>
+
+        <a title="Autonómicas" href="/#/evolucion-electoral/ES70?tipoEleccion=autonomicas">
+            <div class="card">
+                <img class="card-img" src="~images/parcan.jpg" alt="Cabildo Insular">
+                <div class="card-background red">
+                    <h3 class="card-title">Autonómicas</h3>
+                </div>
+            </div>
+        </a>
+
+        <a title="Cabildos" href="/#/evolucion-electoral/ES70?tipoEleccion=cabildo">
+            <div class="card">
+                <img class="card-img" src="~images/cabildo-insular.jpg" alt="Cabildo Insular">
+                <div class="card-background green">
+                    <h3 class="card-title">Cabildos</h3>
+                </div>
+            </div>
+        </a>
+
+        <a title="Senado" href="/#/evolucion-electoral/ES70?tipoEleccion=senado">
+            <div class="card">
+                <img class="card-img" src="~images/senado.jpg" alt="Cabildo Insular">
+                <div class="card-background yellow">
+                    <h3 class="card-title">Senado</h3>
+                </div>
+            </div>
+        </a>
+
+        <a title="Europeas" href="/#/evolucion-electoral/ES70?tipoEleccion=parlamento_europeo">
+            <div class="card">
+                <img class="card-img" src="~images/europarl.jpg" alt="Cabildo Insular">
+                <div class="card-background grey">
+                    <h3 class="card-title">Europeas</h3>
+                </div>
+            </div>
+        </a>
+
+        <a title="Congreso" href="/#/evolucion-electoral/ES70?tipoEleccion=congreso">
+            <div class="card">
+                <img class="card-img" src="~images/congreso-diputados.jpg" alt="Congreso de los Diputados">
+                <div class="card-background purple">
+                    <h3 class="card-title">Congreso</h3>
+                </div>
+            </div>
+        </a>
+
+        <a title="Municipales" href="/#/evolucion-electoral/ES70?tipoEleccion=municipales">
+            <div class="card">
+                <img class="card-img" src="~images/ayuntamiento.jpg" alt="Cabildo Insular">
+                <div class="card-background blue">
+                    <h3 class="card-title">Municipales</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
