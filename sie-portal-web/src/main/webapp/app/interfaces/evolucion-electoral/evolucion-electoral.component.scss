@@ -2,11 +2,17 @@
 
 .section {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 2em auto;
 }
 
 h1 {
     margin-bottom: 1rem;
+}
+
+.page-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
 }
 
 .seleccion-territorio {
@@ -72,7 +78,7 @@ a.proceso-electoral {
     table {
         border: 1px solid $color-tablas-evolucion-electoral;
         color: $istac-grey-dark;
-    
+
         thead {
             background-color: $color-tablas-evolucion-electoral;
             color: $white;
@@ -87,12 +93,12 @@ a.proceso-electoral {
                 }
             }
         }
-    
+
         th {
             padding: 0.3rem 1rem;
             font-size: 1.1rem;
         }
-    
+
         td {
             padding: 0.25rem 0.5rem 0.25rem 0.5rem;
         }
@@ -121,5 +127,15 @@ ngb-tabset {
                 background-color: $istac-blue;
             }
         }
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .page-header {
+        flex-direction: column;
+    }
+
+    jhi-additional-information-button {
+        margin-bottom: 1em;
     }
 }
