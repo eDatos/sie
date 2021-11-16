@@ -33,6 +33,15 @@ const TIPO_ELECCIONES_DEFAULT = 'MUNICIPALES';
 const TIPO_ELECCIONES_REFERENDUM = 'REFERENDUM';
 const TIPO_ELECCIONES_AUTONOMICAS = 'AUTONOMICAS';
 
+const ORDEN_TIPO_ELECCIONES = [
+    'AUTONOMICAS',
+    'CABILDO',
+    'MUNICIPALES',
+    'CONGRESO',
+    'SENADO',
+    'PARLAMENTO_EUROPEO',
+]
+
 const ELECCIONES_REGIONALES_ID_FRAGMENT = '_REGIONALES';
 
 @Component({
@@ -43,7 +52,7 @@ const ELECCIONES_REGIONALES_ID_FRAGMENT = '_REGIONALES';
 export class EvolucionElectoralComponent implements OnInit {
 
     hashProcesos;
-    tiposEleccion: Set<string>;
+    tiposEleccion: Array<string>;
     hashGraficas;
     tipoGrafica = GRAFICA_VOTOS_DEFAULT;
     tipoEleccionesVisible: string;
@@ -102,7 +111,9 @@ export class EvolucionElectoralComponent implements OnInit {
     private inicializarTiposEleccion(listaProcesoElectoral: ProcesoElectoral[]) {
         const tiposEleccion = listaProcesoElectoral.map((procesoElectoral) => procesoElectoral.tipoProcesoElectoral)
             .filter((tipoProcesoElectoral) => tipoProcesoElectoral !== TIPO_ELECCIONES_REFERENDUM); // METAMAC-2905 TRAPICHE! Se ocultan los referéndums
-        this.tiposEleccion = new Set(tiposEleccion);
+        this.tiposEleccion = Array.from(new Set(tiposEleccion)).sort((a, b) => {
+            return ORDEN_TIPO_ELECCIONES.indexOf(a) - ORDEN_TIPO_ELECCIONES.indexOf(b);
+        });
     }
 
     private inicializarGraficas() {
