@@ -1,5 +1,15 @@
 @import '~scss/variables';
 
+.main {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.additional-info {
+    align-self: flex-start;
+    margin: 4em 0;
+}
+
 .ring-selector {
     display: none;
 }
@@ -80,12 +90,17 @@
 }
 
 @media screen and (min-width: 650px) {
-    .cards-selector {
-        display: none;
+    .main {
+        flex-direction: column;
     }
 
-    section {
+    .selector {
         text-align: center;
+    }
+
+    .additional-info {
+        align-self: flex-end;
+        margin: 0;
     }
 
     .ring-selector {
@@ -96,5 +111,9 @@
             height: 100%;
             width: 100%;
         }
+    }
+
+    .cards-selector {
+        display: none;
     }
 }
