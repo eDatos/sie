@@ -3,8 +3,9 @@
 </jhi-title-bar>
 
 <div class="section">
-    <div class="no-metamac">
+    <div class="no-metamac page-header">
         <h1 *ngIf="tipoElecciones && fecha" jhiTranslate="procesoElectoral.header.{{tipoElecciones}}" [translateValues]="{fecha: fecha}"></h1>
+        <jhi-additional-information-button *ngIf="tipoElecciones && fecha"></jhi-additional-information-button>
     </div>
 
     <div class="metamac-container" id="metamac-container"><span jhiTranslate="procesoElectoral.loading"></span></div>
