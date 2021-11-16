@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-secondary" [title]="'global.additionalInfo' | translate">
+<a type="button" class="btn btn-secondary" [title]="'global.additionalInfo' | translate" [href]="this.additionalInfoUrl" [class.disabled-link]="!this.additionalInfoUrl">
     <em class="fa fa-info"></em>
     <span>{{ 'global.additionalInfo' | translate }}</span>
-</button>
+</a>

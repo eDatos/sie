@@ -24,7 +24,8 @@ export interface GenericConfig {
         navbarPathKey,
         footerPathKey,
         organisationUrnKey,
-        geographicalGranularityUrnKey
+        geographicalGranularityUrnKey,
+        sieAdditionalInfoUrl,
     };
 
     baseUrl
