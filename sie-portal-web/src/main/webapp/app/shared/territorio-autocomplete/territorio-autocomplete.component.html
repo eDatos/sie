@@ -1,1 +1,1 @@
-<ac-autocomplete-short-list name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [properties]="['nombreConGranularidad']" [disabled]="!lugares" (onSelect)="onTransitionMethod()"></ac-autocomplete-short-list>
+<ac-autocomplete-short-list [itemTemplate]="itemTemplate" name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [disabled]="!lugares" (onSelect)="onTransitionMethod($event)"></ac-autocomplete-short-list>

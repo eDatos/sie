@@ -29,9 +29,9 @@ const TIPO_LINEA = 'line';
 const ELECTORES = 'ELECTORES';
 const STACKING_TYPE = 'normal';
 
-const TIPO_ELECCIONES_DEFAULT = 'MUNICIPALES';
-const TIPO_ELECCIONES_REFERENDUM = 'REFERENDUM';
 const TIPO_ELECCIONES_AUTONOMICAS = 'AUTONOMICAS';
+const TIPO_ELECCIONES_DEFAULT = TIPO_ELECCIONES_AUTONOMICAS;
+const TIPO_ELECCIONES_REFERENDUM = 'REFERENDUM';
 
 const ORDEN_TIPO_ELECCIONES = [
     'AUTONOMICAS',
@@ -71,25 +71,29 @@ export class EvolucionElectoralComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        const { params, queryParams } = this.activatedRoute.snapshot;
-        this.lugarId = params.id;
-        this.tipoEleccionesVisible = queryParams.tipoEleccion ? queryParams.tipoEleccion.toUpperCase() : TIPO_ELECCIONES_DEFAULT;
+        this.activatedRoute.params.subscribe((params) => {
+            this.lugarId = params.id;
 
-        this.datasetEvolucionElectoralService.getLugarById(params.id).then((resultadoBusquedaLugar) => {
-            if (!resultadoBusquedaLugar) {
-                this.alertService.error('lugar.errorNoEncontrado', { codigo: params.id });
-                throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: params.id }));
-            }
+            this.datasetEvolucionElectoralService.getLugarById(params.id).then((resultadoBusquedaLugar) => {
+                if (!resultadoBusquedaLugar) {
+                    this.alertService.error('lugar.errorNoEncontrado', { codigo: params.id });
+                    throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: params.id }));
+                }
 
-            this.lugar = resultadoBusquedaLugar;
-        });
+                this.lugar = resultadoBusquedaLugar;
+            });
 
-        this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
-            this.limpiarAtributos();
-            this.inicializarProcesosElectorales(listaProcesoElectoral);
-            this.inicializarTiposEleccion(listaProcesoElectoral);
-            this.inicializarGraficas();
-            this.comprobarDatosPagina3();
+            this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
+                this.limpiarAtributos();
+                this.inicializarProcesosElectorales(listaProcesoElectoral);
+                this.inicializarTiposEleccion(listaProcesoElectoral);
+                this.inicializarGraficas();
+
+                this.activatedRoute.queryParams.subscribe((queryParams) => {
+                    this.tipoEleccionesVisible = queryParams.tipoEleccion ? queryParams.tipoEleccion.toUpperCase() : TIPO_ELECCIONES_DEFAULT;
+                    this.comprobarDatosPagina3();
+                })
+            });
         });
     }
 
@@ -207,6 +211,7 @@ export class EvolucionElectoralComponent implements OnInit {
 
     private comprobarDatosPagina3() {
         this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(this.tipoEleccionesVisible).then((multidataset) => {
+            this.router.navigate([], {queryParams: {tipoEleccion: this.tipoEleccionesVisible.toLowerCase()}});
             multidataset.datasetList.forEach((dataset) => {
                 const procesoElectoral = this.hashProcesos[this.tipoEleccionesVisible].find((proceso) => proceso.id === dataset.identifier);
                 if (procesoElectoral) {
@@ -220,6 +225,7 @@ export class EvolucionElectoralComponent implements OnInit {
 
     onTabChange(event) {
         this.tipoEleccionesVisible = event.nextId;
+        this.router.navigate([], {queryParams: {tipoEleccion: this.tipoEleccionesVisible.toLowerCase()}});
         this.comprobarDatosPagina3();
     }
 
@@ -228,7 +234,7 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     transition(lugarId) {
-        this.router.navigate(['evolucion-electoral', lugarId]);
+        this.router.navigate(['evolucion-electoral', lugarId], { queryParams: { tipoEleccion: this.tipoEleccionesVisible.toLowerCase() } });
     }
 
     descargarPdf(event: Event, tipoEleccion: string) {

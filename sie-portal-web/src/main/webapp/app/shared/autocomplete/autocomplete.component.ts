@@ -183,8 +183,8 @@ export class AutocompleteComponent implements ControlValueAccessor, OnInit, Afte
 
             if (this.autoComplete.suggestions) {
                 for (const suggestion of this.autoComplete.suggestions) {
-                    const itemValue = this.autoComplete.field ? this.autoComplete.objectUtils.resolveFieldData(suggestion, this.autoComplete.field)
-                        : this.internalItemTemplate(suggestion);
+                    const itemValue = this.internalItemTemplate ? this.internalItemTemplate(suggestion, true) : this.autoComplete.objectUtils.resolveFieldData(suggestion,
+                        this.autoComplete.field);
                     if (itemValue && inputValue === itemValue.toLowerCase()) {
                         valid = true;
                         break;
@@ -227,6 +227,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnInit, Afte
     onSelectMethod($event) {
         this.onSelect.emit($event);
         this.focusMustOpenPanel = false;
+        this.writeValue($event);
     }
 
     onUnselectMethod($event) {
@@ -277,9 +278,9 @@ export class AutocompleteComponent implements ControlValueAccessor, OnInit, Afte
         }
     }
 
-    private wrapItem(item) {
+    private wrapItem(item, inputValue?: boolean) {
         if (item) {
-            return Object.assign({}, item, { _ITEM_TEMPLATE_FIELD_: this.internalItemTemplate(item) });
+            return Object.assign({}, item, { _ITEM_TEMPLATE_FIELD_: this.internalItemTemplate(item, inputValue) });
         } else {
             return item;
         }
@@ -371,7 +372,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnInit, Afte
 
     writeValue(value: any): void {
         if (this.isWrapCase()) {
-            this._selectedSuggestions = this.wrapItem(value);
+            this._selectedSuggestions = this.wrapItem(value, true);
         } else {
             this._selectedSuggestions = value;
         }
