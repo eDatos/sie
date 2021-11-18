@@ -16,7 +16,8 @@ actualización de la versión 1.0.0 a la 2.0.0.*
 
 ## 2.1.2 a x.y.z
 
-* 
+* Es necesario ejecutar el script SQL contenido en la carpeta
+`etc/changes-from-release/2.1.2/db/common-metadata/postgresql/20210928_add_sie_additional_info.sql`.
 
 ## 0.0.0 a 2.1.2
 
