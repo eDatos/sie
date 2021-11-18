@@ -29,9 +29,18 @@ const TIPO_LINEA = 'line';
 const ELECTORES = 'ELECTORES';
 const STACKING_TYPE = 'normal';
 
-const TIPO_ELECCIONES_DEFAULT = 'MUNICIPALES';
-const TIPO_ELECCIONES_REFERENDUM = 'REFERENDUM';
 const TIPO_ELECCIONES_AUTONOMICAS = 'AUTONOMICAS';
+const TIPO_ELECCIONES_DEFAULT = TIPO_ELECCIONES_AUTONOMICAS;
+const TIPO_ELECCIONES_REFERENDUM = 'REFERENDUM';
+
+const ORDEN_TIPO_ELECCIONES = [
+    'AUTONOMICAS',
+    'CABILDO',
+    'MUNICIPALES',
+    'CONGRESO',
+    'SENADO',
+    'PARLAMENTO_EUROPEO',
+]
 
 const ELECCIONES_REGIONALES_ID_FRAGMENT = '_REGIONALES';
 
@@ -43,10 +52,10 @@ const ELECCIONES_REGIONALES_ID_FRAGMENT = '_REGIONALES';
 export class EvolucionElectoralComponent implements OnInit {
 
     hashProcesos;
-    tiposEleccion: Set<string>;
+    tiposEleccion: Array<string>;
     hashGraficas;
     tipoGrafica = GRAFICA_VOTOS_DEFAULT;
-    tipoEleccionesVisible = TIPO_ELECCIONES_DEFAULT;
+    tipoEleccionesVisible: string;
 
     lugar: Lugar;
     lugarId: string;
@@ -79,7 +88,11 @@ export class EvolucionElectoralComponent implements OnInit {
                 this.inicializarProcesosElectorales(listaProcesoElectoral);
                 this.inicializarTiposEleccion(listaProcesoElectoral);
                 this.inicializarGraficas();
-                this.comprobarDatosPagina3();
+
+                this.activatedRoute.queryParams.subscribe((queryParams) => {
+                    this.tipoEleccionesVisible = queryParams.tipoEleccion ? queryParams.tipoEleccion.toUpperCase() : TIPO_ELECCIONES_DEFAULT;
+                    this.comprobarDatosPagina3();
+                })
             });
         });
     }
@@ -102,7 +115,9 @@ export class EvolucionElectoralComponent implements OnInit {
     private inicializarTiposEleccion(listaProcesoElectoral: ProcesoElectoral[]) {
         const tiposEleccion = listaProcesoElectoral.map((procesoElectoral) => procesoElectoral.tipoProcesoElectoral)
             .filter((tipoProcesoElectoral) => tipoProcesoElectoral !== TIPO_ELECCIONES_REFERENDUM); // METAMAC-2905 TRAPICHE! Se ocultan los referéndums
-        this.tiposEleccion = new Set(tiposEleccion);
+        this.tiposEleccion = Array.from(new Set(tiposEleccion)).sort((a, b) => {
+            return ORDEN_TIPO_ELECCIONES.indexOf(a) - ORDEN_TIPO_ELECCIONES.indexOf(b);
+        });
     }
 
     private inicializarGraficas() {
@@ -196,6 +211,7 @@ export class EvolucionElectoralComponent implements OnInit {
 
     private comprobarDatosPagina3() {
         this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(this.tipoEleccionesVisible).then((multidataset) => {
+            this.router.navigate([], {queryParams: {tipoEleccion: this.tipoEleccionesVisible.toLowerCase()}});
             multidataset.datasetList.forEach((dataset) => {
                 const procesoElectoral = this.hashProcesos[this.tipoEleccionesVisible].find((proceso) => proceso.id === dataset.identifier);
                 if (procesoElectoral) {
@@ -209,6 +225,7 @@ export class EvolucionElectoralComponent implements OnInit {
 
     onTabChange(event) {
         this.tipoEleccionesVisible = event.nextId;
+        this.router.navigate([], {queryParams: {tipoEleccion: this.tipoEleccionesVisible.toLowerCase()}});
         this.comprobarDatosPagina3();
     }
 
@@ -217,7 +234,7 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     transition(lugarId) {
-        this.router.navigate(['evolucion-electoral', lugarId]);
+        this.router.navigate(['evolucion-electoral', lugarId], { queryParams: { tipoEleccion: this.tipoEleccionesVisible.toLowerCase() } });
     }
 
     descargarPdf(event: Event, tipoEleccion: string) {

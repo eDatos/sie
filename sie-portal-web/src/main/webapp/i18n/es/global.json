@@ -5,7 +5,8 @@
         "menu": {
             "elecciones": "ELECCIONES",
             "atlas": "ATLAS"
-        }
+        },
+        "additionalInfo": "Información complementaria"
     },
     "home": {
         "pageTitle": "Bienvenido",
