@@ -14,6 +14,10 @@ actualización de la versión 1.0.0 a la 2.0.0.*
 
 *Se deberá realizar primero la actualización de la versión 1.0.0 a la 2.0.0 y luego desde la 2.0.0 a la 3.0.0*
 
+## 2.1.2 a x.y.z
+
+* 
+
 ## 0.0.0 a 2.1.2
 
 * El proceso de actualizaciones entre versiones para versiones anteriores a la 2.1.2 está definido en "Metamac - Manual
