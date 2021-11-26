@@ -161,3 +161,4 @@ application:
         footerPathKey: metamac.app.style.footer.url
         organisationUrnKey: metamac.organisation.urn
         geographicalGranularityUrnKey: metamac.default.codelist.geographical_granularity.urn
+        sieAdditionalInfoUrl: metamac.sie.additional_info_url

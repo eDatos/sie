@@ -61,6 +61,7 @@ public class ApplicationProperties {
         private String footerPathKey;
         private String organisationUrnKey;
         private String geographicalGranularityUrnKey;
+        private String sieAdditionalInfoUrl;
 
         public String getEndpoint() {
             return endpoint;
@@ -104,6 +105,10 @@ public class ApplicationProperties {
 
         public String getStructuralResourcesExternalKey() {
             return structuralResourcesExternalKey;
+        }
+
+        public String getSieAdditionalInfoUrl() {
+            return sieAdditionalInfoUrl;
         }
 
         public void setStructuralResourcesExternalKey(String structuralResourcesExternalKey) {
@@ -224,6 +229,10 @@ public class ApplicationProperties {
 
         public void setGeographicalGranularityUrnKey(String geographicalGranularityUrnKey) {
             this.geographicalGranularityUrnKey = geographicalGranularityUrnKey;
+        }
+
+        public void setSieAdditionalInfoUrl(String sieAdditionalInfoUrl) {
+            this.sieAdditionalInfoUrl = sieAdditionalInfoUrl;
         }
     }
 }
