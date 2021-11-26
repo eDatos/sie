@@ -5,6 +5,7 @@ export class YElement {
     public data: any[];
     public alternativeName: string;
     public stacking: string;
+    public yAxis: number;
 }
 
 export class Chart {
