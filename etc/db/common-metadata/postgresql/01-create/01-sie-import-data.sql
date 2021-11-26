@@ -1,5 +1,5 @@
 INSERT INTO TB_DATA_CONFIGURATIONS (ID, VERSION, SYSTEM_PROPERTY, CONF_KEY, CONF_VALUE, EXTERNALLY_PUBLISHED)
-VALUES (GET_NEXT_SEQUENCE_VALUE('DATA_CONFIGURATIONS'), 1, true, 'metamac.sie.additional_info_url', 'http://www.gobiernodecanarias.org/istac/estadisticas/sociedad/elecciones/Elecciones/C00010A.html', false);
+VALUES (GET_NEXT_SEQUENCE_VALUE('DATA_CONFIGURATIONS'), 1, true, 'metamac.sie.additional_info.url', 'http://www.gobiernodecanarias.org/istac/estadisticas/sociedad/elecciones/Elecciones/C00010A.html', false);
 
 UPDATE TB_SEQUENCES
 SET SEQUENCE_NEXT_VALUE = SEQUENCE_NEXT_VALUE + 1
