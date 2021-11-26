@@ -35,7 +35,8 @@ export class ChartComponent implements OnChanges, AfterViewInit {
         Highcharts.setOptions({
             lang: {
                 decimalPoint: ',',
-                thousandsSep: '.'
+                thousandsSep: '.',
+                numericSymbols: null,
             }
         });
         this.buildChart();
@@ -52,15 +53,23 @@ export class ChartComponent implements OnChanges, AfterViewInit {
             },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>{series.options.alternativeName}: {point.altData:,.f}'
+                pointFormat: '{series.name}: {point.y}'
             },
-            yAxis: {
-                min: 0,
-                max: this.getMaxY(),
-                title: {
-                    text: ''
+            yAxis: [
+                { // Primary yAxis
+                    title: {
+                        text: '',
+                    },
+                }, { // Secondary yAxis
+                    title: {
+                        text: '',
+                    },
+                    labels: {
+                        format: '{value:.1f} %',
+                    },
+                    opposite: true,
                 },
-            },
+            ],
             plotOptions: {
                 area: {
                     fillOpacity: 0.5,
@@ -75,14 +84,21 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                         inactive: {
                             opacity: 1
                         }
-                    }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.1f}'
+                    },
                 },
                 column: {
                     states: {
                         inactive: {
                             opacity: 1
                         }
-                    }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                    },
                 }
             },
             credits: {

@@ -13,18 +13,17 @@ const ISTAC_BLUE = '#008BD0';
 const ISTAC_BLUE_LIGHT = '#2CBCE2';
 const ISTAC_BLUE_LIGHTEST = '#D5EDFA';
 
-const INDICADORES_GRAFICA_VOTOS = [
-    {nombre: 'VOTOS_VALIDOS_CANDIDATURA', color: ISTAC_BLUE, indicadorAlternativo: 'TASA_VOTOS_VALIDOS_CANDIDATURA'},
-    {nombre: 'VOTOS_VALIDOS_BLANCO', color: ISTAC_GREEN, indicadorAlternativo: 'TASA_VOTOS_VALIDOS_BLANCO'},
-    {nombre: 'VOTOS_NULOS', color: ISTAC_BROWN, indicadorAlternativo: 'TASA_VOTOS_NULOS'}
-];
-const INDICADORES_GRAFICA_PARTICIPACION = [
-    { nombre: 'TASA_ABSTENCION', color: ISTAC_GREEN, indicadorAlternativo: 'ELECTORES_ABSTENIDOS' },
-    { nombre: 'TASA_PARTICIPACION', color: ISTAC_BLUE, indicadorAlternativo: 'ELECTORES_VOTANTES' }
-];
-const GRAFICA_VOTOS_DEFAULT = false;
+const INDICADOR_GRAFICA_ELECTORES = {
+    nombre: 'ELECTORES',
+    color: ISTAC_BLUE,
+};
+
+const INDICADORES_GRAFICA_PARTICIPACION = {
+    nombre: 'TASA_PARTICIPACION',
+    color: ISTAC_ORANGE,
+};
+
 const TIPO_COLUMNA = 'column';
-const TIPO_AREA = 'area';
 const TIPO_LINEA = 'line';
 const ELECTORES = 'ELECTORES';
 const STACKING_TYPE = 'normal';
@@ -54,7 +53,6 @@ export class EvolucionElectoralComponent implements OnInit {
     hashProcesos;
     tiposEleccion: Array<string>;
     hashGraficas;
-    tipoGrafica = GRAFICA_VOTOS_DEFAULT;
     tipoEleccionesVisible: string;
 
     lugar: Lugar;
@@ -127,8 +125,6 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     private inicializarGrafica(tipoEleccion: string) {
-        const indicadores = this.getIndicadores();
-
         let listaProcesoElectoral = this.hashProcesos[tipoEleccion];
         // METAMAC-2931 TRAPICHE! Se ocultan las autonómicas regionales de la gráfica.
         if (tipoEleccion === TIPO_ELECCIONES_AUTONOMICAS) {
@@ -137,23 +133,9 @@ export class EvolucionElectoralComponent implements OnInit {
 
         const grafica = new Chart();
         grafica.xAxis = this.crearEjeX(listaProcesoElectoral);
-        grafica.yAxis = indicadores.map((indicador) => this.crearElementoEjeY(indicador, listaProcesoElectoral));
-        if (!this.tipoGrafica) {
-            grafica.yAxis.push(this.crearLineaCenso(listaProcesoElectoral));
-        } else {
-            grafica.yAxis.push(this.crearAreaAvance(listaProcesoElectoral, 'TASA_PARTICIPACION_A2', ISTAC_BLUE_LIGHT));
-            grafica.yAxis.push(this.crearAreaAvance(listaProcesoElectoral, 'TASA_PARTICIPACION_A1', ISTAC_BLUE_LIGHTEST));
-        }
+        grafica.yAxis = this.crearEjeY(listaProcesoElectoral);
 
         this.hashGraficas[tipoEleccion] = grafica;
-    }
-
-    private getIndicadores(): any[] {
-        if (this.tipoGrafica) {
-            return INDICADORES_GRAFICA_PARTICIPACION;
-        } else {
-            return INDICADORES_GRAFICA_VOTOS;
-        }
     }
 
     private crearEjeX(listaProcesoElectoral: ProcesoElectoral[]): any[] {
@@ -164,48 +146,27 @@ export class EvolucionElectoralComponent implements OnInit {
         return resultado;
     }
 
-    private crearElementoEjeY(indicador: any, listaProcesoElectoral: ProcesoElectoral[]): YElement {
+    private crearEjeY(listaProcesoElectoral: any) {
+        return [
+            this.crearElementoEjeY(INDICADOR_GRAFICA_ELECTORES, TIPO_COLUMNA, listaProcesoElectoral, 0),
+            this.crearElementoEjeY(INDICADORES_GRAFICA_PARTICIPACION, TIPO_LINEA, listaProcesoElectoral, 1),
+        ];
+    }
+
+    private crearElementoEjeY(indicador: any, type: string, listaProcesoElectoral: ProcesoElectoral[], yAxisIndex: number): YElement {
         const resultado = new YElement();
         resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador.nombre);
         resultado.color = indicador.color;
         resultado.stacking = STACKING_TYPE;
-        resultado.type = this.tipoGrafica ? TIPO_AREA : TIPO_COLUMNA;
-        resultado.alternativeName = this.translateService.instant('evolucionElectoral.indicador.' + indicador.indicadorAlternativo);
+        resultado.type = type;
+        resultado.yAxis = yAxisIndex;
         resultado.data = [];
-        listaProcesoElectoral.forEach((eleccion) => {
+        for (const eleccion of listaProcesoElectoral) {
             resultado.data.push({
                 y: parseFloat(eleccion.indicadores[indicador.nombre]),
                 altData: parseFloat(eleccion.indicadores[indicador.indicadorAlternativo])
             });
-        });
-        return resultado;
-    }
-
-    private crearLineaCenso(listaProcesoElectoral: ProcesoElectoral[]): YElement {
-        const resultado = new YElement();
-        resultado.name = this.translateService.instant('evolucionElectoral.indicador.ELECTORES');
-        resultado.color = ISTAC_ORANGE;
-        resultado.type = TIPO_LINEA;
-        resultado['tooltip'] = { pointFormat: '{series.name}: {point.y}'}
-        resultado.data = [];
-        listaProcesoElectoral.forEach((eleccion) => {
-            resultado.data.push(parseInt(eleccion.indicadores[ELECTORES], 10));
-        });
-        return resultado;
-    }
-
-    private crearAreaAvance(listaProcesoElectoral: ProcesoElectoral[], indicador: string, color: string): YElement {
-        const resultado = new YElement();
-        resultado.name = this.translateService.instant('evolucionElectoral.indicador.' + indicador);
-        resultado.color = color;
-        resultado.type = TIPO_AREA;
-        resultado['tooltip'] = { pointFormat: '{series.name}: {point.y}'}
-        resultado.data = [];
-        listaProcesoElectoral.forEach((eleccion) => {
-            const valorIndicador = eleccion.indicadores[indicador];
-            const valorParseado = valorIndicador ? parseFloat(valorIndicador) : null;
-            resultado.data.push(valorParseado);
-        });
+        }
         return resultado;
     }
 
