@@ -190,10 +190,6 @@ export class EvolucionElectoralComponent implements OnInit {
         this.comprobarDatosPagina3();
     }
 
-    onChangeIndicador() {
-        this.inicializarGraficas();
-    }
-
     transition(lugarId) {
         this.router.navigate(['evolucion-electoral', lugarId], { queryParams: { tipoEleccion: this.tipoEleccionesVisible.toLowerCase() } });
     }

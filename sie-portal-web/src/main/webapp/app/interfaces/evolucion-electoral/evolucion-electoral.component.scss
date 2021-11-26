@@ -26,6 +26,9 @@ h1 {
 }
 
 .barra-comandos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     padding: 15px 5px 20px 5px;
     min-width: 270px;
 
