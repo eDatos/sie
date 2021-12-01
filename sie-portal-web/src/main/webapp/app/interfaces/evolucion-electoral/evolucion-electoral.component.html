@@ -22,12 +22,12 @@
             <ng-template ngbTabContent>
                 <div class="barra-comandos">
                     <button type="button" class="btn btn-sm btn-secondary" [title]="'evolucionElectoral.descargarPdf' | translate" (click)="descargarPdf($event, tipo)">
-                        <i class="fa fa-download"></i>
+                        <em class="fa" [ngClass]="downloadingPdf ? 'fa-spinner fa-spin' : 'fa-download'"></em>
                         <span jhiTranslate="evolucionElectoral.descargarPdf">Descargar PDF</span>
                     </button>
                 </div>
 
-                <ac-chart [data]="hashGraficas[tipo]" [isPercentage]="tipoGrafica"></ac-chart>
+                <ac-chart [data]="hashGraficas[tipo]"></ac-chart>
 
                 <div class="grid-procesos">
                     <ng-container *ngFor="let proceso of hashProcesos[tipo].slice().reverse()">
