@@ -6,6 +6,8 @@ import { lugarRoute, LugarComponent } from './lugar';
 import { SieDocumentoModule } from '../documento/documento.module';
 import { evolucionElectoralRoute, EvolucionElectoralComponent } from './evolucion-electoral';
 import { procesoElectoralRoute, ProcesoElectoralComponent } from './proceso-electoral';
+import { DefaultNullPipe } from './proceso-electoral/default-null.pipe';
+import { PercentagePipe } from './proceso-electoral/percentage.pipe';
 
 const ENTITY_STATES = [
     ...lugarRoute,
@@ -23,7 +25,9 @@ const ENTITY_STATES = [
         TitleBarComponent,
         LugarComponent,
         EvolucionElectoralComponent,
-        ProcesoElectoralComponent
+        ProcesoElectoralComponent,
+        DefaultNullPipe,
+        PercentagePipe,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

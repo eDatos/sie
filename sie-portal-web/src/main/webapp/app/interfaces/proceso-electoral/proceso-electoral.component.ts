@@ -1,10 +1,11 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
-import { MultidatasetProcesosElectoralesService } from '../../dataset';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, EventEmitter } from '@angular/core';
+import { MultidatasetProcesosElectoralesService, DatasetEvolucionElectoralService, ProcesoElectoral } from '../../dataset';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MultidatasetProcesosElectorales } from '../../dataset/multidataset-procesos-electorales.model';
 import { ConfigService, MetadataService } from '../../config';
-import { Observable } from 'rxjs';
+import { Observable, Subscriber } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { zip } from 'rxjs/observable/zip';
 
 declare var I18n: any;
 declare var App: any;
@@ -27,6 +28,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
 
     lugarId: string;
     fecha: string;
+    proceso: ProcesoElectoral;
 
     constructor(
         private host: ElementRef,
@@ -35,17 +37,22 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         private multidatasetProcesosElectoralesService: MultidatasetProcesosElectoralesService,
         private configService: ConfigService,
         private metadataService: MetadataService,
-        private translateService: TranslateService
+        private translateService: TranslateService,
+        private datasetEvolucionElectoralService: DatasetEvolucionElectoralService,
     ) { }
 
     ngOnInit() {
-        this.activatedRoute.parent.url.subscribe((url) => {
+        zip(this.activatedRoute.parent.url, this.activatedRoute.parent.params).subscribe((value) => {
+            const [url, params] = value;
+
             if (!this.lugarId || this.lugarId !== url[1].path) {
                 this.lugarId = url[1].path;
             }
-        });
 
-        this.activatedRoute.parent.params.subscribe((params) => {
+            this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(this.lugarId).then((listaProcesoElectoral) => {
+                this.proceso = listaProcesoElectoral.find((proceso) => proceso.id === params.idProcesoElectoral);
+            });
+
             const matchResult = params.idProcesoElectoral.match(TIPO_PROCESO_ELECTORAL_REGEX);
             if (!matchResult) {
                 this.router.navigate(['not-found'], { skipLocationChange: true });
