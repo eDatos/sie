@@ -57,6 +57,7 @@ export class EvolucionElectoralComponent implements OnInit {
 
     lugar: Lugar;
     lugarId: string;
+    downloadingPdf = false;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -196,11 +197,16 @@ export class EvolucionElectoralComponent implements OnInit {
 
     descargarPdf(event: Event, tipoEleccion: string) {
         event.stopPropagation();
+        this.downloadingPdf = true;
         const evolucionElectoral = {
             territorio: this.lugar.nombre,
             tipoElecciones: this.translateService.instant('evolucionElectoral.nombreCompletoEleccion.' + tipoEleccion),
-            procesosElectorales: this.hashProcesos[tipoEleccion].slice().reverse()
+            procesosElectorales: this.hashProcesos[tipoEleccion].slice().reverse(),
         };
-        this.documentoService.descargarPdfEvolucionElectoral(evolucionElectoral);
+        this.documentoService.descargarPdfEvolucionElectoral(evolucionElectoral).subscribe(
+            (response) => this.documentoService.saveToFileSystem(response),
+            () => this.alertService.error('error.cannotDownloadDocument'),
+            () => this.downloadingPdf = false,
+        );
     }
 }

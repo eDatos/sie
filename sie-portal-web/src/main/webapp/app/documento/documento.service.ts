@@ -3,6 +3,7 @@ import { Http, ResponseContentType } from '@angular/http';
 import * as FileSaver from 'file-saver';
 import { TranslateService } from '@ngx-translate/core';
 import { JhiAlertService } from 'ng-jhipster';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class DocumentoService {
@@ -15,14 +16,11 @@ export class DocumentoService {
         private alertService: JhiAlertService
     ) { }
 
-    descargarPdfEvolucionElectoral(evolucionElectoral: any) {
+    descargarPdfEvolucionElectoral(evolucionElectoral: any): Observable<any> {
         const formData = new FormData();
         formData.append('evolucionElectoral', new Blob([JSON.stringify(evolucionElectoral)], { type: 'application/json' }));
         formData.append('grafica', new Blob([this.sanitizeSvg(document.getElementsByTagName('svg')[0].outerHTML)], { type: 'image/svg+xml' }));
-        this.http.post(`${this.resourceUrl}/evolucion-electoral`, formData, { responseType: ResponseContentType.Blob })
-            .subscribe(
-                (response) => this.saveToFileSystem(response),
-                () => this.alertService.error('error.cannotDownloadDocument'));
+        return this.http.post(`${this.resourceUrl}/evolucion-electoral`, formData, { responseType: ResponseContentType.Blob });
     }
 
     private sanitizeSvg(svg) {
@@ -42,7 +40,7 @@ export class DocumentoService {
             .replace(new RegExp('#FFFFFD', 'g'), '#909090'); // Ugly hack to style correctly the credits
     }
 
-    private saveToFileSystem(response) {
+    saveToFileSystem(response) {
         const contentDispositionHeader: string = response.headers.get('Content-Disposition');
         const blob = new Blob([response._body], { type: response.headers.get('content-type') + ';base64,' });
         const filename = contentDispositionHeader.match(/filename[^;=\n]*=((['"])(.*?)\2)/)[3] || 'fichero';

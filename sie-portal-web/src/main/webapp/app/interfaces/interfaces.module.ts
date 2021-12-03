@@ -23,7 +23,7 @@ const ENTITY_STATES = [
         TitleBarComponent,
         LugarComponent,
         EvolucionElectoralComponent,
-        ProcesoElectoralComponent
+        ProcesoElectoralComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
