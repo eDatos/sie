@@ -56,14 +56,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 this.lugarId = url[1].path;
             }
 
-            this.datasetEvolucionElectoralService.getLugarById(this.lugarId).then((result) => {
-                if (!result) {
-                    this.alertService.error('lugar.errorNoEncontrado', { codigo: this.lugarId });
-                    throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: this.lugarId }));
-                }
-
-                this.lugar = result;
-            });
+            this.updateLugar(this.lugarId);
 
             this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(this.lugarId).then((listaProcesoElectoral) => {
                 this.proceso = listaProcesoElectoral.find((proceso) => proceso.id === params.idProcesoElectoral);
@@ -83,6 +76,17 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         });
     }
 
+    private updateLugar(lugarId: string) {
+        this.datasetEvolucionElectoralService.getLugarById(lugarId).then((result) => {
+            if (!result) {
+                this.alertService.error('lugar.errorNoEncontrado', { codigo: lugarId });
+                throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: lugarId }));
+            }
+
+            this.lugar = result;
+        });
+    }
+
     ngAfterViewInit() {
         this.insertMetamacStyles();
     }
@@ -94,6 +98,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     transition(lugarId) {
         const urlSegments = this.activatedRoute.parent.snapshot.url;
         window.location.hash = window.location.hash.replace(urlSegments[1].path, lugarId);
+        this.updateLugar(lugarId);
     }
 
     descargarPdf(event: Event) {
