@@ -1,10 +1,13 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, EventEmitter } from '@angular/core';
-import { MultidatasetProcesosElectoralesService, DatasetEvolucionElectoralService, ProcesoElectoral } from '../../dataset';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
+import { MultidatasetProcesosElectoralesService, DatasetEvolucionElectoralService, ProcesoElectoral, Lugar, ResultadoElectoral } from '../../dataset';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MultidatasetProcesosElectorales } from '../../dataset/multidataset-procesos-electorales.model';
+import { MultidatasetProcesosElectorales } from '../../dataset';
 import { ConfigService, MetadataService } from '../../config';
-import { Observable, Subscriber } from 'rxjs';
+import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { DocumentoService } from '../../documento';
+import { JhiAlertService } from 'ng-jhipster';
+import { finalize } from 'rxjs/operators';
 import { zip } from 'rxjs/observable/zip';
 
 declare var I18n: any;
@@ -29,6 +32,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     lugarId: string;
     fecha: string;
     proceso: ProcesoElectoral;
+    downloadingPdf = false;
+    lugar: Lugar;
 
     constructor(
         private host: ElementRef,
@@ -39,6 +44,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         private metadataService: MetadataService,
         private translateService: TranslateService,
         private datasetEvolucionElectoralService: DatasetEvolucionElectoralService,
+        private documentoService: DocumentoService,
+        private alertService: JhiAlertService,
     ) { }
 
     ngOnInit() {
@@ -48,6 +55,15 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             if (!this.lugarId || this.lugarId !== url[1].path) {
                 this.lugarId = url[1].path;
             }
+
+            this.datasetEvolucionElectoralService.getLugarById(this.lugarId).then((result) => {
+                if (!result) {
+                    this.alertService.error('lugar.errorNoEncontrado', { codigo: this.lugarId });
+                    throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: this.lugarId }));
+                }
+
+                this.lugar = result;
+            });
 
             this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(this.lugarId).then((listaProcesoElectoral) => {
                 this.proceso = listaProcesoElectoral.find((proceso) => proceso.id === params.idProcesoElectoral);
@@ -78,6 +94,19 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     transition(lugarId) {
         const urlSegments = this.activatedRoute.parent.snapshot.url;
         window.location.hash = window.location.hash.replace(urlSegments[1].path, lugarId);
+    }
+
+    descargarPdf(event: Event) {
+        event.stopPropagation();
+        this.downloadingPdf = true;
+        const resultadoElectoral: ResultadoElectoral = {
+            territorio: this.lugar.nombre,
+            procesoElectoral: this.proceso,
+        };
+        this.documentoService.descargarPdfResultadoElectoral(resultadoElectoral).pipe(finalize(() => this.downloadingPdf = false)).subscribe(
+            (response) => this.documentoService.saveToFileSystem(response),
+            () => this.alertService.error('error.cannotDownloadDocument'),
+        );
     }
 
     private onChangeTipoElecciones(idProcesoElectoral: string, tipoElecciones: string) {
