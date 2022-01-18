@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class DocumentoServiceImpl implements DocumentoService {
 
     private static final String LOGO_CABECERA                                    = "logo_istac.png";
     private static final String EVOLUCION_ELECTORAL_TEMPLATE                     = "evolucion-electoral.jasper";
-    private static final String RESULTADOS_ELECTORALES_TEMPLATE                  = "resultado-electoral.jasper";
+    private static final String RESULTADO_ELECTORAL_TEMPLATE = "resultado-electoral.jasper";
     private static final String RUTA_RELATIVA_DIRECTORIO_SUBINFORME              = "./jasper/";
     private static final String EXCEPCION_RUTA_LOGO_CABECERA_EVOLUCION_ELECTORAL = "Error al construir URI al logo cabecera de evolución electoral";
 
@@ -76,11 +77,11 @@ public class DocumentoServiceImpl implements DocumentoService {
             parametros.put("TERRITORIO", resultadoElectoral.getTerritorio());
             parametros.put("TIPO_ELECCIONES", resultadoElectoral.getProcesoElectoral().getTipoProcesoElectoral());
             parametros.put("ANNO_ELECCIONES", Integer.toString(year));
-            parametros.put("PROCESO_ELECTORAL", resultadoElectoral.getProcesoElectoral());
+            parametros.put("DATA_SOURCE", new JRBeanCollectionDataSource(Collections.singletonList(resultadoElectoral.getProcesoElectoral())));
             parametros.put("SUBREPORT_DIR", RUTA_RELATIVA_DIRECTORIO_SUBINFORME);
             parametros.put("RUTA_LOGO", new URI(this.getClass().getResource(Constants.CARPETA_JASPER_REPORT + LOGO_CABECERA).toString()).getPath());
 
-            return this.reportsService.generateFromTemplate(RESULTADOS_ELECTORALES_TEMPLATE, parametros, null);
+            return this.reportsService.generateFromTemplate(RESULTADO_ELECTORAL_TEMPLATE, parametros, null);
         } catch (URISyntaxException e) {
             throw new CustomParameterizedException(EXCEPCION_RUTA_LOGO_CABECERA_EVOLUCION_ELECTORAL, e, ErrorConstants.ERROR_GENERANDO_PDF,
                     this.getClass().getResource(Constants.CARPETA_JASPER_REPORT + LOGO_CABECERA).toString());

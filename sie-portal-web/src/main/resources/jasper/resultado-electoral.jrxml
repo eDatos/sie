@@ -28,15 +28,15 @@
 			<line>
 				<reportElement x="130" y="169" width="400" height="1" forecolor="#3B3B3B" uuid="fb7e3c32-c990-4f4c-b4e2-c87cfdcdc859"/>
 			</line>
-			<textField textAdjust="StretchHeight">
+			<textField>
 				<reportElement x="130" y="101" width="400" height="40" uuid="1e717c0f-acfe-48a2-9cff-ac174629ac09"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="SansSerif" size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{TERRITORIO}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement stretchType="ContainerHeight" x="130" y="143" width="400" height="26" uuid="a43ebc08-10e4-4375-883e-b5cb6b2c6336"/>
+			<textField>
+				<reportElement x="130" y="143" width="400" height="26" uuid="a43ebc08-10e4-4375-883e-b5cb6b2c6336"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="14"/>
 				</textElement>
@@ -53,7 +53,7 @@
 			<subreport>
 				<reportElement stretchType="RelativeToTallestObject" x="130" y="0" width="400" height="200" uuid="b72cb9d4-649f-4d71-8cff-246625bb6359"/>
 				<dataSourceExpression><![CDATA[$P{DATA_SOURCE}]]></dataSourceExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "tablas.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "tabla-resultado-electoral.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
@@ -116,7 +116,7 @@ comunicacion.istac@gobiernodecanarias.org
 				</textElement>
 				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight">
+			<textField>
 				<reportElement x="40" y="2" width="330" height="46" forecolor="#3498CF" uuid="6ab19936-1e26-43a6-aab8-ff1ecae72182">
 					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
 				</reportElement>
