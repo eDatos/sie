@@ -3,6 +3,7 @@ package es.gobcan.istac.sie.service.impl;
 import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -80,6 +81,7 @@ public class DocumentoServiceImpl implements DocumentoService {
             parametros.put("DATA_SOURCE", new JRBeanCollectionDataSource(Collections.singletonList(resultadoElectoral.getProcesoElectoral())));
             parametros.put("SUBREPORT_DIR", RUTA_RELATIVA_DIRECTORIO_SUBINFORME);
             parametros.put("RUTA_LOGO", new URI(this.getClass().getResource(Constants.CARPETA_JASPER_REPORT + LOGO_CABECERA).toString()).getPath());
+            parametros.put("DATOS_PARTIDOS", new JRBeanCollectionDataSource(resultadoElectoral.getData()));
 
             return this.reportsService.generateFromTemplate(RESULTADO_ELECTORAL_TEMPLATE, parametros, null);
         } catch (URISyntaxException e) {

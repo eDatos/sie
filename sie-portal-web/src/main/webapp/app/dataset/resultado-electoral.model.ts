@@ -4,6 +4,7 @@ export class ResultadoElectoral {
     constructor(
         public territorio: string,
         public procesoElectoral: ProcesoElectoral,
+        public data: any = {},
     ) {
     }
 }

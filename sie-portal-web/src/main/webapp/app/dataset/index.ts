@@ -8,3 +8,4 @@ export * from './proceso-electoral.model';
 export * from './tipo-elecciones-dataset-url.model';
 export * from './tipo-elecciones-dataset-url.service';
 export * from './resultado-electoral.model';
+export * from './dataset-resultado-electoral.service';
