@@ -127,7 +127,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             const resultadoElectoral: ResultadoElectoral = {
                 territorio: this.lugar.nombre,
                 procesoElectoral: this.proceso,
-                data: this.parseDataset(dataset).filter(row => row.territory === this.lugar.nombre),
+                data: this.parseDataset(dataset, this.lugar.nombre),
             };
             this.documentoService.descargarPdfResultadoElectoral(resultadoElectoral).pipe(finalize(() => this.downloadingPdf = false)).subscribe(
                 (response) => this.documentoService.saveToFileSystem(response),
@@ -219,35 +219,32 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     /**
      * Converts the dataset to a simple table with the name of the party and the data of the elections
      */
-    private parseDataset(dataset: BasicDataset): ElectoralResult[] {
-        const data: ElectoralResult[] = [];
-
+    private parseDataset(dataset: BasicDataset, territory: string): ElectoralResult[] {
         // parse the string of observations to an array
         const observations = dataset.data.observations.split('|').map((observation) => {
             if (observation.trim().length === 0) {
                 return null;
             }
-            return observation.trim();
+            return Number(observation);
         });
 
         const medidas = dataset.data.dimensions.dimension.find((dim) => dim.dimensionId === 'MEDIDAS').representations.representation;
         const territorios = dataset.data.dimensions.dimension.find((dim) => dim.dimensionId === 'TERRITORIO').representations.representation;
         const candidaturas = dataset.data.dimensions.dimension.find((dim) => dim.dimensionId === 'CANDIDATURAS').representations.representation;
 
+        // TODO: make this pretty
         function getName(id: string, code: string): string {
             return dataset.metadata.dimensions.dimension.find((dim) => dim.id === id)
                           .dimensionValues.value.find((val) => val.id === code)
                           .name.text.find((text) => text.lang === 'es').value;
         }
 
-        for (let i = 0; i < medidas.length; i++) {
-            const medida = medidas[i];
-            for (let j = 0; j < territorios.length; j++) {
-                const territorio = territorios[j];
-                for (let k = 0; k < candidaturas.length; k++) {
-                    const candidatura = candidaturas[k];
+        const data = [];
+        for (const [i, medida] of medidas.entries()) {
+            for (const [j, territorio] of territorios.entries()) {
+                for (const [k, candidatura] of candidaturas.entries()) {
                     data.push({
-                        measure: getName('MEDIDAS', medida.code),
+                        measure: medida.code,
                         territory: getName('TERRITORIO', territorio.code),
                         candidacy: getName('CANDIDATURAS', candidatura.code),
                         value: observations[i + j + k],
@@ -256,6 +253,20 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             }
         }
 
-        return data;
+        const resultsByParty = new Map();
+        for (const row of data) {
+            if (row.territory === territory) {
+                const obj = resultsByParty.get(row.candidacy) || {};
+                obj[row.measure] = row.value;
+                resultsByParty.set(row.candidacy, obj);
+            }
+        }
+
+        return Array.from(resultsByParty.entries()).map((entry) => {
+            return {
+                candidacy: entry[0],
+                results: entry[1],
+            }
+        });
     }
 }

@@ -1,13 +1,12 @@
 package es.gobcan.istac.sie.web.rest.dto;
 
 import java.util.List;
-import java.util.Map;
 
 public class ResultadoElectoralDTO {
 
     private String territorio;
     private ProcesoElectoralDTO procesoElectoral;
-    private List<Map<String, String>> data;
+    private List<ResultadoElectoralData> data;
 
     public String getTerritorio() {
         return territorio;
@@ -25,11 +24,11 @@ public class ResultadoElectoralDTO {
         this.procesoElectoral = procesoElectoral;
     }
 
-    public List<Map<String, String>> getData() {
+    public List<ResultadoElectoralData> getData() {
         return data;
     }
 
-    public void setData(List<Map<String, String>> data) {
+    public void setData(List<ResultadoElectoralData> data) {
         this.data = data;
     }
 }

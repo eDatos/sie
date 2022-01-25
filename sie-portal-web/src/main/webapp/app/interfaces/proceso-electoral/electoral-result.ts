@@ -1,6 +1,9 @@
 export interface ElectoralResult {
-    measure: string;
-    territory: string;
     candidacy: string;
-    value: string;
+    results: [
+        {
+            name: string;
+            value: string;
+        }
+    ];
 }

@@ -39,10 +39,8 @@
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
-		<field name="measure" class="java.lang.String"/>
-		<field name="territory" class="java.lang.String"/>
 		<field name="candidacy" class="java.lang.String"/>
-		<field name="value" class="java.lang.String"/>
+		<field name="results" class="java.util.Map"/>
 	</subDataset>
 	<parameter name="RUTA_LOGO" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
@@ -98,88 +96,132 @@
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "tabla-resultado-electoral.jasper"]]></subreportExpression>
 			</subreport>
 			<componentElement>
-				<reportElement x="130" y="230" width="400" height="200" uuid="9a3c3b4f-f835-40e1-adab-67a1ce814c39">
+				<reportElement x="130" y="230" width="420" height="200" uuid="9a3c3b4f-f835-40e1-adab-67a1ce814c39">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="Blank">
 					<datasetRun subDataset="datos-partidos" uuid="59d2641c-a3d2-4f94-875e-03fddc06e0e7">
 						<dataSourceExpression><![CDATA[$P{DATOS_PARTIDOS}]]></dataSourceExpression>
 					</datasetRun>
-					<jr:column width="160" uuid="5ab32116-9ba4-4893-9d54-63fee9d1db1e">
+					<jr:column width="180" uuid="5ab32116-9ba4-4893-9d54-63fee9d1db1e">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
-						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+						<jr:columnHeader style="Table_CH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 							<staticText>
-								<reportElement x="0" y="0" width="160" height="30" forecolor="#FFFFFF" uuid="b0226b83-75fb-43f1-8228-ca39dcce3373"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<text><![CDATA[HOLA]]></text>
+								<reportElement x="0" y="0" width="180" height="20" forecolor="#FFFFFF" uuid="b0226b83-75fb-43f1-8228-ca39dcce3373"/>
+								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
+								<text><![CDATA[Partido]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30">
-							<textField>
-								<reportElement x="0" y="0" width="160" height="30" uuid="1c2176e5-aa43-42d8-903c-33df96fe3651"/>
-								<textElement verticalAlignment="Middle"/>
+						<jr:detailCell style="Table_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="180" height="20" isPrintWhenDetailOverflows="true" uuid="1c2176e5-aa43-42d8-903c-33df96fe3651"/>
+								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{candidacy}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="60" uuid="898e0950-a1fe-4094-a1dd-fc50b168a267">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
-						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+						<jr:columnHeader style="Table_CH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 							<staticText>
-								<reportElement x="0" y="0" width="60" height="30" forecolor="#FFFFFF" uuid="3545cc57-17fa-4211-83f1-bcf49d03730a"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="3545cc57-17fa-4211-83f1-bcf49d03730a"/>
+								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<text><![CDATA[Static Text]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30">
-							<textField>
-								<reportElement x="0" y="0" width="60" height="30" uuid="478c3b0f-7869-4142-ab14-9f5f1bc462f8"/>
-								<textElement verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{measure}]]></textFieldExpression>
+						<jr:detailCell style="Table_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="60" height="20" uuid="478c3b0f-7869-4142-ab14-9f5f1bc462f8">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{results}.get("RATIO_VOTOS_CANDIDATURA")]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="60" uuid="1571fdf8-e7ec-46d9-bae3-c86f4827f48a">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
-						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+						<jr:columnHeader style="Table_CH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 							<staticText>
-								<reportElement x="0" y="0" width="60" height="30" forecolor="#FFFFFF" uuid="33fa1d42-88c2-4778-9b9d-9969e98aa747"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="33fa1d42-88c2-4778-9b9d-9969e98aa747"/>
+								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<text><![CDATA[Static Text]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30">
-							<textField>
-								<reportElement x="0" y="0" width="60" height="30" uuid="7fe01da1-a6e5-4c61-b9a3-a8e4a27d604d"/>
-								<textElement verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+						<jr:detailCell style="Table_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="60" height="20" uuid="7fe01da1-a6e5-4c61-b9a3-a8e4a27d604d"/>
+								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{results}.get("REPRESENTANTES_ELEGIDOS")]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="60" uuid="c1015764-a963-48a0-b0a6-9b288eecab0a">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
-						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+						<jr:columnHeader style="Table_CH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 							<staticText>
-								<reportElement x="0" y="0" width="60" height="30" forecolor="#FFFFFF" uuid="25394d26-ada1-4515-90fe-17a2e0c81ffc"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="25394d26-ada1-4515-90fe-17a2e0c81ffc"/>
+								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<text><![CDATA[Static Text]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="60" height="20" uuid="3336e09e-df41-47e1-b7ca-b99480570988"/>
+								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{results}.get("VOTOS_VALIDOS_CANDIDATURA")]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="60" uuid="a0fc40e3-791f-4007-88a0-f91d3c6f7ca3">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
-						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+						<jr:columnHeader style="Table_CH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 							<staticText>
-								<reportElement x="0" y="0" width="60" height="30" forecolor="#FFFFFF" uuid="c7fa007c-aa2c-41be-a330-9b0badb1cb26"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="c7fa007c-aa2c-41be-a330-9b0badb1cb26"/>
+								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<text><![CDATA[Static Text]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="60" height="20" uuid="32f4d6d0-8034-451d-bf29-2f30c031aaf1"/>
+								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{results}.get("REPRESENTANTES_ELEGIDOS")]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 				</jr:table>
 			</componentElement>
