@@ -127,7 +127,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             const resultadoElectoral: ResultadoElectoral = {
                 territorio: this.lugar.nombre,
                 procesoElectoral: this.proceso,
-                data: this.parseDataset(dataset, this.lugar.nombre),
+                data: this.parseDataset(dataset, this.lugar.nombre, this.proceso),
             };
             this.documentoService.descargarPdfResultadoElectoral(resultadoElectoral).pipe(finalize(() => this.downloadingPdf = false)).subscribe(
                 (response) => this.documentoService.saveToFileSystem(response),
@@ -219,7 +219,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     /**
      * Converts the dataset to a simple table with the name of the party and the data of the elections
      */
-    private parseDataset(dataset: BasicDataset, territory: string): ElectoralResult[] {
+    private parseDataset(dataset: BasicDataset, territory: string, electoralProcessData: ProcesoElectoral): ElectoralResult[] {
         // parse the string of observations to an array
         const observations = dataset.data.observations.split('|').map((observation) => {
             if (observation.trim().length === 0) {
@@ -263,9 +263,15 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         }
 
         return Array.from(resultsByParty.entries()).map((entry) => {
+            const candidacy = entry[0];
+            const results = entry[1];
+
+            results['RATIO_VOTOS_CENSO'] = results['VOTOS_VALIDOS_CANDIDATURA'] / electoralProcessData.indicadores['ELECTORES'] * 100;
+            results['RATIO_VOTOS_VALIDOS'] = results['VOTOS_VALIDOS_CANDIDATURA'] / electoralProcessData.indicadores['VOTOS_VALIDOS'] * 100;
+
             return {
-                candidacy: entry[0],
-                results: entry[1],
+                candidacy,
+                results,
             }
         });
     }
