@@ -232,21 +232,14 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         const territorios = dataset.data.dimensions.dimension.find((dim) => dim.dimensionId === 'TERRITORIO').representations.representation;
         const candidaturas = dataset.data.dimensions.dimension.find((dim) => dim.dimensionId === 'CANDIDATURAS').representations.representation;
 
-        // TODO: make this pretty
-        function getName(id: string, code: string): string {
-            return dataset.metadata.dimensions.dimension.find((dim) => dim.id === id)
-                          .dimensionValues.value.find((val) => val.id === code)
-                          .name.text.find((text) => text.lang === 'es').value;
-        }
-
         const data = [];
         for (const [i, medida] of medidas.entries()) {
             for (const [j, territorio] of territorios.entries()) {
                 for (const [k, candidatura] of candidaturas.entries()) {
                     data.push({
                         measure: medida.code,
-                        territory: getName('TERRITORIO', territorio.code),
-                        candidacy: getName('CANDIDATURAS', candidatura.code),
+                        territory: this.getName(dataset, 'TERRITORIO', territorio.code),
+                        candidacy: this.getName(dataset, 'CANDIDATURAS', candidatura.code),
                         value: observations[i + j + k],
                     });
                 }
@@ -274,5 +267,11 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 results,
             }
         });
+    }
+
+    private getName(dataset, dimensionId: string, dimensionValue: string): string {
+        return dataset.metadata.dimensions.dimension.find((dim) => dim.id === dimensionId)
+                      .dimensionValues.value.find((val) => val.id === dimensionValue)
+                      .name.text.find((text) => text.lang === 'es').value;
     }
 }
