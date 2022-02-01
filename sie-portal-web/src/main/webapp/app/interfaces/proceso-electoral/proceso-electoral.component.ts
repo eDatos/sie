@@ -19,6 +19,7 @@ import { finalize } from 'rxjs/operators';
 import { zip } from 'rxjs/observable/zip';
 import { BasicDataset } from './basic-dataset';
 import { ElectoralResult } from './electoral-result';
+import { combineLatest } from 'rxjs/observable/combineLatest';
 
 declare var I18n: any;
 declare var App: any;
@@ -63,7 +64,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     ngOnInit() {
-        zip(this.activatedRoute.parent.url, this.activatedRoute.parent.params).subscribe((value) => {
+        combineLatest(this.activatedRoute.parent.url, this.activatedRoute.parent.params).subscribe((value) => {
             const [url, params] = value;
 
             if (!this.lugarId || this.lugarId !== url[1].path) {
@@ -113,8 +114,6 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     transition(lugarId) {
-        // this.router.navigate() // FIXME: porqué no se están actualizando los datos del lugar
-        //                            al transicionar
         const urlSegments = this.activatedRoute.parent.snapshot.url;
         window.location.hash = window.location.hash.replace(urlSegments[1].path, lugarId);
     }
@@ -220,42 +219,59 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
      * Converts the dataset to a simple table with the name of the party and the data of the elections
      */
     private parseDataset(dataset: BasicDataset, territory: string, electoralProcessData: ProcesoElectoral): ElectoralResult[] {
-        // parse the string of observations to an array
-        const observations = dataset.data.observations.split('|').map((observation) => {
-            if (observation.trim().length === 0) {
+        // parse the string of observations to an array of numbers
+        const observations = dataset.data.observations.split(' | ').map((observation) => {
+            if (observation.length === 0) {
                 return null;
             }
             return Number(observation);
         });
 
-        const medidas = dataset.data.dimensions.dimension.find((dim) => dim.dimensionId === 'MEDIDAS').representations.representation;
-        const territorios = dataset.data.dimensions.dimension.find((dim) => dim.dimensionId === 'TERRITORIO').representations.representation;
-        const candidaturas = dataset.data.dimensions.dimension.find((dim) => dim.dimensionId === 'CANDIDATURAS').representations.representation;
+        // create a map of dimensions, where
+        //  key     ->  dimension id (i.e. MEDIDAS, TERRITORIO)
+        //  value   ->  categories array (i.e. for MEDIDAS: VOTOS_VALIDOS, REPRESENTANTES_ELEGIDOS, ...)
+        const dimensions = dataset.data.dimensions.dimension.map((dim) => [dim.dimensionId, dim.representations.representation]).reduce((map, arr) => {
+            map.set(arr[0], arr[1]);
+            return map;
+        }, new Map);
+
+        const dimIds = Array.from(dimensions.keys());
+
+        const cat1 = dimensions.get(dimIds[0]);
+        const cat2 = dimensions.get(dimIds[1]);
+        const cat3 = dimensions.get(dimIds[2]);
 
         const data = [];
-        for (const [i, medida] of medidas.entries()) {
-            for (const [j, territorio] of territorios.entries()) {
-                for (const [k, candidatura] of candidaturas.entries()) {
+
+        // We do all this hastle because we know there are gonna be three dimensions
+        // that we need: medidas, territorio, and candidaturas. Thing is we don't know beforehand the order
+        // they come on the dataset, which it matters because that's how we access the values on the
+        // observations array
+        for (const [i, v1] of cat1.entries()) {
+            for (const [j, v2] of cat2.entries()) {
+                for (const [k, v3] of cat3.entries()) {
+                    const arr = [v1.code, v2.code, v3.code];
                     data.push({
-                        measure: medida.code,
-                        territory: this.getName(dataset, 'TERRITORIO', territorio.code),
-                        candidacy: this.getName(dataset, 'CANDIDATURAS', candidatura.code),
-                        value: observations[i + j + k],
+                        measure: arr[dimIds.indexOf('MEDIDAS')],
+                        territory: this.getName(dataset, 'TERRITORIO', arr[dimIds.indexOf('TERRITORIO')]),
+                        candidacy: this.getName(dataset, 'CANDIDATURAS', arr[dimIds.indexOf('CANDIDATURAS')]),
+                        value: observations[k + cat3.length * (j + cat2.length * i)], // see https://eli.thegreenplace.net/2015/memory-layout-of-multi-dimensional-arrays
                     });
                 }
             }
         }
 
-        const resultsByParty = new Map();
+        // it's easy to deal with the data if it's grouped the results by the candidacy
+        const resultsByCandidacy = new Map();
         for (const row of data) {
             if (row.territory === territory) {
-                const obj = resultsByParty.get(row.candidacy) || {};
+                const obj = resultsByCandidacy.get(row.candidacy) || {};
                 obj[row.measure] = row.value;
-                resultsByParty.set(row.candidacy, obj);
+                resultsByCandidacy.set(row.candidacy, obj);
             }
         }
 
-        return Array.from(resultsByParty.entries()).map((entry) => {
+        return Array.from(resultsByCandidacy.entries()).map((entry) => {
             const candidacy = entry[0];
             const results = entry[1];
 
