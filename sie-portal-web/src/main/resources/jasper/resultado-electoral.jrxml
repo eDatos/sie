@@ -44,13 +44,28 @@
 		</queryString>
 		<field name="candidacy" class="java.lang.String"/>
 		<field name="results" class="java.util.Map"/>
+		<sortField name="votosValidosCandidatura" order="Descending" type="Variable"/>
+		<sortField name="representantesElegidos" order="Descending" type="Variable"/>
 		<variable name="intFormatter" class="java.text.NumberFormat">
-			<variableExpression><![CDATA[$V{intFormatter}]]></variableExpression>
-			<initialValueExpression><![CDATA[$P{INT_FORMATTER}]]></initialValueExpression>
+			<variableExpression><![CDATA[$P{INT_FORMATTER}]]></variableExpression>
 		</variable>
 		<variable name="floatFormatter" class="java.text.NumberFormat">
-			<variableExpression><![CDATA[$V{intFormatter}]]></variableExpression>
-			<initialValueExpression><![CDATA[$P{FLOAT_FORMATTER}]]></initialValueExpression>
+			<variableExpression><![CDATA[$P{FLOAT_FORMATTER}]]></variableExpression>
+		</variable>
+		<variable name="votosValidosCandidatura" class="java.lang.Integer">
+			<variableExpression><![CDATA[$F{results}.get("VOTOS_VALIDOS_CANDIDATURA")]]></variableExpression>
+		</variable>
+		<variable name="ratioVotosValidos" class="java.lang.Double">
+			<variableExpression><![CDATA[$F{results}.get("RATIO_VOTOS_VALIDOS")]]></variableExpression>
+		</variable>
+		<variable name="ratioVotosCenso" class="java.lang.Double">
+			<variableExpression><![CDATA[$F{results}.get("RATIO_VOTOS_CENSO")]]></variableExpression>
+		</variable>
+		<variable name="ratioVotosCandidatura" class="java.lang.Double">
+			<variableExpression><![CDATA[$F{results}.get("RATIO_VOTOS_CANDIDATURA")]]></variableExpression>
+		</variable>
+		<variable name="representantesElegidos" class="java.lang.Integer">
+			<variableExpression><![CDATA[$F{results}.get("REPRESENTANTES_ELEGIDOS")]]></variableExpression>
 		</variable>
 	</subDataset>
 	<parameter name="RUTA_LOGO" class="java.lang.String" isForPrompting="false"/>
@@ -124,7 +139,13 @@
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="Blank">
-					<datasetRun subDataset="datos-partidos" uuid="2efbc555-ce91-48e2-a27b-1eb71301d470">
+					<datasetRun subDataset="datos-partidos" uuid="fabc187d-9502-43dc-afae-6a543ca49b69">
+						<datasetParameter name="INT_FORMATTER">
+							<datasetParameterExpression><![CDATA[$P{INT_FORMATTER}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="FLOAT_FORMATTER">
+							<datasetParameterExpression><![CDATA[$P{FLOAT_FORMATTER}]]></datasetParameterExpression>
+						</datasetParameter>
 						<dataSourceExpression><![CDATA[$P{RESULTADOS_ELECTORALES_PARTIDOS}]]></dataSourceExpression>
 					</datasetRun>
 					<jr:column width="200" uuid="5ab32116-9ba4-4893-9d54-63fee9d1db1e">
@@ -200,7 +221,7 @@
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{results}.get("VOTOS_VALIDOS_CANDIDATURA") != null ? $V{intFormatter}.format($F{results}.get("VOTOS_VALIDOS_CANDIDATURA")) : "N/A"]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{votosValidosCandidatura} != null ? $V{intFormatter}.format($V{votosValidosCandidatura}) : "N/A"]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -238,7 +259,7 @@
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{results}.get("RATIO_VOTOS_VALIDOS") != null ? $V{floatFormatter}.format($F{results}.get("RATIO_VOTOS_VALIDOS")) : "N/A"]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{ratioVotosValidos} != null ? $V{floatFormatter}.format($V{ratioVotosValidos}) : "N/A"]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -275,7 +296,7 @@
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{results}.get("RATIO_VOTOS_CENSO") != null ? $V{floatFormatter}.format($F{results}.get("RATIO_VOTOS_CENSO")) : "N/A"]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{ratioVotosCenso} != null ? $V{floatFormatter}.format($V{ratioVotosCenso}) : "N/A"]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -312,7 +333,7 @@
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{results}.get("RATIO_VOTOS_CANDIDATURA") != null ? $V{floatFormatter}.format($F{results}.get("RATIO_VOTOS_CANDIDATURA")) : "N/A"]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{ratioVotosCandidatura} != null ? $V{floatFormatter}.format($V{ratioVotosCandidatura}) : "N/A"]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -349,7 +370,7 @@
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{results}.get("REPRESENTANTES_ELEGIDOS") != null ? $V{intFormatter}.format($F{results}.get("REPRESENTANTES_ELEGIDOS")) : "N/A"]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{representantesElegidos} != null ? $V{intFormatter}.format($V{representantesElegidos}) : "N/A"]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
