@@ -103,7 +103,7 @@
         };
 
         this.columnWidthOffsets = [];
-        this.leftHeaderColumnWidthOffsets = [];
+        this.leftHeaderColumnWidthOffsets = [300];
     };
 
     App.Table.Delegate.prototype = {
