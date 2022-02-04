@@ -215,7 +215,7 @@
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$V{votosValidosCandidatura} != null ? $V{intFormatter}.format($V{votosValidosCandidatura}) : "N/A"]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{votosValidosCandidatura} != null ? $V{intFormatter}.format($V{votosValidosCandidatura}) : ""]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -252,7 +252,7 @@
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$V{ratioVotosCandidatura} != null ? $V{floatFormatter}.format($V{ratioVotosCandidatura}) + " %" : "N/A"]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{ratioVotosCandidatura} != null ? $V{floatFormatter}.format($V{ratioVotosCandidatura}) + " %" : ""]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -289,7 +289,7 @@
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$V{representantesElegidos} != null ? $V{intFormatter}.format($V{representantesElegidos}) : "N/A"]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{representantesElegidos} != null ? $V{intFormatter}.format($V{representantesElegidos}) : ""]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
