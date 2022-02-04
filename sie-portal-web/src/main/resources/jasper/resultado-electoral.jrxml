@@ -55,12 +55,6 @@
 		<variable name="votosValidosCandidatura" class="java.lang.Integer">
 			<variableExpression><![CDATA[$F{results}.get("VOTOS_VALIDOS_CANDIDATURA")]]></variableExpression>
 		</variable>
-		<variable name="ratioVotosValidos" class="java.lang.Double">
-			<variableExpression><![CDATA[$F{results}.get("RATIO_VOTOS_VALIDOS")]]></variableExpression>
-		</variable>
-		<variable name="ratioVotosCenso" class="java.lang.Double">
-			<variableExpression><![CDATA[$F{results}.get("RATIO_VOTOS_CENSO")]]></variableExpression>
-		</variable>
 		<variable name="ratioVotosCandidatura" class="java.lang.Double">
 			<variableExpression><![CDATA[$F{results}.get("RATIO_VOTOS_CANDIDATURA")]]></variableExpression>
 		</variable>
@@ -225,83 +219,8 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="50" uuid="1571fdf8-e7ec-46d9-bae3-c86f4827f48a">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
-						<jr:columnHeader style="Table_CH" height="17" rowSpan="1">
-							<box>
-								<pen lineWidth="0.1" lineColor="#BABABA"/>
-								<topPen lineWidth="0.1" lineStyle="Solid" lineColor="#BABABA"/>
-								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-								<bottomPen lineWidth="0.1" lineStyle="Solid" lineColor="#BABABA"/>
-								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-							</box>
-							<staticText>
-								<reportElement x="0" y="0" width="50" height="17" forecolor="#FFFFFF" uuid="33fa1d42-88c2-4778-9b9d-9969e98aa747"/>
-								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle">
-									<font size="7" isBold="true"/>
-								</textElement>
-								<text><![CDATA[% válidos
-]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="17">
-							<box>
-								<pen lineWidth="0.1" lineColor="#BFBFBF"/>
-								<topPen lineWidth="0.1" lineStyle="Solid" lineColor="#BABABA"/>
-								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-								<bottomPen lineWidth="0.1" lineStyle="Solid" lineColor="#BABABA"/>
-								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-							</box>
-							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="17" forecolor="#3B3B3B" uuid="7fe01da1-a6e5-4c61-b9a3-a8e4a27d604d"/>
-								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle">
-									<font size="7"/>
-								</textElement>
-								<textFieldExpression><![CDATA[$V{ratioVotosValidos} != null ? $V{floatFormatter}.format($V{ratioVotosValidos}) + " %" : "N/A"]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="50" uuid="c1015764-a963-48a0-b0a6-9b288eecab0a">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
-						<jr:columnHeader style="Table_CH" height="17" rowSpan="1">
-							<box>
-								<pen lineWidth="0.1" lineColor="#BABABA"/>
-								<topPen lineWidth="0.1" lineStyle="Solid" lineColor="#BABABA"/>
-								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-								<bottomPen lineWidth="0.1" lineStyle="Solid" lineColor="#BABABA"/>
-								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-							</box>
-							<staticText>
-								<reportElement x="0" y="0" width="50" height="17" forecolor="#FFFFFF" uuid="25394d26-ada1-4515-90fe-17a2e0c81ffc"/>
-								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle">
-									<font size="7" isBold="true"/>
-								</textElement>
-								<text><![CDATA[% censo]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="17">
-							<box>
-								<pen lineWidth="0.1" lineColor="#BABABA"/>
-								<topPen lineWidth="0.1" lineStyle="Solid" lineColor="#BABABA"/>
-								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-								<bottomPen lineWidth="0.1" lineStyle="Solid" lineColor="#BABABA"/>
-								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-							</box>
-							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="17" forecolor="#3B3B3B" uuid="3336e09e-df41-47e1-b7ca-b99480570988"/>
-								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle">
-									<font size="7"/>
-								</textElement>
-								<textFieldExpression><![CDATA[$V{ratioVotosCenso} != null ? $V{floatFormatter}.format($V{ratioVotosCenso}) + " %" : "N/A"]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
 					<jr:column width="50" uuid="a0fc40e3-791f-4007-88a0-f91d3c6f7ca3">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table_CH" height="17" rowSpan="1">
 							<box>
 								<pen lineWidth="0.1" lineColor="#BABABA"/>
@@ -338,7 +257,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="571a30b4-943e-44d3-b8a6-d969ea8c9fe6">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:columnHeader style="Table_CH" height="17" rowSpan="1">
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 							<box>
