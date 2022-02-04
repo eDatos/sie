@@ -272,15 +272,9 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         }
 
         return Array.from(resultsByCandidacy.entries()).map((entry) => {
-            const candidacy = entry[0];
-            const results = entry[1];
-
-            results['RATIO_VOTOS_CENSO'] = results['VOTOS_VALIDOS_CANDIDATURA'] / electoralProcessData.indicadores['ELECTORES'] * 100;
-            results['RATIO_VOTOS_VALIDOS'] = results['VOTOS_VALIDOS_CANDIDATURA'] / electoralProcessData.indicadores['VOTOS_VALIDOS'] * 100;
-
             return {
-                candidacy,
-                results,
+                candidacy: entry[0],
+                results: entry[1],
             }
         });
     }
