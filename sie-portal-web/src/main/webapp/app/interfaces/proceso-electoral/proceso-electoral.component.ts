@@ -136,7 +136,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private onChangeTipoElecciones(idProcesoElectoral: string, tipoElecciones: string) {
-        this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(tipoElecciones).then((multidataset) => {
+        this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(tipoElecciones).subscribe((multidataset) => {
             this.tipoElecciones = tipoElecciones;
             this.multidataset = multidataset;
             this.onChangeProcesoElectoral(idProcesoElectoral);
@@ -146,7 +146,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             }
             this.multidatasetId = multidataset.id;
             this.startBackbone(this.multidatasetId);
-        }).catch(() => {
+        }, () => {
             this.router.navigate(['not-found'], { skipLocationChange: true });
         });
     }

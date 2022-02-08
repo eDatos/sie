@@ -172,7 +172,7 @@ export class EvolucionElectoralComponent implements OnInit {
     }
 
     private comprobarDatosPagina3() {
-        this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(this.tipoEleccionesVisible).then((multidataset) => {
+        this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(this.tipoEleccionesVisible).subscribe((multidataset) => {
             this.router.navigate([], {queryParams: {tipoEleccion: this.tipoEleccionesVisible.toLowerCase()}});
             multidataset.datasetList.forEach((dataset) => {
                 const procesoElectoral = this.hashProcesos[this.tipoEleccionesVisible].find((proceso) => proceso.id === dataset.identifier);
@@ -180,7 +180,7 @@ export class EvolucionElectoralComponent implements OnInit {
                     procesoElectoral.clickable = true;
                 }
             });
-        }).catch(() => {
+        }, () => {
             console.log(this.translateService.instant('error.noMultidatasetForTipoElecciones', { tipoElecciones: this.tipoEleccionesVisible }));
         });
     }

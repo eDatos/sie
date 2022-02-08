@@ -18,18 +18,18 @@ export class MultidatasetProcesosElectoralesService {
         private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService
     ) { }
 
-    getDatasetsByTipoElecciones(tipoElecciones: string): Promise<MultidatasetProcesosElectorales> {
+    getDatasetsByTipoElecciones(tipoElecciones: string): Observable<MultidatasetProcesosElectorales> {
         if (!this.multidatasetsCache[tipoElecciones]) {
-            this.multidatasetsCache[tipoElecciones] = new Promise<MultidatasetProcesosElectorales>((resolve, reject) => {
+            this.multidatasetsCache[tipoElecciones] = new Observable<MultidatasetProcesosElectorales>((subscriber) => {
                 this.doGetDatasets(tipoElecciones).subscribe(
                     (json) => {
                         if (json.data.nodes) {
-                            resolve(this.parseMultidataset(json));
+                            subscriber.next(this.parseMultidataset(json));
                         } else {
-                            reject();
+                            subscriber.error();
                         }
                     },
-                    (error) => reject(error)
+                    (error) => subscriber.error(error)
                 );
             });
         }
