@@ -58,6 +58,11 @@
                         inactive: {
                             opacity: 1
                         }
+                    },
+                    dataLabels: {
+                        formatter: function() {
+                            return `${this.point.name} (${Highcharts.numberFormat(this.point.percentage)} %)`;
+                        }
                     }
                 }
             }

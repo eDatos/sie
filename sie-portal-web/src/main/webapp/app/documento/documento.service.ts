@@ -4,6 +4,7 @@ import * as FileSaver from 'file-saver';
 import { TranslateService } from '@ngx-translate/core';
 import { JhiAlertService } from 'ng-jhipster';
 import { Observable } from 'rxjs/Observable';
+import { ResultadoElectoral } from '../dataset';
 
 @Injectable()
 export class DocumentoService {
@@ -21,6 +22,13 @@ export class DocumentoService {
         formData.append('evolucionElectoral', new Blob([JSON.stringify(evolucionElectoral)], { type: 'application/json' }));
         formData.append('grafica', new Blob([this.sanitizeSvg(document.getElementsByTagName('svg')[0].outerHTML)], { type: 'image/svg+xml' }));
         return this.http.post(`${this.resourceUrl}/evolucion-electoral`, formData, { responseType: ResponseContentType.Blob });
+    }
+
+    descargarPdfResultadoElectoral(resultadoElectoral: ResultadoElectoral): Observable<any> {
+        const formData = new FormData();
+        formData.append('resultadoElectoral', new Blob([JSON.stringify(resultadoElectoral)], { type: 'application/json' }));
+        formData.append('grafica', new Blob([this.sanitizeSvg(this.getSvg().outerHTML)], { type: 'image/svg+xml' }));
+        return this.http.post(`${this.resourceUrl}/resultado-electoral`, formData, { responseType: ResponseContentType.Blob });
     }
 
     private sanitizeSvg(svg) {
@@ -45,5 +53,43 @@ export class DocumentoService {
         const blob = new Blob([response._body], { type: response.headers.get('content-type') + ';base64,' });
         const filename = contentDispositionHeader.match(/filename[^;=\n]*=((['"])(.*?)\2)/)[3] || 'fichero';
         FileSaver.saveAs(blob, filename);
+    }
+
+    private getSvg(): SVGElement {
+        const svg = document.getElementsByTagName('svg')[0].cloneNode(true) as SVGElement;
+        document.body.appendChild(svg);
+
+        Array.prototype.slice.call(svg.children).forEach((el) => {
+            if (!(el.classList.contains('highcharts-series-group') || el.classList.contains('highcharts-data-labels'))) {
+                el.remove();
+            }
+        });
+
+        // https://typeofnan.dev/how-to-perfectly-fit-an-svg-to-its-contents-using-javascript/
+        const { xMin, xMax, yMin, yMax } = Array.prototype.slice.call(svg.children).filter((el) => el.getBBox).reduce((acc, el) => {
+          const { x, y, width, height } = el.getBBox();
+            if (!acc.xMin || x < acc.xMin) {
+                acc.xMin = x;
+            }
+            if (!acc.xMax || x + width > acc.xMax) {
+                acc.xMax = x + width;
+            }
+            if (!acc.yMin || y < acc.yMin) {
+                acc.yMin = y;
+            }
+            if (!acc.yMax || y + height > acc.yMax) {
+                acc.yMax = y + height;
+            }
+            return acc;
+        }, {});
+
+        const viewbox = `${xMin} ${yMin} ${xMax - xMin + 10} ${yMax - yMin + 10}`;
+        svg.setAttribute('viewBox', viewbox);
+        svg.setAttribute('height', String(yMax - yMin + 10))
+        svg.setAttribute('width', String(xMax - xMin + 10))
+
+        document.body.removeChild(svg);
+
+        return svg;
     }
 }

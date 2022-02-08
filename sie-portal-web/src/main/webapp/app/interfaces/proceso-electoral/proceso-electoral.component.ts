@@ -1,11 +1,25 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, EventEmitter } from '@angular/core';
-import { MultidatasetProcesosElectoralesService, DatasetEvolucionElectoralService, ProcesoElectoral } from '../../dataset';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef } from '@angular/core';
+import {
+    MultidatasetProcesosElectoralesService,
+    DatasetEvolucionElectoralService,
+    ProcesoElectoral,
+    Lugar,
+    ResultadoElectoral,
+    DatasetProcesoElectoral,
+    MultidatasetProcesosElectorales,
+    DatasetResultadoElectoralService,
+} from '../../dataset';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MultidatasetProcesosElectorales } from '../../dataset/multidataset-procesos-electorales.model';
 import { ConfigService, MetadataService } from '../../config';
-import { Observable, Subscriber } from 'rxjs';
+import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { DocumentoService } from '../../documento';
+import { JhiAlertService } from 'ng-jhipster';
+import { finalize } from 'rxjs/operators';
 import { zip } from 'rxjs/observable/zip';
+import { BasicDataset } from './basic-dataset';
+import { ElectoralResult } from './electoral-result';
+import { combineLatest } from 'rxjs/observable/combineLatest';
 
 declare var I18n: any;
 declare var App: any;
@@ -18,7 +32,7 @@ const TIPO_PROCESO_ELECTORAL_REGEX = /([A-Za-z_]+)\_(\d{4}).*/;
 @Component({
     selector: 'jhi-proceso-electoral',
     styleUrls: ['proceso-electoral.component.scss'],
-    templateUrl: './proceso-electoral.component.html'
+    templateUrl: './proceso-electoral.component.html',
 })
 export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -29,6 +43,10 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     lugarId: string;
     fecha: string;
     proceso: ProcesoElectoral;
+    downloadingPdf = false;
+    lugar: Lugar;
+    multidatasetId: string;
+    dataset: DatasetProcesoElectoral;
 
     constructor(
         private host: ElementRef,
@@ -39,19 +57,22 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         private metadataService: MetadataService,
         private translateService: TranslateService,
         private datasetEvolucionElectoralService: DatasetEvolucionElectoralService,
-    ) { }
+        private documentoService: DocumentoService,
+        private alertService: JhiAlertService,
+        private datasetResultadoElectoralService: DatasetResultadoElectoralService,
+    ) {
+    }
 
     ngOnInit() {
-        zip(this.activatedRoute.parent.url, this.activatedRoute.parent.params).subscribe((value) => {
+        combineLatest(this.activatedRoute.parent.url, this.activatedRoute.parent.params).subscribe((value) => {
             const [url, params] = value;
 
             if (!this.lugarId || this.lugarId !== url[1].path) {
                 this.lugarId = url[1].path;
             }
 
-            this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(this.lugarId).then((listaProcesoElectoral) => {
-                this.proceso = listaProcesoElectoral.find((proceso) => proceso.id === params.idProcesoElectoral);
-            });
+            this.updateLugar(this.lugarId);
+            this.updateProceso(params.idProcesoElectoral);
 
             const matchResult = params.idProcesoElectoral.match(TIPO_PROCESO_ELECTORAL_REGEX);
             if (!matchResult) {
@@ -64,6 +85,23 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             } else if (params.idProcesoElectoral !== this.idProcesoElectoral) {
                 this.onChangeProcesoElectoral(params.idProcesoElectoral);
             }
+        });
+    }
+
+    private updateProceso(idProcesoElectoral: string) {
+        this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(this.lugarId).then((listaProcesoElectoral) => {
+            this.proceso = listaProcesoElectoral.find((proceso) => proceso.id === idProcesoElectoral);
+        });
+    }
+
+    private updateLugar(lugarId: string) {
+        this.datasetEvolucionElectoralService.getLugarById(lugarId).then((result) => {
+            if (!result) {
+                this.alertService.error('lugar.errorNoEncontrado', { codigo: lugarId });
+                throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: lugarId }));
+            }
+
+            this.lugar = result;
         });
     }
 
@@ -80,6 +118,23 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         window.location.hash = window.location.hash.replace(urlSegments[1].path, lugarId);
     }
 
+    descargarPdf(event: Event) {
+        event.stopPropagation();
+        this.downloadingPdf = true;
+
+        this.datasetResultadoElectoralService.getDatasetResultadoElectoral(this.dataset.datasetId).subscribe((dataset) => {
+            const resultadoElectoral: ResultadoElectoral = {
+                territorio: this.lugar.nombre,
+                procesoElectoral: this.proceso,
+                data: this.parseDataset(dataset, this.lugar.nombre, this.proceso),
+            };
+            this.documentoService.descargarPdfResultadoElectoral(resultadoElectoral).pipe(finalize(() => this.downloadingPdf = false)).subscribe(
+                (response) => this.documentoService.saveToFileSystem(response),
+                () => this.alertService.error('error.cannotDownloadDocument'),
+            );
+        });
+    }
+
     private onChangeTipoElecciones(idProcesoElectoral: string, tipoElecciones: string) {
         this.multidatasetProcesosElectoralesService.getDatasetsByTipoElecciones(tipoElecciones).then((multidataset) => {
             this.tipoElecciones = tipoElecciones;
@@ -89,15 +144,16 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             if (App.mainRegion) {
                 this.stopBackbone();
             }
-            this.startBackbone(multidataset.id);
+            this.multidatasetId = multidataset.id;
+            this.startBackbone(this.multidatasetId);
         }).catch(() => {
             this.router.navigate(['not-found'], { skipLocationChange: true });
         });
     }
 
     private onChangeProcesoElectoral(idProcesoElectoral: string) {
-        const dataset = this.multidataset.datasetList.find((element) => element.identifier === idProcesoElectoral);
-        if (dataset) {
+        this.dataset = this.multidataset.datasetList.find((element) => element.identifier === idProcesoElectoral);
+        if (this.dataset) {
             this.fecha = idProcesoElectoral.match(TIPO_PROCESO_ELECTORAL_REGEX)[2];
         } else {
             throw new Error(this.translateService.instant('procesoElectoral.errorNoEncontrado', { id: idProcesoElectoral }));
@@ -109,7 +165,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         I18n.locale = 'es';
 
         App.addRegions({
-            mainRegion: '.metamac-container'
+            mainRegion: '.metamac-container',
         });
 
         const config = this.configService.getConfig();
@@ -140,7 +196,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 App.queryParams['agency'] = 'ISTAC';
                 App.queryParams['type'] = 'dataset';
                 App.queryParams['multidatasetId'] = multidatasetId;
-            }
+            },
         ).subscribe(() => App.start());
     }
 
@@ -157,5 +213,75 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         estilosMetamac.href = METAMAC_CSS_LINK;
         estilosMetamac.rel = METAMAC_CSS_REL;
         this.host.nativeElement.appendChild(estilosMetamac);
+    }
+
+    /**
+     * Converts the dataset to a simple table with the name of the party and the data of the elections
+     */
+    private parseDataset(dataset: BasicDataset, territory: string, electoralProcessData: ProcesoElectoral): ElectoralResult[] {
+        // parse the string of observations to an array of numbers
+        const observations = dataset.data.observations.split(' | ').map((observation) => {
+            if (observation.length === 0) {
+                return null;
+            }
+            return Number(observation);
+        });
+
+        // create a map of dimensions, where
+        //  key     ->  dimension id (i.e. MEDIDAS, TERRITORIO)
+        //  value   ->  categories array (i.e. for MEDIDAS: VOTOS_VALIDOS, REPRESENTANTES_ELEGIDOS, ...)
+        const dimensions = dataset.data.dimensions.dimension.map((dim) => [dim.dimensionId, dim.representations.representation]).reduce((map, arr) => {
+            map.set(arr[0], arr[1]);
+            return map;
+        }, new Map);
+
+        const dimIds = Array.from(dimensions.keys());
+
+        const cat1 = dimensions.get(dimIds[0]);
+        const cat2 = dimensions.get(dimIds[1]);
+        const cat3 = dimensions.get(dimIds[2]);
+
+        const data = [];
+
+        // We do all this hastle because we know there are gonna be three dimensions
+        // that we need: medidas, territorio, and candidaturas. Thing is we don't know beforehand the order
+        // they come on the dataset, which it matters because that's how we access the values on the
+        // observations array
+        for (const [i, v1] of cat1.entries()) {
+            for (const [j, v2] of cat2.entries()) {
+                for (const [k, v3] of cat3.entries()) {
+                    const arr = [v1.code, v2.code, v3.code];
+                    data.push({
+                        measure: arr[dimIds.indexOf('MEDIDAS')],
+                        territory: this.getName(dataset, 'TERRITORIO', arr[dimIds.indexOf('TERRITORIO')]),
+                        candidacy: this.getName(dataset, 'CANDIDATURAS', arr[dimIds.indexOf('CANDIDATURAS')]),
+                        value: observations[k + cat3.length * (j + cat2.length * i)], // see https://eli.thegreenplace.net/2015/memory-layout-of-multi-dimensional-arrays
+                    });
+                }
+            }
+        }
+
+        // it's easy to deal with the data if it's grouped the results by the candidacy
+        const resultsByCandidacy = new Map();
+        for (const row of data) {
+            if (row.territory === territory) {
+                const obj = resultsByCandidacy.get(row.candidacy) || {};
+                obj[row.measure] = row.value;
+                resultsByCandidacy.set(row.candidacy, obj);
+            }
+        }
+
+        return Array.from(resultsByCandidacy.entries()).map((entry) => {
+            return {
+                candidacy: entry[0],
+                results: entry[1],
+            }
+        });
+    }
+
+    private getName(dataset, dimensionId: string, dimensionValue: string): string {
+        return dataset.metadata.dimensions.dimension.find((dim) => dim.id === dimensionId)
+                      .dimensionValues.value.find((val) => val.id === dimensionValue)
+                      .name.text.find((text) => text.lang === 'es').value;
     }
 }
