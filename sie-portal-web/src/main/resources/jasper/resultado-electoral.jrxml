@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resultado_electoral" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="eb5828a7-98b5-4cd8-88a2-625a5a8842b7">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resultado_electoral" pageWidth="595" pageHeight="842" columnWidth="483" leftMargin="56" rightMargin="56" topMargin="56" bottomMargin="20" whenResourceMissingType="Empty" uuid="eb5828a7-98b5-4cd8-88a2-625a5a8842b7">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.report.description" value=""/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
@@ -76,40 +76,40 @@
 		<![CDATA[]]>
 	</queryString>
 	<title>
-		<band height="352">
+		<band height="263">
 			<line>
-				<reportElement x="40" y="86" width="480" height="1" forecolor="#3B3B3B" uuid="c35a7fd5-15e0-4155-9ed5-d731aedabbb4"/>
+				<reportElement x="1" y="22" width="479" height="1" forecolor="#3B3B3B" uuid="c35a7fd5-15e0-4155-9ed5-d731aedabbb4"/>
 				<graphicElement>
 					<pen lineWidth="1.0"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="40" y="112" width="480" height="1" forecolor="#3B3B3B" uuid="fb7e3c32-c990-4f4c-b4e2-c87cfdcdc859"/>
+				<reportElement x="1" y="48" width="479" height="1" forecolor="#3B3B3B" uuid="fb7e3c32-c990-4f4c-b4e2-c87cfdcdc859"/>
 			</line>
 			<textField>
-				<reportElement x="40" y="44" width="480" height="40" uuid="1e717c0f-acfe-48a2-9cff-ac174629ac09"/>
+				<reportElement x="1" y="-20" width="479" height="40" uuid="1e717c0f-acfe-48a2-9cff-ac174629ac09"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="SansSerif" size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{TERRITORIO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="40" y="86" width="480" height="26" uuid="a43ebc08-10e4-4375-883e-b5cb6b2c6336"/>
+				<reportElement x="1" y="22" width="479" height="26" uuid="a43ebc08-10e4-4375-883e-b5cb6b2c6336"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Resultados de las elecciones " + $P{TIPO_ELECCIONES}.toLowerCase() + " de " + $P{ANNO_ELECCIONES}]]></textFieldExpression>
 			</textField>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="40" y="133" width="480" height="170" uuid="fbd62366-e286-4664-a5e3-f3b2d6e15f07"/>
+				<reportElement x="1" y="69" width="479" height="170" uuid="fbd62366-e286-4664-a5e3-f3b2d6e15f07"/>
 				<imageExpression><![CDATA[net.sf.jasperreports.renderers.BatikRenderer.getInstance($P{GRAFICA})]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<detail>
-		<band height="230" splitType="Stretch">
+		<band height="134" splitType="Stretch">
 			<subreport>
-				<reportElement stretchType="RelativeToTallestObject" x="40" y="-10" width="480" height="190" uuid="b72cb9d4-649f-4d71-8cff-246625bb6359"/>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="480" height="130" uuid="b72cb9d4-649f-4d71-8cff-246625bb6359"/>
 				<subreportParameter name="INT_FORMATTER">
 					<subreportParameterExpression><![CDATA[$P{INT_FORMATTER}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -120,9 +120,9 @@
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "tabla-resultado-electoral.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="428">
+		<band height="76">
 			<componentElement>
-				<reportElement x="37" y="20" width="480" height="380" isPrintWhenDetailOverflows="true" uuid="9a3c3b4f-f835-40e1-adab-67a1ce814c39">
+				<reportElement x="0" y="17" width="480" height="40" isPrintWhenDetailOverflows="true" uuid="9a3c3b4f-f835-40e1-adab-67a1ce814c39">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -294,9 +294,9 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="55">
+		<band height="67">
 			<image hAlign="Right" vAlign="Middle">
-				<reportElement x="40" y="0" width="180" height="55" uuid="3081b5c6-83dc-4967-a3c5-7848d33025d8"/>
+				<reportElement x="0" y="12" width="180" height="55" uuid="3081b5c6-83dc-4967-a3c5-7848d33025d8"/>
 				<imageExpression><![CDATA[$P{RUTA_LOGO}]]></imageExpression>
 			</image>
 		</band>
