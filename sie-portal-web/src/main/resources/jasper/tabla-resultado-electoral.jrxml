@@ -184,7 +184,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[((String) $F{indicadores}.get("TASA_PARTICIPACION_A1")).trim().isEmpty() ? "N/A" : $V{floatFormatter}.format(java.lang.Float.parseFloat((String) $F{indicadores}.get("TASA_PARTICIPACION_A1")))  + " %"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[((String) $F{indicadores}.get("TASA_PARTICIPACION_A1")).trim().isEmpty() ? "" : $V{floatFormatter}.format(java.lang.Float.parseFloat((String) $F{indicadores}.get("TASA_PARTICIPACION_A1")))  + " %"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="93" width="185" height="14" forecolor="#3B3B3B" uuid="540347a2-fc56-4113-9fdd-3dbb8eecd128"/>
@@ -198,7 +198,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[((String) $F{indicadores}.get("TASA_PARTICIPACION_A2")).trim().isEmpty() ? "N/A" : $V{floatFormatter}.format(java.lang.Float.parseFloat((String) $F{indicadores}.get("TASA_PARTICIPACION_A2"))) + " %"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[((String) $F{indicadores}.get("TASA_PARTICIPACION_A2")).trim().isEmpty() ? "" : $V{floatFormatter}.format(java.lang.Float.parseFloat((String) $F{indicadores}.get("TASA_PARTICIPACION_A2"))) + " %"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="107" width="185" height="14" forecolor="#3B3B3B" uuid="07a17251-33f2-4203-bc62-60365b033bd8"/>
