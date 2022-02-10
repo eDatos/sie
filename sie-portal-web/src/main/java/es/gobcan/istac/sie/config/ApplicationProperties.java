@@ -59,6 +59,7 @@ public class ApplicationProperties {
         private String googleTrackingIdKey;
         private String navbarPathKey;
         private String footerPathKey;
+        private String organisationKey;
         private String organisationUrnKey;
         private String geographicalGranularityUrnKey;
         private String sieAdditionalInfoUrl;
@@ -213,6 +214,14 @@ public class ApplicationProperties {
 
         private boolean isInternal() {
             return Constants.INTERNAL_CONFIG_ID.equalsIgnoreCase(getInstallationType());
+        }
+
+        public String getOrganisationKey() {
+            return organisationKey;
+        }
+
+        public void setOrganisationKey(String organisationKey) {
+            this.organisationKey = organisationKey;
         }
 
         public String getOrganisationUrnKey() {

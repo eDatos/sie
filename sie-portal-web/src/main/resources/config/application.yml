@@ -159,6 +159,7 @@ application:
         googleTrackingIdKey: metamac.analytics.google.tracking_id
         navbarPathKey: metamac.app.style.header.url
         footerPathKey: metamac.app.style.footer.url
+        organisationKey: metamac.organisation
         organisationUrnKey: metamac.organisation.urn
         geographicalGranularityUrnKey: metamac.default.codelist.geographical_granularity.urn
         sieAdditionalInfoUrl: metamac.sie.additional_info.url
