@@ -98,7 +98,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Resultados de las elecciones " + $P{TIPO_ELECCIONES}.toLowerCase() + " de " + $P{ANNO_ELECCIONES}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Resultados de las elecciones " + $P{TIPO_ELECCIONES} + " de " + $P{ANNO_ELECCIONES}]]></textFieldExpression>
 			</textField>
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="1" y="69" width="479" height="170" uuid="fbd62366-e286-4664-a5e3-f3b2d6e15f07"/>

@@ -4,16 +4,17 @@ import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import es.gobcan.istac.sie.config.Constants;
@@ -30,16 +31,18 @@ public class DocumentoServiceImpl implements DocumentoService {
 
     private static final String LOGO_CABECERA                                    = "logo_istac.png";
     private static final String EVOLUCION_ELECTORAL_TEMPLATE                     = "evolucion-electoral.jasper";
-    private static final String RESULTADO_ELECTORAL_TEMPLATE = "resultado-electoral.jasper";
+    private static final String RESULTADO_ELECTORAL_TEMPLATE                     = "resultado-electoral.jasper";
     private static final String RUTA_RELATIVA_DIRECTORIO_SUBINFORME              = "./jasper/";
     private static final String EXCEPCION_RUTA_LOGO_CABECERA_EVOLUCION_ELECTORAL = "Error al construir URI al logo cabecera de evolución electoral";
 
     private static final Logger LOGGER                                           = LoggerFactory.getLogger(DocumentoServiceImpl.class);
 
     private ReportsService      reportsService;
+    private MessageSource       messageSource;
 
-    public DocumentoServiceImpl(ReportsService reportsService) {
+    public DocumentoServiceImpl(ReportsService reportsService, MessageSource messageSource) {
         this.reportsService = reportsService;
+        this.messageSource = messageSource;
     }
 
     @Override
@@ -71,7 +74,7 @@ public class DocumentoServiceImpl implements DocumentoService {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("GRAFICA", new ByteArrayInputStream(grafica));
             parametros.put("TERRITORIO", resultadoElectoral.getTerritorio());
-            parametros.put("TIPO_ELECCIONES", resultadoElectoral.getProcesoElectoral().getTipoProcesoElectoral());
+            parametros.put("TIPO_ELECCIONES", messageSource.getMessage("report.header." + resultadoElectoral.getProcesoElectoral().getTipoProcesoElectoral(), null, Locale.getDefault()));
             parametros.put("ANNO_ELECCIONES", Integer.toString(getYear(resultadoElectoral)));
             parametros.put("DATA_SOURCE", new JRBeanCollectionDataSource(Collections.singletonList(resultadoElectoral.getProcesoElectoral())));
             parametros.put("SUBREPORT_DIR", RUTA_RELATIVA_DIRECTORIO_SUBINFORME);
