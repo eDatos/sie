@@ -16,7 +16,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { DocumentoService } from '../../documento';
 import { JhiAlertService } from 'ng-jhipster';
 import { finalize } from 'rxjs/operators';
-import { zip } from 'rxjs/observable/zip';
 import { BasicDataset } from './basic-dataset';
 import { ElectoralResult } from './electoral-result';
 import { combineLatest } from 'rxjs/observable/combineLatest';
@@ -176,9 +175,18 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             this.metadataService.getPropertyById(config.metadata.permalinksEndpointKey),
             this.metadataService.getPropertyById(config.metadata.exportEndpointKey),
             this.metadataService.getPropertyById(config.metadata.statisticalVisualizerKey),
+            this.metadataService.getPropertyById(config.metadata.organisationKey),
             this.metadataService.getPropertyById(config.metadata.organisationUrnKey),
             this.metadataService.getPropertyById(config.metadata.geographicalGranularityUrnKey),
-            (statisticalResources, structuralResources, indicators, permalinks, exportEndpoint, statisticalVisualizer, organisationUrn, geographicalGranularityUrn) => {
+            (statisticalResources,
+                structuralResources,
+                indicators,
+                permalinks,
+                exportEndpoint,
+                statisticalVisualizer,
+                organizationName,
+                organisationUrn,
+                geographicalGranularityUrn) => {
                 App.endpoints['statistical-resources'] = statisticalResources + '/v1.0';
                 App.endpoints['structural-resources'] = structuralResources + '/v1.0';
                 App.endpoints['indicators'] = indicators + '/v1.0';
@@ -193,7 +201,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 App.config['geographicalGranularityUrn'] = geographicalGranularityUrn;
                 App.config['installationType'] = config.metadata.installationType;
 
-                App.queryParams['agency'] = this.getAgencyName(organisationUrn);
+                App.queryParams['agency'] = organizationName;
                 App.queryParams['type'] = 'dataset';
                 App.queryParams['multidatasetId'] = multidatasetId;
             },
@@ -283,10 +291,5 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         return dataset.metadata.dimensions.dimension.find((dim) => dim.id === dimensionId)
                       .dimensionValues.value.find((val) => val.id === dimensionValue)
                       .name.text.find((text) => text.lang === 'es').value;
-    }
-
-    private getAgencyName(organisationUrn: string): string {
-        // example: urn:sdmx:org.sdmx.infomodel.base.Agency=SDMX:AGENCIES(1.0).ISTAC
-        return organisationUrn.substring(organisationUrn.lastIndexOf('.') + 1);
     }
 }

@@ -16,9 +16,8 @@ export class DatasetResultadoElectoralService {
         const config = this.configService.getConfig();
         return zip(
             this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey),
-            this.metadataService.getPropertyById(config.metadata.organisationUrnKey),
-        ).flatMap(([srmUrl, organisationUrn]) => {
-            const organisationName = organisationUrn.substring(organisationUrn.lastIndexOf('.') + 1);
+            this.metadataService.getPropertyById(config.metadata.organisationKey),
+        ).flatMap(([srmUrl, organisationName]) => {
             return this.http.get(`${srmUrl}/v1.0/datasets/${organisationName}/${datasetId}/~latest?_type=json`).map((res: Response) => res.json());
         });
     }

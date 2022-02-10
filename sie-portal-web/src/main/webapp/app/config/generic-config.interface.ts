@@ -23,6 +23,7 @@ export interface GenericConfig {
         googleTrackingIdKey,
         navbarPathKey,
         footerPathKey,
+        organisationKey,
         organisationUrnKey,
         geographicalGranularityUrnKey,
         sieAdditionalInfoUrl,
