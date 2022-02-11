@@ -2,6 +2,7 @@
     "compilerOptions": {
         "target": "es5",
         "module": "es2015",
+        "downlevelIteration": true,
         "moduleResolution": "node",
         "sourceMap": true,
         "emitDecoratorMetadata": true,
