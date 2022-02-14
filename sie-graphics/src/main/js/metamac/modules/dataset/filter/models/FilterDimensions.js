@@ -20,7 +20,10 @@
             this._bindEvents();
 
             this.accordion = true; //accordion behaviour
-            this.valuesToIgnoreStatus = {};
+            this.valuesToIgnoreStatus = {
+                NULL: true,
+                ZERO: false,
+            };
         },
 
         _bindEvents: function () {
