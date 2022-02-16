@@ -303,7 +303,7 @@
             }
 
             return {
-                series: filteredSeries,
+                series: filteredSeries.sort((a, b) => a.horizontalCategory > b.horizontalCategory ? 1 : -1),
                 xAxis: filteredXAxis
             };
         },
