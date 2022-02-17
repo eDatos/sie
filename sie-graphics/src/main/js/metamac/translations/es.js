@@ -129,7 +129,13 @@ I18n.translations.es = {
                     parties: "Partidos"
                 }
             },
-            level: "Nivel {{level}}"
+            level: {
+                1: "Canarias",
+                2: "Provincias",
+                3: "Islas",
+                4: "Municipios",
+                5: "Secciones censales"
+            }
         }
     },
     ve: {

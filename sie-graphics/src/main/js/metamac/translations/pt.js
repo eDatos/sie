@@ -103,7 +103,13 @@ I18n.translations.pt = {
             }
         },
         selector: {
-            level: "Nível {{level}}"
+            level: {
+                1: "Ilhas Canárias",
+                2: "Províncias",
+                3: "Ilhas",
+                4: "Municípios",
+                5: "Secções de recenseamento"
+            }
         }
     },
     ve: {

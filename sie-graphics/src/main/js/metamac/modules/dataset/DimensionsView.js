@@ -433,7 +433,7 @@
             return _(uniqueLevels).map(function (level) {
                 return {
                     level: level.toString(),
-                    label: I18n.t('filter.selector.level', { level: (level + 1) })
+                    label: I18n.t('filter.selector.level.' + (level + 1))
                 };
             });
         },
