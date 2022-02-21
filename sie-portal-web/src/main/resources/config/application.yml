@@ -163,3 +163,4 @@ application:
         organisationUrnKey: metamac.organisation.urn
         geographicalGranularityUrnKey: metamac.default.codelist.geographical_granularity.urn
         sieAdditionalInfoUrl: metamac.sie.additional_info.url
+        firstTerritoryHierarchyLevelKey: metamac.sie.firstTerritoryHierarchyLevel

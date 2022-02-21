@@ -63,6 +63,7 @@ public class ApplicationProperties {
         private String organisationUrnKey;
         private String geographicalGranularityUrnKey;
         private String sieAdditionalInfoUrl;
+        private String firstTerritoryHierarchyLevelKey;
 
         public String getEndpoint() {
             return endpoint;
@@ -242,6 +243,14 @@ public class ApplicationProperties {
 
         public void setSieAdditionalInfoUrl(String sieAdditionalInfoUrl) {
             this.sieAdditionalInfoUrl = sieAdditionalInfoUrl;
+        }
+
+        public String getFirstTerritoryHierarchyLevelKey() {
+            return firstTerritoryHierarchyLevelKey;
+        }
+
+        public void setFirstTerritoryHierarchyLevelKey(String firstTerritoryHierarchyLevelKey) {
+            this.firstTerritoryHierarchyLevelKey = firstTerritoryHierarchyLevelKey;
         }
     }
 }
