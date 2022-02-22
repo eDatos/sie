@@ -91,6 +91,7 @@
             var debounceUpdate = _.debounce(this.update, 20);
             this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", debounceUpdate);
             this.listenTo(this.filtersModel, "change:candidacyType", debounceUpdate);
+            this.listenTo(this.filterDimensions, "change:valuesToIgnore", debounceUpdate);
 
             var resize = _.debounce(_.bind(this._updateSize, this), 200);
             this.$el.on("resize", function (e) {
@@ -269,7 +270,42 @@
             });
 
             result.xAxis = xaxis;
+
+            result = this.removeIgnoredValuesFromSeries(result);
+
             return result;
+        },
+
+        removeIgnoredValuesFromSeries: function (result) {
+            const toRemove = [];
+
+            if (this.filterDimensions.getValuesToIgnoreStatus().NULL) {
+                toRemove.push(null);
+            }
+            if (this.filterDimensions.getValuesToIgnoreStatus().ZERO) {
+                toRemove.push(0);
+            }
+
+            if (toRemove.length === 0) {
+                return result;
+            }
+
+            const filteredSeries = [];
+            const filteredXAxis = [];
+
+            for (const [i, xAxis] of result.xAxis.entries()) {
+                const serie = result.series.find(serie => serie.data[0].x === i);
+                if (!toRemove.includes(serie.data[0].y)) {
+                    serie.data[0].x = filteredXAxis.length;
+                    filteredSeries.push(serie);
+                    filteredXAxis.push(xAxis);
+                }
+            }
+
+            return {
+                series: filteredSeries.sort((a, b) => a.horizontalCategory > b.horizontalCategory ? 1 : -1),
+                xAxis: filteredXAxis
+            };
         },
 
         update: function () {
