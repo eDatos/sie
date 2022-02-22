@@ -293,8 +293,8 @@
             var filteredSeries = [];
             var filteredXAxis = [];
 
-            for (const [i, xAxis] of result.xAxis.entries()) {
-                const serie = result.series.find(serie => serie.data[0].x === i);
+            for (var [i, xAxis] of result.xAxis.entries()) {
+                var serie = result.series.find(serie => serie.data[0].x === i);
                 if (!toRemove.includes(serie.data[0].y)) {
                     serie.data[0].x = filteredXAxis.length;
                     filteredSeries.push(serie);
