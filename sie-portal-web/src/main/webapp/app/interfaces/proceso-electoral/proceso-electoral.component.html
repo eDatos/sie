@@ -24,7 +24,7 @@
                 <thead>
                 <tr>
                     <th colspan="3">
-                        {{proceso.nombre}}
+                        {{proceso?.nombre}}
                     </th>
                 </tr>
                 </thead>
@@ -34,98 +34,98 @@
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.ELECTORES"></span>
                     </td>
-                    <td>{{proceso.indicadores['ELECTORES'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['ELECTORES'] | number:'1.0-0' | defaultNull }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="indent-1" jhiTranslate="evolucionElectoral.indicador.ELECTORES_VOTANTES"></span>
                     </td>
-                    <td>{{proceso.indicadores['ELECTORES_VOTANTES'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['ELECTORES_VOTANTES'] | number:'1.0-0' | defaultNull }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="indent-1" jhiTranslate="evolucionElectoral.indicador.ELECTORES_ABSTENIDOS"></span>
                     </td>
-                    <td>{{proceso.indicadores['ELECTORES_ABSTENIDOS'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['ELECTORES_ABSTENIDOS'] | number:'1.0-0' | defaultNull }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_PARTICIPACION"></span>
                     </td>
-                    <td>{{proceso.indicadores['TASA_PARTICIPACION'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['TASA_PARTICIPACION'] | number:'1.2-2' | percentage | defaultNull }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_PARTICIPACION_A1"></span>
                     </td>
-                    <td>{{proceso.indicadores['TASA_PARTICIPACION_A1'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['TASA_PARTICIPACION_A1'] != "" ? (proceso?.indicadores['TASA_PARTICIPACION_A1'] | number:'1.2-2' | percentage | defaultNull) : ""}}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_PARTICIPACION_A2"></span>
                     </td>
-                    <td>{{proceso.indicadores['TASA_PARTICIPACION_A2'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['TASA_PARTICIPACION_A2'] != "" ? (proceso?.indicadores['TASA_PARTICIPACION_A2'] | number:'1.2-2' | percentage | defaultNull) : "" }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_ABSTENCION"></span>
                     </td>
-                    <td>{{proceso.indicadores['TASA_ABSTENCION'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['TASA_ABSTENCION'] | number:'1.2-2' | percentage | defaultNull }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.VOTOS"></span>
                     </td>
-                    <td>{{proceso.indicadores['VOTOS'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['VOTOS'] | number:'1.0-0' | defaultNull }}</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>
                         <span class="indent-1" jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS"></span>
                     </td>
-                    <td>{{proceso.indicadores['VOTOS_VALIDOS'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['VOTOS_VALIDOS'] | number:'1.0-0' | defaultNull }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="indent-2" jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS_CANDIDATURA"></span>
                     </td>
-                    <td>{{proceso.indicadores['VOTOS_VALIDOS_CANDIDATURA'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['VOTOS_VALIDOS_CANDIDATURA'] | number:'1.0-0' | defaultNull }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="indent-2" jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS_BLANCO"></span>
                     </td>
-                    <td>{{proceso.indicadores['VOTOS_VALIDOS_BLANCO'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['VOTOS_VALIDOS_BLANCO'] | number:'1.0-0' | defaultNull }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="indent-1" jhiTranslate="evolucionElectoral.indicador.VOTOS_NULOS"></span>
                     </td>
-                    <td>{{proceso.indicadores['VOTOS_NULOS'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['VOTOS_NULOS'] | number:'1.0-0' | defaultNull }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_VOTOS_VALIDOS"></span>
                     </td>
-                    <td>{{proceso.indicadores['TASA_VOTOS_VALIDOS'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['TASA_VOTOS_VALIDOS'] | number:'1.2-2' | percentage | defaultNull }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_VOTOS_VALIDOS_CANDIDATURA"></span>
                     </td>
-                    <td>{{proceso.indicadores['TASA_VOTOS_VALIDOS_CANDIDATURA'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['TASA_VOTOS_VALIDOS_CANDIDATURA'] | number:'1.2-2' | percentage | defaultNull }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_VOTOS_VALIDOS_BLANCO"></span>
                     </td>
-                    <td>{{proceso.indicadores['TASA_VOTOS_VALIDOS_BLANCO'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['TASA_VOTOS_VALIDOS_BLANCO'] | number:'1.2-2' | percentage | defaultNull }}</td>
                 </tr>
                 <tr>
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_VOTOS_NULOS"></span>
                     </td>
-                    <td>{{proceso.indicadores['TASA_VOTOS_NULOS'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{proceso?.indicadores['TASA_VOTOS_NULOS'] | number:'1.2-2' | percentage | defaultNull }}</td>
                 </tr>
                 </tbody>
             </table>
