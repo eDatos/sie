@@ -277,7 +277,7 @@
         },
 
         removeIgnoredValuesFromSeries: function (result) {
-            const toRemove = [];
+            var toRemove = [];
 
             if (this.filterDimensions.getValuesToIgnoreStatus().NULL) {
                 toRemove.push(null);
@@ -290,8 +290,8 @@
                 return result;
             }
 
-            const filteredSeries = [];
-            const filteredXAxis = [];
+            var filteredSeries = [];
+            var filteredXAxis = [];
 
             for (const [i, xAxis] of result.xAxis.entries()) {
                 const serie = result.series.find(serie => serie.data[0].x === i);
