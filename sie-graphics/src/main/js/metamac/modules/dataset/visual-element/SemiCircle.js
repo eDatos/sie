@@ -49,7 +49,7 @@
                     animation: false
                 },
                 pie: {
-                    colors: ["#86CB92", "#404E4D", "#E6AA68", "#B7990D", "#A39B8B", "#F487B6", "#F8F991"],
+                    colors: ["#A7BAF2", "#323840", "#F2E529", "#4ED9BF", "#BCF285", "#DDF8D8"],
                     center: ['50%', '75%'],
                     innerSize: '40%',
                     endAngle: 90,
