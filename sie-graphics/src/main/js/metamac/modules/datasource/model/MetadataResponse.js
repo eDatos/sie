@@ -20,6 +20,14 @@
             this.metadataResponse = _.extend(this.identifier(), metadataResponse);
             this.selectedLanguages = this.metadataResponse.selectedLanguages.language;
             this.metadata = this.metadataResponse.metadata;
+            if (this.metadata.type === 'DATASET') {
+                var candidaturasDimensionValues = _.find(this.metadata.dimensions.dimension, (dim) => {
+                    return dim.id === 'CANDIDATURAS';
+                }).dimensionValues;
+                if (candidaturasDimensionValues !== null && candidaturasDimensionValues.value.length > 0) {
+                    this.candidaturasCodelistUrl = candidaturasDimensionValues.value[0].selfLink.href.replace(/\/[^\/]*$/, ".json?fields=+variableElement");
+                }
+            }
             this.initializeLocalesIndex();
             this.initializeCache();
         },
@@ -206,7 +214,7 @@
                 var isTemporal = dimension.type === 'TIME_DIMENSION';
                 var dimensionValues = dimension.dimensionValues.value;
                 representations = _.map(dimensionValues, function(dimensionValue, index) {
-                    var representation = _.pick(dimensionValue, 'id', 'open', 'temporalGranularity');
+                    var representation = _.pick(dimensionValue, 'id', 'open', 'temporalGranularity', 'selfLink');
                     representation.label = self.localizeLabel(dimensionValue.name.text);
 
                     if (dimensionValue.measureQuantity && dimensionValue.measureQuantity.unitCode) {

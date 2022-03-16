@@ -49,7 +49,7 @@
                     animation: false
                 },
                 pie: {
-                    colors: ["#008BD0", "#67A23F", "#8C5C1D", "#7F5B97", "#C01A41", "#E5772D", "#8C9BA3"],
+                    colors: ["#86CB92", "#404E4D", "#E6AA68", "#B7990D", "#A39B8B", "#F487B6", "#F8F991"],
                     center: ['50%', '75%'],
                     innerSize: '40%',
                     endAngle: 90,
@@ -65,6 +65,30 @@
                         }
                     }
                 }
+            }
+        });
+
+        this.colors = {};
+        var self = this;
+
+        $.ajax({
+            url: this.data.metadata.candidaturasCodelistUrl,
+            dataType: 'jsonp',
+            jsonp: "_callback"
+        }).success(function (response) {
+            var codesWithVarElem = response.code.filter((item) => item.hasOwnProperty("variableElement"));
+            if (codesWithVarElem.length > 0) {
+                var varElemUrl = codesWithVarElem[0].variableElement.selfLink.href.replace(/\/[^\/]*$/, ".json?fields=+renderingColor");
+                $.ajax({
+                    url: varElemUrl,
+                    dataType: 'jsonp',
+                    jsonp: "_callback"
+                }).success(function (varElems) {
+                    for (var code of codesWithVarElem) {
+                        self.colors[code.id] = varElems.variableElement.find(v => v.id === code.variableElement.id).renderingColor;
+                    }
+                    self.update();
+                });
             }
         });
     };
@@ -216,6 +240,9 @@
                         element[attrName] = y;
                     });
 
+                    if (self.colors) {
+                        element.color = self.colors[horizontalCategory.get('id')];
+                    }
                     serie.data.push(element);
                 });
 
