@@ -6,6 +6,23 @@
     App.VisualElement.SemiCircleChart = function (options) {
         this.initialize(options);
         this._type = 'pie';
+        this.colors = {};
+        this.api = new App.dataset.StructuralResourcesApi(options.data);
+
+        var self = this;
+
+        this.api.getCandidaturasCodelist(function(codelist) {
+           var codesWithVariableElements = codelist.code.filter((item) => item.hasOwnProperty("variableElement"));
+            if (codesWithVariableElements.length > 0) {
+                var variableElementsUrl = codesWithVariableElements[0].variableElement.selfLink.href.replace(/\/[^\/]*$/, ".json?fields=+renderingColor");
+                self.api.getVariableElements(variableElementsUrl, function(variableElements) {
+                   for (var code of codesWithVariableElements) {
+                        self.colors[code.id] = variableElements.variableElement.find(v => v.id === code.variableElement.id).renderingColor;
+                    }
+                    self.update();
+                });
+            }
+        });
 
         _.extend(this._chartOptions, {
             chart: {
@@ -65,30 +82,6 @@
                         }
                     }
                 }
-            }
-        });
-
-        this.colors = {};
-        var self = this;
-
-        $.ajax({
-            url: this.data.metadata.candidaturasCodelistUrl,
-            dataType: 'jsonp',
-            jsonp: "_callback"
-        }).success(function (response) {
-            var codesWithVarElem = response.code.filter((item) => item.hasOwnProperty("variableElement"));
-            if (codesWithVarElem.length > 0) {
-                var varElemUrl = codesWithVarElem[0].variableElement.selfLink.href.replace(/\/[^\/]*$/, ".json?fields=+renderingColor");
-                $.ajax({
-                    url: varElemUrl,
-                    dataType: 'jsonp',
-                    jsonp: "_callback"
-                }).success(function (varElems) {
-                    for (var code of codesWithVarElem) {
-                        self.colors[code.id] = varElems.variableElement.find(v => v.id === code.variableElement.id).renderingColor;
-                    }
-                    self.update();
-                });
             }
         });
     };
