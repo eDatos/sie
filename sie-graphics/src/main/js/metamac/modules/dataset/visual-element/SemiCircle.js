@@ -6,6 +6,23 @@
     App.VisualElement.SemiCircleChart = function (options) {
         this.initialize(options);
         this._type = 'pie';
+        this.colors = {};
+        this.api = new App.dataset.StructuralResourcesApi(options.data);
+
+        var self = this;
+
+        this.api.getCandidaturasCodelist(function(codelist) {
+           var codesWithVariableElements = codelist.code.filter((item) => item.hasOwnProperty("variableElement"));
+            if (codesWithVariableElements.length > 0) {
+                var variableElementsUrl = codesWithVariableElements[0].variableElement.selfLink.href.replace(/\/[^\/]*$/, ".json?fields=+renderingColor");
+                self.api.getVariableElements(variableElementsUrl, function(variableElements) {
+                   for (var code of codesWithVariableElements) {
+                        self.colors[code.id] = variableElements.variableElement.find(v => v.id === code.variableElement.id).renderingColor;
+                    }
+                    self.update();
+                });
+            }
+        });
 
         _.extend(this._chartOptions, {
             chart: {
@@ -49,7 +66,7 @@
                     animation: false
                 },
                 pie: {
-                    colors: ["#008BD0", "#67A23F", "#8C5C1D", "#7F5B97", "#C01A41", "#E5772D", "#8C9BA3"],
+                    colors: ["#A7BAF2", "#F2E3B5", "#323840", "#F2E529", "#4ED9BF", "#BCF285", "#DDF8D8", "#F7F7CF", "#F8D8F4"],
                     center: ['50%', '75%'],
                     innerSize: '40%',
                     endAngle: 90,
@@ -216,6 +233,9 @@
                         element[attrName] = y;
                     });
 
+                    if (self.colors) {
+                        element.color = self.colors[horizontalCategory.get('id')];
+                    }
                     serie.data.push(element);
                 });
 
