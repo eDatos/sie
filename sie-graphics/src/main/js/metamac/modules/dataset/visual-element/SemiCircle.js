@@ -6,23 +6,6 @@
     App.VisualElement.SemiCircleChart = function (options) {
         this.initialize(options);
         this._type = 'pie';
-        this.colors = {};
-        this.api = new App.dataset.StructuralResourcesApi(options.data);
-
-        var self = this;
-
-        this.api.getCandidaturasCodelist(function(codelist) {
-           var codesWithVariableElements = codelist.code.filter((item) => item.hasOwnProperty("variableElement"));
-            if (codesWithVariableElements.length > 0) {
-                var variableElementsUrl = codesWithVariableElements[0].variableElement.selfLink.href.replace(/\/[^\/]*$/, ".json?fields=+renderingColor");
-                self.api.getVariableElements(variableElementsUrl, function(variableElements) {
-                   for (var code of codesWithVariableElements) {
-                        self.colors[code.id] = variableElements.variableElement.find(v => v.id === code.variableElement.id).renderingColor;
-                    }
-                    self.update();
-                });
-            }
-        });
 
         _.extend(this._chartOptions, {
             chart: {
@@ -233,9 +216,7 @@
                         element[attrName] = y;
                     });
 
-                    if (self.colors) {
-                        element.color = self.colors[horizontalCategory.get('id')];
-                    }
+                    element.color = self.colors[horizontalCategory.get('id')];
                     serie.data.push(element);
                 });
 
@@ -302,6 +283,11 @@
             var data = this.getData();
             this.replaceSeries(this.chart, data.series);
             this.chart.redraw(false);
+        },
+
+        updateWithColors: function(colors) {
+            this.colors = colors;
+            this.update();
         },
 
         _updateSize: function () {
