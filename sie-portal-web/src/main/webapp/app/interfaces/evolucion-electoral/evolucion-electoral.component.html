@@ -77,17 +77,17 @@
             <tr>
                 <td>
                     &nbsp;&nbsp;&nbsp;&#45;&nbsp;
-                    <span jhiTranslate="evolucionElectoral.indicador.ELECTORES_VOTANTES"></span>
+                    <span jhiTranslate="evolucionElectoral.indicador.VOTANTES"></span>
                 </td>
-                <td>{{proceso.indicadores['ELECTORES_VOTANTES'] | number:'1.0-0' | defaultNull }}</td>
+                <td>{{proceso.indicadores['VOTANTES'] | number:'1.0-0' | defaultNull }}</td>
                 <td>{{proceso.indicadores['TASA_PARTICIPACION'] | number:'1.2-2' | percentage | defaultNull }}</td>
             </tr>
             <tr>
                 <td>
                     &nbsp;&nbsp;&nbsp;&#45;&nbsp;
-                    <span jhiTranslate="evolucionElectoral.indicador.ELECTORES_ABSTENIDOS"></span>
+                    <span jhiTranslate="evolucionElectoral.indicador.ABSTENCION"></span>
                 </td>
-                <td>{{proceso.indicadores['ELECTORES_ABSTENIDOS'] | number:'1.0-0' | defaultNull }}</td>
+                <td>{{proceso.indicadores['ABSTENCION'] | number:'1.0-0' | defaultNull }}</td>
                 <td>{{proceso.indicadores['TASA_ABSTENCION'] | number:'1.2-2' | percentage | defaultNull }}</td>
             </tr>
             <tr>
