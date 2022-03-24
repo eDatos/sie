@@ -64,11 +64,6 @@
                 data: this.data
             });
 
-            this.filtersView = new App.modules.dataset.FiltersView({
-                optionsModel: this.optionsModel,
-                filtersModel: this.filtersModel
-            });
-
             // sidebarView
             var sideViews = [];
             if (!this.optionsModel.get('widget')) {
@@ -138,7 +133,6 @@
             this.content.show(this.sidebarView);
             this.optionsBar.show(this.optionsView);
             this.dimensions.show(this.dimensionsView);
-            this.filters.show(this.filtersView);
             this.fullScreen.setContainer($('.metamac-container'));
             if (this.optionsModel.get('widget')) {
                 this._initializeWidget();
@@ -190,7 +184,6 @@
                 this.visualizationView.activeVisualElement(type);
                 this.visualizationView.load();
                 this.dimensionsView.render();
-                this.filtersView.render();
 
                 var controllerParams = this.metadata.identifier();
                 controllerParams.visualizationType = type;

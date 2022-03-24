@@ -90,7 +90,6 @@
         _bindEvents: function () {
             var debounceUpdate = _.debounce(this.update, 20);
             this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", debounceUpdate);
-            this.listenTo(this.filtersModel, "change:candidacyType", debounceUpdate);
             this.listenTo(this.filterDimensions, "change:valuesToIgnore", debounceUpdate);
 
             var resize = _.debounce(_.bind(this._updateSize, this), 200);
@@ -193,9 +192,6 @@
             var filteredHorizontalDimensionSelectedCategories = [];
             var countedHorizontalCategoryIndex = 0;
             _.each(horizontalDimensionSelectedCategories, function (horizontalCategory, horizontalCategoryIndex) {
-                if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('candidacyType'))) {
-                    return;
-                }
                 filteredHorizontalDimensionSelectedCategories[countedHorizontalCategoryIndex] = horizontalCategory;
 
                 var columnSeries = [];
