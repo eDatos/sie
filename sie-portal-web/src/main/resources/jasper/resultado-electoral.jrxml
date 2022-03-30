@@ -45,7 +45,7 @@
 		<field name="candidacy" class="java.lang.String"/>
 		<field name="results" class="java.util.Map"/>
 		<sortField name="votosValidosCandidatura" order="Descending" type="Variable"/>
-		<sortField name="representantesElegidos" order="Descending" type="Variable"/>
+		<sortField name="diputadosDiputadasAutonomicos" order="Descending" type="Variable"/>
 		<variable name="intFormatter" class="java.text.NumberFormat">
 			<variableExpression><![CDATA[$P{INT_FORMATTER}]]></variableExpression>
 		</variable>
@@ -55,11 +55,11 @@
 		<variable name="votosValidosCandidatura" class="java.lang.Integer">
 			<variableExpression><![CDATA[$F{results}.get("VOTOS_VALIDOS_CANDIDATURA")]]></variableExpression>
 		</variable>
-		<variable name="ratioVotosCandidatura" class="java.lang.Double">
-			<variableExpression><![CDATA[$F{results}.get("RATIO_VOTOS_CANDIDATURA")]]></variableExpression>
+		<variable name="porcentajeVotosCandidatura" class="java.lang.Double">
+			<variableExpression><![CDATA[Double.parseDouble($F{results}.get("PORCENTAJE_VOTOS_CANDIDATURA").toString())]]></variableExpression>
 		</variable>
-		<variable name="representantesElegidos" class="java.lang.Integer">
-			<variableExpression><![CDATA[$F{results}.get("REPRESENTANTES_ELEGIDOS")]]></variableExpression>
+		<variable name="diputadosDiputadasAutonomicos" class="java.lang.Integer">
+			<variableExpression><![CDATA[$F{results}.get("DIPUTADOS_DIPUTADAS_AUTONOMICOS")]]></variableExpression>
 		</variable>
 	</subDataset>
 	<parameter name="RUTA_LOGO" class="java.lang.String" isForPrompting="false"/>
@@ -248,7 +248,7 @@
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$V{ratioVotosCandidatura} != null ? $V{floatFormatter}.format($V{ratioVotosCandidatura}) + " %" : ""]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{porcentajeVotosCandidatura} != null ? $V{floatFormatter}.format($V{porcentajeVotosCandidatura}) + " %" : ""]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -285,7 +285,7 @@
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$V{representantesElegidos} != null ? $V{intFormatter}.format($V{representantesElegidos}) : ""]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{diputadosDiputadasAutonomicos} != null ? $V{intFormatter}.format($V{diputadosDiputadasAutonomicos}) : ""]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

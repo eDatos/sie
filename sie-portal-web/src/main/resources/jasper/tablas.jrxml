@@ -46,14 +46,14 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["   - Electores votantes"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["   - Votantes"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="115" y="37" width="40" height="14" forecolor="#3B3B3B" uuid="46991ad5-248d-41ad-b326-5f1bf3040cb1"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("ELECTORES_VOTANTES")))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("VOTANTES")))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="155" y="37" width="40" height="14" forecolor="#3B3B3B" uuid="e694844d-a5a2-40e9-b22d-eee2f16f6725"/>
@@ -67,14 +67,14 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["   - Electores abstenidos"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["   - Abstención"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="115" y="51" width="40" height="14" forecolor="#3B3B3B" uuid="0afe7f1b-a8a2-4cfe-ba1d-74f94de978f0"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("ELECTORES_ABSTENIDOS")))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("ABSTENCION")))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="155" y="51" width="40" height="14" forecolor="#3B3B3B" uuid="3d9fc192-774a-4083-8a9d-7a2955f7f51b"/>

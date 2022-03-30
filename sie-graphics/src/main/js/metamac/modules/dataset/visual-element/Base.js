@@ -16,8 +16,6 @@
         initialize: function (options) {
             options = options || {};
             this.data = options.data;
-            this.colors = {};
-
             this.filterOptions = options.filterOptions; //deprecated
             this.filterDimensions = options.filterDimensions;
             this.filtersModel = options.filtersModel;

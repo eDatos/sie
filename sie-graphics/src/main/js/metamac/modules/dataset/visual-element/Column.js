@@ -90,7 +90,6 @@
         _bindEvents: function () {
             var debounceUpdate = _.debounce(this.update, 20);
             this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", debounceUpdate);
-            this.listenTo(this.filtersModel, "change:candidacyType", debounceUpdate);
             this.listenTo(this.filterDimensions, "change:valuesToIgnore", debounceUpdate);
 
             var resize = _.debounce(_.bind(this._updateSize, this), 200);
@@ -193,9 +192,6 @@
             var filteredHorizontalDimensionSelectedCategories = [];
             var countedHorizontalCategoryIndex = 0;
             _.each(horizontalDimensionSelectedCategories, function (horizontalCategory, horizontalCategoryIndex) {
-                if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('candidacyType'))) {
-                    return;
-                }
                 filteredHorizontalDimensionSelectedCategories[countedHorizontalCategoryIndex] = horizontalCategory;
 
                 var columnSeries = [];
@@ -209,7 +205,7 @@
                     var y = self.data.getNumberData({ ids: currentPermutation });
                     var name = self.data.getStringData({ ids: currentPermutation });
                     // Instead of saving the data as an array on the same serie, we create as many series as needed so we can sort them independtly
-                    serie.data = [{ y: y, name: name, x: countedHorizontalCategoryIndex, color: self.colors[horizontalCategory.get('id')] }];
+                    serie.data = [{ y: y, name: name, x: countedHorizontalCategoryIndex, color: self.data.colors[horizontalCategory.get('id')] }];
                     serie.name = columnCategory.get('visibleLabel');
 
                     // We keep track on the categories assigned to each serie, so later we can assign the proper x (order) and column color
@@ -325,11 +321,6 @@
             this.replaceSeries(this.chart, data.series);
             this.chart.xAxis[0].setCategories(data.xAxis, false);
             this.chart.redraw(false);
-        },
-
-        updateWithColors: function(colors) {
-            this.colors = colors;
-            this.update();
         },
 
         _updateSize: function () {

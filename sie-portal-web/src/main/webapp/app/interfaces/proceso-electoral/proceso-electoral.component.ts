@@ -258,9 +258,15 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         // that we need: medidas, territorio, and candidaturas. Thing is we don't know beforehand the order
         // they come on the dataset, which it matters because that's how we access the values on the
         // observations array
-        for (const [i, v1] of cat1.entries()) {
-            for (const [j, v2] of cat2.entries()) {
-                for (const [k, v3] of cat3.entries()) {
+        for (let i = 0; i < cat1.length; i++) {
+            const v1 = cat1[i];
+
+            for (let j = 0; j < cat2.length; j++) {
+                const v2 = cat2[j];
+
+                for (let k = 0; k < cat3.length; k++) {
+                    const v3 = cat3[k];
+
                     const arr = [v1.code, v2.code, v3.code];
                     data.push({
                         measure: arr[dimIds.indexOf('MEDIDAS')],

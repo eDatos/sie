@@ -93,7 +93,6 @@
         _bindEvents: function () {
             var debounceUpdate = _.debounce(this.update, 20);
             this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", debounceUpdate);
-            this.listenTo(this.filtersModel, "change:candidacyType", debounceUpdate);
 
             var resize = _.debounce(_.bind(this._updateSize, this), 200);
             this.$el.on("resize", function (e) {
@@ -196,10 +195,6 @@
                 });
 
                 _.each(horizontalDimensionSelectedCategories, function (horizontalCategory) {
-                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('candidacyType'))) {
-                        return;
-                    }
-
                     var element = {};
                     element.longName = horizontalCategory.get('visibleLabel');
                     element.name = self._getShortName(element.longName);
@@ -216,7 +211,7 @@
                         element[attrName] = y;
                     });
 
-                    element.color = self.colors[horizontalCategory.get('id')];
+                    element.color = self.data.colors[horizontalCategory.get('id')];
                     serie.data.push(element);
                 });
 
@@ -283,11 +278,6 @@
             var data = this.getData();
             this.replaceSeries(this.chart, data.series);
             this.chart.redraw(false);
-        },
-
-        updateWithColors: function(colors) {
-            this.colors = colors;
-            this.update();
         },
 
         _updateSize: function () {

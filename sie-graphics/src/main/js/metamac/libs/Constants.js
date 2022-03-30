@@ -35,10 +35,6 @@
             }
         },
 
-        candidacyType: {
-            DEFAULT_VALUE: "G_"
-        },
-
         maxSemiCircleElements: 5,
         
         visualization: {
