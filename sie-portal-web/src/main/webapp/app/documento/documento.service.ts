@@ -56,6 +56,9 @@ export class DocumentoService {
     }
 
     private getSvg(): SVGElement {
+        const pieButton = document.querySelector('button[data-type="pie"]') as HTMLButtonElement;
+        pieButton.click();
+
         const svg = document.getElementsByTagName('svg')[0].cloneNode(true) as SVGElement;
         document.body.appendChild(svg);
 
@@ -83,10 +86,10 @@ export class DocumentoService {
             return acc;
         }, {});
 
-        const viewbox = `${xMin} ${yMin} ${xMax - xMin + 10} ${yMax - yMin + 10}`;
+        const viewbox = `${xMin} ${yMin} ${xMax - xMin + 15} ${yMax - yMin + 10}`;
         svg.setAttribute('viewBox', viewbox);
         svg.setAttribute('height', String(yMax - yMin + 10))
-        svg.setAttribute('width', String(xMax - xMin + 10))
+        svg.setAttribute('width', String(xMax - xMin + 15))
 
         document.body.removeChild(svg);
 
