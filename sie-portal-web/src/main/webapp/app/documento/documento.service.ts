@@ -56,6 +56,9 @@ export class DocumentoService {
     }
 
     private getSvg(): SVGElement {
+        const pieButton = document.querySelector('button[data-type="pie"]') as HTMLButtonElement;
+        pieButton.click();
+
         const svg = document.getElementsByTagName('svg')[0].cloneNode(true) as SVGElement;
         document.body.appendChild(svg);
 
