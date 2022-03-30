@@ -10,6 +10,7 @@
         initialize: function (options) {
             this.container = options.container;
             this.data = options.data;
+            this.data.colors = {};
 
             this.filterDimensions = options.filterDimensions;
 
@@ -19,27 +20,18 @@
             options.optionsView.on("enterFullScreen", this.enterFullScreen, this);
             options.optionsView.on("exitFullScreen", this.exitFullScreen, this);
 
-            this.colors = {};
             if (options.data) {
-                this.api = new App.dataset.StructuralResourcesApi(options.data);
-
                 var self = this;
-
-                this.api.getCandidaturasCodelist(function (codelist) {
+                self.api = new App.dataset.StructuralResourcesApi(options.data);
+                self.api.getCandidaturasCodelist(function (codelist) {
                     var codesWithVariableElements = codelist.code.filter((item) => item.hasOwnProperty("variableElement"));
                     if (codesWithVariableElements.length > 0) {
                         var variableElementsUrl = codesWithVariableElements[0].variableElement.selfLink.href.replace(/\/[^\/]*$/, ".json?fields=+renderingColor");
                         self.api.getVariableElements(variableElementsUrl, function (variableElements) {
                             for (var code of codesWithVariableElements) {
-                                self.colors[code.id] = variableElements.variableElement.find(v => v.id === code.variableElement.id).renderingColor;
+                                self.data.colors[code.id] = variableElements.variableElement.find(v => v.id === code.variableElement.id).renderingColor;
                             }
-
-                            self.data.colors = self.colors;
-                            for (var prop in self.ve) {
-                                if (self.ve.hasOwnProperty(prop) && Object.getPrototypeOf(self.ve[prop]).hasOwnProperty("updateWithColors")) {
-                                    self.ve[prop].updateWithColors(self.data.colors);
-                                }
-                            }
+                            self.ve[self.currentElement].update();
                         });
                     }
                 });

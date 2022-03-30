@@ -211,7 +211,7 @@
                         element[attrName] = y;
                     });
 
-                    element.color = self.colors[horizontalCategory.get('id')];
+                    element.color = self.data.colors[horizontalCategory.get('id')];
                     serie.data.push(element);
                 });
 
@@ -278,11 +278,6 @@
             var data = this.getData();
             this.replaceSeries(this.chart, data.series);
             this.chart.redraw(false);
-        },
-
-        updateWithColors: function(colors) {
-            this.colors = colors;
-            this.update();
         },
 
         _updateSize: function () {
