@@ -16,6 +16,9 @@ export class ChartComponent implements OnChanges, AfterViewInit {
     @Input()
     public data: Chart;
 
+    @Input()
+    public footnote: string;
+
     // Atributos de uso interno
     public name: string = 'container-' + new Date().getTime().toString() + '-' + Math.floor(Math.random() * 10000).toString();
 
@@ -102,7 +105,8 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                 }
             },
             credits: {
-                enabled: false
+                enabled: true,
+                text: this.footnote,
             },
             title: {
                 text: ''
