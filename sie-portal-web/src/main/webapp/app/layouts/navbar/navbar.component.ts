@@ -2,9 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { TemplateService } from '../template';
 import { ConfigService } from '../../config';
 
-declare var setActiveLink: Function;
 declare var setNavbarMode: Function;
-export const APPLICATION_LINK_ID = 'eleccionesLink';
 
 @Component({
     selector: 'jhi-navbar',
@@ -25,8 +23,6 @@ export class NavbarComponent implements OnInit {
             this.navbar = navbarHtml;
             setTimeout(() => {
                 this.reinsertScripts();
-                setActiveLink(APPLICATION_LINK_ID);
-
                 const config = this.configService.getConfig();
                 setNavbarMode(config.metadata.installationType);
             });
