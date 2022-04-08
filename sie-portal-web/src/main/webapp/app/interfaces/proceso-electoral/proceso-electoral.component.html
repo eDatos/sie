@@ -19,7 +19,7 @@
             <em class="fa fa-spinner fa-spin"></em>
             <span jhiTranslate="procesoElectoral.loading"></span>
         </div>
-        <div class="tabla-proceso-electoral">
+        <div *ngIf="proceso" class="tabla-proceso-electoral">
             <table>
                 <thead>
                 <tr>
@@ -30,102 +30,102 @@
                 </thead>
 
                 <tbody>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['ELECTORES'] as data">
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.ELECTORES"></span>
                     </td>
-                    <td>{{proceso?.indicadores['ELECTORES'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{data | number:'1.0-0' | defaultNull }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['VOTANTES'] as data">
                     <td>
                         <span class="indent-1" jhiTranslate="evolucionElectoral.indicador.VOTANTES"></span>
                     </td>
-                    <td>{{proceso?.indicadores['VOTANTES'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{data | number:'1.0-0' | defaultNull }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['ABSTENCION'] as data">
                     <td>
                         <span class="indent-1" jhiTranslate="evolucionElectoral.indicador.ABSTENCION"></span>
                     </td>
-                    <td>{{proceso?.indicadores['ABSTENCION'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{data | number:'1.0-0' | defaultNull }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['TASA_PARTICIPACION'] as data">
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_PARTICIPACION"></span>
                     </td>
-                    <td>{{proceso?.indicadores['TASA_PARTICIPACION'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{data | number:'1.2-2' | percentage | defaultNull }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['TASA_PARTICIPACION_A1'] as data">
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_PARTICIPACION_A1"></span>
                     </td>
-                    <td>{{proceso?.indicadores['TASA_PARTICIPACION_A1'] != "" ? (proceso?.indicadores['TASA_PARTICIPACION_A1'] | number:'1.2-2' | percentage | defaultNull) : ""}}</td>
+                    <td>{{data != "" ? (data | number:'1.2-2' | percentage | defaultNull) : ""}}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['TASA_PARTICIPACION_A1'] as data">
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_PARTICIPACION_A2"></span>
                     </td>
-                    <td>{{proceso?.indicadores['TASA_PARTICIPACION_A2'] != "" ? (proceso?.indicadores['TASA_PARTICIPACION_A2'] | number:'1.2-2' | percentage | defaultNull) : "" }}</td>
+                    <td>{{data != "" ? (data | number:'1.2-2' | percentage | defaultNull) : "" }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['TASA_PARTICIPACION_A2'] as data">
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_ABSTENCION"></span>
                     </td>
-                    <td>{{proceso?.indicadores['TASA_ABSTENCION'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{data | number:'1.2-2' | percentage | defaultNull }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['TASA_PARTICIPACION_A2'] as data">
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.VOTOS"></span>
                     </td>
-                    <td>{{proceso?.indicadores['VOTOS'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{data | number:'1.0-0' | defaultNull }}</td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['TASA_ABSTENCION'] as data">
                     <td>
                         <span class="indent-1" jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS"></span>
                     </td>
-                    <td>{{proceso?.indicadores['VOTOS_VALIDOS'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{data | number:'1.0-0' | defaultNull }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['VOTOS'] as data">
                     <td>
                         <span class="indent-2" jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS_CANDIDATURA"></span>
                     </td>
-                    <td>{{proceso?.indicadores['VOTOS_VALIDOS_CANDIDATURA'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{data | number:'1.0-0' | defaultNull }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['VOTOS_VALIDOS'] as data">
                     <td>
                         <span class="indent-2" jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS_BLANCO"></span>
                     </td>
-                    <td>{{proceso?.indicadores['VOTOS_VALIDOS_BLANCO'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{data | number:'1.0-0' | defaultNull }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['VOTOS_VALIDOS_CANDIDATURA'] as data">
                     <td>
                         <span class="indent-1" jhiTranslate="evolucionElectoral.indicador.VOTOS_NULOS"></span>
                     </td>
-                    <td>{{proceso?.indicadores['VOTOS_NULOS'] | number:'1.0-0' | defaultNull }}</td>
+                    <td>{{data | number:'1.0-0' | defaultNull }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['VOTOS_VALIDOS_BLANCO'] as data">
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_VOTOS_VALIDOS"></span>
                     </td>
-                    <td>{{proceso?.indicadores['TASA_VOTOS_VALIDOS'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{data | number:'1.2-2' | percentage | defaultNull }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['VOTOS_NULOS'] as data">
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_VOTOS_VALIDOS_CANDIDATURA"></span>
                     </td>
-                    <td>{{proceso?.indicadores['TASA_VOTOS_VALIDOS_CANDIDATURA'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{data | number:'1.2-2' | percentage | defaultNull }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['TASA_VOTOS_VALIDOS'] as data">
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_VOTOS_VALIDOS_BLANCO"></span>
                     </td>
-                    <td>{{proceso?.indicadores['TASA_VOTOS_VALIDOS_BLANCO'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{data | number:'1.2-2' | percentage | defaultNull }}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="proceso?.indicadores['TASA_VOTOS_VALIDOS_CANDIDATURA'] as data">
                     <td>
                         <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_VOTOS_NULOS"></span>
                     </td>
-                    <td>{{proceso?.indicadores['TASA_VOTOS_NULOS'] | number:'1.2-2' | percentage | defaultNull }}</td>
+                    <td>{{data | number:'1.2-2' | percentage | defaultNull }}</td>
                 </tr>
                 </tbody>
             </table>

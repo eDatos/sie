@@ -27,7 +27,7 @@
         },
         "tipoEleccion": {
             "AUTONOMICAS": "AUTONÓMICAS",
-            "CABILDO": "CABILDO",
+            "CABILDO": "CABILDOS",
             "CONGRESO": "CONGRESO",
             "MUNICIPALES": "MUNICIPALES",
             "PARLAMENTO_EUROPEO": "PARLAMENTO EUROPEO",
