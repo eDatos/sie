@@ -101,6 +101,7 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                     },
                     dataLabels: {
                         enabled: true,
+                        inside: false,
                     },
                 }
             },
