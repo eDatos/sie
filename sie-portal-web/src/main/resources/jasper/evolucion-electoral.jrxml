@@ -83,20 +83,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<text><![CDATA[ISTAC
-www.gobiernodecanarias.org/istac/noticias
-comunicacion.istac@gobiernodecanarias.org
-928 00 00 00 - 922 00 00 00
-@istac_es]]></text>
 			</staticText>
-			<componentElement>
-				<reportElement x="40" y="2" width="46" height="46" uuid="46f26937-fcac-4929-abef-545d0b0842f4">
-					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
-				</reportElement>
-				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<jr:codeExpression><![CDATA["http://www.gobiernodecanarias.org/istac/"]]></jr:codeExpression>
-				</jr:QRCode>
-			</componentElement>
 			<textField>
 				<reportElement x="430" y="2" width="50" height="46" forecolor="#3498CF" uuid="4db626a9-d514-49aa-b5ad-c1301622c143">
 					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
