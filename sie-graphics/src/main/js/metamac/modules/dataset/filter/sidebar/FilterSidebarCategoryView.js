@@ -13,6 +13,11 @@
             this.filterRepresentation = options.filterRepresentation;
             this.filterDimension = options.filterDimension;
             this.filterSidebarDimensionView = options.filterSidebarDimensionView;
+
+            // uncheck "Total" by default
+            if (this.filterDimension.get('id') === "CANDIDATURAS" && this.filterRepresentation.get('id') === "_T") {
+                this.filterRepresentation.set('selected', false);
+            }
         },
 
         events: {
