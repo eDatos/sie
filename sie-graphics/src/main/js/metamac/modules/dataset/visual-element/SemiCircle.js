@@ -233,7 +233,11 @@
                     return -data.y;
                 });
 
-                if (data.length > App.Constants.maxSemiCircleElements) {
+                var elemWithNotNullY = _.find(data, function(elem) {
+                    return elem.y !== null;
+                });
+
+                if (data.length > App.Constants.maxSemiCircleElements && elemWithNotNullY) {
                     var othersData = {
                         name: I18n.t("ve.others"),
                         longName: I18n.t("ve.others"),

@@ -1,5 +1,5 @@
-import { Component, Input, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Chart } from '.';
+import { Component, Input, AfterViewInit, OnChanges, SimpleChanges } from "@angular/core";
+import { Chart } from ".";
 
 declare var Highcharts: any;
 
@@ -40,7 +40,7 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                 decimalPoint: ',',
                 thousandsSep: '.',
                 numericSymbols: null,
-            }
+            },
         });
         this.buildChart();
     }
@@ -90,7 +90,11 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                     },
                     dataLabels: {
                         enabled: true,
-                        format: '{point.y:.1f}'
+                        format: '{point.y:.1f}',
+                        style: {
+                            color: '#454545',
+                            textOutline: 'white',
+                        }
                     },
                 },
                 column: {
@@ -102,6 +106,10 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                     dataLabels: {
                         enabled: true,
                         inside: false,
+                        style: {
+                            color: '#454545',
+                            textOutline: 'white',
+                        }
                     },
                 }
             },
