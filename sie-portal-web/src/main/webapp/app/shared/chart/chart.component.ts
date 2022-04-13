@@ -52,7 +52,26 @@ export class ChartComponent implements OnChanges, AfterViewInit {
             },
             series: this.data.yAxis,
             chart: {
-                renderTo: this.name
+                renderTo: this.name,
+                events: {
+                    load() {
+                        // Increase distance between data point labels to avoid overlap
+                        const MINIMUM_DISTANCE_BETWEEN_LABELS = 30;
+                        const OFFSET = 35;
+                        const points0 = this.series[0].data;
+                        const points1 = this.series[1].data;
+                        points0.forEach(function(point, i) {
+                            let { x, y } = point.dataLabel.attr();
+                            let { x: x1, y: y1 } = points1[i].dataLabel.attr();
+                            if (Math.abs(y - y1) < MINIMUM_DISTANCE_BETWEEN_LABELS) {
+                                // Add y offsets
+                                y = y1 + OFFSET;
+                                // Set new positions only for the first serie (columns)
+                                point.dataLabel.attr({ x: x, y: y });
+                            }
+                        });
+                    },
+                }
             },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
@@ -71,6 +90,8 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                         format: '{value:.1f} %',
                     },
                     opposite: true,
+                    min: 0,
+                    max: 100,
                 },
             ],
             plotOptions: {
@@ -104,6 +125,7 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                         }
                     },
                     dataLabels: {
+                        allowOverlap: true,
                         enabled: true,
                         inside: false,
                         style: {
