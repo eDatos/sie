@@ -55,7 +55,7 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                 renderTo: this.name,
                 events: {
                     load() {
-                        // Look for points which y positions are close and move them
+                        // Increase distance between data point labels to avoid overlap
                         const MINIMUM_DISTANCE_BETWEEN_LABELS = 30;
                         const OFFSET = 35;
                         const points0 = this.series[0].data;
