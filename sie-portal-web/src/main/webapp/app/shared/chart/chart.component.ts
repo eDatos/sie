@@ -65,12 +65,7 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                             let { x: x1, y: y1 } = points1[i].dataLabel.attr();
                             if (Math.abs(y - y1) < MINIMUM_DISTANCE_BETWEEN_LABELS) {
                                 // Add y offsets
-                                if (y < y1) {
-                                    y += Math.abs(y - y1);
-                                } else {
-                                    y -= Math.abs(y - y1);
-                                }
-                                y += OFFSET;
+                                y = y1 + OFFSET;
                                 // Set new positions only for the first serie (columns)
                                 point.dataLabel.attr({ x: x, y: y });
                             }
