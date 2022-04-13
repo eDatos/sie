@@ -55,22 +55,23 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                 renderTo: this.name,
                 events: {
                     load() {
+                        // Look for points which y positions are close and move them
+                        const MINIMUM_DISTANCE_BETWEEN_LABELS = 30;
+                        const OFFSET = 35;
                         const points0 = this.series[0].data;
                         const points1 = this.series[1].data;
-                        // Look for points which y positions are close and move them
                         points0.forEach(function(point, i) {
                             let { x, y } = point.dataLabel.attr();
                             let { x: x1, y: y1 } = points1[i].dataLabel.attr();
-                            if (Math.abs(y - y1) < 30) {
+                            if (Math.abs(y - y1) < MINIMUM_DISTANCE_BETWEEN_LABELS) {
                                 // Add y offsets
                                 if (y < y1) {
                                     y += Math.abs(y - y1);
                                 } else {
                                     y -= Math.abs(y - y1);
                                 }
-                                y += 35;
-                                // Set new positions
-                                points1[i].dataLabel.attr({ x: x1, y: y1 });
+                                y += OFFSET;
+                                // Set new positions only for the first serie (columns)
                                 point.dataLabel.attr({ x: x, y: y });
                             }
                         });
