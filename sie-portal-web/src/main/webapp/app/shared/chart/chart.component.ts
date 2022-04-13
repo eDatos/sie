@@ -52,7 +52,30 @@ export class ChartComponent implements OnChanges, AfterViewInit {
             },
             series: this.data.yAxis,
             chart: {
-                renderTo: this.name
+                renderTo: this.name,
+                events: {
+                    load() {
+                        const points0 = this.series[0].data;
+                        const points1 = this.series[1].data;
+                        // Look for points which y positions are close and move them
+                        points0.forEach(function(point, i) {
+                            let { x, y } = point.dataLabel.attr();
+                            let { x: x1, y: y1 } = points1[i].dataLabel.attr();
+                            if (Math.abs(y - y1) < 30) {
+                                // Add y offsets
+                                if (y < y1) {
+                                    y += Math.abs(y - y1);
+                                } else {
+                                    y -= Math.abs(y - y1);
+                                }
+                                y += 35;
+                                // Set new positions
+                                points1[i].dataLabel.attr({ x: x1, y: y1 });
+                                point.dataLabel.attr({ x: x, y: y });
+                            }
+                        });
+                    },
+                }
             },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
@@ -106,6 +129,7 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                         }
                     },
                     dataLabels: {
+                        allowOverlap: true,
                         enabled: true,
                         inside: false,
                         style: {
