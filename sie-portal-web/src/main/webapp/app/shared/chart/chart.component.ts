@@ -71,6 +71,8 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                         format: '{value:.1f} %',
                     },
                     opposite: true,
+                    min: 0,
+                    max: 100,
                 },
             ],
             plotOptions: {
