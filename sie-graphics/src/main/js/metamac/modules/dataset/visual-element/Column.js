@@ -115,6 +115,7 @@
 
         _applyVisualizationRestrictions: function () {
             if (this._mustApplyVisualizationRestrictions()) {
+                this.setSelectTotal(false);
                 this._moveAllDimensionsToZone('left');
 
                 this._forceMeasureDimensionInZone('axisy');
@@ -133,8 +134,6 @@
         },
 
         render: function () {
-            this.setSelectTotal(false);
-
             this.$el.html("");
             this.$title = $('<h3></h3>');
             this.updateTitle();

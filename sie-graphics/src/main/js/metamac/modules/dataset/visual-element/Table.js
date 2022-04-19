@@ -78,6 +78,7 @@
 
         _applyVisualizationRestrictions: function () {
             if (this._mustApplyVisualizationRestrictions()) {
+                this.setSelectTotal(true);
                 this._forceDimensionsByMetadataInfo();
             }
 
@@ -95,8 +96,6 @@
         },
 
         render: function () {
-            this.setSelectTotal(true);
-
             this.dataSource = new App.DataSourceDataset({ data: this.data, filterDimensions: this.filterDimensions });
             this.delegate = new App.Table.Delegate();
 

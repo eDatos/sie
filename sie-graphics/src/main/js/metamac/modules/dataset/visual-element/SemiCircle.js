@@ -116,6 +116,7 @@
 
         _applyVisualizationRestrictions: function () {
             if (this._mustApplyVisualizationRestrictions()) {
+                this.setSelectTotal(false);
                 this._moveAllDimensionsToZone('left');
 
                 this._forceMeasureDimensionInZone('top');
@@ -132,7 +133,6 @@
         },
 
         render: function () {
-            this.setSelectTotal(false);
             this._initTitle();
             this.showTitle();
             this._renderContainers();

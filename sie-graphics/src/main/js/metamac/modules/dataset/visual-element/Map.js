@@ -177,7 +177,6 @@
         },
 
         render: function () {
-            this.setSelectTotal(true);
             this._mapContainerView.render();
         },
 
@@ -216,6 +215,7 @@
 
         _applyVisualizationRestrictions: function () {
             if (this._mustApplyVisualizationRestrictions()) {
+                this.setSelectTotal(true);
                 this._moveAllDimensionsToZone('fixed');
                 this._forceGeographicDimensionInZone('left');
 
