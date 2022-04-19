@@ -51,6 +51,10 @@
             return fixedLabels.length ? fixedLabels.join(" ") : "";
         },
 
+        setSelectTotal: function(value) {
+            this.filterDimensions.get('CANDIDATURAS').get('representations').get('_T').set('selected', value);
+        },
+
         load: function () {
         },
 

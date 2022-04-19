@@ -116,6 +116,7 @@
 
         _applyVisualizationRestrictions: function () {
             if (this._mustApplyVisualizationRestrictions()) {
+                this.setSelectTotal(false);
                 this._moveAllDimensionsToZone('left');
 
                 this._forceMeasureDimensionInZone('top');
@@ -291,7 +292,7 @@
 
             // Necesario para evitar error en el dibujado tras cambiar a stacked columns     
             this.chart.xAxis[0].update();
-        }
+        },
     });
 
 }());

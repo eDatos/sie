@@ -215,6 +215,7 @@
 
         _applyVisualizationRestrictions: function () {
             if (this._mustApplyVisualizationRestrictions()) {
+                this.setSelectTotal(true);
                 this._moveAllDimensionsToZone('fixed');
                 this._forceGeographicDimensionInZone('left');
 
@@ -256,8 +257,7 @@
 
         _handleZoomExit: function () {
             this._mapContainerView.zoomExit();
-        }
-
+        },
     });
 
 }());
