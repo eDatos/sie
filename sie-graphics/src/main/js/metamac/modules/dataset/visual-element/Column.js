@@ -133,6 +133,8 @@
         },
 
         render: function () {
+            this.setSelectTotal(false);
+
             this.$el.html("");
             this.$title = $('<h3></h3>');
             this.updateTitle();
@@ -330,8 +332,7 @@
 
             // Necesario para evitar error en el dibujado tras cambiar a stacked columns     
             this.chart.xAxis[0].update();
-        }
-
+        },
     });
 
 }());

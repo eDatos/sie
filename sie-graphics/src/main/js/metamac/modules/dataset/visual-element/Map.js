@@ -177,6 +177,7 @@
         },
 
         render: function () {
+            this.setSelectTotal(true);
             this._mapContainerView.render();
         },
 
@@ -256,8 +257,7 @@
 
         _handleZoomExit: function () {
             this._mapContainerView.zoomExit();
-        }
-
+        },
     });
 
 }());

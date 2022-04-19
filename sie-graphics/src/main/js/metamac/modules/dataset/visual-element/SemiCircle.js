@@ -132,6 +132,7 @@
         },
 
         render: function () {
+            this.setSelectTotal(false);
             this._initTitle();
             this.showTitle();
             this._renderContainers();
@@ -291,7 +292,7 @@
 
             // Necesario para evitar error en el dibujado tras cambiar a stacked columns     
             this.chart.xAxis[0].update();
-        }
+        },
     });
 
 }());
