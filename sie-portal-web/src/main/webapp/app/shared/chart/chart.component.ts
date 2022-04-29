@@ -82,11 +82,15 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                     title: {
                         text: '',
                     },
+                    labels: {
+                        enabled: false,  // EDATOS-3590 - Temporal requirement. Change to `enabled: true` when ISTAC says so.
+                    },
                 }, { // Secondary yAxis
                     title: {
                         text: '',
                     },
                     labels: {
+                        enabled: false,  // EDATOS-3590 - Temporal requirement. Change to `enabled: true` when ISTAC says so.
                         format: '{value:.1f} %',
                     },
                     opposite: true,
@@ -136,7 +140,7 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                 }
             },
             credits: {
-                enabled: true,
+                enabled: false, // EDATOS-3590 - Temporal requirement. Change to `enabled: true` when ISTAC says so.
                 text: this.footnote,
             },
             title: {
