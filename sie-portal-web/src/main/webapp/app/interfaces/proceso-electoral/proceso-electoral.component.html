@@ -2,12 +2,136 @@
     <jhi-territorio-autocomplete [lugarIdentifier]="lugarId" (onTransition)="transition($event)"></jhi-territorio-autocomplete>
 </jhi-title-bar>
 
-<div class="section">
-    <div class="no-metamac">
-        <h1 *ngIf="tipoElecciones && fecha" jhiTranslate="procesoElectoral.header.{{tipoElecciones}}" [translateValues]="{fecha: fecha}"></h1>
+<div *ngIf="tipoElecciones && fecha" class="section">
+    <div class="no-metamac page-header">
+        <h1 jhiTranslate="procesoElectoral.header.{{tipoElecciones}}" [translateValues]="{fecha: fecha}"></h1>
+        <div class="buttons">
+            <button type="button" class="btn btn-sm btn-secondary" [title]="'evolucionElectoral.descargarPdf' | translate" (click)="descargarPdf($event)">
+                <em class="fa" [ngClass]="downloadingPdf ? 'fa-spinner fa-spin' : 'fa-download'"></em>
+                <span jhiTranslate="evolucionElectoral.descargarPdf">Descargar PDF</span>
+            </button>
+            <jhi-additional-information-button></jhi-additional-information-button>
+        </div>
     </div>
 
-    <div class="metamac-container" id="metamac-container"><span jhiTranslate="procesoElectoral.loading"></span></div>
+    <div class="election-result">
+        <div class="metamac-container" id="metamac-container">
+            <em class="fa fa-spinner fa-spin"></em>
+            <span jhiTranslate="procesoElectoral.loading"></span>
+        </div>
+        <div class="tabla-proceso-electoral">
+            <table>
+                <thead>
+                <tr>
+                    <th colspan="3">
+                        {{proceso?.nombre}}
+                    </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr *ngIf="proceso?.indicadores['ELECTORES'] as electores">
+                    <td>
+                        <span class="list" jhiTranslate="evolucionElectoral.indicador.ELECTORES"></span>
+                    </td>
+                    <td>{{electores | number:'1.0-0' | defaultNull }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['VOTANTES'] as votantes">
+                    <td>
+                        <span class="indent-1" jhiTranslate="evolucionElectoral.indicador.VOTANTES"></span>
+                    </td>
+                    <td>{{votantes | number:'1.0-0' | defaultNull }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['ABSTENCION'] as abstencion">
+                    <td>
+                        <span class="indent-1" jhiTranslate="evolucionElectoral.indicador.ABSTENCION"></span>
+                    </td>
+                    <td>{{abstencion | number:'1.0-0' | defaultNull }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['TASA_PARTICIPACION'] as tasaParticipacion">
+                    <td>
+                        <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_PARTICIPACION"></span>
+                    </td>
+                    <td>{{tasaParticipacion | number:'1.2-2' | percentage | defaultNull }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['TASA_PARTICIPACION_A1'] as tasaParticipacionA1">
+                    <td>
+                        <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_PARTICIPACION_A1"></span>
+                    </td>
+                    <td>{{tasaParticipacionA1 != "" ? (tasaParticipacionA1 | number:'1.2-2' | percentage | defaultNull) : ""}}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['TASA_PARTICIPACION_A2'] as tasaParticipacionA2">
+                    <td>
+                        <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_PARTICIPACION_A2"></span>
+                    </td>
+                    <td>{{tasaParticipacionA2 != "" ? (tasaParticipacionA2 | number:'1.2-2' | percentage | defaultNull) : "" }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['TASA_ABSTENCION'] as tasaAbstencion">
+                    <td>
+                        <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_ABSTENCION"></span>
+                    </td>
+                    <td>{{tasaAbstencion | number:'1.2-2' | percentage | defaultNull }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['VOTOS'] as votos">
+                    <td>
+                        <span class="list" jhiTranslate="evolucionElectoral.indicador.VOTOS"></span>
+                    </td>
+                    <td>{{votos | number:'1.0-0' | defaultNull }}</td>
+                    <td></td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['VOTOS_VALIDOS'] as votosValidos">
+                    <td>
+                        <span class="indent-1" jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS"></span>
+                    </td>
+                    <td>{{votosValidos | number:'1.0-0' | defaultNull }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['VOTOS_VALIDOS_CANDIDATURA'] as votosValidosCandidatura">
+                    <td>
+                        <span class="indent-2" jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS_CANDIDATURA"></span>
+                    </td>
+                    <td>{{votosValidosCandidatura | number:'1.0-0' | defaultNull }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['VOTOS_VALIDOS_BLANCO'] as votosValidosBlanco">
+                    <td>
+                        <span class="indent-2" jhiTranslate="evolucionElectoral.indicador.VOTOS_VALIDOS_BLANCO"></span>
+                    </td>
+                    <td>{{votosValidosBlanco | number:'1.0-0' | defaultNull }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['VOTOS_NULOS'] as votosNulos">
+                    <td>
+                        <span class="indent-1" jhiTranslate="evolucionElectoral.indicador.VOTOS_NULOS"></span>
+                    </td>
+                    <td>{{votosNulos | number:'1.0-0' | defaultNull }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['TASA_VOTOS_VALIDOS'] as tasaVotosValidos">
+                    <td>
+                        <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_VOTOS_VALIDOS"></span>
+                    </td>
+                    <td>{{tasaVotosValidos | number:'1.2-2' | percentage | defaultNull }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['TASA_VOTOS_VALIDOS_CANDIDATURA'] as tasaVotosValidosCandidatura">
+                    <td>
+                        <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_VOTOS_VALIDOS_CANDIDATURA"></span>
+                    </td>
+                    <td>{{tasaVotosValidosCandidatura | number:'1.2-2' | percentage | defaultNull }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['TASA_VOTOS_VALIDOS_BLANCO'] as tasaVotosValidosBlanco">
+                    <td>
+                        <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_VOTOS_VALIDOS_BLANCO"></span>
+                    </td>
+                    <td>{{tasaVotosValidosBlanco | number:'1.2-2' | percentage | defaultNull }}</td>
+                </tr>
+                <tr *ngIf="proceso?.indicadores['TASA_VOTOS_NULOS'] as tasaVotosNulos">
+                    <td>
+                        <span class="list" jhiTranslate="evolucionElectoral.indicador.TASA_VOTOS_NULOS"></span>
+                    </td>
+                    <td>{{tasaVotosNulos | number:'1.2-2' | percentage | defaultNull }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 
     <div class="div-margin"></div>
 </div>

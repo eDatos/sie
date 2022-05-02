@@ -16,7 +16,6 @@
         initialize: function (options) {
             options = options || {};
             this.data = options.data;
-
             this.filterOptions = options.filterOptions; //deprecated
             this.filterDimensions = options.filterDimensions;
             this.filtersModel = options.filtersModel;
@@ -50,6 +49,10 @@
                     return selectedRepresentations[0].get('visibleLabel') + ".";
                 });
             return fixedLabels.length ? fixedLabels.join(" ") : "";
+        },
+
+        setSelectTotal: function(value) {
+            this.filterDimensions.get('CANDIDATURAS').get('representations').get('_T').set('selected', value);
         },
 
         load: function () {

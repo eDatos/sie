@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import es.gobcan.istac.sie.service.DocumentoService;
 import es.gobcan.istac.sie.web.rest.dto.EvolucionElectoralDTO;
+import es.gobcan.istac.sie.web.rest.dto.ResultadoElectoralDTO;
 import es.gobcan.istac.sie.web.rest.errors.CustomParameterizedException;
 import es.gobcan.istac.sie.web.rest.errors.ErrorConstants;
 import es.gobcan.istac.sie.web.rest.util.ControllerUtil;
@@ -23,6 +24,7 @@ import es.gobcan.istac.sie.web.rest.util.ControllerUtil;
 public class DocumentoResource extends AbstractResource {
 
     private static final String NOMBRE_DOC_EVOLUCION_ELECTORAL = "evolucion-electoral.pdf";
+    private static final String NOMBRE_DOC_RESULTADOS_ELECTORALES = "resultado-electoral.pdf";
     private static final String EXCEPCION_GRAFICA_EVOLUCION_ELECTORAL = "Error generando la gráfica de evolución electoral";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DocumentoResource.class);
@@ -46,4 +48,19 @@ public class DocumentoResource extends AbstractResource {
             throw new CustomParameterizedException(EXCEPCION_GRAFICA_EVOLUCION_ELECTORAL, ErrorConstants.ERROR_GENERANDO_PDF);
         }
     }
+
+    @PostMapping("/resultado-electoral")
+    public void getPdfResultadoElectoral(@RequestPart("grafica") MultipartFile graficaSvg, @RequestPart("resultadoElectoral") ResultadoElectoralDTO resultadoElectoral, HttpServletResponse response) {
+        LOGGER.debug("REST petición para generar PDF de unos resultados electorales.");
+
+        try {
+            byte[] grafica = graficaSvg.getBytes();
+            byte[] documento = this.documentoService.generarPdfResultadoElectoral(resultadoElectoral, grafica);
+            ControllerUtil.download(documento, NOMBRE_DOC_RESULTADOS_ELECTORALES, response);
+        } catch (IOException e) {
+            LOGGER.debug(EXCEPCION_GRAFICA_EVOLUCION_ELECTORAL, e);
+            throw new CustomParameterizedException(EXCEPCION_GRAFICA_EVOLUCION_ELECTORAL, ErrorConstants.ERROR_GENERANDO_PDF);
+        }
+    }
 }
+

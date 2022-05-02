@@ -78,6 +78,7 @@
 
         _applyVisualizationRestrictions: function () {
             if (this._mustApplyVisualizationRestrictions()) {
+                this.setSelectTotal(true);
                 this._forceDimensionsByMetadataInfo();
             }
 
@@ -152,8 +153,7 @@
         _updateSize: function () {
             var containerDimensions = this.containerDimensions();
             this.view.resize(containerDimensions);
-        }
-
+        },
     });
 
 }());

@@ -59,8 +59,11 @@ public class ApplicationProperties {
         private String googleTrackingIdKey;
         private String navbarPathKey;
         private String footerPathKey;
+        private String organisationKey;
         private String organisationUrnKey;
         private String geographicalGranularityUrnKey;
+        private String sieAdditionalInfoUrl;
+        private String firstTerritoryHierarchyLevelKey;
 
         public String getEndpoint() {
             return endpoint;
@@ -104,6 +107,10 @@ public class ApplicationProperties {
 
         public String getStructuralResourcesExternalKey() {
             return structuralResourcesExternalKey;
+        }
+
+        public String getSieAdditionalInfoUrl() {
+            return sieAdditionalInfoUrl;
         }
 
         public void setStructuralResourcesExternalKey(String structuralResourcesExternalKey) {
@@ -210,6 +217,14 @@ public class ApplicationProperties {
             return Constants.INTERNAL_CONFIG_ID.equalsIgnoreCase(getInstallationType());
         }
 
+        public String getOrganisationKey() {
+            return organisationKey;
+        }
+
+        public void setOrganisationKey(String organisationKey) {
+            this.organisationKey = organisationKey;
+        }
+
         public String getOrganisationUrnKey() {
             return organisationUrnKey;
         }
@@ -224,6 +239,18 @@ public class ApplicationProperties {
 
         public void setGeographicalGranularityUrnKey(String geographicalGranularityUrnKey) {
             this.geographicalGranularityUrnKey = geographicalGranularityUrnKey;
+        }
+
+        public void setSieAdditionalInfoUrl(String sieAdditionalInfoUrl) {
+            this.sieAdditionalInfoUrl = sieAdditionalInfoUrl;
+        }
+
+        public String getFirstTerritoryHierarchyLevelKey() {
+            return firstTerritoryHierarchyLevelKey;
+        }
+
+        public void setFirstTerritoryHierarchyLevelKey(String firstTerritoryHierarchyLevelKey) {
+            this.firstTerritoryHierarchyLevelKey = firstTerritoryHierarchyLevelKey;
         }
     }
 }

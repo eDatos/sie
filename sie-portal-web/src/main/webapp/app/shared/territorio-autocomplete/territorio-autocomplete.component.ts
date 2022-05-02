@@ -29,8 +29,15 @@ export class TerritorioAutocompleteComponent implements OnInit {
         });
     }
 
-    onTransitionMethod() {
-        this.onTransition.emit(this._lugar.id);
+    onTransitionMethod(event: Lugar) {
+        this.onTransition.emit(event.id);
+    }
+
+    itemTemplate(item: Lugar, inputValue?: boolean) {
+        if (inputValue) {
+            return item.nombreConGranularidad;
+        }
+        return `<span class="font-weight-bold">${item.nombre}</span> <span class="text-muted">(${item.granularidad})</span>`;
     }
 
     set lugarIdentifier(lugarIdentifier: string) {

@@ -23,6 +23,7 @@ import {
 
 import { ChartComponent } from './chart/chart.component';
 import { TerritorioAutocompleteComponent } from './territorio-autocomplete/territorio-autocomplete.component';
+import { AdditionalInformationButtonComponent } from './additional-information-button/additional-information-button.component';
 
 @NgModule({
     imports: [
@@ -46,6 +47,7 @@ import { TerritorioAutocompleteComponent } from './territorio-autocomplete/terri
         CurrencyComponent,
         SpinnerComponent,
         StepsComponent,
+        AdditionalInformationButtonComponent,
     ],
     providers: [
         JhiLanguageHelper,
@@ -74,6 +76,7 @@ import { TerritorioAutocompleteComponent } from './territorio-autocomplete/terri
         CurrencyComponent,
         SpinnerComponent,
         StepsComponent,
+        AdditionalInformationButtonComponent,
     ]
 })
 export class SieSharedCommonModule { }

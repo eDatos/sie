@@ -3,6 +3,20 @@
         "pageTitle": "Sistema electoral del ISTAC",
         "header": "¿De qué lugar deseas conocer su evolución electoral?",
         "continuar": "Continuar",
-        "errorNoEncontrado": "No se ha encontrado ningún territorio con el código {{ codigo }}."
+        "errorNoEncontrado": "No se ha encontrado ningún territorio con el código {{ codigo }}.",
+        "informacionElectoralCanarias": "Información electoral de Canarias"
+    },
+    "tipoEleccion": {
+        "municipales": "Municipales",
+        "autonomicas": "Autonómicas",
+        "cabildos": "Cabildos",
+        "congreso": "Congreso",
+        "senado": "Senado",
+        "europeas": "Europeas"
+    },
+    "covidMainTitle": {
+        "informacion": "Información ",
+        "electoral": "Electoral de ",
+        "canarias": "Canarias"
     }
 }

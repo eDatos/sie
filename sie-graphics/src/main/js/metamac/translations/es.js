@@ -108,28 +108,13 @@ I18n.translations.es = {
             }
         },
         selector: {
-            pie: {
-                candidacyType: {
-                    label: "Tipo de candidatura",
-                    groups: "Grupos",
-                    parties: "Partidos"
-                }
-            },
-            map: {
-                candidacyType: {
-                    label: "Tipo de candidatura",
-                    groups: "Grupos",
-                    parties: "Partidos"
-                }
-            },
-            column: {
-                candidacyType: {
-                    label: "Tipo de candidatura",
-                    groups: "Grupos",
-                    parties: "Partidos"
-                }
-            },
-            level: "Nivel {{level}}"
+            level: {
+                1: "Canarias",
+                2: "Provincias",
+                3: "Islas",
+                4: "Municipios",
+                5: "Secciones censales"
+            }
         }
     },
     ve: {

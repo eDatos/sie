@@ -103,7 +103,13 @@ I18n.translations.en = {
             }
         },
         selector: {
-            level: "Level {{level}}"
+            level: {
+                1: "Canary Islands",
+                2: "Provinces",
+                3: "Islands",
+                4: "Municipalities",
+                5: "Census sections"
+            }
         }
     },
     ve: {

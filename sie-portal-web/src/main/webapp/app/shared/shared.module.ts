@@ -15,6 +15,7 @@ import {
     SplitButtonComponent,
     StateStorageService
 } from '.';
+import { DefaultNullPipe, PercentagePipe } from './pipes';
 
 @NgModule({
     imports: [
@@ -26,7 +27,9 @@ import {
         EntityListEmptyComponent,
         SplitButtonComponent,
         CalendarComponent,
-        SideMenuComponent
+        SideMenuComponent,
+        DefaultNullPipe,
+        PercentagePipe,
     ],
     providers: [
         StateStorageService,
@@ -43,7 +46,9 @@ import {
         EntityListEmptyComponent,
         SplitButtonComponent,
         CalendarComponent,
-        SideMenuComponent
+        SideMenuComponent,
+        PercentagePipe,
+        DefaultNullPipe,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

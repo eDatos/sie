@@ -2,8 +2,9 @@
 
 .metamac-container {
     min-width: 760px;
+    flex-grow: 1;
 
-    /* Override primeng classes */ 
+    /* Override primeng classes */
     /deep/ .ui-state-default {
         border: none;
         background: none;
@@ -50,10 +51,81 @@
 }
 
 .section {
-    max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 3em;
 }
 
 h1 {
     margin-bottom: 1rem;
+}
+
+.page-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 750px) {
+    .page-header {
+        flex-direction: column;
+    }
+
+    jhi-additional-information-button {
+        margin-bottom: 1em;
+    }
+}
+
+table {
+    border: 1px solid $color-tablas-evolucion-electoral;
+    color: $istac-grey-dark;
+
+    thead {
+        background-color: $color-tablas-evolucion-electoral;
+        color: $white;
+
+        th.clickable-header-icon {
+            text-align: right;
+
+            .fa.fa-istac-plus {
+                vertical-align: bottom;
+                width: 19px;
+                height: 19px;
+            }
+        }
+    }
+
+    th {
+        padding: 0.3rem 1rem;
+        font-size: 1.1rem;
+    }
+
+    td {
+        padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    }
+}
+
+.election-result {
+    display: flex;
+    gap: 1em;
+    align-content: space-between;
+}
+
+.list {
+    &::before {
+        content: "- ";
+    }
+}
+
+.indent-1 {
+    @extend .list;
+    margin-left: 1ch;
+}
+
+.indent-2 {
+    @extend .list;
+    margin-left: 2ch;
+}
+
+.indent-3 {
+    @extend .list;
+    margin-left: 3ch;
 }

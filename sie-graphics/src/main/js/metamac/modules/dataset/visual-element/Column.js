@@ -90,7 +90,7 @@
         _bindEvents: function () {
             var debounceUpdate = _.debounce(this.update, 20);
             this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", debounceUpdate);
-            this.listenTo(this.filtersModel, "change:candidacyType", debounceUpdate);
+            this.listenTo(this.filterDimensions, "change:valuesToIgnore", debounceUpdate);
 
             var resize = _.debounce(_.bind(this._updateSize, this), 200);
             this.$el.on("resize", function (e) {
@@ -115,6 +115,7 @@
 
         _applyVisualizationRestrictions: function () {
             if (this._mustApplyVisualizationRestrictions()) {
+                this.setSelectTotal(false);
                 this._moveAllDimensionsToZone('left');
 
                 this._forceMeasureDimensionInZone('axisy');
@@ -192,9 +193,6 @@
             var filteredHorizontalDimensionSelectedCategories = [];
             var countedHorizontalCategoryIndex = 0;
             _.each(horizontalDimensionSelectedCategories, function (horizontalCategory, horizontalCategoryIndex) {
-                if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('candidacyType'))) {
-                    return;
-                }
                 filteredHorizontalDimensionSelectedCategories[countedHorizontalCategoryIndex] = horizontalCategory;
 
                 var columnSeries = [];
@@ -208,7 +206,7 @@
                     var y = self.data.getNumberData({ ids: currentPermutation });
                     var name = self.data.getStringData({ ids: currentPermutation });
                     // Instead of saving the data as an array on the same serie, we create as many series as needed so we can sort them independtly
-                    serie.data = [{ y: y, name: name, x: countedHorizontalCategoryIndex }];
+                    serie.data = [{ y: y, name: name, x: countedHorizontalCategoryIndex, color: self.data.colors[horizontalCategory.get('id')] }];
                     serie.name = columnCategory.get('visibleLabel');
 
                     // We keep track on the categories assigned to each serie, so later we can assign the proper x (order) and column color
@@ -264,12 +262,48 @@
                     };
                 }
                 serie.data[0].x = horizontalAxisCategories[serie.horizontalCategory].order;
-                serie.data[0].color = columnAxisCategories[serie.columnCategory];
+                if (!serie.data[0].color) {
+                    serie.data[0].color = columnAxisCategories[serie.columnCategory];
+                }
                 return serie;
             });
 
             result.xAxis = xaxis;
+            result = this.removeIgnoredValuesFromSeries(result);
+
             return result;
+        },
+
+        removeIgnoredValuesFromSeries: function (result) {
+            var toRemove = [];
+
+            if (this.filterDimensions.getValuesToIgnoreStatus().NULL) {
+                toRemove.push(null);
+            }
+            if (this.filterDimensions.getValuesToIgnoreStatus().ZERO) {
+                toRemove.push(0);
+            }
+
+            if (toRemove.length === 0) {
+                return result;
+            }
+
+            var filteredSeries = [];
+            var filteredXAxis = [];
+
+            for (var [i, xAxis] of result.xAxis.entries()) {
+                var serie = result.series.find(serie => serie.data[0].x === i);
+                if (!toRemove.includes(serie.data[0].y)) {
+                    serie.data[0].x = filteredXAxis.length;
+                    filteredSeries.push(serie);
+                    filteredXAxis.push(xAxis);
+                }
+            }
+
+            return {
+                series: filteredSeries.sort((a, b) => a.horizontalCategory > b.horizontalCategory ? 1 : -1),
+                xAxis: filteredXAxis
+            };
         },
 
         update: function () {
@@ -297,8 +331,7 @@
 
             // Necesario para evitar error en el dibujado tras cambiar a stacked columns     
             this.chart.xAxis[0].update();
-        }
-
+        },
     });
 
 }());

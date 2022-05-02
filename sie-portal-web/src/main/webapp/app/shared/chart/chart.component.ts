@@ -1,5 +1,5 @@
-import { Component, Input, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Chart } from '.';
+import { Component, Input, AfterViewInit, OnChanges, SimpleChanges } from "@angular/core";
+import { Chart } from ".";
 
 declare var Highcharts: any;
 
@@ -15,6 +15,9 @@ export class ChartComponent implements OnChanges, AfterViewInit {
 
     @Input()
     public data: Chart;
+
+    @Input()
+    public footnote: string;
 
     // Atributos de uso interno
     public name: string = 'container-' + new Date().getTime().toString() + '-' + Math.floor(Math.random() * 10000).toString();
@@ -35,8 +38,9 @@ export class ChartComponent implements OnChanges, AfterViewInit {
         Highcharts.setOptions({
             lang: {
                 decimalPoint: ',',
-                thousandsSep: '.'
-            }
+                thousandsSep: '.',
+                numericSymbols: null,
+            },
         });
         this.buildChart();
     }
@@ -48,19 +52,52 @@ export class ChartComponent implements OnChanges, AfterViewInit {
             },
             series: this.data.yAxis,
             chart: {
-                renderTo: this.name
+                renderTo: this.name,
+                events: {
+                    load() {
+                        // Increase distance between data point labels to avoid overlap
+                        const MINIMUM_DISTANCE_BETWEEN_LABELS = 30;
+                        const OFFSET = 35;
+                        const points0 = this.series[0].data;
+                        const points1 = this.series[1].data;
+                        points0.forEach(function(point, i) {
+                            let { x, y } = point.dataLabel.attr();
+                            let { x: x1, y: y1 } = points1[i].dataLabel.attr();
+                            if (Math.abs(y - y1) < MINIMUM_DISTANCE_BETWEEN_LABELS) {
+                                // Add y offsets
+                                y = y1 + OFFSET;
+                                // Set new positions only for the first serie (columns)
+                                point.dataLabel.attr({ x: x, y: y });
+                            }
+                        });
+                    },
+                }
             },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>{series.options.alternativeName}: {point.altData:,.f}'
+                pointFormat: '{series.name}: {point.y}'
             },
-            yAxis: {
-                min: 0,
-                max: this.getMaxY(),
-                title: {
-                    text: ''
+            yAxis: [
+                { // Primary yAxis
+                    title: {
+                        text: '',
+                    },
+                    labels: {
+                        enabled: false,  // EDATOS-3590 - Temporal requirement. Change to `enabled: true` when ISTAC says so.
+                    },
+                }, { // Secondary yAxis
+                    title: {
+                        text: '',
+                    },
+                    labels: {
+                        enabled: false,  // EDATOS-3590 - Temporal requirement. Change to `enabled: true` when ISTAC says so.
+                        format: '{value:.1f} %',
+                    },
+                    opposite: true,
+                    min: 0,
+                    max: 100,
                 },
-            },
+            ],
             plotOptions: {
                 area: {
                     fillOpacity: 0.5,
@@ -75,18 +112,36 @@ export class ChartComponent implements OnChanges, AfterViewInit {
                         inactive: {
                             opacity: 1
                         }
-                    }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.1f}',
+                        style: {
+                            color: '#454545',
+                            textOutline: 'white',
+                        }
+                    },
                 },
                 column: {
                     states: {
                         inactive: {
                             opacity: 1
                         }
-                    }
+                    },
+                    dataLabels: {
+                        allowOverlap: true,
+                        enabled: true,
+                        inside: false,
+                        style: {
+                            color: '#454545',
+                            textOutline: 'white',
+                        }
+                    },
                 }
             },
             credits: {
-                enabled: false
+                enabled: false, // EDATOS-3590 - Temporal requirement. Change to `enabled: true` when ISTAC says so.
+                text: this.footnote,
             },
             title: {
                 text: ''

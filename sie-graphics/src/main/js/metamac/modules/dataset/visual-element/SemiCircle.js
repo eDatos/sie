@@ -49,7 +49,7 @@
                     animation: false
                 },
                 pie: {
-                    colors: ["#008BD0", "#67A23F", "#8C5C1D", "#7F5B97", "#C01A41", "#E5772D", "#8C9BA3"],
+                    colors: ["#A7BAF2", "#F2E3B5", "#323840", "#F2E529", "#4ED9BF", "#BCF285", "#DDF8D8", "#F7F7CF", "#F8D8F4"],
                     center: ['50%', '75%'],
                     innerSize: '40%',
                     endAngle: 90,
@@ -57,6 +57,11 @@
                     states: {
                         inactive: {
                             opacity: 1
+                        }
+                    },
+                    dataLabels: {
+                        formatter: function() {
+                            return this.point.name + " (" + Highcharts.numberFormat(this.point.percentage) + " %)";
                         }
                     }
                 }
@@ -88,7 +93,6 @@
         _bindEvents: function () {
             var debounceUpdate = _.debounce(this.update, 20);
             this.listenTo(this.filterDimensions, "change:drawable change:zone change:visibleLabelType reverse", debounceUpdate);
-            this.listenTo(this.filtersModel, "change:candidacyType", debounceUpdate);
 
             var resize = _.debounce(_.bind(this._updateSize, this), 200);
             this.$el.on("resize", function (e) {
@@ -112,6 +116,7 @@
 
         _applyVisualizationRestrictions: function () {
             if (this._mustApplyVisualizationRestrictions()) {
+                this.setSelectTotal(false);
                 this._moveAllDimensionsToZone('left');
 
                 this._forceMeasureDimensionInZone('top');
@@ -191,10 +196,6 @@
                 });
 
                 _.each(horizontalDimensionSelectedCategories, function (horizontalCategory) {
-                    if (!horizontalCategory.get('id').startsWith(self.filtersModel.get('candidacyType'))) {
-                        return;
-                    }
-
                     var element = {};
                     element.longName = horizontalCategory.get('visibleLabel');
                     element.name = self._getShortName(element.longName);
@@ -211,6 +212,7 @@
                         element[attrName] = y;
                     });
 
+                    element.color = self.data.colors[horizontalCategory.get('id')];
                     serie.data.push(element);
                 });
 
@@ -232,7 +234,11 @@
                     return -data.y;
                 });
 
-                if (data.length > App.Constants.maxSemiCircleElements) {
+                var elemWithNotNullY = _.find(data, function(elem) {
+                    return elem.y !== null;
+                });
+
+                if (data.length > App.Constants.maxSemiCircleElements && elemWithNotNullY) {
                     var othersData = {
                         name: I18n.t("ve.others"),
                         longName: I18n.t("ve.others"),
@@ -286,7 +292,7 @@
 
             // Necesario para evitar error en el dibujado tras cambiar a stacked columns     
             this.chart.xAxis[0].update();
-        }
+        },
     });
 
 }());

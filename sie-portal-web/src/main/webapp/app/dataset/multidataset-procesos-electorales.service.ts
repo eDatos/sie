@@ -18,18 +18,18 @@ export class MultidatasetProcesosElectoralesService {
         private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService
     ) { }
 
-    getDatasetsByTipoElecciones(tipoElecciones: string): Promise<MultidatasetProcesosElectorales> {
+    getDatasetsByTipoElecciones(tipoElecciones: string): Observable<MultidatasetProcesosElectorales> {
         if (!this.multidatasetsCache[tipoElecciones]) {
-            this.multidatasetsCache[tipoElecciones] = new Promise<MultidatasetProcesosElectorales>((resolve, reject) => {
+            this.multidatasetsCache[tipoElecciones] = new Observable<MultidatasetProcesosElectorales>((subscriber) => {
                 this.doGetDatasets(tipoElecciones).subscribe(
                     (json) => {
                         if (json.data.nodes) {
-                            resolve(this.parseMultidataset(json));
+                            subscriber.next(this.parseMultidataset(json));
                         } else {
-                            reject();
+                            subscriber.error();
                         }
                     },
-                    (error) => reject(error)
+                    (error) => subscriber.error(error)
                 );
             });
         }
@@ -49,7 +49,7 @@ export class MultidatasetProcesosElectoralesService {
     private parseMultidataset(json: any): MultidatasetProcesosElectorales {
         const nodes = json.data.nodes.node;
         const datasetList = nodes.map((element) => {
-            return new DatasetProcesoElectoral(element.identifier, element.name.text[0].value);
+            return new DatasetProcesoElectoral(element.dataset.id, element.identifier, element.name.text[0].value);
         });
         const splittedUrn = json.urn.split('=');
         return new MultidatasetProcesosElectorales(splittedUrn[1], datasetList);
