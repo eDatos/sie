@@ -1,0 +1,29 @@
+{
+    "error": {
+        "title": "Ups, ha passat un error!",
+        "403": {
+            "title": "Error 403",
+            "detail": "Ho sentim, no teniu permisos per accedir a la pàgina."
+        },
+        "accessDenied": "Ho sentim, no teniu permisos per accedir a la pàgina.",
+        "404": {
+            "title": "Error 404",
+            "detail": "Ho sentim, la pàgina que esteu buscant no existeix."
+        },
+        "blockedUser": {
+            "title": "Error d'usuari",
+            "detail": "Ho sentim, l'usuari amb què està intentant accedir-hi està bloquejat.**"
+        },
+        "nonExistingUser": {
+            "title": "Error d'usuari",
+            "detail": "Ho sentim, l'usuari amb què intenta accedir no ha estat donat d'alta."
+        },
+        "rol": {
+            "validation": {
+                "rol-necesita-operaciones": "És obligatori que al rol se li assigni, almenys, permisos per a una operació."
+            }
+        },
+        "cannotDownloadDocument": "Ho sentim, el document PDF no s'ha pogut generar.",
+        "noMultidatasetForTipoElecciones": "No hi ha dades per al tipus d'eleccions {{ tipoElecciones }}"
+    }
+}

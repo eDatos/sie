@@ -1,0 +1,16 @@
+{
+    "procesoElectoral": {
+        "pageTitle": "Sistema electoral de lISTAC",
+        "loading": "Carregant...",
+        "header": {
+            "AUTONOMICAS": "Resultats a les eleccions autonòmiques de {{ fecha }}",
+            "CABILDO": "Resultats a les eleccions al Cabildo de {{ fecha }}",
+            "CONGRESO": "Resultats a les eleccions al Congrés de {{ fecha }}",
+            "MUNICIPALES": "Resultats a les eleccions municipals de {{ fecha }}",
+            "PARLAMENTO_EUROPEO": "Resultats a les eleccions al Parlament Europeu de {{ fecha }}",
+            "REFERENDUM": "Resultats al referèndum de {{ fecha }}",
+            "SENADO": "Resultats a les eleccions al Senat de {{ fecha }}"
+        },
+        "errorNoEncontrado": "No s'ha trobat cap procés electoral amb l'identificador {{ id }}."
+    }
+}

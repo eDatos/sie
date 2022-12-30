@@ -1,0 +1,47 @@
+{
+    "evolucionElectoral": {
+        "pageTitle": "Sistema electoral de lISTAC",
+        "header": "Participació electoral a {{ territorio }}",
+        "detail": "Veure detall",
+        "descargarPdf": "Descarregar PDF",
+        "unidadMedidas": "Unitat: persones a l'eix esquerre, percentatge a l'eix dret",
+        "indicador": {
+            "votos": "Vots",
+            "participacion": "Participació",
+            "ELECTORES": "Electors",
+            "VOTANTES": "Votants",
+            "ABSTENCION": "Abstenció",
+            "TASA_PARTICIPACION": "Taxa de participació (%)",
+            "TASA_PARTICIPACION_A1": "Taxa de participació en el primer avenç (%)",
+            "TASA_PARTICIPACION_A2": "Taxa de participació en el segon avenç (%)",
+            "TASA_ABSTENCION": "Taxa d'abstenció (%)",
+            "VOTOS": "Vots",
+            "VOTOS_NULOS": "Vots nuls",
+            "TASA_VOTOS_NULOS": "Taxa de vots nuls (%)",
+            "VOTOS_VALIDOS": "Vots vàlids",
+            "TASA_VOTOS_VALIDOS": "Taxa de vots vàlids (%)",
+            "VOTOS_VALIDOS_BLANCO": "Vots vàlids en blanc",
+            "TASA_VOTOS_VALIDOS_BLANCO": "Taxa de vots vàlids en blanc (%)",
+            "VOTOS_VALIDOS_CANDIDATURA": "Vots vàlids a candidatura",
+            "TASA_VOTOS_VALIDOS_CANDIDATURA": "Taxa de vots vàlids en candidatures (%)"
+        },
+        "tipoEleccion": {
+            "AUTONOMICAS": "AUTONÒMIQUES",
+            "CABILDO": "CABILDOS",
+            "CONGRESO": "CONGRÉS",
+            "MUNICIPALES": "MUNICIPALS",
+            "PARLAMENTO_EUROPEO": "PARLAMENT EUROPEU",
+            "REFERENDUM": "REFERÈNDUM",
+            "SENADO": "SENAT"
+        },
+        "nombreCompletoEleccion": {
+            "AUTONOMICAS": "Eleccions autonòmiques",
+            "CABILDO": "Eleccions al Cabildo",
+            "CONGRESO": "Eleccions al Congrés",
+            "MUNICIPALES": "Eleccions municipals",
+            "PARLAMENTO_EUROPEO": "Eleccions al Parlament Europeu",
+            "REFERENDUM": "Referèndum",
+            "SENADO": "Eleccions al Senat"
+        }
+    }
+}
