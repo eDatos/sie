@@ -1,6 +1,6 @@
 {
     "lugar": {
-        "pageTitle": "Sistema electoral de lISTAC",
+        "pageTitle": "Sistema electoral de l'ISTAC",
         "header": "De quin lloc vols conèixer la seva evolució electoral?",
         "continuar": "Continuar",
         "errorNoEncontrado": "No s'ha trobat cap territori amb el codi {{ codigo }}.",

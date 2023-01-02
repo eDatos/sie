@@ -9,9 +9,9 @@
         "additionalInfo": "Informació complementària"
     },
     "home": {
-        "pageTitle": "Benvingut",
-        "title": "Benvingut, {{user}}",
-        "detail": "Accediu a l'apartat desitjat a través del menú de navegació"
+        "pageTitle": "Benvingut/da",
+        "title": "Benvingut/da, {{user}}",
+        "detail": "Accedeixi a l'apartat desitjat a través del menú de navegació"
     },
     "entity": {
         "list": {
