@@ -12,7 +12,7 @@
         },
         "blockedUser": {
             "title": "Error d'usuari",
-            "detail": "Ho sentim, l'usuari amb què està intentant accedir-hi està bloquejat.**"
+            "detail": "Ho sentim, l'usuari amb què està intentant accedir-hi està bloquejat."
         },
         "nonExistingUser": {
             "title": "Error d'usuari",
