@@ -125,7 +125,7 @@ I18n.translations.ca = {
             nomap: "Mapa no disponible"
         },
         noSelection: "Heu de seleccionar almenys una categoria en cada dimensió",
-        loading: Carregant dades...",
+        loading: "Carregant dades...",
         others: "Altres"
     },
 
@@ -136,7 +136,7 @@ I18n.translations.ca = {
             abstract: "Resum",
             measureDimensionCoverageConcepts: "Conceptes que formen la cobertura de la unitat de mesura",
             statisticalOperation: "Operació estadística",
-            validFrom: "Vàlid des",
+            validFrom: "Vàlid des de",
             validTo: "Vàlid fins",
             dateStart: "Període inicial",
             dateEnd: "Període final",
@@ -169,9 +169,9 @@ I18n.translations.ca = {
             nolicense: "Llicència no disponible",
             accessRights: "Drets d'accés",
             subjectAreas: "Àrees",
-            formatExtentObservations: "Grandària de la taula",
+            formatExtentObservations: "Mida de la taula",
             lastUpdate: "Data de la darrera actualització",
-            dateNextUpdate: "Data de propera actualització",
+            dateNextUpdate: "Data de la propera actualització",
             updateFrequency: "Freqüència d'actualització",
             statisticOfficiality: "Oficialitat estadística",
             bibliographicCitation: "Citació bibliogràfica",
@@ -238,9 +238,9 @@ I18n.translations.ca = {
             "long": "%d de %B de %Y"
         },
         day_names: ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"],
-        abbr_day_names: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"]?,
+        abbr_day_names: ["Dd", "Dl", "Dt", "Dc", "Dj", "Dv", "Ds"],
         month_names: [null, "Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"],
-        abbr_month_names: [null, "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]?,
+        abbr_month_names: [null, "Gen", "Febr", "Març", "Abr", "Maig", "Juny", "Jul", "Ag", "Set", "Oct", "Nov", "Des"],
         meridian: ["am", "pm"]
 
 
