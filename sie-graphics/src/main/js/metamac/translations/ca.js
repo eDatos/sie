@@ -62,8 +62,8 @@ I18n.translations.ca = {
         },
         sidebar: {
             ignorable: {
-                null: 'Veure categories amb cel·les en blanc',
-                zero: 'Veure categories amb cel·les en zero'
+                null: "Veure categories amb cel·les en blanc",
+                zero: "Veure categories amb cel·les en zero"
             },
             info: {
                 title: "Info"
@@ -207,13 +207,13 @@ I18n.translations.ca = {
         },
         observation: {
             measure: {
-                title: 'Identificació de la dada',
-                data: 'Dada'
+                title: "Identificació de la dada",
+                data: "Dada"
             },
             attributes: {
-                title: 'Notes de l'observació',
-                primaryMeasure: 'Atributs a nivell dobservació',
-                combinatedDimensions: 'Atributs a nivell de dimensió',
+                title: "Notes de l'observació",
+                primaryMeasure: "Atributs a nivell dobservació",
+                combinatedDimensions: "Atributs a nivell de dimensió",
             }
         },
         granularity: {
