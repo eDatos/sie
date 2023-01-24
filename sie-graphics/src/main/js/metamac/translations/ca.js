@@ -162,7 +162,7 @@ I18n.translations.ca = {
             contributors: "Contribuïdors de publicació",
             mediators: "Mediadors",
             replaces: "Reemplaça a",
-            isReplacedBy: "És reemplaçat per/Ha reemplaçat per?",
+            isReplacedBy: "És reemplaçat per",
             rightsHolder: "Titular dels drets",
             copyrightDate: "Data de copyright",
             license: "Llicència",
