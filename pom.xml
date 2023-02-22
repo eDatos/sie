@@ -22,10 +22,10 @@
     </modules>
 
 	<scm>
-		<connection>scm:git:http://git.arte-consultores.com/istac/sie/</connection>
-		<developerConnection>scm:git:http://git.arte-consultores.com/istac/sie/</developerConnection>
+		<connection>scm:git:https://git.arte-consultores.com/istac/sie/</connection>
+		<developerConnection>scm:git:https://git.arte-consultores.com/istac/sie/</developerConnection>
 		<tag>HEAD</tag>
-		<url>http://git.arte-consultores.com/istac/sie</url>
+		<url>https://git.arte-consultores.com/istac/sie</url>
 	</scm>
 
 	<issueManagement>
