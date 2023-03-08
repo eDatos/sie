@@ -4,7 +4,7 @@
     max-width: 390px;
     min-width: 240px;
     width: 100%;
-    
+
     @media(max-width: 668px) {
         margin-top: 10px;
     }
@@ -25,5 +25,21 @@
             border-left-color: $istac-blue;
             background: $istac-blue;
         }
+    }
+}
+
+.territory-autocomplete {
+    display: flex;
+    align-items: center;
+
+    .title {
+        margin-right: 1em;
+        font-weight: $font-weight-bold;
+        color: $grey-dark;
+        font-size: 1.2em;
+    }
+
+    .autocomplete {
+        flex: 1;
     }
 }
