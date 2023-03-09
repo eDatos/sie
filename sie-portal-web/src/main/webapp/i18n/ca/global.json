@@ -1,0 +1,48 @@
+{
+    "global": {
+        "title": "Sistema d'informació electoral",
+        "browsehappy": "Esteu usant un navegador <strong>no actualitzat</strong>. Si us plau, <a href=\"http://browsehappy.com/?locale=ca\">actualitzeu el vostre navegador</a> per millorar la seva experiència.",
+        "menu": {
+            "elecciones": "ELECCIONS",
+            "atlas": "ATLES"
+        },
+        "additionalInfo": "Informació complementària"
+    },
+    "home": {
+        "pageTitle": "Benvingut/da",
+        "title": "Benvingut/da, {{user}}",
+        "detail": "Accedeixi a l'apartat desitjat a través del menú de navegació"
+    },
+    "components": {
+        "territoryAutocomplete": {
+            "title": "Territori"
+        }
+    },
+    "entity": {
+        "list": {
+            "empty": {
+                "detail": "No s'han trobat resultats"
+            }
+        }
+    },
+    "error": {
+        "internalServerError": "Error intern del servidor",
+        "server.not.reachable": "Servidor no accessible",
+        "url.not.found": "No trobat",
+        "NotNull": "El camp {{0}} no pot estar buit!",
+        "Size": "El camp {{0}} no compleix els requisits de mida mínima/màxim!",
+        "usuario-existe": "El nom d'usuari introduït ja s'està usant",
+        "email-existe": "L'email introduït ja s'està usant",
+        "id-existe": "Un nou {{0}} no pot tenir prèviament un ID",
+        "entidad-no-encontrada": "Resultat de {{0}} no trobat",
+        "userManagement": {
+            "usuario-ldap-no-encontrado": "No s'ha trobat l'usuari especificat"
+        },
+        "rol-no-encontrado": "No s'ha trobat el rol {{0}}",
+        "file-empty": "El fitxer és buit",
+        "rol": {
+            "users-has-role": "No es pot suprimir un rol assignat a alguns usuaris"
+        },
+        "query-no-soportada": "Paràmetre de cerca {{0}} no suportat"
+    }
+}

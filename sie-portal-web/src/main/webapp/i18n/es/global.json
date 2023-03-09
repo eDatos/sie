@@ -13,6 +13,11 @@
         "title": "Bienvenido, {{user}}",
         "detail": "Acceda al apartado deseado a través del menú de navegación"
     },
+    "components": {
+        "territoryAutocomplete": {
+            "title": "Territorio"
+        }
+    },
     "entity": {
         "list": {
             "empty": {
