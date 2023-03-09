@@ -13,6 +13,11 @@
         "title": "Benvingut/da, {{user}}",
         "detail": "Accedeixi a l'apartat desitjat a través del menú de navegació"
     },
+    "components": {
+        "territoryAutocomplete": {
+            "title": "Territori"
+        }
+    },
     "entity": {
         "list": {
             "empty": {
