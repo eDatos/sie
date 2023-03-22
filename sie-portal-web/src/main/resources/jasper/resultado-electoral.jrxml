@@ -89,10 +89,10 @@
 			</line>
 			<textField>
 				<reportElement x="1" y="-20" width="479" height="40" uuid="1e717c0f-acfe-48a2-9cff-ac174629ac09"/>
-				<textElement verticalAlignment="Bottom">
+				<textElement verticalAlignment="Bottom" markup="html">
 					<font fontName="SansSerif" size="18" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{TERRITORIO}  + " (" + $P{GRANULARIDAD} + ")"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{TERRITORIO} + " " + "<font color=\"gray\">(" + $P{GRANULARIDAD} + ")</font>"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="1" y="22" width="479" height="26" uuid="a43ebc08-10e4-4375-883e-b5cb6b2c6336"/>
