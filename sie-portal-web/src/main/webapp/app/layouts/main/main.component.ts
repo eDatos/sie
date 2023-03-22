@@ -45,30 +45,6 @@ export class JhiMainComponent implements OnInit {
                 }
             }
         });
-
-        this.metadataService.getPropertyById(config.metadata.internationalizationLanguages).subscribe((languages) => {
-            let internationalizationLanguages = [];
-            internationalizationLanguages = languages.split(",");
-            this.metadataService.getPropertyById(config.metadata.internationalizationCookieKey).subscribe((cookieName) => {
-                let currentLocale = "";
-                const cookieValue = Promise.resolve(document.cookie.match('(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)') ? document.cookie.match('(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)').pop() : '');
-                cookieValue.then((value) => {
-                    if (value !== '') {
-                        if (internationalizationLanguages.find((element) => element === value) !== undefined) {
-                            currentLocale = value;
-                        } else {
-                            const defaultLanguage = internationalizationLanguages[0];
-                            currentLocale = defaultLanguage;
-                        }
-                    } else {
-                        // No cookie
-                        currentLocale = internationalizationLanguages[0];
-                    }
-                    this.languageService.changeLanguage(currentLocale);
-                });
-            });
-        });
-
     }
 
     private addGoogleAnalyticsScriptTag(googleAnalyticsTrackId: string) {

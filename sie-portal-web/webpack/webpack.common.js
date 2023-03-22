@@ -3,13 +3,23 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StringReplacePlugin = require('string-replace-webpack-plugin');
 const MergeJsonWebpackPlugin = require("merge-jsons-webpack-plugin");
+const path = require('path');
+const fs = require('fs');
 
 const utils = require('./utils.js');
+
+function geti18nLanguages(i18nPathRelativeToSrc) {
+    const i18nPath = path.join(__dirname, '../src/main/webapp', i18nPathRelativeToSrc);
+    return fs.readdirSync(i18nPath, 'utf8');
+}
+
+const availableLanguages = geti18nLanguages('i18n');
 
 module.exports = (options) => {
     const DATAS = {
         VERSION: `'${utils.parseVersion()}'`,
-        DEBUG_INFO_ENABLED: options.env === 'development'
+        DEBUG_INFO_ENABLED: options.env === 'development',
+        AVAILABLE_LANGUAGES: JSON.stringify(availableLanguages)
     };
     return {
         resolve: {
@@ -95,11 +105,10 @@ module.exports = (options) => {
             }),
             new MergeJsonWebpackPlugin({
                 output: {
-                    groupBy: [
-                        { pattern: "./src/main/webapp/i18n/es/*.json", fileName: "./i18n/es.json" },
-                        { pattern: "./src/main/webapp/i18n/ca/*.json", fileName: "./i18n/ca.json" }
+                    groupBy: availableLanguages.map(lang => (
+                        { pattern: `./src/main/webapp/i18n/${lang}/*.json`, fileName: `./i18n/${lang}.json` }
                         // jhipster-needle-i18n-language-webpack - JHipster will add/remove languages in this array
-                    ]
+                    ))
                 }
             }),
             new HtmlWebpackPlugin({

@@ -3,8 +3,13 @@
     They are written in English to avoid character encoding issues (not a perfect solution)
 */
 export const LANGUAGES: string[] = [
-    'es', 'ca', 'en', 'pt'
+    'es', 'ca'
     // jhipster-needle-i18n-language-constant - JHipster will add/remove languages in this array
 ];
 
 export const DEFAULT_LANGUAGE = 'es';
+export let CURRENT_LANGUAGE = '';
+
+export function setCurrentLanguage(lang: string): void {
+    CURRENT_LANGUAGE = lang;
+}

@@ -2,6 +2,8 @@ import { Injectable, RendererFactory2, Renderer2 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { MetadataService, ConfigService } from '../../config';
+import { CookieService } from 'ngx-cookie';
 
 import { LANGUAGES } from './language.constants';
 
@@ -10,6 +12,9 @@ export class JhiLanguageHelper {
     renderer: Renderer2 = null;
 
     constructor(
+        private configService: ConfigService,
+        private metadataService: MetadataService,
+        private cookieService: CookieService,
         private translateService: TranslateService,
         private rootRenderer: RendererFactory2,
         private titleService: Title,
@@ -41,8 +46,12 @@ export class JhiLanguageHelper {
     }
 
     private init() {
-        this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
-            this.renderer.setAttribute(document.querySelector('html'), 'lang', this.translateService.currentLang);
+       this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+            if (this.configService.getConfig().metadata.internationalizationCookieKey) {
+                this.renderer.setAttribute(document.querySelector('html'), this.configService.getConfig().metadata.internationalizationCookieKey, this.cookieService.get(this.configService.getConfig().metadata.internationalizationCookieKey));
+            } else {
+                this.renderer.setAttribute(document.querySelector('html'), 'lang', this.translateService.currentLang);
+            }
             this.updateTitle();
         });
     }

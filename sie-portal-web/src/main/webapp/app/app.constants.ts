@@ -2,9 +2,12 @@
  /* tslint:disable */
 let _VERSION = '0.0.1-SNAPSHOT'; // This value will be overwritten by webpack
 let _DEBUG_INFO_ENABLED = true; // This value will be overwritten by webpack
+let _AVAILABLE_LANGUAGES = ['es', 'ca'];
 /* @toreplace VERSION */
 /* @toreplace DEBUG_INFO_ENABLED */
 /* tslint:enable */
 export const VERSION = _VERSION;
 export const DEBUG_INFO_ENABLED = _DEBUG_INFO_ENABLED;
+export const AVAILABLE_LANGUAGES = _AVAILABLE_LANGUAGES;
 export const TOKEN_AUTH_NAME = 'jhi-authenticationtoken';
+export const DEFAULT_LANG = 'es';
