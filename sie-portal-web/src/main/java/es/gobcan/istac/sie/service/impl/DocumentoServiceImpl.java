@@ -73,7 +73,8 @@ public class DocumentoServiceImpl implements DocumentoService {
 
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("GRAFICA", new ByteArrayInputStream(grafica));
-            parametros.put("TERRITORIO", resultadoElectoral.getTerritorio());
+            parametros.put("TERRITORIO", resultadoElectoral.getTerritorio().getNombre());
+            parametros.put("GRANULARIDAD", resultadoElectoral.getTerritorio().getGranularidad());
             parametros.put("TIPO_ELECCIONES", messageSource.getMessage("report.header." + resultadoElectoral.getProcesoElectoral().getTipoProcesoElectoral(), null, Locale.getDefault()));
             parametros.put("ANNO_ELECCIONES", Integer.toString(getYear(resultadoElectoral)));
             parametros.put("DATA_SOURCE", new JRBeanCollectionDataSource(Collections.singletonList(resultadoElectoral.getProcesoElectoral())));
