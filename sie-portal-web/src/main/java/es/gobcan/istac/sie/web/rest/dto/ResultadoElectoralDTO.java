@@ -4,15 +4,15 @@ import java.util.List;
 
 public class ResultadoElectoralDTO {
 
-    private String territorio;
+    private LugarDTO territorio;
     private ProcesoElectoralDTO procesoElectoral;
     private List<ResultadoElectoralData> data;
 
-    public String getTerritorio() {
+    public LugarDTO getTerritorio() {
         return territorio;
     }
 
-    public void setTerritorio(String territorio) {
+    public void setTerritorio(LugarDTO territorio) {
         this.territorio = territorio;
     }
 
