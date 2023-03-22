@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<!-- Created with Jaspersoft Studio version 6.19.0.final using JasperReports Library version 6.19.0-646c68931cebf1a58bc65c4359d1f0ca223c5e94  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resultado_electoral" pageWidth="595" pageHeight="842" columnWidth="483" leftMargin="56" rightMargin="56" topMargin="56" bottomMargin="20" whenResourceMissingType="Empty" uuid="eb5828a7-98b5-4cd8-88a2-625a5a8842b7">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.report.description" value=""/>
@@ -72,6 +72,7 @@
 	<parameter name="RESULTADOS_ELECTORALES_PARTIDOS" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="INT_FORMATTER" class="java.text.NumberFormat"/>
 	<parameter name="FLOAT_FORMATTER" class="java.text.NumberFormat"/>
+	<parameter name="GRANULARIDAD" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -88,10 +89,10 @@
 			</line>
 			<textField>
 				<reportElement x="1" y="-20" width="479" height="40" uuid="1e717c0f-acfe-48a2-9cff-ac174629ac09"/>
-				<textElement verticalAlignment="Bottom">
+				<textElement verticalAlignment="Bottom" markup="html">
 					<font fontName="SansSerif" size="18" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{TERRITORIO}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{TERRITORIO} + " " + "<font color=\"gray\">(" + $P{GRANULARIDAD} + ")</font>"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="1" y="22" width="479" height="26" uuid="a43ebc08-10e4-4375-883e-b5cb6b2c6336"/>
