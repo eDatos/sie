@@ -37,7 +37,7 @@ export class JhiLanguageHelper {
      */
     updateTitle(titleKey?: string) {
         if (!titleKey) {
-             titleKey = this.getPageTitle(this.router.routerState.snapshot.root);
+            titleKey = this.getPageTitle(this.router.routerState.snapshot.root);
         }
 
         this.translateService.get(titleKey).subscribe((title) => {
@@ -46,12 +46,8 @@ export class JhiLanguageHelper {
     }
 
     private init() {
-       this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
-            if (this.configService.getConfig().metadata.internationalizationCookieKey) {
-                this.renderer.setAttribute(document.querySelector('html'), this.configService.getConfig().metadata.internationalizationCookieKey, this.cookieService.get(this.configService.getConfig().metadata.internationalizationCookieKey));
-            } else {
-                this.renderer.setAttribute(document.querySelector('html'), 'lang', this.translateService.currentLang);
-            }
+        this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+            this.renderer.setAttribute(document.querySelector('html'), 'lang', this.translateService.currentLang);
             this.updateTitle();
         });
     }

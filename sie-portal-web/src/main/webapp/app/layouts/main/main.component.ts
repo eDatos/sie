@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, NavigationEnd, RoutesRecognized } from '@angular/router';
-
 import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper, StateStorageService } from '../../shared';
 import { MetadataService, ConfigService } from '../../config';
+import { CookieService } from 'ngx-cookie';
+import { TranslateService } from '@ngx-translate/core'
 
 declare var executeGoogleAnalyticsInlineCode: Function;
 
@@ -22,7 +23,9 @@ export class JhiMainComponent implements OnInit {
         private configService: ConfigService,
         private metadataService: MetadataService,
         private languageService: JhiLanguageService,
-        private $storageService: StateStorageService
+        private $storageService: StateStorageService,
+        private cookieService: CookieService,
+        private translateService: TranslateService
     ) { }
 
     ngOnInit() {
@@ -45,6 +48,49 @@ export class JhiMainComponent implements OnInit {
                 }
             }
         });
+
+        this.metadataService.getPropertyById(config.metadata.internationalizationLanguages).subscribe((languages) => {
+            let internationalizationLanguages = [];
+            internationalizationLanguages = languages.split(",");
+            this.translateService.setDefaultLang(internationalizationLanguages[0]);
+            this.metadataService.getPropertyById(config.metadata.internationalizationCookieKey).subscribe((cookieName) => {
+                let currentLocale = "";
+                const cookieValue = this.findCookieValue(cookieName);
+                if (cookieValue && this.findLanguageValue(internationalizationLanguages, cookieValue)) {
+                    currentLocale = cookieValue;
+                } else {
+                    // No cookie
+                    //  No cookie - show navigator language
+                    const navigatorValue = this.findNavigatorValue(internationalizationLanguages);
+                    if (navigatorValue !== null) {
+                        currentLocale = navigatorValue;
+                    } else {
+                        //  No navigator language - show default language
+                        currentLocale = internationalizationLanguages[0];
+                    }
+                }
+                this.languageService.changeLanguage(currentLocale);
+            });
+        });
+    }
+
+    private findCookieValue(cookieName: string) {
+        if (cookieName !== null) {
+            const cookies = Object.keys(this.cookieService.getAll()).map(key => (key));
+            if (cookies.find((cookie) => cookie === cookieName) !== undefined) {
+                return this.cookieService.get(cookieName);
+            }
+        }
+        return null;
+    }
+
+    private findNavigatorValue(internationalizationLanguages: string[]) {
+        return this.findLanguageValue(internationalizationLanguages, window.navigator.language);
+    }
+
+    private findLanguageValue(internationalizationLanguages: string[], value: string) {
+        let languageValue = internationalizationLanguages.find((element) => element === value);
+        return languageValue !== undefined ? languageValue : null;
     }
 
     private addGoogleAnalyticsScriptTag(googleAnalyticsTrackId: string) {
