@@ -5,7 +5,6 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { MetadataService, ConfigService } from '../../config';
 import { CookieService } from 'ngx-cookie';
 
-import { LANGUAGES } from './language.constants';
 
 @Injectable()
 export class JhiLanguageHelper {
@@ -24,10 +23,6 @@ export class JhiLanguageHelper {
         this.init();
     }
 
-    getAll(): Promise<any> {
-        return Promise.resolve(LANGUAGES);
-    }
-
     /**
      * Update the window title using params in the following
      * order:
@@ -37,7 +32,7 @@ export class JhiLanguageHelper {
      */
     updateTitle(titleKey?: string) {
         if (!titleKey) {
-            titleKey = this.getPageTitle(this.router.routerState.snapshot.root);
+             titleKey = this.getPageTitle(this.router.routerState.snapshot.root);
         }
 
         this.translateService.get(titleKey).subscribe((title) => {
