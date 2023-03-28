@@ -64,6 +64,8 @@ public class ApplicationProperties {
         private String geographicalGranularityUrnKey;
         private String sieAdditionalInfoUrl;
         private String firstTerritoryHierarchyLevelKey;
+        private String internationalizationCookieKey;
+        private String internationalizationLanguages;
 
         public String getEndpoint() {
             return endpoint;
@@ -251,6 +253,22 @@ public class ApplicationProperties {
 
         public void setFirstTerritoryHierarchyLevelKey(String firstTerritoryHierarchyLevelKey) {
             this.firstTerritoryHierarchyLevelKey = firstTerritoryHierarchyLevelKey;
+        }
+
+        public String getInternationalizationCookieKey() {
+            return internationalizationCookieKey;
+        }
+
+        public void setInternationalizationCookieKey(String internationalizationCookieKey) {
+            this.internationalizationCookieKey = internationalizationCookieKey;
+        }
+
+        public String getInternationalizationLanguages() {
+            return internationalizationLanguages;
+        }
+
+        public void setInternationalizationLanguages(String internationalizationLanguages) {
+            this.internationalizationLanguages = internationalizationLanguages;
         }
     }
 }

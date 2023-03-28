@@ -134,7 +134,7 @@ I18n.translations.es = {
             title: "Título",
             subtitle: "Subtítulo",
             abstract: "Resumen",
-            measureDimensionCoverageConcepts: "Conceptos que forman el cubrimiento de la unidad de medidad",
+            measureDimensionCoverageConcepts: "Conceptos que forman el cubrimiento de la unidad de medida",
             statisticalOperation: "Operación estadística",
             validFrom: "Válido desde",
             validTo: "Válido hasta",
