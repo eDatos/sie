@@ -18,8 +18,7 @@ const availableLanguages = geti18nLanguages('i18n');
 module.exports = (options) => {
     const DATAS = {
         VERSION: `'${utils.parseVersion()}'`,
-        DEBUG_INFO_ENABLED: options.env === 'development'//,
-        //AVAILABLE_LANGUAGES: JSON.stringify(availableLanguages)
+        DEBUG_INFO_ENABLED: options.env === 'development'
     };
     return {
         resolve: {
