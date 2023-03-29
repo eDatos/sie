@@ -8,23 +8,31 @@
 
     App.dataset.StructuralResourcesApi.prototype = {
 
-        getVariableElements: function(url, callback) {
+        getVariableElements: function(url, sucessCallback, alwaysCallback) {
             $.ajax({
                 url: url,
                 dataType: 'jsonp',
                 jsonp: "_callback"
             }).success(function (response) {
-                callback(response);
+                sucessCallback(response);
+            }).always(function (response) {
+                if (alwaysCallback != null) {
+                    alwaysCallback(response);
+                }
             });
         },
 
-        getCandidaturasCodelist: function (callback) {
+        getCandidaturasCodelist: function (successCallback, alwaysCallback) {
             $.ajax({
                 url: this.metadata.candidaturasCodelistUrl,
                 dataType: 'jsonp',
                 jsonp: "_callback"
             }).success(function (response) {
-                callback(response);
+                successCallback(response);
+            }).always(function (response) {
+                if (alwaysCallback != null) {
+                    alwaysCallback(response);
+                }
             });
         },
 

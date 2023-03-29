@@ -59,7 +59,11 @@ export class DocumentoService {
         const pieButton = document.querySelector('button[data-type="pie"]') as HTMLButtonElement;
         pieButton.click();
 
-        const svg = document.getElementById('hidden-svg').cloneNode(true) as SVGElement;
+        let svg = document.querySelector('#hidden-svg') as SVGElement;
+        if (svg == null) {
+            svg = document.querySelector('.dataset-visualization-visual-element svg') as SVGElement;
+        }
+        svg = svg.cloneNode(true) as SVGElement;
         svg.style.display = 'block';
         document.body.appendChild(svg);
 
