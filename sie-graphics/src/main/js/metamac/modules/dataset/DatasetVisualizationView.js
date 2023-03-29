@@ -32,7 +32,7 @@
                                 self.data.colors[code.id] = variableElements.variableElement.find(v => v.id === code.variableElement.id).renderingColor;
                             }
                             self.ve[self.currentElement].update();
-                            App.trigger('svg:loaded');
+                            App.trigger('graphic.visualizer:ready');
                         });
                     }
                 });
