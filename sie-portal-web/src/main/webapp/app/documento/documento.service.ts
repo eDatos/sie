@@ -59,7 +59,8 @@ export class DocumentoService {
         const pieButton = document.querySelector('button[data-type="pie"]') as HTMLButtonElement;
         pieButton.click();
 
-        const svg = document.getElementsByTagName('svg')[0].cloneNode(true) as SVGElement;
+        const svg = document.getElementById('hidden-svg').cloneNode(true) as SVGElement;
+        svg.style.display = 'block';
         document.body.appendChild(svg);
 
         Array.prototype.slice.call(svg.children).forEach((el) => {

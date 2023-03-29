@@ -208,7 +208,10 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 App.queryParams['type'] = 'dataset';
                 App.queryParams['multidatasetId'] = multidatasetId;
             },
-        ).subscribe(() => App.start());
+        ).subscribe(() => {
+            App.start();
+            App.on('svg:loaded', () => this.saveSvg());
+        });
     }
 
     private stopBackbone() {
@@ -310,5 +313,12 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             name: territory.name.text.find((text) => text.lang === 'es').value,
             granularity: territory.geographicGranularity.name.text.find((text) => text.lang === 'es').value,
         }
+    }
+
+    private saveSvg() {
+        const svg = document.getElementsByTagName('svg')[0].cloneNode(true) as SVGElement;
+        svg.setAttribute('id', 'hidden-svg');
+        svg.style.display = 'none';
+        document.body.appendChild(svg);
     }
 }
