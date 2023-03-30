@@ -60,7 +60,6 @@ export class DocumentoService {
         pieButton.click();
 
         svg = svg.cloneNode(true) as SVGElement;
-        svg.style.display = 'block';
         document.body.appendChild(svg);
 
         Array.prototype.slice.call(svg.children).forEach((el) => {
