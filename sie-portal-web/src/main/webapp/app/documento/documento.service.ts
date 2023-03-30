@@ -27,7 +27,7 @@ export class DocumentoService {
     descargarPdfResultadoElectoral(resultadoElectoral: ResultadoElectoral, svg: SVGElement): Observable<any> {
         const formData = new FormData();
         formData.append('resultadoElectoral', new Blob([JSON.stringify(resultadoElectoral)], { type: 'application/json' }));
-        formData.append('grafica', new Blob([this.sanitizeSvg(this.getSvg(svg).outerHTML)], { type: 'image/svg+xml' }));
+        formData.append('grafica', new Blob([this.sanitizeSvg(this.processSvg(svg).outerHTML)], { type: 'image/svg+xml' }));
         return this.http.post(`${this.resourceUrl}/resultado-electoral`, formData, { responseType: ResponseContentType.Blob });
     }
 
@@ -55,14 +55,10 @@ export class DocumentoService {
         FileSaver.saveAs(blob, filename);
     }
 
-    private getSvg(hiddenSvg?: SVGElement): SVGElement {
+    private processSvg(svg: SVGElement): SVGElement {
         const pieButton = document.querySelector('button[data-type="pie"]') as HTMLButtonElement;
         pieButton.click();
 
-        let svg = hiddenSvg;
-        if (svg == null) {
-            svg = document.querySelector('.dataset-visualization-visual-element svg') as SVGElement;
-        }
         svg = svg.cloneNode(true) as SVGElement;
         svg.style.display = 'block';
         document.body.appendChild(svg);
