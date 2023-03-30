@@ -47,7 +47,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     multidatasetId: string;
     dataset: DatasetProcesoElectoral;
 
-    hiddenSvg: SVGElement | null = null;
+    graphicSvg: SVGElement | null = null;
 
     constructor(
         private host: ElementRef,
@@ -129,7 +129,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 procesoElectoral: this.proceso,
                 data: this.parseDataset(dataset, this.lugar, this.proceso),
             };
-            this.documentoService.descargarPdfResultadoElectoral(resultadoElectoral, this.hiddenSvg).pipe(finalize(() => this.downloadingPdf = false)).subscribe(
+            this.documentoService.descargarPdfResultadoElectoral(resultadoElectoral, this.graphicSvg).pipe(finalize(() => this.downloadingPdf = false)).subscribe(
                 (response) => this.documentoService.saveToFileSystem(response),
                 () => this.alertService.error('error.cannotDownloadDocument'),
             );
@@ -318,6 +318,6 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private saveSvg() {
-        this.hiddenSvg = document.querySelector('.dataset-visualization-visual-element svg') as SVGElement;
+        this.graphicSvg = document.querySelector('.dataset-visualization-visual-element svg') as SVGElement;
     }
 }
