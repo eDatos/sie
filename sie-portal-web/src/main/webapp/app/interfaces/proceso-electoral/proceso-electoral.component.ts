@@ -47,7 +47,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     multidatasetId: string;
     dataset: DatasetProcesoElectoral;
 
-    private hiddenSvg: SVGElement | null = null;
+    hiddenSvg: SVGElement | null = null;
 
     constructor(
         private host: ElementRef,
@@ -318,8 +318,6 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private saveSvg() {
-        this.hiddenSvg = document.getElementsByTagName('svg')[0].cloneNode(true) as SVGElement;
-        this.hiddenSvg.setAttribute('id', 'hidden-svg');
-        this.hiddenSvg.style.display = 'none';
+        this.hiddenSvg = document.querySelector('.dataset-visualization-visual-element svg') as SVGElement;
     }
 }
