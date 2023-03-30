@@ -212,7 +212,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             },
         ).subscribe(() => {
             App.start();
-            App.on('graphic.visualizer:ready', this.saveSvg);
+            App.on('graphic.visualizer:ready', this.saveSvg, this);
         });
     }
 
