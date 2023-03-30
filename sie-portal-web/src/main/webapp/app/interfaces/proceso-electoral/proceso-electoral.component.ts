@@ -47,6 +47,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     multidatasetId: string;
     dataset: DatasetProcesoElectoral;
 
+    private hiddenSvg: SVGElement | null = null;
+
     constructor(
         private host: ElementRef,
         private activatedRoute: ActivatedRoute,
@@ -127,7 +129,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 procesoElectoral: this.proceso,
                 data: this.parseDataset(dataset, this.lugar, this.proceso),
             };
-            this.documentoService.descargarPdfResultadoElectoral(resultadoElectoral).pipe(finalize(() => this.downloadingPdf = false)).subscribe(
+            this.documentoService.descargarPdfResultadoElectoral(resultadoElectoral, this.hiddenSvg).pipe(finalize(() => this.downloadingPdf = false)).subscribe(
                 (response) => this.documentoService.saveToFileSystem(response),
                 () => this.alertService.error('error.cannotDownloadDocument'),
             );
@@ -316,9 +318,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private saveSvg() {
-        const svg = document.getElementsByTagName('svg')[0].cloneNode(true) as SVGElement;
-        svg.setAttribute('id', 'hidden-svg');
-        svg.style.display = 'none';
-        document.body.appendChild(svg);
+        this.hiddenSvg = document.getElementsByTagName('svg')[0].cloneNode(true) as SVGElement;
+        this.hiddenSvg.setAttribute('id', 'hidden-svg');
+        this.hiddenSvg.style.display = 'none';
     }
 }
