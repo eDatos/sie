@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.19.0.final using JasperReports Library version 6.19.0-646c68931cebf1a58bc65c4359d1f0ca223c5e94  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tablas" columnCount="2" printOrder="Horizontal" pageWidth="480" pageHeight="842" columnWidth="240" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d8e514a9-93fa-4e1b-88a9-4064dc8bd566">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tablas" columnCount="2" printOrder="Horizontal" pageWidth="480" pageHeight="842" columnWidth="240" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d8e514a9-93fa-4e1b-88a9-4064dc8bd566"
+resourceBundle="i18n.messages">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -10,6 +11,7 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="INT_FORMATTER" class="java.text.NumberFormat"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -22,7 +24,7 @@
 	<field name="nombre" class="java.lang.String"/>
 	<variable name="numberFormatter" class="java.text.NumberFormat">
 		<variableExpression><![CDATA[$V{numberFormatter}]]></variableExpression>
-		<initialValueExpression><![CDATA[java.text.NumberFormat.getNumberInstance(new java.util.Locale("es", "ES"))]]></initialValueExpression>
+		<initialValueExpression><![CDATA[$P{INT_FORMATTER}]]></initialValueExpression>
 	</variable>
 	<detail>
 		<band height="135" splitType="Stretch">
@@ -42,7 +44,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["- Electores"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["- " + $R{report.indicador.electores}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="140" y="23" width="40" height="14" forecolor="#3B3B3B" uuid="1ecaaf9d-21a8-4fee-aee5-b267651b9880"/>
@@ -56,7 +58,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["   - Votantes"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["   - " + $R{report.indicador.votantes}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="140" y="37" width="40" height="14" forecolor="#3B3B3B" uuid="46991ad5-248d-41ad-b326-5f1bf3040cb1"/>
@@ -77,7 +79,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["   - Abstención"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["   - " + $R{report.indicador.abstencion}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="140" y="51" width="40" height="14" forecolor="#3B3B3B" uuid="0afe7f1b-a8a2-4cfe-ba1d-74f94de978f0"/>
@@ -98,7 +100,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["   - Votos nulos"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["   - " + $R{report.indicador.votos_nulos}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="140" y="121" width="40" height="14" forecolor="#3B3B3B" uuid="270a49a5-3876-4b53-9224-f57c6845d239"/>
@@ -133,14 +135,14 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["      - Votos válidos en blanco"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["      - " + $R{report.indicador.votos_validos_blanco}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="93" width="135" height="14" forecolor="#3B3B3B" uuid="3940b501-4841-42c0-9849-dd57646eba76"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["      - Votos válidos a candidatura"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["      - " + $R{report.indicador.votos_validos_candidatura}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="140" y="93" width="40" height="14" forecolor="#3B3B3B" uuid="067eb90c-65e0-4459-af4e-8c8b74148e9d"/>
@@ -175,14 +177,14 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["   - Votos válidos"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["   - " + $R{report.indicador.votos_validos}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="65" width="135" height="14" forecolor="#3B3B3B" uuid="44f1acb4-2359-4a32-9a9d-ed2abc6b30bb"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["- Votos"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["- " + $R{report.indicador.votos}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="140" y="65" width="40" height="14" forecolor="#3B3B3B" uuid="6507b3ae-953a-46f4-bbbd-3bba764db140"/>

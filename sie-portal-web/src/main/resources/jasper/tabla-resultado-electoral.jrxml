@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tablas" printOrder="Horizontal" pageWidth="480" pageHeight="500" columnWidth="480" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d8e514a9-93fa-4e1b-88a9-4064dc8bd566">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tablas" printOrder="Horizontal" pageWidth="480" pageHeight="500" columnWidth="480" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d8e514a9-93fa-4e1b-88a9-4064dc8bd566"
+resourceBundle="i18n.messages">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -51,7 +52,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["- Electores"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["- " + $R{report.indicador.electores}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="23" width="40" height="14" forecolor="#3B3B3B" uuid="1ecaaf9d-21a8-4fee-aee5-b267651b9880"/>
@@ -65,7 +66,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["   - Votantes"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["   - " + $R{report.indicador.votantes}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="37" width="40" height="14" forecolor="#3B3B3B" uuid="46991ad5-248d-41ad-b326-5f1bf3040cb1"/>
@@ -79,7 +80,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["   - Abstención"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["   - " + $R{report.indicador.abstencion}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="51" width="40" height="14" forecolor="#3B3B3B" uuid="0afe7f1b-a8a2-4cfe-ba1d-74f94de978f0"/>
@@ -93,7 +94,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["   - Votos nulos"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["   - " + $R{report.indicador.votos_nulos}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="430" y="79" width="40" height="14" forecolor="#3B3B3B" uuid="270a49a5-3876-4b53-9224-f57c6845d239"/>
@@ -114,14 +115,14 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["      - Votos válidos en blanco"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["      - " + $R{report.indicador.votos_validos_blanco}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="260" y="51" width="170" height="14" forecolor="#3B3B3B" uuid="3940b501-4841-42c0-9849-dd57646eba76"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["      - Votos válidos a candidatura"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["      - " + $R{report.indicador.votos_validos_candidatura}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="430" y="51" width="40" height="14" forecolor="#3B3B3B" uuid="067eb90c-65e0-4459-af4e-8c8b74148e9d"/>
@@ -142,14 +143,14 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["   - Votos válidos"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["   - " + $R{report.indicador.votos_validos}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="260" y="23" width="170" height="14" forecolor="#3B3B3B" uuid="44f1acb4-2359-4a32-9a9d-ed2abc6b30bb"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["- Votos"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["- " + $R{report.indicador.votos}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="430" y="23" width="40" height="14" forecolor="#3B3B3B" uuid="6507b3ae-953a-46f4-bbbd-3bba764db140"/>
@@ -163,7 +164,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["- Tasa de participación (%)"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["- " + $R{report.indicador.tasa_participacion}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="65" width="40" height="14" forecolor="#3B3B3B" uuid="25cce714-f097-4a35-8f50-a218d6c9a5e4"/>
@@ -177,7 +178,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["- Tasa de participación en el primer avance (%)"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["- " + $R{report.indicador.tasa_participacion_a1}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="79" width="40" height="14" forecolor="#3B3B3B" uuid="69c5dfb7-fa26-4f68-8841-dd545c7c69df"/>
@@ -191,7 +192,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["- Tasa de participación en el segundo avance (%)"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["- " + $R{report.indicador.tasa_participacion_a2}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="93" width="40" height="14" forecolor="#3B3B3B" uuid="84863cec-672d-46f6-86ca-3f10f8885747"/>
@@ -205,7 +206,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["- Tasa de abstención (%)"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["- " + $R{report.indicador.tasa_abstencion}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="107" width="40" height="14" forecolor="#3B3B3B" uuid="ec6ffaef-7e9f-43d4-a750-5d40b56dc2f3"/>
@@ -219,7 +220,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["- Tasa de votos válidos (%)"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["- " + $R{report.indicador.tasa_votos_validos}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="430" y="93" width="40" height="14" forecolor="#3B3B3B" uuid="7b060522-1d90-4cb5-abcc-4ab5b16c8406"/>
@@ -233,7 +234,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["   - Tasa de votos válidos a candidaturas (%)"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["   - " + $R{report.indicador.tasa_votos_validos_candidatura}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="430" y="107" width="40" height="14" forecolor="#3B3B3B" uuid="32de2a65-6ad2-484d-99c8-d9d1bcade119"/>
@@ -247,7 +248,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["   - Tasa de votos válidos en blanco (%)"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["   - " + $R{report.indicador.tasa_votos_validos_blanco}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="430" y="121" width="40" height="14" forecolor="#3B3B3B" uuid="392d85ee-4515-4ed0-bd10-f9bcdf367bbf"/>
@@ -261,7 +262,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["- Tasa de votos nulos (%)"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["- " + $R{report.indicador.tasa_votos_nulos}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="430" y="135" width="40" height="14" forecolor="#3B3B3B" uuid="8416618d-6f39-49ee-8562-1e0b8a265fac"/>

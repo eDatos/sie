@@ -15,6 +15,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import es.gobcan.istac.sie.config.Constants;
@@ -24,6 +25,7 @@ import es.gobcan.istac.sie.web.rest.dto.EvolucionElectoralDTO;
 import es.gobcan.istac.sie.web.rest.dto.ResultadoElectoralDTO;
 import es.gobcan.istac.sie.web.rest.errors.CustomParameterizedException;
 import es.gobcan.istac.sie.web.rest.errors.ErrorConstants;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
@@ -57,6 +59,8 @@ public class DocumentoServiceImpl implements DocumentoService {
             parametros.put("dataSource", new JRBeanCollectionDataSource(evolucionElectoral.getProcesosElectorales()));
             parametros.put("SUBREPORT_DIR", RUTA_RELATIVA_DIRECTORIO_SUBINFORME);
             parametros.put("rutaLogo", new URI(this.getClass().getResource(Constants.CARPETA_JASPER_REPORT + LOGO_CABECERA).toString()).getPath());
+            parametros.put("INT_FORMATTER", getIntFormatter());
+            parametros.put(JRParameter.REPORT_LOCALE, new Locale(getLanguage()));
 
             return this.reportsService.generateFromTemplate(EVOLUCION_ELECTORAL_TEMPLATE, parametros, null);
         } catch (URISyntaxException e) {
@@ -83,6 +87,7 @@ public class DocumentoServiceImpl implements DocumentoService {
             parametros.put("RESULTADOS_ELECTORALES_PARTIDOS", new JRBeanCollectionDataSource(resultadoElectoral.getData()));
             parametros.put("INT_FORMATTER", getIntFormatter());
             parametros.put("FLOAT_FORMATTER", getFloatFormatter());
+            parametros.put(JRParameter.REPORT_LOCALE, new Locale(getLanguage()));
 
             return this.reportsService.generateFromTemplate(RESULTADO_ELECTORAL_TEMPLATE, parametros, null);
         } catch (URISyntaxException e) {
@@ -100,15 +105,19 @@ public class DocumentoServiceImpl implements DocumentoService {
         return calendar.get(Calendar.YEAR);
     }
 
+    private String getLanguage() {
+        Locale locale = LocaleContextHolder.getLocale();
+        return locale.toString().split("_")[0];
+    }
+
     private NumberFormat getIntFormatter() {
-        return NumberFormat.getNumberInstance(new java.util.Locale("es", "ES"));
+        return NumberFormat.getNumberInstance(new java.util.Locale(getLanguage()));
     }
 
     private NumberFormat getFloatFormatter() {
-        NumberFormat floatFormatter = NumberFormat.getNumberInstance(new java.util.Locale("es", "ES"));
+        NumberFormat floatFormatter = NumberFormat.getNumberInstance(new java.util.Locale(getLanguage()));
         floatFormatter.setMinimumFractionDigits(2);
         floatFormatter.setMaximumFractionDigits(2);
         return floatFormatter;
     }
 }
-
