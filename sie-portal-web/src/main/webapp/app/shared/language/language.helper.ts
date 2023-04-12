@@ -4,6 +4,7 @@ import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { MetadataService, ConfigService } from '../../config';
 import { CookieService } from 'ngx-cookie';
+import { GenericConfig } from '../../config/generic-config.interface';
 
 
 @Injectable()
@@ -53,5 +54,55 @@ export class JhiLanguageHelper {
             title = this.getPageTitle(routeSnapshot.firstChild) || title;
         }
         return title;
+    }
+
+    getLanguages(config: GenericConfig): Promise<string[]> {
+        return new Promise<string[]>((resolve) => {
+            this.metadataService.getPropertyById(config.metadata.internationalizationLanguages).subscribe((languages) => {
+                let internationalizationLanguages = languages.split(",");
+                resolve(internationalizationLanguages);
+            });
+        });
+    }
+
+    getInternationalizationCookieValue(config: GenericConfig): Promise<string> {
+        return new Promise<string>((resolve, reject) => {
+            this.metadataService.getPropertyById(config.metadata.internationalizationCookieKey).subscribe((cookieName) => {
+                if (cookieName !== null) {
+                    const cookies = Object.keys(this.cookieService.getAll()).map(key => (key));
+                    if (cookies.find((cookie) => cookie === cookieName) !== undefined) {
+                        resolve(this.cookieService.get(cookieName));
+                    }
+                }
+                reject(null);
+            });
+        });
+    }
+
+    getCurrentLocale(cookieValue: string, languages: string[]): Promise<string> {
+        return new Promise<string>((resolve) => {
+            if (cookieValue && this.findLanguageValue(languages, cookieValue)) {
+                resolve(cookieValue);
+            } else {
+                // No cookie
+                //  No cookie - show navigator language
+                const navigatorValue = this.findNavigatorValue(languages);
+                if (navigatorValue !== null) {
+                    resolve(navigatorValue);
+                } else {
+                    //  No navigator language - show default language
+                    resolve(languages[0]);
+                }
+            }
+        });
+    }
+
+    findNavigatorValue(internationalizationLanguages: string[]) {
+        return this.findLanguageValue(internationalizationLanguages, window.navigator.language);
+    }
+    
+    findLanguageValue(internationalizationLanguages: string[], value: string) {
+        let languageValue = internationalizationLanguages.find((element) => element === value);
+        return languageValue !== undefined ? languageValue : null;
     }
 }

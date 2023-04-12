@@ -19,6 +19,7 @@ import { finalize } from 'rxjs/operators';
 import { BasicDataset } from './basic-dataset';
 import { ElectoralResult } from './electoral-result';
 import { combineLatest } from 'rxjs/observable/combineLatest';
+import { JhiLanguageHelper } from '../../shared';
 
 declare var I18n: any;
 declare var App: any;
@@ -59,6 +60,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         private documentoService: DocumentoService,
         private alertService: JhiAlertService,
         private datasetResultadoElectoralService: DatasetResultadoElectoralService,
+        private jhiLanguageHelper: JhiLanguageHelper
     ) {
     }
 
@@ -160,14 +162,21 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private startBackbone(multidatasetId: string) {
-        I18n.defaultLocale = 'es';
-        I18n.locale = 'es';
+        const config = this.configService.getConfig();
+
+        this.jhiLanguageHelper.getLanguages(config).then((languages) => {
+            I18n.defaultLocale = languages[0];
+            this.jhiLanguageHelper.getInternationalizationCookieValue(config).then((cookieValue)=> {
+                this.jhiLanguageHelper.getCurrentLocale(cookieValue, languages).then((currentLocale) => {
+                    I18n.locale = currentLocale
+                });
+            });
+        });
 
         App.addRegions({
             mainRegion: '.metamac-container',
         });
-
-        const config = this.configService.getConfig();
+        
         Observable.zip(
             this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey),
             this.metadataService.getPropertyById(config.metadata.structuralResourcesKey),
