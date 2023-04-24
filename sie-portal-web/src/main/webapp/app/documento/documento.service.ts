@@ -59,17 +59,16 @@ export class DocumentoService {
         const pieButton = document.querySelector('button[data-type="pie"]') as HTMLButtonElement;
         pieButton.click();
 
-        const clonedSvg = svg.cloneNode(true) as SVGElement;
-        document.body.appendChild(clonedSvg);
+        document.body.appendChild(svg);
 
-        Array.prototype.slice.call(clonedSvg.children).forEach((el) => {
+        Array.prototype.slice.call(svg.children).forEach((el) => {
             if (!(el.classList.contains('highcharts-series-group') || el.classList.contains('highcharts-data-labels'))) {
                 el.remove();
             }
         });
 
         // https://typeofnan.dev/how-to-perfectly-fit-an-svg-to-its-contents-using-javascript/
-        const { xMin, xMax, yMin, yMax } = Array.prototype.slice.call(clonedSvg.children).filter((el) => el.getBBox).reduce((acc, el) => {
+        const { xMin, xMax, yMin, yMax } = Array.prototype.slice.call(svg.children).filter((el) => el.getBBox).reduce((acc, el) => {
           const { x, y, width, height } = el.getBBox();
             if (!acc.xMin || x < acc.xMin) {
                 acc.xMin = x;
@@ -87,12 +86,12 @@ export class DocumentoService {
         }, {});
 
         const viewbox = `${xMin} ${yMin} ${xMax - xMin + 15} ${yMax - yMin + 10}`;
-        clonedSvg.setAttribute('viewBox', viewbox);
-        clonedSvg.setAttribute('height', String(yMax - yMin + 10))
-        clonedSvg.setAttribute('width', String(xMax - xMin + 15))
+        svg.setAttribute('viewBox', viewbox);
+        svg.setAttribute('height', String(yMax - yMin + 10))
+        svg.setAttribute('width', String(xMax - xMin + 15))
 
-        document.body.removeChild(clonedSvg);
+        document.body.removeChild(svg);
 
-        return clonedSvg;
+        return svg;
     }
 }
