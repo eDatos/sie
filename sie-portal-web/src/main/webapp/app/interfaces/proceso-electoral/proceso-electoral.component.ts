@@ -318,6 +318,6 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private saveSvg() {
-        this.svgGraphic = document.querySelector('.dataset-visualization-visual-element svg') as SVGElement;
+        this.svgGraphic = document.querySelector('.dataset-visualization-visual-element svg').cloneNode(true) as SVGElement;
     }
 }
