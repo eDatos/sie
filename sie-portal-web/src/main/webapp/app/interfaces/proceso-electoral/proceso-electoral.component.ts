@@ -47,6 +47,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     multidatasetId: string;
     dataset: DatasetProcesoElectoral;
 
+    svgGraphic: SVGElement | null = null;
+
     constructor(
         private host: ElementRef,
         private activatedRoute: ActivatedRoute,
@@ -127,7 +129,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 procesoElectoral: this.proceso,
                 data: this.parseDataset(dataset, this.lugar, this.proceso),
             };
-            this.documentoService.descargarPdfResultadoElectoral(resultadoElectoral).pipe(finalize(() => this.downloadingPdf = false)).subscribe(
+            this.documentoService.descargarPdfResultadoElectoral(resultadoElectoral, this.svgGraphic).pipe(finalize(() => this.downloadingPdf = false)).subscribe(
                 (response) => this.documentoService.saveToFileSystem(response),
                 () => this.alertService.error('error.cannotDownloadDocument'),
             );
@@ -208,7 +210,10 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 App.queryParams['type'] = 'dataset';
                 App.queryParams['multidatasetId'] = multidatasetId;
             },
-        ).subscribe(() => App.start());
+        ).subscribe(() => {
+            App.start();
+            App.on('graphic.visualizer:ready', this.saveSvg, this);
+        });
     }
 
     private stopBackbone() {
@@ -310,5 +315,9 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             name: territory.name.text.find((text) => text.lang === 'es').value,
             granularity: territory.geographicGranularity.name.text.find((text) => text.lang === 'es').value,
         }
+    }
+
+    private saveSvg() {
+        this.svgGraphic = document.querySelector('.dataset-visualization-visual-element svg') as SVGElement;
     }
 }

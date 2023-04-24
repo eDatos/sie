@@ -24,10 +24,10 @@ export class DocumentoService {
         return this.http.post(`${this.resourceUrl}/evolucion-electoral`, formData, { responseType: ResponseContentType.Blob });
     }
 
-    descargarPdfResultadoElectoral(resultadoElectoral: ResultadoElectoral): Observable<any> {
+    descargarPdfResultadoElectoral(resultadoElectoral: ResultadoElectoral, svg: SVGElement): Observable<any> {
         const formData = new FormData();
         formData.append('resultadoElectoral', new Blob([JSON.stringify(resultadoElectoral)], { type: 'application/json' }));
-        formData.append('grafica', new Blob([this.sanitizeSvg(this.getSvg().outerHTML)], { type: 'image/svg+xml' }));
+        formData.append('grafica', new Blob([this.sanitizeSvg(this.processSvg(svg).outerHTML)], { type: 'image/svg+xml' }));
         return this.http.post(`${this.resourceUrl}/resultado-electoral`, formData, { responseType: ResponseContentType.Blob });
     }
 
@@ -55,21 +55,21 @@ export class DocumentoService {
         FileSaver.saveAs(blob, filename);
     }
 
-    private getSvg(): SVGElement {
+    private processSvg(svg: SVGElement): SVGElement {
         const pieButton = document.querySelector('button[data-type="pie"]') as HTMLButtonElement;
         pieButton.click();
 
-        const svg = document.getElementsByTagName('svg')[0].cloneNode(true) as SVGElement;
-        document.body.appendChild(svg);
+        const clonedSvg = svg.cloneNode(true) as SVGElement;
+        document.body.appendChild(clonedSvg);
 
-        Array.prototype.slice.call(svg.children).forEach((el) => {
+        Array.prototype.slice.call(clonedSvg.children).forEach((el) => {
             if (!(el.classList.contains('highcharts-series-group') || el.classList.contains('highcharts-data-labels'))) {
                 el.remove();
             }
         });
 
         // https://typeofnan.dev/how-to-perfectly-fit-an-svg-to-its-contents-using-javascript/
-        const { xMin, xMax, yMin, yMax } = Array.prototype.slice.call(svg.children).filter((el) => el.getBBox).reduce((acc, el) => {
+        const { xMin, xMax, yMin, yMax } = Array.prototype.slice.call(clonedSvg.children).filter((el) => el.getBBox).reduce((acc, el) => {
           const { x, y, width, height } = el.getBBox();
             if (!acc.xMin || x < acc.xMin) {
                 acc.xMin = x;
@@ -87,12 +87,12 @@ export class DocumentoService {
         }, {});
 
         const viewbox = `${xMin} ${yMin} ${xMax - xMin + 15} ${yMax - yMin + 10}`;
-        svg.setAttribute('viewBox', viewbox);
-        svg.setAttribute('height', String(yMax - yMin + 10))
-        svg.setAttribute('width', String(xMax - xMin + 15))
+        clonedSvg.setAttribute('viewBox', viewbox);
+        clonedSvg.setAttribute('height', String(yMax - yMin + 10))
+        clonedSvg.setAttribute('width', String(xMax - xMin + 15))
 
-        document.body.removeChild(svg);
+        document.body.removeChild(clonedSvg);
 
-        return svg;
+        return clonedSvg;
     }
 }
