@@ -71,7 +71,8 @@
             if (!_.isEmpty(App.endpoints["sharedVisualizerUrl"])) {
                 return App.endpoints["sharedVisualizerUrl"];
             } else {
-                return [window.location.protocol, '//', window.location.host, window.location.pathname].join('');
+                const hashWithoutPermalink = window.location.hash.replaceAll(/\/permalink.*/g, "");
+                return [window.location.protocol, '//', window.location.host, '/', hashWithoutPermalink].join('');
             }
         },
 

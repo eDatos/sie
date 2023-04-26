@@ -12,10 +12,10 @@
             this.permalinkId = this.options.permalinkId;
         },
 
-        getSharedVisualizerParams: function () {
+        getSharedVisualizerPath: function () {
             return [
                 'permalink',
-                '=',
+                '/',
                 this.permalinkId
             ].join('')
         },
@@ -23,8 +23,8 @@
         getSharedUrl: function () {
             return [
                 this.filterDimensions.metadata.getSharedVisualizerUrl(),
-                '?',
-                this.getSharedVisualizerParams()
+                '/',
+                this.getSharedVisualizerPath()
             ].join('');
         },
 

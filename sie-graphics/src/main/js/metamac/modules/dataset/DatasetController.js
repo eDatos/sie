@@ -122,7 +122,7 @@
                 self.visualizationView = new App.modules.dataset.DatasetView({ controller: self, filterDimensions: self.filterDimensions, metadata: self.metadata, data: self.data, filtersModel: self.filtersModel });
 
                 if (result.permalink) {
-                    self.filtersModel.importJSON(result.permalink.filters);
+                    //self.filtersModel.importJSON(result.permalink.filters); // FIXME: why are the filters empty when the permalink is generated?
                     self.filterDimensions.importJSONSelection(result.permalink.selection);
                     self.filterDimensions.importJSONState(result.permalink.state);
                     if (!window.location.hash.includes(result.permalink.hash)) {
