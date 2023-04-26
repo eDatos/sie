@@ -29,7 +29,8 @@ export interface GenericConfig {
         sieAdditionalInfoUrl,
         firstTerritoryHierarchyLevelKey,
         internationalizationCookieKey,
-        internationalizationLanguages
+        internationalizationLanguages,
+        captchaExternalApiUrlBase
     };
 
     baseUrl

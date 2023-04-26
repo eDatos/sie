@@ -20,8 +20,10 @@ I18n.translations.es = {
             map: "Mapa",
             mapbubble: "Mapa de símbolos",
             fullscreen: "Pantalla completa",
+            helpUrl: "Ayuda",
             share: "Compartir",
             download: "Descarga",
+            save: "Guardar",
             accept: "Aceptar",
             cancel: "Cancelar",
             selectAll: "Marcar",
@@ -37,8 +39,17 @@ I18n.translations.es = {
         download: {
             selection: "Descargar selección",
             all: "Descargar todo",
+            excel: {
+                disabled: "Este recurso no se puede descargar como XLSX porque excede el número de observaciones para este formato. Por favor, elija otra opción."
+            },
             modal: {
                 title: "Información de descarga"
+            },
+            attributes: {
+                modal: {
+                    title: "Incluir atributos",
+                    question: "¿Desea incluir los atributos en la descarga?"
+                }
             }
         },
         share: {
@@ -47,6 +58,20 @@ I18n.translations.es = {
         embed: {
             instructions: "Selecciona, copia y pega este código en tu página"
         },
+        save: {
+            button: {
+                submit: "Guardar",
+            },
+            label: {
+                name: "Nombre de la consulta personalizada",
+                notes: "Notas"
+            },
+            modal: {
+                title: "Guardar consulta personalizada",
+                success: "La consulta personalizada se ha guardado correctamente",
+                failure: "Ha habido un problema guardando la consulta personalizada"
+            }
+        },
         text: {
             fixedDimensions: "Valores fijados",
             leftDimensions: "Filas",
@@ -54,6 +79,7 @@ I18n.translations.es = {
             fixedDimensionX: "Dimensión fija",
             horizontalAxis: "Eje horizontal",
             columns: "Columnas",
+            bars: "Barras",
             lines: "Lineas",
             sectors: "Sectores",
             map: "Territorios",
@@ -90,6 +116,12 @@ I18n.translations.es = {
                     axisy: "Eje Y",
                     top: "Columnas"
                 },
+                bar: {
+                    fixed: "Fijadas",
+                    left: "Eje Y",
+                    axisy: "Eje X",
+                    top: "Barras"
+                },
                 line: {
                     fixed: "Fijadas",
                     left: "Eje X",
@@ -125,8 +157,7 @@ I18n.translations.es = {
             nomap: "Mapa no disponible"
         },
         noSelection: "Debe seleccionar al menos una categoría en cada dimensión",
-        loading: "Cargando datos...",
-        others: "Otros"
+        loading: "Cargando datos..."
     },
 
     entity: {
@@ -175,6 +206,8 @@ I18n.translations.es = {
             updateFrequency: "Frecuencia de actualización",
             statisticOfficiality: "Oficialidad estadística",
             bibliographicCitation: "Citación bibliográfica",
+            dataProviders: "Proveedores de datos",
+            dataProviderAnnotations: "Observaciones asociadas a los proveedores de datos",
             measureConcepts: {
                 title: "Qué miden los datos",
                 annotations: "Notas generales"
@@ -252,6 +285,100 @@ I18n.translations.es = {
                 MEASURE: "Medidas",
                 GEOGRAPHICAL: "Localización geográfica"
             }
+        }
+    },
+    login: {
+        button: {
+            submit: "Iniciar sesión",
+            register: "Registrarse"
+        },
+        label: {
+            email: "Correo electrónico",
+            password: "Contraseña"
+        },
+        modal: {
+            title: "Usuario",
+            success: "Ha iniciado sesión con éxito",
+            failure: "Ha habido un problema iniciando sesión"
+        },
+        error: {
+            client: "El correo electrónico o la contraseña no son válidos.",
+            server: "Ha habido un problema iniciando sesión. Inténtelo de nuevo más tarde."
+        }
+    },
+    logout: {
+        modal: {
+            title: "Cerrar sesión",
+            question: "¿Está seguro de que quiere cerrar sesión?"
+        }
+    },
+    modal: {
+        confirmation: {
+            button: {
+                confirm: "Sí",
+                reject: "No"
+            }
+        },
+        information: {
+            loginRequired: {
+                title: "Operación no válida",
+                message: "La operación que quiere realizar requiere que inicie sesión primero. ¿Desea iniciar sesión?"
+            }
+        },
+        permalinkConfig: {
+            button: {
+                submit: "Guardar",
+            },
+            label: {
+                version: {
+                    group: "Datos",
+                    last: "Actualizar los datos con posibles correcciones o modificaciones de los mismos",
+                    current: "Mostrar siempre los datos actuales",
+                },
+                data: {
+                    group: "Datos",
+                    update: "Actualizar los datos con nuevos periodos",
+                    selected: "Fijar los datos al periodo seleccionado",
+                },
+                dataReview: {
+                    group: "Revisiones de datos",
+                    update: "Actualizar con las revisiones de datos"
+                },
+                periods: {
+                    group: "Periodos",
+                    quantity: "Actualizar con los últimos n periodos:",
+                    date: "Actualizar a partir del siguiente periodo:",
+                    all: "Actualizar con todos los periodos",
+                }
+            },
+            error: {
+                quantity: "El campo númerico del apartado 'Actualizar con los últimos n periodos' debe ser un número entero positivo mayor o igual a uno.",
+                periods: "Debe seleccionar una de las opciones del apartado 'Periodos'."
+            },
+            info: {
+                noTemporalDimension: "Este recurso no permite elegir el periodo porque no tiene una dimensión temporal.",
+                noVersionUpdate: "Este recurso no permite consultar versiones anteriores."
+            }
+        },
+        embedConfig: {
+            label: {
+                title: "Título"
+            }
+        }
+    },
+    user: {
+        header: {
+            userAreaTooltip: "Área del usuario",
+            loginTooltip: "Iniciar sesión",
+            logoutTooltip: "Cerrar sesión"
+        }
+    },
+    captcha: {
+        button: {
+            text: "Enviar"
+        },
+        label: {
+            text: "Escriba el valor de la imagen mostrada encima"
         }
     }
 };
