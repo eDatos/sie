@@ -2,6 +2,7 @@
     "use strict";
 
     var DatasetPermalink = App.modules.dataset.DatasetPermalink;
+    var UserHeaderView = App.modules.user.UserHeaderView;
 
     App.namespace('App.modules.dataset.DatasetController');
 
@@ -15,12 +16,8 @@
             var self = this;
             this._loadMetadataAndData(datasetIdentifier).then(function () {
                 var routeParts = [];
-                /* 
-                   Hay problemas en firefox con los routers de angular y backbone.
-                   Para solucionar el problema, de manera temporal, se redirige a 
-                   visualization/pie en vez de a visualization
-                */
-               if (self.metadata.getAutoOpen()) {
+
+                if (self.metadata.getAutoOpen()) {
                     routeParts.push("visualization");
                     routeParts.push("pie");
                 } else {
@@ -112,18 +109,16 @@
 
             var self = this;
             async.parallel(loads, function (err, result) {
-                self.filtersModel = new App.modules.dataset.FiltersModel();
                 self.metadata = self.metadataRequest.getMetadataResponse();
                 self.filterDimensions = App.modules.dataset.filter.models.FilterDimensions.initializeWithMetadata(self.metadata);
                 self.data = self.dataRequest.getDataResponse(self.metadata, self.filterDimensions);
 
-                self.selectionView = new App.modules.selection.SelectionView({ controller: self, collection: self.filterDimensions, metadata: self.metadata });
+                self.selectionView = new App.modules.selection.SelectionView({ controller: self, collection: self.filterDimensions, metadata: self.metadata, data: self.data });
                 
-                self.visualizationView = new App.modules.dataset.DatasetView({ controller: self, filterDimensions: self.filterDimensions, metadata: self.metadata, data: self.data, filtersModel: self.filtersModel });
+                self.visualizationView = new App.modules.dataset.DatasetView({ controller: self, filterDimensions: self.filterDimensions, metadata: self.metadata, data: self.data });
 
                 if (result.permalink) {
-                    //self.filtersModel.importJSON(result.permalink.filters); // FIXME: why are the filters empty when the permalink is generated?
-                    self.filterDimensions.importJSONSelection(result.permalink.selection);
+                    self.filterDimensions.importJSONSelection(self.filterDimensions.preprocessSelectionWithDynamicSelection(result.permalink.selection, result.permalink.dynamicSelection));
                     self.filterDimensions.importJSONState(result.permalink.state);
                     if (!window.location.hash.includes(result.permalink.hash)) {
                         self.visualizationView.optionsModel.set('mustApplyVisualizationRestrictions', true);
@@ -134,6 +129,14 @@
                     deferred.resolve();
                 } else {
                     deferred.resolve();
+                }
+
+                if(!$(".visualizer-header-user") || !(App.endpoints["external-users"] && App.endpoints["external-users-web"])) {
+                    console.log("No se pudo cargar el header de usuarios");
+                } else {
+                    new UserHeaderView({
+                        el: $(".visualizer-header-user")
+                    }).render();
                 }
             });
 
