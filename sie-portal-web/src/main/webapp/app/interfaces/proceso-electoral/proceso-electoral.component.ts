@@ -275,12 +275,15 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
 
                     const arr = [v1.code, v2.code, v3.code];
                     const measure = arr[dimIds.indexOf('MEDIDAS')];
-                    data.push({
-                        measure: this.normalizeMeasureForPdf(measure),
-                        territory: this.getTerritoryInfo(dataset, "TERRITORIO", arr[dimIds.indexOf("TERRITORIO")]),
-                        candidacy: this.getName(dataset, 'CANDIDATURAS', arr[dimIds.indexOf('CANDIDATURAS')]),
-                        value: observations[k + cat3.length * (j + cat2.length * i)], // see https://eli.thegreenplace.net/2015/memory-layout-of-multi-dimensional-arrays
-                    });
+                    const observation = observations[k + cat3.length * (j + cat2.length * i)]; // see https://eli.thegreenplace.net/2015/memory-layout-of-multi-dimensional-arrays
+                    if (observation !== null) {
+                        data.push({
+                            measure: this.normalizeMeasureForPdf(measure),
+                            territory: this.getTerritoryInfo(dataset, "TERRITORIO", arr[dimIds.indexOf("TERRITORIO")]),
+                            candidacy: this.getName(dataset, 'CANDIDATURAS', arr[dimIds.indexOf('CANDIDATURAS')]),
+                            value: observation
+                        });
+                    }
                 }
             }
         }
