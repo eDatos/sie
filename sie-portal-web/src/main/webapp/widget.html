@@ -79,6 +79,7 @@
 			App.config['organisationUrn'] = organisationUrn[0].value;
 			App.config['geographicalGranularityUrn'] = geographicalGranularityUrn[0].value;
 			App.config['installationType'] = /*[[${metadata.getInstallationType()}]]*/ 'EXTERNAL';
+            App.config['firstTerritoryHierarchyLevel'] = /*[[${metadata.getFirstTerritoryHierarchyLevelKey()}]]*/ 'Canarias';
 
 			App.queryParams['agency'] = 'ISTAC';
 			App.queryParams['type'] = 'dataset';
