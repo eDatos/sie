@@ -141,7 +141,7 @@
         },
 
         _isExportableImage: function () {
-            return _.contains(['line', 'column', 'bar', 'map', 'mapbubble'], this.optionsModel.get('type'));
+            return _.contains(['line', 'column', 'map', 'mapbubble'], this.optionsModel.get('type'));
         },
 
         clickFilter: function (e) {
@@ -254,28 +254,13 @@
         clickEmbed: function (e) {
             e.preventDefault();
             var modalContentView = null;
-            var modal = null;
-            var title = I18n.t("filter.button.embed");
             if (this.isInternalPortal()) {
                 modalContentView = new DisabledFeatureInternalPortalView();
             } else {
-                if (DatasetPermalink.needsPermalink(this.filterDimensions)) {
-                    var self = this;
-                    modalContentView = new App.components.modal.EmbedConfigModalView({
-                        filterDimensions: this.filterDimensions,
-                        onSubmit: function (permalink, embedConfigExtraData) {
-                            modal.close();
-
-                            modalContentView = new App.modules.dataset.DatasetEmbedView({ permalinkId: permalink.id, filterDimensions: self.filterDimensions, title: embedConfigExtraData.title });
-                            modal = new App.components.modal.ModalView({ title: title, contentView: modalContentView });
-                            modal.show();
-                        },
-                    });
-                } else {
-                    modalContentView = new App.modules.dataset.DatasetEmbedView({ permalinkId: DatasetPermalink.getExistingPermalinkId(this.filterDimensions), filterDimensions: this.filterDimensions });
-                }
+                modalContentView = new App.modules.dataset.DatasetEmbedView({ filterDimensions: this.filterDimensions, filtersModel: this.filtersModel });
             }
-            modal = new App.components.modal.ModalView({ title: title, contentView: modalContentView });
+            var title = I18n.t("filter.button.embed");
+            var modal = new App.components.modal.ModalView({ title: title, contentView: modalContentView });
             modal.show();
         },
 

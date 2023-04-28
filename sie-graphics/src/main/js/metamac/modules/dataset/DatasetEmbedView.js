@@ -18,7 +18,7 @@
             var self = this;
             if (this.needsPermalink()) {
                 var savePermalinkRequest = this.savePermalink();
-                savePermalinkRequest.done(function (response) {
+                savePermalinkRequest.then(function (response) {
                     self.renderEmbed(response.id);
                 });
             } else {
