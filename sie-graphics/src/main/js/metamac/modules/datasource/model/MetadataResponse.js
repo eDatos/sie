@@ -72,7 +72,7 @@
                 return App.endpoints["sharedVisualizerUrl"];
             } else {
                 const hashWithoutPermalink = window.location.hash.replaceAll(/\/permalink.*/g, "");
-                return [window.location.protocol, '//', window.location.host, '/', hashWithoutPermalink].join('');
+                return new URL([window.location.protocol, '//', window.location.host, window.location.pathname, hashWithoutPermalink].join('')).href;
             }
         },
 
