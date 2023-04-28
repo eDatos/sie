@@ -157,6 +157,7 @@ I18n.translations.es = {
             nomap: "Mapa no disponible"
         },
         noSelection: "Debe seleccionar al menos una categoría en cada dimensión",
+        others: "Otros",
         loading: "Cargando datos..."
     },
 
