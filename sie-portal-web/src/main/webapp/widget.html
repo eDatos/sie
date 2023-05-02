@@ -6,9 +6,9 @@
 	<meta charset="utf-8" />
 	<title>SIE widget</title>
 
-	<link rel="stylesheet" th:href="@{/visualizer-static/metamac.css}" />
+	<link rel="stylesheet" th:href="@{/visualizer-static/metamac.css}" href="/visualizer-static/metamac.css" />
 
-	<script type="text/javascript" th:src="@{/visualizer-static/metamac.js}"></script>
+	<script type="text/javascript" th:src="@{/visualizer-static/metamac.js}" src="/visualizer-static/metamac.js" ></script>
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-501fc6f600bacbe9"></script>
 
 	<style>
@@ -42,10 +42,11 @@
 		var contextPath = /*[[${#httpServletRequest.getContextPath().toString()}]]*/ '';
 		sieBaseUrl = sieBaseUrl.replace(requestURI, contextPath) + "/";
 		var mappingUrl = /*[[@{/api/tipo-elecciones-dataset/}]]*/ "/api/tipo-elecciones-dataset/";
+		var captchaExternalApiUrlBase = /*[[${metadata.getCaptchaExternalApiUrlBase()}]]*/ 'metamac.portal.rest.external.authentication.captcha.url';
 
-		getPropertyById(statisticalVisualizerApiKey).done(function (response) {
+		getPropertyById(captchaExternalApiUrlBase).done(function (response) {
 			var metamacAuthenticationScript = document.createElement('script');
-			metamacAuthenticationScript.setAttribute('src', response.value + '/js/authentication.js');
+			metamacAuthenticationScript.setAttribute('src', response.value + '/authentication.js');
 			document.head.appendChild(metamacAuthenticationScript);
 		})
 
