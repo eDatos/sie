@@ -270,24 +270,7 @@
             if (this.isInternalPortal() && !this._isExportableImage()) {
                 modalContentView = new DisabledFeatureInternalPortalView();
             } else {
-                modalContentView = new App.modules.dataset.DatasetDownloadView({ 
-                    filterDimensions: this.filterDimensions, 
-                    visualizationType: this.optionsModel.get('type'),
-                    estimatedNumberOfCells: {
-                        all: this.data.getDataNonEmptyAttributesCount(), // Depends only on datarequest
-                        selection: this.dataSource.getSelectionNonEmptyAttributesCount() // Depends on datarequest and selected values
-                    },
-                    numberOfObservations: {
-                        all: {
-                            total: this.data.getDataObservationsCount(),
-                            tableSize: this.data.getDataTableSize()
-                        },
-                        selection: {
-                            total: this.dataSource.getSelectionObservationsCount(),
-                            tableSize: this.filterDimensions.getTableInfo().getTableSize()
-                        }
-                    }
-                });
+                modalContentView = new App.modules.dataset.DatasetDownloadView({ filterDimensions: this.filterDimensions, visualizationType: this.optionsModel.get('type') });
             }
             var title = I18n.t("filter.download.modal.title");
             var modal = new App.components.modal.ModalView({ title: title, contentView: modalContentView });
