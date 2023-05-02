@@ -42,10 +42,11 @@
 		var contextPath = /*[[${#httpServletRequest.getContextPath().toString()}]]*/ '';
 		sieBaseUrl = sieBaseUrl.replace(requestURI, contextPath) + "/";
 		var mappingUrl = /*[[@{/api/tipo-elecciones-dataset/}]]*/ "/api/tipo-elecciones-dataset/";
+		var captchaExternalApiUrlBase = /*[[${metadata.getCaptchaExternalApiUrlBase()}]]*/ 'metamac.portal.rest.external.authentication.captcha.url';
 
-		getPropertyById(statisticalVisualizerApiKey).done(function (response) {
+		getPropertyById(captchaExternalApiUrlBase).done(function (response) {
 			var metamacAuthenticationScript = document.createElement('script');
-			metamacAuthenticationScript.setAttribute('src', response.value + '/js/authentication.js');
+			metamacAuthenticationScript.setAttribute('src', response.value + '/authentication.js');
 			document.head.appendChild(metamacAuthenticationScript);
 		})
 
