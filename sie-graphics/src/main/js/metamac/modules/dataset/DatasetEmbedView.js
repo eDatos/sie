@@ -36,7 +36,7 @@
 
         savePermalink: function () {
             var permalinkContent = DatasetPermalink.buildPermalinkContent(this.filterDimensions, this.filtersModel);
-            return DatasetPermalink.savePermalink(permalinkContent, this.$el);
+            return DatasetPermalink.savePermalink(permalinkContent, this.$el[0]);
         },
 
         renderEmbed: function (permalinkId) {
