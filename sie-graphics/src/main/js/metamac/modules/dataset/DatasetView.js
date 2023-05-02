@@ -178,7 +178,7 @@
             if (type) {
                 this._toggleClassByChartType(type);
 
-                if (oldChart) {
+                if (oldChart && this.filterSidebarView) {
                     this.filterSidebarView.updateMultidatasetUrlsIfExist(oldChart, type);
                 }
                 this.visualizationView.activeVisualElement(type);
