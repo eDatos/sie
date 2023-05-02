@@ -327,7 +327,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private normalizeMeasureForPdf(measure: string): string {
-        return REPRESENTANTES_ELEGIDOS_TYPES.indexOf(measure) > 0 ? REPRESENTANTES_ELEGIDOS : measure;
+        return REPRESENTANTES_ELEGIDOS_TYPES.indexOf(measure) > -1 ? REPRESENTANTES_ELEGIDOS : measure;
     }
 }
 
