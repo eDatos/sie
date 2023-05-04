@@ -6,7 +6,7 @@
     <div class="no-metamac page-header">
         <h1 jhiTranslate="procesoElectoral.header.{{tipoElecciones}}" [translateValues]="{fecha: fecha}"></h1>
         <div class="buttons">
-            <button type="button" class="btn btn-sm btn-secondary" [title]="'evolucionElectoral.descargarPdf' | translate" (click)="descargarPdf($event)">
+            <button type="button" [disabled]="!svgGraphic" class="btn btn-sm btn-secondary" [title]="'evolucionElectoral.descargarPdf' | translate" (click)="descargarPdf($event)">
                 <em class="fa" [ngClass]="downloadingPdf ? 'fa-spinner fa-spin' : 'fa-download'"></em>
                 <span jhiTranslate="evolucionElectoral.descargarPdf">Descargar PDF</span>
             </button>

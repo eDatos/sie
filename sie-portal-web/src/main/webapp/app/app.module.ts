@@ -27,7 +27,6 @@ const APP_ROUTES = [
         SieDatasetServiceModule,
         SieInterfacesModule,
         SieSharedModule,
-
         // jhipster-needle-angular-add-module JHipster will add new module here
         RouterModule.forRoot(APP_ROUTES, { useHash: true })
     ],

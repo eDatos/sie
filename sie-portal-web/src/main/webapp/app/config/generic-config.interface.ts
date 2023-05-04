@@ -28,6 +28,9 @@ export interface GenericConfig {
         geographicalGranularityUrnKey,
         sieAdditionalInfoUrl,
         firstTerritoryHierarchyLevelKey,
+        internationalizationCookieKey,
+        internationalizationLanguages,
+        captchaExternalApiUrlBase
     };
 
     baseUrl

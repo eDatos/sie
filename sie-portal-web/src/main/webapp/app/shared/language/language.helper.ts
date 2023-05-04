@@ -2,14 +2,18 @@ import { Injectable, RendererFactory2, Renderer2 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { MetadataService, ConfigService } from '../../config';
+import { CookieService } from 'ngx-cookie';
 
-import { LANGUAGES } from './language.constants';
 
 @Injectable()
 export class JhiLanguageHelper {
     renderer: Renderer2 = null;
 
     constructor(
+        private configService: ConfigService,
+        private metadataService: MetadataService,
+        private cookieService: CookieService,
         private translateService: TranslateService,
         private rootRenderer: RendererFactory2,
         private titleService: Title,
@@ -17,10 +21,6 @@ export class JhiLanguageHelper {
     ) {
         this.renderer = rootRenderer.createRenderer(document.querySelector('html'), null);
         this.init();
-    }
-
-    getAll(): Promise<any> {
-        return Promise.resolve(LANGUAGES);
     }
 
     /**

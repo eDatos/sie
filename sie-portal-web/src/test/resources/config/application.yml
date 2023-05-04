@@ -106,3 +106,5 @@ application:
         organisationKey: metamac.organisation
         organisationUrnKey: metamac.organisation.urn
         geographicalGranularityUrnKey: metamac.default.codelist.geographical_granularity.urn
+        internationalizationCookieKey: metamac.internationalization.cookieId
+        internationalizationLanguages: metamac.edition.languages

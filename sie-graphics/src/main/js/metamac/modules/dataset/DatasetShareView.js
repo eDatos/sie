@@ -1,8 +1,6 @@
 (function () {
     "use strict";
 
-    var DatasetPermalink = App.modules.dataset.DatasetPermalink;
-
     App.namespace('App.modules.dataset.DatasetShareView');
 
     App.modules.dataset.DatasetShareView = Backbone.View.extend({
@@ -10,47 +8,29 @@
         template: App.templateManager.get("dataset/dataset-share"),
 
         initialize: function () {
-            this.filtersModel = this.options.filtersModel;
             this.filterDimensions = this.options.filterDimensions;
+            this.permalinkId = this.options.permalinkId;
         },
 
-        render: function () {
-            var self = this;
-            if (this.needsPermalink()) {
-                var savePermalinkRequest = this.savePermalink();
-                savePermalinkRequest.done(function (response) {
-                    self.renderShare(response.id);
-                });
-            } else {
-                self.renderShare(this.getExistingPermalinkId());
-            }
-        },
-
-        needsPermalink: function () {
-            return !(App.config.widget && this.getExistingPermalinkId());
-        },
-
-        getExistingPermalinkId: function () {
-            return this.filterDimensions.metadata.identifier().permalinkId;
-        },
-
-        savePermalink: function () {
-            var permalinkContent = DatasetPermalink.buildPermalinkContent(this.filterDimensions, this.filtersModel);
-            return DatasetPermalink.savePermalinkShowingCaptchaInElement(permalinkContent, this.$el);
-        },
-
-        getSharedUrl: function (permalinkId) {
+        getSharedVisualizerPath: function () {
             return [
-                App.endpoints["sie-base-url"],
-                window.location.hash.split("/").slice(0,6).join("/"),
-                '/permalink/',
-                permalinkId
+                'permalink',
+                '/',
+                this.permalinkId
+            ].join('')
+        },
+
+        getSharedUrl: function () {
+            return [
+                this.filterDimensions.metadata.getSharedVisualizerUrl(),
+                '/',
+                this.getSharedVisualizerPath()
             ].join('');
         },
 
-        renderShare: function (permalinkId) {
+        render: function () {
             var context = {
-                url: this.getSharedUrl(permalinkId),
+                url: this.getSharedUrl(),
                 title: this.filterDimensions.metadata.getTitle(),
                 description: this.filterDimensions.metadata.getDescription()
             };
@@ -66,13 +46,16 @@
                 description: context.description,
                 passthrough: {
                     twitter: {
-                        via: 'istac_es',
                         text: context.title
                     }
                 }
             };
 
-            addthis.toolbox(".addthis_toolbox", config, share);
+            if (App.config.socialTwitterVia) {
+                share.passthrough.twitter.via = App.config.socialTwitterVia;
+            }
+
+            addthis.toolbox(this.$el.find('.addthis_toolbox')[0], config, share);
         }
 
     });
