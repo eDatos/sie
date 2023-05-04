@@ -269,7 +269,6 @@
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7" isBold="true"/>
 								</textElement>
-								<!-- FIXME -->
 								<text><![CDATA[Representantes]]></text>
 							</staticText>
 						</jr:columnHeader>
