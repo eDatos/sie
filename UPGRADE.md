@@ -19,7 +19,7 @@ actualización de la versión 1.0.0 a la 2.0.0.*
 * Es necesario ejecutar los scripts SQL contenidos en la carpeta
 `etc/changes-from-release/2.4.0/db/common-metadata/postgresql`.
 
-## 2.1.2 a 2.4.0
+## 2.1.2 a 2.2.0
 
 * Es necesario ejecutar los scripts SQL contenidos en la carpeta
 `etc/changes-from-release/2.1.2/db/common-metadata/postgresql`.
