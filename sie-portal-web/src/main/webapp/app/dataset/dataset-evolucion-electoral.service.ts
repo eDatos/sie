@@ -6,6 +6,13 @@ import { Lugar } from './lugar.model';
 import { ProcesoElectoral } from './proceso-electoral.model';
 import { TipoEleccionesDatasetUrlService } from './tipo-elecciones-dataset-url.service';
 import { DatePipe } from '@angular/common';
+import {toInteger} from "@ng-bootstrap/ng-bootstrap/util/util";
+import {
+    FRONTERA_DATASET_ID,
+    FRONTERA_SEGREGATION_YEAR,
+    NEW_FRONTERA_ID,
+    OLD_FRONTERA_ID
+} from "../shared/constants/data.constants";
 
 const GEOGRAPHIC_DIMENSION = 'GEOGRAPHIC_DIMENSION';
 const FECHA_ELECCION = 'FECHA_ELECCION';
@@ -49,8 +56,17 @@ export class DatasetEvolucionElectoralService {
         return this.promesaLugares;
     }
 
-    getLugarById(id: string): Promise<Lugar> {
-        return this.getListaLugares().then((listaLugares) => listaLugares.find((element) => element.id === id));
+    async getLugarById(id: string, date?: string): Promise<Lugar> {
+        const listaLugares = await this.getListaLugares();
+        const lugar = listaLugares.find((element) => element.id === id);
+        if (!lugar && id.startsWith(FRONTERA_DATASET_ID) && date != null) {
+            if (toInteger(date) <= FRONTERA_SEGREGATION_YEAR) {
+                return listaLugares.find((el) => el.id === OLD_FRONTERA_ID);
+            } else {
+                return listaLugares.find((el) => el.id === NEW_FRONTERA_ID);
+            }
+        }
+        return lugar;
     }
 
     private doGetMetadata(): Observable<any> {
