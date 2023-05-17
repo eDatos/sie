@@ -27,6 +27,7 @@ export interface GenericConfig {
         organisationUrnKey,
         geographicalGranularityUrnKey,
         sieAdditionalInfoUrl,
+        sieExplanatoryVideoUrl,
         firstTerritoryHierarchyLevelKey,
         internationalizationCookieKey,
         internationalizationLanguages,

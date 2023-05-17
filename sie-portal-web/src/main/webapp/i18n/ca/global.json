@@ -6,7 +6,8 @@
             "elecciones": "ELECCIONS",
             "atlas": "ATLES"
         },
-        "additionalInfo": "Informació complementària"
+        "additionalInfo": "Informació complementària",
+        "explanatoryVideo": "Vídeo explicatiu"
     },
     "home": {
         "pageTitle": "Benvingut/da",
