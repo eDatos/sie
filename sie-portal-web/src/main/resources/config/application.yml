@@ -163,6 +163,7 @@ application:
         organisationUrnKey: metamac.organisation.urn
         geographicalGranularityUrnKey: metamac.default.codelist.geographical_granularity.urn
         sieAdditionalInfoUrl: metamac.sie.additional_info.url
+        sieExplanatoryVideoUrl: metamac.sie.explanatory_video.url
         firstTerritoryHierarchyLevelKey: metamac.sie.firstTerritoryHierarchyLevel
         internationalizationCookieKey: metamac.internationalization.cookieId
         internationalizationLanguages: metamac.edition.languages

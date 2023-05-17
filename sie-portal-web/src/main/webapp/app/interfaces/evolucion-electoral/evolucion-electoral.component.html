@@ -6,7 +6,7 @@
 
     <div *ngIf="lugar" class="page-header">
         <h1 jhiTranslate="evolucionElectoral.header" [translateValues]="{territorio: lugar.nombre}">Historia de la evolución electoral en</h1>
-        <jhi-additional-information-button></jhi-additional-information-button>
+        <jhi-information-button titleKey="global.additionalInfo" metadataObjKey="sieAdditionalInfoUrl"></jhi-information-button>
     </div>
 
     <div *ngIf="!tiposEleccion || !lugar" class="seleccion-territorio">

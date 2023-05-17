@@ -6,7 +6,8 @@
             "elecciones": "ELECCIONES",
             "atlas": "ATLAS"
         },
-        "additionalInfo": "Información complementaria"
+        "additionalInfo": "Información complementaria",
+        "explanatoryVideo": "Vídeo explicativo"
     },
     "home": {
         "pageTitle": "Bienvenido",

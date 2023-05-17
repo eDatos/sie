@@ -14,7 +14,12 @@ actualización de la versión 1.0.0 a la 2.0.0.*
 
 *Se deberá realizar primero la actualización de la versión 1.0.0 a la 2.0.0 y luego desde la 2.0.0 a la 3.0.0*
 
-## 2.1.2 a 2.2.0
+## 2.4.0 a 2.4.1-SNAPSHOT
+
+* Es necesario ejecutar los scripts SQL contenidos en la carpeta
+`etc/changes-from-release/2.4.0/db/common-metadata/postgresql`.
+
+## 2.1.2 a 2.4.0
 
 * Es necesario ejecutar los scripts SQL contenidos en la carpeta
 `etc/changes-from-release/2.1.2/db/common-metadata/postgresql`.
