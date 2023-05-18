@@ -209,4 +209,8 @@ export class EvolucionElectoralComponent implements OnInit {
             () => this.downloadingPdf = false,
         );
     }
+
+    getLugar(id: string) {
+        return id.startsWith('38013') ? '38013' : id;
+    }
 }

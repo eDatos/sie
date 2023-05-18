@@ -1,0 +1,4 @@
+export const FRONTERA_SEGREGATION_YEAR = 2007;
+export const FRONTERA_DATASET_ID = '38013';
+export const OLD_FRONTERA_ID = '38013_1912';
+export const NEW_FRONTERA_ID = '38013_2007';

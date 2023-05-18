@@ -63,6 +63,7 @@ public class ApplicationProperties {
         private String organisationUrnKey;
         private String geographicalGranularityUrnKey;
         private String sieAdditionalInfoUrl;
+        private String sieExplanatoryVideoUrl;
         private String firstTerritoryHierarchyLevelKey;
         private String internationalizationCookieKey;
         private String internationalizationLanguages;
@@ -114,6 +115,14 @@ public class ApplicationProperties {
 
         public String getSieAdditionalInfoUrl() {
             return sieAdditionalInfoUrl;
+        }
+
+        public String getSieExplanatoryVideoUrl() {
+            return sieExplanatoryVideoUrl;
+        }
+
+        public void setSieExplanatoryVideoUrl(String sieExplanatoryVideoUrl) {
+            this.sieExplanatoryVideoUrl = sieExplanatoryVideoUrl;
         }
 
         public void setStructuralResourcesExternalKey(String structuralResourcesExternalKey) {
