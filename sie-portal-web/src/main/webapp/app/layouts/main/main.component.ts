@@ -49,48 +49,16 @@ export class JhiMainComponent implements OnInit {
             }
         });
 
-        this.metadataService.getPropertyById(config.metadata.internationalizationLanguages).subscribe((languages) => {
-            let internationalizationLanguages = [];
-            internationalizationLanguages = languages.split(",");
-            this.translateService.setDefaultLang(internationalizationLanguages[0]);
-            this.metadataService.getPropertyById(config.metadata.internationalizationCookieKey).subscribe((cookieName) => {
-                let currentLocale = "";
-                const cookieValue = this.findCookieValue(cookieName);
-                if (cookieValue && this.findLanguageValue(internationalizationLanguages, cookieValue)) {
-                    currentLocale = cookieValue;
-                } else {
-                    // No cookie
-                    //  No cookie - show navigator language
-                    const navigatorValue = this.findNavigatorValue(internationalizationLanguages);
-                    if (navigatorValue !== null) {
-                        currentLocale = navigatorValue;
-                    } else {
-                        //  No navigator language - show default language
-                        currentLocale = internationalizationLanguages[0];
-                    }
-                }
-                this.languageService.changeLanguage(currentLocale);
-            });
-        });
-    }
-
-    private findCookieValue(cookieName: string) {
-        if (cookieName !== null) {
-            const cookies = Object.keys(this.cookieService.getAll()).map(key => (key));
-            if (cookies.find((cookie) => cookie === cookieName) !== undefined) {
-                return this.cookieService.get(cookieName);
+        this.jhiLanguageHelper.getLanguages(config).then((internationalizationLanguages) => {
+            if (internationalizationLanguages !== null) {
+                this.translateService.setDefaultLang(internationalizationLanguages[0]);
+                this.jhiLanguageHelper.getInternationalizationCookieValue(config).then((cookieValue)=> {
+                    this.jhiLanguageHelper.getCurrentLocale(cookieValue, internationalizationLanguages).then((currentLocale) => {
+                        this.languageService.changeLanguage(currentLocale);
+                    });
+                });
             }
-        }
-        return null;
-    }
-
-    private findNavigatorValue(internationalizationLanguages: string[]) {
-        return this.findLanguageValue(internationalizationLanguages, window.navigator.language);
-    }
-
-    private findLanguageValue(internationalizationLanguages: string[], value: string) {
-        let languageValue = internationalizationLanguages.find((element) => element === value);
-        return languageValue !== undefined ? languageValue : null;
+        });
     }
 
     private addGoogleAnalyticsScriptTag(googleAnalyticsTrackId: string) {
