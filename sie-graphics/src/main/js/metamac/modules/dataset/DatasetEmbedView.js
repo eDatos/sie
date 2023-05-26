@@ -18,7 +18,7 @@
             var self = this;
             if (this.needsPermalink()) {
                 var savePermalinkRequest = this.savePermalink();
-                savePermalinkRequest.done(function (response) {
+                savePermalinkRequest.then(function (response) {
                     self.renderEmbed(response.id);
                 });
             } else {
@@ -36,7 +36,7 @@
 
         savePermalink: function () {
             var permalinkContent = DatasetPermalink.buildPermalinkContent(this.filterDimensions, this.filtersModel);
-            return DatasetPermalink.savePermalinkShowingCaptchaInElement(permalinkContent, this.$el);
+            return DatasetPermalink.savePermalink(permalinkContent, this.$el);
         },
 
         renderEmbed: function (permalinkId) {

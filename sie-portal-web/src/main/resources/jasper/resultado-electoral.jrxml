@@ -46,7 +46,7 @@ resourceBundle="i18n.messages">
 		<field name="candidacy" class="java.lang.String"/>
 		<field name="results" class="java.util.Map"/>
 		<sortField name="votosValidosCandidatura" order="Descending" type="Variable"/>
-		<sortField name="diputadosDiputadasAutonomicos" order="Descending" type="Variable"/>
+		<sortField name="representantesElegidos" order="Descending" type="Variable"/>
 		<variable name="intFormatter" class="java.text.NumberFormat">
 			<variableExpression><![CDATA[$P{INT_FORMATTER}]]></variableExpression>
 		</variable>
@@ -59,8 +59,8 @@ resourceBundle="i18n.messages">
 		<variable name="porcentajeVotosCandidatura" class="java.lang.Double">
 			<variableExpression><![CDATA[Double.parseDouble($F{results}.get("PORCENTAJE_VOTOS_CANDIDATURA").toString())]]></variableExpression>
 		</variable>
-		<variable name="diputadosDiputadasAutonomicos" class="java.lang.Integer">
-			<variableExpression><![CDATA[$F{results}.get("DIPUTADOS_DIPUTADAS_AUTONOMICOS")]]></variableExpression>
+		<variable name="representantesElegidos" class="java.lang.Integer">
+			<variableExpression><![CDATA[$F{results}.get("REPRESENTANTES_ELEGIDOS")]]></variableExpression>
 		</variable>
 	</subDataset>
 	<parameter name="RUTA_LOGO" class="java.lang.String" isForPrompting="false"/>
@@ -249,7 +249,7 @@ resourceBundle="i18n.messages">
 								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
-								</textElement>
+								</textElement>								
 								<textFieldExpression><![CDATA[$V{porcentajeVotosCandidatura} != null ? $V{floatFormatter}.format($V{porcentajeVotosCandidatura}) + " %" : ""]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -270,6 +270,7 @@ resourceBundle="i18n.messages">
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7" isBold="true"/>
 								</textElement>
+								<!-- FIXME -->
 								<textFieldExpression><![CDATA[$R{report.resultado_electoral.table.representantes}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
@@ -287,7 +288,7 @@ resourceBundle="i18n.messages">
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$V{diputadosDiputadasAutonomicos} != null ? $V{intFormatter}.format($V{diputadosDiputadasAutonomicos}) : ""]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{representantesElegidos} != null ? $V{intFormatter}.format($V{representantesElegidos}) : ""]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

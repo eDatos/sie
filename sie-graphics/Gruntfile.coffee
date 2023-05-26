@@ -57,6 +57,10 @@ module.exports = (grunt) ->
                 paths.js + "/libs/select2.min.js"
                 paths.js + "/libs/moment.min.js"
 
+                # User
+                paths.js + "/metamac/modules/user/UserUtils.js"
+                paths.js + "/metamac/modules/user/UserHeaderView.js"
+
                 # Metamac libs
                 paths.js + "/metamac/libs/i18n.js"
                 paths.js + "/metamac/libs/DB.js"
@@ -85,6 +89,7 @@ module.exports = (grunt) ->
                 # DATASET MODULE
                 paths.modules + "/dataset/DatasetPermalink.js"
                 paths.modules + "/dataset/PermalinkBuilder.js"
+                paths.modules + "/dataset/DatasetDynamicSelectionBuilder.js"
                 paths.modules + "/dataset/DatasetActionsView.js"
                 paths.modules + "/dataset/DatasetExportView.js"
                 paths.modules + "/dataset/DatasetView.js"
@@ -135,6 +140,7 @@ module.exports = (grunt) ->
                 paths.js + "/metamac/components/select/SelectView.js"
                 paths.js + "/metamac/components/toggleable/ToggleableView.js"
                 paths.js + "/metamac/components/modal/ModalView.js"
+                paths.js + "/metamac/components/modal/PermalinkConfigModalView.js"
 
                 # filters
                 paths.js + "/metamac/modules/dataset/filter/FilterOptionsDimensionRestriction.js"

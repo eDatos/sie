@@ -30,8 +30,8 @@ export class JhiMainComponent implements OnInit {
 
     ngOnInit() {
         const config = this.configService.getConfig();
-        this.metadataService.getPropertyById(config.metadata.statisticalVisualizerApiKey).subscribe((statisticalVisualizerApiEndpoint) => {
-            this.addMetamacAuthenticationScriptTag(statisticalVisualizerApiEndpoint);
+        this.metadataService.getPropertyById(config.metadata.captchaExternalApiUrlBase).subscribe((captchaExternalApiUrlBase) => {
+            this.addMetamacAuthenticationScriptTag(captchaExternalApiUrlBase);
         });
 
         this.metadataService.getPropertyById(config.metadata.googleTrackingIdKey).subscribe((googleAnalyticsTrackId) => {
@@ -70,7 +70,7 @@ export class JhiMainComponent implements OnInit {
 
     private addMetamacAuthenticationScriptTag(baseUrl: string) {
         const metamacAuthenticationScript = document.createElement('script');
-        metamacAuthenticationScript.setAttribute('src', baseUrl + '/js/authentication.js');
+        metamacAuthenticationScript.setAttribute('src', baseUrl + '/authentication.js');
         document.head.appendChild(metamacAuthenticationScript);
     }
 

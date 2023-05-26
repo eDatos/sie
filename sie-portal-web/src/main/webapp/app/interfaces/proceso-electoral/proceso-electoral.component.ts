@@ -20,6 +20,7 @@ import { BasicDataset } from './basic-dataset';
 import { ElectoralResult } from './electoral-result';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { JhiLanguageHelper } from '../../shared';
+import { REPRESENTANTES_ELEGIDOS, REPRESENTANTES_ELEGIDOS_TYPES } from '../../shared';
 
 declare var I18n: any;
 declare var App: any;
@@ -47,6 +48,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     lugar: Lugar;
     multidatasetId: string;
     dataset: DatasetProcesoElectoral;
+
+    svgGraphic: SVGElement | null = null;
 
     constructor(
         private host: ElementRef,
@@ -127,9 +130,9 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             const resultadoElectoral: ResultadoElectoral = {
                 territorio: this.lugar,
                 procesoElectoral: this.proceso,
-                data: this.parseDataset(dataset, this.lugar, this.proceso),
+                data: this.parseDatasetForPdf(dataset, this.lugar),
             };
-            this.documentoService.descargarPdfResultadoElectoral(resultadoElectoral).pipe(finalize(() => this.downloadingPdf = false)).subscribe(
+            this.documentoService.descargarPdfResultadoElectoral(resultadoElectoral, this.svgGraphic).pipe(finalize(() => this.downloadingPdf = false)).subscribe(
                 (response) => this.documentoService.saveToFileSystem(response),
                 () => this.alertService.error('error.cannotDownloadDocument'),
             );
@@ -217,7 +220,10 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 App.queryParams['type'] = 'dataset';
                 App.queryParams['multidatasetId'] = multidatasetId;
             },
-        ).subscribe(() => App.start());
+        ).subscribe(() => {
+            App.start();
+            App.on('graphic.visualizer:ready', this.saveSvg, this);
+        });
     }
 
     private stopBackbone() {
@@ -238,7 +244,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     /**
      * Converts the dataset to a simple table with the name of the party and the data of the elections
      */
-    private parseDataset(dataset: BasicDataset, territory: Lugar, electoralProcessData: ProcesoElectoral): ElectoralResult[] {
+    private parseDatasetForPdf(dataset: BasicDataset, territory: Lugar): ElectoralResult[] {
         // parse the string of observations to an array of numbers
         const observations = dataset.data.observations.split(' | ').map((observation) => {
             if (observation.length === 0) {
@@ -277,12 +283,16 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                     const v3 = cat3[k];
 
                     const arr = [v1.code, v2.code, v3.code];
-                    data.push({
-                        measure: arr[dimIds.indexOf('MEDIDAS')],
-                        territory: this.getTerritoryInfo(dataset, "TERRITORIO", arr[dimIds.indexOf("TERRITORIO")]),
-                        candidacy: this.getName(dataset, 'CANDIDATURAS', arr[dimIds.indexOf('CANDIDATURAS')]),
-                        value: observations[k + cat3.length * (j + cat2.length * i)], // see https://eli.thegreenplace.net/2015/memory-layout-of-multi-dimensional-arrays
-                    });
+                    const measure = arr[dimIds.indexOf('MEDIDAS')];
+                    const observation = observations[k + cat3.length * (j + cat2.length * i)]; // see https://eli.thegreenplace.net/2015/memory-layout-of-multi-dimensional-arrays
+                    if (observation !== null) {
+                        data.push({
+                            measure: this.normalizeMeasureForPdf(measure),
+                            territory: this.getTerritoryInfo(dataset, "TERRITORIO", arr[dimIds.indexOf("TERRITORIO")]),
+                            candidacy: this.getName(dataset, 'CANDIDATURAS', arr[dimIds.indexOf('CANDIDATURAS')]),
+                            value: observation
+                        });
+                    }
                 }
             }
         }
@@ -320,4 +330,13 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             granularity: territory.geographicGranularity.name.text.find((text) => text.lang === 'es').value,
         }
     }
+
+    private saveSvg() {
+        this.svgGraphic = document.querySelector('.dataset-visualization-visual-element svg').cloneNode(true) as SVGElement;
+    }
+
+    private normalizeMeasureForPdf(measure: string): string {
+        return REPRESENTANTES_ELEGIDOS_TYPES.indexOf(measure) > 0 ? REPRESENTANTES_ELEGIDOS : measure;
+    }
 }
+

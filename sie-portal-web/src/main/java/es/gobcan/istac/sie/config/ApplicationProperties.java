@@ -66,6 +66,7 @@ public class ApplicationProperties {
         private String firstTerritoryHierarchyLevelKey;
         private String internationalizationCookieKey;
         private String internationalizationLanguages;
+        private String captchaExternalApiUrlBase;
 
         public String getEndpoint() {
             return endpoint;
@@ -269,6 +270,14 @@ public class ApplicationProperties {
 
         public void setInternationalizationLanguages(String internationalizationLanguages) {
             this.internationalizationLanguages = internationalizationLanguages;
+        }
+
+        public String getCaptchaExternalApiUrlBase() {
+            return captchaExternalApiUrlBase;
+        }
+
+        public void setCaptchaExternalApiUrlBase(String captchaExternalApiUrlBase) {
+            this.captchaExternalApiUrlBase = captchaExternalApiUrlBase;
         }
     }
 }
