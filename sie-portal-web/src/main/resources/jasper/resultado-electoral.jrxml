@@ -270,7 +270,6 @@ resourceBundle="i18n.messages">
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7" isBold="true"/>
 								</textElement>
-								<!-- FIXME -->
 								<textFieldExpression><![CDATA[$R{report.resultado_electoral.table.representantes}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>

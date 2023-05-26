@@ -36,13 +36,13 @@
 
         savePermalink: function () {
             var permalinkContent = DatasetPermalink.buildPermalinkContent(this.filterDimensions, this.filtersModel);
-            return DatasetPermalink.savePermalink(permalinkContent, this.$el);
+            return DatasetPermalink.savePermalink(permalinkContent, this.$el[0]);
         },
 
         renderEmbed: function (permalinkId) {
             var context = {
                 baseUrl: App.endpoints["sie-base-url"],
-                hash: window.location.hash.split("/").slice(0,6).join("/"),
+                hash: window.location.hash.split("/").slice(0,6).join("/"), // Subpath inside SIE
                 permalink: permalinkId
             };
             this.$el.html(this.template(context));

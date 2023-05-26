@@ -21,6 +21,7 @@ import { ElectoralResult } from './electoral-result';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { JhiLanguageHelper } from '../../shared';
 import { REPRESENTANTES_ELEGIDOS, REPRESENTANTES_ELEGIDOS_TYPES } from '../../shared';
+import {FRONTERA_DATASET_ID} from "../../shared/constants/data.constants";
 
 declare var I18n: any;
 declare var App: any;
@@ -28,7 +29,7 @@ declare var Backbone: any;
 
 export const METAMAC_CSS_LINK = './visualizer-static/metamac.css';
 export const METAMAC_CSS_REL = 'stylesheet';
-const TIPO_PROCESO_ELECTORAL_REGEX = /([A-Za-z_]+)\_(\d{4}).*/;
+export const TIPO_PROCESO_ELECTORAL_REGEX = /([A-Za-z_]+)\_(\d{4}).*/;
 
 @Component({
     selector: 'jhi-proceso-electoral',
@@ -75,9 +76,6 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 this.lugarId = url[1].path;
             }
 
-            this.updateLugar(this.lugarId);
-            this.updateProceso(params.idProcesoElectoral);
-
             const matchResult = params.idProcesoElectoral.match(TIPO_PROCESO_ELECTORAL_REGEX);
             if (!matchResult) {
                 this.router.navigate(['not-found'], { skipLocationChange: true });
@@ -93,13 +91,13 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private updateProceso(idProcesoElectoral: string) {
-        this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(this.lugarId).then((listaProcesoElectoral) => {
+        this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(this.lugar.id).then((listaProcesoElectoral) => {
             this.proceso = listaProcesoElectoral.find((proceso) => proceso.id === idProcesoElectoral);
         });
     }
 
     private updateLugar(lugarId: string) {
-        this.datasetEvolucionElectoralService.getLugarById(lugarId).then((result) => {
+        return this.datasetEvolucionElectoralService.getLugarById(lugarId, this.fecha).then((result) => {
             if (!result) {
                 this.alertService.error('lugar.errorNoEncontrado', { codigo: lugarId });
                 throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: lugarId }));
@@ -119,6 +117,9 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
 
     transition(lugarId) {
         const urlSegments = this.activatedRoute.parent.snapshot.url;
+        if (lugarId.startsWith(FRONTERA_DATASET_ID)) {
+            lugarId = FRONTERA_DATASET_ID;
+        }
         window.location.hash = window.location.hash.replace(urlSegments[1].path, lugarId);
     }
 
@@ -159,6 +160,9 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         this.dataset = this.multidataset.datasetList.find((element) => element.identifier === idProcesoElectoral);
         if (this.dataset) {
             this.fecha = idProcesoElectoral.match(TIPO_PROCESO_ELECTORAL_REGEX)[2];
+            this.updateLugar(this.lugarId).then(() => {
+                this.updateProceso(idProcesoElectoral);
+            });
         } else {
             throw new Error(this.translateService.instant('procesoElectoral.errorNoEncontrado', { id: idProcesoElectoral }));
         }
@@ -336,7 +340,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private normalizeMeasureForPdf(measure: string): string {
-        return REPRESENTANTES_ELEGIDOS_TYPES.indexOf(measure) > 0 ? REPRESENTANTES_ELEGIDOS : measure;
+        return REPRESENTANTES_ELEGIDOS_TYPES.indexOf(measure) > -1 ? REPRESENTANTES_ELEGIDOS : measure;
     }
 }
 
