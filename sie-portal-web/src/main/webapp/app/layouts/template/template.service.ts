@@ -17,7 +17,7 @@ export class TemplateService {
     getNavbar(): Observable<string> {
         const config = this.configService.getConfig();
         return this.metadataService.getPropertyById(config.metadata.navbarPathKey).flatMap((endpoint) => {
-            return this.http.get(`${endpoint}`).map((res: Response) => res.text());
+            return this.http.get(`${endpoint}`, {params: {appName: 'Sistema de Información Electoral', enableAuthentication: null}}).map((res: Response) => res.text());
         });
     }
 
