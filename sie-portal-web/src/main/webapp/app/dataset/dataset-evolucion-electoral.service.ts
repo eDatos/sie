@@ -142,10 +142,17 @@ export class DatasetEvolucionElectoralService {
         return listaProcesosConDatos.sort((proceso1, proceso2) => {
             const ordenPorProceso = this.tipoEleccionesToNumber(proceso1.tipoProcesoElectoral) - this.tipoEleccionesToNumber(proceso2.tipoProcesoElectoral);
             if (ordenPorProceso === 0) {
-                return proceso1.fechaEleccion.getTime() - proceso2.fechaEleccion.getTime();
-            } else {
-                return ordenPorProceso;
+                const time = proceso1.fechaEleccion.getTime() - proceso2.fechaEleccion.getTime();
+                if (time !== 0) {
+                    return time;
+                } else if (proceso1.id < proceso2.id) {
+                    return 1;
+                } else if (proceso1.id > proceso2.id) {
+                    return -1;
+                }
+                return 0;
             }
+            return ordenPorProceso;
         });
     }
 
