@@ -145,9 +145,9 @@ export class DatasetEvolucionElectoralService {
                 const time = proceso1.fechaEleccion.getTime() - proceso2.fechaEleccion.getTime();
                 if (time !== 0) {
                     return time;
-                } else if (proceso1.id < proceso2.id) {
+                } else if (proceso1.nombre < proceso2.nombre) {
                     return 1;
-                } else if (proceso1.id > proceso2.id) {
+                } else if (proceso1.nombre > proceso2.nombre) {
                     return -1;
                 }
                 return 0;
