@@ -1,6 +1,7 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { TemplateService } from '../template';
-import { ConfigService } from '../../config';
+import {Component, ComponentFactoryResolver, ElementRef, OnInit, Renderer2, ViewContainerRef} from '@angular/core';
+import {TemplateService} from '../template';
+import {ConfigService} from '../../config';
+import {TerritorioAutocompleteComponent} from "../../shared";
 
 declare var setNavbarMode: Function;
 
@@ -9,14 +10,18 @@ declare var setNavbarMode: Function;
     templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit {
-
+    static readonly TITLE_NAVBAR_ID = 'title-bar';
     public navbar = '';
 
     constructor(
         private elementRef: ElementRef,
         private templateService: TemplateService,
-        private configService: ConfigService
-    ) { }
+        private configService: ConfigService,
+        private viewContainerRef: ViewContainerRef,
+        private renderer: Renderer2,
+        private componentFactoryResolver: ComponentFactoryResolver,
+    ) {
+    }
 
     ngOnInit() {
         this.templateService.getNavbar().subscribe((navbarHtml) => {
@@ -25,8 +30,18 @@ export class NavbarComponent implements OnInit {
                 this.reinsertScripts();
                 const config = this.configService.getConfig();
                 setNavbarMode(config.metadata.installationType);
+                this.initializeNavbarComponents();
             });
         });
+
+    }
+
+    private initializeNavbarComponents() {
+        const componentRef = this.viewContainerRef.createComponent(this.componentFactoryResolver.resolveComponentFactory(TerritorioAutocompleteComponent));
+        this.renderer.appendChild(
+            document.getElementById(NavbarComponent.TITLE_NAVBAR_ID),
+            componentRef.location.nativeElement
+        );
     }
 
     private reinsertScripts() {

@@ -77,6 +77,9 @@ import { InformationButtonComponent } from './additional-information-button/info
         SpinnerComponent,
         StepsComponent,
         InformationButtonComponent,
+    ],
+    entryComponents: [
+        TerritorioAutocompleteComponent
     ]
 })
 export class SieSharedCommonModule { }
