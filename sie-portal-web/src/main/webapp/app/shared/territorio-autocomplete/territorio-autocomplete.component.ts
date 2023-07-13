@@ -62,7 +62,7 @@ export class TerritorioAutocompleteComponent implements OnInit {
         })
     }
 
-    private updateLugar(lugarId: string) {
+    updateLugar(lugarId: string) {
         if (lugarId) {
             if (this.loadOnlyDatasetTerritories && lugarId.startsWith(FRONTERA_DATASET_ID)) {
                 const date = this.router.url.match(TIPO_PROCESO_ELECTORAL_REGEX)[2];
@@ -93,7 +93,7 @@ export class TerritorioAutocompleteComponent implements OnInit {
             const lugarId = url[2];
             const questionCharIndex = lugarId.indexOf('?')
             if (questionCharIndex !== -1) {
-                return lugarId.substr(0, questionCharIndex);
+                return lugarId.substring(0, questionCharIndex);
             }
             return lugarId;
         }

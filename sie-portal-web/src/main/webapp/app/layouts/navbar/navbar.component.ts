@@ -11,6 +11,7 @@ declare var setNavbarMode: Function;
 })
 export class NavbarComponent implements OnInit {
     static readonly TITLE_NAVBAR_ID = 'title-bar';
+    static readonly APP_HEADER_CONTENT_ID = 'istac-app-header-content';
     public navbar = '';
 
     constructor(
@@ -38,10 +39,10 @@ export class NavbarComponent implements OnInit {
 
     private initializeNavbarComponents() {
         const componentRef = this.viewContainerRef.createComponent(this.componentFactoryResolver.resolveComponentFactory(TerritorioAutocompleteComponent));
-        this.renderer.appendChild(
+        this.renderer.insertBefore(
             document.getElementById(NavbarComponent.TITLE_NAVBAR_ID),
-            componentRef.location.nativeElement
-        );
+            componentRef.location.nativeElement,
+            document.getElementById(NavbarComponent.APP_HEADER_CONTENT_ID));
     }
 
     private reinsertScripts() {
