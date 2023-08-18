@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.19.0.final using JasperReports Library version 6.19.0-646c68931cebf1a58bc65c4359d1f0ca223c5e94  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resultado_electoral" pageWidth="595" pageHeight="842" columnWidth="483" leftMargin="56" rightMargin="56" topMargin="56" bottomMargin="20" whenResourceMissingType="Empty" uuid="eb5828a7-98b5-4cd8-88a2-625a5a8842b7">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resultado_electoral" pageWidth="595" pageHeight="842" columnWidth="483" leftMargin="56" rightMargin="56" topMargin="56" bottomMargin="20" whenResourceMissingType="Empty" uuid="eb5828a7-98b5-4cd8-88a2-625a5a8842b7"
+resourceBundle="i18n.messages">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.report.description" value=""/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
@@ -99,7 +100,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Resultados de las elecciones " + $P{TIPO_ELECCIONES} + " de " + $P{ANNO_ELECCIONES}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$R{report.resultado_electoral.header} + " " + $P{TIPO_ELECCIONES} + " " + $R{report.resultado_electoral.header.de} + " " + $P{ANNO_ELECCIONES}]]></textFieldExpression>
 			</textField>
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="1" y="69" width="479" height="170" uuid="fbd62366-e286-4664-a5e3-f3b2d6e15f07"/>
@@ -150,14 +151,14 @@
 								<bottomPen lineWidth="0.1" lineStyle="Solid" lineColor="#BABABA"/>
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
-							<staticText>
+							<textField>
 								<reportElement x="0" y="0" width="270" height="17" forecolor="#FFFFFF" uuid="b0226b83-75fb-43f1-8228-ca39dcce3373"/>
 								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
 								<textElement textAlignment="Left" verticalAlignment="Middle">
 									<font size="7" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Candidatura]]></text>
-							</staticText>
+								<textFieldExpression><![CDATA[$R{report.resultado_electoral.table.candidatura}]]></textFieldExpression>
+							</textField>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="17">
 							<box>
@@ -187,14 +188,14 @@
 								<bottomPen lineWidth="0.1" lineStyle="Solid" lineColor="#BABABA"/>
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
-							<staticText>
+							<textField>
 								<reportElement x="0" y="0" width="70" height="17" forecolor="#FFFFFF" uuid="3545cc57-17fa-4211-83f1-bcf49d03730a"/>
 								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Votos]]></text>
-							</staticText>
+								<textFieldExpression><![CDATA[$R{report.resultado_electoral.table.votos}]]></textFieldExpression>
+							</textField>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="17">
 							<box>
@@ -226,14 +227,14 @@
 								<bottomPen lineWidth="0.1" lineStyle="Solid" lineColor="#BABABA"/>
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
-							<staticText>
+							<textField>
 								<reportElement x="0" y="0" width="70" height="17" forecolor="#FFFFFF" uuid="c7fa007c-aa2c-41be-a330-9b0badb1cb26"/>
 								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7" isBold="true"/>
 								</textElement>
-								<text><![CDATA[% candidatura]]></text>
-							</staticText>
+								<textFieldExpression><![CDATA[$R{report.resultado_electoral.table.porcentaje_candidatura}]]></textFieldExpression>
+							</textField>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="17">
 							<box>
@@ -263,14 +264,14 @@
 								<bottomPen lineWidth="0.1" lineStyle="Solid" lineColor="#BABABA"/>
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
-							<staticText>
+							<textField>
 								<reportElement x="0" y="0" width="70" height="17" forecolor="#FFFFFF" uuid="a9ad50e2-f61b-4b3f-9ca9-6150c50eec4b"/>
 								<box topPadding="2" leftPadding="5" bottomPadding="3" rightPadding="5"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Representantes]]></text>
-							</staticText>
+								<textFieldExpression><![CDATA[$R{report.resultado_electoral.table.representantes}]]></textFieldExpression>
+							</textField>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="17">
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
