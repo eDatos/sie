@@ -17,7 +17,6 @@ import {toInteger} from '@ng-bootstrap/ng-bootstrap/util/util';
     templateUrl: './territorio-autocomplete.component.html'
 })
 export class TerritorioAutocompleteComponent implements OnInit {
-
     lugares: Lugar[];
     _lugar: Lugar;
 
@@ -30,6 +29,7 @@ export class TerritorioAutocompleteComponent implements OnInit {
     loadOnlyDatasetTerritories = false;
 
     private tipoEleccionesVisible: string;
+    private readonly LUGAR_URL_INDEX = 2;
 
     constructor(
         private datasetEvolucionElectoralService: DatasetEvolucionElectoralService,
@@ -90,7 +90,7 @@ export class TerritorioAutocompleteComponent implements OnInit {
         const routeType = this.getRouteType();
         if (RouteType.EVOLUCION_ELECTORAL === routeType || RouteType.PROCESO_ELECTORAL === routeType) {
             const url = this.router.url.split('/');
-            const lugarId = url[2];
+            const lugarId = url[this.LUGAR_URL_INDEX];
             const questionCharIndex = lugarId.indexOf('?')
             if (questionCharIndex !== -1) {
                 return lugarId.substring(0, questionCharIndex);
@@ -104,7 +104,7 @@ export class TerritorioAutocompleteComponent implements OnInit {
         const routeType = this.getRouteType();
         if (routeType === RouteType.PROCESO_ELECTORAL) {
             const urlSegments = this.router.url.split('/');
-            window.location.hash = window.location.hash.replace(urlSegments[2], event.id);
+            window.location.hash = window.location.hash.replace(urlSegments[this.LUGAR_URL_INDEX], event.id);
         } else if (routeType === RouteType.EVOLUCION_ELECTORAL) {
             this.router.navigate(['evolucion-electoral', event.id], {queryParams: {tipoEleccion: this.tipoEleccionesVisible.toLowerCase()}});
         }
