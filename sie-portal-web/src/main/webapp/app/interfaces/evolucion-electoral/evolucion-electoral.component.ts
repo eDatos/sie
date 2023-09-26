@@ -5,43 +5,13 @@ import { Chart, YElement } from '../../shared';
 import { TranslateService } from '@ngx-translate/core';
 import { DocumentoService } from '../../documento';
 import { JhiAlertService } from 'ng-jhipster';
-
-const ISTAC_ORANGE = '#E5772D';
-const ISTAC_GREEN = '#67A23F';
-const ISTAC_BROWN = '#8C5C1D';
-const ISTAC_BLUE = '#008BD0';
-const ISTAC_BLUE_LIGHT = '#2CBCE2';
-const ISTAC_BLUE_LIGHTEST = '#D5EDFA';
-
-const INDICADOR_GRAFICA_ELECTORES = {
-    nombre: 'ELECTORES',
-    color: ISTAC_BLUE,
-};
-
-const INDICADORES_GRAFICA_PARTICIPACION = {
-    nombre: 'TASA_PARTICIPACION',
-    color: ISTAC_ORANGE,
-};
-
-const TIPO_COLUMNA = 'column';
-const TIPO_LINEA = 'line';
-const ELECTORES = 'ELECTORES';
-const STACKING_TYPE = 'normal';
-
-const TIPO_ELECCIONES_AUTONOMICAS = 'AUTONOMICAS';
-const TIPO_ELECCIONES_DEFAULT = TIPO_ELECCIONES_AUTONOMICAS;
-const TIPO_ELECCIONES_REFERENDUM = 'REFERENDUM';
-
-const ORDEN_TIPO_ELECCIONES = [
-    'AUTONOMICAS',
-    'CABILDO',
-    'MUNICIPALES',
-    'CONGRESO',
-    'SENADO',
-    'PARLAMENTO_EUROPEO',
-]
-
-const ELECCIONES_REGIONALES_ID_FRAGMENT = '_REGIONALES';
+import {
+    ELECCIONES_REGIONALES_ID_FRAGMENT, INDICADOR_GRAFICA_ELECTORES, INDICADORES_GRAFICA_PARTICIPACION,
+    ORDEN_TIPO_ELECCIONES, STACKING_TYPE, TIPO_COLUMNA,
+    TIPO_ELECCIONES_AUTONOMICAS,
+    TIPO_ELECCIONES_DEFAULT,
+    TIPO_ELECCIONES_REFERENDUM, TIPO_LINEA
+} from "../../config";
 
 @Component({
     selector: 'jhi-evolucion-electoral',

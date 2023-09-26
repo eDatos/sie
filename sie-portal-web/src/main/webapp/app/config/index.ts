@@ -1,3 +1,4 @@
 export * from './config.service';
 export * from './config.module';
 export * from './metadata.service';
+export * from './constants';

@@ -1,4 +1,4 @@
-<div class="territory-autocomplete">
+<div *ngIf="getRouteType() !== OTHER_ROUTE_TYPE" class="territory-autocomplete">
     <span class="title">{{ "components.territoryAutocomplete.title" | translate }}</span>
     <ac-autocomplete-short-list class="autocomplete" [itemTemplate]="itemTemplate" name="lugar" [(ngModel)]="lugar" [suggestions]="lugares" [disabled]="!lugares" (onSelect)="onTransitionMethod($event)"></ac-autocomplete-short-list>
 </div>

@@ -12,6 +12,10 @@ import { SieDatasetServiceModule } from './dataset/dataset.module';
 import { SieInterfacesModule } from './interfaces/interfaces.module';
 import { JhiMainComponent, LayoutRoutingModule, ErrorComponent, notFoundRoute, NavbarComponent, FooterComponent } from './layouts';
 import { SieSharedModule } from './shared';
+import {XsrfNoopInterceptor} from "./xsrf-noop-interceptor.service";
+import {LocationStrategy} from "@angular/common";
+import {SieLocationStrategy} from "./sie-location.strategy";
+import {XSRFStrategy} from "@angular/http";
 
 const APP_ROUTES = [
     notFoundRoute
@@ -39,6 +43,8 @@ const APP_ROUTES = [
     providers: [
         customHttpProvider(),
         PaginationConfig,
+        { provide: LocationStrategy, useClass: SieLocationStrategy },
+        { provide: XSRFStrategy, useClass: XsrfNoopInterceptor }
     ],
     bootstrap: [JhiMainComponent]
 })
