@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { ConfigService, MetadataService } from '../../config';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable()
 export class TemplateService {
@@ -11,13 +12,20 @@ export class TemplateService {
     constructor(
         private http: Http,
         private configService: ConfigService,
-        private metadataService: MetadataService
-    ) { }
+        private metadataService: MetadataService,
+        private translateService: TranslateService
+    ) {
+    }
 
     getNavbar(): Observable<string> {
         const config = this.configService.getConfig();
         return this.metadataService.getPropertyById(config.metadata.navbarPathKey).flatMap((endpoint) => {
-            return this.http.get(`${endpoint}`, {params: {appName: 'Sistema de Información Electoral', enableAuthentication: null}}).map((res: Response) => res.text());
+            return this.http.get(`${endpoint}`, {
+                params: {
+                    appName: this.translateService.instant('global.title'),
+                    enableAuthentication: null
+                }
+            }).map((res: Response) => res.text());
         });
     }
 
