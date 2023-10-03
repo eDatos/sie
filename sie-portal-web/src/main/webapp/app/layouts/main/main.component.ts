@@ -6,6 +6,7 @@ import { MetadataService, ConfigService } from '../../config';
 import { CookieService } from 'ngx-cookie';
 import { TranslateService } from '@ngx-translate/core'
 
+
 declare var executeGoogleAnalyticsInlineCode: Function;
 
 @Component({
@@ -46,17 +47,6 @@ export class JhiMainComponent implements OnInit {
                 if (this.googleAnalyticsTrackId) {
                     executeGoogleAnalyticsInlineCode(this.googleAnalyticsTrackId);
                 }
-            }
-        });
-
-        this.jhiLanguageHelper.getLanguages(config).then((internationalizationLanguages) => {
-            if (internationalizationLanguages !== null) {
-                this.translateService.setDefaultLang(internationalizationLanguages[0]);
-                this.jhiLanguageHelper.getInternationalizationCookieValue(config).then((cookieValue)=> {
-                    this.jhiLanguageHelper.getCurrentLocale(cookieValue, internationalizationLanguages).then((currentLocale) => {
-                        this.languageService.changeLanguage(currentLocale);
-                    });
-                });
             }
         });
     }

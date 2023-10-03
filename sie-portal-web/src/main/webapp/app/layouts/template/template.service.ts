@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { ConfigService, MetadataService } from '../../config';
 import {TranslateService} from '@ngx-translate/core';
+import {JhiLanguageHelper} from "../../shared";
 
 @Injectable()
 export class TemplateService {
