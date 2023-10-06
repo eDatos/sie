@@ -59,7 +59,6 @@ module.exports = (grunt) ->
 
                 # User
                 paths.js + "/metamac/modules/user/UserUtils.js"
-                paths.js + "/metamac/modules/user/UserHeaderView.js"
 
                 # Metamac libs
                 paths.js + "/metamac/libs/i18n.js"
@@ -128,6 +127,7 @@ module.exports = (grunt) ->
 
                 # data
                 paths.js + "/metamac/modules/dataset/model/StructuralResourcesApi.js"
+                paths.js + "/metamac/modules/dataset/model/FilterModel.js"
 
                 # components
                 paths.js + "/metamac/components/tooltip/Tooltip.js"
@@ -176,7 +176,7 @@ module.exports = (grunt) ->
                 paths.js + "/metamac/modules/dataset/visual-element/line/DetailZoomModel.js"
                 paths.js + "/metamac/modules/dataset/visual-element/line/DetailZoomView.js"
                 paths.js + "/metamac/modules/dataset/visual-element/Map.js"
-
+                paths.js + "/metamac/modules/dataset/ErrorView.js"
                 # canvas table
                 paths.js + "/libs/lru.js"
                 paths.js + "/libs/jquery.hotkeys.js"
