@@ -15,7 +15,7 @@
             this.permalinkType = "EXTERNAL";
 
             var hash = DatasetPermalink.removePermalink(window.location.hash);
-            this.permalink = window.location.origin + window.location.pathname + hash + "/permalink/" + attributes.permalink;
+            this.permalink = hash + "/permalink/" + attributes.permalink;
         },
 
         toString: function () {
