@@ -183,10 +183,12 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         App.addRegions({
             mainRegion: '.metamac-container',
         });
-        
+
         Observable.zip(
             this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey),
             this.metadataService.getPropertyById(config.metadata.structuralResourcesKey),
+            this.metadataService.getPropertyById(config.metadata.externalUsersKey),
+            this.metadataService.getPropertyById(config.metadata.externalUsersWebKey),
             this.metadataService.getPropertyById(config.metadata.indicatorsKey),
             this.metadataService.getPropertyById(config.metadata.permalinksEndpointKey),
             this.metadataService.getPropertyById(config.metadata.exportEndpointKey),
@@ -197,6 +199,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             this.metadataService.getPropertyById(config.metadata.firstTerritoryHierarchyLevelKey),
             (statisticalResources,
                 structuralResources,
+                externalUsers,
+                externalUsersWeb,
                 indicators,
                 permalinks,
                 exportEndpoint,
@@ -207,6 +211,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 firstTerritoryHierarchyLevel) => {
                 App.endpoints['statistical-resources'] = statisticalResources + '/v1.0';
                 App.endpoints['structural-resources'] = structuralResources + '/v1.0';
+                App.endpoints['external-users'] = externalUsers;
+                App.endpoints['external-users-web'] = externalUsersWeb;
                 App.endpoints['indicators'] = indicators + '/v1.0';
                 App.endpoints['permalinks'] = permalinks + '/v1.0';
                 App.endpoints['export'] = exportEndpoint + '/v1.0';

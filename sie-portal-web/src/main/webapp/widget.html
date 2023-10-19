@@ -45,9 +45,9 @@
 		var captchaExternalApiUrlBase = /*[[${metadata.getCaptchaExternalApiUrlBase()}]]*/ 'metamac.portal.rest.external.authentication.captcha.url';
 
 		getPropertyById(captchaExternalApiUrlBase).done(function (response) {
-			var metamacAuthenticationScript = document.createElement('script');
-			metamacAuthenticationScript.setAttribute('src', response.value + '/captcha.js');
-			document.head.appendChild(metamacAuthenticationScript);
+			var captcha = document.createElement('script');
+			captcha.setAttribute('src', response.value + '/captcha.js');
+			document.head.appendChild(captcha);
 		})
 
 		I18n.defaultLocale = 'es';
