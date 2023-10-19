@@ -30,7 +30,7 @@ const APP_ROUTES = [
 ]
 
 
-function initializeTranslateService(translateService: TranslateService) {
+export function initializeTranslateService(translateService: TranslateService) {
     // Note that the language should be obtained from some configuration file or service. For
     // now, direct injection is enough.
     return () => translateService.setDefaultLang('es');
