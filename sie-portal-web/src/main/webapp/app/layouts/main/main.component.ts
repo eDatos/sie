@@ -70,7 +70,7 @@ export class JhiMainComponent implements OnInit {
 
     private addMetamacAuthenticationScriptTag(baseUrl: string) {
         const metamacAuthenticationScript = document.createElement('script');
-        metamacAuthenticationScript.setAttribute('src', baseUrl + '/authentication.js');
+        metamacAuthenticationScript.setAttribute('src', baseUrl + '/captcha.js');
         document.head.appendChild(metamacAuthenticationScript);
     }
 

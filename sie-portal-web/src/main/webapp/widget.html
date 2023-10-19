@@ -46,7 +46,7 @@
 
 		getPropertyById(captchaExternalApiUrlBase).done(function (response) {
 			var metamacAuthenticationScript = document.createElement('script');
-			metamacAuthenticationScript.setAttribute('src', response.value + '/authentication.js');
+			metamacAuthenticationScript.setAttribute('src', response.value + '/captcha.js');
 			document.head.appendChild(metamacAuthenticationScript);
 		})
 
