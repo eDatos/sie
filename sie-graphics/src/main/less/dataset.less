@@ -211,7 +211,7 @@
     .box-sizing(border-box);
 
     border: 1px solid @istacGreyMedium;
-    .border-radius(0 0 @borderRadiusGreat @borderRadiusGreat);
+    .border-radius(0 0 @borderRadiusBig @borderRadiusBig);
     overflow: hidden;
     .clearfix;
 
@@ -275,7 +275,7 @@
     
     .dataset-visualization-options-bar {
         .options-bar;
-        .border-radius(0 0 @borderRadiusLittle @borderRadiusLittle);        
+        .border-radius(0 0 @borderRadiusSmall @borderRadiusSmall);
         .btn {
             .options-bar-btn;
 
@@ -670,7 +670,36 @@
         } 
     }
 }
+.modal-message {
+    padding: 5px;
+}
 
+.dataset-save {
+    padding: 5px;
+    input, textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    textarea {
+        resize: none;
+        min-width: 400px;
+    }
+    fieldset {
+        margin-bottom: 10px;
+        > input, label {
+            display: block;
+        }
+    }
+    .form-buttons {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        align-items: baseline;
+        a, button {
+            margin-left: 5px;
+        }
+    }
+}
 .dataset-embed {
     padding: 5px;
     .dataset-embed-title {
