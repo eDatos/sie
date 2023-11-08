@@ -1,6 +1,7 @@
 import { Routes, UrlSegment } from '@angular/router';
 import { ProcesoElectoralComponent } from './proceso-electoral.component';
 import { footerRoute } from '../../layouts/footer/footer.route';
+import {PermalinkRedirectGuard} from './permalink-redirect.guard';
 
 export function procesoElectoralUrls(url: UrlSegment[]) {
     if (url.length === 0) {
@@ -8,7 +9,7 @@ export function procesoElectoralUrls(url: UrlSegment[]) {
     }
 
     let result = null;
-    if (url.length >= 3 && url[0].path === 'proceso-electoral') {
+    if (url.length >= 3 && url[0].path === 'proceso-electoral' && url[1].path !== 'permalink') {
         result = {
             consumed: url,
             posParams: {
@@ -20,6 +21,11 @@ export function procesoElectoralUrls(url: UrlSegment[]) {
 }
 
 export const procesoElectoralRoute: Routes = [
+    {
+        path: 'proceso-electoral/permalink/:permalinkId',
+        canActivate: [PermalinkRedirectGuard],
+        children: []
+    },
     {
         matcher: procesoElectoralUrls,
         children: [
