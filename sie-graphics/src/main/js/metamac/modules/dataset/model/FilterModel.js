@@ -1,8 +1,6 @@
 (function () {
     "use strict";
 
-    var DatasetPermalink = App.modules.dataset.DatasetPermalink;
-
     App.namespace('App.modules.dataset.model');
 
     App.modules.dataset.model.FilterModel = Backbone.Model.extend({
@@ -12,10 +10,8 @@
             this.name = attributes.name;
             this.notes = attributes.notes;
             this.userId = attributes.userId;
+            this.permalink = attributes.permalink;
             this.permalinkType = "SIE";
-
-            var hash = DatasetPermalink.removePermalink(window.location.hash);
-            this.permalink = "/" + hash + "/permalink/" + attributes.permalink;
         },
 
         toString: function () {
