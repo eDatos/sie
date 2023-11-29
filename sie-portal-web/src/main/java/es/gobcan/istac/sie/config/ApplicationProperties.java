@@ -50,6 +50,8 @@ public class ApplicationProperties {
         private String statisticalResourcesExternalKey;
         private String structuralResourcesInternalKey;
         private String structuralResourcesExternalKey;
+        private String externalUsersKey;
+        private String externalUsersWebKey;
         private String indicatorsInternalKey;
         private String indicatorsExternalKey;
         private String statisticalVisualizerKey;
@@ -111,6 +113,22 @@ public class ApplicationProperties {
 
         public String getStructuralResourcesExternalKey() {
             return structuralResourcesExternalKey;
+        }
+
+        public String getExternalUsersKey() {
+            return externalUsersKey;
+        }
+
+        public void setExternalUsersKey(String externalUsersKey) {
+            this.externalUsersKey = externalUsersKey;
+        }
+
+        public String getExternalUsersWebKey() {
+            return externalUsersWebKey;
+        }
+
+        public void setExternalUsersWebKey(String externalUsersWebKey) {
+            this.externalUsersWebKey = externalUsersWebKey;
         }
 
         public String getSieAdditionalInfoUrl() {

@@ -1,6 +1,8 @@
 @import '~scss/variables';
 
 :host {
+    margin-left: auto;
+
     max-width: 390px;
     min-width: 240px;
     width: 100%;

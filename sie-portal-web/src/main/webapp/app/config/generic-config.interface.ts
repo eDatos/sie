@@ -15,6 +15,8 @@ export interface GenericConfig {
         installationType,
         statisticalResourcesKey,
         structuralResourcesKey,
+        externalUsersKey,
+        externalUsersWebKey,
         indicatorsKey,
         statisticalVisualizerKey,
         statisticalVisualizerApiKey,

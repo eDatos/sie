@@ -1,173 +1,210 @@
+
+
 @modal-width: 452px;
 @modal-min-width: 260px;
 
 .modal-backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: (@zIndex40 - 5);
-  background-color: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: (@zIndex40 - 5);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
-.metamac-modal {
-  background-color: @istacWhite;
-  overflow: auto;
-  font: @istacFontSansSerif;
-  font-size: @defaultFontSize;
+.edatos-modal {
+    background-color : @istacWhite;
+    overflow: auto;
+    font: @istacFontSansSerif;
+    font-size: @defaultFontSize;
 
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: @zIndex40;
-  max-height: 500px;
-  max-width: @modal-width;
-  min-width: @modal-min-width;
-  margin-left: -220px;
-  margin-top: -175px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: @zIndex40;
+    max-height: 500px;
+    max-width: @modal-width;
+    min-width: @modal-min-width;
+    display: block;
+    bottom: inherit;
+    right: inherit;
 
-  .border-radius(@borderRadiusGreat);
-  border: 2px solid @istacGreyDark;
+    .border-radius(@borderRadiusBig);
+    border: 2px solid @istacGreyDark;
+    
+    .modal-close {
+	    float: right;
+	    font-size: 30px;
+	    font-weight: bold;
+	    line-height: 20px;
+	    color: @istacGreyDark;
+	    border: 0;
+		background: none;	    
+	    
+	    &:hover {
+		    cursor: pointer;
+		    opacity: .4;
+		    filter: alpha(opacity=40)
+		} 
+	}
 
-  .modal-close {
-    float: right;
-    font-size: 30px;
-    font-weight: bold;
-    line-height: 20px;
-    color: @istacGreyDark;
-    border: 0;
-    background: none;
-
-    &:hover {
-      cursor: pointer;
-      opacity: .4;
-      filter: alpha(opacity=40)
-    }
+  button {
+    padding: 2px 6px;
   }
 }
 
 .modal-header {
-  h2 {
-    margin: 0;
-    text-align: left;
-    font-size: 14px;
-    color: @istacGreyDark;
-  }
-
-  border-bottom: 1px solid @istacGreyLight;
-  padding: 10px;
-  background: @istacGreyLight;
+	h2 {
+    	margin: 0;
+    	text-align: left;
+        font-size: 14px;
+        color: @istacGreyDark;
+	}
+	border-bottom: 1px solid @istacGreyLight;    	
+    padding: 10px;
+    background: @istacGreyLight;
+    display: block;
 }
 
 .modal-content {
   text-align: left;
   padding: 10px 10px 20px 10px;
+  border-radius: 0;
+  width: inherit;
 
-  h3 {
-    margin: 0 0 10px 4px;
-    text-align: left;
-    font-size: 13px;
+  &, > div:first-child {
+    &, > form {
+      min-width: min-content;
+    }
   }
 
-  .modal-permalink-config {
+  h3 {
+      margin: 0 0 10px 4px;
+      text-align: left;
+      font-size: 13px;
+  }
+
+  .modal-info {
+    font-size: 12px;
+    background-color: @istacGreyLight;
     padding: 5px;
+    margin-top: 9px;
+  }
+}
 
-    fieldset {
-      margin-bottom: 10px;
-    }
+.modal-confirmation {
+  p {
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  .form-buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+  button {
+    width: 40%;
+  }
+}
 
-    .form-buttons {
+@media only screen and (min-width: 550px) {
+  .modal-permalink-config {
+    width: 335px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .modal-permalink-config {
+    width: 230px;
+  }
+}
+
+.modal-permalink-config {
+  padding: 5px;
+  fieldset, #modal-permalink-captcha {
+    margin-bottom: 10px;
+  }
+  #modal-permalink-captcha {
+    display: flex;
+    justify-content: center;
+  }
+  .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .horizontal-radio-group {
+    display: flex;
+    justify-content: space-evenly;
+    .radio-field {
+      width: 100%;
       display: flex;
-      justify-content: flex-end;
-    }
-
-    .horizontal-radio-group {
-      display: flex;
-      justify-content: space-evenly;
-
-      .radio-field {
-        width: 100%;
-        display: flex;
-
-        label {
-          margin: 0;
-          font-weight: normal;
-        }
-
-        input {
-          width: auto;
-          margin: 0 5px 0 0;
-        }
-      }
-    }
-
-    .vertical-radio-group {
-      .radio-field {
-        width: 100%;
-        display: flex;
-        margin-bottom: 5px;
-
-        label {
-          margin: 0 5px 0 0;
-          font-weight: normal;
-        }
-
-        input, select {
-          width: auto;
-
-          &[type="radio"] {
-            margin: 0 5px 0 0;
-          }
-
-          &:disabled {
-            background-color: #e6e6e6;
-          }
-        }
-
-        .radio-related-input {
-          width: 50%;
-          box-sizing: border-box;
-        }
-
-        .input-related-radio {
-          min-height: 16px;
-          width: 50%;
-          display: flex;
-          align-items: center;
-        }
-      }
-    }
-
-    .checkbox-field {
-      display: flex;
-
-      input {
-        margin: 0 5px 0 0;
-        width: auto;
-      }
-
       label {
-        margin-bottom: 0;
+        margin: 0;
         font-weight: normal;
       }
+      input {
+        width: auto;
+        margin: 0 5px 0 0;
+      }
     }
-
-    .form-error {
-      margin: 0 0 10px 0;
-      color: red;
-    }
-
-    .form-info {
-      color: @istacGreyDark;
-      margin: 0;
-    }
-
-    #dataset-embed-title-input {
-      display: block;
+  }
+  .vertical-radio-group {
+    .radio-field {
       width: 100%;
-      box-sizing: border-box;
+      display: flex;
+      margin-bottom: 5px;
+      label {
+        margin: 0 5px 0 0;
+        font-weight: normal;
+      }
+      input, select {
+        width: auto;
+        &[type="radio"] {
+          margin: 0 5px 0 0;
+        }
+        &:disabled {
+          background-color: #e6e6e6;
+        }
+      }
+      .radio-related-input {
+        width: 50%;
+        box-sizing: border-box;
+      }
+      .input-related-radio {
+        min-height: 16px;
+        width: 50%;
+        display: flex;
+        align-items: center;
+      }
     }
+  }
 
+  .checkbox-field {
+    display: flex;
+    input {
+      margin: 0 5px 0 0;
+      width: auto;
+    }
+    label {
+      margin-bottom: 0;
+      font-weight: normal;
+    }
+  }
+
+  .form-error {
+    margin: 0 0 10px 0;
+    color: red;
+  }
+
+  .form-info {
+    color: @istacGreyDark;
+    margin: 0;
+  }
+
+  #dataset-embed-title-input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
   }
 }

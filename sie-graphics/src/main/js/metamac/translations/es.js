@@ -381,5 +381,10 @@ I18n.translations.es = {
         label: {
             text: "Escriba el valor de la imagen mostrada encima"
         }
+    },
+    exception: {
+        common: {
+            unknown: "Error desconocido"
+        }
     }
 };

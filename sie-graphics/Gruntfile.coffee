@@ -44,6 +44,7 @@ module.exports = (grunt) ->
                 paths.lib + "/handlebars.runtime.js"
                 paths.lib + "/jquery.dotdotdot-1.5.0-packed.js"
                 paths.lib + "/async.js"
+                paths.lib + "/cookies.js"
                 paths.js + "/metamac/App.js"
                 paths.js + "/metamac/libs/HandlebarsHelpers.js"
                 paths.js + "/metamac/templates/HandlebarsTemplates.js"
@@ -59,7 +60,6 @@ module.exports = (grunt) ->
 
                 # User
                 paths.js + "/metamac/modules/user/UserUtils.js"
-                paths.js + "/metamac/modules/user/UserHeaderView.js"
 
                 # Metamac libs
                 paths.js + "/metamac/libs/i18n.js"
@@ -99,6 +99,7 @@ module.exports = (grunt) ->
                 paths.modules + "/dataset/DimensionsView.js"
                 paths.modules + "/dataset/DatasetVisualizationView.js"
                 paths.modules + "/dataset/DatasetShareView.js"
+                paths.modules + "/dataset/DatasetSaveView.js"
                 paths.modules + "/dataset/DatasetDownloadView.js"
                 paths.modules + "/dataset/DatasetEmbedView.js"
 
@@ -128,6 +129,7 @@ module.exports = (grunt) ->
 
                 # data
                 paths.js + "/metamac/modules/dataset/model/StructuralResourcesApi.js"
+                paths.js + "/metamac/modules/dataset/model/FilterModel.js"
 
                 # components
                 paths.js + "/metamac/components/tooltip/Tooltip.js"
@@ -140,6 +142,7 @@ module.exports = (grunt) ->
                 paths.js + "/metamac/components/select/SelectView.js"
                 paths.js + "/metamac/components/toggleable/ToggleableView.js"
                 paths.js + "/metamac/components/modal/ModalView.js"
+                paths.js + "/metamac/components/modal/ConfirmationModalView.js"
                 paths.js + "/metamac/components/modal/PermalinkConfigModalView.js"
 
                 # filters
@@ -176,7 +179,7 @@ module.exports = (grunt) ->
                 paths.js + "/metamac/modules/dataset/visual-element/line/DetailZoomModel.js"
                 paths.js + "/metamac/modules/dataset/visual-element/line/DetailZoomView.js"
                 paths.js + "/metamac/modules/dataset/visual-element/Map.js"
-
+                paths.js + "/metamac/modules/dataset/ErrorView.js"
                 # canvas table
                 paths.js + "/libs/lru.js"
                 paths.js + "/libs/jquery.hotkeys.js"

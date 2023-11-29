@@ -150,6 +150,8 @@ application:
         statisticalResourcesExternalKey: metamac.statistical_resources.rest.external
         structuralResourcesInternalKey: metamac.srm.rest.internal
         structuralResourcesExternalKey: metamac.srm.rest.external
+        externalUsersKey: metamac.edatos_external_users.rest.external
+        externalUsersWebKey: metamac.edatos_external_users.web.external.url
         indicatorsInternalKey: indicators.rest.internal
         indicatorsExternalKey: indicators.rest.external
         statisticalVisualizerKey: metamac.portal.web.external

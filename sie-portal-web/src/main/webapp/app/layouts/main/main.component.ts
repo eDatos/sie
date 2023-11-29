@@ -6,6 +6,7 @@ import { MetadataService, ConfigService } from '../../config';
 import { CookieService } from 'ngx-cookie';
 import { TranslateService } from '@ngx-translate/core'
 
+
 declare var executeGoogleAnalyticsInlineCode: Function;
 
 @Component({
@@ -31,7 +32,7 @@ export class JhiMainComponent implements OnInit {
     ngOnInit() {
         const config = this.configService.getConfig();
         this.metadataService.getPropertyById(config.metadata.captchaExternalApiUrlBase).subscribe((captchaExternalApiUrlBase) => {
-            this.addMetamacAuthenticationScriptTag(captchaExternalApiUrlBase);
+            this.addCaptchaScriptTag(captchaExternalApiUrlBase);
         });
 
         this.metadataService.getPropertyById(config.metadata.googleTrackingIdKey).subscribe((googleAnalyticsTrackId) => {
@@ -48,17 +49,6 @@ export class JhiMainComponent implements OnInit {
                 }
             }
         });
-
-        this.jhiLanguageHelper.getLanguages(config).then((internationalizationLanguages) => {
-            if (internationalizationLanguages !== null) {
-                this.translateService.setDefaultLang(internationalizationLanguages[0]);
-                this.jhiLanguageHelper.getInternationalizationCookieValue(config).then((cookieValue)=> {
-                    this.jhiLanguageHelper.getCurrentLocale(cookieValue, internationalizationLanguages).then((currentLocale) => {
-                        this.languageService.changeLanguage(currentLocale);
-                    });
-                });
-            }
-        });
     }
 
     private addGoogleAnalyticsScriptTag(googleAnalyticsTrackId: string) {
@@ -68,10 +58,10 @@ export class JhiMainComponent implements OnInit {
         document.head.appendChild(googleAnalyticsScript);
     }
 
-    private addMetamacAuthenticationScriptTag(baseUrl: string) {
-        const metamacAuthenticationScript = document.createElement('script');
-        metamacAuthenticationScript.setAttribute('src', baseUrl + '/authentication.js');
-        document.head.appendChild(metamacAuthenticationScript);
+    private addCaptchaScriptTag(baseUrl: string) {
+        const captcha = document.createElement('script');
+        captcha.setAttribute('src', baseUrl + '/captcha.js');
+        document.head.appendChild(captcha);
     }
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
