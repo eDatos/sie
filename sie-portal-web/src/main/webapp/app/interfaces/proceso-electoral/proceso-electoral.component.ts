@@ -22,6 +22,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
 import { JhiLanguageHelper } from '../../shared';
 import { REPRESENTANTES_ELEGIDOS, REPRESENTANTES_ELEGIDOS_TYPES } from '../../shared';
 import {FRONTERA_DATASET_ID} from "../../shared/constants/data.constants";
+import {of} from "rxjs/observable/of";
 
 declare var I18n: any;
 declare var App: any;
@@ -187,8 +188,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         Observable.zip(
             this.metadataService.getPropertyById(config.metadata.statisticalResourcesKey),
             this.metadataService.getPropertyById(config.metadata.structuralResourcesKey),
-            this.metadataService.getPropertyById(config.metadata.externalUsersKey),
-            this.metadataService.getPropertyById(config.metadata.externalUsersWebKey),
+            this.metadataService.getPropertyById(config.metadata.externalUsersKey).catch(() => of(null)),
+            this.metadataService.getPropertyById(config.metadata.externalUsersWebKey).catch(() => of(null)),
             this.metadataService.getPropertyById(config.metadata.indicatorsKey),
             this.metadataService.getPropertyById(config.metadata.permalinksEndpointKey),
             this.metadataService.getPropertyById(config.metadata.exportEndpointKey),
