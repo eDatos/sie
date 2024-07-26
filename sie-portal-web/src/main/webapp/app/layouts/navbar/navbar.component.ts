@@ -4,14 +4,13 @@ import {ConfigService} from '../../config';
 import {TerritorioAutocompleteComponent} from "../../shared";
 
 declare var setNavbarMode: Function;
+declare const Edatos;
 
 @Component({
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit {
-    static readonly TITLE_NAVBAR_ID = 'title-bar';
-    static readonly APP_HEADER_CONTENT_ID = 'istac-app-header-content';
     public navbar = '';
 
     constructor(
@@ -39,10 +38,9 @@ export class NavbarComponent implements OnInit {
 
     private initializeNavbarComponents() {
         const componentRef = this.viewContainerRef.createComponent(this.componentFactoryResolver.resolveComponentFactory(TerritorioAutocompleteComponent));
-        this.renderer.insertBefore(
-            document.getElementById(NavbarComponent.TITLE_NAVBAR_ID),
-            componentRef.location.nativeElement,
-            document.getElementById(NavbarComponent.APP_HEADER_CONTENT_ID));
+        if (typeof Edatos !== 'undefined' && Edatos.HeaderManagement) {
+            Edatos.HeaderManagement.addAtEnd(componentRef.location.nativeElement);
+        }
     }
 
     private reinsertScripts() {
