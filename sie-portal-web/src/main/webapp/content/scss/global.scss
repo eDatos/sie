@@ -12,3 +12,7 @@
 @import 'global/components/input';
 @import 'global/components/loader';
 @import 'global/components/icons';
+
+#edatos-custom-header:has(> jhi-territorio-autocomplete:empty) {
+    display: none;
+}
