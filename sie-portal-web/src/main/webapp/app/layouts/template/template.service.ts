@@ -22,6 +22,7 @@ export class TemplateService {
         return this.metadataService.getPropertyById(config.metadata.navbarPathKey).flatMap((endpoint) => {
             return this.http.get(`${endpoint}`, {
                 params: {
+                    appId: `sie-${config.metadata.installationType}`,
                     appName: this.translateService.instant('global.title'),
                     enableAuthentication: null
                 }
