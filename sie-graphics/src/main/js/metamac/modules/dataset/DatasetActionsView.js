@@ -95,7 +95,6 @@
                     }
                 }
             };
-            addthis.toolbox(".addthis_toolbox", config, share);
         }
 
     });
