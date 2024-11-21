@@ -20,11 +20,12 @@ export class TemplateService {
     getNavbar(): Observable<string> {
         const config = this.configService.getConfig();
         return this.metadataService.getPropertyById(config.metadata.navbarPathKey).flatMap((endpoint) => {
-            return this.http.get(`${endpoint}`, {
+            return this.http.get("http://localhost:8080/complementos-apps/organisations/istac/common/header/header.html", {
                 params: {
                     appId: `sie-${config.metadata.installationType}`,
                     appName: this.translateService.instant('global.title'),
-                    enableAuthentication: null
+                    enableAuthentication: null,
+					installationType: config.metadata.installationType
                 }
             }).map((res: Response) => res.text());
         });
