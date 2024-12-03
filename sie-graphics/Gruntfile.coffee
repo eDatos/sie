@@ -144,6 +144,8 @@ module.exports = (grunt) ->
                 paths.js + "/metamac/components/modal/ModalView.js"
                 paths.js + "/metamac/components/modal/ConfirmationModalView.js"
                 paths.js + "/metamac/components/modal/PermalinkConfigModalView.js"
+                paths.js + "/metamac/components/modal/EmbedConfigModalView.js"
+                paths.js + "/metamac/components/modal/InformationModalView.js"
 
                 # filters
                 paths.js + "/metamac/modules/dataset/filter/FilterOptionsDimensionRestriction.js"
