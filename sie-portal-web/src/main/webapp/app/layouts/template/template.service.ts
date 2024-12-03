@@ -24,8 +24,7 @@ export class TemplateService {
                 params: {
                     appId: `sie-${config.metadata.installationType}`,
                     appName: this.translateService.instant('global.title'),
-                    enableAuthentication: null,
-					installationType: config.metadata.installationType
+                    enableAuthentication: null
                 }
             }).map((res: Response) => res.text());
         });
