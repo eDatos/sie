@@ -27,7 +27,7 @@
         },
 
         needsPermalink: function () {
-            return !(App.config.widget && this.getExistingPermalinkId());
+            return !(this.getExistingPermalinkId() || App.config.widget);
         },
 
         getExistingPermalinkId: function () {
@@ -36,7 +36,14 @@
 
         savePermalink: function () {
             var permalinkContent = DatasetPermalink.buildPermalinkContent(this.filterDimensions, this.filtersModel);
-            return DatasetPermalink.savePermalink(permalinkContent, this.$el[0]);
+            this._captchaOptions = {
+                captchaEl: this.$el.find("#modal-permalink-captcha")[0],
+                action: "portal_permalink",
+                buttonText: I18n.t("captcha.button.text"),
+                labelText: I18n.t("captcha.label.text"),
+                withButton: false
+            };
+            return DatasetPermalink.savePermalink(permalinkContent, this.$el.find("#modal-permalink-captcha")[0], this._captchaOptions);
         },
 
         renderEmbed: function (permalinkId) {

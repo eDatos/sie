@@ -253,13 +253,24 @@
         clickEmbed: function (e) {
             e.preventDefault();
             var modalContentView = null;
-            if (this.isInternalPortal()) {
-                modalContentView = new DisabledFeatureInternalPortalView();
-            } else {
-                modalContentView = new App.modules.dataset.DatasetEmbedView({ filterDimensions: this.filterDimensions, filtersModel: this.filtersModel });
-            }
+            var modal = null;
             var title = I18n.t("filter.button.embed");
-            var modal = new App.components.modal.ModalView({ title: title, contentView: modalContentView });
+                if (DatasetPermalink.needsPermalink(this.filterDimensions)) {
+                    var self = this;
+                    modalContentView = new App.components.modal.EmbedConfigModalView({
+                        filterDimensions: this.filterDimensions,
+                        onSubmit: function (permalink, embedConfigExtraData) {
+                            modal.close();
+
+                            modalContentView = new App.modules.dataset.DatasetEmbedView({permalinkId: permalink.id, filterDimensions: self.filterDimensions, title: embedConfigExtraData.title});
+                            modal = new App.components.modal.ModalView({title: title, contentView: modalContentView});
+                            modal.show();
+                        },
+                    });
+                } else {
+                    modalContentView = new App.modules.dataset.DatasetEmbedView({permalinkId: DatasetPermalink.getExistingPermalinkId(this.filterDimensions), filterDimensions: this.filterDimensions});
+                }
+            modal = new App.components.modal.ModalView({title: title, contentView: modalContentView});
             modal.show();
         },
 
