@@ -55,7 +55,6 @@
                 share.passthrough.twitter.via = App.config.socialTwitterVia;
             }
 
-            addthis.toolbox(this.$el.find('.addthis_toolbox')[0], config, share);
         }
 
     });
