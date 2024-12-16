@@ -65,7 +65,8 @@ module.exports = (options) => {
         plugins: [
             new webpack.DefinePlugin({
                 'process.env': {
-                    'NODE_ENV': JSON.stringify(options.env)
+                    'NODE_ENV': JSON.stringify(options.env),
+                    'VERSION': `'${utils.parseVersion()}'`
                 }
             }),
             new webpack.optimize.CommonsChunkPlugin({
