@@ -11,7 +11,7 @@
     
 	<groupId>es.gobcan.istac.sie</groupId>
 	<artifactId>sie</artifactId>
-	<version>2.7.2-SNAPSHOT</version>
+	<version>2.8.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Sistema de Información Electoral</name>
 	<description>Visualizador del Sistema de Información Electoral de Canarias</description>
