@@ -3,7 +3,6 @@ import {TemplateService} from '../template';
 import {ConfigService} from '../../config';
 import {TerritorioAutocompleteComponent} from "../../shared";
 
-declare var setNavbarMode: Function;
 declare const Edatos;
 
 @Component({
@@ -29,7 +28,6 @@ export class NavbarComponent implements OnInit {
             setTimeout(() => {
                 this.reinsertScripts();
                 const config = this.configService.getConfig();
-                setNavbarMode(config.metadata.installationType);
                 this.initializeNavbarComponents();
             });
         });
