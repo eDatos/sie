@@ -25,11 +25,8 @@ export class NavbarComponent implements OnInit {
     ngOnInit() {
         this.templateService.getNavbar().subscribe((navbarHtml) => {
             this.navbar = navbarHtml;
-            setTimeout(() => {
-                this.reinsertScripts();
-                const config = this.configService.getConfig();
-                this.initializeNavbarComponents();
-            });
+            this.appendContextualFragment(this.navbar, 'header');
+            this.initializeNavbarComponents();
         });
 
     }
@@ -41,17 +38,11 @@ export class NavbarComponent implements OnInit {
         }
     }
 
-    private reinsertScripts() {
-        const scriptList = this.elementRef.nativeElement.getElementsByTagName('script');
-        for (const script of scriptList) {
-            const scriptCopy = document.createElement('script');
-            if (script.innerHTML) {
-                scriptCopy.innerHTML = script.innerHTML;
-            } else if (script.src) {
-                scriptCopy.src = script.src;
-            }
-            scriptCopy.async = false;
-            script.parentNode.replaceChild(scriptCopy, script);
+    private appendContextualFragment(html: string, id: string) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.appendChild(document.createRange().createContextualFragment(html));
         }
+        return element;
     }
 }
