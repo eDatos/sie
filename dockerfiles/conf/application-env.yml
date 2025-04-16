@@ -3,6 +3,8 @@
 #
 # This configuration overrides the application.yml file.
 # ===================================================================
+server:
+    context-path: /sie
 
 # ===================================================================
 # Standard Spring Boot properties.
