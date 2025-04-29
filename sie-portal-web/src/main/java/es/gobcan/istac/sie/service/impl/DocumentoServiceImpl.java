@@ -1,6 +1,8 @@
 package es.gobcan.istac.sie.service.impl;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.NumberFormat;
@@ -12,6 +14,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.util.JRLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -34,7 +38,8 @@ public class DocumentoServiceImpl implements DocumentoService {
     private static final String LOGO_CABECERA                                    = "logo_istac.png";
     private static final String EVOLUCION_ELECTORAL_TEMPLATE                     = "evolucion-electoral.jasper";
     private static final String RESULTADO_ELECTORAL_TEMPLATE                     = "resultado-electoral.jasper";
-    private static final String RUTA_RELATIVA_DIRECTORIO_SUBINFORME              = "./jasper/";
+    private static final String SUBINFORME_TABLAS                                = "tablas.jasper";
+    private static final String SUBINFORME_TABLA_RESULTADO                       = "tabla-resultado-electoral.jasper";
     private static final String EXCEPCION_RUTA_LOGO_CABECERA_EVOLUCION_ELECTORAL = "Error al construir URI al logo cabecera de evolución electoral";
 
     private static final Logger LOGGER                                           = LoggerFactory.getLogger(DocumentoServiceImpl.class);
@@ -57,13 +62,16 @@ public class DocumentoServiceImpl implements DocumentoService {
             parametros.put("TERRITORIO", evolucionElectoral.getTerritorio());
             parametros.put("TIPO_ELECCIONES", evolucionElectoral.getTipoElecciones());
             parametros.put("dataSource", new JRBeanCollectionDataSource(evolucionElectoral.getProcesosElectorales()));
-            parametros.put("SUBREPORT_DIR", RUTA_RELATIVA_DIRECTORIO_SUBINFORME);
             parametros.put("rutaLogo", new URI(this.getClass().getResource(Constants.CARPETA_JASPER_REPORT + LOGO_CABECERA).toString()).getPath());
             parametros.put("INT_FORMATTER", getIntFormatter());
             parametros.put(JRParameter.REPORT_LOCALE, new Locale(getLanguage()));
 
+            try (InputStream subReport = getClass().getResourceAsStream(Constants.CARPETA_JASPER_REPORT + SUBINFORME_TABLAS)) {
+                parametros.put("SUBREPORT_TABLAS", JRLoader.loadObject(subReport));
+            }
+
             return this.reportsService.generateFromTemplate(EVOLUCION_ELECTORAL_TEMPLATE, parametros, null);
-        } catch (URISyntaxException e) {
+        } catch (URISyntaxException | IOException | JRException e) {
             throw new CustomParameterizedException(EXCEPCION_RUTA_LOGO_CABECERA_EVOLUCION_ELECTORAL, e, ErrorConstants.ERROR_GENERANDO_PDF,
                     this.getClass().getResource(Constants.CARPETA_JASPER_REPORT + LOGO_CABECERA).toString());
 
@@ -82,15 +90,18 @@ public class DocumentoServiceImpl implements DocumentoService {
             parametros.put("TIPO_ELECCIONES", messageSource.getMessage("report.header." + resultadoElectoral.getProcesoElectoral().getTipoProcesoElectoral(), null, Locale.getDefault()));
             parametros.put("ANNO_ELECCIONES", Integer.toString(getYear(resultadoElectoral)));
             parametros.put("DATA_SOURCE", new JRBeanCollectionDataSource(Collections.singletonList(resultadoElectoral.getProcesoElectoral())));
-            parametros.put("SUBREPORT_DIR", RUTA_RELATIVA_DIRECTORIO_SUBINFORME);
             parametros.put("RUTA_LOGO", new URI(this.getClass().getResource(Constants.CARPETA_JASPER_REPORT + LOGO_CABECERA).toString()).getPath());
             parametros.put("RESULTADOS_ELECTORALES_PARTIDOS", new JRBeanCollectionDataSource(resultadoElectoral.getData()));
             parametros.put("INT_FORMATTER", getIntFormatter());
             parametros.put("FLOAT_FORMATTER", getFloatFormatter());
             parametros.put(JRParameter.REPORT_LOCALE, new Locale(getLanguage()));
 
+            try (InputStream subReport = getClass().getResourceAsStream(Constants.CARPETA_JASPER_REPORT + SUBINFORME_TABLA_RESULTADO)) {
+                parametros.put("SUBREPORT_TABLA_RESULTADO", JRLoader.loadObject(subReport));
+            }
+
             return this.reportsService.generateFromTemplate(RESULTADO_ELECTORAL_TEMPLATE, parametros, null);
-        } catch (URISyntaxException e) {
+        } catch (URISyntaxException | IOException | JRException e) {
             throw new CustomParameterizedException(EXCEPCION_RUTA_LOGO_CABECERA_EVOLUCION_ELECTORAL, e, ErrorConstants.ERROR_GENERANDO_PDF,
                     this.getClass().getResource(Constants.CARPETA_JASPER_REPORT + LOGO_CABECERA).toString());
 
