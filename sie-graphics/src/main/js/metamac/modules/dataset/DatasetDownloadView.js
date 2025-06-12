@@ -21,12 +21,13 @@
         },
 
         render: function () {
-            var datasetSelection = this.getDatasetSelection();
+            var datasetAllSelected = this.getDatasetSelection(false);
+            var datasetSelectionObject = this.getDatasetSelection();
             var identifierUrlPart = this.filterDimensions.metadata.urlIdentifierPart();
 
             var context = {
-                selection: JSON.stringify(datasetSelection),
-                emptySelection: JSON.stringify(this.getEmptyDatasetSelection()),
+                selection: JSON.stringify(datasetSelectionObject),
+                allSelected: JSON.stringify(datasetAllSelected),
                 url: {
                     tsv: App.endpoints["export"] + "/tsv" + identifierUrlPart,
                     excel: App.endpoints["export"] + "/excel" + identifierUrlPart,
@@ -105,7 +106,7 @@
             return params;
         },
 
-        getDatasetSelection: function () {
+        getDatasetSelection: function (includeSelectedCategories = true) {
             var result = {
                 dimensions: {
                     dimension: []
@@ -115,17 +116,29 @@
 
             var self = this;
             _.each(selection, function (dimension, dimensionId) {
-                result.dimensions.dimension.push({
+                const selectedIds = self.getSelectedDimensionCategoriesIds(dimension.categories);
+                const totalCategories = dimension.categories.length;
+                const selectedCount = selectedIds.length;
+                const selectedDimension = {
                     dimensionId: dimensionId,
                     labelVisualisationMode: dimension.visibleLabelType,
-                    position: dimension.position,
-                    dimensionValues: {
-                        dimensionValue: self.getSelectedDimensionCategoriesIds(dimension.categories)
-                    }
-                })
+                    position: dimension.position
+                };
+
+                // Only include if some (but not all) are selected
+                if (includeSelectedCategories && selectedCount > 0 && selectedCount < totalCategories) {
+                    selectedDimension.dimensionValues = {
+                        dimensionValue: selectedIds
+                    };
+                }
+                result.dimensions.dimension.push(selectedDimension);
             });
 
-            return { datasetSelection: result };
+            if (result.dimensions.dimension.length === 0) {
+                return this.getEmptyDatasetSelection();
+            }
+
+            return {datasetSelection: result};
         },
 
         getSelectedDimensionCategoriesIds: function (categories) {
