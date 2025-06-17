@@ -1,5 +1,7 @@
 (function () {
     "use strict";
+    // see org.siemac.metamac.portal.rest.common.export.v1_0.mapper.DatasetSelectionMapper#toStatisticalResourcesApiRepresentationParameter
+    const GLOBAL_CHAR_LENGTH_URL_LIMIT = 2000;
 
     App.namespace('App.modules.dataset.DatasetDownloadView');
 
@@ -82,13 +84,24 @@
             var allDimensionsWithSelections = this.filterDimensions.getDimensionsWithoutSelections().length == 0;
             var isQuery = this.filterDimensions.metadata.identifier().type == "query";
 
+            const param = this.toStatisticalResourcesApiRepresentationParameter(this.getDatasetSelection());
+            const disableAllSelectionFormat = param && param.length > GLOBAL_CHAR_LENGTH_URL_LIMIT && visualizationSupertype === 'data';
+
             return {
                 dataFormats: haveDataFormats,
                 allDimensionsWithSelections: allDimensionsWithSelections,
                 mapFormats: haveMapFormats,
                 imageFormats: haveImageFormats,
                 iconPreffix: visualizationSupertype,
-                drawSelectionButtons: !isQuery || haveImageFormats // TODO METAMAC-2709
+                drawSelectionButtons: !isQuery || haveImageFormats, // TODO METAMAC-2709
+                disableFormat: {
+                    selection: {
+                        excel: disableAllSelectionFormat,
+                        tsv: disableAllSelectionFormat,
+                        px: disableAllSelectionFormat,
+                        infoMessage: disableAllSelectionFormat ? I18n.t("filter.download.selectionDisabled") : null
+                    }
+                }
             };
         },
 
@@ -154,6 +167,51 @@
         // Empty selection returns all
         getEmptyDatasetSelection: function () {
             return { datasetSelection: null };
+        },
+
+        // see org.siemac.metamac.portal.rest.common.export.v1_0.mapper.DatasetSelectionMapper.toStatisticalResourcesApiRepresentationParameter
+        toStatisticalResourcesApiRepresentationParameter: function (exportationBody) {
+            if (!exportationBody) {
+                return null;
+            }
+            const datasetSelection = exportationBody.datasetSelection;
+            if (!datasetSelection || !datasetSelection.dimensions || !datasetSelection.dimensions.dimension) {
+                return null;
+            }
+            const dimensions = datasetSelection.dimensions.dimension;
+
+            let sb = '';
+            for (const dimension of dimensions) {
+                sb += dimension.dimensionId;
+                sb += '[';
+
+                if (dimension.dimensionFilters) {
+                    const dimensionFilters = dimension.dimensionFilters;
+                    if (dimensionFilters.after) {
+                        sb += `~after=${dimensionFilters.after}|`;
+                    }
+                    if (dimensionFilters.last) {
+                        sb += `~last=${dimensionFilters.last}|`;
+                    }
+                    if (dimensionFilters.range) {
+                        sb += `~range=${dimensionFilters.range.start};${dimensionFilters.range.end}|`;
+                    }
+                }
+                if (dimension.dimensionValues && dimension.dimensionValues.dimensionValue && dimension.dimensionValues.dimensionValue.length > 0) {
+                    sb += dimension.dimensionValues.dimensionValue.join('|');
+                }
+                if (sb.charAt(sb.length - 1) === '|') {
+                    sb = sb.slice(0, -1); // delete last |
+                }
+
+                sb += ']';
+                sb += ':';
+            }
+            if (sb.charAt(sb.length - 1) === ':') {
+                sb = sb.slice(0, -1); // delete last :
+            }
+
+            return sb;
         },
 
         clickDownloadButton: function (e) {
