@@ -1,6 +1,6 @@
 {
     "evolucionElectoral": {
-        "pageTitle": "Sistema electoral de l'ISTAC",
+        "pageTitle": "Sistema electoral",
         "header": "Participació electoral a {{ territorio }}",
         "detail": "Veure detall",
         "descargarPdf": "Descarregar PDF",

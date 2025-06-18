@@ -1,6 +1,6 @@
 {
     "procesoElectoral": {
-        "pageTitle": "Sistema electoral del ISTAC",
+        "pageTitle": "Sistema electoral",
         "loading": "Cargando...",
         "header": {
             "AUTONOMICAS": "Resultados en las elecciones autonómicas de {{ fecha }}",

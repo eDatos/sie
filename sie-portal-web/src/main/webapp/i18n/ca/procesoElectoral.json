@@ -1,6 +1,6 @@
 {
     "procesoElectoral": {
-        "pageTitle": "Sistema electoral de l'ISTAC",
+        "pageTitle": "Sistema electoral",
         "loading": "Carregant...",
         "header": {
             "AUTONOMICAS": "Resultats en les eleccions autonòmiques de {{ fecha }}",

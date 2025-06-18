@@ -4,7 +4,7 @@
 resourceBundle="i18n.messages">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Usuario Data Adapter"/>
 	<property name="com.jaspersoft.studio.report.description" value=""/>
-	<parameter name="rutaLogo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="RUTA_LOGO" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="SUBREPORT_TABLAS" class="net.sf.jasperreports.engine.JasperReport"/>
 	<parameter name="dataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<parameter name="TERRITORIO" class="java.lang.String"/>
@@ -97,7 +97,9 @@ resourceBundle="i18n.messages">
 			</textField>
 			<image hAlign="Right" vAlign="Middle">
 				<reportElement x="35" y="0" width="180" height="55" uuid="3081b5c6-83dc-4967-a3c5-7848d33025d8"/>
-				<imageExpression><![CDATA[$P{rutaLogo}]]></imageExpression>
+				<imageExpression class="java.net.URL">
+                    <![CDATA[new java.net.URL($P{RUTA_LOGO})]]>
+                </imageExpression>
 			</image>
 		</band>
 	</pageFooter>

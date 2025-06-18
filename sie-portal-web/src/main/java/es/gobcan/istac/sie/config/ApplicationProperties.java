@@ -70,6 +70,7 @@ public class ApplicationProperties {
         private String internationalizationCookieKey;
         private String internationalizationLanguages;
         private String captchaExternalApiUrlBase;
+        private String appOrganisationLogoUrl;
 
         public String getEndpoint() {
             return endpoint;
@@ -305,6 +306,14 @@ public class ApplicationProperties {
 
         public void setCaptchaExternalApiUrlBase(String captchaExternalApiUrlBase) {
             this.captchaExternalApiUrlBase = captchaExternalApiUrlBase;
+        }
+
+        public String getAppOrganisationLogoUrl() {
+            return appOrganisationLogoUrl;
+        }
+
+        public void setAppOrganisationLogoUrl(String appOrganisationLogoUrl) {
+            this.appOrganisationLogoUrl = appOrganisationLogoUrl;
         }
     }
 }

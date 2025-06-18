@@ -170,3 +170,4 @@ application:
         internationalizationCookieKey: metamac.internationalization.cookieId
         internationalizationLanguages: metamac.edition.languages
         captchaExternalApiUrlBase: metamac.portal.rest.external.authentication.captcha.url
+        appOrganisationLogoUrl: edatos.app.organisation.logo.url

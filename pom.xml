@@ -14,7 +14,7 @@
 	<version>2.11.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Sistema de Información Electoral</name>
-	<description>Visualizador del Sistema de Información Electoral de Canarias</description>
+	<description>Visualizador del Sistema de Información Electoral</description>
 
     <modules>
         <module>sie-graphics</module>
