@@ -1,16 +1,22 @@
 package es.gobcan.istac.sie.config;
 
+import org.siemac.edatos.core.common.conf.ConfigurationService;
+import org.siemac.edatos.core.common.conf.ConfigurationServiceImpl;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 
 /**
  * Properties are configured in the application.yml file.
  */
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
-
     private final Visualizer visualizer = new Visualizer();
-
     private final Metadata   metadata   = new Metadata();
+
+    @Bean
+    public ConfigurationService configurationService() {
+        return new ConfigurationServiceImpl();
+    }
 
     public Visualizer getVisualizer() {
         return visualizer;

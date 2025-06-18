@@ -4,8 +4,6 @@ import es.gobcan.istac.sie.config.ApplicationProperties;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Collections;
@@ -18,6 +16,8 @@ import java.util.Map;
 import java.util.Objects;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.util.JRLoader;
+
+import org.siemac.edatos.core.common.conf.ConfigurationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -47,12 +47,12 @@ public class DocumentoServiceImpl implements DocumentoService {
 
     private final ReportsService reportsService;
     private final MessageSource messageSource;
-    private final ApplicationProperties applicationProperties;
+    private final ConfigurationService configurationService;
 
-    public DocumentoServiceImpl(ReportsService reportsService, MessageSource messageSource, ApplicationProperties applicationProperties) {
+    public DocumentoServiceImpl(ReportsService reportsService, MessageSource messageSource, ConfigurationService configurationService) {
         this.reportsService = reportsService;
         this.messageSource = messageSource;
-        this.applicationProperties = applicationProperties;
+        this.configurationService = configurationService;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class DocumentoServiceImpl implements DocumentoService {
         parametros.put("TERRITORIO", evolucionElectoral.getTerritorio());
         parametros.put("TIPO_ELECCIONES", evolucionElectoral.getTipoElecciones());
         parametros.put("dataSource", new JRBeanCollectionDataSource(evolucionElectoral.getProcesosElectorales()));
-        parametros.put("RUTA_LOGO", applicationProperties.getMetadata().getAppOrganisationLogoUrl());
+        parametros.put("RUTA_LOGO", configurationService.retrieveAppOrganisationLogoUrl());
         parametros.put("INT_FORMATTER", getIntFormatter());
         parametros.put(JRParameter.REPORT_LOCALE, new Locale(getLanguage()));
 
@@ -89,7 +89,7 @@ public class DocumentoServiceImpl implements DocumentoService {
         parametros.put("TIPO_ELECCIONES", messageSource.getMessage("report.header." + resultadoElectoral.getProcesoElectoral().getTipoProcesoElectoral(), null, Locale.getDefault()));
         parametros.put("ANNO_ELECCIONES", Integer.toString(getYear(resultadoElectoral)));
         parametros.put("DATA_SOURCE", new JRBeanCollectionDataSource(Collections.singletonList(resultadoElectoral.getProcesoElectoral())));
-        parametros.put("RUTA_LOGO", applicationProperties.getMetadata().getAppOrganisationLogoUrl());
+        parametros.put("RUTA_LOGO", configurationService.retrieveAppOrganisationLogoUrl());
         parametros.put("RESULTADOS_ELECTORALES_PARTIDOS", new JRBeanCollectionDataSource(resultadoElectoral.getData()));
         parametros.put("INT_FORMATTER", getIntFormatter());
         parametros.put("FLOAT_FORMATTER", getFloatFormatter());
