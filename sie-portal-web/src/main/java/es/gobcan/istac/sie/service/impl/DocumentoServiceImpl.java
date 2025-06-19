@@ -1,6 +1,5 @@
 package es.gobcan.istac.sie.service.impl;
 
-import es.gobcan.istac.sie.config.ApplicationProperties;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,10 +11,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
 import java.util.Objects;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.siemac.edatos.core.common.conf.ConfigurationService;
 import org.slf4j.Logger;
@@ -31,8 +27,10 @@ import es.gobcan.istac.sie.web.rest.dto.EvolucionElectoralDTO;
 import es.gobcan.istac.sie.web.rest.dto.ResultadoElectoralDTO;
 import es.gobcan.istac.sie.web.rest.errors.CustomParameterizedException;
 import es.gobcan.istac.sie.web.rest.errors.ErrorConstants;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 @Service
 public class DocumentoServiceImpl implements DocumentoService {
