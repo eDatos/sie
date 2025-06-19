@@ -4,7 +4,7 @@
         "header": "De quin lloc vols conèixer la seva evolució electoral?",
         "continuar": "Continuar",
         "errorNoEncontrado": "No s'ha trobat cap territori amb el codi {{ codigo }}.",
-        "informacionElectoralCanarias": "Informació electoral de Canàries"
+        "informacionElectoral": "Informació electoral"
     },
     "tipoEleccion": {
         "municipales": "Municipals",
@@ -15,8 +15,7 @@
         "europeas": "Europees"
     },
     "covidMainTitle": {
-        "informacion": "Informació ",
-        "electoral": "Electoral de ",
-        "canarias": "Canàries"
+        "informacion": "Informació",
+        "electoral": "Electoral"
     }
 }
