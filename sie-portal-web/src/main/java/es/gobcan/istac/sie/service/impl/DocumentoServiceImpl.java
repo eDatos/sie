@@ -3,7 +3,6 @@ package es.gobcan.istac.sie.service.impl;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -27,6 +26,7 @@ import es.gobcan.istac.sie.web.rest.dto.EvolucionElectoralDTO;
 import es.gobcan.istac.sie.web.rest.dto.ResultadoElectoralDTO;
 import es.gobcan.istac.sie.web.rest.errors.CustomParameterizedException;
 import es.gobcan.istac.sie.web.rest.errors.ErrorConstants;
+import es.gobcan.istac.sie.web.rest.util.ValueFormatter;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -63,7 +63,7 @@ public class DocumentoServiceImpl implements DocumentoService {
         parametros.put("TIPO_ELECCIONES", evolucionElectoral.getTipoElecciones());
         parametros.put("dataSource", new JRBeanCollectionDataSource(evolucionElectoral.getProcesosElectorales()));
         parametros.put("RUTA_LOGO", configurationService.retrieveAppOrganisationLogoUrl());
-        parametros.put("INT_FORMATTER", getIntFormatter());
+        parametros.put("VALUE_FORMATTER", getFormatter());
         parametros.put(JRParameter.REPORT_LOCALE, new Locale(getLanguage()));
 
         try (InputStream subReport = getClass().getResourceAsStream(Constants.CARPETA_JASPER_REPORT + SUBINFORME_TABLAS)) {
@@ -89,8 +89,7 @@ public class DocumentoServiceImpl implements DocumentoService {
         parametros.put("DATA_SOURCE", new JRBeanCollectionDataSource(Collections.singletonList(resultadoElectoral.getProcesoElectoral())));
         parametros.put("RUTA_LOGO", configurationService.retrieveAppOrganisationLogoUrl());
         parametros.put("RESULTADOS_ELECTORALES_PARTIDOS", new JRBeanCollectionDataSource(resultadoElectoral.getData()));
-        parametros.put("INT_FORMATTER", getIntFormatter());
-        parametros.put("FLOAT_FORMATTER", getFloatFormatter());
+        parametros.put("VALUE_FORMATTER", getFormatter());
         parametros.put(JRParameter.REPORT_LOCALE, new Locale(getLanguage()));
 
         try (InputStream subReport = getClass().getResourceAsStream(Constants.CARPETA_JASPER_REPORT + SUBINFORME_TABLA_RESULTADO)) {
@@ -116,14 +115,7 @@ public class DocumentoServiceImpl implements DocumentoService {
         return locale.toString().split("_")[0];
     }
 
-    private NumberFormat getIntFormatter() {
-        return NumberFormat.getNumberInstance(new java.util.Locale(getLanguage()));
-    }
-
-    private NumberFormat getFloatFormatter() {
-        NumberFormat floatFormatter = NumberFormat.getNumberInstance(new java.util.Locale(getLanguage()));
-        floatFormatter.setMinimumFractionDigits(2);
-        floatFormatter.setMaximumFractionDigits(2);
-        return floatFormatter;
+    private ValueFormatter getFormatter() {
+        return new ValueFormatter();
     }
 }

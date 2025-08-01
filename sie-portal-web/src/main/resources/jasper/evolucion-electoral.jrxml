@@ -10,7 +10,7 @@ resourceBundle="i18n.messages">
 	<parameter name="TERRITORIO" class="java.lang.String"/>
 	<parameter name="TIPO_ELECCIONES" class="java.lang.String"/>
 	<parameter name="GRAFICA" class="java.io.ByteArrayInputStream"/>
-	<parameter name="INT_FORMATTER" class="java.text.NumberFormat"/>
+	<parameter name="VALUE_FORMATTER" class="es.gobcan.istac.sie.web.rest.util.ValueFormatter"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -49,8 +49,8 @@ resourceBundle="i18n.messages">
 		<band height="200" splitType="Stretch">
 			<subreport>
 				<reportElement stretchType="RelativeToTallestObject" x="40" y="-80" width="470" height="200" uuid="b72cb9d4-649f-4d71-8cff-246625bb6359"/>
-				<subreportParameter name="INT_FORMATTER">
-					<subreportParameterExpression><![CDATA[$P{INT_FORMATTER}]]></subreportParameterExpression>
+				<subreportParameter name="VALUE_FORMATTER">
+					<subreportParameterExpression><![CDATA[$P{VALUE_FORMATTER}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[$P{dataSource}]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_TABLAS}]]></subreportExpression>

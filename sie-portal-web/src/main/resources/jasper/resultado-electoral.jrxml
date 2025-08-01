@@ -38,8 +38,7 @@ resourceBundle="i18n.messages">
 	<subDataset name="datos-partidos" uuid="9019e526-40e5-480c-b781-b4776a6964dc">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 		<parameter name="DATOS_ELECCCION" class="java.util.Map"/>
-		<parameter name="INT_FORMATTER" class="java.text.NumberFormat"/>
-		<parameter name="FLOAT_FORMATTER" class="java.text.NumberFormat"/>
+		<parameter name="VALUE_FORMATTER" class="es.gobcan.istac.sie.web.rest.util.ValueFormatter"/>
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
@@ -47,11 +46,8 @@ resourceBundle="i18n.messages">
 		<field name="results" class="java.util.Map"/>
 		<sortField name="votosValidosCandidatura" order="Descending" type="Variable"/>
 		<sortField name="representantesElegidos" order="Descending" type="Variable"/>
-		<variable name="intFormatter" class="java.text.NumberFormat">
-			<variableExpression><![CDATA[$P{INT_FORMATTER}]]></variableExpression>
-		</variable>
-		<variable name="floatFormatter" class="java.text.NumberFormat">
-			<variableExpression><![CDATA[$P{FLOAT_FORMATTER}]]></variableExpression>
+		<variable name="valueFormatter" class="es.gobcan.istac.sie.web.rest.util.ValueFormatter">
+			<variableExpression><![CDATA[$P{VALUE_FORMATTER}]]></variableExpression>
 		</variable>
 		<variable name="votosValidosCandidatura" class="java.lang.Integer">
 			<variableExpression><![CDATA[$F{results}.get("VOTOS_VALIDOS_CANDIDATURA")]]></variableExpression>
@@ -71,8 +67,7 @@ resourceBundle="i18n.messages">
 	<parameter name="GRAFICA" class="java.io.ByteArrayInputStream"/>
 	<parameter name="ANNO_ELECCIONES" class="java.lang.String"/>
 	<parameter name="RESULTADOS_ELECTORALES_PARTIDOS" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
-	<parameter name="INT_FORMATTER" class="java.text.NumberFormat"/>
-	<parameter name="FLOAT_FORMATTER" class="java.text.NumberFormat"/>
+	<parameter name="VALUE_FORMATTER" class="es.gobcan.istac.sie.web.rest.util.ValueFormatter"/>
 	<parameter name="GRANULARIDAD" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
@@ -112,11 +107,8 @@ resourceBundle="i18n.messages">
 		<band height="134" splitType="Stretch">
 			<subreport>
 				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="480" height="130" uuid="b72cb9d4-649f-4d71-8cff-246625bb6359"/>
-				<subreportParameter name="INT_FORMATTER">
-					<subreportParameterExpression><![CDATA[$P{INT_FORMATTER}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="FLOAT_FORMATTER">
-					<subreportParameterExpression><![CDATA[$P{FLOAT_FORMATTER}]]></subreportParameterExpression>
+				<subreportParameter name="VALUE_FORMATTER">
+					<subreportParameterExpression><![CDATA[$P{VALUE_FORMATTER}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[$P{DATA_SOURCE}]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_TABLA_RESULTADO}]]></subreportExpression>
@@ -132,11 +124,8 @@ resourceBundle="i18n.messages">
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="Blank">
 					<datasetRun subDataset="datos-partidos" uuid="fabc187d-9502-43dc-afae-6a543ca49b69">
-						<datasetParameter name="INT_FORMATTER">
-							<datasetParameterExpression><![CDATA[$P{INT_FORMATTER}]]></datasetParameterExpression>
-						</datasetParameter>
-						<datasetParameter name="FLOAT_FORMATTER">
-							<datasetParameterExpression><![CDATA[$P{FLOAT_FORMATTER}]]></datasetParameterExpression>
+						<datasetParameter name="VALUE_FORMATTER">
+							<datasetParameterExpression><![CDATA[$P{VALUE_FORMATTER}]]></datasetParameterExpression>
 						</datasetParameter>
 						<dataSourceExpression><![CDATA[$P{RESULTADOS_ELECTORALES_PARTIDOS}]]></dataSourceExpression>
 					</datasetRun>
@@ -213,7 +202,7 @@ resourceBundle="i18n.messages">
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$V{votosValidosCandidatura} != null ? $V{intFormatter}.format($V{votosValidosCandidatura}) : ""]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{votosValidosCandidatura} != null ? $V{valueFormatter}.formatInt($V{votosValidosCandidatura}) : ""]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -250,7 +239,7 @@ resourceBundle="i18n.messages">
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$V{porcentajeVotosCandidatura} != null ? $V{floatFormatter}.format($V{porcentajeVotosCandidatura}) + " %" : ""]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{porcentajeVotosCandidatura} != null ? $V{valueFormatter}.formatFloat($V{porcentajeVotosCandidatura}) + " %" : ""]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -287,7 +276,7 @@ resourceBundle="i18n.messages">
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$V{representantesElegidos} != null ? $V{intFormatter}.format($V{representantesElegidos}) : ""]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$V{representantesElegidos} != null ? $V{valueFormatter}.formatInt($V{representantesElegidos}) : ""]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
