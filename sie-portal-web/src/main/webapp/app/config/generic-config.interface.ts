@@ -33,7 +33,8 @@ export interface GenericConfig {
         firstTerritoryHierarchyLevelKey,
         internationalizationCookieKey,
         internationalizationLanguages,
-        captchaExternalApiUrlBase
+        captchaExternalApiUrlBase,
+        appOrganisationLogoUrlKey,
     };
 
     baseUrl

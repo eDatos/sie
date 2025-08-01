@@ -12,7 +12,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-import org.siemac.edatos.core.common.conf.ConfigurationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -45,12 +44,10 @@ public class DocumentoServiceImpl implements DocumentoService {
 
     private final ReportsService reportsService;
     private final MessageSource messageSource;
-    private final ConfigurationService configurationService;
 
-    public DocumentoServiceImpl(ReportsService reportsService, MessageSource messageSource, ConfigurationService configurationService) {
+    public DocumentoServiceImpl(ReportsService reportsService, MessageSource messageSource) {
         this.reportsService = reportsService;
         this.messageSource = messageSource;
-        this.configurationService = configurationService;
     }
 
     @Override
@@ -62,7 +59,7 @@ public class DocumentoServiceImpl implements DocumentoService {
         parametros.put("TERRITORIO", evolucionElectoral.getTerritorio());
         parametros.put("TIPO_ELECCIONES", evolucionElectoral.getTipoElecciones());
         parametros.put("dataSource", new JRBeanCollectionDataSource(evolucionElectoral.getProcesosElectorales()));
-        parametros.put("RUTA_LOGO", configurationService.retrieveAppOrganisationLogoUrl());
+        parametros.put("RUTA_LOGO", evolucionElectoral.getAppOrganisationLogoUrl());
         parametros.put("VALUE_FORMATTER", getFormatter());
         parametros.put(JRParameter.REPORT_LOCALE, new Locale(getLanguage()));
 
@@ -87,7 +84,7 @@ public class DocumentoServiceImpl implements DocumentoService {
         parametros.put("TIPO_ELECCIONES", messageSource.getMessage("report.header." + resultadoElectoral.getProcesoElectoral().getTipoProcesoElectoral(), null, Locale.getDefault()));
         parametros.put("ANNO_ELECCIONES", Integer.toString(getYear(resultadoElectoral)));
         parametros.put("DATA_SOURCE", new JRBeanCollectionDataSource(Collections.singletonList(resultadoElectoral.getProcesoElectoral())));
-        parametros.put("RUTA_LOGO", configurationService.retrieveAppOrganisationLogoUrl());
+        parametros.put("RUTA_LOGO", resultadoElectoral.getAppOrganisationLogoUrl());
         parametros.put("RESULTADOS_ELECTORALES_PARTIDOS", new JRBeanCollectionDataSource(resultadoElectoral.getData()));
         parametros.put("VALUE_FORMATTER", getFormatter());
         parametros.put(JRParameter.REPORT_LOCALE, new Locale(getLanguage()));

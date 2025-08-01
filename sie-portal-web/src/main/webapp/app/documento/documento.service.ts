@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, ResponseContentType } from '@angular/http';
 import * as FileSaver from 'file-saver';
-import { TranslateService } from '@ngx-translate/core';
-import { JhiAlertService } from 'ng-jhipster';
 import { Observable } from 'rxjs/Observable';
 import { ResultadoElectoral } from '../dataset';
+import { MetadataService, ConfigService } from '../config';
 
 @Injectable()
 export class DocumentoService {
@@ -13,22 +12,28 @@ export class DocumentoService {
 
     constructor(
         private http: Http,
-        private translateService: TranslateService,
-        private alertService: JhiAlertService
+        private metadataService: MetadataService,
+        private configService: ConfigService
     ) { }
 
     descargarPdfEvolucionElectoral(evolucionElectoral: any): Observable<any> {
-        const formData = new FormData();
-        formData.append('evolucionElectoral', new Blob([JSON.stringify(evolucionElectoral)], { type: 'application/json' }));
-        formData.append('grafica', new Blob([this.sanitizeSvg(document.getElementsByTagName('svg')[0].outerHTML)], { type: 'image/svg+xml' }));
-        return this.http.post(`${this.resourceUrl}/evolucion-electoral`, formData, { responseType: ResponseContentType.Blob });
+        return this.metadataService.getPropertyById(this.configService.getConfig().metadata.appOrganisationLogoUrlKey).switchMap((logoUrl: string) => {
+            const formData = new FormData();
+            evolucionElectoral.appOrganisationLogoUrl = logoUrl;
+            formData.append('evolucionElectoral', new Blob([JSON.stringify(evolucionElectoral)], { type: 'application/json' }));
+            formData.append('grafica', new Blob([this.sanitizeSvg(document.getElementsByTagName('svg')[0].outerHTML)], { type: 'image/svg+xml' }));
+            return this.http.post(`${this.resourceUrl}/evolucion-electoral`, formData, { responseType: ResponseContentType.Blob });
+        });
     }
 
     descargarPdfResultadoElectoral(resultadoElectoral: ResultadoElectoral, svg: SVGElement): Observable<any> {
-        const formData = new FormData();
-        formData.append('resultadoElectoral', new Blob([JSON.stringify(resultadoElectoral)], { type: 'application/json' }));
-        formData.append('grafica', new Blob([this.sanitizeSvg(this.processSvg(svg).outerHTML)], { type: 'image/svg+xml' }));
-        return this.http.post(`${this.resourceUrl}/resultado-electoral`, formData, { responseType: ResponseContentType.Blob });
+        return this.metadataService.getPropertyById(this.configService.getConfig().metadata.appOrganisationLogoUrlKey).switchMap((logoUrl: string) => {
+            const formData = new FormData();
+            resultadoElectoral.appOrganisationLogoUrl = logoUrl;
+            formData.append('resultadoElectoral', new Blob([JSON.stringify(resultadoElectoral)], { type: 'application/json' }));
+            formData.append('grafica', new Blob([this.sanitizeSvg(this.processSvg(svg).outerHTML)], { type: 'image/svg+xml' }));
+            return this.http.post(`${this.resourceUrl}/resultado-electoral`, formData, { responseType: ResponseContentType.Blob });
+        });
     }
 
     private sanitizeSvg(svg) {

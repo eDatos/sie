@@ -15,7 +15,6 @@
     <properties>
         <argLine>-Djava.security.egd=file:/dev/./urandom -Xmx256m</argLine>
         <arte-libs-grammar.version>2.1.0</arte-libs-grammar.version>
-        <edatos-core-common.version>1.8.1-SNAPSHOT</edatos-core-common.version>
         <assertj.version>3.6.2</assertj.version>
         <awaitility.version>2.0.0</awaitility.version>
         <commons-io.version>2.5</commons-io.version>
@@ -118,11 +117,6 @@
             <artifactId>batik-bridge</artifactId>
             <version>1.10</version>
 		</dependency>
-        <dependency>
-            <groupId>org.siemac.metamac</groupId>
-	        <artifactId>edatos-core-common</artifactId>
-            <version>${edatos-core-common.version}</version>
-        </dependency>
           <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
