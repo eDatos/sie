@@ -4,9 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'defaultNull',
 })
 export class DefaultNullPipe implements PipeTransform {
-    transform(value: any, defaultText= ''): any {
+    transform(value: any): any {
         if (!value) {
-            return defaultText;
+            return 0;
         }
         return value;
     }
