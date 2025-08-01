@@ -36,7 +36,7 @@
                             self.ve[self.currentElement].update();
                         }, graphReady);
                     }
-                }, graphReady);
+                }, null, graphReady);
             }
 
             this._initializeVisualElements();
