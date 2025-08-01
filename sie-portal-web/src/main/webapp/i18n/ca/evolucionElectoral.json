@@ -28,6 +28,7 @@
         "tipoEleccion": {
             "AUTONOMICAS": "AUTONÒMIQUES",
             "CABILDO": "CABILDOS",
+            "CONSEJO_INSULAR": "CONSSELLS INSULARS",
             "CONGRESO": "CONGRÉS",
             "MUNICIPALES": "MUNICIPALS",
             "PARLAMENTO_EUROPEO": "PARLAMENT EUROPEU",
@@ -37,6 +38,7 @@
         "nombreCompletoEleccion": {
             "AUTONOMICAS": "Eleccions autonòmiques",
             "CABILDO": "Eleccions al Cabildo",
+            "CONSEJO_INSULAR": "Eleccions als Consells Insulars",
             "CONGRESO": "Eleccions al Congrés",
             "MUNICIPALES": "Eleccions municipals",
             "PARLAMENTO_EUROPEO": "Eleccions al Parlament Europeu",

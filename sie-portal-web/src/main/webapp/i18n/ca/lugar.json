@@ -10,6 +10,11 @@
         "municipales": "Municipals",
         "autonomicas": "Autonòmiques",
         "cabildos": "Cabildos",
+        "consejosInsulares": {
+            "consejos": "Consells",
+            "insulares": "Insulars",
+            "all": "Consells Insulars"
+        },
         "congreso": "Congrés",
         "senado": "Senat",
         "europeas": "Europees"

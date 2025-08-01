@@ -6,6 +6,7 @@
             "AUTONOMICAS": "Resultados en las elecciones autonómicas de {{ fecha }}",
             "CABILDO": "Resultados en las elecciones al Cabildo de {{ fecha }}",
             "CONGRESO": "Resultados en las elecciones al Congreso de {{ fecha }}",
+            "CONSEJO_INSULAR": "Resultados en las elecciones al Consejo Insular de {{ fecha }}",
             "MUNICIPALES": "Resultados en las elecciones municipales de {{ fecha }}",
             "PARLAMENTO_EUROPEO": "Resultados en las elecciones al Parlamento Europeo de {{ fecha }}",
             "REFERENDUM": "Resultados en el referéndum de {{ fecha }}",

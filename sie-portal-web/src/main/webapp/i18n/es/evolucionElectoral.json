@@ -29,6 +29,7 @@
             "AUTONOMICAS": "AUTONÓMICAS",
             "CABILDO": "CABILDOS",
             "CONGRESO": "CONGRESO",
+            "CONSEJO_INSULAR": "CONSEJOS INSULARES",
             "MUNICIPALES": "MUNICIPALES",
             "PARLAMENTO_EUROPEO": "PARLAMENTO EUROPEO",
             "REFERENDUM": "REFERÉNDUM",
@@ -37,6 +38,7 @@
         "nombreCompletoEleccion": {
             "AUTONOMICAS": "Elecciones autonómicas",
             "CABILDO": "Elecciones al Cabildo",
+            "CONSEJO_INSULAR": "Elecciones a los Consejos Insulares",
             "CONGRESO": "Elecciones al Congreso",
             "MUNICIPALES": "Elecciones municipales",
             "PARLAMENTO_EUROPEO": "Elecciones al Parlamento Europeo",
