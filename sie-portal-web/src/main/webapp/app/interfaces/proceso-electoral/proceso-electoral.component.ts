@@ -252,6 +252,16 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         this.host.nativeElement.appendChild(estilosMetamac);
     }
 
+    private getCandidaturasDimensionId(dataset: BasicDataset): string {
+        const dimensionIds: string[] = dataset.metadata.dimensions.dimension.map((dim) => dim.id);
+        if (dimensionIds.indexOf("CANDIDATURA") !== -1) {
+            return "CANDIDATURA";
+        } else if (dimensionIds.indexOf("CANDIDATURAS") !== -1) {
+            return "CANDIDATURAS";
+        }
+        throw new Error("The CANDIDATURA(S) dimension was not found in the dataset");
+    }
+
     /**
      * Converts the dataset to a simple table with the name of the party and the data of the elections
      */
@@ -297,10 +307,11 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                     const measure = arr[dimIds.indexOf('MEDIDAS')];
                     const observation = observations[k + cat3.length * (j + cat2.length * i)]; // see https://eli.thegreenplace.net/2015/memory-layout-of-multi-dimensional-arrays
                     if (observation !== null) {
+                        const candidaturasDimensionId = this.getCandidaturasDimensionId(dataset);
                         data.push({
                             measure: this.normalizeMeasureForPdf(measure),
                             territory: this.getTerritoryInfo(dataset, "TERRITORIO", arr[dimIds.indexOf("TERRITORIO")]),
-                            candidacy: this.getName(dataset, 'CANDIDATURAS', arr[dimIds.indexOf('CANDIDATURAS')]),
+                            candidacy: this.getName(dataset, candidaturasDimensionId, arr[dimIds.indexOf(candidaturasDimensionId)]),
                             value: observation
                         });
                     }

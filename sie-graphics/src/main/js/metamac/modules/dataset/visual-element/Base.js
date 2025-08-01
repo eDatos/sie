@@ -51,8 +51,12 @@
             return fixedLabels.length ? fixedLabels.join(" ") : "";
         },
 
+        getCandidaturasDimension() {
+            return this.filterDimensions.get('CANDIDATURAS') || this.filterDimensions.get('CANDIDATURA');
+        },
+
         setSelectTotal: function(value) {
-            this.filterDimensions.get('CANDIDATURAS').get('representations').get('_T').set('selected', value);
+            this.getCandidaturasDimension().get('representations').get('_T').set('selected', value);
         },
 
         load: function () {

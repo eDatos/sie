@@ -3,7 +3,7 @@ export interface BasicDataset {
         dimensions: {
             dimension: [
                 {
-                    id: 'MEDIDAS' | 'TERRITORIO' | 'CANDIDATURAS';
+                    id: 'MEDIDAS' | 'TERRITORIO' | 'CANDIDATURAS' | 'CANDIDATURA';
                     dimensionValues: {
                         value: [
                             {
@@ -27,7 +27,7 @@ export interface BasicDataset {
         dimensions: {
             dimension: [
                 {
-                    dimensionId: 'MEDIDAS' | 'TERRITORIO' | 'CANDIDATURAS';
+                    dimensionId: 'MEDIDAS' | 'TERRITORIO' | 'CANDIDATURAS' | 'CANDIDATURA';
                     representations: {
                         representation: [
                             {
