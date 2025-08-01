@@ -133,8 +133,9 @@ export class EvolucionElectoralComponent implements OnInit {
         resultado.yAxis = yAxisIndex;
         resultado.data = [];
         for (const eleccion of listaProcesoElectoral) {
+            const valorPrincipal = eleccion.indicadores[indicador.nombre];
             resultado.data.push({
-                y: parseFloat(eleccion.indicadores[indicador.nombre]),
+                y: parseFloat(valorPrincipal || '0'),
                 altData: parseFloat(eleccion.indicadores[indicador.indicadorAlternativo])
             });
         }
