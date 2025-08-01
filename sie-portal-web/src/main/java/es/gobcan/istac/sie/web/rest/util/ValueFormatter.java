@@ -54,11 +54,11 @@ public class ValueFormatter {
     }
 
     private NumberFormat getIntFormatter() {
-        return NumberFormat.getNumberInstance(new java.util.Locale(getLanguage()));
+        return NumberFormat.getNumberInstance(new Locale(getLanguage()));
     }
 
     private NumberFormat getFloatFormatter() {
-        NumberFormat floatFormatter = NumberFormat.getNumberInstance(new java.util.Locale(getLanguage()));
+        NumberFormat floatFormatter = NumberFormat.getNumberInstance(new Locale(getLanguage()));
         floatFormatter.setMinimumFractionDigits(2);
         floatFormatter.setMaximumFractionDigits(2);
         return floatFormatter;
