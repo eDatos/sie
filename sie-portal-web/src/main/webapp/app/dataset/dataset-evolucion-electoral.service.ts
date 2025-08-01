@@ -185,14 +185,9 @@ export class DatasetEvolucionElectoralService {
     }
 
     private tieneDatos(procesoElectoral: ProcesoElectoral): boolean {
-        let result = true;
-        Object.keys(procesoElectoral.indicadores).find((key) => {
-            if (!procesoElectoral.indicadores[key]) {
-                result = false;
-            }
-            return true;
-        });
-        return result;
+        return Object.keys(procesoElectoral.indicadores).some(
+            (key) => !!procesoElectoral.indicadores[key],
+        );
     }
 
     private doGetDataByRegionId(id: string): Observable<any> {
