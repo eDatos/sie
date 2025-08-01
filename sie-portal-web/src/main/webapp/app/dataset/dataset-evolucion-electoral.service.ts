@@ -161,7 +161,8 @@ export class DatasetEvolucionElectoralService {
             case 'MUNICIPALES': {
                 return 0;
             }
-            case 'CABILDO': {
+            case 'CABILDO':
+            case 'CONSEJO_INSULAR': {
                 return 1;
             }
             case 'AUTONOMICAS': {
