@@ -14,6 +14,10 @@ export class TipoEleccionesDatasetUrlService {
         private http: Http
     ) { }
 
+    getAll(): Observable<TipoEleccionesDatasetUrl[]> {
+        return this.http.get(`${this.mappingUrl}`).map((response) => response.json());
+    }
+
     getDatasetIdByTipoElecciones(tipoElecciones: string): Observable<TipoEleccionesDatasetUrl> {
         if (!this.mappingCache[tipoElecciones]) {
             this.mappingCache[tipoElecciones] = this.doGetDatasetIdByTipoElecciones(tipoElecciones).publishReplay(1).refCount();

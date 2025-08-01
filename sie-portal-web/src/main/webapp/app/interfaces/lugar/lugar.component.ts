@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { DatasetEvolucionElectoralService, Lugar } from '../../dataset';
+import { DatasetEvolucionElectoralService, Lugar, TipoEleccionesDatasetUrlService, TipoEleccionesDatasetUrl } from '../../dataset';
+import { MetadataService, ConfigService } from '../../config';
 
 const BACKGROUND_CLASS = 'lugar-background';
 
@@ -13,12 +14,25 @@ export class LugarComponent implements OnInit, OnDestroy {
 
     lugares: Lugar[];
     lugar: Lugar;
+    nutsTerritoryCode: string;
+    elecciones: TipoEleccionesDatasetUrl[];
 
     constructor(
         private router: Router,
         private datasetEvolucionElectoralService: DatasetEvolucionElectoralService,
-        private renderer: Renderer2
-    ) { }
+        private renderer: Renderer2,
+        private metadataService: MetadataService,
+        private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService,
+        private configService: ConfigService,
+    ) {
+        this.tipoEleccionesDatasetUrlService.getAll().subscribe((all) => {
+            this.elecciones = all;
+        })
+        const config = this.configService.getConfig();
+        this.metadataService.getPropertyById(config.metadata.firstTerritoryHierarchyLevelKey).subscribe((territorio) => {
+            this.nutsTerritoryCode = territorio;
+        });
+    }
 
     ngOnInit() {
         this.renderer.addClass(document.body.parentNode, BACKGROUND_CLASS);
@@ -31,5 +45,10 @@ export class LugarComponent implements OnInit, OnDestroy {
 
     transition() {
         this.router.navigate(['evolucion-electoral', this.lugar.id]);
+    }
+
+    getInsularInstitutionType() {
+        const tipoElecciones = this.elecciones.map((elem) => elem.tipoElecciones);
+        return tipoElecciones.find((elem) => elem === 'CABILDO') || tipoElecciones.find((elem) => elem === 'CONSEJO_INSULAR');
     }
 }

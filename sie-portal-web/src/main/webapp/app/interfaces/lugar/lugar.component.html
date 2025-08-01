@@ -4,7 +4,7 @@
         <jhi-information-button titleKey="global.explanatoryVideo" metadataObjKey="sieExplanatoryVideoUrl"></jhi-information-button>
     </aside>
 
-    <section class="selector">
+    <section *ngIf="elecciones" class="selector">
         <div class="ring-selector">
             <svg id="selector" width="384" height="428" viewBox="0 0 384 428" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="coronavirus">
@@ -48,7 +48,7 @@
                             <tspan x="156.681" y="232.652">{{ 'covidMainTitle.electoral' | translate }}</tspan>
                         </text>
                     </g>
-                    <a href="#/evolucion-electoral/ES70?tipoEleccion=autonomicas">
+                    <a [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=autonomicas"'>
                         <g id="select-region">
                             <g id="Figure">
                                 <g id="Group_8">
@@ -65,7 +65,7 @@
                             </text>
                         </g>
                     </a>
-                    <a href="#/evolucion-electoral/ES70?tipoEleccion=cabildo">
+                    <a *ngIf="getInsularInstitutionType() === 'CABILDO'" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=cabildo"'>
                         <g id="select-councils">
                             <g id="Figure_2">
                                 <g id="Group_9">
@@ -82,7 +82,25 @@
                             </text>
                         </g>
                     </a>
-                    <a href="#/evolucion-electoral/ES70?tipoEleccion=senado">
+                    <a *ngIf="getInsularInstitutionType() === 'CONSEJO_INSULAR'" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=consejo_insular"'>
+                        <g id="select-councils">
+                            <g id="Figure_2">
+                                <g id="Group_9">
+                                    <path id="Vector_11" fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M280.02 133.331C280.02 104.701 303.23 81.491 331.86 81.491C360.49 81.491 383.7 104.701 383.7 133.331C383.7 161.961 360.49 185.171 331.86 185.171C303.23 185.171 280.02 161.961 280.02 133.331Z"
+                                          fill="#00B050"/>
+                                    <path id="Vector_12"
+                                          d="M280.02 133.331C280.02 104.701 303.23 81.491 331.86 81.491C360.49 81.491 383.7 104.701 383.7 133.331C383.7 161.961 360.49 185.171 331.86 185.171C303.23 185.171 280.02 161.961 280.02 133.331Z"
+                                          stroke="white" stroke-miterlimit="8"/>
+                                </g>
+                            </g>
+                            <text id="Consejos_Insulares" fill="white" xml:space="preserve" style="white-space: pre" font-family="Roboto" font-size="12" letter-spacing="0em">
+                                <tspan x="310" y="131.102">{{ 'tipoEleccion.consejosInsulares.consejos' | translate }}</tspan>
+                                <tspan x="311" y="145.102">{{ 'tipoEleccion.consejosInsulares.insulares' | translate }}</tspan>
+                            </text>
+                        </g>
+                    </a>
+                    <a [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=senado"'>
                         <g id="select-senate">
                             <g id="Figure_3">
                                 <g id="Group_10">
@@ -99,7 +117,7 @@
                             </text>
                         </g>
                     </a>
-                    <a href="#/evolucion-electoral/ES70?tipoEleccion=parlamento_europeo">
+                    <a [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=parlamento_europeo"'>
                         <g id="select-europe">
                             <g id="Figure_4">
                                 <g id="Group_11">
@@ -116,7 +134,7 @@
                             </text>
                         </g>
                     </a>
-                    <a href="#/evolucion-electoral/ES70?tipoEleccion=congreso">
+                    <a [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=congreso"'>
                         <g id="select-congress">
                             <g id="Figure_5">
                                 <g id="Group_12">
@@ -133,7 +151,7 @@
                             </text>
                         </g>
                     </a>
-                    <a href="#/evolucion-electoral/ES70?tipoEleccion=municipales">
+                    <a [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=municipales"'>
                         <g id="select-municipales">
                             <g id="Figure_6">
                                 <g id="Group_13">
@@ -157,7 +175,7 @@
         <div class="cards-selector">
             <h1 class="title">{{ 'lugar.informacionElectoral' | translate }}</h1>
 
-            <a title="{{ 'tipoEleccion.autonomicas' | translate }}" href="#/evolucion-electoral/ES70?tipoEleccion=autonomicas">
+            <a title="{{ 'tipoEleccion.autonomicas' | translate }}" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=autonomicas"'>
                 <div class="card">
                     <img class="card-img" src="~images/parcan.jpg" alt="Parlamento de Canarias">
                     <div class="card-background red">
@@ -166,7 +184,7 @@
                 </div>
             </a>
 
-            <a title="{{ 'tipoEleccion.cabildos' | translate }}" href="#/evolucion-electoral/ES70?tipoEleccion=cabildo">
+            <a *ngIf="getInsularInstitutionType() === 'CABILDO'" title="{{ 'tipoEleccion.cabildos' | translate }}" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=cabildo"'>
                 <div class="card">
                     <img class="card-img" src="~images/cabildo-insular.jpg" alt="Cabildo Insular de Tenerife">
                     <div class="card-background green">
@@ -175,7 +193,16 @@
                 </div>
             </a>
 
-            <a title="{{ 'tipoEleccion.municipales' | translate }}" href="#/evolucion-electoral/ES70?tipoEleccion=municipales">
+            <a *ngIf="getInsularInstitutionType() === 'CONSEJO_INSULAR'" title="{{ 'tipoEleccion.cabildos' | translate }}" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=consejo_insular"'>
+                <div class="card">
+                    <img class="card-img" src="~images/consejo-insular.jpg" alt="Consejo Insular de Palma">
+                    <div class="card-background green">
+                        <h3 class="card-title">{{ 'tipoEleccion.consejosInsulares.all' | translate }}</h3>
+                    </div>
+                </div>
+            </a>
+
+            <a title="{{ 'tipoEleccion.municipales' | translate }}" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=municipales"'>
                 <div class="card">
                     <img class="card-img" src="~images/ayuntamiento.jpg" alt="Ayuntamiento de La Orotava">
                     <div class="card-background blue">
@@ -184,7 +211,7 @@
                 </div>
             </a>
 
-            <a title="{{ 'tipoEleccion.congreso' | translate }}" href="#/evolucion-electoral/ES70?tipoEleccion=congreso">
+            <a title="{{ 'tipoEleccion.congreso' | translate }}" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=congreso"'>
                 <div class="card">
                     <img class="card-img" src="~images/congreso-diputados.jpg" alt="Congreso de los Diputados">
                     <div class="card-background purple">
@@ -193,7 +220,7 @@
                 </div>
             </a>
 
-            <a title="{{ 'tipoEleccion.senado' | translate }}" href="#/evolucion-electoral/ES70?tipoEleccion=senado">
+            <a title="{{ 'tipoEleccion.senado' | translate }}" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=senado"'>
                 <div class="card">
                     <img class="card-img" src="~images/senado.jpg" alt="Senado">
                     <div class="card-background yellow">
@@ -202,7 +229,7 @@
                 </div>
             </a>
 
-            <a title="Europeas" href="#/evolucion-electoral/ES70?tipoEleccion=parlamento_europeo">
+            <a title="Europeas" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=parlamento_europeo"'>
                 <div class="card">
                     <img class="card-img" src="~images/europarl.jpg" alt="Parlamento Europeo (Estrasburgo)">
                     <div class="card-background grey">
