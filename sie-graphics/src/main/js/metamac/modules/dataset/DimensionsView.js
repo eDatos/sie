@@ -433,7 +433,7 @@
             return _(uniqueLevels).map(function (level) {
                 return {
                     level: level.toString(),
-                    label: level === 0 ? I18n.t('filter.selector.level.' + App.config['firstTerritoryHierarchyLevel']) : I18n.t('filter.selector.level.' + level)
+                    label: I18n.t('filter.selector.level.' + (level === 0 ? App.config['firstTerritoryHierarchyLevel'] : level))
                 };
             });
         },
