@@ -26,7 +26,9 @@
             }).success(function (response) {
                 successCallback(response);
             }).error(function (jqXhr, textStatus, errorThrown) {
-                errorCallback(jqXhr, textStatus, errorThrown);
+                if (errorCallback) {
+                    errorCallback(jqXhr, textStatus, errorThrown);
+                }
             }).always(function (response) {
                 if (alwaysCallback) {
                     alwaysCallback(response);
