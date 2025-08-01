@@ -142,11 +142,12 @@ I18n.translations.es = {
         },
         selector: {
             level: {
-                1: "Canarias",
-                2: "Provincias",
-                3: "Islas",
-                4: "Municipios",
-                5: "Secciones censales"
+                "ES70": "Canarias",
+                "ES53": "Islas Baleares",
+                1: "Provincias",
+                2: "Islas",
+                3: "Municipios",
+                4: "Secciones censales"
             }
         }
     },

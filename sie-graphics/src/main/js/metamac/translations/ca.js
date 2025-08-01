@@ -110,11 +110,12 @@ I18n.translations.ca = {
         },
         selector: {
             level: {
-                1: "Canàries",
-                2: "Províncies",
-                3: "Illes",
-                4: "Municipis",
-                5: "Seccions censals"
+                "ES70": "Illes Canàries",
+                "ES53": "Illes Balears",
+                1: "Províncies",
+                2: "Illes",
+                3: "Municipis",
+                4: "Seccions censals"
             }
         }
     },

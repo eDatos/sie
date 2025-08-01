@@ -105,11 +105,12 @@ I18n.translations.en = {
         },
         selector: {
             level: {
-                1: "Canary Islands",
-                2: "Provinces",
-                3: "Islands",
-                4: "Municipalities",
-                5: "Census sections"
+                "ES70": "Canary Islands",
+                "ES53": "Balearic Islands",
+                1: "Provinces",
+                2: "Islands",
+                3: "Municipalities",
+                4: "Census sections"
             }
         }
     },

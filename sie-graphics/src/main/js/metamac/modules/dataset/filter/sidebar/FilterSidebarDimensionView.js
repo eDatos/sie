@@ -86,9 +86,9 @@
             this.subviews.push(this.actionsView);
 
             if (this.filterDimension.get('hierarchy')) {
-                var hierarchyLevel = this.filterDimension.getMaxHierarchyLevel() + 1;
+                var hierarchyLevel = this.filterDimension.getMaxHierarchyLevel();
                 var levelsModels = _(hierarchyLevel).times(function (n) {
-                    return { id: n, title: n === 0 ? App.config['firstTerritoryHierarchyLevel'] : I18n.t('filter.selector.level.' + (n + 1)) };
+                    return { id: n, title: n === 0 ? I18n.t('filter.selector.level.' + App.config['firstTerritoryHierarchyLevel']) : I18n.t('filter.selector.level.' + n) };
                 });
                 this.levelsCollection = new Backbone.Collection(levelsModels);
 
