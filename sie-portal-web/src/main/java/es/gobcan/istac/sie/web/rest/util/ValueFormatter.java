@@ -20,8 +20,12 @@ public class ValueFormatter {
 
     public String format(NumberFormat formatter, String value) {
         String str = value != null ? value : "";
-        double num = !str.isEmpty() ? Double.parseDouble(str) : 0;
-        return formatter.format(num);
+        if (!str.isEmpty()) {
+            double num = Double.parseDouble(str);
+            return formatter.format(num);
+        } else {
+            return "";
+        }
     }
 
     public String format(NumberFormat formatter, Number num) {
