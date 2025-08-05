@@ -29,7 +29,7 @@ export class LugarComponent implements OnInit, OnDestroy {
             this.elecciones = all;
         })
         const config = this.configService.getConfig();
-        this.metadataService.getPropertyById(config.metadata.firstTerritoryHierarchyLevelKey).subscribe((territorio) => {
+        this.metadataService.getPropertyById(config.metadata.firstTerritoryKey).subscribe((territorio) => {
             this.nutsTerritoryCode = territorio;
         });
     }

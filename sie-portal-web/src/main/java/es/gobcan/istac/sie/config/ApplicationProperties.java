@@ -64,7 +64,7 @@ public class ApplicationProperties {
         private String geographicalGranularityUrnKey;
         private String sieAdditionalInfoUrl;
         private String sieExplanatoryVideoUrl;
-        private String firstTerritoryHierarchyLevelKey;
+        private String firstTerritoryKey;
         private String internationalizationCookieKey;
         private String internationalizationLanguages;
         private String captchaExternalApiUrlBase;
@@ -274,12 +274,12 @@ public class ApplicationProperties {
             this.sieAdditionalInfoUrl = sieAdditionalInfoUrl;
         }
 
-        public String getFirstTerritoryHierarchyLevelKey() {
-            return firstTerritoryHierarchyLevelKey;
+        public String getFirstTerritoryKey() {
+            return firstTerritoryKey;
         }
 
-        public void setFirstTerritoryHierarchyLevelKey(String firstTerritoryHierarchyLevelKey) {
-            this.firstTerritoryHierarchyLevelKey = firstTerritoryHierarchyLevelKey;
+        public void setFirstTerritoryKey(String firstTerritoryKey) {
+            this.firstTerritoryKey = firstTerritoryKey;
         }
 
         public String getInternationalizationCookieKey() {

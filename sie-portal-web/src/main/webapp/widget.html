@@ -35,7 +35,7 @@
 		var geographicalGranularityUrnKey = /*[[${metadata.getGeographicalGranularityUrnKey()}]]*/ 'metamac.default.codelist.geographical_granularity.urn';
 		var statisticalVisualizerKey = /*[[${metadata.getStatisticalVisualizerKey()}]]*/ 'metamac.portal.web.external';
 		var statisticalVisualizerApiKey = /*[[${metadata.getStatisticalVisualizerApiKey()}]]*/ 'metamac.portal.rest.external.base';
-		var firstTerritoryHierarchyLevelKey = /*[[${metadata.getFirstTerritoryHierarchyLevelKey()}]]*/ 'metamac.sie.firstTerritoryHierarchyLevel';
+		var firstTerritoryKey = /*[[${metadata.getFirstTerritoryKey()}]]*/ 'edatos.shared.first_territory';
 		var sieBaseUrl = /*[[${#httpServletRequest.getRequestURL().toString()}]]*/ 'http://localhost:8080';
 		var requestURI = /*[[${#httpServletRequest.getRequestURI().toString()}]]*/ '';
 		var contextPath = /*[[${#httpServletRequest.getContextPath().toString()}]]*/ '';
@@ -66,8 +66,8 @@
 			getPropertyById(statisticalVisualizerKey),
 			getPropertyById(organisationUrnKey),
 			getPropertyById(geographicalGranularityUrnKey),
-			getPropertyById(firstTerritoryHierarchyLevelKey),
-		).done(function (multidatasetResponse, statisticalResources, structuralResources, indicators, permalinks, exportEndpoint, statisticalVisualizer, organisationUrn, geographicalGranularityUrn, firstTerritoryHierarchyLevel) {
+			getPropertyById(firstTerritoryKey),
+		).done(function (multidatasetResponse, statisticalResources, structuralResources, indicators, permalinks, exportEndpoint, statisticalVisualizer, organisationUrn, geographicalGranularityUrn, firstTerritory) {
 			App.endpoints['statistical-resources'] = statisticalResources[0].value + '/v1.0';
 			App.endpoints['structural-resources'] = structuralResources[0].value + '/v1.0';
 			App.endpoints['indicators'] = indicators[0].value + '/v1.0';
@@ -81,7 +81,7 @@
 			App.config['organisationUrn'] = organisationUrn[0].value;
 			App.config['geographicalGranularityUrn'] = geographicalGranularityUrn[0].value;
 			App.config['installationType'] = /*[[${metadata.getInstallationType()}]]*/ 'EXTERNAL';
-            App.config['firstTerritoryHierarchyLevel'] = firstTerritoryHierarchyLevel[0].value;
+            App.config['firstTerritory'] = firstTerritory[0].value;
             App.config['widget'] = true;
 
 			App.queryParams['agency'] = 'ISTAC';

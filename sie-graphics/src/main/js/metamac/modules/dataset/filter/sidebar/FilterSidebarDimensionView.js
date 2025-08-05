@@ -88,7 +88,7 @@
             if (this.filterDimension.get('hierarchy')) {
                 var hierarchyLevel = this.filterDimension.getMaxHierarchyLevel();
                 var levelsModels = _(hierarchyLevel).times(function (n) {
-                    return { id: n, title: I18n.t('filter.selector.level.' + (n === 0 ? App.config['firstTerritoryHierarchyLevel'] : n)) };
+                    return { id: n, title: I18n.t('filter.selector.level.' + (n === 0 ? App.config['firstTerritory'] : n)) };
                 });
                 this.levelsCollection = new Backbone.Collection(levelsModels);
 

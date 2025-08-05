@@ -30,7 +30,7 @@ export interface GenericConfig {
         geographicalGranularityUrnKey,
         sieAdditionalInfoUrl,
         sieExplanatoryVideoUrl,
-        firstTerritoryHierarchyLevelKey,
+        firstTerritoryKey,
         internationalizationCookieKey,
         internationalizationLanguages,
         captchaExternalApiUrlBase,
