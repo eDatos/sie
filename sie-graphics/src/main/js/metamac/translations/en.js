@@ -105,8 +105,8 @@ I18n.translations.en = {
         },
         selector: {
             level: {
-                "ES70": "Canary Islands",
-                "ES53": "Balearic Islands",
+                "CCAA_CANARIAS": "Canary Islands",
+                "CCAA_ILLES_BALEARS": "Balearic Islands",
                 1: "Provinces",
                 2: "Islands",
                 3: "Municipalities",

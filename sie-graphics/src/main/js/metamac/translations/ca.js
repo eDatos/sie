@@ -110,8 +110,8 @@ I18n.translations.ca = {
         },
         selector: {
             level: {
-                "ES70": "Illes Canàries",
-                "ES53": "Illes Balears",
+                "CCAA_CANARIAS": "Illes Canàries",
+                "CCAA_ILLES_BALEARS": "Illes Balears",
                 1: "Províncies",
                 2: "Illes",
                 3: "Municipis",

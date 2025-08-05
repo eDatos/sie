@@ -104,8 +104,8 @@ I18n.translations.pt = {
         },
         selector: {
             level: {
-                "ES70": "Ilhas Canárias",
-                "ES53": "Ilhas Baleares",
+                "CCAA_CANARIAS": "Ilhas Canárias",
+                "CCAA_ILLES_BALEARS": "Ilhas Baleares",
                 1: "Províncias",
                 2: "Ilhas",
                 3: "Municípios",
