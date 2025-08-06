@@ -48,7 +48,7 @@
                             <tspan x="156.681" y="232.652">{{ 'covidMainTitle.electoral' | translate }}</tspan>
                         </text>
                     </g>
-                    <a [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=autonomicas"'>
+                    <a [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=autonomicas"'>
                         <g id="select-region">
                             <g id="Figure">
                                 <g id="Group_8">
@@ -65,7 +65,7 @@
                             </text>
                         </g>
                     </a>
-                    <a *ngIf="getInsularInstitutionType() === 'CABILDO'" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=cabildo"'>
+                    <a *ngIf="getInsularInstitutionType() === 'CABILDO'" [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=cabildo"'>
                         <g id="select-councils">
                             <g id="Figure_2">
                                 <g id="Group_9">
@@ -82,7 +82,7 @@
                             </text>
                         </g>
                     </a>
-                    <a *ngIf="getInsularInstitutionType() === 'CONSEJO_INSULAR'" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=consejo_insular"'>
+                    <a *ngIf="getInsularInstitutionType() === 'CONSEJO_INSULAR'" [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=consejo_insular"'>
                         <g id="select-councils">
                             <g id="Figure_2">
                                 <g id="Group_9">
@@ -100,7 +100,7 @@
                             </text>
                         </g>
                     </a>
-                    <a [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=senado"'>
+                    <a [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=senado"'>
                         <g id="select-senate">
                             <g id="Figure_3">
                                 <g id="Group_10">
@@ -117,7 +117,7 @@
                             </text>
                         </g>
                     </a>
-                    <a [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=parlamento_europeo"'>
+                    <a [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=parlamento_europeo"'>
                         <g id="select-europe">
                             <g id="Figure_4">
                                 <g id="Group_11">
@@ -134,7 +134,7 @@
                             </text>
                         </g>
                     </a>
-                    <a [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=congreso"'>
+                    <a [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=congreso"'>
                         <g id="select-congress">
                             <g id="Figure_5">
                                 <g id="Group_12">
@@ -151,7 +151,7 @@
                             </text>
                         </g>
                     </a>
-                    <a [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=municipales"'>
+                    <a [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=municipales"'>
                         <g id="select-municipales">
                             <g id="Figure_6">
                                 <g id="Group_13">
@@ -175,7 +175,7 @@
         <div class="cards-selector">
             <h1 class="title">{{ 'lugar.informacionElectoral' | translate }}</h1>
 
-            <a title="{{ 'tipoEleccion.autonomicas' | translate }}" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=autonomicas"'>
+            <a title="{{ 'tipoEleccion.autonomicas' | translate }}" [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=autonomicas"'>
                 <div class="card">
                     <img class="card-img" src="~images/parcan.jpg" alt="Parlamento de Canarias">
                     <div class="card-background red">
@@ -184,7 +184,7 @@
                 </div>
             </a>
 
-            <a *ngIf="getInsularInstitutionType() === 'CABILDO'" title="{{ 'tipoEleccion.cabildos' | translate }}" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=cabildo"'>
+            <a *ngIf="getInsularInstitutionType() === 'CABILDO'" title="{{ 'tipoEleccion.cabildos' | translate }}" [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=cabildo"'>
                 <div class="card">
                     <img class="card-img" src="~images/cabildo-insular.jpg" alt="Cabildo Insular de Tenerife">
                     <div class="card-background green">
@@ -193,7 +193,7 @@
                 </div>
             </a>
 
-            <a *ngIf="getInsularInstitutionType() === 'CONSEJO_INSULAR'" title="{{ 'tipoEleccion.cabildos' | translate }}" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=consejo_insular"'>
+            <a *ngIf="getInsularInstitutionType() === 'CONSEJO_INSULAR'" title="{{ 'tipoEleccion.cabildos' | translate }}" [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=consejo_insular"'>
                 <div class="card">
                     <img class="card-img" src="~images/consejo-insular.jpg" alt="Consejo Insular de Palma">
                     <div class="card-background green">
@@ -202,7 +202,7 @@
                 </div>
             </a>
 
-            <a title="{{ 'tipoEleccion.municipales' | translate }}" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=municipales"'>
+            <a title="{{ 'tipoEleccion.municipales' | translate }}" [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=municipales"'>
                 <div class="card">
                     <img class="card-img" src="~images/ayuntamiento.jpg" alt="Ayuntamiento de La Orotava">
                     <div class="card-background blue">
@@ -211,7 +211,7 @@
                 </div>
             </a>
 
-            <a title="{{ 'tipoEleccion.congreso' | translate }}" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=congreso"'>
+            <a title="{{ 'tipoEleccion.congreso' | translate }}" [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=congreso"'>
                 <div class="card">
                     <img class="card-img" src="~images/congreso-diputados.jpg" alt="Congreso de los Diputados">
                     <div class="card-background purple">
@@ -220,7 +220,7 @@
                 </div>
             </a>
 
-            <a title="{{ 'tipoEleccion.senado' | translate }}" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=senado"'>
+            <a title="{{ 'tipoEleccion.senado' | translate }}" [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=senado"'>
                 <div class="card">
                     <img class="card-img" src="~images/senado.jpg" alt="Senado">
                     <div class="card-background yellow">
@@ -229,7 +229,7 @@
                 </div>
             </a>
 
-            <a title="Europeas" [attr.href]='"#/evolucion-electoral/" + nutsTerritoryCode + "?tipoEleccion=parlamento_europeo"'>
+            <a title="Europeas" [attr.href]='"#/evolucion-electoral/" + territoryCode + "?tipoEleccion=parlamento_europeo"'>
                 <div class="card">
                     <img class="card-img" src="~images/europarl.jpg" alt="Parlamento Europeo (Estrasburgo)">
                     <div class="card-background grey">

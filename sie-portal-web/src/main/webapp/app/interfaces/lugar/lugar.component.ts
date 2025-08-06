@@ -14,7 +14,7 @@ export class LugarComponent implements OnInit, OnDestroy {
 
     lugares: Lugar[];
     lugar: Lugar;
-    nutsTerritoryCode: string;
+    territoryCode: string;
     elecciones: TipoEleccionesDatasetUrl[];
 
     constructor(
@@ -29,8 +29,8 @@ export class LugarComponent implements OnInit, OnDestroy {
             this.elecciones = all;
         })
         const config = this.configService.getConfig();
-        this.metadataService.getPropertyById(config.metadata.firstTerritoryKey).subscribe((territorio) => {
-            this.nutsTerritoryCode = territorio;
+        this.metadataService.getPropertyById(config.metadata.firstTerritoryKey).subscribe((variableElementTerritoryCode) => {
+            this.territoryCode = variableElementTerritoryCode;
         });
     }
 
