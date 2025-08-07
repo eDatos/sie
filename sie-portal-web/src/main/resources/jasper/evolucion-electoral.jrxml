@@ -95,8 +95,8 @@ resourceBundle="i18n.messages">
 				</textElement>
 				<textFieldExpression><![CDATA[" " + $R{report.pageFooter.de} + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<image hAlign="Right" vAlign="Middle">
-				<reportElement x="35" y="0" width="180" height="55" uuid="3081b5c6-83dc-4967-a3c5-7848d33025d8"/>
+			<image hAlign="Left" vAlign="Middle">
+				<reportElement x="35" y="12" width="180" height="30" uuid="3081b5c6-83dc-4967-a3c5-7848d33025d8"/>
 				<imageExpression class="java.net.URL">
                     <![CDATA[new java.net.URL($P{RUTA_LOGO})]]>
                 </imageExpression>
