@@ -1,9 +1,10 @@
 import {Component, ComponentFactoryResolver, ElementRef, OnInit, Renderer2, ViewContainerRef} from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+
 import {TemplateService} from '../template';
 import {ConfigService} from '../../config';
 import {TerritorioAutocompleteComponent} from "../../shared";
-
-declare const Edatos;
+import { AVAILABLE_LANGS } from '../../app.constants';
 
 @Component({
     selector: 'jhi-navbar',
@@ -18,6 +19,7 @@ export class NavbarComponent implements OnInit {
         private configService: ConfigService,
         private viewContainerRef: ViewContainerRef,
         private renderer: Renderer2,
+        private languageService: TranslateService,
         private componentFactoryResolver: ComponentFactoryResolver,
     ) {
     }
@@ -27,6 +29,7 @@ export class NavbarComponent implements OnInit {
             this.navbar = navbarHtml;
             this.appendContextualFragment(this.navbar, 'header');
             this.initializeNavbarComponents();
+            this.updateLang();
         });
 
     }
@@ -44,5 +47,15 @@ export class NavbarComponent implements OnInit {
             element.appendChild(document.createRange().createContextualFragment(html));
         }
         return element;
+    }
+
+    private updateLang() {
+        const cookieValue = Edatos.i18n.getChosenLocaleCookie();
+        if (cookieValue && AVAILABLE_LANGS.indexOf(cookieValue) !== -1) {
+            this.languageService.use(cookieValue).subscribe(() => {
+                // tslint:disable-next-line:no-console
+                console.debug('Language changed to', cookieValue);
+            });
+        }
     }
 }
