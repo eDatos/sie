@@ -105,8 +105,7 @@ I18n.translations.en = {
         },
         selector: {
             level: {
-                "CCAA_CANARIAS": "Canary Islands",
-                "CCAA_ILLES_BALEARS": "Balearic Islands",
+                0: "Autonomous Community",
                 1: "Provinces",
                 2: "Islands",
                 3: "Municipalities",

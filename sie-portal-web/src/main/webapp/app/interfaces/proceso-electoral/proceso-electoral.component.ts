@@ -197,7 +197,6 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             this.metadataService.getPropertyById(config.metadata.organisationKey),
             this.metadataService.getPropertyById(config.metadata.organisationUrnKey),
             this.metadataService.getPropertyById(config.metadata.geographicalGranularityUrnKey),
-            this.metadataService.getPropertyById(config.metadata.firstTerritoryKey),
             (statisticalResources,
                 structuralResources,
                 externalUsers,
@@ -208,8 +207,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 statisticalVisualizer,
                 organizationName,
                 organisationUrn,
-                geographicalGranularityUrn,
-                firstTerritory) => {
+                geographicalGranularityUrn) => {
                 App.endpoints['statistical-resources'] = statisticalResources + '/v1.0';
                 App.endpoints['structural-resources'] = structuralResources + '/v1.0';
                 App.endpoints['external-users'] = externalUsers;
@@ -225,7 +223,6 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 App.config['organisationUrn'] = organisationUrn;
                 App.config['geographicalGranularityUrn'] = geographicalGranularityUrn;
                 App.config['installationType'] = config.metadata.installationType;
-                App.config['firstTerritory'] = firstTerritory;
 
                 App.queryParams['agency'] = organizationName;
                 App.queryParams['type'] = 'dataset';

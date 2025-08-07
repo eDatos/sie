@@ -66,8 +66,7 @@
 			getPropertyById(statisticalVisualizerKey),
 			getPropertyById(organisationUrnKey),
 			getPropertyById(geographicalGranularityUrnKey),
-			getPropertyById(firstTerritoryKey),
-		).done(function (multidatasetResponse, statisticalResources, structuralResources, indicators, permalinks, exportEndpoint, statisticalVisualizer, organisationUrn, geographicalGranularityUrn, firstTerritory) {
+		).done(function (multidatasetResponse, statisticalResources, structuralResources, indicators, permalinks, exportEndpoint, statisticalVisualizer, organisationUrn, geographicalGranularityUrn) {
 			App.endpoints['statistical-resources'] = statisticalResources[0].value + '/v1.0';
 			App.endpoints['structural-resources'] = structuralResources[0].value + '/v1.0';
 			App.endpoints['indicators'] = indicators[0].value + '/v1.0';
@@ -81,7 +80,6 @@
 			App.config['organisationUrn'] = organisationUrn[0].value;
 			App.config['geographicalGranularityUrn'] = geographicalGranularityUrn[0].value;
 			App.config['installationType'] = /*[[${metadata.getInstallationType()}]]*/ 'EXTERNAL';
-            App.config['firstTerritory'] = firstTerritory[0].value;
             App.config['widget'] = true;
 
 			App.queryParams['agency'] = 'ISTAC';

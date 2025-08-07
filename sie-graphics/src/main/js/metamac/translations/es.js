@@ -142,8 +142,7 @@ I18n.translations.es = {
         },
         selector: {
             level: {
-                "CCAA_CANARIAS": "Canarias",
-                "CCAA_ILLES_BALEARS": "Islas Baleares",
+                0: "Comunidad autónoma",
                 1: "Provincias",
                 2: "Islas",
                 3: "Municipios",
