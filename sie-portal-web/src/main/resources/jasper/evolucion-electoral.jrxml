@@ -37,7 +37,7 @@ resourceBundle="i18n.messages">
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$R{report.evolucion_electoral.header} + $P{TIPO_ELECCIONES}.substring(0, 1).toLowerCase() + $P{TIPO_ELECCIONES}.substring(1)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$R{report.evolucion_electoral.header} + " " + $P{TIPO_ELECCIONES}.substring(0, 1).toLowerCase() + $P{TIPO_ELECCIONES}.substring(1)]]></textFieldExpression>
 			</textField>
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="40" y="110" width="470" height="170" uuid="fbd62366-e286-4664-a5e3-f3b2d6e15f07"/>
@@ -75,7 +75,7 @@ resourceBundle="i18n.messages">
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="SansSerif" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[" " + $R{report.pageFooter.de} + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[" " + $R{report.pageFooter.de} + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="430" y="2" width="50" height="46" forecolor="#000000" uuid="4db626a9-d514-49aa-b5ad-c1301622c143">
@@ -93,7 +93,7 @@ resourceBundle="i18n.messages">
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="SansSerif" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[" " + $R{report.pageFooter.de} + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[" " + $R{report.pageFooter.de} + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<image hAlign="Right" vAlign="Middle">
 				<reportElement x="35" y="0" width="180" height="55" uuid="3081b5c6-83dc-4967-a3c5-7848d33025d8"/>
