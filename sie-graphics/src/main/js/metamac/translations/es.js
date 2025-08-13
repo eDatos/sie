@@ -31,7 +31,7 @@ I18n.translations.es = {
             reverseOrder: "Invertir orden",
             close: "Cerrar",
             visualize: "Consultar",
-            embed: "Widget",
+            embed: "Giny (Widget)",
             disabledFeature: {
                 internalPortal: "Esta característica está desactivada en el visualizador interno"
             }
