@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import {TemplateService} from '../template';
 import {ConfigService} from '../../config';
-import {TerritorioAutocompleteComponent} from "../../shared";
+import { TerritorioAutocompleteComponent, JhiLanguageHelper } from "../../shared";
 import { AVAILABLE_LANGS } from '../../app.constants';
 
 @Component({
@@ -21,17 +21,24 @@ export class NavbarComponent implements OnInit {
         private renderer: Renderer2,
         private languageService: TranslateService,
         private componentFactoryResolver: ComponentFactoryResolver,
+        private jhiLanguageHelper: JhiLanguageHelper
     ) {
     }
 
     ngOnInit() {
-        this.templateService.getNavbar().subscribe((navbarHtml) => {
-            this.navbar = navbarHtml;
-            this.appendContextualFragment(this.navbar, 'header');
-            this.initializeNavbarComponents();
-            this.updateLang();
+        const config = this.configService.getConfig();
+        this.jhiLanguageHelper.getLanguages(config).then((languages) => {
+            this.jhiLanguageHelper.getInternationalizationCookieValue(config).then((cookieValue) => {
+                this.jhiLanguageHelper.getCurrentLocale(cookieValue, languages).then((currentLocale) => {
+                    this.templateService.getNavbar(currentLocale).subscribe((navbarHtml) => {
+                        this.navbar = navbarHtml;
+                        this.appendContextualFragment(this.navbar, "header");
+                        this.initializeNavbarComponents();
+                        this.updateLang();
+                    });
+                });
+            });
         });
-
     }
 
     private initializeNavbarComponents() {
