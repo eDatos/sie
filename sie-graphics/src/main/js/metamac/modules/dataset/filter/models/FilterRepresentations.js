@@ -41,8 +41,12 @@
         _setSelectedGeographicDimension: function (attributes, options) {
             this.each(function (representation) {
                 // TODO mejorar el rendimiento de esto
-                if (attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.identifier().territorio === representation.id) {
-                    representation.setMeAndMyChildren("selected", true, { silent: true });
+                const normCode = representation.get("normCode");
+                if (normCode) {
+                    const territoryVariableElementId = normCode.substring(normCode.indexOf(".") + 1);
+                    if (territoryVariableElementId && attributes.type === "GEOGRAPHIC_DIMENSION" && options.metadata.identifier().territorio === territoryVariableElementId) {
+                        representation.setMeAndMyChildren("selected", true, {silent: true});
+                    }
                 }
             }, this);
         },

@@ -247,7 +247,9 @@
                 exportResult[dimension.id] = {
                     position: position,
                     visibleLabelType: dimension.get('visibleLabelType'),
-                    categories: categories
+                    categories: categories,
+                    sortBy: dimension.get('sortBy'),
+                    reversed: dimension.get('reversed'),
                 }
             });
             return exportResult;

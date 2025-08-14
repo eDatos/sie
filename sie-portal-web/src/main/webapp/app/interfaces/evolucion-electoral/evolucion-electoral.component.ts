@@ -46,22 +46,21 @@ export class EvolucionElectoralComponent implements OnInit {
             this.datasetEvolucionElectoralService.getLugarById(params.id).then((resultadoBusquedaLugar) => {
                 if (!resultadoBusquedaLugar) {
                     this.alertService.error('lugar.errorNoEncontrado', { codigo: params.id });
-                    throw new Error(this.translateService.instant('lugar.errorNoEncontrado', { codigo: params.id }));
+                    throw new Error(this.translateService.instant("lugar.errorNoEncontrado", { codigo: params.id }));
                 }
 
                 this.lugar = resultadoBusquedaLugar;
-            });
+                this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(this.lugar.id).then((listaProcesoElectoral) => {
+                    this.limpiarAtributos();
+                    this.inicializarProcesosElectorales(listaProcesoElectoral);
+                    this.inicializarTiposEleccion(listaProcesoElectoral);
+                    this.inicializarGraficas();
 
-            this.datasetEvolucionElectoralService.getProcesosElectoralesByRegionId(params.id).then((listaProcesoElectoral) => {
-                this.limpiarAtributos();
-                this.inicializarProcesosElectorales(listaProcesoElectoral);
-                this.inicializarTiposEleccion(listaProcesoElectoral);
-                this.inicializarGraficas();
-
-                this.activatedRoute.queryParams.subscribe((queryParams) => {
-                    this.tipoEleccionesVisible = queryParams.tipoEleccion ? queryParams.tipoEleccion.toUpperCase() : TIPO_ELECCIONES_DEFAULT;
-                    this.comprobarDatosPagina3();
-                })
+                    this.activatedRoute.queryParams.subscribe((queryParams) => {
+                        this.tipoEleccionesVisible = queryParams.tipoEleccion ? queryParams.tipoEleccion.toUpperCase() : TIPO_ELECCIONES_DEFAULT;
+                        this.comprobarDatosPagina3();
+                    });
+                });
             });
         });
     }
@@ -133,9 +132,11 @@ export class EvolucionElectoralComponent implements OnInit {
         resultado.yAxis = yAxisIndex;
         resultado.data = [];
         for (const eleccion of listaProcesoElectoral) {
+            const valorPrincipal = eleccion.indicadores[indicador.nombre];
+            const valorAlternativo = eleccion.indicadores[indicador.indicadorAlternativo];
             resultado.data.push({
-                y: parseFloat(eleccion.indicadores[indicador.nombre]),
-                altData: parseFloat(eleccion.indicadores[indicador.indicadorAlternativo])
+                y: valorPrincipal ? parseFloat(valorPrincipal) : null,
+                altData: valorAlternativo ? parseFloat(valorAlternativo) : null
             });
         }
         return resultado;

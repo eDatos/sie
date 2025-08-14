@@ -108,3 +108,13 @@ application:
         geographicalGranularityUrnKey: metamac.default.codelist.geographical_granularity.urn
         internationalizationCookieKey: metamac.internationalization.cookieId
         internationalizationLanguages: metamac.edition.languages
+        appOrganisationLogoUrl: edatos.app.organisation.logo.url
+
+environment:
+    edatos:
+        configuration:
+            db:
+                driverName: org.postgresql.Driver
+                url: jdbc:postgresql://artejenkins.arte.internal:5432/ARTE
+                username: istac_metamac_common_metadata_ci
+                password: oYJYi+yfdqQtcsiboNlFmm2Eqm5GBYqBTJ+QGDE49BDlvcTK1YyQJBCHxBHiqYfN

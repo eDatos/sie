@@ -1,22 +1,26 @@
 {
     "lugar": {
-        "pageTitle": "Sistema electoral de l'ISTAC",
+        "pageTitle": "Sistema electoral",
         "header": "De quin lloc vols conèixer la seva evolució electoral?",
         "continuar": "Continuar",
         "errorNoEncontrado": "No s'ha trobat cap territori amb el codi {{ codigo }}.",
-        "informacionElectoralCanarias": "Informació electoral de Canàries"
+        "informacionElectoral": "Informació electoral"
     },
     "tipoEleccion": {
         "municipales": "Municipals",
         "autonomicas": "Autonòmiques",
         "cabildos": "Cabildos",
+        "consejosInsulares": {
+            "consejos": "Consells",
+            "insulares": "Insulars",
+            "all": "Consells Insulars"
+        },
         "congreso": "Congrés",
         "senado": "Senat",
         "europeas": "Europees"
     },
     "covidMainTitle": {
-        "informacion": "Informació ",
-        "electoral": "Electoral de ",
-        "canarias": "Canàries"
+        "informacion": "Informació",
+        "electoral": "Electoral"
     }
 }

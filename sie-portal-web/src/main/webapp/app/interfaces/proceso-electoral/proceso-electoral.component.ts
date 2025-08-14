@@ -197,7 +197,6 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
             this.metadataService.getPropertyById(config.metadata.organisationKey),
             this.metadataService.getPropertyById(config.metadata.organisationUrnKey),
             this.metadataService.getPropertyById(config.metadata.geographicalGranularityUrnKey),
-            this.metadataService.getPropertyById(config.metadata.firstTerritoryHierarchyLevelKey),
             (statisticalResources,
                 structuralResources,
                 externalUsers,
@@ -208,8 +207,7 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 statisticalVisualizer,
                 organizationName,
                 organisationUrn,
-                geographicalGranularityUrn,
-                firstTerritoryHierarchyLevel) => {
+                geographicalGranularityUrn) => {
                 App.endpoints['statistical-resources'] = statisticalResources + '/v1.0';
                 App.endpoints['structural-resources'] = structuralResources + '/v1.0';
                 App.endpoints['external-users'] = externalUsers;
@@ -225,7 +223,6 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                 App.config['organisationUrn'] = organisationUrn;
                 App.config['geographicalGranularityUrn'] = geographicalGranularityUrn;
                 App.config['installationType'] = config.metadata.installationType;
-                App.config['firstTerritoryHierarchyLevel'] = firstTerritoryHierarchyLevel;
 
                 App.queryParams['agency'] = organizationName;
                 App.queryParams['type'] = 'dataset';
@@ -250,6 +247,16 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
         estilosMetamac.href = METAMAC_CSS_LINK;
         estilosMetamac.rel = METAMAC_CSS_REL;
         this.host.nativeElement.appendChild(estilosMetamac);
+    }
+
+    private getCandidaturasDimensionId(dataset: BasicDataset): string {
+        const dimensionIds: string[] = dataset.metadata.dimensions.dimension.map((dim) => dim.id);
+        if (dimensionIds.indexOf("CANDIDATURA") !== -1) {
+            return "CANDIDATURA";
+        } else if (dimensionIds.indexOf("CANDIDATURAS") !== -1) {
+            return "CANDIDATURAS";
+        }
+        throw new Error("The CANDIDATURA(S) dimension was not found in the dataset");
     }
 
     /**
@@ -297,10 +304,11 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                     const measure = arr[dimIds.indexOf('MEDIDAS')];
                     const observation = observations[k + cat3.length * (j + cat2.length * i)]; // see https://eli.thegreenplace.net/2015/memory-layout-of-multi-dimensional-arrays
                     if (observation !== null) {
+                        const candidaturasDimensionId = this.getCandidaturasDimensionId(dataset);
                         data.push({
                             measure: this.normalizeMeasureForPdf(measure),
                             territory: this.getTerritoryInfo(dataset, "TERRITORIO", arr[dimIds.indexOf("TERRITORIO")]),
-                            candidacy: this.getName(dataset, 'CANDIDATURAS', arr[dimIds.indexOf('CANDIDATURAS')]),
+                            candidacy: this.getName(dataset, candidaturasDimensionId, arr[dimIds.indexOf(candidaturasDimensionId)]),
                             value: observation
                         });
                     }

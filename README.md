@@ -7,7 +7,7 @@ El módulo sie-graphics (visualizador) se copia del siguiente commit de metamac-
 ## Introducción
 
 ### Descripción de la aplicación
-La aplicación SIE es un visualizador de resultados electorales del ISTAC.
+La aplicación SIE es un visualizador de resultados electorales.
 
 ### Requerimientos previos
 

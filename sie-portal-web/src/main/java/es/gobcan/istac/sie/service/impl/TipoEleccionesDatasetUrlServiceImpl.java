@@ -1,5 +1,7 @@
 package es.gobcan.istac.sie.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +11,16 @@ import es.gobcan.istac.sie.service.TipoEleccionesDatasetUrlService;
 
 @Service
 public class TipoEleccionesDatasetUrlServiceImpl implements TipoEleccionesDatasetUrlService {
-    
+
     @Autowired
     private TipoEleccionesDatasetUrlRepository tipoEleccionesDatasetUrlRepository;
-    
+
     public TipoEleccionesDatasetUrlEntity findOne(String tipoElecciones) {
         return this.tipoEleccionesDatasetUrlRepository.findOne(tipoElecciones);
+    }
+
+    @Override
+    public List<TipoEleccionesDatasetUrlEntity> findAll() {
+        return this.tipoEleccionesDatasetUrlRepository.findAll();
     }
 }

@@ -166,7 +166,17 @@ application:
         geographicalGranularityUrnKey: metamac.default.codelist.geographical_granularity.urn
         sieAdditionalInfoUrl: metamac.sie.additional_info.url
         sieExplanatoryVideoUrl: metamac.sie.explanatory_video.url
-        firstTerritoryHierarchyLevelKey: metamac.sie.firstTerritoryHierarchyLevel
+        firstTerritoryKey: edatos.shared.first_territory
         internationalizationCookieKey: metamac.internationalization.cookieId
         internationalizationLanguages: metamac.edition.languages
         captchaExternalApiUrlBase: metamac.portal.rest.external.authentication.captcha.url
+        appOrganisationLogoUrl: edatos.app.organisation.logo.url
+
+environment:
+    edatos:
+        configuration:
+            db: # Datos de conexión contra la base de datos common_metadata
+                driverName: FILL_ME
+                url: FILL_ME
+                username: FILL_ME
+                password: FILL_ME

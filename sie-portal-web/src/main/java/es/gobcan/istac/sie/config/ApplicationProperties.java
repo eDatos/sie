@@ -7,9 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
-
     private final Visualizer visualizer = new Visualizer();
-
     private final Metadata   metadata   = new Metadata();
 
     public Visualizer getVisualizer() {
@@ -66,10 +64,11 @@ public class ApplicationProperties {
         private String geographicalGranularityUrnKey;
         private String sieAdditionalInfoUrl;
         private String sieExplanatoryVideoUrl;
-        private String firstTerritoryHierarchyLevelKey;
+        private String firstTerritoryKey;
         private String internationalizationCookieKey;
         private String internationalizationLanguages;
         private String captchaExternalApiUrlBase;
+        private String appOrganisationLogoUrl;
 
         public String getEndpoint() {
             return endpoint;
@@ -275,12 +274,12 @@ public class ApplicationProperties {
             this.sieAdditionalInfoUrl = sieAdditionalInfoUrl;
         }
 
-        public String getFirstTerritoryHierarchyLevelKey() {
-            return firstTerritoryHierarchyLevelKey;
+        public String getFirstTerritoryKey() {
+            return firstTerritoryKey;
         }
 
-        public void setFirstTerritoryHierarchyLevelKey(String firstTerritoryHierarchyLevelKey) {
-            this.firstTerritoryHierarchyLevelKey = firstTerritoryHierarchyLevelKey;
+        public void setFirstTerritoryKey(String firstTerritoryKey) {
+            this.firstTerritoryKey = firstTerritoryKey;
         }
 
         public String getInternationalizationCookieKey() {
@@ -305,6 +304,14 @@ public class ApplicationProperties {
 
         public void setCaptchaExternalApiUrlBase(String captchaExternalApiUrlBase) {
             this.captchaExternalApiUrlBase = captchaExternalApiUrlBase;
+        }
+
+        public String getAppOrganisationLogoUrl() {
+            return appOrganisationLogoUrl;
+        }
+
+        public void setAppOrganisationLogoUrl(String appOrganisationLogoUrl) {
+            this.appOrganisationLogoUrl = appOrganisationLogoUrl;
         }
     }
 }

@@ -17,17 +17,19 @@ export class TemplateService {
     ) {
     }
 
-    getNavbar(): Observable<string> {
+    getNavbar(lang: string): Observable<string> {
         const config = this.configService.getConfig();
-        return this.metadataService.getPropertyById(config.metadata.navbarPathKey).flatMap((endpoint) => {
-            return this.http.get(`${endpoint}`, {
-                params: {
-                    appId: `sie-${config.metadata.installationType}`,
-                    appName: this.translateService.instant('global.title'),
-                    enableAuthentication: null,
-					appVersion: process.env.VERSION
-                }
-            }).map((res: Response) => res.text());
+        return this.translateService.use(lang).switchMap(() => {
+            return this.metadataService.getPropertyById(config.metadata.navbarPathKey).switchMap((endpoint) => {
+                return this.http.get(`${endpoint}`, {
+                    params: {
+                        appId: `sie-${config.metadata.installationType}`,
+                        appName: this.translateService.instant("global.title"),
+                        enableAuthentication: null,
+                        appVersion: process.env.VERSION,
+                    },
+                }).map((res: Response) => res.text());
+            });
         });
     }
 

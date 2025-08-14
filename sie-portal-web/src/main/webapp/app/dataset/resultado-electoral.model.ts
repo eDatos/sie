@@ -6,6 +6,7 @@ export class ResultadoElectoral {
         public territorio: Lugar,
         public procesoElectoral: ProcesoElectoral,
         public data: any = {},
+        public appOrganisationLogoUrl?: string,
     ) {
     }
 }

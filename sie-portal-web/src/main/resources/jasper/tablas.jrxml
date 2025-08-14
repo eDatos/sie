@@ -11,7 +11,7 @@ resourceBundle="i18n.messages">
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<parameter name="INT_FORMATTER" class="java.text.NumberFormat"/>
+	<parameter name="VALUE_FORMATTER" class="es.gobcan.istac.sie.web.rest.util.ValueFormatter"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -22,9 +22,9 @@ resourceBundle="i18n.messages">
 	<field name="tipoProcesoElectoral" class="java.lang.String"/>
 	<field name="indicadores" class="java.util.Map"/>
 	<field name="nombre" class="java.lang.String"/>
-	<variable name="numberFormatter" class="java.text.NumberFormat">
-		<variableExpression><![CDATA[$V{numberFormatter}]]></variableExpression>
-		<initialValueExpression><![CDATA[$P{INT_FORMATTER}]]></initialValueExpression>
+	<variable name="valueFormatter" class="es.gobcan.istac.sie.web.rest.util.ValueFormatter">
+		<variableExpression><![CDATA[$V{valueFormatter}]]></variableExpression>
+		<initialValueExpression><![CDATA[$P{VALUE_FORMATTER}]]></initialValueExpression>
 	</variable>
 	<detail>
 		<band height="135" splitType="Stretch">
@@ -51,7 +51,7 @@ resourceBundle="i18n.messages">
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("ELECTORES")))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatInt((String) $F{indicadores}.get("ELECTORES"))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="37" width="135" height="14" forecolor="#3B3B3B" uuid="fcd731e2-e765-47bb-934f-2d529fbfd565"/>
@@ -65,14 +65,14 @@ resourceBundle="i18n.messages">
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("VOTANTES")))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatInt((String) $F{indicadores}.get("VOTANTES"))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="37" width="40" height="14" forecolor="#3B3B3B" uuid="e694844d-a5a2-40e9-b22d-eee2f16f6725"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Double.parseDouble((String) $F{indicadores}.get("TASA_PARTICIPACION"))) + "%"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatFloat((String) $F{indicadores}.get("TASA_PARTICIPACION")) + "%"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="51" width="135" height="14" forecolor="#3B3B3B" uuid="f2819873-57f3-4d18-8299-a71ffd6e344b"/>
@@ -86,14 +86,14 @@ resourceBundle="i18n.messages">
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("ABSTENCION")))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatInt((String) $F{indicadores}.get("ABSTENCION"))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="51" width="40" height="14" forecolor="#3B3B3B" uuid="3d9fc192-774a-4083-8a9d-7a2955f7f51b"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Double.parseDouble((String) $F{indicadores}.get("TASA_ABSTENCION"))) + "%"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatFloat((String) $F{indicadores}.get("TASA_ABSTENCION")) + "%"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="121" width="135" height="14" forecolor="#3B3B3B" uuid="2c3eab60-9c62-473b-b4b0-dcf354d5ad64"/>
@@ -107,28 +107,28 @@ resourceBundle="i18n.messages">
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("VOTOS_NULOS")))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatInt((String) $F{indicadores}.get("VOTOS_NULOS"))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="121" width="40" height="14" forecolor="#3B3B3B" uuid="4a65aa21-d1c7-4c61-bf50-54a4e32d4ee3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Double.parseDouble((String) $F{indicadores}.get("TASA_VOTOS_NULOS"))) + "%"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatFloat((String) $F{indicadores}.get("TASA_VOTOS_NULOS")) + "%"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="107" width="40" height="14" forecolor="#3B3B3B" uuid="cb365e9e-39bc-408c-b1b1-f594805510c6"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Double.parseDouble((String) $F{indicadores}.get("TASA_VOTOS_VALIDOS_BLANCO"))) + "%"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatFloat((String) $F{indicadores}.get("TASA_VOTOS_VALIDOS_BLANCO")) + "%"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="140" y="107" width="40" height="14" forecolor="#3B3B3B" uuid="185ad3a0-fbe7-4d5b-b485-f0324086d7b7"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("VOTOS_VALIDOS_BLANCO")))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatInt((String) $F{indicadores}.get("VOTOS_VALIDOS_BLANCO"))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="107" width="135" height="14" forecolor="#3B3B3B" uuid="c41f26ad-accd-4eaa-90be-06c5d84f8e40"/>
@@ -149,28 +149,28 @@ resourceBundle="i18n.messages">
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("VOTOS_VALIDOS_CANDIDATURA")))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatInt((String) $F{indicadores}.get("VOTOS_VALIDOS_CANDIDATURA"))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="93" width="40" height="14" forecolor="#3B3B3B" uuid="8d0c14e3-eed4-47af-a569-72019be802d0"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Double.parseDouble((String) $F{indicadores}.get("TASA_VOTOS_VALIDOS_CANDIDATURA"))) + "%"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatFloat((String) $F{indicadores}.get("TASA_VOTOS_VALIDOS_CANDIDATURA")) + "%"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="79" width="40" height="14" forecolor="#3B3B3B" uuid="47a80893-acaa-425f-b789-a271cfc26160"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Double.parseDouble((String) $F{indicadores}.get("TASA_VOTOS_VALIDOS"))) + "%"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatFloat((String) $F{indicadores}.get("TASA_VOTOS_VALIDOS")) + "%"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="140" y="79" width="40" height="14" forecolor="#3B3B3B" uuid="b90cdd0a-a024-43d7-b524-06e2c57562f0"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("VOTOS_VALIDOS")))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatInt((String) $F{indicadores}.get("VOTOS_VALIDOS"))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5" y="79" width="135" height="14" forecolor="#3B3B3B" uuid="502be356-bf87-4707-88e2-9a7f31d291c4"/>
@@ -191,7 +191,7 @@ resourceBundle="i18n.messages">
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="7.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{numberFormatter}.format(java.lang.Integer.parseInt((String) $F{indicadores}.get("VOTOS")))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valueFormatter}.formatInt((String) $F{indicadores}.get("VOTOS"))]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
