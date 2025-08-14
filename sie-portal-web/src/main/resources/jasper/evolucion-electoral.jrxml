@@ -4,13 +4,13 @@
 resourceBundle="i18n.messages">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Usuario Data Adapter"/>
 	<property name="com.jaspersoft.studio.report.description" value=""/>
-	<parameter name="rutaLogo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="RUTA_LOGO" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="SUBREPORT_TABLAS" class="net.sf.jasperreports.engine.JasperReport"/>
 	<parameter name="dataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<parameter name="TERRITORIO" class="java.lang.String"/>
 	<parameter name="TIPO_ELECCIONES" class="java.lang.String"/>
 	<parameter name="GRAFICA" class="java.io.ByteArrayInputStream"/>
-	<parameter name="INT_FORMATTER" class="java.text.NumberFormat"/>
+	<parameter name="VALUE_FORMATTER" class="es.gobcan.istac.sie.web.rest.util.ValueFormatter"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -37,7 +37,7 @@ resourceBundle="i18n.messages">
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$R{report.evolucion_electoral.header} + $P{TIPO_ELECCIONES}.substring(0, 1).toLowerCase() + $P{TIPO_ELECCIONES}.substring(1)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$R{report.evolucion_electoral.header} + " " + $P{TIPO_ELECCIONES}.substring(0, 1).toLowerCase() + $P{TIPO_ELECCIONES}.substring(1)]]></textFieldExpression>
 			</textField>
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="40" y="110" width="470" height="170" uuid="fbd62366-e286-4664-a5e3-f3b2d6e15f07"/>
@@ -49,8 +49,8 @@ resourceBundle="i18n.messages">
 		<band height="200" splitType="Stretch">
 			<subreport>
 				<reportElement stretchType="RelativeToTallestObject" x="40" y="-80" width="470" height="200" uuid="b72cb9d4-649f-4d71-8cff-246625bb6359"/>
-				<subreportParameter name="INT_FORMATTER">
-					<subreportParameterExpression><![CDATA[$P{INT_FORMATTER}]]></subreportParameterExpression>
+				<subreportParameter name="VALUE_FORMATTER">
+					<subreportParameterExpression><![CDATA[$P{VALUE_FORMATTER}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[$P{dataSource}]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_TABLAS}]]></subreportExpression>
@@ -75,7 +75,7 @@ resourceBundle="i18n.messages">
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="SansSerif" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[" " + $R{report.pageFooter.de} + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[" " + $R{report.pageFooter.de} + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="430" y="2" width="50" height="46" forecolor="#000000" uuid="4db626a9-d514-49aa-b5ad-c1301622c143">
@@ -93,11 +93,13 @@ resourceBundle="i18n.messages">
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="SansSerif" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[" " + $R{report.pageFooter.de} + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[" " + $R{report.pageFooter.de} + " " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<image hAlign="Right" vAlign="Middle">
-				<reportElement x="35" y="0" width="180" height="55" uuid="3081b5c6-83dc-4967-a3c5-7848d33025d8"/>
-				<imageExpression><![CDATA[$P{rutaLogo}]]></imageExpression>
+			<image hAlign="Left" vAlign="Middle">
+				<reportElement x="35" y="12" width="180" height="30" uuid="3081b5c6-83dc-4967-a3c5-7848d33025d8"/>
+				<imageExpression class="java.net.URL">
+                    <![CDATA[new java.net.URL($P{RUTA_LOGO})]]>
+                </imageExpression>
 			</image>
 		</band>
 	</pageFooter>

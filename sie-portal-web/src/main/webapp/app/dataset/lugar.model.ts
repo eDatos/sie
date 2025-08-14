@@ -4,6 +4,7 @@ export class Lugar {
 
     constructor(
         public id: string,
+        public variableElementId: string,
         public nombre: string,
         public granularidad: string
     ) {

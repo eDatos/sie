@@ -7,6 +7,7 @@ public class ResultadoElectoralDTO {
     private LugarDTO territorio;
     private ProcesoElectoralDTO procesoElectoral;
     private List<ResultadoElectoralData> data;
+    private String appOrganisationLogoUrl;
 
     public LugarDTO getTerritorio() {
         return territorio;
@@ -30,5 +31,13 @@ public class ResultadoElectoralDTO {
 
     public void setData(List<ResultadoElectoralData> data) {
         this.data = data;
+    }
+
+    public String getAppOrganisationLogoUrl() {
+        return appOrganisationLogoUrl;
+    }
+
+    public void setAppOrganisationLogoUrl(String appOrganisationLogoUrl) {
+        this.appOrganisationLogoUrl = appOrganisationLogoUrl;
     }
 }

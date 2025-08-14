@@ -23,5 +23,8 @@
     "angularCompilerOptions": {
         "genDir": "target/aot",
         "skipMetadataEmit" : true
-    }
+    },
+    "include": [
+        "src/**/*.d.ts"
+    ]
 }

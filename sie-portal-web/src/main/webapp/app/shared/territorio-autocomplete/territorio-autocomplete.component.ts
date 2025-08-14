@@ -67,12 +67,12 @@ export class TerritorioAutocompleteComponent implements OnInit {
             if (this.loadOnlyDatasetTerritories && lugarId.startsWith(FRONTERA_DATASET_ID)) {
                 const date = this.router.url.match(TIPO_PROCESO_ELECTORAL_REGEX)[2];
                 if (toInteger(date) <= FRONTERA_SEGREGATION_YEAR) {
-                    this.lugar = this.lugares.find((el) => el.id === OLD_FRONTERA_ID);
+                    this.lugar = this.lugares.find((el) => el.variableElementId === OLD_FRONTERA_ID);
                 } else {
-                    this.lugar = this.lugares.find((el) => el.id === NEW_FRONTERA_ID);
+                    this.lugar = this.lugares.find((el) => el.variableElementId === NEW_FRONTERA_ID);
                 }
             } else {
-                this.lugar = this.lugares.find((lugar) => lugar.id === lugarId);
+                this.lugar = this.lugares.find((lugar) => lugar.variableElementId === lugarId);
             }
         }
     }
@@ -104,9 +104,9 @@ export class TerritorioAutocompleteComponent implements OnInit {
         const routeType = this.getRouteType();
         if (routeType === RouteType.PROCESO_ELECTORAL) {
             const urlSegments = this.router.url.split('/');
-            window.location.hash = window.location.hash.replace(urlSegments[this.LUGAR_URL_INDEX], event.id);
+            window.location.hash = window.location.hash.replace(urlSegments[this.LUGAR_URL_INDEX], event.variableElementId);
         } else if (routeType === RouteType.EVOLUCION_ELECTORAL) {
-            this.router.navigate(['evolucion-electoral', event.id], {queryParams: {tipoEleccion: this.tipoEleccionesVisible.toLowerCase()}});
+            this.router.navigate(['evolucion-electoral', event.variableElementId], {queryParams: {tipoEleccion: this.tipoEleccionesVisible.toLowerCase()}});
         }
     }
 

@@ -19,6 +19,7 @@ import {
     notFoundRoute
 } from './layouts';
 import {SieSharedModule} from './shared';
+import {AVAILABLE_LANGS, DEFAULT_LANG} from './app.constants';
 import {XsrfNoopInterceptor} from "./xsrf-noop-interceptor.service";
 import {LocationStrategy} from "@angular/common";
 import {SieLocationStrategy} from "./sie-location.strategy";
@@ -30,10 +31,9 @@ const APP_ROUTES = [
 ]
 
 
-export function initializeTranslateService(translateService: TranslateService) {
-    // Note that the language should be obtained from some configuration file or service. For
-    // now, direct injection is enough.
-    return () => translateService.setDefaultLang('es');
+export function initializeTranslateService(translateService: TranslateService): Function {
+    translateService.addLangs(AVAILABLE_LANGS);
+    return () => translateService.use(DEFAULT_LANG);
 }
 
 @NgModule({

@@ -58,7 +58,7 @@ export class DatasetEvolucionElectoralService {
 
     async getLugarById(id: string, date?: string): Promise<Lugar> {
         const listaLugares = await this.getListaLugares();
-        const lugar = listaLugares.find((element) => element.id === id);
+        const lugar = listaLugares.find((element) => element.variableElementId === id);
         if (!lugar && id.startsWith(FRONTERA_DATASET_ID) && date != null) {
             if (toInteger(date) <= FRONTERA_SEGREGATION_YEAR) {
                 return listaLugares.find((el) => el.id === OLD_FRONTERA_ID);
@@ -84,7 +84,7 @@ export class DatasetEvolucionElectoralService {
         const geographicDimension = json.metadata.dimensions.dimension.find((dimension) => dimension.type === GEOGRAPHIC_DIMENSION);
         const lugares = geographicDimension.dimensionValues.value.filter((element) => !/.+_O$/.test(element.id));
         return lugares.map((element) => {
-            return new Lugar(element.id, element.name.text[0].value, element.geographicGranularity.name.text[0].value);
+            return new Lugar(element.id, element.variableElement.id, element.name.text[0].value, element.geographicGranularity.name.text[0].value);
         });
     }
 
@@ -161,7 +161,8 @@ export class DatasetEvolucionElectoralService {
             case 'MUNICIPALES': {
                 return 0;
             }
-            case 'CABILDO': {
+            case 'CABILDO':
+            case 'CONSEJO_INSULAR': {
                 return 1;
             }
             case 'AUTONOMICAS': {
@@ -185,14 +186,9 @@ export class DatasetEvolucionElectoralService {
     }
 
     private tieneDatos(procesoElectoral: ProcesoElectoral): boolean {
-        let result = true;
-        Object.keys(procesoElectoral.indicadores).find((key) => {
-            if (!procesoElectoral.indicadores[key]) {
-                result = false;
-            }
-            return true;
-        });
-        return result;
+        return Object.keys(procesoElectoral.indicadores).some(
+            (key) => !!procesoElectoral.indicadores[key],
+        );
     }
 
     private doGetDataByRegionId(id: string): Observable<any> {

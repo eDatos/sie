@@ -1,5 +1,6 @@
 package es.gobcan.istac.sie.web.rest;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -19,18 +20,23 @@ import io.github.jhipster.web.util.ResponseUtil;
 @RestController
 @RequestMapping("/api/tipo-elecciones-dataset")
 public class TipoEleccionesDatasetUrlResource extends AbstractResource {
-    
+
     private static final Logger LOGGER = LoggerFactory.getLogger(TipoEleccionesDatasetUrlResource.class);
-    
-    private TipoEleccionesDatasetUrlService tipoEleccionesDatasetUrlService;
-    
-    private TipoEleccionesDatasetUrlMapper tipoEleccionesDatasetUrlMapper;
-    
+
+    private final TipoEleccionesDatasetUrlService tipoEleccionesDatasetUrlService;
+    private final TipoEleccionesDatasetUrlMapper tipoEleccionesDatasetUrlMapper;
+
     public TipoEleccionesDatasetUrlResource(TipoEleccionesDatasetUrlService tipoEleccionesDatasetUrlService, TipoEleccionesDatasetUrlMapper tipoEleccionesDatasetUrlMapper) {
         this.tipoEleccionesDatasetUrlService = tipoEleccionesDatasetUrlService;
         this.tipoEleccionesDatasetUrlMapper = tipoEleccionesDatasetUrlMapper;
     }
-    
+
+    @GetMapping
+    public ResponseEntity<List<TipoEleccionesDatasetUrlDTO>> getAllTipoEleccionesAvailable() {
+        LOGGER.debug("Petición REST para obtener todos los tipos de elecciones disponibles");
+        return ResponseEntity.ok(tipoEleccionesDatasetUrlMapper.toDto(this.tipoEleccionesDatasetUrlService.findAll()));
+    }
+
     @GetMapping("/{tipoElecciones}")
     public ResponseEntity<TipoEleccionesDatasetUrlDTO> getByTipoElecciones(@PathVariable String tipoElecciones) {
         LOGGER.debug("REST petición para obtener una url de dataset. Tipo Elecciones: {}", tipoElecciones);

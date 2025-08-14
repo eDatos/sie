@@ -22,7 +22,7 @@
             this.metadata = this.metadataResponse.metadata;
             if (this.metadata.type === 'DATASET') {
                 var candidaturasDimensionValues = _.find(this.metadata.dimensions.dimension, (dim) => {
-                    return dim.id === 'CANDIDATURAS';
+                    return dim.id === 'CANDIDATURAS' || dim.id === 'CANDIDATURA';
                 }).dimensionValues;
                 if (candidaturasDimensionValues !== null && candidaturasDimensionValues.value.length > 0) {
                     this.candidaturasCodelistUrl = candidaturasDimensionValues.value[0].selfLink.href.replace(/\/[^\/]*$/, ".json?fields=+variableElement");

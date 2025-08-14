@@ -8,3 +8,5 @@ let _DEBUG_INFO_ENABLED = true; // This value will be overwritten by webpack
 export const VERSION = _VERSION;
 export const DEBUG_INFO_ENABLED = _DEBUG_INFO_ENABLED;
 export const TOKEN_AUTH_NAME = 'jhi-authenticationtoken';
+export const AVAILABLE_LANGS = ['es', 'en', 'ca'];
+export const DEFAULT_LANG = 'es';

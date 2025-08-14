@@ -31,7 +31,7 @@ I18n.translations.es = {
             reverseOrder: "Invertir orden",
             close: "Cerrar",
             visualize: "Consultar",
-            embed: "Widget",
+            embed: "Giny (Widget)",
             disabledFeature: {
                 internalPortal: "Esta característica está desactivada en el visualizador interno"
             }
@@ -142,11 +142,11 @@ I18n.translations.es = {
         },
         selector: {
             level: {
-                1: "Canarias",
-                2: "Provincias",
-                3: "Islas",
-                4: "Municipios",
-                5: "Secciones censales"
+                0: "Comunidad autónoma",
+                1: "Provincias",
+                2: "Islas",
+                3: "Municipios",
+                4: "Secciones censales"
             }
         }
     },
