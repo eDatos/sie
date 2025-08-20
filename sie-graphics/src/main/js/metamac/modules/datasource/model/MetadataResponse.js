@@ -251,6 +251,7 @@
 
                     if (isGeographic) {
                         representation.normCode = self.getGeographicDimensionNormCode(dimensionValue);
+                        representation.geographicGranularityLabel = self.localizeLabel(dimensionValue.geographicGranularity.name.text);
                     }
 
                     if (isMeasureDimension) {
