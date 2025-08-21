@@ -150,6 +150,17 @@
             return this.where({ drawable: true });
         },
 
+        getGeographicRepresentationsWithAtLeastOneElementSelected : function() {
+            return this.filter(item => {
+                // Filter selected elements
+                if (item.get('selected')) {
+                  // check that there are more items selected in your level
+                  return this.filter(subItem => subItem.get('level') === item.get('level') && subItem.get('selected')).length >= 1;
+                }
+                return false;
+              });
+        },
+
         updateDrawablesBySelectedLevel: function () {
             if (this.getSelectedRepresentationsByCurrentLevel().length === 0) {
                 this.updateSelectedGeographicLevelWithMostRepeatedValue();    

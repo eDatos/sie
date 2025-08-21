@@ -74,7 +74,7 @@ export class JhiLanguageHelper {
                         resolve(this.cookieService.get(cookieName));
                     }
                 }
-                reject(null);
+                resolve(null);
             });
         });
     }
@@ -100,7 +100,7 @@ export class JhiLanguageHelper {
     findNavigatorValue(internationalizationLanguages: string[]) {
         return this.findLanguageValue(internationalizationLanguages, window.navigator.language);
     }
-    
+
     findLanguageValue(internationalizationLanguages: string[], value: string) {
         let languageValue = internationalizationLanguages.find((element) => element === value);
         return languageValue !== undefined ? languageValue : null;
