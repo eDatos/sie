@@ -59,8 +59,7 @@ export class JhiLanguageHelper {
     getLanguages(config: GenericConfig): Promise<string[]> {
         return new Promise<string[]>((resolve) => {
             this.metadataService.getPropertyById(config.metadata.internationalizationLanguages).subscribe((languages) => {
-                let internationalizationLanguages = languages.split(",");
-                resolve(internationalizationLanguages);
+                resolve(languages.split(',').map((lang) => lang.trim()));
             });
         });
     }
