@@ -61,7 +61,7 @@ public class DocumentoServiceImpl implements DocumentoService {
         parametros.put("dataSource", new JRBeanCollectionDataSource(evolucionElectoral.getProcesosElectorales()));
         parametros.put("RUTA_LOGO", evolucionElectoral.getAppOrganisationLogoUrl());
         parametros.put("VALUE_FORMATTER", getFormatter());
-        parametros.put(JRParameter.REPORT_LOCALE, new Locale(getLanguage()));
+        parametros.put(JRParameter.REPORT_LOCALE, getSelectedLocale());
 
         try (InputStream subReport = getClass().getResourceAsStream(Constants.CARPETA_JASPER_REPORT + SUBINFORME_TABLAS)) {
             parametros.put("SUBREPORT_TABLAS", JRLoader.loadObject(subReport));
@@ -87,7 +87,7 @@ public class DocumentoServiceImpl implements DocumentoService {
         parametros.put("RUTA_LOGO", resultadoElectoral.getAppOrganisationLogoUrl());
         parametros.put("RESULTADOS_ELECTORALES_PARTIDOS", new JRBeanCollectionDataSource(resultadoElectoral.getData()));
         parametros.put("VALUE_FORMATTER", getFormatter());
-        parametros.put(JRParameter.REPORT_LOCALE, new Locale(getLanguage()));
+        parametros.put(JRParameter.REPORT_LOCALE, getSelectedLocale());
 
         try (InputStream subReport = getClass().getResourceAsStream(Constants.CARPETA_JASPER_REPORT + SUBINFORME_TABLA_RESULTADO)) {
             parametros.put("SUBREPORT_TABLA_RESULTADO", JRLoader.loadObject(subReport));
@@ -107,9 +107,8 @@ public class DocumentoServiceImpl implements DocumentoService {
         return calendar.get(Calendar.YEAR);
     }
 
-    private String getLanguage() {
-        Locale locale = LocaleContextHolder.getLocale();
-        return locale.toString().split("_")[0];
+    private Locale getSelectedLocale() {
+        return LocaleContextHolder.getLocale();
     }
 
     private ValueFormatter getFormatter() {
