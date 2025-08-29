@@ -134,6 +134,7 @@
                 .map(function (representation) {
                     return {
                         level: representation.get("level").toString(),
+                        id: representation.get("geographicGranularityId"),
                         label: representation.get("geographicGranularityLabel"),
                     };
                 })
