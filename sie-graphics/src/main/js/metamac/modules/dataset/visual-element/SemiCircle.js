@@ -34,12 +34,12 @@
             tooltip: {
                 formatter: function () {
                     var tooltip = "<b>" + this.point.longName + "</b><br/>";
-                    tooltip += this.series.options.extraTooltip + ": " + Highcharts.numberFormat(this.point.y, -1, ',', '.') + this.series.options.symbol + "<br/>";
+                    tooltip += this.series.options.extraTooltip + ": " + Highcharts.numberFormat(this.point.y, this.series.options.decimals, ',', '.') + this.series.options.symbol + "<br/>";
                     if (this.point.y1) {
-                        tooltip += this.series.options.extraTooltip1 + ": " + Highcharts.numberFormat(this.point.y1, -1, ',', '.') + this.series.options.symbol1 + "<br/>";
+                        tooltip += this.series.options.extraTooltip1 + ": " + Highcharts.numberFormat(this.point.y1, this.series.options.decimals1, ',', '.') + this.series.options.symbol1 + "<br/>";
                     }
                     if (this.point.y2) {
-                        tooltip += this.series.options.extraTooltip2 + ": " + Highcharts.numberFormat(this.point.y2, -1, ',', '.') + this.series.options.symbol2;
+                        tooltip += this.series.options.extraTooltip2 + ": " + Highcharts.numberFormat(this.point.y2, this.series.options.decimals2, ',', '.') + this.series.options.symbol2;
                     }
                     return tooltip;
                 }
@@ -61,7 +61,7 @@
                     },
                     dataLabels: {
                         formatter: function() {
-                            return this.point.name + " (" + Highcharts.numberFormat(this.point.percentage) + " %)";
+                            return this.point.name + " (" + Highcharts.numberFormat(this.point[this.point.percentageAttrName]) + " %)";
                         }
                     }
                 }
@@ -192,7 +192,8 @@
                 _.each(extraDataSelectedCategories, function (extraCategory, index) {
                     var distinguishingName = (index > 0 ? index : '');
                     serie['extraTooltip' + distinguishingName] = extraCategory.get('visibleLabel');
-                    serie['symbol' + distinguishingName] = extraCategory.id === "RATIO_VOTOS_CANDIDATURA" ? "%" : "";
+                    serie['symbol' + distinguishingName] = extraCategory.get("measureUnitId") === "PORCENTAJE" ? " %" : "";
+                    serie['decimals' + distinguishingName] = extraCategory.get("decimals");
                 });
 
                 _.each(horizontalDimensionSelectedCategories, function (horizontalCategory) {
@@ -210,6 +211,9 @@
                         var y = self.data.getNumberData({ ids: currentPermutation });
                         var attrName = 'y' + (index > 0 ? index : '');
                         element[attrName] = y;
+                        if (extraCategory.get("measureUnitId") === "PORCENTAJE") {
+                            element["percentageAttrName"] = attrName;
+                        }
                     });
 
                     element.color = self.data.colors[horizontalCategory.get('id')];
@@ -244,7 +248,8 @@
                         longName: I18n.t("ve.others"),
                         y: 0,
                         y1: 0,
-                        y2: 0
+                        y2: 0,
+                        percentageAttrName: data[0].percentageAttrName,
                     };
                     while (data.length > App.Constants.maxSemiCircleElements) {
                         var element = data.pop();

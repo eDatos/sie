@@ -219,6 +219,7 @@
                     representation.label = self.localizeLabel(dimensionValue.name.text);
 
                     if (dimensionValue.measureQuantity && dimensionValue.measureQuantity.unitCode) {
+                        representation.measureUnitId = dimensionValue.measureQuantity.unitCode.id;
                         representation.measureUnit = self.localizeLabel(dimensionValue.measureQuantity.unitCode.name.text);
                     }
 
