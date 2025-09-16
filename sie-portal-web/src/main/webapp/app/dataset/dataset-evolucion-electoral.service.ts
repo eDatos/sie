@@ -23,6 +23,7 @@ const SEPARADOR = '|';
 const TERRITORIO = 'TERRITORIO';
 const PROCESO_ELECTORAL = 'PROCESO_ELECTORAL';
 const INDICADORES = 'INDICADORES';
+const MEDIDAS = 'MEDIDAS';
 
 @Injectable()
 export class DatasetEvolucionElectoralService {
@@ -120,6 +121,7 @@ export class DatasetEvolucionElectoralService {
         // Ensamblaje de los procesos electorales
         const listaProcesoElectoral = this.creaProcesosElectorales(json);
         const listaIndicadores = this.creaIndicadores(json);
+        const dimMedidasName = json.data.dimensions.dimension.find((dimension) => dimension.dimensionId === INDICADORES || dimension.dimensionId === MEDIDAS).dimensionId;
 
         for (let i = 0; i < listaProcesoElectoral.length; i++) {
             const procesoElectoral = listaProcesoElectoral[i];
@@ -133,7 +135,7 @@ export class DatasetEvolucionElectoralService {
             for (let j = 0; j < listaIndicadores.length; j++) {
                 const indicador = listaIndicadores[j];
                 const coordenadas = {
-                    'INDICADORES': indicador.index,
+                    [dimMedidasName]: indicador.index,
                     'TERRITORIO': 0,
                     'PROCESO_ELECTORAL': procesoElectoral.indiceDimension
                 }
@@ -258,7 +260,7 @@ export class DatasetEvolucionElectoralService {
     }
 
     private creaIndicadores(json: any): any[] {
-        return json.data.dimensions.dimension.find((dimension) => dimension.dimensionId === INDICADORES)
+        return json.data.dimensions.dimension.find((dimension) => dimension.dimensionId === INDICADORES || dimension.dimensionId === MEDIDAS)
             .representations.representation;
     }
 
