@@ -12,8 +12,8 @@
             "VOTANTES": "Votants",
             "ABSTENCION": "Abstenció",
             "TASA_PARTICIPACION": "Taxa de participació (%)",
-            "TASA_PARTICIPACION_A1": "Taxa de participació en el primer avenç (%)",
-            "TASA_PARTICIPACION_A2": "Taxa de participació en el segon avenç (%)",
+            "TASA_PARTICIPACION_A1": "Taxa de participació (avanç 1) (%)",
+            "TASA_PARTICIPACION_A2": "Taxa de participació (avanç 2) (%)",
             "TASA_ABSTENCION": "Taxa d'abstenció (%)",
             "VOTOS": "Vots",
             "VOTOS_NULOS": "Vots nuls",
@@ -23,7 +23,7 @@
             "VOTOS_VALIDOS_BLANCO": "Vots vàlids en blanc",
             "TASA_VOTOS_VALIDOS_BLANCO": "Taxa de vots vàlids en blanc (%)",
             "VOTOS_VALIDOS_CANDIDATURA": "Vots vàlids a candidatura",
-            "TASA_VOTOS_VALIDOS_CANDIDATURA": "Taxa de vots vàlids en candidatures (%)"
+            "TASA_VOTOS_VALIDOS_CANDIDATURA": "Taxa de vots vàlids a candidatura (%)"
         },
         "tipoEleccion": {
             "AUTONOMICAS": "AUTONÒMIQUES",
