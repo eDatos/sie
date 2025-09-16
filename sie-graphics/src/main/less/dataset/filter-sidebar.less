@@ -99,13 +99,34 @@
         margin-top: 5px;
         margin-bottom: 8px;
 
-        background:@istacGreyMedium;
         .border-radius(0 0 @borderRadiusSmall @borderRadiusSmall);
 
         .filter-sidebar-dimension-actionsbar-wrapper {
-            background: @istacWhite;
-            display: inline-block;
-        }        
+            display: flex;
+            align-items: center;
+            gap: 3px;
+
+            > * {
+                flex: 0 0 auto;
+            }
+
+            .filter-sidebar-dimension-levels {
+                flex: 1 1 0;
+                min-width: 0;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+
+                select {
+                    width: 100%;
+                    min-width: 0;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-align: left;
+                }
+            }
+        }
 
         .filter-sidebar-selectAll {
             .border-radius(0 0 0 @borderRadiusSmall);
@@ -115,15 +136,8 @@
         .filter-sidebar-dimension-visibleLabelType,
         .filter-sidebar-dimension-actions {
             display: inline-block;
-            
-            select {
-                .metamac-container .btn;
-                padding: 3px 4px;
-                margin-right: 3px;
-                font-size: @littleFontSize;
-                text-align: left;
-            }         
         }
+
         .filter-sidebar-dimension-actions {
             .filter-sidebar-selectAll {
                 text-overflow: ellipsis;
