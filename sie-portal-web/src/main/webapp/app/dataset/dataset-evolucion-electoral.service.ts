@@ -13,6 +13,7 @@ import {
     NEW_FRONTERA_ID,
     OLD_FRONTERA_ID
 } from "../shared/constants/data.constants";
+import { JhiLanguageHelper } from "../shared";
 
 const GEOGRAPHIC_DIMENSION = 'GEOGRAPHIC_DIMENSION';
 const FECHA_ELECCION = 'FECHA_ELECCION';
@@ -38,7 +39,8 @@ export class DatasetEvolucionElectoralService {
         private configService: ConfigService,
         private metadataService: MetadataService,
         private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService,
-        private datePipe: DatePipe
+        private datePipe: DatePipe,
+        private languageHelper: JhiLanguageHelper,
     ) { }
 
     getListaLugares(): Promise<Lugar[]> {
@@ -84,7 +86,8 @@ export class DatasetEvolucionElectoralService {
         const geographicDimension = json.metadata.dimensions.dimension.find((dimension) => dimension.type === GEOGRAPHIC_DIMENSION);
         const lugares = geographicDimension.dimensionValues.value.filter((element) => !/.+_O$/.test(element.id));
         return lugares.map((element) => {
-            return new Lugar(element.id, element.variableElement.id, element.name.text[0].value, element.geographicGranularity.name.text[0].value);
+            return new Lugar(element.id, element.variableElement.id, this.languageHelper.getLocalisedString(element.name),
+                this.languageHelper.getLocalisedString(element.geographicGranularity.name));
         });
     }
 
