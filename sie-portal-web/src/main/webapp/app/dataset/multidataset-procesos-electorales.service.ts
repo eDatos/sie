@@ -5,6 +5,7 @@ import { DatasetProcesoElectoral } from './dataset-proceso-electoral.model';
 import { Observable } from 'rxjs';
 import { MultidatasetProcesosElectorales } from './multidataset-procesos-electorales.model';
 import { TipoEleccionesDatasetUrlService } from './tipo-elecciones-dataset-url.service';
+import { JhiLanguageHelper } from "../shared";
 
 @Injectable()
 export class MultidatasetProcesosElectoralesService {
@@ -15,7 +16,8 @@ export class MultidatasetProcesosElectoralesService {
         private http: Http,
         private configService: ConfigService,
         private metadataService: MetadataService,
-        private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService
+        private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService,
+        private languageHelper: JhiLanguageHelper,
     ) { }
 
     getDatasetsByTipoElecciones(tipoElecciones: string): Observable<MultidatasetProcesosElectorales> {
@@ -49,7 +51,7 @@ export class MultidatasetProcesosElectoralesService {
     private parseMultidataset(json: any): MultidatasetProcesosElectorales {
         const nodes = json.data.nodes.node;
         const datasetList = nodes.map((element) => {
-            return new DatasetProcesoElectoral(element.dataset.id, element.identifier, element.name.text[0].value);
+            return new DatasetProcesoElectoral(element.dataset.id, element.identifier, this.languageHelper.getLocalisedString(element.name));
         });
         const splittedUrn = json.urn.split('=');
         return new MultidatasetProcesosElectorales(splittedUrn[1], datasetList);
