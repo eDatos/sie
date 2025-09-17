@@ -97,7 +97,7 @@ resourceBundle="i18n.messages">
 				</textElement>
 				<textFieldExpression><![CDATA[$R{report.resultado_electoral.header} + " " + $P{TIPO_ELECCIONES} + " " + $R{report.resultado_electoral.header.de} + " " + $P{ANNO_ELECCIONES}]]></textFieldExpression>
 			</textField>
-			<image hAlign="Center" vAlign="Middle">
+			<image hAlign="Center" vAlign="Middle" scaleImage="RetainShape">
 				<reportElement x="1" y="69" width="479" height="170" uuid="fbd62366-e286-4664-a5e3-f3b2d6e15f07"/>
 				<imageExpression><![CDATA[net.sf.jasperreports.renderers.BatikRenderer.getInstance($P{GRAFICA})]]></imageExpression>
 			</image>
