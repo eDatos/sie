@@ -53,7 +53,12 @@ resourceBundle="i18n.messages">
 			<variableExpression><![CDATA[$F{results}.get("VOTOS_VALIDOS_CANDIDATURA")]]></variableExpression>
 		</variable>
 		<variable name="porcentajeVotosCandidatura" class="java.lang.Double">
-			<variableExpression><![CDATA[Double.parseDouble($F{results}.get("PORCENTAJE_VOTOS_CANDIDATURA").toString())]]></variableExpression>
+			<variableExpression><![CDATA[
+                $F{results}.get("PORCENTAJE_VOTOS_CANDIDATURA") != null
+                    ? Double.parseDouble($F{results}.get("PORCENTAJE_VOTOS_CANDIDATURA").toString())
+                    : Double.parseDouble($F{results}.get("TASA_VOTOS_VALIDOS_CANDIDATURA").toString())
+            ]]>
+            </variableExpression>
 		</variable>
 		<variable name="representantesElegidos" class="java.lang.Integer">
 			<variableExpression><![CDATA[$F{results}.get("REPRESENTANTES_ELEGIDOS")]]></variableExpression>
