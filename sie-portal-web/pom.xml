@@ -93,10 +93,17 @@
 	    <jasperreports.version>6.18.1</jasperreports.version>
 		<jasperreports-fonts.version>6.18.1</jasperreports-fonts.version>
 		<jasperreports-plugin.version>2.8</jasperreports-plugin.version>
+		
+		<edatos-core-utils.version>1.23.1-SNAPSHOT</edatos-core-utils.version>
     </properties>
 
 
     <dependencies>
+        <dependency>
+			<groupId>org.siemac.metamac</groupId>
+			<artifactId>edatos-core-utils</artifactId>
+			<version>${edatos-core-utils.version}</version>
+		</dependency>
 	    <dependency>
 	      <groupId>net.sf.jasperreports</groupId>
 	      <artifactId>jasperreports</artifactId>
