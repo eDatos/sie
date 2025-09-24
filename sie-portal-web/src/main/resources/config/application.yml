@@ -15,7 +15,7 @@ spring:
     application:
         name: sie
     datasource:
-        type: com.zaxxer.hikari.HikariDataSource
+        type: org.siemac.edatos.core.common.datasource.EdatosHikariDataSource
         url: jdbc:postgresql://FILL_HOST:FILL_PORT/FILL_DATABASE
         username: FILL_USER
         password: FILL_PASS
