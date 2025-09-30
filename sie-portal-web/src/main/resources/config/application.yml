@@ -168,7 +168,7 @@ application:
         sieExplanatoryVideoUrl: metamac.sie.explanatory_video.url
         firstTerritoryKey: edatos.shared.first_territory
         internationalizationCookieKey: metamac.internationalization.cookieId
-        internationalizationLanguages: metamac.edition.languages
+        internationalizationLanguages: metamac.internationalization.languages
         captchaExternalApiUrlBase: metamac.portal.rest.external.authentication.captcha.url
         appOrganisationLogoUrl: edatos.app.organisation.logo.url
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.19.0.final using JasperReports Library version 6.19.0-646c68931cebf1a58bc65c4359d1f0ca223c5e94  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Notificacion_Decreto_Orden_Dia" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="eb5828a7-98b5-4cd8-88a2-625a5a8842b7"
-resourceBundle="i18n.messages">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Notificacion_Decreto_Orden_Dia" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="i18n.messages" whenResourceMissingType="Empty" uuid="eb5828a7-98b5-4cd8-88a2-625a5a8842b7">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Usuario Data Adapter"/>
 	<property name="com.jaspersoft.studio.report.description" value=""/>
 	<parameter name="RUTA_LOGO" class="java.lang.String" isForPrompting="false"/>
@@ -15,7 +14,8 @@ resourceBundle="i18n.messages">
 		<![CDATA[]]>
 	</queryString>
 	<title>
-		<band height="378">
+		<band height="289">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<line>
 				<reportElement x="40" y="63" width="470" height="1" forecolor="#3B3B3B" uuid="c35a7fd5-15e0-4155-9ed5-d731aedabbb4"/>
 				<graphicElement>
@@ -46,9 +46,11 @@ resourceBundle="i18n.messages">
 		</band>
 	</title>
 	<detail>
-		<band height="200" splitType="Stretch">
+		<band height="156" splitType="Stretch">
 			<subreport>
-				<reportElement stretchType="RelativeToTallestObject" x="40" y="-80" width="470" height="200" uuid="b72cb9d4-649f-4d71-8cff-246625bb6359"/>
+				<reportElement stretchType="RelativeToTallestObject" x="42" y="10" width="470" height="135" uuid="b72cb9d4-649f-4d71-8cff-246625bb6359">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
 				<subreportParameter name="VALUE_FORMATTER">
 					<subreportParameterExpression><![CDATA[$P{VALUE_FORMATTER}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -97,9 +99,7 @@ resourceBundle="i18n.messages">
 			</textField>
 			<image hAlign="Left" vAlign="Middle">
 				<reportElement x="35" y="12" width="180" height="30" uuid="3081b5c6-83dc-4967-a3c5-7848d33025d8"/>
-				<imageExpression class="java.net.URL">
-                    <![CDATA[new java.net.URL($P{RUTA_LOGO})]]>
-                </imageExpression>
+				<imageExpression><![CDATA[new java.net.URL($P{RUTA_LOGO})]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>

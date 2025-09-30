@@ -107,7 +107,7 @@ application:
         organisationUrnKey: metamac.organisation.urn
         geographicalGranularityUrnKey: metamac.default.codelist.geographical_granularity.urn
         internationalizationCookieKey: metamac.internationalization.cookieId
-        internationalizationLanguages: metamac.edition.languages
+        internationalizationLanguages: metamac.internationalization.languages
         appOrganisationLogoUrl: edatos.app.organisation.logo.url
 
 environment:

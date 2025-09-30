@@ -163,7 +163,7 @@
 
         updateDrawablesBySelectedLevel: function () {
             if (this.getSelectedRepresentationsByCurrentLevel().length === 0) {
-                this.updateSelectedGeographicLevelWithMostRepeatedValue();    
+                this.updateSelectedGeographicLevel();
             }
 
             _.invoke(this.models, 'set', { drawable: false }, { silent: true });
@@ -195,17 +195,30 @@
 
         getSelectedGeographicLevel: function () {
             if (this.selectedGeographicalLevel == null) {
-                this.updateSelectedGeographicLevelWithMostRepeatedValue();
+                this.updateSelectedGeographicLevel();
             }
             return this.selectedGeographicalLevel;
         },
 
-        updateSelectedGeographicLevelWithMostRepeatedValue: function () {
-            this.selectedGeographicalLevel = this._getMostRepeatedValue(this.getSelectedGeographicLevels());
+        updateSelectedGeographicLevel: function () {
+            this.selectedGeographicalLevel = this.getDefaultLevel();
         },
 
         getSelectedGeographicLevels: function () {
             return _(this.getSelectedRepresentations()).invoke("get", "level");
+        },
+
+        getSelectedMunicipalities: function () {
+            return this.getSelectedRepresentations().filter(representation => representation.get("geographicGranularityId") === "MUNICIPALITIES");
+        },
+
+        getDefaultLevel: function () {
+            const selectedMunicipalities = this.getSelectedMunicipalities();
+            if (selectedMunicipalities.length > 0) {
+                return selectedMunicipalities[0].get("level");
+            } else {
+                return this._getMostRepeatedValue(this.getSelectedGeographicLevels());
+            }
         },
 
         setSelectedTemporalGranularity: function(temporalGranularity) {
