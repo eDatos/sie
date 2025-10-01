@@ -1,0 +1,75 @@
+-- -----------------------------------------------------------------------------------------------
+-- EDATOS-5072 - Eliminar menciones de ISTAC Canarias de SIE en preparación de su puesta en marcha en IBESTAT
+-- -----------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------
+-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!! SOLO PARA IBESTAT PRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!! --
+---------------------------------------------------------------------------------------
+
+-- Upserts de datasets para IBESTAT PRE. En caso de que la propiedad ya exista, se actualiza su valor.
+
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('EVOLUCION_ELECTORAL', '/datasets/IBESTAT/000199A_000026/~latest.json')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('MUNICIPALES', '/multidatasets/IBESTAT/000199A_000004')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('CONSEJO_INSULAR', '/multidatasets/IBESTAT/000199A_000005')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('AUTONOMICAS', '/multidatasets/IBESTAT/000199A_000006')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('CONGRESO', '/multidatasets/IBESTAT/000199A_000007')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('SENADO', '/multidatasets/IBESTAT/000199A_000008')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('PARLAMENTO_EUROPEO', '/multidatasets/IBESTAT/000199A_000009')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- COMMIT;
+
+---------------------------------------------------------------------------------------
+-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!! SOLO PARA IBESTAT PRO !!!!!!!!!!!!!!!!!!!!!!!!!!!!! --
+---------------------------------------------------------------------------------------
+
+-- Upserts de datasets para IBESTAT PRO. En caso de que la propiedad ya exista, se actualiza su valor.
+
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('EVOLUCION_ELECTORAL', '/datasets/IBESTAT/000199A_000001/~latest.json')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('MUNICIPALES', '/multidatasets/IBESTAT/000199A_000009')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('CONSEJO_INSULAR', '/multidatasets/IBESTAT/000199A_000008')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('AUTONOMICAS', '/multidatasets/IBESTAT/000199A_000007')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('CONGRESO', '/multidatasets/IBESTAT/000199A_000010')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('SENADO', '/multidatasets/IBESTAT/000199A_000011')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- INSERT INTO tb_tipo_elecciones_dataset_url (tipo_elecciones, dataset_url)
+-- VALUES ('PARLAMENTO_EUROPEO', '/multidatasets/IBESTAT/000199A_000012')
+-- ON CONFLICT (tipo_elecciones) DO UPDATE SET dataset_url = EXCLUDED.dataset_url;
+--
+-- COMMIT;
