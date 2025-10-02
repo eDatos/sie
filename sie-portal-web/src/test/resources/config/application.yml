@@ -21,7 +21,7 @@ spring:
     cache:
         type: none
     datasource:
-        type: com.zaxxer.hikari.HikariDataSource
+        type: org.siemac.edatos.core.common.datasource.EdatosHikariDataSource
         url: jdbc:h2:mem:sie;DB_CLOSE_DELAY=-1
         name:
         username:
@@ -107,7 +107,7 @@ application:
         organisationUrnKey: metamac.organisation.urn
         geographicalGranularityUrnKey: metamac.default.codelist.geographical_granularity.urn
         internationalizationCookieKey: metamac.internationalization.cookieId
-        internationalizationLanguages: metamac.edition.languages
+        internationalizationLanguages: metamac.internationalization.languages
         appOrganisationLogoUrl: edatos.app.organisation.logo.url
 
 environment:

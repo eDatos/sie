@@ -13,6 +13,7 @@ import {
     NEW_FRONTERA_ID,
     OLD_FRONTERA_ID
 } from "../shared/constants/data.constants";
+import { JhiLanguageHelper } from "../shared";
 
 const GEOGRAPHIC_DIMENSION = 'GEOGRAPHIC_DIMENSION';
 const FECHA_ELECCION = 'FECHA_ELECCION';
@@ -22,6 +23,7 @@ const SEPARADOR = '|';
 const TERRITORIO = 'TERRITORIO';
 const PROCESO_ELECTORAL = 'PROCESO_ELECTORAL';
 const INDICADORES = 'INDICADORES';
+const MEDIDAS = 'MEDIDAS';
 
 @Injectable()
 export class DatasetEvolucionElectoralService {
@@ -38,7 +40,8 @@ export class DatasetEvolucionElectoralService {
         private configService: ConfigService,
         private metadataService: MetadataService,
         private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService,
-        private datePipe: DatePipe
+        private datePipe: DatePipe,
+        private languageHelper: JhiLanguageHelper,
     ) { }
 
     getListaLugares(): Promise<Lugar[]> {
@@ -84,7 +87,8 @@ export class DatasetEvolucionElectoralService {
         const geographicDimension = json.metadata.dimensions.dimension.find((dimension) => dimension.type === GEOGRAPHIC_DIMENSION);
         const lugares = geographicDimension.dimensionValues.value.filter((element) => !/.+_O$/.test(element.id));
         return lugares.map((element) => {
-            return new Lugar(element.id, element.variableElement.id, element.name.text[0].value, element.geographicGranularity.name.text[0].value);
+            return new Lugar(element.id, element.variableElement.id, this.languageHelper.getLocalisedString(element.name),
+                this.languageHelper.getLocalisedString(element.geographicGranularity.name));
         });
     }
 
@@ -117,6 +121,7 @@ export class DatasetEvolucionElectoralService {
         // Ensamblaje de los procesos electorales
         const listaProcesoElectoral = this.creaProcesosElectorales(json);
         const listaIndicadores = this.creaIndicadores(json);
+        const dimMedidasName = json.data.dimensions.dimension.find((dimension) => dimension.dimensionId === INDICADORES || dimension.dimensionId === MEDIDAS).dimensionId;
 
         for (let i = 0; i < listaProcesoElectoral.length; i++) {
             const procesoElectoral = listaProcesoElectoral[i];
@@ -130,7 +135,7 @@ export class DatasetEvolucionElectoralService {
             for (let j = 0; j < listaIndicadores.length; j++) {
                 const indicador = listaIndicadores[j];
                 const coordenadas = {
-                    'INDICADORES': indicador.index,
+                    [dimMedidasName]: indicador.index,
                     'TERRITORIO': 0,
                     'PROCESO_ELECTORAL': procesoElectoral.indiceDimension
                 }
@@ -255,7 +260,7 @@ export class DatasetEvolucionElectoralService {
     }
 
     private creaIndicadores(json: any): any[] {
-        return json.data.dimensions.dimension.find((dimension) => dimension.dimensionId === INDICADORES)
+        return json.data.dimensions.dimension.find((dimension) => dimension.dimensionId === INDICADORES || dimension.dimensionId === MEDIDAS)
             .representations.representation;
     }
 

@@ -6,7 +6,7 @@
     App.components.sidebar.SidebarStateModel = Backbone.Model.extend({
 
         defaults : {
-            width : 240,
+            width : 290,
             minWidth : 240,
             visible : false,
             currentSideView : undefined

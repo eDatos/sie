@@ -219,6 +219,7 @@
                     representation.label = self.localizeLabel(dimensionValue.name.text);
 
                     if (dimensionValue.measureQuantity && dimensionValue.measureQuantity.unitCode) {
+                        representation.measureUnitId = dimensionValue.measureQuantity.unitCode.id;
                         representation.measureUnit = self.localizeLabel(dimensionValue.measureQuantity.unitCode.name.text);
                     }
 
@@ -251,6 +252,8 @@
 
                     if (isGeographic) {
                         representation.normCode = self.getGeographicDimensionNormCode(dimensionValue);
+                        representation.geographicGranularityId = dimensionValue.geographicGranularity.id;
+                        representation.geographicGranularityLabel = self.localizeLabel(dimensionValue.geographicGranularity.name.text);
                     }
 
                     if (isMeasureDimension) {

@@ -335,9 +335,9 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     private getName(dataset, dimensionId: string, dimensionValue: string): string {
-        return dataset.metadata.dimensions.dimension.find((dim) => dim.id === dimensionId)
-                      .dimensionValues.value.find((val) => val.id === dimensionValue)
-                      .name.text.find((text) => text.lang === 'es').value;
+        const selectedDimValue = dataset.metadata.dimensions.dimension.find((dim) => dim.id === dimensionId)
+                            .dimensionValues.value.find((val) => val.id === dimensionValue);
+        return this.jhiLanguageHelper.getLocalisedString(selectedDimValue.name);
     }
 
     private getTerritoryInfo(dataset, dimensionId: string, dimensionValue: string): { name: string, granularity: string } {
@@ -345,8 +345,8 @@ export class ProcesoElectoralComponent implements OnInit, AfterViewInit, OnDestr
                       .dimensionValues.value.find((val) => val.id === dimensionValue);
 
         return {
-            name: territory.name.text.find((text) => text.lang === 'es').value,
-            granularity: territory.geographicGranularity.name.text.find((text) => text.lang === 'es').value,
+            name: this.jhiLanguageHelper.getLocalisedString(territory.name),
+            granularity: this.jhiLanguageHelper.getLocalisedString(territory.geographicGranularity.name),
         }
     }
 

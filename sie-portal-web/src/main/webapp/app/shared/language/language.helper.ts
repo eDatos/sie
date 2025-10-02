@@ -59,8 +59,7 @@ export class JhiLanguageHelper {
     getLanguages(config: GenericConfig): Promise<string[]> {
         return new Promise<string[]>((resolve) => {
             this.metadataService.getPropertyById(config.metadata.internationalizationLanguages).subscribe((languages) => {
-                let internationalizationLanguages = languages.split(",");
-                resolve(internationalizationLanguages);
+                resolve(languages.split(',').map((lang) => lang.trim()));
             });
         });
     }
@@ -74,7 +73,7 @@ export class JhiLanguageHelper {
                         resolve(this.cookieService.get(cookieName));
                     }
                 }
-                reject(null);
+                resolve(null);
             });
         });
     }
@@ -100,9 +99,25 @@ export class JhiLanguageHelper {
     findNavigatorValue(internationalizationLanguages: string[]) {
         return this.findLanguageValue(internationalizationLanguages, window.navigator.language);
     }
-    
+
     findLanguageValue(internationalizationLanguages: string[], value: string) {
         let languageValue = internationalizationLanguages.find((element) => element === value);
         return languageValue !== undefined ? languageValue : null;
+    }
+
+    getLocalisedString(internationalString: { text: { value: string; lang: string; }[] }, lang?: string): string | null {
+        if (internationalString && internationalString.text && internationalString.text.length > 0) {
+            if (lang) {
+                const text = internationalString.text.find((t) => t.lang === lang);
+                if (text) {
+                    return text.value;
+                }
+            }
+            const text = internationalString.text.find((t) => t.lang === this.translateService.currentLang);
+            if (text) {
+                return text.value;
+            }
+        }
+        return null;
     }
 }

@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Http, ResponseContentType } from '@angular/http';
-import * as FileSaver from 'file-saver';
-import { Observable } from 'rxjs/Observable';
-import { ResultadoElectoral } from '../dataset';
-import { MetadataService, ConfigService } from '../config';
+import { Injectable } from "@angular/core";
+import { Http, ResponseContentType, Headers } from "@angular/http";
+import * as FileSaver from "file-saver";
+import { Observable } from "rxjs/Observable";
+import { ResultadoElectoral } from "../dataset";
+import { MetadataService, ConfigService } from "../config";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable()
 export class DocumentoService {
@@ -13,8 +14,16 @@ export class DocumentoService {
     constructor(
         private http: Http,
         private metadataService: MetadataService,
-        private configService: ConfigService
+        private configService: ConfigService,
+        private langService: TranslateService
     ) { }
+
+    private getAcceptLanguageHeader(): string {
+        if (navigator.languages && navigator.languages.length > 0) {
+            return this.langService.currentLang + ',' + navigator.languages.join(',');
+        }
+        return this.langService.currentLang + ',' + navigator.language;
+    }
 
     descargarPdfEvolucionElectoral(evolucionElectoral: any): Observable<any> {
         return this.metadataService.getPropertyById(this.configService.getConfig().metadata.appOrganisationLogoUrlKey).switchMap((logoUrl: string) => {
@@ -22,7 +31,9 @@ export class DocumentoService {
             evolucionElectoral.appOrganisationLogoUrl = logoUrl;
             formData.append('evolucionElectoral', new Blob([JSON.stringify(evolucionElectoral)], { type: 'application/json' }));
             formData.append('grafica', new Blob([this.sanitizeSvg(document.getElementsByTagName('svg')[0].outerHTML)], { type: 'image/svg+xml' }));
-            return this.http.post(`${this.resourceUrl}/evolucion-electoral`, formData, { responseType: ResponseContentType.Blob });
+            const headers = new Headers();
+            headers.append('Accept-Language', this.getAcceptLanguageHeader());
+            return this.http.post(`${this.resourceUrl}/evolucion-electoral`, formData, { responseType: ResponseContentType.Blob, headers });
         });
     }
 
@@ -32,7 +43,9 @@ export class DocumentoService {
             resultadoElectoral.appOrganisationLogoUrl = logoUrl;
             formData.append('resultadoElectoral', new Blob([JSON.stringify(resultadoElectoral)], { type: 'application/json' }));
             formData.append('grafica', new Blob([this.sanitizeSvg(this.processSvg(svg).outerHTML)], { type: 'image/svg+xml' }));
-            return this.http.post(`${this.resourceUrl}/resultado-electoral`, formData, { responseType: ResponseContentType.Blob });
+            const headers = new Headers();
+            headers.append('Accept-Language', this.getAcceptLanguageHeader());
+            return this.http.post(`${this.resourceUrl}/resultado-electoral`, formData, { responseType: ResponseContentType.Blob, headers });
         });
     }
 

@@ -86,10 +86,18 @@
             this.subviews.push(this.actionsView);
 
             if (this.filterDimension.get('hierarchy')) {
-                var hierarchyLevel = this.filterDimension.getMaxHierarchyLevel();
-                var levelsModels = _(hierarchyLevel).times(function (n) {
-                    return { id: n, title: I18n.t('filter.selector.level.' + n) };
-                });
+                let levelsModels;
+                if (this.filterDimension.get("type") === "GEOGRAPHIC_DIMENSION") {
+                    levelsModels = this._getGeographicGranularityCollection(this.filterDimension).map(level => {
+                        return { id: Number(level.level), title: level.label };
+                    });
+                } else {
+                    var hierarchyLevel = this.filterDimension.getMaxHierarchyLevel();
+                    levelsModels = _(hierarchyLevel).times(function (n) {
+                        return { id: n, title: I18n.t('filter.selector.level.' + n) };
+                    });
+                }
+
                 this.levelsCollection = new Backbone.Collection(levelsModels);
 
                 this.levelView = new App.components.select.views.SelectView({
@@ -117,6 +125,20 @@
             this._onChangeOpen(this.filterDimension);
 
             return this.el;
+        },
+
+        _getGeographicGranularityCollection: function (dimension) {
+            return _.chain(dimension.get("representations").getGeographicRepresentationsWithAtLeastOneElementSelected())
+                .sortBy(representation => representation.get("level"))
+                .uniq(true, representation => representation.get("level"))
+                .map(function (representation) {
+                    return {
+                        level: representation.get("level").toString(),
+                        id: representation.get("geographicGranularityId"),
+                        label: representation.get("geographicGranularityLabel"),
+                    };
+                })
+                .value();
         },
 
         updateScrollbar: function () {

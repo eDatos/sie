@@ -1,8 +1,11 @@
 @import "variables";
 
+@btn-height-bg: 4px;
+
 .metamac-container {
 
     .btn {
+
         .border-radius(0);
         padding: 2px 4px;
         margin-bottom: 0; // For input.btn
@@ -14,6 +17,7 @@
         white-space: nowrap;
         .user-select(none);
         display: inline-block;
+        height: @defaultFontSize + 5px + @btn-height-bg;
         line-height: @defaultFontSize + 5px;
 
         background-color: @istacGreyMedium;
@@ -67,6 +71,7 @@
         font-size: @littleFontSize;
         i {
             font-size: @littleFontSize - 1px;
+            height: @littleFontSize - 1px + 5px + @btn-height-bg;
             line-height: @littleFontSize - 1px + 5px;
         }
     }   

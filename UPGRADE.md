@@ -14,6 +14,11 @@ actualización de la versión 1.0.0 a la 2.0.0.*
 
 *Se deberá realizar primero la actualización de la versión 1.0.0 a la 2.0.0 y luego desde la 2.0.0 a la 3.0.0*
 
+## 2.12.1 a 2.12.2-SNAPSHOT
+
+* Solo en los entornos del IBESTAT es necesario ejecutar los scripts SQL contenidos en la carpeta
+`etc/changes-from-release/2.12.1/db/sie/postgresql`.
+
 ## 2.11.0 a 2.12.0
 
 * Es necesario ejecutar los scripts SQL contenidos en la carpeta
