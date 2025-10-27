@@ -12,7 +12,6 @@ export class HeadersInterceptor extends JhiHttpInterceptor {
     }
 
     requestIntercept(options?: RequestOptionsArgs): RequestOptionsArgs {
-        console.log('HeadersInterceptor:requestIntercept');
         if (!options) {
               options = new RequestOptions();
             }

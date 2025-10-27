@@ -25,7 +25,6 @@ import {LocationStrategy} from "@angular/common";
 import {SieLocationStrategy} from "./sie-location.strategy";
 import {XSRFStrategy} from "@angular/http";
 import {TranslateService} from "@ngx-translate/core";
-import { HttpHeaderModule } from './http/headers/http-headers.module';
 import { HeadersInterceptor } from './blocks/interceptor/headers.interceptor';
 
 const APP_ROUTES = [
@@ -48,7 +47,6 @@ export function initializeTranslateService(translateService: TranslateService): 
         SieDatasetServiceModule,
         SieInterfacesModule,
         SieSharedModule,
-        HttpHeaderModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         RouterModule.forRoot(APP_ROUTES, { useHash: true })
     ],

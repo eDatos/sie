@@ -5,6 +5,7 @@ import { JhiEventManager, JhiInterceptableHttp } from 'ng-jhipster';
 import { LocalStorageService, SessionStorageService } from 'ng2-webstorage';
 import { ErrorHandlerInterceptor } from './errorhandler.interceptor';
 import { CookieService } from 'ngx-cookie';
+import { ConfigService } from '../../config';
 import { HeadersInterceptor } from './headers.interceptor';
 
 export function interceptableFactory(
@@ -14,13 +15,13 @@ export function interceptableFactory(
     sessionStorage: SessionStorageService,
     cookieService: CookieService,
     injector: Injector,
-    eventManager: JhiEventManager,
-    headersInterceptor: HeadersInterceptor
+    eventManager: JhiEventManager
 ) {
     return new JhiInterceptableHttp(
         backend,
         defaultOptions,
         [
+            new HeadersInterceptor(eventManager,injector.get(ConfigService))
         ]
     );
 };
@@ -36,8 +37,7 @@ export function customHttpProvider() {
             SessionStorageService,
             CookieService,
             Injector,
-            JhiEventManager,
-            HeadersInterceptor
+            JhiEventManager
         ]
     };
 };

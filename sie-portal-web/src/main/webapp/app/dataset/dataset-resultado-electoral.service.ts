@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Response } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { ConfigService, MetadataService } from '../config';
 import { zip } from 'rxjs/observable/zip';
-import { HttpHeadersService } from '../http/headers/http-headers.service';
 
 @Injectable()
 export class DatasetResultadoElectoralService {
 
-    constructor(private http: HttpHeadersService,
+    constructor(private http: Http,
         private configService: ConfigService,
         private metadataService: MetadataService) {
     }
