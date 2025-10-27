@@ -1,7 +1,7 @@
 import { TipoEleccionesDatasetUrl } from './tipo-elecciones-dataset-url.model';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
+import { HttpHeadersService } from '../http/headers/http-headers.service';
 
 @Injectable()
 export class TipoEleccionesDatasetUrlService {
@@ -11,7 +11,7 @@ export class TipoEleccionesDatasetUrlService {
     private mappingCache = {};
 
     constructor(
-        private http: Http
+        private http: HttpHeadersService
     ) { }
 
     getAll(): Observable<TipoEleccionesDatasetUrl[]> {

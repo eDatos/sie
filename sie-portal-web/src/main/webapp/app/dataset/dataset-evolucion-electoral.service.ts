@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { ConfigService, MetadataService } from '../config';
 import { Lugar } from './lugar.model';
@@ -14,6 +14,7 @@ import {
     OLD_FRONTERA_ID
 } from "../shared/constants/data.constants";
 import { JhiLanguageHelper } from "../shared";
+import { HttpHeadersService } from '../http/headers/http-headers.service';
 
 const GEOGRAPHIC_DIMENSION = 'GEOGRAPHIC_DIMENSION';
 const FECHA_ELECCION = 'FECHA_ELECCION';
@@ -36,7 +37,7 @@ export class DatasetEvolucionElectoralService {
     private idsDimensiones: string[] = [];
 
     constructor(
-        private http: Http,
+        private http: HttpHeadersService,
         private configService: ConfigService,
         private metadataService: MetadataService,
         private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService,

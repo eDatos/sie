@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { ConfigService, MetadataService } from '../config';
 import { DatasetProcesoElectoral } from './dataset-proceso-electoral.model';
 import { Observable } from 'rxjs';
 import { MultidatasetProcesosElectorales } from './multidataset-procesos-electorales.model';
 import { TipoEleccionesDatasetUrlService } from './tipo-elecciones-dataset-url.service';
 import { JhiLanguageHelper } from "../shared";
+import { HttpHeadersService } from '../http/headers/http-headers.service';
 
 @Injectable()
 export class MultidatasetProcesosElectoralesService {
@@ -13,7 +13,7 @@ export class MultidatasetProcesosElectoralesService {
     private multidatasetsCache = {};
 
     constructor(
-        private http: Http,
+        private http: HttpHeadersService,
         private configService: ConfigService,
         private metadataService: MetadataService,
         private tipoEleccionesDatasetUrlService: TipoEleccionesDatasetUrlService,
