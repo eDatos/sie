@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
-import { HttpHeadersService} from '../http/headers/http-headers.service';
+import { Http } from '@angular/http';
 
 @Injectable()
 export class MetadataService {
@@ -9,7 +9,7 @@ export class MetadataService {
     private metadataCache = {};
 
     constructor(
-        private http: HttpHeadersService,
+        private http: Http,
         private configService: ConfigService
     ) { }
 

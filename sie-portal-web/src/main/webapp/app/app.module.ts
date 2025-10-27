@@ -26,6 +26,7 @@ import {SieLocationStrategy} from "./sie-location.strategy";
 import {XSRFStrategy} from "@angular/http";
 import {TranslateService} from "@ngx-translate/core";
 import { HttpHeaderModule } from './http/headers/http-headers.module';
+import { HeadersInterceptor } from './blocks/interceptor/headers.interceptor';
 
 const APP_ROUTES = [
     notFoundRoute
@@ -59,6 +60,7 @@ export function initializeTranslateService(translateService: TranslateService): 
     ],
     providers: [
         customHttpProvider(),
+        HeadersInterceptor,
         PaginationConfig,
         { provide: LocationStrategy, useClass: SieLocationStrategy },
         { provide: XSRFStrategy, useClass: XsrfNoopInterceptor },
