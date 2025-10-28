@@ -26,6 +26,8 @@
         "external-users": "",
     };
 
+    App.apiKeyValue = "825k2IWxZoTlVW6r0yUkQzwUBp7F6D5LVhyguW8zxjvU6o6mYSUkZBaqe26bQn3l";
+
     App.queryParams = {
         "agency": undefined,
         "identifier": undefined,
