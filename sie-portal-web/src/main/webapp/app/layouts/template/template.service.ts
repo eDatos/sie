@@ -27,6 +27,7 @@ export class TemplateService {
                         appName: this.translateService.instant("global.title"),
                         enableAuthentication: null,
                         appVersion: process.env.VERSION,
+                        apiKey: config.metadata.sieApiKeyValue
                     },
                 }).map((res: Response) => res.text());
             });

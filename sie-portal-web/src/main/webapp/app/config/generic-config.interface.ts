@@ -35,6 +35,7 @@ export interface GenericConfig {
         internationalizationLanguages,
         captchaExternalApiUrlBase,
         appOrganisationLogoUrlKey,
+        sieApiKeyValue
     };
 
     baseUrl

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
+import { Http } from '@angular/http';
 
 @Injectable()
 export class MetadataService {

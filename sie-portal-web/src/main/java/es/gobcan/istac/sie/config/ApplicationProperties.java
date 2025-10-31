@@ -69,6 +69,7 @@ public class ApplicationProperties {
         private String internationalizationLanguages;
         private String captchaExternalApiUrlBase;
         private String appOrganisationLogoUrl;
+        private String sieExternalApiKeyValue;
 
         public String getEndpoint() {
             return endpoint;
@@ -242,6 +243,14 @@ public class ApplicationProperties {
             }
         }
 
+        public String getSieApiKeyValue() {
+            if (isInternal()) {
+                return null;
+            } else {
+                return getSieExternalApiKeyValue();
+            }
+        }
+
         private boolean isInternal() {
             return Constants.INTERNAL_CONFIG_ID.equalsIgnoreCase(getInstallationType());
         }
@@ -312,6 +321,14 @@ public class ApplicationProperties {
 
         public void setAppOrganisationLogoUrl(String appOrganisationLogoUrl) {
             this.appOrganisationLogoUrl = appOrganisationLogoUrl;
+        }
+
+        public String getSieExternalApiKeyValue() {
+            return sieExternalApiKeyValue;
+        }
+
+        public void setSieExternalApiKeyValue(String sieExternalApiKeyValue) {
+            this.sieExternalApiKeyValue = sieExternalApiKeyValue;
         }
     }
 }
