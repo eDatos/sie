@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Response, Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { ConfigService, MetadataService } from '../config';
 import { zip } from 'rxjs/observable/zip';
 
