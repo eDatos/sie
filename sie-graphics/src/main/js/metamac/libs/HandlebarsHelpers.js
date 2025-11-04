@@ -112,16 +112,21 @@
         return new Handlebars.SafeString(resourceOutput(values));
     });
 
-    function resourceOutput(values) {
+    function resourceOutput(values, fieldClass, iconClass, targetBlank) {
         var result = "";
         if (!(values instanceof Array)) {
             values = [values];
         }
 
         return _.reduce(values, function (memo, value) {
+            fieldClass = _.isUndefined(fieldClass) ? "" : fieldClass;
+            var target = targetBlank ? " target='_blank'" : "";
             var href = Handlebars.Utils.escapeExpression(value.href);
             var name = Handlebars.Utils.escapeExpression(value.name);
-            result = href ? '<a href=' + href + '>' : '';
+            result = href ? '<a href=' + href + target + ' class="' + fieldClass + '">' : '';
+            if (!_.isUndefined(iconClass)) {
+                result += '<i class="' + iconClass + '"></i>';
+            }
             result += name;
             result += href ? '</a>' : '';
             memo = memo ? ", " : "";
@@ -135,12 +140,12 @@
      * usage:
      *      {{ fieldOutput "entity.dataset.title" }}
      */
-    Handlebars.registerHelper("fieldOutput", function (label, value, type, localizeLabel, allowEmptyValue, fieldClass) {
+    Handlebars.registerHelper("fieldOutput", function (label, value, type, localizeLabel, allowEmptyValue, fieldClass, iconClass, targetBlank) {
         label = Handlebars.Utils.escapeExpression(label);
         localizeLabel = _.isUndefined(localizeLabel) ? true : localizeLabel;
         fieldClass = _.isUndefined(fieldClass) ? "field" : fieldClass;
         var result = '';
-        if (value || allowEmptyValue) {
+        if (type !=='resourceButton' && (value || allowEmptyValue)) {
             result +=
                 '<div class="' + fieldClass + '" >' +
                 '<span class="metadata-title">';
@@ -167,6 +172,9 @@
             result += '</div>';
             result +=
                 '</div>';
+        } else if (type === 'resourceButton' && value) {
+            var hrefValue = {href: value, name: localizeLabel ? I18n.t(label) : label};
+            result += resourceOutput(hrefValue, fieldClass, iconClass, targetBlank);
         }
 
         return new Handlebars.SafeString(result);

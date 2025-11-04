@@ -21,7 +21,13 @@
             <div>{{message "entity.dataset.section.datasetAttributes"}}</div>
         </div>
         <div class="metadata-value">
-            {{#ulList datasetAttributes }} {{ fieldOutput name value "resourceNoLink" false}} {{/ulList}}
+            {{#ulList datasetAttributes }} {{ fieldOutput name value "resourceNoLink" false false}}
+            {{#if relatedResource }}
+            <div class="metadata-resource-value">
+                {{ fieldOutput "entity.dataset.seeRelatedResource.button" relatedResource "resourceButton" true false "btn button-link" "metadata-value-resource-url" true}}
+            </div>
+            {{/if}}
+            {{/ulList}}
         </div>
     </div>
     {{/if}} {{#if metadata.hasPeriods}}
@@ -55,6 +61,9 @@
             <div class="field">
                 {{ fieldOutput name description "text" false true ''}} {{#each annotations }}
                 <span class="metadata-value">{{ resourceOutput this }}</span> {{/each}}
+                <div class="metadata-resource-value">
+                    {{ fieldOutput "entity.dataset.seeConcept.button" resource "resourceButton" true false "btn button-link" "metadata-value-resource-url" true}}
+                </div>
             </div>
             {{/ulList}}
         </div>
@@ -65,7 +74,16 @@
             <div>{{ message "entity.dataset.section.dimensions" }}</div>
         </div>
         <div class="metadata-value">
-            {{#ulList nonMeasureDimensions }} {{ fieldOutput conceptName conceptDescription "text" false true}} {{/ulList}}
+            {{#ulList nonMeasureDimensions }} {{ fieldOutput conceptName conceptDescription "text" false true}} 
+            <div class="metadata-resource-value">
+                {{ fieldOutput "entity.dataset.seeConcept.button" conceptResource "resourceButton" true false "btn button-link" "metadata-value-resource-url" true}}
+            </div>
+            {{#if relatedResource }}
+            <div class="metadata-resource-value">
+                {{ fieldOutput "entity.dataset.seeRelatedResource.button" relatedResource "resourceButton" true false "btn button-link" "metadata-value-resource-url" true}}
+            </div>
+            {{/if}}
+            {{/ulList}}
         </div>
     </div>
     {{/if}} {{#if metadata.hasValidity}}
