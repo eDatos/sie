@@ -158,6 +158,31 @@
                 }
             }
         }
+
+        .metadata-resource-value {
+            padding-top: 10px;
+            .button-link {
+                padding: 0px 6px;
+                background: transparent;
+                border: 1px solid @istacBlueMedium;
+                border-radius: 5px;
+                font-size: 9px;
+                text-transform: uppercase;
+                display: flex;
+                gap: 5px;
+                align-items: center;
+                width: max-content;
+
+                i {
+                    color: @istacBlueMedium;
+                       
+                    &:before {
+                        color: @istacBlueMedium;
+                        padding: 0;
+                    }  
+                }
+            }
+        }
     }
 
     .field:last-child {
@@ -536,6 +561,16 @@
 .dataset-options-visualize {
     .dataset-options-type-icon;
     .icon-visualize;
+}
+
+.metadata-value-resource-url {
+    .dataset-options-type-icon;
+    .icon-eye;
+    height: 12px;
+    width: 14px;
+    font-size: 12px;
+    line-height: 12px;
+
 }
 
 .dataset-download {
