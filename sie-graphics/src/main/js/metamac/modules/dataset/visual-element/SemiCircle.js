@@ -61,7 +61,7 @@
                     },
                     dataLabels: {
                         formatter: function() {
-                            return this.point.name + " (" + Highcharts.numberFormat(this.point[this.point.percentageAttrName]) + " %)";
+                            return this.point.name + " (" + Highcharts.numberFormat(this.point.y) + " %)";
                         }
                     }
                 }
@@ -189,11 +189,22 @@
             _.each(columnsDimensionSelectedCategories, function (columnCategory) {
                 var serie = {};
                 serie.data = [];
-                _.each(extraDataSelectedCategories, function (extraCategory, index) {
-                    var distinguishingName = (index > 0 ? index : '');
-                    serie['extraTooltip' + distinguishingName] = extraCategory.get('visibleLabel');
-                    serie['symbol' + distinguishingName] = extraCategory.get("measureUnitId") === "PORCENTAJE" ? " %" : "";
-                    serie['decimals' + distinguishingName] = extraCategory.get("decimals");
+
+                let measureIndex = 1;
+                _.each(extraDataSelectedCategories, function (extraCategory) {
+                    const isPercentage = extraCategory.get("measureUnitId") === "PORCENTAJE";
+
+                    let measureAttr;
+                    if (isPercentage) {
+                        measureAttr = '';
+                    } else {
+                        measureAttr = measureIndex;
+                        measureIndex++;
+                    }
+
+                    serie['symbol' + measureAttr] = isPercentage ? " %" : "";
+                    serie['extraTooltip' + measureAttr] = extraCategory.get('visibleLabel');
+                    serie['decimals' + measureAttr] = extraCategory.get("decimals");
                 });
 
                 _.each(horizontalDimensionSelectedCategories, function (horizontalCategory) {
@@ -201,18 +212,23 @@
                     element.longName = horizontalCategory.get('visibleLabel');
                     element.name = self._getShortName(element.longName);
 
-                    _.each(extraDataSelectedCategories, function (extraCategory, index) {
+                    let measureIndex = 1;
+
+                    _.each(extraDataSelectedCategories, function (extraCategory) {
                         var currentPermutation = {};
                         currentPermutation[horizontalDimension.id] = horizontalCategory.id;
                         currentPermutation[columnsDimension.id] = columnCategory.id;
                         currentPermutation[extraData.id] = extraCategory.id;
                         _.extend(currentPermutation, fixedPermutation);
 
-                        var y = self.data.getNumberData({ ids: currentPermutation });
-                        var attrName = 'y' + (index > 0 ? index : '');
-                        element[attrName] = y;
-                        if (extraCategory.get("measureUnitId") === "PORCENTAJE") {
-                            element["percentageAttrName"] = attrName;
+                        const measureAttr = extraCategory.get("measureUnitId") === "PORCENTAJE"
+                            ? 'y'
+                            : 'y' + measureIndex;
+
+                        element[measureAttr] = self.data.getNumberData({ ids: currentPermutation });
+                        if (measureAttr !== 'y') {
+                            // allows to handle y1, y2 as consecutive
+                            measureIndex++;
                         }
                     });
 
@@ -249,7 +265,6 @@
                         y: 0,
                         y1: 0,
                         y2: 0,
-                        percentageAttrName: data[0].percentageAttrName,
                     };
                     while (data.length > App.Constants.maxSemiCircleElements) {
                         var element = data.pop();
@@ -262,7 +277,9 @@
                     othersData.y1 = self._round(othersData.y1);
                     othersData.y2 = self._round(othersData.y2);
 
-                    data.push(othersData);
+                    if (othersData.y > 0) {
+                        data.push(othersData);
+                    }
                 }
 
                 serie.data = data;

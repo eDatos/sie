@@ -386,7 +386,7 @@
                 self.scrollbuttons.push(new App.components.scrollbuttons.Scrollbuttons({ el: this }));
             });
             this.$el.find('select').select2({
-                dropdownParent: $('.metamac-container')
+                dropdownParent: $('#metamac-container')
             });
         },
 
