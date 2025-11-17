@@ -103,10 +103,10 @@ export class DocumentoService {
             return acc;
         }, {});
 
-        const viewbox = `${xMin} ${yMin} ${xMax - xMin + 15} ${yMax - yMin + 10}`;
+        const viewbox = `${xMin} ${yMin} ${xMax - xMin + 55} ${yMax - yMin + 10}`;
         svg.setAttribute('viewBox', viewbox);
         svg.setAttribute('height', String(yMax - yMin + 10))
-        svg.setAttribute('width', String(xMax - xMin + 15))
+        svg.setAttribute('width', String(xMax - xMin + 55))
 
         document.body.removeChild(svg);
 

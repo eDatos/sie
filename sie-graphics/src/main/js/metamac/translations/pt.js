@@ -220,6 +220,13 @@ I18n.translations.pt = {
                 version: "Versionamento e atualização dos dados",
                 reuse: "Reutilização e informações para desenvolvedores"
             },
+            seeConcept: {
+                button: "Ver conceito",
+            },
+            seeRelatedResource: {
+                button: "Ver classificação"
+            },
+
             language: "Idioma",
             apiDocumentationUrl: "Acesso à documentação da API",
             apiUrl: "Acesso ao recurso na API",
