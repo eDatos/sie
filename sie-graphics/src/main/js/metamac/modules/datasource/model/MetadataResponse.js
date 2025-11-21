@@ -254,6 +254,7 @@
                         representation.normCode = self.getGeographicDimensionNormCode(dimensionValue);
                         representation.geographicGranularityId = dimensionValue.geographicGranularity.id;
                         representation.geographicGranularityLabel = self.localizeLabel(dimensionValue.geographicGranularity.name.text);
+                        representation.variableElementId = dimensionValue.variableElement ? dimensionValue.variableElement.id : undefined;
                     }
 
                     if (isMeasureDimension) {

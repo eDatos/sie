@@ -10,7 +10,8 @@
         initialize: function () {
             this.drawableLimit = Infinity;
 
-            this.selectedGeographicalLevel = null;
+            this.selectedGeographicalGranularity = null;
+            this.selectedIndicatorMeasure = null;
             this.selectedTemporalGranularity = null;
             this._bindEvents();
         },
@@ -73,12 +74,12 @@
         },
 
         selectVisible: function () {
-            var visibleModels = this.where({ visible: true, selected: false });
+            var visibleModels = this.filter(representation => representation.get("visible") && !representation.get("selected"));
             _.invoke(visibleModels, 'set', { selected: true });
         },
 
         deselectVisible: function () {
-            var visibleModels = this.where({ visible: true, selected: true });
+            var visibleModels = this.filter(representation => representation.get("visible") && representation.get("selected"));
             _.invoke(visibleModels, 'set', { selected: false });
         },
 
@@ -88,7 +89,7 @@
         },
 
         toggleRepresentationsVisibleRange: function (start, end, state) {
-            var visibleModels = this.where({ visible: true });
+            var visibleModels = this.filter(representation => representation.get("visible"));
             var modelsToChange = visibleModels.slice(start, end + 1);
             _.invoke(modelsToChange, 'set', { selected: state });
         },
@@ -143,36 +144,57 @@
         },
 
         getSelectedRepresentations: function () {
-            return this.where({ selected: true });
+            return this.filter(representation => representation.get("selected"));
         },
 
-        getDrawableRepresentations: function () {
-            return this.where({ drawable: true });
+        getSelectedAndDrawableRepresentations: function () {
+            return this.filter(representation => representation.get("selected") && representation.get("drawable"));
         },
 
-        getGeographicRepresentationsWithAtLeastOneElementSelected : function() {
+        getGeographicRepresentationsWithMoreThanOneElementSelected : function() {
             return this.filter(item => {
                 // Filter selected elements
                 if (item.get('selected')) {
                   // check that there are more items selected in your level
-                  return this.filter(subItem => subItem.get('level') === item.get('level') && subItem.get('selected')).length >= 1;
+                  return this.filter(subItem => subItem.get('geographicGranularityId') === item.get('geographicGranularityId') && subItem.get('selected')).length > 1;
                 }
                 return false;
               });
         },
 
-        updateDrawablesBySelectedLevel: function () {
-            if (this.getSelectedRepresentationsByCurrentLevel().length === 0) {
-                this.updateSelectedGeographicLevel();
+        updateSelectedGeographicGranularityIfNoElementsInGranularity: function() {
+            //take the actual SelectedGeographicalLevel
+            var granularity = this.getSelectedGeographicGranularity();
+            //take the representations of the current level that have more than one element selected
+            var filterRepresentations = this.getGeographicRepresentationsWithMoreThanOneElementSelected().filter(item => item.get('geographicGranularityId').toString() === granularity);
+            //If there are no elements selected, then we perform the update
+            if (filterRepresentations.length == 0) {
+                this.updateSelectedGeographicGranularityWithMostRepeatedValue();
+            }
+        },
+
+        getDrawableRepresentations: function () {
+            return this.filter(representation => representation.get("drawable"));
+        },
+
+        updateDrawablesBySelectedGeographicGranularity: function () {
+            if (this.getSelectedRepresentations().length === 0) {
+                this.updateSelectedGeographicGranularityWithMostRepeatedValue();
             }
 
             _.invoke(this.models, 'set', { drawable: false }, { silent: true });
-            _.invoke(this.getSelectedRepresentationsByCurrentLevel(), 'set', { drawable: true });
+            _.invoke(this.getSelectedRepresentationsByCurrentGeographicGranularity(), 'set', { drawable: true });
             this.trigger("change:drawable");
         },
 
-        getSelectedRepresentationsByCurrentLevel: function () {
-            return this.where({ level: parseInt(this.selectedGeographicalLevel), selected: true });
+        updateDrawablesBySelectedIndicatorMeasure: function () {
+            _.invoke(this.models, 'set', { drawable: false }, { silent: true });
+            _.invoke(this.getSelectedRepresentations(), 'set', { drawable: true });
+            this.trigger("change:drawable");
+        },
+
+        getSelectedRepresentationsByCurrentGeographicGranularity: function () {
+            return this.filter(representation => representation.get("geographicGranularityId") === this.selectedGeographicalGranularity && representation.get("selected"));
         },
 
         updateDrawablesBySelectedGranularity: function () {
@@ -181,44 +203,46 @@
             }
 
             _.invoke(this.models, 'set', { drawable: false }, { silent: true });
-            _.invoke(this.getSelectedRepresentationsByCurrentGranularity(), 'set', { drawable: true });
+            _.invoke(this.getSelectedRepresentationsByCurrentGranularity(), 'set', { drawable: true }, { silent: true });
             this.trigger("change:drawable");
         },
 
         getSelectedRepresentationsByCurrentGranularity: function () {
-            return this.where({ temporalGranularity: this.selectedTemporalGranularity, selected: true });
+            return this.filter(representation => representation.get("temporalGranularity") === this.selectedTemporalGranularity && representation.get("selected"));
         },
 
-        setSelectedGeographicLevel: function (geographicalLevel) {
-            this.selectedGeographicalLevel = geographicalLevel;
+        setSelectedGeographicGranularity: function (geographicalGranularity) {
+            this.selectedGeographicalGranularity = geographicalGranularity;
         },
 
-        getSelectedGeographicLevel: function () {
-            if (this.selectedGeographicalLevel == null) {
-                this.updateSelectedGeographicLevel();
+        getSelectedGeographicGranularity: function () {
+            if (this.selectedGeographicalGranularity == null) {
+                this.updateSelectedGeographicGranularityWithMunicipalities();
             }
-            return this.selectedGeographicalLevel;
+            return this.selectedGeographicalGranularity;
         },
 
-        updateSelectedGeographicLevel: function () {
-            this.selectedGeographicalLevel = this.getDefaultLevel();
-        },
-
-        getSelectedGeographicLevels: function () {
-            return _(this.getSelectedRepresentations()).invoke("get", "level");
-        },
-
-        getSelectedMunicipalities: function () {
-            return this.getSelectedRepresentations().filter(representation => representation.get("geographicGranularityId") === "MUNICIPALITIES");
-        },
-
-        getDefaultLevel: function () {
-            const selectedMunicipalities = this.getSelectedMunicipalities();
-            if (selectedMunicipalities.length > 0) {
-                return selectedMunicipalities[0].get("level");
-            } else {
-                return this._getMostRepeatedValue(this.getSelectedGeographicLevels());
+        getSelectedIndicatorMeasure: function () {
+            if (this.selectedIndicatorMeasure == null) {
+                this.updateSelectedIndicatorRepresentationsWithVotesPercentageValue();
             }
+            return this.selectedIndicatorMeasure;
+        },
+
+        updateSelectedGeographicGranularityWithMostRepeatedValue: function () {
+            this.selectedGeographicalGranularity = this._getMostRepeatedValue(this.getSelectedGeographicGranularities());
+        },
+
+        updateSelectedGeographicGranularityWithMunicipalities: function () {
+            this.selectedGeographicalGranularity = this._getMunicipalityGeographicGranularity(this.getSelectedGeographicGranularities());
+        },
+
+        updateSelectedIndicatorRepresentationsWithVotesPercentageValue: function () {
+            this.selectedIndicatorMeasure = this._getVotesPercentageIndicatorMeasure(this.getSelectedRepresentations());
+        },
+
+        getSelectedGeographicGranularities: function () {
+            return _(this.getGeographicRepresentationsWithMoreThanOneElementSelected()).invoke("get", "geographicGranularityId");
         },
 
         setSelectedTemporalGranularity: function(temporalGranularity) {
@@ -244,6 +268,17 @@
             var countedBy = _(collection).countBy();
             var maxPopulation = _(countedBy).max();
             return _.invert(countedBy)[maxPopulation];
+        },
+
+        _getMunicipalityGeographicGranularity: function (collection) {
+            if (_.contains(collection, "MUNICIPALITIES")) {
+                return "MUNICIPALITIES";
+            }
+            return this._getMostRepeatedValue(collection);
+        },
+
+        _getVotesPercentageIndicatorMeasure: function (measures) {
+            return measures.find(indicator => indicator.get("measureUnit") === "%");
         },
 
     }, {
