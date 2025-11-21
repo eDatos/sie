@@ -177,6 +177,10 @@
             return this.filter(representation => representation.get("drawable"));
         },
 
+        getRepresentationsFromIndicatorMeasure: function () {
+            return this.filter(representation => representation.get("measureUnit") === "%");
+        },
+
         updateDrawablesBySelectedGeographicGranularity: function () {
             if (this.getSelectedRepresentations().length === 0) {
                 this.updateSelectedGeographicGranularityWithMostRepeatedValue();
@@ -189,7 +193,7 @@
 
         updateDrawablesBySelectedIndicatorMeasure: function () {
             _.invoke(this.models, 'set', { drawable: false }, { silent: true });
-            _.invoke(this.getSelectedRepresentations(), 'set', { drawable: true });
+            _.invoke(this.getRepresentationsFromIndicatorMeasure(), 'set', { drawable: true });
             this.trigger("change:drawable");
         },
 
