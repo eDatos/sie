@@ -178,7 +178,7 @@
         },
 
         getRepresentationsFromIndicatorMeasure: function () {
-            return this.filter(representation => representation.get("measureUnit") === "%");
+            return this.filter(representation => representation.get("measureUnit") !== "%" && representation.get('id').includes("VOTOS"));
         },
 
         updateDrawablesBySelectedGeographicGranularity: function () {
@@ -242,7 +242,7 @@
         },
 
         updateSelectedIndicatorRepresentationsWithVotesPercentageValue: function () {
-            this.selectedIndicatorMeasure = this._getVotesPercentageIndicatorMeasure(this.getSelectedRepresentations());
+            this.selectedIndicatorMeasure = _.first(this.getRepresentationsFromIndicatorMeasure());
         },
 
         getSelectedGeographicGranularities: function () {
@@ -279,10 +279,6 @@
                 return "MUNICIPALITIES";
             }
             return this._getMostRepeatedValue(collection);
-        },
-
-        _getVotesPercentageIndicatorMeasure: function (measures) {
-            return measures.find(indicator => indicator.get("measureUnit") === "%");
         },
 
     }, {
