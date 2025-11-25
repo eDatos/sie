@@ -178,7 +178,7 @@
         },
 
         getRepresentationsFromIndicatorMeasure: function () {
-            return this.filter(representation => representation.get("measureUnit") !== "%" && representation.get('id').includes("VOTOS"));
+            return this.filter(representation => representation.get("measureUnitId")?.toUpperCase() !== "PORCENTAJE" && representation.get('id').includes("VOTOS"));
         },
 
         updateDrawablesBySelectedGeographicGranularity: function () {
