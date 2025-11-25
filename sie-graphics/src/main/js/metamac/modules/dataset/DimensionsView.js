@@ -216,8 +216,9 @@
             var selectedGranularity = currentTarget.val();
             var dimensionId = currentTarget.data("dimension-id");
             if (dimensionId) {
-                this.filterDimensions.get(dimensionId).get('representations').setSelectedGeographicGranularity(selectedGranularity);
-                this.filterDimensions.get(dimensionId).get('representations').updateDrawablesBySelectedGeographicGranularity();
+                const representations = this.filterDimensions.get(dimensionId).get('representations');
+                representations.setSelectedGeographicGranularity(selectedGranularity);
+                representations.updateDrawablesBySelectedGeographicGranularity();
             }
         },
 

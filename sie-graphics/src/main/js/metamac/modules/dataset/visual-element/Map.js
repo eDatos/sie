@@ -228,7 +228,7 @@
         _applyVisualizationPreselections: function () {
             this._preselectMostRecentTimeRepresentation();
             this._preselectMunicipalitiesForGeographicLevelRepresentations();
-            this._preselectVotePercentageForMeasureRepresentations();
+            this._preselectIndicatorForMeasureRepresentations();
         },
 
         _getGeographicDimension: function () {

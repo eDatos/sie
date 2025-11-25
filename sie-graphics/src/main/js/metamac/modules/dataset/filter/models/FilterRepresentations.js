@@ -228,7 +228,7 @@
 
         getSelectedIndicatorMeasure: function () {
             if (this.selectedIndicatorMeasure == null) {
-                this.updateSelectedIndicatorRepresentationsWithVotesPercentageValue();
+                this.updateSelectedIndicatorRepresentations();
             }
             return this.selectedIndicatorMeasure;
         },
@@ -241,7 +241,7 @@
             this.selectedGeographicalGranularity = this._getMunicipalityGeographicGranularity(this.getSelectedGeographicGranularities());
         },
 
-        updateSelectedIndicatorRepresentationsWithVotesPercentageValue: function () {
+        updateSelectedIndicatorRepresentations: function () {
             this.selectedIndicatorMeasure = _.first(this.getRepresentationsFromIndicatorMeasure());
         },
 

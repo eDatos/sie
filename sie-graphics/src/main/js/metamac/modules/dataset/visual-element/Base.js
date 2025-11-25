@@ -245,13 +245,13 @@
             });
         },
 
-        _preselectVotePercentageForMeasureRepresentations: function () {
+        _preselectIndicatorForMeasureRepresentations: function () {
             var measureDimension = this.filterDimensions
                 .getAllFixedDimensionsCopy()
                 .find(function (dimension) {
                     return dimension.get('type') == "MEASURE_DIMENSION";
                 })
-            measureDimension.get('representations').updateSelectedIndicatorRepresentationsWithVotesPercentageValue();
+            measureDimension.get('representations').updateSelectedIndicatorRepresentations();
             measureDimension.get('representations').updateDrawablesBySelectedIndicatorMeasure();
         },
 
