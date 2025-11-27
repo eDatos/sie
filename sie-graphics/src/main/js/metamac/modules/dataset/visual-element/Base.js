@@ -237,12 +237,22 @@
             });
         },
 
-        _preselectMostPopulatedGeographicLevelRepresentations: function () {
+        _preselectMunicipalitiesForGeographicLevelRepresentations: function () {
             var nonFixedGeographicDimensions = this.filterDimensions.getAllNonFixedDimensionsCopyByType("GEOGRAPHIC_DIMENSION");
             _(nonFixedGeographicDimensions).each(function (geographicDimension) {
-                geographicDimension.get('representations').updateSelectedGeographicLevel();
-                geographicDimension.get('representations').updateDrawablesBySelectedLevel();
+                geographicDimension.get('representations').updateSelectedGeographicGranularityWithMunicipalities();
+                geographicDimension.get('representations').updateDrawablesBySelectedGeographicGranularity();
             });
+        },
+
+        _preselectIndicatorForMeasureRepresentations: function () {
+            var measureDimension = this.filterDimensions
+                .getAllFixedDimensionsCopy()
+                .find(function (dimension) {
+                    return dimension.get('type') == "MEASURE_DIMENSION";
+                })
+            measureDimension.get('representations').updateSelectedIndicatorRepresentations();
+            measureDimension.get('representations').updateDrawablesBySelectedIndicatorMeasure();
         },
 
         resetDimensionsLimits: function () {

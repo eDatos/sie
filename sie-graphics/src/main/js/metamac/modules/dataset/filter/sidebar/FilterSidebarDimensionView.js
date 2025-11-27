@@ -128,9 +128,9 @@
         },
 
         _getGeographicGranularityCollection: function (dimension) {
-            return _.chain(dimension.get("representations").getGeographicRepresentationsWithAtLeastOneElementSelected())
+            return _.chain(dimension.get("representations").getGeographicRepresentationsWithMoreThanOneElementSelected())
                 .sortBy(representation => representation.get("level"))
-                .uniq(true, representation => representation.get("level"))
+                .uniq(false, representation => representation.get("level"))
                 .map(function (representation) {
                     return {
                         level: representation.get("level").toString(),

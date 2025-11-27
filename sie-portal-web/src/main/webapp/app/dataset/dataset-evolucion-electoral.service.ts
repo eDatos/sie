@@ -211,6 +211,15 @@ export class DatasetEvolucionElectoralService {
         const atributo = json.data.attributes.attribute.find((attribute) => attribute.id === nombreAtributo);
         if (atributo) {
             return atributo.value.split(SEPARADOR);
+        } else {
+            const internationalAttribute = json.data.attributes.internationalAttribute;
+            if (internationalAttribute) {
+                const foundAttribute = internationalAttribute.find((attribute) => attribute.id === nombreAtributo);
+                if (foundAttribute && foundAttribute.values) {
+                    return foundAttribute.values.map((value) => this.languageHelper.getLocalisedString(value));
+                }
+            }
+            return null;
         }
     }
 

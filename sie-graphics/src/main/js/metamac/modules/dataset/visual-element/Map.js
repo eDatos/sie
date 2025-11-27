@@ -227,7 +227,8 @@
 
         _applyVisualizationPreselections: function () {
             this._preselectMostRecentTimeRepresentation();
-            this._preselectMostPopulatedGeographicLevelRepresentations();
+            this._preselectMunicipalitiesForGeographicLevelRepresentations();
+            this._preselectIndicatorForMeasureRepresentations();
         },
 
         _getGeographicDimension: function () {
@@ -235,7 +236,7 @@
         },
 
         _getGeographicSelectedRepresentations: function () {
-            return this._getGeographicDimension().get('representations').getSelectedRepresentationsByCurrentLevel();
+            return this._getGeographicDimension().get('representations').getSelectedRepresentationsByCurrentGeographicGranularity();
         },
 
         _getGeographicDimensionNormCodes: function () {
