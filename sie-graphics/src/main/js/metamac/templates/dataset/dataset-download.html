@@ -1,45 +1,22 @@
-{{#if buttonConfig.drawSelectionButtons}}
 <div class="dataset-download-group">
     <h3>{{ message "filter.download.selection" }}</h3>
 
 {{#if buttonConfig.allDimensionsWithSelections}}
-       
-    {{#if buttonConfig.dataFormats}}       
-    <form method="POST" {{#if buttonConfig.disableFormat.selection.excel}}disabled="disabled"{{/if}} action="{{url.excel}}" target="_parent">
-        <input type="hidden" name="jsonBody" value="{{selection}}">
-        <a href="#" class="download-xls {{#if buttonConfig.disableFormat.selection.excel}}disabled{{/if}}"><i class="icon-data-xls"></i></a>
-    </form>
 
-    <form method="POST" {{#if buttonConfig.disableFormat.selection.tsv}}disabled="disabled"{{/if}} action="{{url.tsv}}" target="_parent">
-        <input type="hidden" name="jsonBody" value="{{selection}}">
-        <a href="#" class="download-tsv {{#if buttonConfig.disableFormat.selection.tsv}}disabled{{/if}}"><i class="icon-data-tsv"></i></a>
-    </form>
-
-    <form method="POST" {{#if buttonConfig.disableFormat.selection.px}}disabled="disabled"{{/if}} action="{{url.px}}" target="_parent">
-        <input type="hidden" name="jsonBody" value="{{selection}}">
-        <a href="#" class="download-csv {{#if buttonConfig.disableFormat.selection.px}}disabled{{/if}}"><i class="icon-px"></i></a>
-    </form>
-    {{/if}}     
+    {{#if buttonConfig.dataFormats}}
+    <a href="#" class="download-xlsx selection {{#if buttonConfig.disableFormat.selection.excel}}disabled{{/if}}" ><i class="icon-data-xls"></i></a>
+    <a href="#" class="download-tsv selection {{#if buttonConfig.disableFormat.selection.tsv}}disabled{{/if}}"><i class="icon-data-tsv"></i></a>
+    <a href="#" class="download-px selection {{#if buttonConfig.disableFormat.selection.px}}disabled{{/if}}"><i class="icon-px"></i></a>
+    {{/if}}
 
     {{#if buttonConfig.imageFormats}}
-    <form method="POST" action="{{url.png}}" target="_parent">
-        <input type="hidden" name="svg" value="{{svg}}">
-        <a href="#" class="download-png"><i class="icon-{{buttonConfig.iconPreffix}}-png"></i></a>
-    </form>
-
-    <form method="POST" action="{{url.pdf}}" target="_parent">
-        <input type="hidden" name="svg" value="{{svg}}">
-        <a href="#" class="download-pdf"><i class="icon-{{buttonConfig.iconPreffix}}-pdf"></i></a>
-    </form>
-
-    <form method="POST" action="{{url.svg}}" target="_parent">
-        <input type="hidden" name="svg" value="{{svg}}">
-        <a href="#" class="download-svg"><i class="icon-{{buttonConfig.iconPreffix}}-svg"></i></a>
-    </form>
+    <a href="#" class="download-png {{#if buttonConfig.disableFormat.selection.png}}disabled{{/if}}" data-svg="{{svg}}"><i class="icon-{{buttonConfig.iconPreffix}}-png"></i></a>
+    <a href="#" class="download-pdf {{#if buttonConfig.disableFormat.selection.pdf}}disabled{{/if}}" data-svg="{{svg}}"><i class="icon-{{buttonConfig.iconPreffix}}-pdf"></i></a>
+    <a href="#" class="download-svg {{#if buttonConfig.disableFormat.selection.svg}}disabled{{/if}}" data-svg="{{svg}}"><i class="icon-{{buttonConfig.iconPreffix}}-svg"></i></a>
     {{/if}}
-    {{#if buttonConfig.disableFormat.selection.infoMessage}}<div class="modal-info">{{ buttonConfig.disableFormat.selection.infoMessage }}</div>{{/if}}
+
+    {{#if buttonConfig.disableFormat.selection.infoMessage}}<div class="modal-info">{{{ buttonConfig.disableFormat.selection.infoMessage }}}</div>{{/if}}
 {{/if}}
-{{/if}} 
 
 {{#unless buttonConfig.allDimensionsWithSelections}}
     <p>
@@ -52,19 +29,12 @@
 {{#if buttonConfig.dataFormats}}
 <div class="dataset-download-group">
     <h3>{{ message "filter.download.all" }}</h3>
-    <form method="POST" action="{{url.excel}}" target="_parent">
-        <input type="hidden" name="jsonBody" value="{{allSelected}}">
-        <a href="#" class="download-xls"><i class="icon-data-xls"></i></a>
-    </form>
 
-    <form method="POST" action="{{url.tsv}}" target="_parent">
-        <input type="hidden" name="jsonBody" value="{{allSelected}}">
-         <a href="#" class="download-tsv"><i class="icon-data-tsv"></i></a>
-    </form>
+    <a href="#" class="download-xlsx {{#if buttonConfig.disableFormat.all.excel}}disabled{{/if}}"><i class="icon-data-xls"></i></a>
+    <a href="#" class="download-tsv {{#if buttonConfig.disableFormat.all.tsv}}disabled{{/if}}"><i class="icon-data-tsv"></i></a>
+    <a href="#" class="download-px {{#if buttonConfig.disableFormat.all.px}}disabled{{/if}}"><i class="icon-px"></i></a>
 
-    <form method="POST" action="{{url.px}}" target="_parent">
-        <input type="hidden" name="jsonBody" value="{{allSelected}}">
-         <a href="#" class="download-csv"><i class="icon-px"></i></a>
-    </form>
+    {{#if buttonConfig.disableFormat.all.infoMessage}}<div class="modal-info">{{ buttonConfig.disableFormat.all.infoMessage }}</div>{{/if}}
+
 </div>
 {{/if}}

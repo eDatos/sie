@@ -280,7 +280,7 @@
             if (this.isInternalPortal() && !this._isExportableImage()) {
                 modalContentView = new DisabledFeatureInternalPortalView();
             } else {
-                modalContentView = new App.modules.dataset.DatasetDownloadView({ filterDimensions: this.filterDimensions, visualizationType: this.optionsModel.get('type') });
+                modalContentView = new App.modules.dataset.DatasetDownloadView({ filterDimensions: this.filterDimensions, optionsModel: this.optionsModel });
             }
             var title = I18n.t("filter.download.modal.title");
             var modal = new App.components.modal.ModalView({ title: title, contentView: modalContentView });
