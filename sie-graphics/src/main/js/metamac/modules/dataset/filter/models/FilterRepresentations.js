@@ -152,14 +152,22 @@
         },
 
         getGeographicRepresentationsWithMoreThanOneElementSelected : function() {
+            return this.getGeographicRepresentationsWithAtLeastNElementSelected(2);
+        },
+
+        getGeographicRepresentationsWithAtLeastOneElementSelected : function() {
+            return this.getGeographicRepresentationsWithAtLeastNElementSelected(1);
+        },
+
+        getGeographicRepresentationsWithAtLeastNElementSelected(n) {
             return this.filter(item => {
                 // Filter selected elements
                 if (item.get('selected')) {
-                  // check that there are more items selected in your level
-                  return this.filter(subItem => subItem.get('geographicGranularityId') === item.get('geographicGranularityId') && subItem.get('selected')).length > 1;
+                    // check that there are more items selected in your level
+                    return this.filter(subItem => subItem.get('geographicGranularityId') === item.get('geographicGranularityId') && subItem.get('selected')).length >= n;
                 }
                 return false;
-              });
+            });
         },
 
         updateSelectedGeographicGranularityIfNoElementsInGranularity: function() {
