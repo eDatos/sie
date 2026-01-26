@@ -39,9 +39,7 @@
         getOrganisation: function (callback) {
             var requestParams = {
                 url: this.buildOrganisationUrl() + "?_type=json",
-                method: "GET",
-                dataType: 'jsonp',
-                jsonp: '_callback'
+                method: "GET"
             };
             $.ajax(requestParams).
                 done(function (response) {
@@ -72,9 +70,7 @@
 
             var requestParams = {
                 url: this.metadata.metadata.relatedDsd.selfLink.href + "?_type=json",
-                method: "GET",
-                dataType: 'jsonp',
-                jsonp: '_callback'
+                method: "GET"
             };
 
             $.ajax(requestParams).
@@ -119,9 +115,7 @@
 
                 var requestParams = {
                     url: conceptItem.selfLink.href + "?_type=json",
-                    method: "GET",
-                    dataType: 'jsonp',
-                    jsonp: '_callback'
+                    method: "GET"
                 };
 
                 promises.push(
