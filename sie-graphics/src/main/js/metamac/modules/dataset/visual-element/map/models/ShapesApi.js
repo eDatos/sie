@@ -12,8 +12,6 @@
             var codes = this._extractCodes(normCodes);
             var ajaxParams = {
                 type: "GET",
-                dataType: 'jsonp',
-                jsonp: '_callback',
                 url: App.endpoints["structural-resources"] + "/variables/" + variableId + "/variableelements/~all/geoinfo.json",
                 data: {
                     query: this._createNormCodesQuery(codes),
@@ -38,9 +36,7 @@
             var url = App.endpoints["structural-resources"] + "/variables/~all/variableelements.json?query=VARIABLE_TYPE%20EQ%20'GEOGRAPHICAL'%20AND%20GEOGRAPHICAL_GRANULARITY_URN%20IS_NULL&limit=1&_type=json";
             var ajaxParams = {
                 type: "GET",
-                url: url,
-                dataType: 'jsonp',
-                jsonp: '_callback'
+                url
             }
             $.ajax(ajaxParams).done(function (response) {
                 var urn = response.variableElement[0].urn;
@@ -56,9 +52,7 @@
             if (codes.length) {
                 var requestParams = {
                     url: App.endpoints["structural-resources"] + "/variables/" + variableId + "/variableelements/" + codes[0] + "/geoinfo.json?fields=-geographicalGranularity,-geometry,-point",
-                    method: "GET",
-                    dataType: 'jsonp',
-                    jsonp: '_callback'
+                    method: "GET"
                 };
                 $.ajax(requestParams)
                     .done(function (response) {
@@ -83,9 +77,7 @@
 
             var requestParams = {
                 url: defaultGeographicalGranularityCodelistUrl,
-                method: "GET",
-                dataType: 'jsonp',
-                jsonp: '_callback'
+                method: "GET"
             };
             $.ajax(requestParams).
                 done(function (response) {
